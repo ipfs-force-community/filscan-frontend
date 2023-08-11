@@ -1,4 +1,5 @@
 const common = {
+    lang:'中',
     fil: 'FIL',
     last_time:'最新区块时间',
     base_fee: 'Base Fee',
