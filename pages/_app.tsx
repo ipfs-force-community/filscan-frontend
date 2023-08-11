@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
-import '@/styles/common.scss'
+import '@/styles/common.css'
+import '@/styles/custom.scss'
 import { Layout, Space } from 'antd'
 import { I18nextProvider } from 'react-i18next';
 import { useRouter } from 'next/router';
@@ -11,6 +12,7 @@ import { useEffect, useState } from 'react';
 import HeaderMain from '@/components/header';
 
 import i18n from '@/i18n';
+import Banner from '@/components/banner';
 
 
 const { Content, Footer, Header }  = Layout
@@ -31,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Layout className={`container_body ${theme}`}>
           <HeaderMain />
         <Content >
+          <Banner />
         <Component {...pageProps} />
       </Content>
       <Footer>Footer</Footer>

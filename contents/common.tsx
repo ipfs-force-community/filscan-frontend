@@ -49,3 +49,15 @@ export const header_top:TOP_DATA = {
     ]
 }
 
+export const search = {
+    holder: 'search_holder',
+    opt: [
+    {label: 'all', value: 'all' },
+    {label:'address',value:'address'},
+    {label: 'message_id', value: 'message_id' },
+    {label: 'height', value: 'height' },
+    {label:'cid',value:'cid'},
+   {label:'node',value:'node'}
+]
+}
+

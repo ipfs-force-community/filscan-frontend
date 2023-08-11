@@ -1,0 +1,59 @@
+.container_body{
+    background-color: var(--bg_color);
+}  
+
+.box-shadow{
+    box-shadow: var(--box-shadow);
+}
+
+.text_green{
+    color:#4ACAB4
+}
+.text_red{
+    color: #E15252;
+}
+
+/*//主题色*/
+.text_primary{
+    color:#1C6AFD ; 
+}
+     
+.animated-div {
+  animation-name: moveAndScale;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/*渐变text*/
+
+.clip_text{
+    background: linear-gradient(279deg, #0052F8 0%, #0A96E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+@keyframes moveAndScale {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(20px) ;
+    transform: translateX(10px) scale(1.15);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateX(10px);
+    transform: translateY(20px);
+
+  }
+}

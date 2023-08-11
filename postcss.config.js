@@ -1,17 +1,26 @@
 module.exports = {
   plugins: {
     tailwindcss: {},
-    autoprefixer: {},
-     'postcss-px-to-viewport': {
-      unitToConvert: 'px', // 要转换的单位
-      viewportWidth: 1440, // 视口宽度
-      unitPrecision: 5, // 单位精度
-      propList: ['*'], // 需要转换的属性
-      viewportUnit: 'vw', // 转换后的单位
-      fontViewportUnit: 'vw', // 字体单位
-      selectorBlackList: [], // 要忽略的选择器列表
-      minPixelValue: 1, // 最小像素值
-      mediaQuery: false, // 是否生成媒体查询
+    'postcss-px-to-viewport': {
+     unitToConvert: 'px',
+      viewportWidth: 1440,
+      unitPrecision: 5,
+      propList: ['*'],
+      viewportUnit: 'vw',
+      fontViewportUnit: 'vw',
+      selectorBlackList: [],
+      minPixelValue: 1,
+      mediaQuery: false,
+    },
+    'postcss-flexbugs-fixes': {},
+    'postcss-preset-env': {
+      autoprefixer: {
+        flexbox: 'no-2009',
+      },
+      stage: 3,
+      features: {
+        'custom-properties': false,
+      },
     },
   },
 }

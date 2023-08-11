@@ -26,14 +26,7 @@ resources:'자원',
 resources_tools: '자주 쓰는 도구',
 provider: '스토리지 공급자',
 fvm: 'FVM 생태계 개요',
-//search
-'search_holder':'주소/메시지 ID/높이/블록 CID/노드 ID/FNS를 입력하세요',
-all: '모든 필터 유형',
-address: '주소',
-message_id: '메시지 ID',
-height: '높이',
-cid: '블록 CID',
-node: '노드',
+
 
     
     
