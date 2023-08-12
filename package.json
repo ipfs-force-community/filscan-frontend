@@ -3,9 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "env-cmd -f .env.test next dev --port 3003 ",
+    "pre": "env-cmd -f .env.pre next dev --port 9090 ",
+    "cai": "env-cmd -f  .env.calibration NODE_ENV=devlopment next dev --port 9092 ",
+    "start": "env-cmd -f .env.test next start --port 9092",
+    "start:pre": "env-cmd -f .env.pre next start --port 9090",
+    "start:ha": "env-cmd -f .env.ha next start --port 9098",
+    "start:main": "env-cmd -f .env.minner next start --port 9090",
+    "main": "PORT=9090 node server.js",
+    "cali": "PORT=9092 node server.js",
+    "test": "PORT=9092 node server.js",
+    "build": "NODE_ENV=development environment=dev  FVM_URL='https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage' next build",
+    "build:dev": "env-cmd -f .env.test next build",
+    "build:pre": "env-cmd -f .env.pre next build",
+    "build:main": "env-cmd -f .env.minner next build",
+    "build:cali": "env-cmd -f .env.calibration next build ",
+    "de": "next start --port 9091",
     "lint": "next lint"
   },
   "dependencies": {
@@ -26,6 +39,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "i18next": "^23.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^9.1.1",

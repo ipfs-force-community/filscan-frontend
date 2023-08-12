@@ -18,24 +18,23 @@ const data :any = {
 export default () => { 
     const { tr } = Translation({ns:'common'});
 
-    return <Header className="bg-bgColor h-[106px] p-0">
+    return <Header className="bg-bgColor h-[106px] p-0" >
         <div className="flex justify-between items-center h-[45px] text-xs font-PingFang font-medium border-b border-border_des px-24">
             <ul className="flex gap-x-5 list-none">
                 {header_top.left.map((item) => { 
                     const { title,dataIndex, render } = item
                     const value = data[dataIndex]
                     const renderDom =  render  && render(value,data)
-                    return <li className="flex gap-x-1">
+                    return <li key={dataIndex} className="flex gap-x-1">
                         <span>{tr(title)}:</span>
                         <span>{ renderDom || value}</span>
                     </li>
                 })}
             </ul>
             <div className="flex gap-x-2.5 items-center" >
-                <Image src={network} width={28} height={28} alt='network' />
+                <Image src={network} width={28} height={28} alt='network' key='network' />
                 <span className="flex items-center justify-center w-7 h-7 border border-border rounded-[5px]">{ tr('lang')}</span>
-                <Image src={moon} width={28} height={ 28} alt='theme' />
-
+                <Image src={moon} width={28} height={ 28} alt='theme' key='moon'/>
             </div>
 
         </div>
