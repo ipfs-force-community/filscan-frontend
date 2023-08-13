@@ -3,8 +3,9 @@ import { Layout } from "antd"
 import { Translation } from "@/components/hooks/Translation";
 import network from '@/assets/images/network.svg'
 import moon from '@/assets/images/moon.svg'
-
+import Account from './Account'
 import Image from 'next/image'
+import Link from 'next/link'
 import Nav from './Nav'
 
 const { Header } = Layout;
@@ -34,7 +35,11 @@ export default () => {
             <div className="flex gap-x-2.5 items-center" >
                 <Image src={network} width={28} height={28} alt='network' key='network' />
                 <span className="flex items-center justify-center w-7 h-7 border border-border rounded-[5px]">{ tr('lang')}</span>
-                <Image src={moon} width={28} height={ 28} alt='theme' key='moon'/>
+                <Image src={moon} width={28} height={28} alt='theme' key='moon' />
+                <Link href='/account' as='/account' scroll={ false}>
+                     <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
+                </Link>
+                {/* <Account /> */}
             </div>
 
         </div>

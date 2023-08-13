@@ -26,10 +26,10 @@ export default () => {
 
     return <div className='flex items-center px-24 h-[60px] justify-between text-sm  font-medium' >
             <Link href={ '/'} className='flex gap-x-2 items-center cursor-pointer'>
-                  <Image src={logo} width={ 32} height={32} alt='logo' />
+            <Image src={logo} width={ 32} height={32} alt='logo' />
             <span className='font-Barlow font-bold text-xl text-font'>Filscan</span>
             </Link>
-        <div className='flex gap-x-8 h-full justify-between items-center' >
+            <div className='flex gap-x-8 h-full justify-between items-center' >
             {navMenu.map((nav,index) => { 
                 if (nav?.children) { 
                     return <div key={index} className='group h-full flex cursor-pointer items-center relative hover:text-primary'>
@@ -42,9 +42,8 @@ export default () => {
                 }
                 return <Link href={`${nav.link}`} key={nav.key } className='cursor-pointer  text-font   hover:text-primary'>
                 {tr(nav.key)}
-            </Link>
-        })}
-        </div>
-
+                 </Link>
+            })}
+            </div>
     </div>
 }

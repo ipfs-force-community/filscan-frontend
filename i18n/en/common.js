@@ -1,4 +1,5 @@
 const common = {
+   login:'Login',
     lang:'En',
     fil: 'FIL',
     last_time:'最新区块时间',

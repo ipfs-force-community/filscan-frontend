@@ -42,11 +42,15 @@
 }
 
 /*渐变text*/
-
 .clip_text{
     background: linear-gradient(279deg, #0052F8 0%, #0A96E9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/*找到锚点，文字高亮*/
+.highlight{
+  color: var(--font-color);
 }
 
 

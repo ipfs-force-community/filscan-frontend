@@ -23,13 +23,15 @@ export default function App({ Component, pageProps }: AppProps) {
    const [theme, setTheme] = useState('light')
 
   useEffect(() => {
+    // if ('scrollRestoration' in window.history) {
+    //   window.history.scrollRestoration = 'manual';
+    // }
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setTheme('dark')
   }, [])
 
 
   return <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
-
     <I18nextProvider i18n={i18n}>
       <FilscanStoreProvider>
        <Layout className={`container_body ${theme}`}>

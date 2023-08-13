@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 :root {
+    --font-color:'#000000',
     --select-shadow: rgba(223,227,234,0.6);
     --card-shadow: rgba(223,227,234,0.6);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+   
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
@@ -25,8 +27,13 @@ body {
     )
     rgb(var(--background-start-rgb)); */
 }
+
+a{
+  color: #1C6AFD;
+}
 .main_contain{
   max-width: 1440px;
+  width: 100%;
   padding: 50px 94px;
   margin: auto;
   box-sizing: content-box;

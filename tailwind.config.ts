@@ -28,7 +28,8 @@ const config: Config = {
       colors: {
         // 亮色模式颜色配置
         bgColor: '#FFFFFF',
-        font:'#000000',
+        font: '#000000',
+        font_des:'rgba(0,0,0,0.4)',
         border_des: 'F0F1F3',
         border: '#EEEFF1',
         primary: '#1C6AFD',
