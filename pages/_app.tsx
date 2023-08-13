@@ -9,10 +9,10 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import enUS from 'antd/lib/locale/en_US';
 import { useEffect, useState } from 'react';
-import HeaderMain from '@/components/header';
+import { FilscanStoreProvider } from '@/store/FilscanStore';
 
+import HeaderMain from '@/components/header';
 import i18n from '@/i18n';
-import Banner from '@/components/banner';
 
 
 const { Content, Footer, Header }  = Layout
@@ -29,15 +29,17 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
+
     <I18nextProvider i18n={i18n}>
-    <Layout className={`container_body ${theme}`}>
-          <HeaderMain />
+      <FilscanStoreProvider>
+       <Layout className={`container_body ${theme}`}>
+        <HeaderMain />
         <Content >
-          <Banner />
         <Component {...pageProps} />
       </Content>
       <Footer>Footer</Footer>
     </Layout>
+    </FilscanStoreProvider>
     </I18nextProvider>
   </ConfigProvider>
 

@@ -5,7 +5,7 @@ import network from '@/assets/images/network.svg'
 import moon from '@/assets/images/moon.svg'
 
 import Image from 'next/image'
-import Nav from "./Nav";
+import Nav from './Nav'
 
 const { Header } = Layout;
 const data :any = {
@@ -18,7 +18,7 @@ const data :any = {
 export default () => { 
     const { tr } = Translation({ns:'common'});
 
-    return <Header className="bg-bgColor h-[106px] p-0" >
+    return <Header className="!bg-bgColor !h-[106px] !p-0" >
         <div className="flex justify-between items-center h-[45px] text-xs font-PingFang font-medium border-b border-border_des px-24">
             <ul className="flex gap-x-5 list-none">
                 {header_top.left.map((item) => { 

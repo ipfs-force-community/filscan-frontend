@@ -1,7 +1,8 @@
 export interface Item {
   title: string;
-    dataIndex: string;
-    render?:(text:any,record?:Record<string,any>,index?:number)=>number|string|JSX.Element
+  title_tip?:string
+  dataIndex: string;
+  render?:(text:any,record?:Record<string,any>,index?:number)=>number|string|JSX.Element
 }
 export interface Menu_Info { 
     key: string;
