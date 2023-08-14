@@ -92,7 +92,7 @@ export const registerList = [
 export const account_manager: Array<MenuItem> = [
     {
         label: 'overview',
-        icon: <span className='!text-font'>{ getSvgIcon('account_overview')}</span>,
+        icon:getSvgIcon('account_overview'),
         href: 'overview',
         key:'overview',
         children: [
@@ -125,19 +125,19 @@ export const account_manager: Array<MenuItem> = [
     },
      {
         label: 'miners',
-         icon: <span className='!text-font'>{getSvgIcon('account_miners')}</span>,
+         icon: getSvgIcon('account_miners'),
          key:'miners',
         href: 'miners', 
     },
     {
         label: 'personal',
-        icon: <span className='!text-font'>{getSvgIcon('account_personal')}</span>,
+        icon: getSvgIcon('account_personal'),
         key:'personal',
         href: 'personal',
     },
     {
         label: 'logout',
-        icon: <span className='!text-font'>{getSvgIcon('account_logout')}</span>,
+        icon:getSvgIcon('account_logout'),
         href: '',
         key:'logout',
         
