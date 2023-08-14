@@ -37,20 +37,18 @@ const config: Config = {
         border: '#EEEFF1',
         primary: '#1C6AFD',
         bg_hover:'rgba(28, 106, 253, 0.1)',
-
         icon_border: 'rgba(0,0,0,0.2)',
-
-          secondary: '#00FF00',
+        secondary: '#00FF00',
         // 暗色模式颜色配置
         dark: {
-           font:'#FFFFFF',
+          font:'#FFFFFF',
           bgColor:'#000000',
         },
       },
     
     },
   },
-  plugins:[],
+  plugins:[]
   // plugins: [
   //     plugin(function({ addUtilities, e, theme }) {
   //     const colors:any = theme('colors', {})
