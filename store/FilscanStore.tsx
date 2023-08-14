@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface FilscanStore {
   theme: string;
@@ -10,8 +10,16 @@ interface FilscanStore {
 const FilscanStoreContext = createContext<FilscanStore | null>(null);
 
 export const FilscanStoreProvider = ({ children }: {children:JSX.Element}) => {
-  const [theme, setTheme] = useState<string>('light');
+  const [theme, setTheme] = useState<string>('dark');
   const [lang, setLang] = useState<string>('en');
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   const value = {
     theme,

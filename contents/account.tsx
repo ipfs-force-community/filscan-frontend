@@ -62,7 +62,7 @@ export const registerList = [
     },
      {
         label: 'code',
-        name: 'token',
+        name: 'code',
         placeholder:'code_placeholder',
         prefix:<LockOutlined className="site-form-item-icon" />,
         rules:[{ required: true, message: '${password} is required' }]

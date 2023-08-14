@@ -5,26 +5,32 @@ import SendCode from "@/src/account/sendCode";
 import fetchData from "@/store/server";
 import { validateCode, validatePassword } from "@/utils";
 import { Button, Checkbox, Form, Input } from "antd";
+import { useState } from "react";
+import Link from 'next/link';
 
 export default () => { 
     const { tr } = Translation({ ns: 'common' });
+    const [token,setToken] = useState('token');
       const [form] = Form.useForm();
 
   
     const onFinish = async() => { 
         //注册
         const data = form.getFieldsValue();
-        console.log('---3',data)
-        const result = await fetchData(proApi.byCode, {
+        const result:any = await fetchData(proApi.login, {
             ...data,
-            mail:data.email
+            mail: data.email,
+            password: data.new_password,
+            token,
         })
-        console.log('---3',result)
+        if (result.token) { 
+            localStorage.setItem('token', result.token)
+            localStorage.setItem("expired_at", result.expired_at) //过期时间
+        }
     }
 
     //监听mail 的变化
   const mail = Form.useWatch('email', form);
-
 
     //注册
     return <>
@@ -101,7 +107,7 @@ export default () => {
                         rules={newRules}
                     >
                         <Input prefix={item.prefix} placeholder={tr(item.placeholder)}
-                            suffix={showButton && <SendCode mail={mail} />} 
+                            suffix={showButton && <SendCode mail={mail} onChange={ (token)=>setToken(token)} />} 
                         />
                           
                        
@@ -109,9 +115,9 @@ export default () => {
                 })}
                   <div className="!flex !gap-x-2"  >
                       <span>{tr('have_account')}</span>
-                        <a  href="">
+                        <Link  href="/account">
                         {tr('login')}
-                         </a>
+                         </Link>
                     </div> 
                 <Form.Item className="!mt-5">
                     <Button type="primary" htmlType="submit" className="!w-full">

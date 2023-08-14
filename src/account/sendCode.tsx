@@ -4,7 +4,7 @@ import { proApi } from "@/contents/apiUrl";
 import fetchData from "@/store/server";
 
 // 在组件中使用自定义hook
-function VerifyCodeButton({ mail }: {mail:string}) {
+function VerifyCodeButton({ mail,onChange }: {mail:string,onChange?:(token:string)=>void}) {
     const { tr } = Translation({ ns: 'common' });
   const { count, resetCountdown } = useCountdown(0);
 
@@ -20,8 +20,10 @@ function VerifyCodeButton({ mail }: {mail:string}) {
       console.log('=mail==2', mail)
       if (mail && validateEmail(mail)) {
           const result:any = await fetchData(proApi.send_code, { mail: mail })
-          if (result?.token) {
-              console.log('---3',result)
+        if (result?.token) {
+            if(onChange)onChange(result?.token)
+            //token 存入localStorage
+           // localStorage.setItem('token',result.token)
               
            }            
       } else { 

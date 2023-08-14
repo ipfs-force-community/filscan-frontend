@@ -5,6 +5,7 @@ const common = {
     last_time:'最新区块时间',
     base_fee: 'Base Fee',
     last_height: '最新区块高度',
+    go_home:'返回首页',
     
      //search 
     'search_holder':'请输入地址/消息ID/高度/区块Cid/节点ID/FNS',

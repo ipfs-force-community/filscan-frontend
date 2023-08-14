@@ -15,7 +15,8 @@ async function fetchData<T>(url: string, body = {}, options: FetchDataOptions = 
   const { maxRetries, timeout } = options;
   let retries = 0;
   let error:any = null;
-  let data: T | null|any = null;
+  let data: T | null | any = null;
+  const token = localStorage.getItem('token'); // 从 localStorage 获取 token
 
   while (retries < maxRetries) {
     try {
@@ -24,10 +25,9 @@ async function fetchData<T>(url: string, body = {}, options: FetchDataOptions = 
       if (timeout > 0) {
         timeoutId = setTimeout(() => controller.abort(), timeout);
       }
-
       const response = await fetch(url, { 
         method: 'POST',  // Change the request method to POST
-        headers: { 'Content-Type': 'application/json' },  // Set the content type to JSON
+        headers: { 'Content-Type': 'application/json',Authorization:`${token}` },  // Set the content type to JSON
         body: JSON.stringify(body),  // Convert the body data to JSON format
         signal: controller.signal
       });

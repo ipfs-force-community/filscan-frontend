@@ -1,6 +1,9 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
+
 
 const config: Config = {
+  darkMode:'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -47,6 +50,31 @@ const config: Config = {
     
     },
   },
-  plugins: [],
+  plugins:[],
+  // plugins: [
+  //     plugin(function({ addUtilities, e, theme }) {
+  //     const colors:any = theme('colors', {})
+  //     const colorModes = ['light', 'dark']
+  //     const createUtilityClass = (mode:string, property:any, color:any) => {
+  //     return `.${mode === 'dark' ? 'dark ' : ''}${property}-${e(color)}`
+  //     }
+  //     const newUtilities = colorModes.reduce((acc:any, mode:string) => {
+  //     const modeColors = colors[mode];
+  //     console.log('--mode',mode)
+  //     Object.keys(modeColors).forEach((color) => {
+  //     const utilityClassBg = createUtilityClass(mode, 'bg', color)
+  //     const utilityClassText = createUtilityClass(mode, 'text', color)
+  //     const utilityClassBorder = createUtilityClass(mode, 'border', color)
+  //     acc[utilityClassBg] = { backgroundColor: modeColors[color] }
+  //     acc[utilityClassText] = { color: modeColors[color] }
+  //     acc[utilityClassBorder] = { borderColor: modeColors[color] }
+  //     })
+  //       console.log('---3',acc)
+  //     return acc
+  //     }, {})
+
+  //       addUtilities(newUtilities)
+  //     }),
+  //     ],
 }
 export default config
