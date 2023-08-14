@@ -4,18 +4,18 @@ interface FetchDataOptions {
 }
 
 interface FetchDataResult<T> {
-  data: T | null;
-  error: string | null;
+  result: T | null;
+  error?: string | null;
 }
 
-async function fetchData<T>(url: string, options: FetchDataOptions = {
+async function fetchData<T>(url: string, body = {}, options: FetchDataOptions = {
   maxRetries: 3,
   timeout: 0  // Default is no timeout
 }): Promise<FetchDataResult<T>> {
   const { maxRetries, timeout } = options;
   let retries = 0;
   let error:any = null;
-  let data: T | null = null;
+  let data: T | null|any = null;
 
   while (retries < maxRetries) {
     try {
@@ -25,9 +25,13 @@ async function fetchData<T>(url: string, options: FetchDataOptions = {
         timeoutId = setTimeout(() => controller.abort(), timeout);
       }
 
-      const response = await fetch(url, { signal: controller.signal });
+      const response = await fetch(url, { 
+        method: 'POST',  // Change the request method to POST
+        headers: { 'Content-Type': 'application/json' },  // Set the content type to JSON
+        body: JSON.stringify(body),  // Convert the body data to JSON format
+        signal: controller.signal
+      });
       data = await response.json();
-      
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
@@ -38,15 +42,11 @@ async function fetchData<T>(url: string, options: FetchDataOptions = {
       retries += 1;
     }
   }
-
   if (data) {
-    return {
-      data,
-      error: null,
-    };
+    return data?.result || data || {}
   } else {
     return {
-      data: null,
+      result: null,
       error: error ? error.message : '请求失败',
     };
   }

@@ -6,6 +6,7 @@ const nextConfig = {
    env: {
      APP_ENV:process.env['NEXT_PUBLIC_environment'],
      APP_BASE_URL: process.env['NEXT_PUBLIC_APP_BASE_URL'],
+     APP_BASE_URL_PRO: process.env['NEXT_PUBLIC_APP_BASE_URL_PRO'],
      environment: process.env['NEXT_PUBLIC_environment'],
     FVM_URL: process.env['NEXT_PUBLIC_FVM_URL'],
      NET_WORK:process.env['NEXT_PUBLIC_NET_WORK'],

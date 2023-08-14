@@ -107,6 +107,33 @@ export function getClassName(str: string | number) {
    return showNum < 0?'text_red':'text_green';
 }
 
+//密码校验规则
+export function validatePassword(password: string, email: string): boolean {
+  // 8-20个字符
+  if (password.length < 8 || password.length > 20) {
+    return false;
+  }
+
+  // 需要同时包含数字、字母
+  if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password)) {
+    return false;
+  }
+
+  // 密码不能与邮箱地址相同
+  if (password === email) {
+    return false;
+  }
+
+  return true;
+}
+
+// 校验验证码
+export function validateCode(code: number|string) { 
+  // 六位验证码 9999 100000
+  const newCode = Number(code)
+  return newCode > 99999 && newCode < 1000000 
+
+}
 export function isMobile() {
   if (process.browser) {
     return window.innerWidth < 1100

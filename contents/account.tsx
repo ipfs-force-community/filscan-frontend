@@ -40,3 +40,46 @@ export const login_list = (type: string) => {
         rules:[{ required: true, message: '${password} is required' }]
     },]
 }
+
+
+export const registerList = [
+    {
+        label: 'email',
+        name: 'email',
+        prefix: <UserOutlined className="site-form-item-icon" />,
+        placeholder:'email_placeholder',
+       rules:[
+          {
+            type: 'email',
+            required: true,
+            message: 'email_rules',
+          },
+          {
+            required: true,
+            message: 'email_required',
+          },
+        ]
+    },
+     {
+        label: 'code',
+        name: 'token',
+        placeholder:'code_placeholder',
+        prefix:<LockOutlined className="site-form-item-icon" />,
+        rules:[{ required: true, message: '${password} is required' }]
+    },
+     {
+        label: 'password',
+        name: 'new_password',
+        placeholder:'new_password',
+        prefix:<LockOutlined className="site-form-item-icon" />,
+        rules:[{ required: true, message: '${password} is required' }]
+    },
+      {
+        label: 'password',
+        name: 'confirm_password',
+        placeholder:'confirm_password',
+        prefix:<LockOutlined className="site-form-item-icon" />,
+        rules:[{ required: true, message: '${password} is required' }]
+    }
+
+]

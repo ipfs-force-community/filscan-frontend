@@ -5,10 +5,12 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link'
+import SendCode from "@/src/account/sendCode";
 
 
 
 export default () => { 
+    const [form] = Form.useForm();
     const { tr } = Translation({ ns: 'common' });
     const [hash,setHash] = useState('login')
     //useHashScroll();
@@ -60,7 +62,7 @@ export default () => {
                 })}
             </ul>
             <Form
-                name="normal_login"
+                form={form}
                 size='large'
                 className="custom_form !w-full !mt-7 !flex !flex-col gap-y-4"
                 initialValues={{ remember: true }}
@@ -75,7 +77,7 @@ export default () => {
                     rules={item.rules}
                     >
                         <Input prefix={item.prefix} placeholder={tr(item.placeholder)}
-                        suffix={ showButton&& <span className="text_primary text-sm border-s pl-2 cursor-pointer">{tr('get_code')}</span> }
+                        suffix={ showButton&& <SendCode mail={form.getFieldValue('email')}/>}
                         />
                           
                        
