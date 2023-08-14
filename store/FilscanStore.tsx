@@ -16,8 +16,11 @@ export const FilscanStoreProvider = ({ children }: {children:JSX.Element}) => {
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute("theme", 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute("theme", 'light');
+
     }
   }, [theme]);
 

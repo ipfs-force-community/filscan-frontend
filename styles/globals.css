@@ -2,18 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --font-color:'#000000',
+:root,:root[theme='light']{
+     --bgColor:#FFFFFF;
+    --font-color:#000000;
     --select-shadow: rgba(223,227,234,0.6);
     --card-shadow: rgba(223,227,234,0.6);
+    --bg_hover:rgba(28, 106, 253, 0.1);
+    --font_des:rgba(0,0,0,0.6);
+    --primary: #1C6AFD;
+
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-   
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  :root,:root[theme='dark'] {
+   --bgColor:#000000;
+   --font-color:#ffffff;
+    --bg_hover:rgba(28, 106, 253, 0.1);
+   --font_des:rgba(0,0,0,0.6);
+   --primary: #1C6AFD;
+
   
   }
 }

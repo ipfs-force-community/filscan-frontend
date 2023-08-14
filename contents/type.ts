@@ -13,4 +13,12 @@ export interface Menu_Info {
     link?: string;
     outLink?: string;
     color?:string
- }
+}
+ 
+export interface MenuItem {
+    key: string,
+    label: string,
+    icon?: string | JSX.Element,
+    href?:string,
+   children?:Array<MenuItem>
+}

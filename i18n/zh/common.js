@@ -40,6 +40,8 @@ const common = {
     code_rules:'请正确输入6位数字验证码',
     password_rules: '请输入 8-20 个字符，需同时包含数字、字母以及特殊符号,密码不能与您的邮箱地址相同',
     confirm_password_rules: '两次输入的密码不一致，请重新输入',
+
+    
     
     
 }

@@ -115,7 +115,7 @@ export default () => {
                 })}
                   <div className="!flex !gap-x-2"  >
                       <span>{tr('have_account')}</span>
-                        <Link  href="/account">
+                        <Link  href="/account/login">
                         {tr('login')}
                          </Link>
                     </div> 

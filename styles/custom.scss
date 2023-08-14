@@ -1,3 +1,39 @@
+//layout
+.custom_header{
+    background-color: var(--bgColor) !important;
+    color: var(--font-color) !important;
+}
+//custom_menu
+.custom_menu{
+    .ant-menu-sub{
+        background-color: transparent !important;
+    }
+    .ant-menu-submenu{
+        width: calc(100% - 40px);
+        margin: auto;
+        > .ant-menu-submenu-title{
+            border-radius: 0px !important;
+            padding: 0px 20px !important;
+           
+        
+        }
+    }
+  
+    .ant-menu-item{
+         color:  var(--font_des) !important;
+        &:hover{
+            background-color: transparent !important;
+            color: var(--primary) !important;
+        }
+    }
+      .ant-menu-item-selected{
+        color: var(--primary) !important;
+        background-color: var( --bg_hover) !important;
+        &:hover{
+            background-color: var( --bg_hover) !important;
+        }
+    }
+}
 .custom_form{
     .ant-form-item-row{
        height: 100%;

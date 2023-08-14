@@ -44,15 +44,18 @@ import commonZh from './zh/common.js';
 import commonEn from './en/common.js';
 import commonKr from './kr/common.js';
 
+import accountZh from './zh/account.js';
+import accountEn from './en/account.js';
+import accountKr from './kr/account.js';
 
 
 i18n
   .use(initReactI18next)
   .init({
     resources: {
-      en: {common:commonEn, nav: navEn, home: homeEh, static: statisticEn, rank: rankEn, tipset: tipsetEn, detail: detailEn, fvm: fvmEn, contract: contractEn, domain: domainEn,fevm:fevmEn },
-      kr: {common:commonKr, nav: navHa,home:homeHa,static:statisticHa,rank:rankHa,tipset:tipsetHa,detail:detailHa,fvm:fvmHa,contract:contractHa,domain:domainHa,fevm:fevmKr},
-      zh: {common:commonZh,  nav: navZh, home: homeZh, static: statisticZh, rank: rankZh, tipset: tipsetZh, detail: detailZh,fvm:fvm,contract:contractZh,domain:domainZh,fevm:fevmZh},
+      en: {common:commonEn,  account:accountEn, nav: navEn, home: homeEh, static: statisticEn, rank: rankEn, tipset: tipsetEn, detail: detailEn, fvm: fvmEn, contract: contractEn, domain: domainEn,fevm:fevmEn },
+      kr: {common:commonKr, account:accountKr, nav: navHa,home:homeHa,static:statisticHa,rank:rankHa,tipset:tipsetHa,detail:detailHa,fvm:fvmHa,contract:contractHa,domain:domainHa,fevm:fevmKr},
+      zh: {common:commonZh,  account:accountZh,nav: navZh, home: homeZh, static: statisticZh, rank: rankZh, tipset: tipsetZh, detail: detailZh,fvm:fvm,contract:contractZh,domain:domainZh,fevm:fevmZh},
     },
    fallbackLng: 'zh',
     debug: true,

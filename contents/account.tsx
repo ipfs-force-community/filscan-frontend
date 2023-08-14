@@ -1,4 +1,6 @@
+import { getSvgIcon } from '@/svgsIcon';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { MenuItem } from './type';
 
 
 export const logTabs = [
@@ -81,5 +83,64 @@ export const registerList = [
         prefix:<LockOutlined className="site-form-item-icon" />,
         rules:[{ required: true, message: '${password} is required' }]
     }
+
+]
+
+
+
+
+export const account_manager: Array<MenuItem> = [
+    {
+        label: 'overview',
+        icon: <span className='!text-font'>{ getSvgIcon('account_overview')}</span>,
+        href: 'overview',
+        key:'overview',
+        children: [
+            {
+                label: 'overview_power', //算力概览
+                key:'overview_power'
+            },
+            {
+                label: 'overview_gas', //gas 消耗
+                key:'overview_gas'
+            },
+            {
+                label: 'overview_expired', //到期扇区
+                key:'overview_expired'
+            },
+            {
+                label: 'overview_reward', //出块奖励
+                key:'overview_reward'
+            },
+            {
+                label: 'overview_lucky', //幸运值
+                key:'overview_lucky'
+            },
+            {
+                label: 'overview_balance', //地址余额
+                key:'overview_balance'
+            },
+        ]
+        
+    },
+     {
+        label: 'miners',
+         icon: <span className='!text-font'>{getSvgIcon('account_miners')}</span>,
+         key:'miners',
+        href: 'miners', 
+    },
+    {
+        label: 'personal',
+        icon: <span className='!text-font'>{getSvgIcon('account_personal')}</span>,
+        key:'personal',
+        href: 'personal',
+    },
+    {
+        label: 'logout',
+        icon: <span className='!text-font'>{getSvgIcon('account_logout')}</span>,
+        href: '',
+        key:'logout',
+        
+    },
 
 ]

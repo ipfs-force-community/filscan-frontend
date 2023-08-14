@@ -30,9 +30,9 @@ export default () => {
         return moon
     },[theme])
 
-    return <Header className="!bg-bgColor !text-font !h-[106px] !p-0 !dark:bg-dark-bgColor" >
+    return <Header className="custom_header !h-[106px] !p-0 " >
         <div className="flex justify-between items-center h-[45px] text-xs !text-font font-PingFang font-medium border-b border-border_des px-24">
-            <ul className="flex gap-x-5 list-none">
+            <ul className="flex gap-x-5 list-none ">
                 {header_top.left.map((item) => { 
                     const { title,dataIndex, render } = item
                     const value = data[dataIndex]
@@ -47,10 +47,10 @@ export default () => {
                 <Image src={network} width={28} height={28} alt='network' key='network' />
                 <span className="flex items-center justify-center w-7 h-7 border border-border rounded-[5px]">{tr('lang')}</span>
                 <Image src={showTheme} width={28} height={28} alt='theme' key='moon' onClick={()=>setTheme(theme === 'dark'?'light':'dark')} />
-                <Link href='/account' as='/account' scroll={ false}>
+                {/* <Link href='/account/login' as='/account/login' scroll={ false}>
                      <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
-                </Link>
-                {/* <Account /> */}
+                </Link> */}
+                 <Account /> 
             </div>
 
         </div>
