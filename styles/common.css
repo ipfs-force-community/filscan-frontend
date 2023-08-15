@@ -28,7 +28,25 @@
     color: #E15252;
     -webkit-text-fill-color: #E15252; 
 }
+/* 向上滑动*/
+@keyframes fadeInAndUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  /* 50% {
+    opacity: 1;
+    transform: translateY(-50px);
+  } */
+   100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
 
+.fade-in {
+  animation: fadeInAndUp 6s;
+}
 /*//主题色*/
 .text_primary{
     color:#1C6AFD ; 
@@ -60,7 +78,9 @@
   }
   50% {
     transform: translateY(20px) ;
-    transform: translateX(10px) scale(1.15);
+          transform: translateX(20px) ;
+
+    /* transform: translateX(10px) scale(1.15); */
   }
   100% {
     transform: translateY(0) scale(1);

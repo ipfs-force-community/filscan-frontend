@@ -1,34 +1,21 @@
-import * as echarts from "echarts";
-// import {
-//   BarChart,
-//   LineChart
-// } from 'echarts/charts';
-import {
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  // 数据集组件
-  DatasetComponent,
-  // 内置数据转换器组件 (filter, sort)
-  TransformComponent
-} from 'echarts/components';
+/** @format */
+
+import * as echarts from 'echarts';
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 import type {
   // 系列类型的定义后缀都为 SeriesOption
-  BarSeriesOption, 
-  LineSeriesOption
+  BarSeriesOption,
+  LineSeriesOption,
 } from 'echarts/charts';
 import type {
   // 组件类型的定义后缀都为 ComponentOption
   TitleComponentOption,
   TooltipComponentOption,
   GridComponentOption,
-  DatasetComponentOption
+  DatasetComponentOption,
 } from 'echarts/components';
-import type { 
-  ComposeOption, 
-} from 'echarts/core';
+import type { ComposeOption } from 'echarts/core';
 import { useEffect, useRef } from 'react';
 import { isMobile } from '@/utils';
 
@@ -60,36 +47,45 @@ interface EChartsComponentProps {
   options: ECOption;
 }
 
-const EChartsComponent: React.FC<EChartsComponentProps> = ({ options }) => {
+const EChartsComponent: React.FC<EChartsComponentProps> = ({
+  options = {},
+}) => {
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (chartRef.current) {
-      const chartInstance = echarts.init(chartRef.current);
+      const chart = echarts.init(chartRef.current as unknown as HTMLDivElement);
       const default_options = {
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         grid: {
-        top: isMobile() ? 100:5,
-        left: 20,
-        right: 20,
-        bottom: 40,
-        containLabel: true,
-      },
+          top: isMobile() ? 100 : 5,
+          left: 20,
+          right: 20,
+          bottom: 40,
+          containLabel: true,
+        },
         yAxis: {
-          value:'line'
-        }
-      }
-      chartInstance.setOption({...default_options,...options,});
+          value: 'line',
+        },
+        series: [],
+      };
+      console.log('===3', options);
 
+      chart?.setOption({ ...default_options, ...options });
+
+      const handleSize = () => {
+        chart.resize();
+      };
+
+      window.addEventListener('resize', handleSize);
       return () => {
-        chartInstance.dispose();
+        chart.dispose();
+        window.removeEventListener('resize', handleSize);
       };
     }
   }, [options]);
 
-  return (
-    <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>
-  );
+  return <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>;
 };
 
 export default EChartsComponent;
