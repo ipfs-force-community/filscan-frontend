@@ -2,7 +2,13 @@ export interface Item {
   title: string;
   title_tip?:string
   dataIndex: string;
+  api?:string,
   render?:(text:any,record?:Record<string,any>,index?:number)=>number|string|JSX.Element
+}
+
+export interface Option_Item { 
+  label: string,
+  value: string
 }
 export interface Menu_Info { 
     key: string;

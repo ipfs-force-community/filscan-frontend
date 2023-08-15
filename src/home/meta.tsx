@@ -1,8 +1,14 @@
 /** @format */
 
+import { apiUrl } from '@/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
+import useInterval from '@/components/hooks/useInterval';
 import useObserver from '@/components/hooks/useObserver';
 import { home_meta } from '@/contents/home';
+import fetchData from '@/store/server';
+import { Skeleton } from 'antd';
+import { data } from 'autoprefixer';
+import { useEffect, useMemo, useState } from 'react';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -28,19 +34,53 @@ const mockData: Record<DataIndex, number | undefined> & {
 };
 function Meta() {
   const { tr } = Translation({ ns: 'home' });
-  const ref = useObserver();
+  //const ref = useObserver();
+
+  const [data, setData] = useState<
+    Record<DataIndex, number | undefined> & {
+      [key: string]: number | undefined;
+    }
+  >();
+
+  useEffect(() => {
+    //loadInterval();
+    load();
+  }, []);
+
+  const load = async () => {
+    const data: any = await fetchData(apiUrl.home_meta);
+    setData(data?.total_indicators || {});
+  };
+
+  // useInterval(() => {
+  //   loadInterval();
+  // }, 15000);
+
+  const loadInterval = async () => {
+    const lastData = await fetchData(apiUrl.tipset_chain_FinalHeight);
+    // postAxios(apiUrl.tipset_chain_FinalHeight).then((res: any) => {
+    //   const data = res?.result || {};
+    //   setLast({
+    //     latest_height: data.height,
+    //     latest_block_time: data.block_time,
+    //   });
+    // });
+  };
 
   return (
     <div
-      ref={ref}
+      //ref={ref}
       className='border card_shadow w-[831px] h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl'>
       {home_meta.map((item: Item, index: number) => {
         const { render, dataIndex, title } = item;
-        const value = mockData[dataIndex];
-        const renderDom = render && render(value, mockData);
+        const value = (data && data[dataIndex]) || '';
+        let renderDom;
+        if (data) {
+          renderDom = render && render(value, data);
+        }
         return (
           <div key={item.dataIndex}>
-            <div className='text_clip font-DIN font-bold text-xl'>
+            <div className='text_clip DINPro-Bold font-bold	 text-xl'>
               {renderDom || value}
             </div>
             <div className='text-xs font-PingFang'>{tr(title)}</div>

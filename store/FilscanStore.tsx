@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface FilscanStore {
@@ -9,18 +11,21 @@ interface FilscanStore {
 
 const FilscanStoreContext = createContext<FilscanStore | null>(null);
 
-export const FilscanStoreProvider = ({ children }: {children:JSX.Element}) => {
-  const [theme, setTheme] = useState<string>('dark');
+export const FilscanStoreProvider = ({
+  children,
+}: {
+  children: JSX.Element;
+}) => {
+  const [theme, setTheme] = useState<string>('light');
   const [lang, setLang] = useState<string>('en');
 
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
-      document.documentElement.setAttribute("theme", 'dark');
+      document.documentElement.setAttribute('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
-            document.documentElement.setAttribute("theme", 'light');
-
+      document.documentElement.setAttribute('theme', 'light');
     }
   }, [theme]);
 
@@ -41,7 +46,9 @@ export const FilscanStoreProvider = ({ children }: {children:JSX.Element}) => {
 export const useFilscanStore = (): FilscanStore => {
   const context = useContext(FilscanStoreContext);
   if (!context) {
-    throw new Error('useFilscanStore must be used within a FilscanStoreProvider');
+    throw new Error(
+      'useFilscanStore must be used within a FilscanStoreProvider'
+    );
   }
   return context;
-}
+};

@@ -58,19 +58,18 @@ const EChartsComponent: React.FC<EChartsComponentProps> = ({
       const default_options = {
         backgroundColor: 'transparent',
         grid: {
-          top: isMobile() ? 100 : 5,
+          top: isMobile() ? 100 : 10,
           left: 20,
           right: 20,
-          bottom: 40,
+          bottom: '10%',
           containLabel: true,
         },
+        xAxis: {},
         yAxis: {
           value: 'line',
         },
         series: [],
       };
-      console.log('===3', options);
-
       chart?.setOption({ ...default_options, ...options });
 
       const handleSize = () => {

@@ -1,25 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-const useHash = (): string => {
-  const [hash, setHash] = useState<string>('');
+// 自定义Hook，用于获取hash
+export function useHash() {
+  const router = useRouter()
+  const [hash, setHash] = useState('')
 
   useEffect(() => {
-    const showHash = window.location?.hash?.split('#')[1]||''
-    setHash(showHash);
+    const currentHash = router.asPath.split('#')[1]
+    setHash(currentHash)
+  }, [router.asPath])
 
-    const handleHashChange = () => {
-      setHash(showHash);
-    };
+  return hash
+}
 
-    window.addEventListener('hashchange', handleHashChange);
-
-    // 在组件卸载时移除事件监听器
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, []);
-
-  return hash;
-};
-
-export default useHash;

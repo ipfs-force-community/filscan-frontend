@@ -7,9 +7,15 @@ const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './packages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,jsx,ts,tsx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  variants: {
+    extend: {
+      visibility: ['group-hover'],
+    },
+  },
   theme: {
     extend: {
        screens: {
@@ -26,17 +32,19 @@ const config: Config = {
       fontFamily: {
         'PingFang': ['PingFang SC', 'sans-serif'],
         'Barlow':['Barlow'],
-        "DIN":['DINPro']
+        "DIN": ['DINPro'],
+        "DINPro-Bold":['DINPro-Bold']
       },
       colors: {
         // 亮色模式颜色配置
         bgColor: '#FFFFFF',
+        bgDesColor:'#F6F6F6',
         font: '#000000',
         font_des:'rgba(0,0,0,0.6)',
         border_des: 'F0F1F3',
         border: '#EEEFF1',
         primary: '#1C6AFD',
-        bg_hover:'rgba(28, 106, 253, 0.1)',
+        bg_hover: 'rgba(28, 106, 253, 0.1)',
         icon_border: 'rgba(0,0,0,0.2)',
         secondary: '#00FF00',
         // 暗色模式颜色配置

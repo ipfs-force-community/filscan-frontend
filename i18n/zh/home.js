@@ -53,6 +53,9 @@ const home = {
     search_notFound: '搜索无结果',
     warn_text: 'Oops! 您输入的搜索字符:',
     warn_details: '对不起！这是一个无效的字符串',
-    go_home:'返回首页'
+    go_home: '返回首页',
+    
+    base_gas: '24h基础手续费走势',
+    rank:'排行榜'
 }
 export default home

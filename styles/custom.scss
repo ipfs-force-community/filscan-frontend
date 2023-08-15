@@ -1,3 +1,29 @@
+
+
+
+@font-face {
+  font-family: "DINPro"; /* Project id 1544881 */
+  src: url('../assets/font/din/DINPro-Regular.otf');
+font-display: auto;
+}
+@font-face {
+  font-family: "DINPro-Bold"; /* Project id 1544881 */
+  src: url('../assets/font/din/DINPro-Bold.otf');
+font-display: auto;
+}
+
+@font-face {
+  font-family: "DINPro-Medium"; /* Project id 1544881 */
+  src: url('../assets/font/din/DINPro-Medium.otf');
+font-display: auto;
+}
+
+// @font-face {
+//   font-family: 'Beirut';
+//   src: url('../assets/fonts/Beirut.ttc');
+//   font-display: auto;
+// }
+
 //layout
 .custom_header{
     background-color: var(--bgColor) !important;
@@ -49,5 +75,56 @@
             }
         }
        }
+    }
+}
+
+
+//table 
+.custom_table{
+    width: 100%;
+    .ant-table{
+        .ant-table-content{
+            .ant-table-thead{
+                .ant-table-cell{
+                    background-color: transparent ;
+                    border-bottom:none;
+                    &::before{
+                        display: none;
+                    }
+                    .ant-table-column-sorters{
+                        justify-content:flex-start;
+                        .ant-table-column-title{
+                            width: fit-content;
+                            flex: none;
+                        }
+                    }
+                }
+            }
+            .ant-table-tbody{
+                .custom_table_row{
+                    .ant-table-column-sort{
+                        background-color: transparent;
+                        &:hover{
+                            background-color: #fafafa;
+                        }
+                    }
+                    &:last-child{
+                     .ant-table-cell{
+                        border-bottom:none;
+                    } 
+                    }
+                }
+            }
+        }
+    }
+}
+
+//骨架屏
+.skeleton_Input{
+    width: 60px !important;
+    height: 28px !important;
+    min-width: 50px !important;
+    >.ant-skeleton-input{
+        min-width:50px
     }
 }

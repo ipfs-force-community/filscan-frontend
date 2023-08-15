@@ -1,18 +1,18 @@
 /** @format */
-import Card from "@/packages/custom_card";
-import { apiUrl } from "@/contants/apiUrl";
-import { gas_24 } from "@/contants/statistic";
-import { useTranslation } from "react-i18next";
-import { useEffect, useState, useMemo, useContext } from "react";
-import { postAxios } from "@/store/server";
-import Table from "@/packages/newTable";
-import FilscanState from "@/store/content";
+import Card from '@/packages/custom_card';
+import { apiUrl } from '@/contants/apiUrl';
+import { gas_24 } from '@/contants/statistic';
+import { useTranslation } from 'react-i18next';
+import { useEffect, useState, useMemo, useContext } from 'react';
+import { postAxios } from '@/store/server';
+import Table from '@/packages/Table';
+import FilscanState from '@/store/content';
 
 export default () => {
-    const filscanStore: any = useContext(FilscanState);
+  const filscanStore: any = useContext(FilscanState);
   const { t } = useTranslation();
   const tr = (label: string): string => {
-    return t(label, { ns: "static" });
+    return t(label, { ns: 'static' });
   };
 
   const [data, setData] = useState([]);
@@ -25,7 +25,7 @@ export default () => {
 
   const columns: any = useMemo(() => {
     return gas_24.columns.map((item: any) => {
-      return { ...item,align:'center', title: tr(item.title) };
+      return { ...item, align: 'center', title: tr(item.title) };
     });
   }, [filscanStore.filscan]);
 
@@ -35,7 +35,7 @@ export default () => {
         className='custom-table'
         dataSource={data}
         columns={columns}
-        rowKey={ (record:any)=>`${record.sum_gas_fee}_${record.method_name}`}
+        rowKey={(record: any) => `${record.sum_gas_fee}_${record.method_name}`}
       />
     </Card>
   );
