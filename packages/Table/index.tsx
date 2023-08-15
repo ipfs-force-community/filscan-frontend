@@ -1,5 +1,6 @@
 /** @format */
 
+import { useFilscanStore } from '@/store/FilscanStore';
 import { isMobile, pageLimit } from '@/utils';
 import { Pagination, Skeleton, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -27,6 +28,7 @@ export default (props: Props) => {
     className = '',
     onChange,
   } = props;
+
   const showLimit = useMemo(() => {
     return limit || pageLimit;
   }, [limit]);

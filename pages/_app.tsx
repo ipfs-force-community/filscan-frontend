@@ -1,7 +1,7 @@
 /** @format */
 
 import '@/styles/globals.css';
-import '@/styles/common.css';
+import '@/styles/common.scss';
 import '@/styles/custom.scss';
 import { Layout } from 'antd';
 import { I18nextProvider } from 'react-i18next';

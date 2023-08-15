@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Translation } from '@/components/hooks/Translation';
 import go from '@/assets/images/black_go.svg';
+import { useEffect } from 'react';
 
 //import fetchData from '@/store/server';
 

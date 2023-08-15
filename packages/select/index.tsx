@@ -10,10 +10,16 @@ export default ({
   options,
   ns = 'home',
   onChange,
+  header,
+  wrapClassName,
+  className,
 }: {
   ns: string;
   options: Array<Option_Item>;
   onChange: (value: string) => void;
+  header?: JSX.Element;
+  wrapClassName?: string;
+  className?: string;
 }) => {
   const { tr } = Translation({ ns });
   const [showLabel, setShowLabel] = useState(options[0].label);
@@ -26,15 +32,19 @@ export default ({
   };
 
   return (
-    <div className='group h-fit flex cursor-pointer bg-bgDesColor items-center relative rounded-[5px] w-fit'>
-      <span className='flex justify-between font-PingFang p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
-        {tr(showLabel)}
-        <Image src={down} width={8} height={4} alt='down' />
-      </span>
+    <div
+      className={`group h-fit flex cursor-pointer bg-bgDesColor items-center relative rounded-[5px] w-fit ${wrapClassName}`}>
+      {header ? (
+        header
+      ) : (
+        <span className='flex justify-between font-PingFang p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
+          {tr(showLabel)}
+          <Image src={down} width={8} height={4} alt='down' />
+        </span>
+      )}
+
       <ul
-        className={
-          'invisible group-hover:visible absolute z-10 inset-y-full max-h-fit w-max list-none p-4  border border-border rounded-[5px] bg-bgColor select_shadow '
-        }>
+        className={`invisible group-hover:visible absolute  z-10 inset-y-full max-h-fit w-max list-none p-4  border border-border rounded-[5px] bg-bgColor select_shadow ${className}`}>
         {options.map((item) => {
           return (
             <li

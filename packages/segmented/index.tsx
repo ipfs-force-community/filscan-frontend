@@ -12,10 +12,12 @@ export default ({
   data,
   defaultValue,
   ns,
+  isHash = true,
 }: {
   data: Array<Item>;
   defaultValue: string;
   ns: string;
+  isHash: boolean;
 }) => {
   const { tr } = Translation({ ns });
   const router = useRouter();
@@ -29,7 +31,12 @@ export default ({
   const handleClick = (tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
     setActive(tabId);
-    router.push(`${router.pathname}#${tabId}`, undefined, { shallow: true });
+    if (isHash) {
+      router.replace(`${router.pathname}#${tabId}`, undefined, {
+        shallow: true,
+        scroll: false,
+      });
+    }
   };
 
   return (
@@ -39,7 +46,7 @@ export default ({
           <li
             key={item.dataIndex}
             onClick={() => handleClick(item.dataIndex)}
-            className={`w-20 h-7 cursor-pointer flex items-center justify-center text-font_des hover:text-font ${
+            className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text-font_des hover:text-font ${
               active === item.dataIndex
                 ? 'tab_shadow highlight !bg-bgColor rounded-[5px] '
                 : ''

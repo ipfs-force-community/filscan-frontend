@@ -1,4 +1,7 @@
 const common = {
+      zh: '中',
+        en: 'En',
+        kr:'Kr',
     login:'登录',
     lang:'中',
     fil: 'FIL',

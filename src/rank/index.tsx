@@ -3,19 +3,12 @@
 import { useHash } from '@/components/hooks/useHash';
 import { Translation } from '@/components/hooks/Translation';
 import { useEffect, useMemo, useState } from 'react';
-import {
-  getColumn,
-  getDefaultSort,
-  poolList,
-  providerList,
-  rank_header,
-} from '@/contents/rank';
+import { getColumn, getDefaultSort } from '@/contents/rank';
 import Table from '@/packages/Table';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/apiUrl';
-import Select from '@/packages/select';
-import Segmented from '@/packages/segmented';
 import Header from './header';
+import { useFilscanStore } from '@/store/FilscanStore';
 
 const defaultFilter = {
   sector_size: 'all',
@@ -25,6 +18,8 @@ const defaultFilter = {
 export default ({ origin }: { origin: string }) => {
   const hash = useHash();
   const { tr } = Translation({ ns: 'rank' });
+  const { theme, lang } = useFilscanStore();
+
   const [active, setActive] = useState('provider');
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<any>({});
@@ -38,6 +33,7 @@ export default ({ origin }: { origin: string }) => {
     rewards: { ...defaultFilter },
   });
   const [sort, setSort] = useState<any>({});
+
   useEffect(() => {
     const showHash = hash || 'provider';
     setActive(showHash);
@@ -112,7 +108,7 @@ export default ({ origin }: { origin: string }) => {
       return { ...item, title: tr(item.title) };
     });
     return content;
-  }, [active, progress[active]]);
+  }, [active, progress[active], theme, lang]);
 
   const handleHeaderChange = (type: string, value: string) => {
     const showHeader = headerFilter[active];
@@ -151,7 +147,6 @@ export default ({ origin }: { origin: string }) => {
     if (active === 'rewards') return rewardsData;
     return data;
   }, [active, data, poolData, growthData, rewardsData]);
-  console.log('===3345', showData, active);
 
   return (
     <>

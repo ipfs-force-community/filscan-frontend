@@ -31,6 +31,7 @@ export default ({
           data={rank_header.tabList}
           ns='rank'
           defaultValue='provider'
+          isHash={origin !== 'home'}
         />
         {rank_header[active] &&
           Object.keys(rank_header[active]).map((item) => {

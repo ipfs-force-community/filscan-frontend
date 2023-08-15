@@ -61,14 +61,14 @@ export const providerList = (progress: any): Array<any> => {
     {
       title: 'ranking', //排名
       dataIndex: 'rank',
-      width: '5%',
+      width: '6%',
       align: 'center',
       render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
     {
       title: 'provider_miner', //节点号
       dataIndex: 'miner_id',
-      with: '10%',
+      with: '9%',
       align: 'center',
       render: (text: string) => {
         return (
@@ -141,7 +141,7 @@ export const poolList = (progress: number | string) => {
     {
       title: 'ranking', //排名
       dataIndex: 'rank',
-      width: '5%',
+      width: '6%',
       align: 'center',
       render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
@@ -149,7 +149,7 @@ export const poolList = (progress: number | string) => {
       title: 'pool_owner', //存储池号
       dataIndex: 'owner_id',
       align: 'center',
-      with: '10%',
+      with: '9%',
       render: (text: string) => {
         return (
           <Link href={`/owner/${text}`} prefetch className='link_text'>
@@ -273,6 +273,7 @@ const rewardsList = () => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '10%',
+      render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
     {
       title: 'miner', //节点号

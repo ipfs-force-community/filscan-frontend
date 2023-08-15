@@ -44,8 +44,10 @@ const home = {
      search_notFound: 'Search Not Found',
     warn_text: 'Oops! The search string you enterd was:',
   warn_details: 'Sorry! This is an invalid search string',
-        go_home:'Back Home'
-
+  go_home: 'Back Home',
+        
+  base_gas: '24h BaseFee',
+    rank:'Rank'
    
 }
 export default home

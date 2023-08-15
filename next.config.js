@@ -12,10 +12,9 @@ const nextConfig = {
      NET_WORK:process.env['NEXT_PUBLIC_NET_WORK'],
      PORT: process.env['NEXT_PUBLIC_PORT'],
   },
-    i18n: {
+   i18n: {
     locales: ['zh', 'en', 'kr'],
     defaultLocale: 'zh',
-    localePath: path.resolve('./i18n'),
   },
 }
 

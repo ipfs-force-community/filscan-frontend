@@ -17,7 +17,7 @@ export const FilscanStoreProvider = ({
   children: JSX.Element;
 }) => {
   const [theme, setTheme] = useState<string>('light');
-  const [lang, setLang] = useState<string>('en');
+  const [lang, setLang] = useState<string>('zh');
 
   useEffect(() => {
     if (theme === 'dark') {
