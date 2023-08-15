@@ -93,12 +93,14 @@ export default (props: Props) => {
 
   return (
     <Table
+      tableLayout='fixed'
       bordered={false}
-      className={`custom_table ${className}`}
-      dataSource={[...data]}
+      className={`custom_table ${className} w-full h-full`}
+      dataSource={loading ? [] : [...data]}
       columns={columnsList}
       rowClassName={'custom_table_row'}
       rowKey={new Date().getDate()}
+      onChange={onChange}
       pagination={
         total > showLimit
           ? {

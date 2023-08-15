@@ -1,16 +1,15 @@
 /** @format */
 
 //import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { apiUrl } from '@/apiUrl';
-import { Translation } from '@/components/hooks/Translation';
+
 import Banner from '@/components/banner';
 import Meta from '@/src/home/meta';
 import Gas from '@/src/statistics/Gas';
+import Rank from '@/src/rank';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Translation } from '@/components/hooks/Translation';
 import go from '@/assets/images/black_go.svg';
-import Rank from '@/src/rank';
-import RankHeader from '@/src/rank/header';
 
 //import fetchData from '@/store/server';
 
@@ -27,10 +26,10 @@ import RankHeader from '@/src/rank/header';
 
 function Home(props: any) {
   const { tr } = Translation({ ns: 'home' });
+
   return (
     <>
       <Banner />
-
       <div className='main_contain bg-bgColor'>
         <div className='flex justify-between'>
           <Meta />
@@ -52,27 +51,7 @@ function Home(props: any) {
         </div>
 
         <div className='mt-16'>
-          <div>
-            <div className='flex justify-between '>
-              <div className='flex gap-x-4 items-center'>
-                <div className='font-PingFang font-semibold text-lg	'>
-                  {tr('rank')}
-                </div>
-                <RankHeader />
-              </div>
-
-              <Link href={`/statistics/gas/`}>
-                <Image
-                  className='cursor-pointer'
-                  src={go}
-                  width={18}
-                  height={18}
-                  alt='go'
-                />
-              </Link>
-            </div>
-          </div>
-          <Rank />
+          <Rank origin={'home'} />
         </div>
       </div>
     </>

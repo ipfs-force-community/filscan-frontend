@@ -1,28 +1,33 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
+import { useHash } from '@/components/hooks/useHash';
 import { Item } from '@/contents/type';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //分段控制器，添加锚点
 
 export default ({
   data,
-  value,
+  defaultValue,
   ns,
 }: {
   data: Array<Item>;
-  value: string;
+  defaultValue: string;
   ns: string;
 }) => {
   const { tr } = Translation({ ns });
   const router = useRouter();
-  const [active, setActive] = useState(value);
+  const [active, setActive] = useState(defaultValue);
+
+  const hash = useHash();
+  useEffect(() => {
+    setActive(hash || defaultValue);
+  }, [hash]);
 
   const handleClick = (tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
-
     setActive(tabId);
     router.push(`${router.pathname}#${tabId}`, undefined, { shallow: true });
   };

@@ -9,9 +9,11 @@ import { useState } from 'react';
 export default ({
   options,
   ns = 'home',
+  onChange,
 }: {
   ns: string;
   options: Array<Option_Item>;
+  onChange: (value: string) => void;
 }) => {
   const { tr } = Translation({ ns });
   const [showLabel, setShowLabel] = useState(options[0].label);
@@ -20,6 +22,7 @@ export default ({
   const handleClick = (item: Option_Item) => {
     setShowLabel(item.label);
     setValue(item.value);
+    onChange(item.value);
   };
 
   return (

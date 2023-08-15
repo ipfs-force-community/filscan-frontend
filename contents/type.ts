@@ -9,6 +9,7 @@ export interface Item {
 export interface Option_Item { 
   label: string,
   value: string
+  options?:Array<Item>
 }
 export interface Menu_Info { 
     key: string;

@@ -33,7 +33,8 @@ const config: Config = {
         'PingFang': ['PingFang SC', 'sans-serif'],
         'Barlow':['Barlow'],
         "DIN": ['DINPro'],
-        "DINPro-Bold":['DINPro-Bold']
+        "DINPro-Bold": ['DINPro-Bold'],
+         "DINPro-Medium":['DINPro-Medium']
       },
       colors: {
         // 亮色模式颜色配置
