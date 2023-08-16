@@ -2,7 +2,6 @@
 import Image from '@/packages/image';
 import { formatNumber, get$Number } from '@/utils';
 import TextTip from '@/packages/textTooltip';
-import { Tooltip } from 'antd';
 
 export const defi_list = {
   title: 'defi_list',

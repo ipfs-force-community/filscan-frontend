@@ -1,132 +1,133 @@
 /** @format */
 
-import { useEffect, useState, useMemo, useContext } from "react";
-import { apiUrl } from "@/contants/apiUrl";
-import { useTranslation } from "react-i18next";
-import { pool_list, pool_columns } from "@/contants/tipset";
-import { Select } from "antd";
-import FilscanState from "@/store/content";
-import { postAxios } from "@/store/server";
-import { pageLimit } from "@/contants/varible";
-import styles from "../index.module.scss";
-import Table from "@/packages/newTable";
-
+import { apiUrl } from '@/apiUrl';
+import { Translation } from '@/components/hooks/Translation';
+import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
+import useUpdateQuery from '@/components/hooks/useUpdateQuery';
+import { pool_list } from '@/contents/tipset';
+import { Item } from '@/contents/type';
+import Table from '@/packages/Table';
+import Select from '@/packages/select';
+import Selects from '@/packages/selects';
+import { useFilscanStore } from '@/store/FilscanStore';
+import fetchData from '@/store/server';
+import { pageLimit } from '@/utils';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 export default () => {
-  const filscanStore: any = useContext(FilscanState);
-  const { t } = useTranslation();
-  const tr = (label: string, value?: Record<string, any>) => {
-    if (value) {
-      return t(label, { ...value, ns: "tipset" });
-    }
-    return t(label, { ns: "tipset" });
-  };
-  const [options, setOptions] = useState([]);
-  const [current, setCurrent] = useState(1);
+  const { tr } = Translation({ ns: 'tipset' });
+  const { theme, lang } = useFilscanStore();
+  const updateQuery = useUpdateQuery();
+  const removeQueryParam = useRemoveQueryParam();
+  const { name, p } = useRouter().query;
   const [loading, setLoading] = useState(false);
-  const [select,selectValue]= useState('')
-  const [data, setData] = useState<any>({
-    total: 0,
-    dataSource: [],
+  const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
+  const [dataSource, setDataSource] = useState({
+    data: [],
+    total: undefined,
   });
 
-  const columns = useMemo(() => {
-    return pool_columns.map((v) => {
-      const newObj = {
-        ...v,
-        title: tr(v.title),
-      };
-      return newObj;
-    });
-  }, [filscanStore?.filscan?.lang]);
-
-  useEffect(() => {
-    if (options) {
-      const newOptios: any = options.map((v: any) => {
-        return { ...v, label: tr(v.key) };
-      });
-      setOptions(newOptios);
-    } else { 
-      setOptions([])
+  const method = useMemo(() => {
+    if (name && typeof name === 'string') {
+      return name;
     }
-  }, [filscanStore?.filscan?.lang]);
+    return 'all';
+  }, [name]);
+
+  const current = useMemo(() => {
+    if (p && typeof p === 'string') {
+      return Number(p);
+    }
+    return 1;
+  }, [p]);
 
   useEffect(() => {
-    postAxios(apiUrl.tipset_message_pool_opt).then((res: any) => {
-      const opt: any = [ ];
-      const newObj = res?.result?.method_name_list || {};
-      let numRes = 0;
-      //        opt.push({ label: `${tr("message_list_all")} (${newObj[key]})` , value: 'all', key:'message_list_all' });
+    loadOptions();
+  }, [lang]);
 
-      Object.keys(newObj).forEach((key: string) => {
-        
-        numRes =Number( numRes + Number(newObj[key]));
-
-        opt.push({ label: `${tr(key)}` , value: key, key:key });
-        
-      });
-      opt.unshift({ label: `${tr("message_list_all")}` , value: 'all', key:'message_list_all' })
-      setOptions(opt);
+  const loadOptions = async () => {
+    const result: any = await fetchData(apiUrl.tipset_message_pool_opt);
+    const obj = result?.method_name_list || {};
+    const options = Object.keys(obj).map((v: string) => {
+      return { value: v, label: tr(v) };
     });
-    load();
-  }, []);
+    options.unshift({
+      label: `${tr('all')}`,
+      value: 'all',
+    });
+    setHeaderOptions(options);
+  };
 
-  const load = (cur?: number,methods?:string) => {
-    const index = cur || current;
-    const method = methods ||select
-    setLoading(true)
-    postAxios(apiUrl.tipset_pool, {
+  useEffect(() => {
+    load(current, method);
+  }, [method, current]);
+
+  const load = async (cur?: number, method?: string) => {
+    setLoading(true);
+    const showIndex = cur || current;
+    const method_name = method === 'all' ? '' : method;
+    const result: any = await fetchData(apiUrl.tipset_message, {
       filters: {
-        index:index-1,
+        index: showIndex - 1,
         limit: pageLimit,
-        method_name:method === 'all'? undefined:method
+        method_name,
       },
-    }).then((res: any) => {
-          setLoading(false)
-      setData({
-        total: res?.result.total_count,
-        dataSource: (res?.result.messages_pool_list || [])?.map((item: any) => {
-          return {
-            ...item?.message_basic,
-            gas_fee_cap: item?.gas_limit || "",
-            gas_premium: item?.gas_premium || "",
-          };
-        }),
-      });
+    });
+    setLoading(false);
+    setDataSource({
+      data: result?.message_list || [],
+      total: result?.total_count,
     });
   };
 
+  const columns = useMemo(() => {
+    const content = pool_list.columns.map((v: any) => {
+      return { ...v, title: tr(v.title) };
+    });
+    return content;
+  }, [theme, lang]);
+
+  const handleChange = (pagination: any, filters?: any, sorter?: any) => {
+    if (pagination?.current) {
+      updateQuery({ p: pagination.current });
+    }
+  };
   return (
-    <div className={styles.message_list}>
-      <div className="font_18 font-Weight_500">{tr(pool_list.title)}</div>
-      <div className={styles.message_list_header}>
-        <div className="font_16">{tr(pool_list.total_list, { value: data.total })}</div>
-        <Select
-          showSearch={ true}
-          options={options}
-          defaultValue={"all"}
-          className='custom_select'
-          onChange={(value) => { 
-            setCurrent(0);
-            selectValue(value)
-            load(1,value)
+    <div className='main_contain'>
+      <div className='flex justify-between items-center'>
+        <div>
+          <div className='font-PingFang font-semibold text-lg'>
+            {tr('pool_list')}
+          </div>
+          <div className='text_des text-xs'>
+            {tr(pool_list.total_list, { value: dataSource.total })}
+          </div>
+        </div>
+        <Selects
+          className='w-[240px]'
+          value={method}
+          options={headerOptions}
+          onChange={(value) => {
+            if (value !== 'all') {
+              updateQuery({ name: value });
+            } else {
+              removeQueryParam('name');
+            }
           }}
         />
       </div>
-      <Table
-        loading={ loading}
-        dataSource={data.dataSource}
-        total={data.total}
-        columns={columns}
-        rowKey={(record: any,other:any) => { 
-          return `${record.gas_premium}_${record.gas_limit}`
-        }}
-        current={current}
-        onPage={(cur) => {
-          setCurrent(cur);
-          load(cur);
-        }}
-      />
+
+      <div className='mt-4 h-full border  rounded-xl p-5	card_shadow border_color'>
+        <Table
+          className='-mt-2.5 '
+          data={dataSource.data}
+          total={dataSource.total}
+          columns={columns}
+          loading={loading}
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@
 
 import { apiUrl } from '@/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
+import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import { message_list } from '@/contents/tipset';
 import { Item } from '@/contents/type';
@@ -18,6 +19,7 @@ export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
+  const removeQueryParam = useRemoveQueryParam();
   const { name, p } = useRouter().query;
   const [loading, setLoading] = useState(false);
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
@@ -105,7 +107,13 @@ export default () => {
         <Selects
           value={method}
           options={headerOptions}
-          onChange={(value) => updateQuery({ name: value })}
+          onChange={(value) => {
+            if (value !== 'all') {
+              updateQuery({ name: value });
+            } else {
+              removeQueryParam('name');
+            }
+          }}
         />
       </div>
 

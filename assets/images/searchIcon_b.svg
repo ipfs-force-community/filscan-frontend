@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 8</title>
+    <defs>
+        <linearGradient x1="11.0001364%" y1="13.2559906%" x2="86.3970258%" y2="85.0453048%" id="linearGradient-1">
+            <stop stop-color="#398BEF" offset="0%"></stop>
+            <stop stop-color="#1C6AFD" offset="100%"></stop>
+        </linearGradient>
+        <filter id="filter-2">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.047059 0 0 0 0 0.050980 0 0 0 0 0.054902 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-267.000000, -198.000000)">
+            <g id="编组-8" transform="translate(267.000000, 198.000000)">
+                <rect id="矩形" fill="url(#linearGradient-1)" x="0" y="0" width="34" height="34" rx="5"></rect>
+                <g filter="url(#filter-2)" id="右箭头">
+                    <g transform="translate(9.189189, 11.027027)">
+                        <path d="M15.1806569,7.43230895 L0.593575094,7.43230895 C0.265752622,7.43230895 -3.26465581e-14,7.16655633 -3.26465581e-14,6.83873385 L-3.26465581e-14,5.65158367 C-3.26465581e-14,5.32376119 0.265752622,5.05800857 0.593575094,5.05800857 L15.1806569,5.05800857 L15.1806569,7.43230895 Z" id="路径" fill="#2C2C2C" fill-rule="nonzero"></path>
+                        <path d="M9.52337325,12.3170028 L8.68587752,11.479507 C8.57464253,11.3685418 8.51212864,11.2178786 8.51212864,11.0607592 C8.51212864,10.9036397 8.57464253,10.7529766 8.68587752,10.6420113 L13.0827301,6.24515876 L8.68587752,1.84830621 C8.45479117,1.61696292 8.45479117,1.24215378 8.68587752,1.01081049 L9.52337325,0.173314764 C9.75471654,-0.0577715882 10.1295257,-0.0577715882 10.360869,0.173314764 L16.432713,6.24515876 L10.360869,12.3170028 C10.1295257,12.5480891 9.75471654,12.5480891 9.52337325,12.3170028 L9.52337325,12.3170028 Z" id="路径" fill="#2C2C2C" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

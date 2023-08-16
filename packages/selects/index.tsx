@@ -8,8 +8,10 @@ export default ({
   options,
   onChange,
   value,
+  className = '',
 }: {
   value: string;
+  className?: string;
   options: Array<Option_Item>;
   onChange: (value: string) => void;
 }) => {
@@ -27,16 +29,16 @@ export default ({
     <Select
       showSearch
       value={active}
-      className='custom_select'
+      className={`custom_select cursor-pointer ${className}`}
       popupClassName={'custom_select'}
       placeholder='Search to Select'
       optionFilterProp='children'
       filterOption={(input, option) => (option?.label ?? '').includes(input)}
-      filterSort={(optionA: { label: any }, optionB: { label: any }) =>
-        (optionA?.label ?? '')
-          .toLowerCase()
-          .localeCompare((optionB?.label ?? '').toLowerCase())
-      }
+      // filterSort={(optionA: { label: any }, optionB: { label: any }) =>
+      //   (optionA?.label ?? '')
+      //     .toLowerCase()
+      //     .localeCompare((optionB?.label ?? '').toLowerCase())
+      // }
       options={options}
       onChange={handleChange}
     />

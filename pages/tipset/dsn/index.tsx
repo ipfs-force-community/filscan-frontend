@@ -1,95 +1,106 @@
 /** @format */
 
-import { useEffect, useState, useMemo, useContext } from "react";
-import { apiUrl } from "@/contants/apiUrl";
-import { useTranslation } from "react-i18next";
-import { dsn_list, dsn_columns } from "@/contants/tipset";
-import { Input } from "antd";
-import Table from "@/packages/newTable";
-import FilscanState from "@/store/content";
-import { postAxios } from "@/store/server";
-import styles from "../index.module.scss";
-import { pageLimit } from "@/contants/varible";
+import { apiUrl } from '@/apiUrl';
+import { Translation } from '@/components/hooks/Translation';
+import useUpdateQuery from '@/components/hooks/useUpdateQuery';
+import Search from '@/components/search';
+import { address_list, dsn_list, message_list } from '@/contents/tipset';
+import Table from '@/packages/Table';
+import { useFilscanStore } from '@/store/FilscanStore';
+import fetchData from '@/store/server';
+import { pageLimit } from '@/utils';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
+import { SearchOutlined } from '@ant-design/icons';
 
 export default () => {
-  const filscanStore: any = useContext(FilscanState);
-
-  const { t } = useTranslation();
-  const tr = (label: string, value?: Record<string, any>) => {
-    if (value) {
-      return t(label, { ...value, ns: "tipset" });
-    }
-    return t(label, { ns: "tipset" });
-  };
-  const [current, setCurrent] = useState(1);
-  const [input,setInput] = useState('');
-    const [loading,setLoading] = useState(false);
-  const [data, setData] = useState({
-    total: 0,
-    dataSource: [],
+  const { tr } = Translation({ ns: 'tipset' });
+  const { theme, lang } = useFilscanStore();
+  const updateQuery = useUpdateQuery();
+  const { p } = useRouter().query;
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
+  const [dataSource, setDataSource] = useState({
+    data: [],
+    total: undefined,
   });
 
-  useEffect(() => {
-    load();
-  }, []);
+  const current = useMemo(() => {
+    if (p && typeof p === 'string') {
+      return Number(p);
+    }
+    return 1;
+  }, [p]);
 
-  const load = (cur?: number,input?:string) => {
-    const showIndex = cur || current
-    setLoading(true)
-    postAxios(apiUrl.tipset_Dsn, {
-      input:input,
+  useEffect(() => {
+    load(current);
+  }, [current]);
+
+  const load = async (cur?: number, searching?: string) => {
+    setLoading(true);
+    const showIndex = cur || current;
+    const input = searching || search;
+    const result: any = await fetchData(apiUrl.tipset_Dsn, {
+      input,
       filters: {
         index: showIndex - 1,
-        limit:20
-      }
-    }).then((res: any) => {
-      setLoading(false)
-      setData({
-        total: res?.result.total_count,
-        dataSource: res?.result.market_deals_list || [],
-      });
+        limit: pageLimit,
+      },
+    });
+    setLoading(false);
+    setDataSource({
+      data: result?.market_deals_list || [],
+      total: result?.total_count,
     });
   };
 
-
-
   const columns = useMemo(() => {
-    return dsn_columns.map((item) => {
-      return { ...item, title: tr(item.title) };
+    const content = dsn_list.columns.map((v: any) => {
+      return { ...v, title: tr(v.title) };
     });
-  }, [filscanStore.filscan.lang]);
+    return content;
+  }, [theme, lang]);
 
+  const handleSearch = (search: string) => {
+    setSearch(search);
+    load(undefined, search);
+  };
 
-
+  const handleChange = (pagination: any, filters?: any, sorter?: any) => {
+    if (pagination?.current) {
+      updateQuery({ p: pagination.current });
+    }
+  };
   return (
-    <div className={styles.message_list}>
-      <div className="font_18 font-Weight_500">{tr(dsn_list.title)}</div>
-      <div className={styles.message_list_header}>
-        <div className="font_16">{tr(dsn_list.total_list, { value: data.total })}</div>
-        <Input.Search
-          className='custom-input-search'
-          placeholder={tr(dsn_list.placeholder)}
-          allowClear
-          onSearch={(value:string) => { 
-            load(1, value);
-            setCurrent(1)
-            setInput(value)
-          }}
+    <div className='main_contain'>
+      <div className='flex justify-between items-center'>
+        <div>
+          <div className='font-PingFang font-semibold text-lg'>
+            {tr('dsn_list')}
+          </div>
+          <div className='text_des text-xs'>
+            {tr(dsn_list.total_list, { value: dataSource.total })}
+          </div>
+        </div>
+        <Search
+          className='w-[400px]'
+          placeholder={dsn_list.placeholder}
+          onSearch={handleSearch}
+          ns='tipset'
+          suffix={<SearchOutlined />}
         />
       </div>
-      <Table
-        columns={columns}
-        loading={ loading}
-          total={data.total}
-          dataSource={[...data.dataSource] }
-          current={current}
-          rowKey={(record: any) => `${record.piece_cid}_${record.end_time}`}
-         // onChange={handleTableChange}
-          onPage={(cur: number) => {
-            setCurrent(cur);
-            load( cur,input);
-          }}
-      />
+
+      <div className='mt-4 h-full border  rounded-xl p-5	card_shadow border_color'>
+        <Table
+          className='-mt-2.5 '
+          data={dataSource.data}
+          total={dataSource.total}
+          columns={columns}
+          loading={loading}
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 };

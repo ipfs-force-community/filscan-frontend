@@ -184,7 +184,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
   return (
     <>
       <span
-        className='text_link'
+        className='link_text'
         onClick={() => {
           account_link(value);
         }}>

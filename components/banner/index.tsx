@@ -1,7 +1,8 @@
 /** @format */
 
-import Search from './Search';
+import Search from '@/components/search';
 import style from './index.module.scss';
+import { search } from '@/contents/common';
 
 export default () => {
   return (
@@ -16,7 +17,13 @@ export default () => {
         <h3 className='clip_text text-[28px] font-Barlow font-bold	'>
           Filecoin Blockchain
         </h3>
-        <Search />
+        <Search
+          ns='common'
+          placeholder={search.holder}
+          onSearch={(value: string) => {}}
+          className='!w-[500px] !text-white'
+          origin='banner'
+        />
       </div>
 
       <div className={`${style.banner_content}`}></div>

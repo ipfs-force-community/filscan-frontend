@@ -1,0 +1,29 @@
+
+.search_input{
+            color: #ffffff;
+            font-size: 14px;
+            background: rgba(255,255,255,0.04) !important;
+            border-radius: 5px !important;
+            border: 1px solid var(--border-color) !important;
+            backdrop-filter: blur(10px);
+             transition: border 0.3s ease-in-out; /* 过渡效果 */
+           
+            &:hover{
+                  border: 1px solid  var(--primary) !important;
+            }
+            .ant-input{
+                background-color: transparent !important;
+                color: var(--font_color) !important;
+                 &:placeholder-shown{
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: #FFFFFF !important;
+                font-size: 14px;
+            }
+            .ant-input-suffix{
+                background-color: var(--bgDesColor) !important;
+            }
+                
+            }
+        }
+

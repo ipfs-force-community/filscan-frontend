@@ -126,6 +126,7 @@ font-display: auto;
         border-radius: 5px;      
         .ant-select-selection-item{
             color: var(--font-color) !important;
+            cursor: pointer;
         }  
     }
 }
