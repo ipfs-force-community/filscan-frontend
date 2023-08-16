@@ -18,6 +18,7 @@ import type {
 import type { ComposeOption } from 'echarts/core';
 import { useEffect, useRef } from 'react';
 import { isMobile } from '@/utils';
+import { useFilscanStore } from '@/store/FilscanStore';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = ComposeOption<

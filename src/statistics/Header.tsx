@@ -1,12 +1,12 @@
 /** @format */
-import Link from "next/link";
-import { useTranslation } from "react-i18next";
-import styles from "./index.module.scss";
-import { RightOutlined } from "@ant-design/icons";
-import Tips from "@/packages/tips";
-import Tabs from "@/packages/tabs";
-import { OPT_Value } from "@/types";
-import { getSvgIcon } from "@/svgUtils";
+import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import styles from './index.module.scss';
+import { RightOutlined } from '@ant-design/icons';
+import Tips from '@/packages/tips';
+import Tabs from '@/packages/tabs';
+import { OPT_Value } from '@/types';
+import { getSvgIcon } from '@/svgUtils';
 
 export default ({
   title,
@@ -19,27 +19,26 @@ export default ({
 }) => {
   const { t } = useTranslation();
   const tr = (label: string): string => {
-    return t(label, { ns: "static" });
+    return t(label, { ns: 'static' });
   };
 
   const rightTitle = title?.right?.title;
-   
 
   return (
     <div className={styles.gas_header}>
-      <span  className={styles.gas_header_left}>
-          {title?.icon && (
-        <span className={styles.gas_header_left_IconSvg}>{getSvgIcon(title.label)}</span>
-        // <Image src={title?.icon} alt='' width={19} className='image-icon' />
-        )}
-          <span className={`${styles.statis_trend_title} font_18`}>
-            {tr(title.label)}
+      <span className={styles.gas_header_left}>
+        {title?.icon && (
+          <span className={styles.gas_header_left_IconSvg}>
+            {getSvgIcon(title.label)}
           </span>
+          // <Image src={title?.icon} alt='' width={19} className='image-icon' />
+        )}
+        <span className={`${styles.statis_trend_title} font_18`}>
+          {tr(title.label)}
+        </span>
         {title?.tip && <Tips context={tr(title.tip)} />}
-
       </span>
-    
-    
+
       {title.right && (
         <span className='right'>
           {rightTitle && title.right.link ? (

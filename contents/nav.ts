@@ -30,7 +30,7 @@ const navMenu:Array<Menu_Info> = [
               },
           ]
     },
-        {
+    {
         key: 'contract',
         preIcon: 'newIcon',
         color:'#F44C30',

@@ -1,15 +1,10 @@
 /** @format */
 import { useState, useMemo, useEffect } from 'react';
-import * as echarts from 'echarts';
-import Image from 'next/image';
-import Link from 'next/link';
 import BigNumber from 'bignumber.js';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { Translation } from '@/components/hooks/Translation';
-import { defaultOpt, getColor } from '@/utils/echarts';
+import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import EChart from '@/components/echarts';
-import { gas } from '@/contents/statistic';
-import go from '@/assets/images/black_go.svg';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/apiUrl';
 import { formatFilNum } from '@/utils';
@@ -36,6 +31,10 @@ function Gas(props: Props) {
 
   const color = useMemo(() => {
     return getColor(theme);
+  }, [theme]);
+
+  const default_xAxis = useMemo(() => {
+    return get_xAxis(theme);
   }, [theme]);
 
   const defaultOptions: any = useMemo(() => {
@@ -73,33 +72,8 @@ function Gas(props: Props) {
           },
         },
       },
-      series: {
-        type: 'line',
-        lineStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-            { offset: 0, color: 'rgba(23 , 156 , 238,1)' },
-            { offset: 0.5, color: 'rgba(23 ,100  ,255,1)' },
-            { offset: 1, color: 'rgba(0 ,   61  ,  185 ,  1)' },
-          ]),
-        },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(
-            0,
-            0,
-            0,
-            1, // 渐变方向
-            [
-              { offset: 0, color: 'rgba(57,128 ,250,0.6)' }, // 渐变起始颜色
-              { offset: 0.7, color: 'rgba(57,128 ,250,0.3)' }, // 渐变起始颜色
-              { offset: 1, color: 'rgba(57 , 128,  250,0.01)' }, // 渐变结束颜色 rgba(23, 156, 238, 1)
-            ]
-          ),
-        },
-        markArea: {
-          itemStyle: {
-            color: 'trans',
-          },
-        },
+      legend: {
+        show: false, // 设置图例不显示
       },
       tooltip: {
         trigger: 'axis',
@@ -125,7 +99,6 @@ function Gas(props: Props) {
           return result;
         },
       },
-      ...defaultOpt('line', theme),
     };
   }, [theme]);
 
@@ -139,11 +112,10 @@ function Gas(props: Props) {
   const load = (inter?: string) => {
     const interval = inter || value;
     const dateList: Array<string> = [];
-    const legendList: any = [];
     const seriesObj: any = {
       base_fee: [],
     };
-    const newOpt = { ...defaultOptions };
+    const newOpt: any = {};
     fetchData(apiUrl.static_gas, { interval }).then((res: any) => {
       res?.list?.reverse().forEach((dataItem: any) => {
         const { timestamp, base_fee, gas_in_32g, gas_in_64g } = dataItem;
@@ -166,28 +138,38 @@ function Gas(props: Props) {
           timestamp: timestamp.split('+')[0],
         });
       });
-      newOpt.xAxis.data = dateList;
+      newOpt.xData = dateList;
       newOpt.series = [];
       showData.forEach((item: any) => {
         newOpt.series.push({
           type: item.type,
+          ...seriesArea,
           data: seriesObj[item.label],
           name: tr(item.label),
           smooth: false,
           yAxisIndex: item.yIndex,
           symbol: 'none',
           unit: item.unit,
-          ...defaultOptions.series,
         });
       });
-      newOpt.legend.data = legendList;
       setOptions({ ...newOpt });
     });
   };
 
+  const newOptions = useMemo(() => {
+    return {
+      ...defaultOptions,
+      xAxis: {
+        ...default_xAxis,
+        data: options?.xData || [],
+      },
+      series: options?.series || [],
+    };
+  }, [options, defaultOptions]);
+
   return (
     <div className={`w-full h-full  ${className}`}>
-      <EChart options={options} />
+      <EChart options={newOptions} />
     </div>
   );
 }
