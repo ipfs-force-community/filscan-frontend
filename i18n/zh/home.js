@@ -57,6 +57,7 @@ const home = {
     
     base_gas: '24h基础手续费走势',
     rank: '排行榜',
-    contract_rank:'合约排行',
+    contract_rank: '合约排行',
+    defi_list:'Defi Protocol'
 }
 export default home

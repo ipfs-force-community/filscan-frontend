@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import CompoundedSpace from 'antd/es/space';
 import { getSvgIcon } from '@/svgsIcon';
+import i18n from '@/i18n';
 
 const { Header } = Layout;
 const data: any = {
@@ -42,6 +43,7 @@ export default () => {
     //切换语言
     setLang(value);
     localStorage.setItem('lang', value);
+    i18n.changeLanguage(lang);
     router.push(router.asPath, router.asPath, { locale: value });
   };
 

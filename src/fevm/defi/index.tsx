@@ -10,13 +10,14 @@ import { useEffect, useMemo, useState } from 'react';
 import verifySvg from '@/assets/images/verify.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { homeDefiColumns, defi_list } from '@/contents/fevm';
 
 const default_sort = {
-  field: 'transfer_count',
+  field: 'tvl',
   order: 'descend',
 };
 export default ({ origin }: { origin?: string }) => {
-  const { tr } = Translation({ ns: 'contract' });
+  const { tr } = Translation({ ns: 'fevm' });
   const { theme, lang } = useFilscanStore();
   const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(1);
@@ -31,54 +32,44 @@ export default ({ origin }: { origin?: string }) => {
     load();
   }, []);
 
-  const load = async (cur?: number, orders?: any) => {
-    const index = cur || current;
-    const sortFile = orders || sort;
+  const load = async (cur?: number, sorter?: any) => {
     setLoading(true);
-    const data: any = await fetchData(apiUrl.contract_rank, {
-      page: index - 1,
+    const page = cur || current;
+    const sortData = sorter || sort;
+    const result: any = await fetchData(apiUrl.fevm_defiList, {
+      page: page - 1,
       limit: 7,
-      sort: sortFile.order === 'ascend' ? 'asc' : 'desc',
-      field: sortFile?.field,
+      field: sortData.field,
+      reverse: sortData.order === 'ascend',
     });
+    // setMax(res?.result?.items[0]?.tvl);
     setLoading(false);
     setDataSource({
-      data: data?.evm_contract_list || [],
-      total: data?.total,
+      data:
+        result?.items?.map((v: any, index: number) => {
+          return { ...v, rank: index * page + 1 };
+        }) || [],
+      total: result?.total,
     });
   };
 
   const columns = useMemo(() => {
-    const newArr =
-      origin === 'home'
-        ? contract_rank.columns.slice(0, 5)
-        : contract_rank.columns;
-    let content = newArr.map((item) => {
-      if (item.dataIndex === 'contract_name') {
-        item.render = (text: string, record: any) => {
-          if (text) {
-            return (
-              <span className='flex gap-x-2 items-center'>
-                <Link href={`/address/${record.contract_address}`}>{text}</Link>
-                <Image src={verifySvg} width={13} height={14} alt='' />
-              </span>
-            );
-          }
-          return (
-            <Link href='/contract/verify' className='text_color'>
-              {tr('ver_address')}
-            </Link>
-          );
-        };
+    const newArr: any = [];
+    defi_list.columns.forEach((col: any) => {
+      if (origin === 'home') {
+        if (homeDefiColumns.hasOwnProperty(col.dataIndex)) {
+          newArr.push({
+            ...col,
+            title: tr(col.title),
+            width: homeContractRank[col.dataIndex],
+          });
+        }
+      } else {
+        newArr.push({ ...col, title: tr(col.title) });
       }
-      return {
-        ...item,
-        title: tr(item.title),
-        width:
-          origin === 'home' ? homeContractRank[item.dataIndex] : item.width,
-      };
     });
-    return content;
+
+    return newArr;
   }, [theme, lang]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
@@ -95,6 +86,8 @@ export default ({ origin }: { origin?: string }) => {
     setSort(order);
     load(cur, order);
   };
+
+  console.log('----33', columns, dataSource);
 
   return (
     <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>

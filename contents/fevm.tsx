@@ -1,6 +1,8 @@
 /** @format */
 import Image from '@/packages/image';
 import { formatNumber, get$Number } from '@/utils';
+import TextTip from '@/packages/textTooltip';
+import { Tooltip } from 'antd';
 
 export const defi_list = {
   title: 'defi_list',
@@ -10,16 +12,19 @@ export const defi_list = {
       title: 'rank',
       dataIndex: 'rank',
       width: '5%',
+      render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
     {
-      dataIndex: 'protocol',
       title: 'Protocol',
       width: '25%',
+      dataIndex: 'protocol',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return (
-          <div
-            className='flex_align_center'
-            style={{ cursor: 'pointer' }}
+          <span
+            className='flex items-center gap-x-1'
             onClick={() => {
               if (record.main_site) {
                 window.open(record.main_site);
@@ -27,23 +32,27 @@ export const defi_list = {
             }}>
             <Image
               src={record.icon_url || ''}
-              width={35}
-              height={35}
-              style={{ borderRadius: '50%' }}
+              width={25}
+              height={25}
               alt='logo'
             />
-            <span className='margin-10'>{text}</span>
-          </div>
+            <TextTip text={text} />
+          </span>
         );
       },
     },
     {
-      dataIndex: 'tvl',
       title: 'tvl',
+      dataIndex: 'tvl',
       width: '15%',
       defaultSortOrder: 'descend',
       sorter: true,
-      render: (text: string, record: any) => get$Number(text),
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (text: string, record: any) => (
+        <TextTip text={get$Number(text)} />
+      ),
     },
     {
       dataIndex: 'tvl_change_rate_in_24h',
@@ -78,14 +87,7 @@ export const defi_list = {
     },
     {
       dataIndex: 'tokens',
-      title: (tr: any) => {
-        return (
-          <span className='flex_align_center'>
-            {tr('tokens')}
-            {/* <Tip context={tr('tokens_tip')} /> */}
-          </span>
-        );
-      },
+      title: 'tokens',
       width: '10%',
       render: (text: any) => {
         if (Array.isArray(text)) {
@@ -116,8 +118,8 @@ export const defi_list = {
 
 export const homeDefiColumns: any = {
   rank: '10%',
-  protocol: '25%',
-  tvl: '25%',
-  tvl_change_rate_in_24h: '20%',
-  user_count: '20%',
+  protocol: '30%',
+  tvl: '40%',
+  tvl_change_rate_in_24h: '10%',
+  users: '10%',
 };

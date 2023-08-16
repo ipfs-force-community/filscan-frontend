@@ -2,6 +2,7 @@
 const path = require('path');
 
 const nextConfig = {
+  
   reactStrictMode: true,
    env: {
      APP_ENV:process.env['NEXT_PUBLIC_environment'],
@@ -15,6 +16,9 @@ const nextConfig = {
    i18n: {
     locales: ['zh', 'en', 'kr'],
     defaultLocale: 'zh',
+  },
+    images: {
+    domains: ['filscan-v2.oss-cn-hongkong.aliyuncs.com'],
   },
 }
 

@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { Translation } from '@/components/hooks/Translation';
 import go from '@/assets/images/black_go.svg';
 import ContractRank from '@/src/contract/rank';
+import DefiList from '@/src/fevm/defi';
 
 //import fetchData from '@/store/server';
 
@@ -74,7 +75,7 @@ function Home(props: any) {
           <div className=''>
             <div className={`flex justify-between `}>
               <div className='font-PingFang font-semibold text-lg	'>
-                {tr('contract_rank')}
+                {tr('defi_list')}
               </div>
               <Link href={`/contract/rank`}>
                 <Image
@@ -86,7 +87,7 @@ function Home(props: any) {
                 />
               </Link>
             </div>
-            <ContractRank origin='home' />
+            <DefiList origin='home' />
           </div>
         </div>
       </div>

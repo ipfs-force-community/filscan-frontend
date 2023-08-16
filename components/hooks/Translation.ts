@@ -11,9 +11,9 @@ export const Translation = ({ ns }: TranslationProps) => {
   const { t, i18n } = useTranslation(ns);
 
   // 当 lang 状态改变时，重新设置语言
-  useEffect(() => {
-    i18n.changeLanguage(lang);
-  }, [lang]);
+  // useEffect(() => {
+  //   i18n.changeLanguage(lang);
+  // }, [lang,i18n]);
 
   const tr = (label: string, value?: Record<string, any>) => {
     if (value) {
