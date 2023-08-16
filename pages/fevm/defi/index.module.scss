@@ -1,0 +1,77 @@
+.defi{
+        //    background-color: var(--main-bg-color);
+        //    padding: 20px;
+
+    &_title{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0px;
+        font-size: 18px;
+        font-weight: 500;
+        &_des{
+            display: inline-flex;
+            width: 200px;
+            align-items: center;
+            text-align: center;
+            line-height: 20px;
+            font-weight: 400;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            // color: #fff;
+            //background-color:#2090ff;
+        }
+    }
+    &_card{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        list-style: none;
+        gap: 20px;
+        border-radius: 6px;
+        padding: 20px 20px;
+        margin-bottom: 20px;
+        background-color: var(--main-bg-color);
+        &_item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 0px ;
+            border:1px solid var(--border-color);
+            border-radius: 6px;
+            row-gap: 15px;
+            font-size: 18px;
+            &_title{
+              //font-size: 18px;
+            }
+            &_value{
+               font-size: 24px;
+                font-weight: 600;
+            }
+        }
+    }
+    &_time{
+        display: inline-block;
+       // padding: 20px;
+        font-size:12px;
+        margin-left: 10px;
+        color: var(--font_des);
+    }
+}
+
+
+@media only screen and (max-width: 1100px) {
+   .defi{
+       &_card{
+           display: block;
+           &_item{
+               margin-bottom: 10px;
+               &:last-child{
+                   margin-bottom: 0px;
+               }
+           }
+       }
+   }
+
+
+}
