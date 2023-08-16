@@ -64,6 +64,7 @@ export const colors = ["#F7C739", "#5AD8A6", "#5B8FF9", "#9270CA"];
 
 export const get_xAxis=(theme:string)=>{ 
   const color = getColor(theme);
+  console.log(theme,color)
   return {
     type: 'category',
     axisLabel: {

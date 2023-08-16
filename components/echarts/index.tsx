@@ -45,7 +45,7 @@ type ECOption = ComposeOption<
 // ]);
 
 interface EChartsComponentProps {
-  options: ECOption;
+  options: ECOption | Record<string, any>;
 }
 
 const EChartsComponent: React.FC<EChartsComponentProps> = ({

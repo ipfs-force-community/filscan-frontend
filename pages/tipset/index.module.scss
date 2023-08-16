@@ -1,0 +1,12 @@
+.message_list{
+    //background-color: var(--main-bg-color);
+    padding: 20px;
+    &_header{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    line-height: 30px;
+    }
+}

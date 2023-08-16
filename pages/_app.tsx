@@ -43,7 +43,6 @@ export default function App({ Component, pageProps }: AppProps) {
               <Content>
                 <Component {...pageProps} />
               </Content>
-              <Footer>Footer</Footer>
             </Layout>
           </FilscanStoreProvider>
         </I18nextProvider>

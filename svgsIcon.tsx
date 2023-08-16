@@ -224,6 +224,43 @@ const account_logout = (
   </svg>
 );
 
+const legendIcon = (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='20px'
+    height='8px'
+    viewBox='0 0 20 8'
+    version='1.1'>
+    <title>2</title>
+    <g
+      id='页面-1'
+      stroke='none'
+      stroke-width='1'
+      fill='none'
+      fill-rule='evenodd'>
+      <g
+        id='切图'
+        transform='translate(-302.000000, -130.000000)'
+        fill='currentColor'>
+        <g id='2' transform='translate(302.000000, 131.000000)'>
+          <polygon
+            id='矩形'
+            points='-4.37150316e-16 2 20 2 20 3.5 -4.37150316e-16 3.5'
+          />
+          <circle
+            id='椭圆形'
+            stroke='#FFFFFF'
+            stroke-width='2'
+            cx='10'
+            cy='3'
+            r='3'
+          />
+        </g>
+      </g>
+    </g>
+  </svg>
+);
+
 const svgTypes: Record<string, JSX.Element> = {
   moon,
   network,
@@ -231,6 +268,7 @@ const svgTypes: Record<string, JSX.Element> = {
   account_miners,
   account_personal,
   account_logout,
+  legendIcon,
 };
 
 export const getSvgIcon = (type: string) => {

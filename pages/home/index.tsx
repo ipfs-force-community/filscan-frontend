@@ -12,6 +12,7 @@ import { Translation } from '@/components/hooks/Translation';
 import go from '@/assets/images/black_go.svg';
 import ContractRank from '@/src/contract/rank';
 import DefiList from '@/src/fevm/defi';
+import Trend from '@/src/statistics/Trend';
 
 //import fetchData from '@/store/server';
 
@@ -32,8 +33,8 @@ function Home(props: any) {
   return (
     <>
       <Banner />
-      <div className='main_contain'>
-        <div className='flex justify-between'>
+      <div className='main_contain !mt-[26px]'>
+        <div className='flex justify-between h-[270px]'>
           <Meta />
           <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color'>
             <div className={`flex justify-between text-xs font-PingFang p-5`}>
@@ -51,7 +52,11 @@ function Home(props: any) {
             <Gas className={'w-full !h-[210px]'} />
           </div>
         </div>
-        <div className='mt-16 '>
+        <div className='flex justify-between mt-12 gap-x-5 h-[400px]'>
+          <Trend origin='home' className={'w-full !h-full'} />
+          <Trend origin='home' className={'w-full !h-full'} />
+        </div>
+        <div className='mt-12'>
           <Rank origin={'home'} />
         </div>
         <div className='flex mt-12 gap-x-5 h-[489px] '>

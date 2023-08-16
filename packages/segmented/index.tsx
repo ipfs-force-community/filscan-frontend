@@ -49,7 +49,7 @@ export default ({
           <li
             key={item.dataIndex}
             onClick={() => handleClick(item.dataIndex)}
-            className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des    ${
+            className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des_hover  ${
               active === item.dataIndex
                 ? 'tab_shadow highlight  rounded-[5px] card_bg_color'
                 : ''

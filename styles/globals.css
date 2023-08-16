@@ -4,6 +4,7 @@
 
 :root,:root[theme='light']{
      --bgColor:#FFFFFF;
+     --main-bg-color:#F9F9F9;
     --font-color:#000000;
     --select-shadow: rgba(223,227,234,0.6);
     --card-shadow: rgba(223,227,234,0.6);
@@ -22,7 +23,8 @@
 }
 
  :root,:root[theme='dark'] {
-   --bgColor:#090A0A;
+   --bgColor:#000000;
+    --main-bg-color:#090A0A;
    --font-color:#ffffff;
     --bg_hover:rgba(28, 106, 253, 0.1);
     --bgDesColor: #1C1C1C;
@@ -51,9 +53,9 @@ body {
 .main_contain{
   max-width: 1440px;
   width: 100%;
-  padding: 50px 94px;
+  padding: 24px 94px;
   margin: auto;
   box-sizing: content-box;
   color: var(--font-color);
-  background-color: var(--bgColor);
+  background-color: var(--main-bg-color);
 }

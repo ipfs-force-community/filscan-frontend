@@ -21,6 +21,10 @@ a{
 }
 .text_des{
    color: var(--font_des);
+}
+
+.text_des_hover{
+   color: var(--font_des);
     &:hover{
     color: var(--font-color);
    }
@@ -32,6 +36,7 @@ a{
 
 /*shadow*/
 .card_shadow{
+  background-color: var(--bgColor);
   box-shadow: 0px 2px 30px -2px var(--card-shadow)
 }
 
@@ -39,7 +44,7 @@ a{
   box-shadow: 0px 1px 13px -3px var(--select-shadow)
 }
 .tab_shadow{
-  box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.1);
+  box-shadow: 2px 0px 5px 0px var(--tab-shadow);
 }
 
 
@@ -80,21 +85,18 @@ a{
 
 
 .fade-in {
-  animation: fadeInAndUp 6s;
+  animation: fadeInUp 1s forwards;
+  transform: translateY(-80px);
 }
 /* 向上滑动*/
-@keyframes fadeInAndUp {
+@keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(0);
-  }
-  /* 50% {
-    opacity: 1;
-    transform: translateY(-50px);
-  } */
-   100% {
-    opacity: 1;
     transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-80px);
   }
 }
 

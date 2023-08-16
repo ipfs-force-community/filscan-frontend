@@ -108,6 +108,58 @@ font-display: auto;
     }
 }
 
+//select 
+.ant-select:not(.ant-select-customize-input) .ant-select-selector{
+ border-color: none !important;
+ &:hover,&:focus,&:active,&:focus-visible{
+    box-shadow: none !important;
+     border-color: none !important;
+ }
+}
+.custom_select{
+    min-width: 150px;
+       color: var(--font-color) !important;
+    border-color: none;
+    .ant-select-selector{
+         background-color: var(--bgDesColor) !important;
+       border-color: transparent !important; 
+        border-radius: 5px;      
+        .ant-select-selection-item{
+            color: var(--font-color) !important;
+        }  
+    }
+}
+
+
+.ant-select-dropdown{
+    display: block;
+    background-color: var(--bgDesColor) !important;
+    color: var(--font-color)!important;
+    box-shadow: 0px 1px 13px -3px var(--select-shadow) !important;
+    .ant-select-item-option-selected{
+    color: var(--primary);
+    font-weight: 600;
+    background-color:  var(--bg-bg_hover) !important;
+    }
+
+    .ant-select-item{
+        padding: 8px 12px !important;
+        border-radius: 5px;
+        color: var(--font-color) !important;
+        cursor: pointer;
+        &:hover{
+            background-color: transparent;
+            color: var(--primary);
+        }
+    }
+
+}
+
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: transparent !important;
+     color: var(--primary) !important;
+}
+
 
 //table 
 .custom_table{
@@ -220,7 +272,49 @@ font-display: auto;
     }
   }
 
+//ant-pagination
+.ant-pagination{
+    display: flex;
+    align-items: center;
+    .ant-pagination-prev,.ant-pagination-next{
+      
+        width: 28px !important;
+        min-width: 28px !important;
+        height: 28px !important;
+        border: 1px solid var(--border-color);
+        .ant-pagination-item-link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
 
+    }
+    .ant-pagination-item{
+        // width: 28px;
+        height: 28px;
+        min-width: 28px;
+        min-height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-color);
+    }
+    .ant-pagination-item-active{
+        background-color: var(--primary);
+        a{
+             color: #ffffff !important;
+        }
+    }
+    .ant-pagination-options{
+     margin-inline-start:10px;
+    }
+   
+}
+.ant-pagination-options-quick-jumper input{
+       width: 40px !important;
+    height: 28px !important;
+    margin-inline-start:4px !important;
+}
 
 
 //骨架屏

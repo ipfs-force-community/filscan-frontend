@@ -87,8 +87,6 @@ export default ({ origin }: { origin?: string }) => {
     load(cur, order);
   };
 
-  console.log('----33', columns, dataSource);
-
   return (
     <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>
       <Table

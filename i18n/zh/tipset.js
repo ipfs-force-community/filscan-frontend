@@ -8,6 +8,7 @@ const tipset = {
     to: '接收地址',
     value: '数额',
     method_name: '方法',
+    all:'全部方法',
     //chain
     blocks_cid: 'Cid',
     blocks_miner: '节点',

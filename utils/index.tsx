@@ -1,8 +1,14 @@
 /** @format */
 
+import { apiUrl } from '@/apiUrl';
+import Copy from '@/components/copy';
+import fetchData from '@/store/server';
 import BigNumber from 'bignumber.js';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import router from 'next/router';
 
-export const pageLimit = 20;
+export const pageLimit = 15;
 
 export function formatFilNum(
   showNum: number | string,
@@ -105,7 +111,17 @@ export function formatNumber(v: number | string, len = 4) {
   return Number(v).toLocaleString('en', { maximumFractionDigits: len });
 }
 
-export function isIndent(str: string, unit: number = 5, unitNum?: number) {
+export function formatDateTime(
+  time: number | string,
+  str: string = 'YYYY-MM-DD HH:mm:ss'
+) {
+  if (!time) return '--';
+  return typeof time === 'number'
+    ? dayjs(time * 1000).format(str)
+    : dayjs(time).format(str);
+}
+
+export function isIndent(str: string, unit: number = 5, unitNum: number = 4) {
   const showUnit = unitNum ? unit + unitNum : unit * 2;
   const suffixNum = unitNum || unit;
   return str && unit && str.length > showUnit
@@ -160,3 +176,36 @@ export function isMobile() {
     return window.innerWidth < 1100;
   }
 }
+
+//不同账户 ,
+
+//不同账户 ,
+export const get_account_type = (value: string = '', unit: number = 6) => {
+  return (
+    <>
+      <span
+        className='text_link'
+        onClick={() => {
+          account_link(value);
+        }}>
+        {isIndent(value, isMobile() ? 6 : unit)}
+      </span>
+      {value && <Copy text={value} />}
+    </>
+  );
+};
+
+export const account_link = async (value: string) => {
+  let show_type;
+  const result: any = await fetchData(apiUrl.searchInfo, { input: value });
+  show_type = result?.result?.result_type;
+
+  switch (show_type) {
+    case 'miner':
+      return router.push(`/miner/${value}`);
+    case 'storageminer':
+      return router.push(`/miner/${value}`);
+    default:
+      return router.push(`/address/${value}`);
+  }
+};

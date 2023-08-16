@@ -13,7 +13,7 @@ const useFadeInOnScroll = (): RefObject<HTMLDivElement> => {
       },
       {
         // 当元素的50%可见时，触发回调
-        threshold: 0.5,
+        threshold: 0.01,
       }
     );
 

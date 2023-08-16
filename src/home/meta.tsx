@@ -18,23 +18,23 @@ type DataIndex = ElementType<typeof home_meta>['dataIndex'];
 
 type Item = ElementType<typeof home_meta>;
 
-const mockData: Record<DataIndex, number | undefined> & {
-  [key: string]: number | undefined;
-} = {
-  power_increase_24h: 3740899077455872,
-  increase_24h: -46.23,
-  add_power_in_32g: 6732636259164418311,
-  miner_initial_pledge: 6732636359164418311,
-  fil_per_tera_24h: 374089907741648311,
-  total_contract: 5678.9012,
-  contract_24h: 123,
-  contract_transaction: 6789.0123,
-  contract_address: 7890.1234,
-  gas_24: 8901.2345,
-};
+// const mockData: Record<DataIndex, number | undefined> & {
+//   [key: string]: number | undefined;
+// } = {
+//   power_increase_24h: 3740899077455872,
+//   increase_24h: -46.23,
+//   add_power_in_32g: 6732636259164418311,
+//   miner_initial_pledge: 6732636359164418311,
+//   fil_per_tera_24h: 374089907741648311,
+//   total_contract: 5678.9012,
+//   contract_24h: 123,
+//   contract_transaction: 6789.0123,
+//   contract_address: 7890.1234,
+//   gas_24: 8901.2345,
+// };
 function Meta() {
   const { tr } = Translation({ ns: 'home' });
-  //const ref = useObserver();
+  // const ref = useObserver();
 
   const [data, setData] = useState<
     Record<DataIndex, number | undefined> & {

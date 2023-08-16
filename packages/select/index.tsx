@@ -4,7 +4,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { Option_Item } from '@/contents/type';
 import Image from 'next/image';
 import down from '@/assets/images/down.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default ({
   options,
@@ -22,8 +22,15 @@ export default ({
   className?: string;
 }) => {
   const { tr } = Translation({ ns });
-  const [showLabel, setShowLabel] = useState(options[0].label);
-  const [value, setValue] = useState(options[0].value);
+  const [showLabel, setShowLabel] = useState('');
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (options.length > 0) {
+      setShowLabel(options[0]?.label);
+      setValue(options[0]?.value);
+    }
+  }, [options]);
 
   const handleClick = (item: Option_Item) => {
     setShowLabel(item.label);
