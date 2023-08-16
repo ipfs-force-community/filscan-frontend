@@ -13,11 +13,13 @@ export default ({
   defaultValue,
   ns,
   isHash = true,
+  onChange,
 }: {
   data: Array<Item>;
   defaultValue: string;
   ns: string;
   isHash: boolean;
+  onChange?: (value: string) => void;
 }) => {
   const { tr } = Translation({ ns });
   const router = useRouter();
@@ -31,6 +33,7 @@ export default ({
   const handleClick = (tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
     setActive(tabId);
+    if (onChange) onChange(tabId);
     if (isHash) {
       router.replace(`${router.pathname}#${tabId}`, undefined, {
         shallow: true,

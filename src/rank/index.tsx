@@ -28,10 +28,7 @@ export default ({ origin }: { origin: string }) => {
   const [growthData, setGrowthData] = useState([]);
   const [rewardsData, setRewardsData] = useState([]);
   const [current, setCurrent] = useState(1);
-  const [headerFilter, setHeaderFilter] = useState<any>({
-    growth: { ...defaultFilter },
-    rewards: { ...defaultFilter },
-  });
+  const [headerFilter, setHeaderFilter] = useState<any>();
   const [sort, setSort] = useState<any>({});
 
   useEffect(() => {
@@ -56,7 +53,7 @@ export default ({ origin }: { origin: string }) => {
               field: getDefaultSort[showActive],
               order: 'descend',
             };
-      const showFilter = filter || headerFilter[showActive];
+      const showFilter = filter || headerFilter;
       setLoading(true);
       setData([]);
       const linkUrl: any = `rank_${showActive}`;
@@ -111,18 +108,23 @@ export default ({ origin }: { origin: string }) => {
   }, [active, progress[active], theme, lang]);
 
   const handleHeaderChange = (type: string, value: string) => {
-    const showHeader = headerFilter[active];
-    const activeHeader = {
-      ...showHeader,
-      [type]: value,
-    };
+    let newActive = active;
+    let activeHeader = headerFilter;
+    if (type === 'active' && origin === 'home') {
+      newActive = value;
+      setActive(value);
+      setHeaderFilter({ ...defaultFilter });
+      activeHeader = { ...defaultFilter };
+    } else {
+      activeHeader = {
+        ...headerFilter,
+        [type]: value,
+      };
+      setHeaderFilter(activeHeader);
+    }
 
-    setHeaderFilter({
-      ...headerFilter,
-      [active]: activeHeader,
-    });
     setCurrent(1);
-    load(active, 1, undefined, activeHeader);
+    load(newActive, 1, undefined, activeHeader);
   };
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
@@ -148,6 +150,7 @@ export default ({ origin }: { origin: string }) => {
     return data;
   }, [active, data, poolData, growthData, rewardsData]);
 
+  console.log('===3', active);
   return (
     <>
       <Header origin={origin} active={active} onChange={handleHeaderChange} />

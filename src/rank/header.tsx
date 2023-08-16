@@ -19,6 +19,13 @@ export default ({
 }) => {
   const { tr } = Translation({ ns: 'home' });
 
+  let SegmentedProps: any = {};
+  if (origin === 'home') {
+    SegmentedProps.onChange = (value: string) => {
+      onChange('active', value);
+    };
+  }
+
   return (
     <div className='flex justify-between items-center '>
       <div className='flex gap-x-2.5'>
@@ -32,6 +39,7 @@ export default ({
           ns='rank'
           defaultValue='provider'
           isHash={origin !== 'home'}
+          {...SegmentedProps}
         />
         {rank_header[active] &&
           Object.keys(rank_header[active]).map((item) => {
