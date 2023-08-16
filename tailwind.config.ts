@@ -51,9 +51,9 @@ const config: Config = {
         // 暗色模式颜色配置
         dark: {
           font:'#FFFFFF',
-          bgColor: '#000000',
+          bgColor: '#090A0A',
           border: '#222',
-          border_des: '#222',
+          border_des: '#1C1C1C',
           bgDesColor: 'rgba(255,255,255,0.1)',
           font_des:'rgba(255,255,255,0.6)',
         },
