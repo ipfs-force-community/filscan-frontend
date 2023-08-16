@@ -33,7 +33,7 @@ export default ({
 
   return (
     <div
-      className={`group h-fit flex cursor-pointer bg-bgDesColor items-center relative rounded-[5px] w-fit ${wrapClassName}`}>
+      className={`group h-fit flex cursor-pointer items-center relative rounded-[5px] w-fit  ${wrapClassName}`}>
       {header ? (
         header
       ) : (
@@ -44,7 +44,7 @@ export default ({
       )}
 
       <ul
-        className={`invisible group-hover:visible absolute  z-10 inset-y-full max-h-fit w-max list-none p-4  border border-border rounded-[5px] bg-bgColor select_shadow ${className}`}>
+        className={`invisible group-hover:visible absolute  z-10 inset-y-full max-h-fit w-max list-none p-4  border  rounded-[5px]  select_shadow card_bg_color  border_color ${className}`}>
         {options.map((item) => {
           return (
             <li

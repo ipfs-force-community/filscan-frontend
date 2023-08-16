@@ -151,7 +151,7 @@ export default ({ origin }: { origin: string }) => {
   return (
     <>
       <Header origin={origin} active={active} onChange={handleHeaderChange} />
-      <div className='mt-4 h-[491px] border  border-border rounded-xl p-5	default_card_shadow'>
+      <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>
         <Table
           className='-mt-2.5 '
           key={active}

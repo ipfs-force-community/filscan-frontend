@@ -10,23 +10,33 @@
     --bg_hover:rgba(28, 106, 253, 0.1);
     --font_des:rgba(0,0,0,0.6);
     --primary: #1C6AFD;
+     --border-color:#e6e6e6;
+    --bgDesColor:#F6F6F6;
+
+
+
+
+
 
 }
 
-@media (prefers-color-scheme: dark) {
-  :root,:root[theme='dark'] {
-   --bgColor:#000000;
+ :root,:root[theme='dark'] {
+   --bgColor:#171a1f;
    --font-color:#ffffff;
     --bg_hover:rgba(28, 106, 253, 0.1);
-   --font_des:rgba(0,0,0,0.6);
+    --bgDesColor: rgba(255,255,255,0.1);
+   --font_des:rgba(255,255,255,0.6);
    --primary: #1C6AFD;
+  --select-shadow: rgba(223,227,234,0.2);
+  --card-shadow: rgba(223,227,234,0.1);
+    --border-color:#222;
 
-  
+
+
   }
-}
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--font-color));
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -44,4 +54,6 @@ a{
   padding: 50px 94px;
   margin: auto;
   box-sizing: content-box;
+  color: var(--font-color);
+  background-color: var(--bgColor);
 }

@@ -42,7 +42,7 @@ const config: Config = {
         bgDesColor:'#F6F6F6',
         font: '#000000',
         font_des:'rgba(0,0,0,0.6)',
-        border_des: 'F0F1F3',
+        border_des: '#F0F1F3',
         border: '#EEEFF1',
         primary: '#1C6AFD',
         bg_hover: 'rgba(28, 106, 253, 0.1)',
@@ -51,7 +51,11 @@ const config: Config = {
         // 暗色模式颜色配置
         dark: {
           font:'#FFFFFF',
-          bgColor:'#000000',
+          bgColor: '#000000',
+          border: '#222',
+          border_des: '#222',
+          bgDesColor: 'rgba(255,255,255,0.1)',
+          font_des:'rgba(255,255,255,0.6)',
         },
       },
     

@@ -40,15 +40,15 @@ export default ({
   };
 
   return (
-    <ul className='list-none w-fit h-fit bg-bgDesColor p-0.5 rounded-[5px] flex '>
+    <ul className='list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex '>
       {data.map((item) => {
         return (
           <li
             key={item.dataIndex}
             onClick={() => handleClick(item.dataIndex)}
-            className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text-font_des hover:text-font ${
+            className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des    ${
               active === item.dataIndex
-                ? 'tab_shadow highlight !bg-bgColor rounded-[5px] '
+                ? 'tab_shadow highlight  rounded-[5px] card_bg_color'
                 : ''
             }`}
             id={item.dataIndex}>

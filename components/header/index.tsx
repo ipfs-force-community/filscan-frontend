@@ -16,6 +16,7 @@ import Select from '@/packages/select';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import CompoundedSpace from 'antd/es/space';
+import { getSvgIcon } from '@/svgsIcon';
 
 const { Header } = Layout;
 const data: any = {
@@ -39,21 +40,22 @@ export default () => {
 
   const handleLangChange = (value: string) => {
     //切换语言
-    router.push(router.asPath, router.asPath, { locale: value });
     setLang(value);
+    localStorage.setItem('lang', value);
+    router.push(router.asPath, router.asPath, { locale: value });
   };
 
   return (
     <Header className='custom_header !h-[106px] !p-0 '>
-      <div className='flex justify-between items-center h-[45px] text-xs !text-font font-PingFang font-medium border-b border-border_des px-24'>
+      <div className='flex justify-between items-center h-[45px] text-xs  font-PingFang font-medium border-b border_color px-24'>
         <ul className='flex gap-x-5 list-none '>
           {header_top.left.map((item) => {
             const { title, dataIndex, render } = item;
             const value = data[dataIndex];
             const renderDom = render && render(value, data);
             return (
-              <li key={dataIndex} className='flex gap-x-1 text-font'>
-                <span className='text-font'>{tr(title)}:</span>
+              <li key={dataIndex} className='flex gap-x-1'>
+                <span>{tr(title)}:</span>
                 <span>{renderDom || value}</span>
               </li>
             );
@@ -72,13 +74,16 @@ export default () => {
             wrapClassName='!bg-bgColor'
             className='!-inset-x-1/2	'
             header={
-              <span className='flex items-center justify-center w-7 h-7 border border-border cursor-pointer rounded-[5px]'>
+              <span className='flex items-center justify-center w-7 h-7 border card_bg_color  border_color cursor-pointer rounded-[5px]'>
                 {tr(lang)}
               </span>
             }
             onChange={handleLangChange}
             options={langOptions}
           />
+          <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] card_bg_color  border_color '>
+            {getSvgIcon('network')}
+          </span>
 
           <Image
             src={showTheme}
@@ -88,7 +93,10 @@ export default () => {
             className='cursor-pointer'
             key='moon'
             onClick={() => {
-              console.log('---e', theme);
+              localStorage.setItem(
+                'theme',
+                theme === 'dark' ? 'light' : 'dark'
+              );
               setTheme(theme === 'dark' ? 'light' : 'dark');
             }}
           />

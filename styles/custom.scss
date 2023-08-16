@@ -113,7 +113,9 @@ font-display: auto;
 .custom_table{
     width: 100%;
     .ant-table{
+       
         .ant-table-content{
+             background-color: var(--bgColor);
             .ant-table-thead{
                 .ant-table-cell{
                     background-color: transparent ;
@@ -126,6 +128,9 @@ font-display: auto;
                         display: none;
                     }
                     .ant-table-column-sorters{
+                        .ant-table-column-sorter{
+                             color: var(--font_des);
+                        }
                         justify-content:flex-start;
                         .ant-table-column-title{
                             width: fit-content;
@@ -135,21 +140,41 @@ font-display: auto;
                 }
             }
             .ant-table-tbody{
-                .custom_table_row{
-                     &:hover{
-                        .ant-table-column-sort{
-                            background-color: #fafafa;
-                        }
-                        }
-                    .ant-table-column-sort{
-                        background-color: transparent;
-                       
+                .ant-table-placeholder{
+                    background-color: transparent;
+                    .ant-empty-description{
+                         color: var(--font_des);
                     }
                     .ant-table-cell{
+                        border-bottom: none;
+                    }
+                    &:hover{
+                        .ant-table-cell{
+                            background-color: transparent;
+                        }
+                      
+                    }
+                }
+                .custom_table_row{
+                     &:hover{
+                        .ant-table-cell{
+                            background-color: var(--border-color) !important;
+                        }
+                        .ant-table-column-sort{
+                            background-color: transparent;
+                        }
+                        }
+                        .ant-table-column-sort{
+                            background-color: transparent;
+                        
+                        }
+                        .ant-table-cell{
                         height: 58px;
                         font-size: 14px;
                         font-family: DINPro-Medium, DINPro;
                         font-weight: 500;
+                        color:var(--font-color);
+                        border-bottom:1px solid var(--border-color);
                     }
                     &:last-child{
                      .ant-table-cell{

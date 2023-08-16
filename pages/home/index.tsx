@@ -31,10 +31,10 @@ function Home(props: any) {
   return (
     <>
       <Banner />
-      <div className='main_contain bg-bgColor'>
+      <div className='main_contain'>
         <div className='flex justify-between'>
           <Meta />
-          <div className='border card_shadow w-[403px] h-[270px] rounded-xl'>
+          <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color'>
             <div className={`flex justify-between text-xs font-PingFang p-5`}>
               {tr('base_gas')}
               <Link href={`/statistics/gas/`}>
@@ -51,7 +51,7 @@ function Home(props: any) {
           </div>
         </div>
 
-        <div className='mt-16'>
+        <div className='mt-16 '>
           <Rank origin={'home'} />
         </div>
       </div>

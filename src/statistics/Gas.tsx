@@ -186,7 +186,7 @@ function Gas(props: Props) {
   };
 
   return (
-    <div className={`w-full h-full ${className}`}>
+    <div className={`w-full h-full  ${className}`}>
       <EChart options={options} />
     </div>
   );

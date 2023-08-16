@@ -70,7 +70,7 @@ function Meta() {
   return (
     <div
       //ref={ref}
-      className='border card_shadow w-[831px] h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl'>
+      className='border card_shadow w-[831px] h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color'>
       {home_meta.map((item: Item, index: number) => {
         const { render, dataIndex, title } = item;
         const value = (data && data[dataIndex]) || '';

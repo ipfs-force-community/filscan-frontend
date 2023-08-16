@@ -3,25 +3,43 @@
 }
 
 .container_body{
-    background-color: var(--bg_color);
+    background-color: var(--bgColor);
 }  
 
+//色值改变
+.card_bg_color{
+  background-color: var(--bgColor);
+}
+.des_bg_color{
+  background-color: var(--bgDesColor);
+}
+.text_color{
+   color: var(--font-color);
+  
+}
+.text_des{
+   color: var(--font_des);
+    &:hover{
+    color: var(--font-color);
+   }
+}
+.border_color{
+  border-color: var(--border-color);
+}
 
 
 /*shadow*/
 .card_shadow{
-  box-shadow: 0px 2px 30px -2px rgba(223,227,234,0.6)
+  box-shadow: 0px 2px 30px -2px var(--card-shadow)
 }
 
 .select_shadow{
-  box-shadow: 0px 1px 13px -3px rgba(223,227,234,0.6);
+  box-shadow: 0px 1px 13px -3px var(--select-shadow)
 }
 .tab_shadow{
   box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.1);
 }
-.default_card_shadow{
-  box-shadow: 0px 2px 30px -2px rgba(227,227,227,0.4);    
-}
+
 
 /*主题文字渐变text*/
 .clip_text{
@@ -102,6 +120,7 @@
   font-family: DINPro-Bold;
   font-weight: bold;
 }
+
     
 .link_text{
   font-size: 14px;
