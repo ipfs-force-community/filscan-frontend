@@ -45,9 +45,7 @@ body {
     rgb(var(--background-start-rgb)); */
 }
 
-a{
-  color: #1C6AFD;
-}
+
 .main_contain{
   max-width: 1440px;
   width: 100%;

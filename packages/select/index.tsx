@@ -37,7 +37,7 @@ export default ({
       {header ? (
         header
       ) : (
-        <span className='flex justify-between font-PingFang p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
+        <span className='flex justify-between font-PingFang des_bg_color rounded-[5px] p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
           {tr(showLabel)}
           <Image src={down} width={8} height={4} alt='down' />
         </span>

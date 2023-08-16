@@ -56,6 +56,7 @@ const home = {
     go_home: '返回首页',
     
     base_gas: '24h基础手续费走势',
-    rank:'排行榜'
+    rank: '排行榜',
+    contract_rank:'合约排行',
 }
 export default home

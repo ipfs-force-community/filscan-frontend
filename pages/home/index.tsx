@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Translation } from '@/components/hooks/Translation';
 import go from '@/assets/images/black_go.svg';
-import { useEffect } from 'react';
+import ContractRank from '@/src/contract/rank';
 
 //import fetchData from '@/store/server';
 
@@ -50,9 +50,44 @@ function Home(props: any) {
             <Gas className={'w-full !h-[210px]'} />
           </div>
         </div>
-
         <div className='mt-16 '>
           <Rank origin={'home'} />
+        </div>
+        <div className='flex mt-12 gap-x-5 h-[489px] '>
+          <div className=''>
+            <div className={`flex justify-between `}>
+              <div className='font-PingFang font-semibold text-lg	'>
+                {tr('contract_rank')}
+              </div>
+              <Link href={`/contract/rank`}>
+                <Image
+                  className='cursor-pointer'
+                  src={go}
+                  width={18}
+                  height={18}
+                  alt='go'
+                />
+              </Link>
+            </div>
+            <ContractRank origin='home' />
+          </div>
+          <div className=''>
+            <div className={`flex justify-between `}>
+              <div className='font-PingFang font-semibold text-lg	'>
+                {tr('contract_rank')}
+              </div>
+              <Link href={`/contract/rank`}>
+                <Image
+                  className='cursor-pointer'
+                  src={go}
+                  width={18}
+                  height={18}
+                  alt='go'
+                />
+              </Link>
+            </div>
+            <ContractRank origin='home' />
+          </div>
         </div>
       </div>
     </>

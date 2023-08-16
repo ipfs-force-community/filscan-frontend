@@ -2,13 +2,14 @@
 
 import { useFilscanStore } from '@/store/FilscanStore';
 import { isMobile, pageLimit } from '@/utils';
-import { Pagination, Skeleton, Table } from 'antd';
+import { Pagination, Table, Skeleton } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+//import Skeleton from '../skeleton';
 import { useMemo } from 'react';
 
 interface Props {
   data: Array<any>;
-  columns: ColumnsType<any>;
+  columns: ColumnsType<any> | Array<any>;
   loading: boolean;
   limit?: number;
   current?: number;
@@ -32,21 +33,6 @@ export default (props: Props) => {
   const showLimit = useMemo(() => {
     return limit || pageLimit;
   }, [limit]);
-
-  const columnsList: any = useMemo(() => {
-    const arrList: any = [];
-    if (loading) {
-      columns.forEach((item: any) => {
-        arrList.push({ ...item, render: () => <Skeleton active /> });
-      });
-    } else {
-      columns.forEach((item: any) => {
-        arrList.push({ ...item });
-      });
-    }
-
-    return arrList;
-  }, [loading, columns]);
 
   if (isMobile()) {
     return (
@@ -98,11 +84,17 @@ export default (props: Props) => {
       tableLayout='fixed'
       bordered={false}
       className={`custom_table ${className} w-full h-full`}
-      dataSource={loading ? [] : [...data]}
-      columns={columnsList}
+      dataSource={[...data]}
+      columns={columns}
       rowClassName={'custom_table_row'}
-      rowKey={new Date().getDate()}
+      rowKey={new Date().getTime()}
       onChange={onChange}
+      // loading={loading}
+      loading={{
+        spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
+        indicator: <Skeleton active />,
+        wrapperClassName: 'custom_table_loading',
+      }}
       pagination={
         total > showLimit
           ? {

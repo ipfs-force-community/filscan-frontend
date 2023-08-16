@@ -1,5 +1,7 @@
-.margin-l-4{
-  margin-left: 4px;
+a{
+  &:hover{
+    color: #1C6AFD !important;
+  }
 }
 
 .container_body{
@@ -123,14 +125,13 @@
 
     
 .link_text{
-  font-size: 14px;
-  font-family: DINPro-Medium, DINPro;
-  font-weight: 500;
-  color: var(--font-color);
+ font-family: DINPro-Medium, DINPro;
+font-weight: 500;
+color: #1C6AFD;
+font-size: 14px;
   &:hover{
     color: #1C6AFD;
   }
-  
 }
 
 

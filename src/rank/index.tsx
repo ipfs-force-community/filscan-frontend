@@ -150,7 +150,6 @@ export default ({ origin }: { origin: string }) => {
     return data;
   }, [active, data, poolData, growthData, rewardsData]);
 
-  console.log('===3', active);
   return (
     <>
       <Header origin={origin} active={active} onChange={handleHeaderChange} />

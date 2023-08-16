@@ -112,8 +112,23 @@ font-display: auto;
 //table 
 .custom_table{
     width: 100%;
+    .ant-spin-nested-loading >div>.ant-spin .ant-spin-dot{
+        inset-inline-start: 0px !important;
+    }
+    .custom_table_loading{
+        .ant-skeleton{
+            width: 100%;
+            .ant-spin-dot{
+             inset-inline-start: 0px !important;
+            }
+            .ant-skeleton-content{
+                width: inherit;
+                display: block;
+            }
+
+        }
+    }
     .ant-table{
-       
         .ant-table-content{
              background-color: var(--bgColor);
             .ant-table-thead{

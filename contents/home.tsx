@@ -17,7 +17,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='inline text-xs margin-l-4'>{unit}</span>
+          <span className='inline text-xs ml-1'>{unit}</span>
           <span className={`bg-bgColor ${getClassName(classValue)} text-xs`}>
             {classValue}
           </span>
@@ -34,7 +34,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs margin-l-4'>{unit + '/TiB'}</span>
+          <span className='text-xs ml-1	'>{unit + '/TiB'}</span>
         </>
       );
     },
@@ -47,7 +47,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs margin-l-4'>{unit + '/TiB'}</span>
+          <span className='text-xs ml-1'>{unit + '/TiB'}</span>
         </>
       );
     },
@@ -61,7 +61,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs margin-l-4'>{unit + '/TiB'}</span>
+          <span className='text-xs ml-1'>{unit + '/TiB'}</span>
         </>
       );
     },
