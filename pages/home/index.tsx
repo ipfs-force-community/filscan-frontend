@@ -58,7 +58,7 @@ function Home(props: any) {
           <Trend origin='home' className={'w-full !h-full'} />
           <Trend origin='home' className={'w-full !h-full'} />
         </div>
-        <div className='mt-32 ' ref={ref}>
+        <div className='mt-32' ref={ref}>
           <Rank origin={'home'} />
         </div>
         <div className='flex mt-12 gap-x-5 h-[489px] '>

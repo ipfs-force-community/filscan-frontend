@@ -13,28 +13,34 @@ export default ({
   header,
   wrapClassName,
   className,
+  value,
 }: {
   ns: string;
   options: Array<Option_Item>;
   onChange: (value: string) => void;
   header?: JSX.Element;
   wrapClassName?: string;
+  value?: string | undefined;
   className?: string;
 }) => {
   const { tr } = Translation({ ns });
   const [showLabel, setShowLabel] = useState('');
-  const [value, setValue] = useState('');
+  const [active, setActive] = useState(value);
 
   useEffect(() => {
-    if (options.length > 0) {
+    if (value) {
+      const file = options.find((v) => v.value === value);
+      setActive(value);
+      if (file) setShowLabel(file?.label);
+    } else if (options.length > 0) {
       setShowLabel(options[0]?.label);
-      setValue(options[0]?.value);
+      setActive(options[0]?.value);
     }
-  }, [options]);
+  }, [options, value]);
 
   const handleClick = (item: Option_Item) => {
     setShowLabel(item.label);
-    setValue(item.value);
+    setActive(item.value);
     onChange(item.value);
   };
 
@@ -58,7 +64,7 @@ export default ({
               onClick={() => handleClick(item)}
               key={item.value}
               className={`p-2 rounded-[5px] hover:text-primary ${
-                item.value === value ? 'bg-bg_hover text-primary' : ''
+                item.value === active ? 'bg-bg_hover text-primary' : ''
               }`}>
               {tr(item.label)}
             </li>

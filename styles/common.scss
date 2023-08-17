@@ -1,3 +1,7 @@
+
+@function px-to-rem($px, $base-font-size: 16px) {
+  @return #{$px / $base-font-size}rem;
+}
 a{
   &:hover{
     color: #1C6AFD !important;
@@ -87,7 +91,7 @@ a{
 
 .fade-in {
   animation: fadeInUp 1s forwards;
-  transform: translateY(-80px);
+  transform: translateY(px-to-rem(-80px));
 }
 /* 向上滑动*/
 @keyframes fadeInUp {
@@ -97,7 +101,7 @@ a{
   }
   100% {
     opacity: 1;
-    transform: translateY(-80px);
+    transform: translateY(px-to-rem(-80px));
   }
 }
 

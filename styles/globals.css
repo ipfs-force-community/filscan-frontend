@@ -49,6 +49,10 @@ body {
     rgb(var(--background-start-rgb)); */
 }
 
+.container_body{
+   color: var(--font-color);
+  background-color: var(--main-bg-color);
+}
 
 .main_contain{
   max-width: 1440px;
@@ -56,6 +60,6 @@ body {
   padding: 24px 94px;
   margin: auto;
   box-sizing: content-box;
-  color: var(--font-color);
-  background-color: var(--main-bg-color);
+   color: var(--font-color);
+  background-color: var(--main-bg-color); 
 }

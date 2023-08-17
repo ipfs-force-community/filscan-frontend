@@ -80,6 +80,7 @@ export default () => {
                 {tr(lang)}
               </span>
             }
+            value={lang}
             onChange={handleLangChange}
             options={langOptions}
           />
