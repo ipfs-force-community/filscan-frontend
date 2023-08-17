@@ -15,12 +15,14 @@ export default ({
   ns,
   placeholder = '',
   suffix,
+  clear,
 }: {
   className?: string;
   origin?: string;
   ns: string;
   placeholder?: string;
   suffix?: JSX.Element;
+  clear?: boolean;
   onSearch: (value: string) => void;
 }) => {
   const { tr } = Translation({ ns });
@@ -37,6 +39,9 @@ export default ({
           setValue(e.target.value);
         }}
         onPressEnter={() => {
+          if (clear) {
+            setValue('');
+          }
           onSearch(value);
         }}
         suffix={

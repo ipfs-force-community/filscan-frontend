@@ -20,7 +20,8 @@ export const proApi = {
     mail_exists: proUrl + '/MailExists',
     send_code: proUrl + '/SendVerificationCode',
     byCode: proUrl + '/ResetPasswordByCode',
-    login:proUrl +'/Login',
+    login: proUrl + '/Login',
+    getGroups: proUrl + '/GetUserGroups',
 }
 
 export const apiUrl: API | any = {

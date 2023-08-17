@@ -46,17 +46,18 @@ const config: Config = {
         border: '#EEEFF1',
         primary: '#1C6AFD',
         bg_hover: 'rgba(28, 106, 253, 0.1)',
+        select_bg:'rgba(28, 106, 253, 0.6)',
         icon_border: 'rgba(0,0,0,0.2)',
         secondary: '#00FF00',
-        // 暗色模式颜色配置
-        dark: {
-          font:'#FFFFFF',
-          bgColor: '#090A0A',
-          border: '#222',
-          border_des: '#1C1C1C',
-          bgDesColor: 'rgba(255,255,255,0.1)',
-          font_des:'rgba(255,255,255,0.6)',
-        },
+        // // 暗色模式颜色配置
+        // dark: {
+        //   font:'#FFFFFF',
+        //   bgColor: '#090A0A',
+        //   border: '#222',
+        //   border_des: '#1C1C1C',
+        //   bgDesColor: 'rgba(255,255,255,0.1)',
+        //   font_des:'rgba(255,255,255,0.6)',
+        // },
       },
     
     },

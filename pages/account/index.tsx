@@ -6,16 +6,17 @@ import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
 import useAnchorLink from '@/components/hooks/useAnchorLink';
 import Overview from '@/src/account/overview';
+import Miners from '@/src/account/miners';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
-  const hash = useHash();
+  const { hash } = useHash();
+
   const rootSubmenuKeys: Array<string> = [];
   const navigateWithNoScroll = useAnchorLink();
 
   //const [selectedKey, setSelectKey] = useState('');
 
-  console.log('---f', hash);
   const selectedKey = useMemo(() => {
     if (hash) {
       return hash;
@@ -53,6 +54,8 @@ const Account: React.FC = () => {
     return itemsArr;
   }, []);
 
+  console.log('---34', selectedKey);
+
   return (
     <div className='main_contain !py-6 '>
       <div className='flex rounded-xl border card_shadow border_color '>
@@ -81,11 +84,9 @@ const Account: React.FC = () => {
             })}
           </ul>
         </div>
-        <div className='px-5 py-10'>
-          <p className='w-full mb-5 font-semibold font-PingFang	'>
-            {tr(selectedKey)}
-          </p>
-          {selectedKey === 'overview' && <Overview />}
+        <div className='flex flex-col px-5 py-10 w-full h-screen'>
+          {selectedKey === 'overview' && <Overview selectedKey='overview' />}
+          {selectedKey === 'miners' && <Miners />}
         </div>
       </div>
     </div>

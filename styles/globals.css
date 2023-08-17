@@ -5,6 +5,7 @@
 :root,:root[theme='light']{
      --bgColor:#FFFFFF;
      --main-bg-color:#F9F9F9;
+     --reverse-color:'#000000';
     --font-color:#000000;
     --select-shadow: rgba(223,227,234,0.6);
     --card-shadow: rgba(223,227,234,0.6);
@@ -25,6 +26,7 @@
  :root,:root[theme='dark'] {
    --bgColor:#000000;
     --main-bg-color:#090A0A;
+   --reverse-color:'#FFFFFF';
    --font-color:#ffffff;
     --bg_hover:rgba(28, 106, 253, 0.1);
     --bgDesColor: #1C1C1C;

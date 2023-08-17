@@ -328,6 +328,23 @@ font-display: auto;
 }
 
 
+//custom_message
+.ant-message{
+       .ant-message-notice-error{
+         .ant-message-notice-content{
+            background: rgba(225,82,82,0.09) !important;
+            border-radius: 5px;
+            border: 1px solid rgba(225,82,82,0.4) !important;
+        .ant-message-error{
+            display: flex;
+            column-gap: 4px;
+            align-items: center;
+            }
+        }
+    }
+
+}
+
 //骨架屏
 .skeleton_Input{
     width: 60px !important;

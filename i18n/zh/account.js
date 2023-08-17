@@ -11,7 +11,12 @@ const account = {
      overview_expired: '到期扇区',
      overview_reward: '出块奖励',
      overview_lucky: '幸运值',
-     overview_balance:'地址余额'
+     overview_balance: '地址余额',
+     no_node_data:'暂未添加节点，去',
+     miners_add: '添加节点',
+     
+     //添加节点
+     miner_add_placeholder:'输入您要添加的矿工号'
      
      
 }

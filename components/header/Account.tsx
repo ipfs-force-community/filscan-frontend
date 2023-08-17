@@ -30,6 +30,7 @@ export default () => {
             <Link
               key={index}
               href={`/account/#${item.href}`}
+              scroll={false}
               className='h-10  text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>
               <span className='flex items-center gap-x-2 px-4'>
                 {item.icon}

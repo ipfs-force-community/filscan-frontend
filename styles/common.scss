@@ -120,15 +120,19 @@ a{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
-  width: 20px;
-  height: 20px;
+  width: px-to-rem(20px);
+  height: px-to-rem(20px);
   background: var(--font-color);
   color: var(--bgColor);
-  border-radius: 6px;
-  font-size: 11px;
+  border-radius: px-to-rem(6px);
+  font-size: px-to-rem(11px);
   font-family: DINPro-Bold;
   font-weight: bold;
+}
+
+.reverse_color{
+  background: var(--font-color);
+  color: var(--bgColor);
 }
 
     
