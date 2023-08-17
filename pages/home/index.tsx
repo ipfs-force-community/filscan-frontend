@@ -13,6 +13,7 @@ import go from '@/assets/images/black_go.svg';
 import ContractRank from '@/src/contract/rank';
 import DefiList from '@/src/fevm/defi';
 import Trend from '@/src/statistics/Trend';
+import useObserver from '@/components/hooks/useObserver';
 
 //import fetchData from '@/store/server';
 
@@ -29,6 +30,7 @@ import Trend from '@/src/statistics/Trend';
 
 function Home(props: any) {
   const { tr } = Translation({ ns: 'home' });
+  const ref = useObserver();
 
   return (
     <>
@@ -56,12 +58,12 @@ function Home(props: any) {
           <Trend origin='home' className={'w-full !h-full'} />
           <Trend origin='home' className={'w-full !h-full'} />
         </div>
-        <div className='mt-12'>
+        <div className='mt-32 ' ref={ref}>
           <Rank origin={'home'} />
         </div>
         <div className='flex mt-12 gap-x-5 h-[489px] '>
           <div className=''>
-            <div className={`flex justify-between `}>
+            <div className={`flex justify-between`}>
               <div className='font-PingFang font-semibold text-lg	'>
                 {tr('contract_rank')}
               </div>

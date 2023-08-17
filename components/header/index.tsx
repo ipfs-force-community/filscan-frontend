@@ -86,7 +86,6 @@ export default () => {
           <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] card_bg_color  border_color '>
             {getSvgIcon('network')}
           </span>
-
           <Image
             src={showTheme}
             width={28}

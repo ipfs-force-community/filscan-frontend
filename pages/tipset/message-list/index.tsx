@@ -89,8 +89,13 @@ export default () => {
   }, [theme, lang]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
-    if (pagination?.current) {
-      updateQuery({ p: pagination.current });
+    const showCurrent = pagination?.current;
+    if (showCurrent) {
+      if (showCurrent === 1) {
+        removeQueryParam('p');
+      } else {
+        updateQuery({ p: pagination.current });
+      }
     }
   };
   return (
@@ -121,6 +126,7 @@ export default () => {
         <Table
           className='-mt-2.5 '
           data={dataSource.data}
+          current={current}
           total={dataSource.total}
           columns={columns}
           loading={loading}

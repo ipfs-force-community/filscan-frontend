@@ -235,7 +235,7 @@ export default (props: Props) => {
     <div
       className={`w-full h-[full]  ${className} mt-20`}
       ref={origin === 'home' ? ref : ''}>
-      <div className='flex justify-between items-center mb-5'>
+      <div className='flex justify-between flex-wrap items-center mb-5'>
         <div className='flex gap-x-10 items-center'>
           <span className='font-PingFang font-semibold text-lg '>
             {tr('power')}

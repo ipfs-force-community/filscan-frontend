@@ -3,8 +3,9 @@
 import { apiUrl } from '@/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
+import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import Search from '@/components/search';
-import { address_list, dsn_list, message_list } from '@/contents/tipset';
+import { dsn_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
@@ -17,6 +18,7 @@ export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
+  const removeQueryParam = useRemoveQueryParam();
   const { p } = useRouter().query;
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
@@ -67,8 +69,13 @@ export default () => {
   };
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
-    if (pagination?.current) {
-      updateQuery({ p: pagination.current });
+    const showCurrent = pagination?.current;
+    if (showCurrent) {
+      if (showCurrent === 1) {
+        removeQueryParam('p');
+      } else {
+        updateQuery({ p: pagination.current });
+      }
     }
   };
   return (
@@ -96,6 +103,7 @@ export default () => {
           className='-mt-2.5 '
           data={dataSource.data}
           total={dataSource.total}
+          current={current}
           columns={columns}
           loading={loading}
           onChange={handleChange}
@@ -104,3 +112,6 @@ export default () => {
     </div>
   );
 };
+function removeQueryParam(arg0: string) {
+  throw new Error('Function not implemented.');
+}

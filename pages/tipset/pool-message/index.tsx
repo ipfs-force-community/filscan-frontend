@@ -89,8 +89,13 @@ export default () => {
   }, [theme, lang]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
-    if (pagination?.current) {
-      updateQuery({ p: pagination.current });
+    const showCurrent = pagination?.current;
+    if (showCurrent) {
+      if (showCurrent === 1) {
+        removeQueryParam('p');
+      } else {
+        updateQuery({ p: pagination.current });
+      }
     }
   };
   return (
@@ -125,6 +130,7 @@ export default () => {
           total={dataSource.total}
           columns={columns}
           loading={loading}
+          current={current}
           onChange={handleChange}
         />
       </div>
