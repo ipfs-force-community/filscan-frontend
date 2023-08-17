@@ -119,6 +119,7 @@ export default () => {
             } else {
               removeQueryParam('name');
             }
+            removeQueryParam('p');
           }}
         />
       </div>

@@ -1,9 +1,7 @@
+/** @format */
+
 export default () => {
-    console.log()
+  console.log();
 
-
-    return <div>
-        
-    </div>
-
- }
+  return <div>1111</div>;
+};
