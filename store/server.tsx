@@ -12,13 +12,14 @@ interface FetchDataResult<T> {
 
 async function fetchData<T>(
   url: string,
-  body?: any,
+  body?: {},
   options: FetchDataOptions = {
     maxRetries: 3,
     timeout: 0, // Default is no timeout
   }
 ): Promise<FetchDataResult<T>> {
   const { maxRetries, timeout } = options;
+  const newBody = body || {};
   let retries = 0;
   let error: any = null;
   let data: T | null | any = null;
@@ -37,7 +38,7 @@ async function fetchData<T>(
           'Content-Type': 'application/json',
           Authorization: `${token}`,
         }, // Set the content type to JSON
-        body: body ? JSON.stringify(body) : undefined, // Convert the body data to JSON format
+        body: JSON.stringify(newBody), // Convert the body data to JSON format
         signal: controller.signal,
       });
       data = await response.json();

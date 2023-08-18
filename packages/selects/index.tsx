@@ -9,9 +9,13 @@ export default ({
   onChange,
   value,
   className = '',
+  border,
+  suffix,
 }: {
   value: string;
   className?: string;
+  border?: boolean;
+  suffix?: JSX.Element;
   options: Array<Option_Item>;
   onChange: (value: string) => void;
 }) => {
@@ -28,19 +32,32 @@ export default ({
   return (
     <Select
       showSearch
-      value={active}
-      className={`custom_select cursor-pointer ${className}`}
-      popupClassName={'custom_select'}
-      placeholder='Search to Select'
+      placeholder='Select a person'
       optionFilterProp='children'
-      filterOption={(input, option) => (option?.label ?? '').includes(input)}
-      // filterSort={(optionA: { label: any }, optionB: { label: any }) =>
-      //   (optionA?.label ?? '')
-      //     .toLowerCase()
-      //     .localeCompare((optionB?.label ?? '').toLowerCase())
-      // }
+      className={`custom_select ${
+        border ? 'border_select' : 'no_border_select'
+      } ${className}`}
+      popupClassName={'custom_select_wrapper'}
+      filterOption={(input, option: any) =>
+        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+      }
       options={options}
-      onChange={handleChange}
-    />
+      onSearch={handleChange}>
+      {/* {options?.map((item) => {
+        return (
+          <Select.Option key={item.value} value={item.value} label={item.label}>
+            {item.label}
+          </Select.Option>
+        );
+      })}
+      {suffix && (
+        <Select.Option
+          className={'custom_options_item'}
+          value={'suffix'}
+          style={{ pointerEvents: 'none' }}>
+          {suffix}
+        </Select.Option>
+      )} */}
+    </Select>
   );
 };

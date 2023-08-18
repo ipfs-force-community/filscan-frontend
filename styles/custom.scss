@@ -18,41 +18,6 @@ font-display: auto;
 font-display: auto;
 }
 
-// @font-face {
-//   font-family: 'Beirut';
-//   src: url('../assets/fonts/Beirut.ttc');
-//   font-display: auto;
-// }
-
-/*progress*/
-
-
-// .other_progress{
-//   display: flex;
-//   align-items: center;
-//    .progress {
-//      display: inline-block;
-//      background-image: url("../assets/images/progress.png");
-//      height: 18px;
-//      width: 74px;
-//      background-size: 100% 100%;
-//      vertical-align: bottom;
-//      margin-right: 10px;
-//      overflow: hidden;
-//      position: relative;
-//      font-size: 16px;
-//      .mask {
-//        display: inline-block;
-//        position: absolute;
-//        width: 100%;
-//        height: 100%;
-//        left: 0;
-//        top: 0;
-//        background: var(--main-bg-color);
-//        opacity: 0.7;
-//      }
-//    }
-// }
 
 //layout
 .custom_header{
@@ -90,6 +55,7 @@ font-display: auto;
         }
     }
 }
+
 .custom_form{
     .ant-form-item-row{
        height: 100%;
@@ -118,79 +84,11 @@ font-display: auto;
    
 }
 
-//select 
-.ant-select:not(.ant-select-customize-input) .ant-select-selector{
- border-color: none !important;
- &:hover,&:focus,&:active,&:focus-visible{
-    box-shadow: none !important;
-     border-color: none !important;
- }
-}
-.custom_select{
-    min-width: 150px;
-       color: var(--font-color) !important;
-    border-color: none;
-    .ant-select-selector{
-         background-color: var(--bgDesColor) !important;
-       border-color: transparent !important; 
-        border-radius: 5px;      
-        .ant-select-selection-item{
-            color: var(--font-color) !important;
-            cursor: pointer;
-        }  
-    }
-}
-
-
-.ant-select-dropdown{
-    display: block;
-    background-color: var(--bgDesColor) !important;
-    color: var(--font-color)!important;
-    box-shadow: 0px 1px 13px -3px var(--select-shadow) !important;
-    .ant-select-item-option-selected{
-    color: var(--primary);
-    font-weight: 600;
-    background-color:  var(--bg-bg_hover) !important;
-    }
-
-    .ant-select-item{
-        padding: 8px 12px !important;
-        border-radius: 5px;
-        color: var(--font-color) !important;
-        cursor: pointer;
-        &:hover{
-            background-color: transparent;
-            color: var(--primary);
-        }
-    }
-
-}
-
-.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-    background-color: transparent !important;
-     color: var(--primary) !important;
-}
 
 
 //table 
 .custom_table{
     width: 100%;
-    // .ant-spin-nested-loading >div>.ant-spin .ant-spin-dot{
-    //     inset-inline-start: 0px !important;
-    // }
-    // .custom_table_loading{
-    //     .ant-skeleton{
-    //         width: 100%;
-    //         .ant-spin-dot{
-    //          inset-inline-start: 0px !important;
-    //         }
-    //         .ant-skeleton-content{
-    //             width: inherit;
-    //             display: block;
-    //         }
-
-    //     }
-    // }
     .ant-table{
         .ant-table-content{
              background-color: var(--bgColor);
@@ -353,4 +251,60 @@ font-display: auto;
     >.ant-skeleton-input{
         min-width:50px
     }
+}
+
+//select 
+.custom_select{
+    font-size: 14px !important;
+    &:hover{
+        .ant-select-selector{
+            border-color: var(--primary) !important;
+            
+        }
+    }
+    .ant-select-selector{
+        padding: 6px 16px !important;
+        height:42px !important;
+        border: 1px solid var(--border-color) !important;
+        background-color: var(--bgColor) !important;
+        .ant-select-selection-search-input {
+             height:42px !important;
+        }
+    }
+
+}
+.custom_select_wrapper{
+    padding: 16px;
+  background-color: var(--bgColor);
+  color: var(--font-color);
+  border: var(--border-color);
+  box-shadow: 0px 2px 30px -2px var(--card-shadow);
+
+  .ant-select-item:not(.custom_options_item){
+    color: var(--font-color) ;
+    margin-bottom: 4px;
+     &:hover{
+        color: var(--primary) !important;
+        background-color: var(--bg_hover) !important;
+     }
+     .ant-select-item-option-content{
+        cursor: pointer;
+     }
+     
+  }
+  .custom_options_item{
+    .ant-select-item-option-content{
+        display: flex !important;
+        align-items: center;
+        column-gap: 8px;
+        cursor: pointer;
+        &:hover{
+            color: var(--primary);
+        }
+    }
+  }
+ 
+}
+.border_select{
+
 }

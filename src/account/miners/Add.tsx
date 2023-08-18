@@ -4,14 +4,24 @@ import { Translation } from '@/components/hooks/Translation';
 import Search from '@/components/search';
 import Breadcrumb from '@/packages/breadcrumb';
 import del_light from '@/assets/images/del_light.svg';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { message } from 'antd';
 import errorIcon from '@/assets/images/error.svg';
 import messageManager from '@/packages/message';
 import { getSvgIcon } from '@/svgsIcon';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
+import Select from '@/packages/select';
+import Selects from '@/packages/selects';
+import { spawn } from 'child_process';
+import { Divider } from 'antd';
+
+interface Group {
+  group_name: string;
+  group_id: number | string;
+}
+
+const defaultGroup = { group_name: 'default_group', group_id: 1 };
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
@@ -20,6 +30,8 @@ export default () => {
     { title: tr('miners_add'), path: '/account#miners?type=miner_add' },
   ];
 
+  const [groups, setGroups] = useState<Array<Group>>([defaultGroup]);
+
   const [addMiners, setAddMiner] = useState<string[]>([]);
   useEffect(() => {
     loadGroups();
@@ -27,7 +39,7 @@ export default () => {
 
   const loadGroups = async () => {
     const groups = await fetchData(proApi.getGroups);
-    console.log('---3', groups);
+    //setGroups([{ group_name: 'default_group', group_id: 1 }]);
   };
 
   const handleSearch = (values: any) => {
@@ -48,6 +60,10 @@ export default () => {
       });
     }
     setAddMiner([...addMiners, values]);
+  };
+
+  const handleGroupChange = (value: string) => {
+    console.log('---3', value);
   };
 
   return (
@@ -95,7 +111,35 @@ export default () => {
               })}
             </ul>
           )}
-          <div className='mt-5'></div>
+          <div className='mt-5 group'>
+            <input type='text' className='focus:outline-none' />
+            <Search
+              ns={'account'}
+              className='w-full mt-4 h-12'
+              placeholder='miner_select_group_placeholder'
+              clear
+              suffix={<span />}
+              onSearch={handleSearch}
+            />
+            <ul className='mt-1 card_shadow p-4 hidden group-focus:block'>
+              {groups.map((item) => {
+                return (
+                  <li
+                    key={item.group_id}
+                    className='py-4 px-5 hover:text-primary hover:bg-bg_hover rounded-[5px] cursor-pointer'>
+                    {tr(item.group_name)}
+                  </li>
+                );
+              })}
+              <li className='mt-4'>
+                <hr className=' border_color' />
+                <span className='w-full py-4 px-5 flex rounded-[5px] items-center gap-x-2 mt-4 cursor-pointer hover:text-primary hover:bg-bg_hover'>
+                  {getSvgIcon('addIcon')}
+                  {tr('group_add')}
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

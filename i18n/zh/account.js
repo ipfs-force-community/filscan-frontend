@@ -4,6 +4,7 @@ const account = {
      miners: '节点管理',
      personal: '账号信息',
      logout: '退出登录',
+     default_group:'未分组',
      
      //数据概览
      overview_power: '算力概览',
@@ -14,9 +15,12 @@ const account = {
      overview_balance: '地址余额',
      no_node_data:'暂未添加节点，去',
      miners_add: '添加节点',
+     group_add: '添加分组',
      
+
      //添加节点
-     miner_add_placeholder:'输入您要添加的矿工号'
+     miner_add_placeholder: '输入您要添加的矿工号',
+     miner_select_group_placeholder: '选择分组（如未选择组，添加的节点将全部进入“未分组”中',
      
      
 }

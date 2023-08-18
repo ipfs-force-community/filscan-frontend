@@ -14,6 +14,7 @@ export default ({
   wrapClassName,
   className,
   value,
+  suffix,
 }: {
   ns: string;
   options: Array<Option_Item>;
@@ -22,6 +23,7 @@ export default ({
   wrapClassName?: string;
   value?: string | undefined;
   className?: string;
+  suffix?: JSX.Element;
 }) => {
   const { tr } = Translation({ ns });
   const [showLabel, setShowLabel] = useState('');
