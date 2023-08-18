@@ -9,6 +9,7 @@ import Link from 'next/link';
 import router from 'next/router';
 
 export const pageLimit = 15;
+export const max_name_length = 10;
 
 export function formatFilNum(
   showNum: number | string,

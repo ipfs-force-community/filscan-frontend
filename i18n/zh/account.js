@@ -38,7 +38,15 @@ const account = {
      //个人中心
      default_user: '普通用户',
      last_login: '上次登录时间',
-     personal_setting:'账户设置'
+     personal_setting: '账户设置',
+     personal_name: '账户名称',
+     old_placeholder: '输入旧密码',
+     old_password:'旧密码',
+     new_password: '新密码',
+     new_placeholder:'输入新密码',
+     confirm_password: '确认密码',
+     confirm_placeholder: '重新输入新密码'
+
      
      
 }

@@ -143,3 +143,27 @@ export const account_manager: Array<MenuItem> = [
     key: 'logout',
   },
 ];
+
+export const personal_setting = [
+  {
+    title: 'personal_name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'old_password',
+    placeholder: 'old_placeholder',
+    dataIndex: 'old_password',
+    rules: [{ required: true, message: '${old_placeholder} is required' }],
+  },
+  {
+    title: 'new_password',
+    placeholder: 'new_placeholder',
+    dataIndex: 'new_password',
+    rules: [{ required: true, message: '${new_password} is required' }],
+  },
+  {
+    title: 'confirm_password',
+    dataIndex: 'confirm_password',
+    rules: [{ required: true, message: '${confirm_password} is required' }],
+  },
+];
