@@ -6,7 +6,7 @@ import { Translation } from '../hooks/Translation';
 import IconB from '@/assets/images/searchIcon_b.svg';
 import IconW from '@/assets/images/searchIcon_w.svg';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default ({
   className,
@@ -16,17 +16,27 @@ export default ({
   placeholder = '',
   suffix,
   clear,
+  disabled = false,
+  value,
 }: {
   className?: string;
+  disabled?: boolean;
   origin?: string;
   ns: string;
+  value?: string;
   placeholder?: string;
   suffix?: JSX.Element;
   clear?: boolean;
   onSearch: (value: string) => void;
 }) => {
   const { tr } = Translation({ ns });
-  const [value, setValue] = useState('');
+  const [inputValue, setValue] = useState('');
+
+  useEffect(() => {
+    if (value) {
+      setValue(value);
+    }
+  }, [value]);
 
   return (
     <div className={style.box_input}>
@@ -34,15 +44,17 @@ export default ({
         className={`${style.search_input} text-color ${className}`}
         placeholder={tr(placeholder)}
         style={{ color: origin === 'banner' ? '#fff' : '' }}
-        value={value}
+        value={inputValue}
         onChange={(e) => {
-          setValue(e.target.value);
+          if (!disabled) {
+            setValue(e.target.value);
+          }
         }}
         onPressEnter={() => {
           if (clear) {
             setValue('');
           }
-          onSearch(value);
+          onSearch(inputValue);
         }}
         suffix={
           suffix || (

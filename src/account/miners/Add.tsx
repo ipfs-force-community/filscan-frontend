@@ -8,39 +8,46 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import errorIcon from '@/assets/images/error.svg';
 import messageManager from '@/packages/message';
+import CreateGroup from './CreateGroup';
 import { getSvgIcon } from '@/svgsIcon';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
-import Select from '@/packages/select';
-import Selects from '@/packages/selects';
-import { spawn } from 'child_process';
-import { Divider } from 'antd';
+import { Button, Input } from 'antd';
+import SearchSelect from '@/packages/searchSelect';
+import { Option_Item } from '@/contents/type';
 
-interface Group {
+interface Group extends Option_Item {
   group_name: string;
   group_id: number | string;
+  miners_id: Array<any>;
 }
 
-const defaultGroup = { group_name: 'default_group', group_id: 1 };
-
-export default () => {
+export default ({ groups }: { groups: Array<Group> }) => {
+  let defaut_groupId;
   const { tr } = Translation({ ns: 'account' });
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     { title: tr('miners_add'), path: '/account#miners?type=miner_add' },
   ];
 
-  const [groups, setGroups] = useState<Array<Group>>([defaultGroup]);
-
+  //const [groups, setGroups] = useState<Array<Group>>([]);
   const [addMiners, setAddMiner] = useState<string[]>([]);
-  useEffect(() => {
-    loadGroups();
-  }, []);
+  const [show, setShow] = useState<boolean>(false);
+  const [selectGroup, setSelectGroup] = useState<string | number>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const loadGroups = async () => {
-    const groups = await fetchData(proApi.getGroups);
-    //setGroups([{ group_name: 'default_group', group_id: 1 }]);
-  };
+  // useEffect(() => {
+  //   loadGroups();
+  // }, []);
+
+  // const loadGroups = async () => {
+  //   const groups: any = await fetchData(proApi.getGroups);
+  //   const data =
+  //     groups?.group_info_list?.map((item: Group) => {
+  //       return { ...item, label: tr(item.group_name), value: item.group_id };
+  //     }) || [];
+  //   setGroups(data);
+  // };
 
   const handleSearch = (values: any) => {
     if (addMiners.length > 4) {
@@ -62,19 +69,25 @@ export default () => {
     setAddMiner([...addMiners, values]);
   };
 
-  const handleGroupChange = (value: string) => {
-    console.log('---3', value);
+  const handleSave = async () => {
+    if (addMiners.length > 0) {
+      setLoading(false);
+      const selectedGroup = selectGroup || '12';
+      const groupsUpdated = await fetchData(proApi.saveGroup, {
+        group_id: selectedGroup,
+        miners_id: addMiners,
+      });
+    }
   };
-
   return (
-    <div>
+    <>
       <Breadcrumb items={routerItems} />
       <div className='mt-8 mb-10 font-PingFang font-semibold text-lg'>
         {tr('miners_add')}
       </div>
-      <div className='border-color card_shadow px-5 py-7 rounded-xl	'>
+      <div className='border-color card_shadow px-5 py-7 rounded-xl	flex-1 flex flex-col'>
         <div className='text_des'>{tr('miners_add')}</div>
-        <div>
+        <div className='flex-1'>
           <Search
             ns={'account'}
             className='w-full mt-4'
@@ -111,26 +124,13 @@ export default () => {
               })}
             </ul>
           )}
-          <div className='mt-5 group'>
-            <input type='text' className='focus:outline-none' />
-            <Search
-              ns={'account'}
-              className='w-full mt-4 h-12'
-              placeholder='miner_select_group_placeholder'
-              clear
-              suffix={<span />}
-              onSearch={handleSearch}
-            />
-            <ul className='mt-1 card_shadow p-4 hidden group-focus:block'>
-              {groups.map((item) => {
-                return (
-                  <li
-                    key={item.group_id}
-                    className='py-4 px-5 hover:text-primary hover:bg-bg_hover rounded-[5px] cursor-pointer'>
-                    {tr(item.group_name)}
-                  </li>
-                );
-              })}
+          <SearchSelect
+            ns='account'
+            options={groups}
+            onChange={(value) => {
+              setSelectGroup(value);
+            }}
+            suffix={
               <li className='mt-4'>
                 <hr className=' border_color' />
                 <span className='w-full py-4 px-5 flex rounded-[5px] items-center gap-x-2 mt-4 cursor-pointer hover:text-primary hover:bg-bg_hover'>
@@ -138,10 +138,22 @@ export default () => {
                   {tr('group_add')}
                 </span>
               </li>
-            </ul>
-          </div>
+            }
+          />
+        </div>
+        <div className='mt-5 flex gap-x-4 justify-end'>
+          <Button className='cancel_btn'>{tr('cancel')}</Button>
+          <Button className='confirm_btn' onClick={handleSave}>
+            {tr('confirm')}
+          </Button>
         </div>
       </div>
-    </div>
+      <CreateGroup
+        show={show}
+        onChange={() => {
+          setShow(false);
+        }}
+      />
+    </>
   );
 };

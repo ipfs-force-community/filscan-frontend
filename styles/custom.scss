@@ -81,6 +81,7 @@ font-display: auto;
 .ant-input{
     background-color: transparent !important;
     color: var(--font-color);
+
    
 }
 
@@ -305,6 +306,16 @@ font-display: auto;
   }
  
 }
-.border_select{
 
+
+//ant-modal
+.ant-modal-root{
+    .ant-modal-content{
+        background-color: var(--bgColor) !important;
+        color: var(--font-color) !important;
+        .ant-modal-header{
+            text-align: center;
+        }
+    }
 }
+

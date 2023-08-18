@@ -1,4 +1,6 @@
 const account = {
+     confirm: '确认',
+     cancel:'取消',
      go_home:'返回首页',
      account_title:'节点仪表盘',
      overview: '数据概览',
@@ -20,11 +22,18 @@ const account = {
      no_node_data:'暂未添加节点，去',
      miners_add: '添加节点',
      group_add: '添加分组',
+     miners_group_manage:'分组设置',
      
 
      //添加节点
      miner_add_placeholder: '输入您要添加的矿工号',
      miner_select_group_placeholder: '选择分组（如未选择组，添加的节点将全部进入“未分组”中',
+
+     //分组
+     create_group: '创建分组',
+     create_group_holder: '输入您要创建组的名称',
+     item_value: '组内 {{value}} 个节点',
+     group_name:'分组名称',
      
      
 }

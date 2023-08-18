@@ -10,7 +10,7 @@ export default ({ selectedKey }: { selectedKey: string }) => {
 
   return (
     <>
-      <p className='w-full mb-5 font-semibold font-PingFang	'>
+      <p className='w-full mb-5 text-lg	font-semibold font-PingFang	'>
         {tr(selectedKey)}
       </p>
       <div

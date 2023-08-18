@@ -4,7 +4,7 @@
 }
 a{
   &:hover{
-    color: #1C6AFD !important;
+    color: #1C6AFD;
   }
 }
 
@@ -148,8 +148,36 @@ cursor: pointer;
 }
 
 
+.cancel_btn{
+  min-width: 80px;
+  width: fit-content;
+  height: fit-content;
+  padding: 6px 15px;
+  background-color: var(--bgColor) !important;
+  color: var(--font-color) !important;
+  border-color: var(--border-color) !important;
+  outline:none !important;
+  box-shadow: none !important;
+    .ant_wave{
+      display: none !important;
+    }
+}
 
+.confirm_btn{
+  width: fit-content;
+  height: fit-content;
+  min-width: 80px;
+   padding: 6px 15px;
+   background: var(--font-color) !important;
+  color: var(--bgColor) !important;
+  border-color: transparent !important;
+  outline:none !important;
+    box-shadow: none !important;
+    .ant_wave{
+      display: none !important;
+    }
 
+}
 
 .animated-div {
   animation: myAnimation 6s linear infinite;

@@ -23,6 +23,8 @@ export const proApi = {
     login: proUrl + '/Login',
     userInfo: proUrl + '/UserInfo',
     getGroups: proUrl + '/GetUserGroups',
+    createGroup: proUrl + '/CreateGroup',
+    saveGroup:  proUrl + '/SaveGroupMiners',
 }
 
 export const apiUrl: API | any = {

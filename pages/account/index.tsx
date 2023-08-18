@@ -75,7 +75,9 @@ const Account: React.FC = () => {
             })}
           </ul>
         </div>
-        <div className='flex flex-col px-5 py-10 w-full h-screen'>
+        <div
+          className='flex flex-col px-5 py-10 w-full'
+          style={{ height: 'inherit' }}>
           {selectedKey === 'overview' && <Overview selectedKey='overview' />}
           {selectedKey === 'miners' && <Miners />}
         </div>
