@@ -31,13 +31,13 @@ export default function App({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    // loadUser();
+    loadUser();
   }, []);
 
-  // const loadUser = async () => {
-  //   const userData = await fetchData(proApi.userInfo);
-  //   console.log('-----435', userData);
-  // };
+  const loadUser = async () => {
+    const userData = await fetchData(proApi.userInfo);
+    setUserInfo(userData);
+  };
 
   return (
     <ErrorBoundary>

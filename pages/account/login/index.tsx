@@ -35,19 +35,20 @@ export default () => {
     }
   };
 
-  console.log('----34', !userInfo?.mail);
-  if (success || !!userInfo?.mail) {
-    return <Success />;
-  }
+  useEffect(() => {
+    if (userInfo.mail) {
+      setSuccess(true);
+    }
+  }, [userInfo.mail]);
 
   return (
     <>
       <div className='bg-black w-full h-[200px]'>Banner</div>
-      <div className=' !w-[404px] !p-0 !mt-14 !m-auto'>
+      <>
         {success ? (
           <Success />
         ) : (
-          <>
+          <div className='!w-[404px] !p-0 !mt-14 !m-auto'>
             <ul className='flex gap-x-6 list-none'>
               {logTabs?.map((log_item, index) => {
                 return (
@@ -117,9 +118,9 @@ export default () => {
               <span>{tr('no_account')}</span>
               <Link href={'/account/register'}>{tr('go_register')}</Link>
             </div>
-          </>
+          </div>
         )}
-      </div>
+      </>
     </>
   );
 };
