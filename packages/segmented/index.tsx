@@ -25,7 +25,7 @@ export default ({
   const router = useRouter();
   const [active, setActive] = useState(defaultValue);
 
-  const hash = useHash();
+  const { hash } = useHash();
   useEffect(() => {
     setActive(hash || defaultValue);
   }, [hash]);

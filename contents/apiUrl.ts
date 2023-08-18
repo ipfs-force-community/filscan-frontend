@@ -21,6 +21,7 @@ export const proApi = {
     send_code: proUrl + '/SendVerificationCode',
     byCode: proUrl + '/ResetPasswordByCode',
     login: proUrl + '/Login',
+    userInfo: proUrl + '/UserInfo',
     getGroups: proUrl + '/GetUserGroups',
 }
 

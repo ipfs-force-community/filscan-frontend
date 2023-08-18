@@ -1,5 +1,8 @@
 /** @format */
 
+import { message } from 'antd';
+import Router from 'next/router';
+
 interface FetchDataOptions {
   maxRetries: number;
   timeout: number; // 0 means no timeout
@@ -41,6 +44,14 @@ async function fetchData<T>(
         body: JSON.stringify(newBody), // Convert the body data to JSON format
         signal: controller.signal,
       });
+      if (response.status === 401) {
+        message.warning('please login ');
+        Router.push('/account/login');
+        return {
+          result: null,
+          error: 'Invalid credentials',
+        };
+      }
       data = await response.json();
       if (timeoutId) {
         clearTimeout(timeoutId);

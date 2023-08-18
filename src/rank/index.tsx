@@ -16,7 +16,7 @@ const defaultFilter = {
 };
 
 export default ({ origin }: { origin: string }) => {
-  const hash = useHash();
+  const { hash } = useHash();
   const { tr } = Translation({ ns: 'rank' });
   const { theme, lang } = useFilscanStore();
 
