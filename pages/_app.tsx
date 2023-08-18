@@ -35,8 +35,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   const loadUser = async () => {
-    const userData = await fetchData(proApi.userInfo);
-    setUserInfo(userData);
+    const userData: any = await fetchData(proApi.userInfo);
+    setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
   };
 
   return (

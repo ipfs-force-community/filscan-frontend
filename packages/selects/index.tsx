@@ -10,7 +10,6 @@ export default ({
   value,
   className = '',
   border,
-  suffix,
 }: {
   value: string;
   className?: string;
@@ -19,11 +18,11 @@ export default ({
   options: Array<Option_Item>;
   onChange: (value: string) => void;
 }) => {
-  const [active, setActive] = useState('');
+  // const [active, setActive] = useState('');
 
-  useEffect(() => {
-    setActive(value);
-  }, [value]);
+  // useEffect(() => {
+  //   setActive(value);
+  // }, [value]);
 
   const handleChange = (value: string) => {
     onChange(value);
@@ -34,6 +33,7 @@ export default ({
       showSearch
       placeholder='Select a person'
       optionFilterProp='children'
+      value={value}
       className={`custom_select ${
         border ? 'border_select' : 'no_border_select'
       } ${className}`}
@@ -42,22 +42,6 @@ export default ({
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }
       options={options}
-      onSearch={handleChange}>
-      {/* {options?.map((item) => {
-        return (
-          <Select.Option key={item.value} value={item.value} label={item.label}>
-            {item.label}
-          </Select.Option>
-        );
-      })}
-      {suffix && (
-        <Select.Option
-          className={'custom_options_item'}
-          value={'suffix'}
-          style={{ pointerEvents: 'none' }}>
-          {suffix}
-        </Select.Option>
-      )} */}
-    </Select>
+      onChange={handleChange}></Select>
   );
 };

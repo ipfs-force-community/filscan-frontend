@@ -33,7 +33,12 @@ const account = {
      create_group: '创建分组',
      create_group_holder: '输入您要创建组的名称',
      item_value: '组内 {{value}} 个节点',
-     group_name:'分组名称',
+     group_name: '分组名称',
+     
+     //个人中心
+     default_user: '普通用户',
+     last_login: '上次登录时间',
+     personal_setting:'账户设置'
      
      
 }

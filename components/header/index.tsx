@@ -8,7 +8,6 @@ import moon from '@/assets/images/moon.svg';
 import light from '@/assets/images/sun.svg';
 import Account from './Account';
 import Image from 'next/image';
-import Link from 'next/link';
 import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { useMemo } from 'react';

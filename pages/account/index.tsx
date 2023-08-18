@@ -1,12 +1,13 @@
 /** @format */
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
 import useAnchorLink from '@/components/hooks/useAnchorLink';
 import Overview from '@/src/account/overview';
 import Miners from '@/src/account/miners';
+import Personal from '@/src/account/personal';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -45,11 +46,9 @@ const Account: React.FC = () => {
     return itemsArr;
   }, []);
 
-  console.log('---34', selectedKey);
-
   return (
     <div className='main_contain !py-6 '>
-      <div className='flex rounded-xl border card_shadow border_color '>
+      <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
         <div className='w-[210px] border-r border_color  py-10'>
           <div className='w-full px-5 mb-10 font-semibold font-PingFang	'>
             {tr('account_title')}
@@ -80,6 +79,7 @@ const Account: React.FC = () => {
           style={{ height: 'inherit' }}>
           {selectedKey === 'overview' && <Overview selectedKey='overview' />}
           {selectedKey === 'miners' && <Miners />}
+          {selectedKey === 'personal' && <Personal />}
         </div>
       </div>
     </div>
