@@ -10,12 +10,10 @@ import Miners from '@/src/account/miners';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
-  const { hash } = useHash();
+  const hash = useHash();
 
   const rootSubmenuKeys: Array<string> = [];
   const navigateWithNoScroll = useAnchorLink();
-
-  //const [selectedKey, setSelectKey] = useState('');
 
   const selectedKey = useMemo(() => {
     if (hash) {
@@ -23,13 +21,6 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
-
-  // useEffect(() => {
-  //   if (hash) {
-  //     consol
-  //     setSelectKey(hash);
-  //   }
-  // }, [hash]);
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {

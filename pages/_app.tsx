@@ -4,7 +4,6 @@ import '@/styles/globals.css';
 import '@/styles/common.scss';
 import '@/styles/custom.scss';
 import { Layout } from 'antd';
-import { I18nextProvider } from 'react-i18next';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
 import { ConfigProvider } from 'antd';
@@ -36,16 +35,14 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
-        <I18nextProvider i18n={i18n}>
-          <FilscanStoreProvider>
-            <Layout className={`container_body ${theme}`}>
-              <HeaderMain />
-              <Content>
-                <Component {...pageProps} />
-              </Content>
-            </Layout>
-          </FilscanStoreProvider>
-        </I18nextProvider>
+        <FilscanStoreProvider>
+          <Layout className={`container_body ${theme}`}>
+            <HeaderMain />
+            <Content>
+              <Component {...pageProps} />
+            </Content>
+          </Layout>
+        </FilscanStoreProvider>
       </ConfigProvider>
     </ErrorBoundary>
   );
