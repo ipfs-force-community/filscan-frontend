@@ -1,24 +1,35 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+interface HashParams {
+  [key: string]: string | null;
+}
+
 // 自定义Hook，用于获取hash
 export function useHash() {
   const router = useRouter()
   const [hash, setHash] = useState('')
+    const [hashParams, setHashParams] = useState<HashParams>({});
+
 
   useEffect(() => {
-    const currentHash = router.asPath.split('#')[1]?.split('?' || '')[0]
-    // const searchParams = router.asPath.split('?')[1];
-    // if (searchParams) {
-    //   const query = parseQuery(searchParams)
-    //   setSearchParams(query)
-    // } else { 
-    //   setSearchParams({})
-    // }
-    setHash(currentHash)
+    if (typeof window !== 'undefined') {
+      const hashParams = router.asPath.split('?')[1];
+      const params: Record<string, any> = new URLSearchParams(hashParams);
+      const result: HashParams = {};
+      for (const [key, value] of params.entries()) {
+        result[key] = value;
+      }
+      setHashParams(result);
+      let currentHash = router.asPath.split('#')[1];
+      if (hashParams) { 
+        currentHash= currentHash.split('?')[0]
+      }
+    setHash(currentHash);
+    }
     
   }, [router.asPath])
 
-  return hash
+  return { hash ,hashParams}
 }
 

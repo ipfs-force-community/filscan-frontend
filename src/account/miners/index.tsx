@@ -1,14 +1,17 @@
 /** @format */
 
 import MinerAdd from './Add';
+import { useHash } from '@/components/hooks/useHash';
+
+import { useEffect } from 'react';
 
 export default () => {
-  //   const { searchParams } = useHash();
-  //   const { type } = searchParams || {};
+  const { hashParams } = useHash();
+  const { type } = hashParams || {};
 
-  //   if (type === 'miner_add') {
-  //     return <MinerAdd />;
-  //   }
+  if (type === 'miner_add') {
+    return <MinerAdd />;
+  }
 
   return <div>dgtrt</div>;
 };
