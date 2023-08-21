@@ -11,7 +11,6 @@ export function useHash() {
   const [hash, setHash] = useState('')
     const [hashParams, setHashParams] = useState<HashParams>({});
 
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hashParams = router.asPath.split('?')[1];
@@ -22,13 +21,15 @@ export function useHash() {
       }
       setHashParams(result);
       let currentHash = router.asPath.split('#')[1];
-      if (hashParams) { 
+      if (hashParams) {
         currentHash= currentHash.split('?')[0]
       }
     setHash(currentHash);
     }
     
   }, [router.asPath])
+  
+  
 
   return { hash ,hashParams}
 }

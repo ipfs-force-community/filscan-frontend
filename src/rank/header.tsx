@@ -28,7 +28,10 @@ export default ({
 
   return (
     <div className='flex justify-between items-center '>
-      <div className='flex gap-x-2.5'>
+      <div
+        className={`flex w-full gap-x-2.5 ${
+          origin === 'rank' ? 'justify-between' : ''
+        }`}>
         {origin === 'home' && (
           <div className='font-PingFang font-semibold text-lg	mr-2'>
             {tr('rank')}
@@ -41,19 +44,22 @@ export default ({
           isHash={origin !== 'home'}
           {...SegmentedProps}
         />
-        {rank_header[active] &&
-          Object.keys(rank_header[active]).map((item) => {
-            return (
-              <Select
-                key={`${active}_${item}`}
-                options={rank_header[active][item]}
-                ns='rank'
-                onChange={(value: string) => {
-                  onChange(item, value);
-                }}
-              />
-            );
-          })}
+        {rank_header[active] && (
+          <div className='flex gap-x-2.5 items-center'>
+            {Object.keys(rank_header[active]).map((item) => {
+              return (
+                <Select
+                  key={`${active}_${item}`}
+                  options={rank_header[active][item]}
+                  ns='rank'
+                  onChange={(value: string) => {
+                    onChange(item, value);
+                  }}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
       {origin === 'home' && (
         <Link href={`/statistics/gas/`}>

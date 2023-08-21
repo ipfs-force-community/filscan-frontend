@@ -33,16 +33,22 @@ export default ({
 
   const handleClick = (event: any, tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
-    //event.preventDefault();
+    const scrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop;
+
+    event.preventDefault();
     setActive(tabId);
     if (onChange) onChange(tabId);
     const pathValue = router.asPath.split('#')[0];
+
     if (isHash) {
       router.push(`${pathValue}#${tabId}`, undefined, {
         shallow: false,
         scroll: false,
       });
     }
+    // 恢复滚动条位置
+    window.scrollTo(0, scrollPosition);
   };
 
   return (
@@ -58,7 +64,8 @@ export default ({
                 ? 'tab_shadow highlight  rounded-[5px] card_bg_color'
                 : ''
             }`}
-            id={item.dataIndex}>
+            //id={item.dataIndex}
+          >
             {tr(item.title)}
           </li>
         );

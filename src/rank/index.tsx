@@ -9,33 +9,44 @@ import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
 import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
+import { pageLimit } from '@/utils';
 
 const defaultFilter = {
   sector_size: 'all',
   interval: '24h',
 };
+const defaultData = {
+  dataSource: [],
+  total: 0,
+};
 
 export default ({ origin }: { origin: string }) => {
   const { hash } = useHash();
+  console.log('----34345', hash);
   const { tr } = Translation({ ns: 'rank' });
   const { theme, lang } = useFilscanStore();
 
   const [active, setActive] = useState('provider');
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<any>({});
-  const [data, setData] = useState([]);
-  const [poolData, setPoolData] = useState([]);
-  const [growthData, setGrowthData] = useState([]);
-  const [rewardsData, setRewardsData] = useState([]);
+  const [data, setData] = useState({ ...defaultData });
+  const [poolData, setPoolData] = useState({ ...defaultData });
+  const [growthData, setGrowthData] = useState({ ...defaultData });
+  const [rewardsData, setRewardsData] = useState({ ...defaultData });
   const [current, setCurrent] = useState(1);
   const [headerFilter, setHeaderFilter] = useState<any>();
   const [sort, setSort] = useState<any>({});
 
   useEffect(() => {
     const showHash = hash || 'provider';
+    if (showHash === 'growth' || showHash === 'rewards') {
+      setHeaderFilter({ ...defaultFilter });
+    }
     setActive(showHash);
-    load(showHash);
+    load(showHash, undefined, undefined, defaultFilter);
   }, [hash]);
+
+  console.log('----hash', hash);
 
   const load = async (
     tab?: string,
@@ -46,17 +57,16 @@ export default ({ origin }: { origin: string }) => {
     const showActive = tab || active;
     if (showActive) {
       const index = cur || current;
-      const showOrder =
-        orders || sort?.field
-          ? sort
-          : {
-              field: getDefaultSort[showActive],
-              order: 'descend',
-            };
+      const showOrder = orders ||
+        (sort.field && sort) || {
+          field: getDefaultSort[showActive],
+          order: 'descend',
+        };
+
       const showFilter = filter || headerFilter;
       setLoading(true);
-      setData([]);
       const linkUrl: any = `rank_${showActive}`;
+      console.log('===3', showFilter, headerFilter);
       const filters = showFilter
         ? {
             ...showFilter,
@@ -68,7 +78,7 @@ export default ({ origin }: { origin: string }) => {
         : {};
       const data: any = await fetchData(apiUrl[linkUrl], {
         index: index - 1,
-        limit: 7,
+        limit: origin === 'home' ? 7 : pageLimit,
         order: {
           field: showOrder.field,
           sort: showOrder.order === 'ascend' ? 'asc' : 'desc',
@@ -89,13 +99,25 @@ export default ({ origin }: { origin: string }) => {
         });
       }
       if (showActive === 'pool') {
-        setPoolData(showData);
+        setPoolData({
+          dataSource: showData,
+          total: data.total || 0,
+        });
       } else if (showActive === 'growth') {
-        setGrowthData(showData);
+        setGrowthData({
+          dataSource: showData,
+          total: data.total || 0,
+        });
       } else if (showActive === 'rewards') {
-        setRewardsData(showData);
+        setRewardsData({
+          dataSource: showData,
+          total: data.total || 0,
+        });
       } else {
-        setData(showData);
+        setData({
+          dataSource: showData,
+          total: data.total || 0,
+        });
       }
     }
   };
@@ -110,7 +132,7 @@ export default ({ origin }: { origin: string }) => {
   const handleHeaderChange = (type: string, value: string) => {
     let newActive = active;
     let activeHeader = headerFilter;
-    if (type === 'active' && origin === 'home') {
+    if (type === 'active') {
       newActive = value;
       setActive(value);
       setHeaderFilter({ ...defaultFilter });
@@ -135,9 +157,8 @@ export default ({ origin }: { origin: string }) => {
         field: sorter.field,
         order: sorter.order,
       };
-      cur = 1;
     }
-    setCurrent(1);
+    setCurrent(cur);
     setSort(order);
     load(active, cur, order);
   };
@@ -153,11 +174,15 @@ export default ({ origin }: { origin: string }) => {
   return (
     <>
       <Header origin={origin} active={active} onChange={handleHeaderChange} />
-      <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>
+      <div
+        className={`mt-4 ${
+          origin === 'home' ? 'h-[491px]' : 'h-full'
+        } border  rounded-xl p-5	card_shadow border_color`}>
         <Table
           className='-mt-2.5 '
           key={active}
-          data={showData}
+          data={showData.dataSource}
+          total={origin === 'home' ? 0 : showData.total}
           columns={columns}
           loading={loading}
           onChange={handleChange}

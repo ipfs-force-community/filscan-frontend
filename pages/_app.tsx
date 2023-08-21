@@ -36,7 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
   // useEffect(() => {
   //   // 在路由改变开始时禁用滚动到顶部
   //   function handleChangeStart(url: string) {
-  //     debugger;
   //     console.log('----3', url);
 
   //     window.history.scrollRestoration = 'manual';
