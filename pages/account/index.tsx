@@ -8,6 +8,7 @@ import useAnchorLink from '@/components/hooks/useAnchorLink';
 import Overview from '@/src/account/overview';
 import Miners from '@/src/account/miners';
 import Personal from '@/src/account/personal';
+import Lucky from '@/src/account/lucky';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -77,8 +78,14 @@ const Account: React.FC = () => {
         <div
           className='flex flex-col px-5 py-10 w-full'
           style={{ height: 'inherit' }}>
-          {selectedKey === 'overview' && <Overview selectedKey='overview' />}
+          {selectedKey === 'overview' && (
+            <Overview selectedKey='overview' noMiners={true} />
+          )}
           {selectedKey === 'miners' && <Miners />}
+          {selectedKey === 'lucky' && (
+            <Lucky noMiners={false} selectedKey={'overview_lucky'} />
+          )}
+
           {selectedKey === 'personal' && <Personal />}
         </div>
       </div>

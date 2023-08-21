@@ -29,6 +29,7 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
+    "file-saver": "^2.0.5",
     "next": "13.4.13",
     "postcss": "^8.4.27",
     "postcss-px-to-viewport": "^1.1.1",
@@ -36,9 +37,11 @@
     "react-dom": "18.2.0",
     "sass": "^1.65.1",
     "tailwindcss": "^3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "bignumber.js": "^9.1.1",
     "copy-to-clipboard": "^3.3.3",
     "echarts": "^5.4.1",

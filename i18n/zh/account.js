@@ -11,6 +11,7 @@ const account = {
      welcome: '欢迎来到Filscan!',
      welcome_text1: '恭喜！您的账户已成功注册,您可以使用您的邮箱号和密码继续登录。',
      welcome_text2: '请登录您的账户并享受您的Filscan服务!',
+     last_time:'最新更新时间',
      
      //数据概览
      overview_power: '算力概览',
@@ -34,7 +35,17 @@ const account = {
      create_group_holder: '输入您要创建组的名称',
      item_value: '组内 {{value}} 个节点',
      group_name: '分组名称',
-     
+
+
+     //幸运值
+     "all":'全部',
+     "24h_lucky":"24时幸运值	",
+     "7d_lucky":"7天的幸运值",
+     "30d_lucky":"30天幸运值",
+     "1year_lucky": "1年的幸运值",
+     tag: '标签',
+     miner_id:'节点ID',
+
      //个人中心
      default_user: '普通用户',
      last_login: '上次登录时间',
@@ -45,7 +56,8 @@ const account = {
      new_password: '新密码',
      new_placeholder:'输入新密码',
      confirm_password: '确认密码',
-     confirm_placeholder: '重新输入新密码'
+     confirm_placeholder: '重新输入新密码',
+
 
      
      

@@ -266,12 +266,12 @@ font-display: auto;
     }
     .ant-select-selector{
           cursor: pointer;
-        padding: 6px 16px !important;
-        height:42px !important;
+        padding: 3px 16px !important;
+        height:38px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgColor) !important;
         .ant-select-selection-search-input {
-             height:42px !important;
+             height:38px !important;
              cursor: pointer;
         }
     }
@@ -319,8 +319,7 @@ font-display: auto;
     }
     .ant-select-selector{
         cursor: pointer;
-        padding: 6px 16px !important;
-        height:42px !important;
+     
         border: 1px solid transparent !important;
         background-color:var(--bgDesColor)!important;
         .ant-select-selection-search-input {
@@ -341,3 +340,20 @@ font-display: auto;
     }
 }
 
+
+.custom_Collapse{
+    .ant-collapse-item{
+        width: 100%;
+        .ant-collapse-header{
+            display: flex;
+            align-items: center;
+             .ant-collapse-header-text{
+            flex: 1 !important;
+            .custom_Collapse_item{
+                width: 100%;
+            }
+        }
+        }
+       
+    }
+}

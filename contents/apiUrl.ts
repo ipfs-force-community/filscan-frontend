@@ -24,7 +24,8 @@ export const proApi = {
     userInfo: proUrl + '/UserInfo',
     getGroups: proUrl + '/GetUserGroups',
     createGroup: proUrl + '/CreateGroup',
-    saveGroup:  proUrl + '/SaveGroupMiners',
+    saveGroup: proUrl + '/SaveGroupMiners',
+    getLucky: proUrl + '/LuckyRateDetail',
 }
 
 export const apiUrl: API | any = {

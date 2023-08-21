@@ -196,3 +196,50 @@ export const account_power = {
     },
   ],
 };
+
+/*
+24h幸运值：近24h的幸运值
+
+
+
+7天幸运值：近7天的幸运值
+
+
+
+30天幸运值：近30天的幸运值
+
+
+
+1年幸运值：近1年的幸运值*/
+export const account_lucky = {
+  headerOptions: [
+    {
+      label: 'all',
+      value: 'all',
+    },
+    {
+      label: '24h_lucky',
+      value: '24h',
+    },
+    {
+      label: '7d_lucky',
+      value: '7d',
+    },
+    {
+      label: '30d_lucky',
+      value: '30d',
+    },
+    {
+      label: '1year_lucky',
+      value: '1year',
+    },
+  ],
+  columns: [
+    { title: 'tag', dataIndex: 'tag', width: '20%' },
+    { title: 'miner_id', dataIndex: 'miner_id', width: '15%' },
+    { title: 'group_name', dataIndex: 'group_name', width: '20%' },
+    { title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%' },
+    { title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%' },
+    { title: '30d_lucky', dataIndex: 'lucky_rate_30d', width: '15%' },
+  ],
+};

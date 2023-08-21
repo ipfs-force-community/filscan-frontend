@@ -10,7 +10,7 @@ import fetchData from '@/store/server';
 import { useEffect, useMemo, useState } from 'react';
 import { spawn } from 'child_process';
 import { getSvgIcon } from '@/svgsIcon';
-import { Button } from 'antd';
+import { Button, Collapse } from 'antd';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
 import { Group } from '../type';
@@ -53,6 +53,8 @@ export default () => {
   if (type === 'miners_group') {
     return <GroupAdd groupId={group} groupDetail={groupDetail} />;
   }
+
+  console.log('====3', showGroup);
   return (
     <div>
       <p className='w-full mb-5 flex align-baseline justify-between	'>
@@ -63,49 +65,71 @@ export default () => {
           </span>
         </span>
         <Link
-          href={`/account#miners?type=miners_group`}
+          href={`/account#miners?type=miner_add`}
           scroll={false}
           className='confirm_btn flex rounded-[5px] items-center gap-x-5 text_color'>
           {getSvgIcon('addIcon')}
-          {tr('group_add')}
+          {tr('miners_add')}
         </Link>
       </p>
 
       <ul className='flex gap-y-5 flex-col '>
-        {groups.map((item) => {
+        {groups.map((item, index) => {
           return (
-            <li
-              className='card_shadow cursor-pointer rounded-xl h-[65px] flex items-center px-5  justify-between'
-              key={item.group_id}>
-              <span className='flex gap-x-5 items-center'>
-                <span className='des_bg_color flex items-center text-xs border_color border text_des w-fit px-1 rounded-[5px] '>
-                  {tr(item.label)}
-                </span>
-                <span>
-                  {tr('item_value', { value: item?.miners_id?.length || 0 })}
-                </span>
-              </span>
-              <span className='flex gap-x-5 items-center'>
-                <Link
-                  href={`/account#miners?type=miners_group&group=${item.group_id}`}
-                  className='cursor-pointer text_color'
-                  onClick={() => {
-                    setEditOpen(item);
-                  }}>
-                  {getSvgIcon('editIcon')}
-                </Link>
-                <span
-                  className='cursor-pointer'
-                  onClick={() => {
-                    setShowGroup({
-                      ...showGroup,
-                      [item.group_id]: !showGroup[item.group_id],
-                    });
-                  }}>
-                  {getSvgIcon('downIcon')}
-                </span>
-              </span>
-            </li>
+            <Collapse
+              collapsible='header'
+              className='card_shadow custom_Collapse '
+              expandIconPosition='end'
+              defaultActiveKey={[1]}
+              items={[
+                {
+                  key: index,
+                  label: (
+                    <li
+                      className='custom_Collapse_item cursor-pointer w-full rounded-xl h-[38px] flex items-center justify-between'
+                      key={item.group_id}>
+                      <span className='flex gap-x-5 items-center'>
+                        <span className='des_bg_color flex items-center text-xs border_color border text_des w-fit px-1 rounded-[5px] '>
+                          {tr(item.label)}
+                        </span>
+                        <span>
+                          {tr('item_value', {
+                            value: item?.miners_id?.length || 0,
+                          })}
+                        </span>
+                      </span>
+                      <div className='flex gap-x-5 items-center'>
+                        <Link
+                          href={`/account#miners?type=miners_group&group=${item.group_id}`}
+                          className='cursor-pointer text_color'
+                          onClick={() => {
+                            setEditOpen(item);
+                          }}>
+                          {getSvgIcon('editIcon')}
+                        </Link>
+                      </div>
+                    </li>
+                  ),
+                  children: (
+                    <>
+                      {item?.miners_id?.length > 0 && (
+                        <div>
+                          {(item?.miners_id || [])?.map((minerItem) => {
+                            return <span>{minerItem}</span>;
+                            return (
+                              <li>
+                                <span>{minerItem.minerId || ''}</span>
+                                <span>{minerItem.minerTag || ''}</span>
+                              </li>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </>
+                  ),
+                },
+              ]}
+            />
           );
         })}
       </ul>
