@@ -46,9 +46,10 @@ export default () => {
     router.push(router.asPath, router.asPath, { locale: value });
   };
 
+   // px-24 
   return (
-    <Header className='custom_header !h-[106px] !p-0 '>
-      <div className='flex justify-between items-center h-[45px] text-xs  font-PingFang font-medium border-b border_color px-24'>
+    <Header className='custom_header !h-[106px] !p-0 '>   
+      <div className='flex justify-between items-center h-[45px] text-xs  font-PingFang font-medium border-b border_color '>
         <ul className='flex gap-x-5 list-none '>
           {header_top.left.map((item) => {
             const { title, dataIndex, render } = item;
@@ -108,6 +109,7 @@ export default () => {
         </div>
       </div>
       <Nav />
+      
     </Header>
   );
 };

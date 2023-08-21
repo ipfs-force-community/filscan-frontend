@@ -167,3 +167,32 @@ export const personal_setting = [
     rules: [{ required: true, message: '${confirm_password} is required' }],
   },
 ];
+
+export const account_power = {
+  columns: [
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      title: '',
+      dataIndex: '',
+    },
+  ],
+};

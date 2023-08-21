@@ -2,7 +2,8 @@ export interface Item {
   title: string;
   title_tip?:string
   dataIndex: string;
-  api?:string,
+  api?: string,
+  type?:string,
   render?:(text:any,record?:Record<string,any>,index?:number)=>number|string|JSX.Element
 }
 

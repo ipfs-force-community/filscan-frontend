@@ -2,6 +2,7 @@
 
 import { apiUrl } from '@/apiUrl';
 import Copy from '@/components/copy';
+import { Item } from '@/contents/type';
 import fetchData from '@/store/server';
 import BigNumber from 'bignumber.js';
 import dayjs from 'dayjs';
@@ -10,6 +11,19 @@ import router from 'next/router';
 
 export const pageLimit = 15;
 export const max_name_length = 10;
+
+export function getShowData(item: any, data: { [key: string]: any }): any {
+  const [first, second] = item.type || [];
+  let showData: any = data;
+  if (first) {
+    if (second) {
+      showData = data && data[first] && data[first][second];
+    } else {
+      showData = data && data[first];
+    }
+  }
+  return showData;
+}
 
 export function formatFilNum(
   showNum: number | string,

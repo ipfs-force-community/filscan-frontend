@@ -65,13 +65,10 @@ const EChartsComponent: React.FC<EChartsComponentProps> = ({
           bottom: '10%',
           containLabel: true,
         },
-        xAxis: {},
-        yAxis: {
-          value: 'line',
-        },
-        series: [],
       };
-      chart?.setOption({ ...default_options, ...options });
+      if (options && options.series) {
+        chart?.setOption({ ...default_options, ...options });
+      }
 
       const handleSize = () => {
         chart.resize();
