@@ -1,5 +1,5 @@
 /** @format */
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
 import { power_trend } from '@/contents/statistic';

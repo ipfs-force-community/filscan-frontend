@@ -16,6 +16,7 @@ import ErrorBoundary from '@/components/Bounday';
 import { UserInfo, UserStoreContext } from '@/store/UserStore';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
+import { useRouter } from 'next/router';
 
 const { Content, Footer, Header } = Layout;
 
@@ -29,6 +30,32 @@ export default function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState<any>({ ...defaultUerInfo });
   const [locale, setLocale] = useState('zh');
   const [theme, setTheme] = useState('light');
+
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   // 在路由改变开始时禁用滚动到顶部
+  //   function handleChangeStart(url: string) {
+  //     debugger;
+  //     console.log('----3', url);
+
+  //     window.history.scrollRestoration = 'manual';
+  //   }
+  //   function handleChangeComplete(url: string) {
+  //     console.log('----3', url);
+  //     if (!url.includes('#')) {
+  //       window.history.scrollRestoration = 'auto';
+  //     }
+  //   }
+  //   router.events.on('routeChangeStart', handleChangeStart);
+  //   // 在路由改变完成后恢复滚动到顶部
+  //   router.events.on('routeChangeComplete', handleChangeComplete);
+  //   // 在组件卸载时移除事件监听器
+  //   return () => {
+  //     router.events.off('routeChangeStart', handleChangeStart);
+  //     router.events.off('routeChangeComplete', handleChangeComplete);
+  //   };
+  // }, [router]);
 
   useEffect(() => {
     loadUser();

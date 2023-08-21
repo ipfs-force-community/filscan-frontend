@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getColumn, getDefaultSort } from '@/contents/rank';
 import Table from '@/packages/Table';
 import fetchData from '@/store/server';
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
 

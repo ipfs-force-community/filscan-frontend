@@ -10,14 +10,28 @@ const useUpdateQuery = () => {
   const router = useRouter();
 
   const updateQuery = (newQuery: QueryParam) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: { ...router.query, ...newQuery },
-      },
-      undefined,
-      { scroll: false }
-    );
+    const isHash = router.asPath.includes('#');
+    if (isHash) {
+      const isSearch = router.asPath.includes('?') ? '&' : '?';
+      const key = Object.keys(newQuery)[0];
+      router.push(
+        `${router.asPath}`,
+        `${router.asPath}${isSearch}${key}=${newQuery[key]}`,
+        {
+          scroll: false,
+          shallow: false,
+        }
+      );
+    } else {
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, ...newQuery },
+        },
+        undefined,
+        { scroll: false }
+      );
+    }
   };
 
   return updateQuery;

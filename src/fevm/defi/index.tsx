@@ -1,6 +1,6 @@
 /** @format */
 
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import { contract_rank, homeContractRank } from '@/contents/contract';
 import Table from '@/packages/Table';

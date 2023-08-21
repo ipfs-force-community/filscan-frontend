@@ -1,6 +1,6 @@
 /** @format */
 
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import useColumnAlign from '@/components/hooks/useColumns';
 import Segmented from '@/packages/segmented';

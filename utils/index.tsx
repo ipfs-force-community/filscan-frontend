@@ -1,6 +1,6 @@
 /** @format */
 
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import Copy from '@/components/copy';
 import { Item } from '@/contents/type';
 import fetchData from '@/store/server';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 import router from 'next/router';
 
 export const pageLimit = 15;
+export const detailPageLimit = 10;
 export const max_name_length = 10;
 
 export function getShowData(item: any, data: { [key: string]: any }): any {

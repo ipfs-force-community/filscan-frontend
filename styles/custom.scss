@@ -257,6 +257,7 @@ font-display: auto;
 //select 
 .custom_select{
     font-size: 14px !important;
+    min-width: 150px;
     &:hover{
         .ant-select-selector{
             border-color: var(--primary) !important;
@@ -264,12 +265,14 @@ font-display: auto;
         }
     }
     .ant-select-selector{
+          cursor: pointer;
         padding: 6px 16px !important;
         height:42px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgColor) !important;
         .ant-select-selection-search-input {
              height:42px !important;
+             cursor: pointer;
         }
     }
 
@@ -305,6 +308,25 @@ font-display: auto;
     }
   }
  
+}
+
+.no_border_select{
+    border-color: transparent !important;
+      &:hover{
+        .ant-select-selector{
+            border-color: transparent !important
+        }
+    }
+    .ant-select-selector{
+        cursor: pointer;
+        padding: 6px 16px !important;
+        height:42px !important;
+        border: 1px solid transparent !important;
+        background-color:var(--bgDesColor)!important;
+        .ant-select-selection-search-input {
+             height:42px !important;
+        }
+    }
 }
 
 

@@ -1,7 +1,14 @@
 /** @format */
 
-import { formatFilNum, unitConversion } from '@/utils';
+import {
+  formatDateTime,
+  formatFilNum,
+  get_account_type,
+  isIndent,
+  unitConversion,
+} from '@/utils';
 import { Item } from './type';
+import Link from 'next/link';
 
 //储存池概览 账户余额 & 有效算力
 
@@ -245,3 +252,221 @@ export const power_change = {
     },
   ],
 };
+
+export const minerTabs = [
+  {
+    title: 'message_list',
+    dataIndex: 'message_list',
+    optionsUrl: 'AllMethodByAccountID',
+  },
+  {
+    title: 'block_list',
+    dataIndex: 'block_list',
+  },
+  {
+    title: 'traces_list',
+    dataIndex: 'traces_list',
+    optionsUrl: 'AllMethodByAccountID',
+  },
+];
+
+export const message_list = (fromList: any, toList: any) => [
+  {
+    dataIndex: 'cid',
+    title: 'cid',
+    width: '10%',
+    render: (text: string) =>
+      text ? (
+        <Link href={`/message/${text}`} className='link_text'>
+          {text ? isIndent(text, 6) : ''}
+        </Link>
+      ) : (
+        '--'
+      ),
+  },
+  {
+    dataIndex: 'height',
+    title: 'height',
+    width: '10%',
+    render: (text: string) => (
+      <Link href={`/tipset/chain?height=${text}`} className='link_text'>
+        {text}
+      </Link>
+    ),
+  },
+  {
+    dataIndex: 'block_time',
+    title: 'time',
+    width: '15%',
+    render: (text: string | number) => formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+  },
+  {
+    dataIndex: 'from',
+    title: 'from',
+    width: '15%',
+    render: (text: string, record: any) => {
+      if (!text) return '--';
+      return (
+        <span className='flex items-center gap-x-1'>
+          {get_account_type(text)}
+          {fromList?.domains && fromList?.domains[text] && (
+            <Link
+              href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
+              ({fromList.domains[text]})
+            </Link>
+          )}
+        </span>
+      );
+    },
+  },
+  {
+    dataIndex: 'to',
+    title: 'to',
+    width: '15%',
+    render: (text: string, record: any) => {
+      if (!text) return '--';
+      return (
+        <div className='flex items-center gap-x-1'>
+          {get_account_type(text)}
+          {toList?.domains && toList?.domains[text] && (
+            <Link
+              href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
+              ({toList.domains[text]})
+            </Link>
+          )}
+        </div>
+      );
+    },
+  },
+  {
+    dataIndex: 'value',
+    title: 'value',
+    width: '10%',
+    render: (text: number) =>
+      text ? formatFilNum(text, false, false) : text || '--',
+  },
+  { dataIndex: 'exit_code', width: '10%', title: 'status' },
+  { dataIndex: 'method_name', width: '15%', title: 'method_name' },
+];
+
+export const block_list = (fromList: any, toList: any) => [
+  {
+    dataIndex: 'cid',
+    title: 'block_cid',
+    width: '15%',
+    render: (text: string) =>
+      text ? (
+        <Link href={`/tipset/chain?cid=${text}`} className='link_text'>
+          {text ? isIndent(text, 6) : ''}
+        </Link>
+      ) : (
+        '--'
+      ),
+  },
+  {
+    dataIndex: 'height',
+    title: 'block_height',
+    width: '15%',
+    render: (text: string) => (
+      <Link href={`/tipset/chain?height=${text}`} className='link_text'>
+        {text}
+      </Link>
+    ),
+  },
+  {
+    dataIndex: 'block_time',
+    title: 'block_time',
+    width: '20%',
+    render: (text: string | number) => formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+  },
+  {
+    dataIndex: 'messages_count',
+    width: '10%',
+    title: 'block_messages_count',
+  },
+  {
+    dataIndex: 'miner_id',
+    width: '15%',
+    title: 'block_miner_id',
+    render: (text: string) => (
+      <Link href={`/miner/${text}`} className='link'>
+        {text}
+      </Link>
+    ),
+  },
+  {
+    dataIndex: 'reward',
+    title: 'block_mined_reward',
+    width: '15%',
+    render: (text: number) =>
+      text ? formatFilNum(text, false, false) : text || '--',
+  },
+];
+export const trance_list = (fromList: any, toList: any) => [
+  {
+    dataIndex: 'block_time',
+    title: 'time',
+    width: '20%',
+    render: (text: string | number) => formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+  },
+  {
+    dataIndex: 'cid',
+    title: 'cid',
+    width: '15%',
+    render: (text: string) =>
+      text ? (
+        <Link href={`/message/${text}`} className='link'>
+          {isIndent(text, 6)}
+        </Link>
+      ) : (
+        '--'
+      ),
+  },
+  {
+    dataIndex: 'from',
+    title: 'from',
+    width: '15%',
+    render: (text: string, record: any) => {
+      if (!text) return '--';
+      return (
+        <span className='flex items-center gap-x-1'>
+          {get_account_type(text)}
+          {fromList?.domains && fromList?.domains[text] && (
+            <Link
+              href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
+              ({fromList.domains[text]})
+            </Link>
+          )}
+        </span>
+      );
+    },
+  },
+  {
+    dataIndex: 'to',
+    title: 'to',
+    width: '15%',
+    render: (text: string, record: any) => {
+      if (!text) return '--';
+      return (
+        <div className='flex items-center gap-x-1'>
+          <div>{get_account_type(text)}</div>
+
+          {toList?.domains && toList?.domains[text] && (
+            <Link
+              href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
+              ({toList.domains[text]})
+            </Link>
+          )}
+        </div>
+      );
+    },
+  },
+  {
+    dataIndex: 'value',
+    width: '15%',
+    title: 'value',
+    render: (text: number) =>
+      text ? formatFilNum(text, false, false) : text || '--',
+  },
+  { dataIndex: 'method_name', width: '20%', title: 'method_name' },
+];

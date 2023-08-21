@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { fvmUrl } from '@/apiUrl';
+import { fvmUrl } from '@/contents/apiUrl';
 
 const ImageWithFallback = (props: any) => {
   const { src, fallbackSrc = fvmUrl + `/images/default.png`, ...rest } = props;

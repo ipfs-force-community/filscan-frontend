@@ -65,6 +65,9 @@ export const apiUrl: API | any = {
 
     detail_miner_list: mianUrl,
     detail_list_method: mianUrl + '/AllMethodByAccountID',
+    detail_message_list: mianUrl + '/MessagesByAccountID',
+    detail_block_list: mianUrl + '/BlocksByAccountID',
+    detail_trance_list:mianUrl+'/TracesByAccountID',
     detail_deal:mianUrl +'/DealDetails',
     account_change: mianUrl + '/BalanceTrendByAccountID',
     account_trend: mianUrl + '/PowerTrendByAccountID',

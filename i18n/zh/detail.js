@@ -9,7 +9,7 @@ const detail = {
     //owner
     'owner_title': '存储池详情',
     'owner_title_tip': '存储池详情：存储池数据由名下节点数据,汇总而成',
-    all: '全部方法',
+    all_method: '全部方法',
     account: '账户',
     owner_address: 'Owner地址',
     owned_miners: '名下节点',

@@ -1,6 +1,6 @@
 /** @format */
 
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import useInterval from '@/components/hooks/useInterval';
 import useObserver from '@/components/hooks/useObserver';

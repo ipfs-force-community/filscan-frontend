@@ -6,7 +6,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import EChart from '@/components/echarts';
 import fetchData from '@/store/server';
-import { apiUrl } from '@/apiUrl';
+import { apiUrl } from '@/contents/apiUrl';
 import { formatFilNum } from '@/utils';
 
 interface Props {

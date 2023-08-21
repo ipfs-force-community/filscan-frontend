@@ -3,8 +3,9 @@
 import { Translation } from '@/components/hooks/Translation';
 import { useHash } from '@/components/hooks/useHash';
 import { Item } from '@/contents/type';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 //分段控制器，添加锚点
 
@@ -30,13 +31,15 @@ export default ({
     setActive(hash || defaultValue);
   }, [hash]);
 
-  const handleClick = (tabId: string) => {
+  const handleClick = (event: any, tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
+    //event.preventDefault();
     setActive(tabId);
     if (onChange) onChange(tabId);
+    const pathValue = router.asPath.split('#')[0];
     if (isHash) {
-      router.replace(`${router.pathname}#${tabId}`, undefined, {
-        shallow: true,
+      router.push(`${pathValue}#${tabId}`, undefined, {
+        shallow: false,
         scroll: false,
       });
     }
@@ -47,8 +50,9 @@ export default ({
       {data.map((item) => {
         return (
           <li
+            // href={hash ? `${pathValue}#${item.dataIndex}` : ''}
             key={item.dataIndex}
-            onClick={() => handleClick(item.dataIndex)}
+            onClick={(e) => handleClick(e, item.dataIndex)}
             className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des_hover  ${
               active === item.dataIndex
                 ? 'tab_shadow highlight  rounded-[5px] card_bg_color'

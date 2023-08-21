@@ -18,16 +18,15 @@ export default ({
   options: Array<Option_Item>;
   onChange: (value: string) => void;
 }) => {
-  // const [active, setActive] = useState('');
+  const [new_options, setOptions] = useState<Array<Option_Item>>([]);
 
-  // useEffect(() => {
-  //   setActive(value);
-  // }, [value]);
+  useEffect(() => {
+    setOptions(options || []);
+  }, [options]);
 
   const handleChange = (value: string) => {
     onChange(value);
   };
-
   return (
     <Select
       showSearch
@@ -41,7 +40,7 @@ export default ({
       filterOption={(input, option: any) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }
-      options={options}
+      options={[...new_options]}
       onChange={handleChange}></Select>
   );
 };
