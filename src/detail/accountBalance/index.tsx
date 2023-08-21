@@ -12,7 +12,7 @@ import { theme } from 'antd';
 import Item from 'antd/es/list/Item';
 import { useEffect, useMemo, useState } from 'react';
 
-export default ({ data }: { data: any }) => {
+export default ({ data, loading }: { data: any; loading: boolean }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
 
@@ -96,6 +96,7 @@ export default ({ data }: { data: any }) => {
       }
       seriesData.push({
         value,
+        dataIndex: item.dataIndex,
         name: item.dataIndex,
         itemStyle: {
           color: item.color,
@@ -121,13 +122,6 @@ export default ({ data }: { data: any }) => {
     return newOpt;
   }, [options, defaultOptions, noShow]);
 
-  const loading = useMemo(() => {
-    if (data.account_indicator) {
-      return false;
-    }
-    return true;
-  }, [data?.account_indicator]);
-
   return (
     <div className='flex h-[340px] w-1/2 p-7'>
       <div className='flex-1'>
@@ -136,8 +130,8 @@ export default ({ data }: { data: any }) => {
           <span className='font-DINPro-Bold text-xl text_clip'>
             {loading ? (
               <SkeletonScreen />
-            ) : data?.account_indicator?.balance ? (
-              formatFilNum(data?.account_indicator?.balance, false, false, 4)
+            ) : data?.balance ? (
+              formatFilNum(data?.balance, false, false, 4)
             ) : (
               '--'
             )}
@@ -146,9 +140,7 @@ export default ({ data }: { data: any }) => {
 
         <ul className='mt-24 flex  flex-col flex-wrap gap-y-10 justify-between max-h-[140px]'>
           {account_balance.list.map((balance_item: any) => {
-            const value =
-              data?.account_indicator &&
-              data.account_indicator[balance_item.dataIndex];
+            const value = data[balance_item.dataIndex];
             return (
               <li
                 className='w-1/2 flex flex-col flex-0'

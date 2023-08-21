@@ -14,8 +14,9 @@ export const detailPageLimit = 10;
 export const max_name_length = 10;
 
 export function getShowData(item: any, data: { [key: string]: any }): any {
-  const [first, second] = item.type || [];
   let showData: any = data;
+
+  const [first, second] = item.type || [];
   if (first) {
     if (second) {
       showData = data && data[first] && data[first][second];
@@ -23,6 +24,7 @@ export function getShowData(item: any, data: { [key: string]: any }): any {
       showData = data && data[first];
     }
   }
+
   return showData;
 }
 export function formatFil(

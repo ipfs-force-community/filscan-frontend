@@ -9,6 +9,7 @@ import {
 } from '@/utils';
 import { Item } from './type';
 import Link from 'next/link';
+import Copy from '@/components/copy';
 
 //储存池概览 账户余额 & 有效算力
 
@@ -18,25 +19,21 @@ export const account_balance = {
     {
       title: 'available_balance',
       dataIndex: 'available_balance',
-      type: ['account_indicator'],
       color: '#256DF3',
     },
     {
       title: 'init_pledge',
       dataIndex: 'init_pledge',
-      type: ['account_indicator'],
       color: '#D5E3F4',
     },
     {
       title: 'pre_deposits',
       dataIndex: 'pre_deposits',
       color: '#4ACAB4',
-      type: ['account_indicator'],
     },
     {
       title: 'locked_balance',
       dataIndex: 'locked_balance',
-      type: ['account_indicator'],
       color: '#7F79EB',
     },
   ],
@@ -84,6 +81,7 @@ export const power_list = {
       title: 'sector_size',
       dataIndex: 'sector_size',
       render: (text: number) => {
+        if (Number(text) === 0) return text;
         return text ? unitConversion(text) : '--';
       },
     },
@@ -205,6 +203,63 @@ export const miner_overview = {
   ],
 };
 
+export const owner_detail = {
+  list: [
+    {
+      title: 'owner_address',
+      dataIndex: 'account_address',
+      render: (text: string) => {
+        return (
+          <div className='flex gap-x-1 items-center'>
+            <Link className='link' href={`/address/${text}`}>
+              {text}
+            </Link>
+            <Copy text={text} />
+          </div>
+        );
+      },
+    },
+    {
+      title: 'owned_miners',
+      dataIndex: 'owned_miners',
+      render: (text: Array<any>, record: any) => {
+        return (
+          <span className='flex flex-wrap gap-2.5 items-baseline'>
+            {text &&
+              Array.isArray(text) &&
+              text?.map((item: any, index: number) => {
+                return (
+                  <Link className='link' key={index} href={`/miner/${item}`}>
+                    {item}
+                  </Link>
+                );
+              })}
+          </span>
+        );
+      },
+    },
+    {
+      title: 'owned_active_miners',
+      dataIndex: 'owned_active_miners',
+      render: (text: Array<any>, record: any) => {
+        return (
+          <span className='flex flex-wrap gap-2.5 items-baseline'>
+            {text &&
+              Array.isArray(text) &&
+              text?.map((item: any, index: number) => {
+                return (
+                  <Link className='link' key={index} href={`/miner/${item}`}>
+                    {item}
+                  </Link>
+                );
+              })}
+          </span>
+        );
+      },
+    },
+  ],
+};
+
 export const account_change = {
   title: 'account_change',
   list: [
@@ -237,7 +292,7 @@ export const account_change = {
 };
 
 export const power_change = {
-  title: 'quality_adjust_power',
+  title: 'power_change',
   tabList: [
     { title: '7d', dataIndex: '7d' },
     { title: '30d', dataIndex: '1m' },

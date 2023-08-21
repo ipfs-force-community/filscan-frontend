@@ -17,6 +17,7 @@ export default () => {
   const router = useRouter();
   const { miner } = router.query;
   const [data, setData] = useState<any>({});
+  const [loading, setLoading] = useState<boolean>(false);
   const [method, setMethod] = useState<any>([]);
   const { tr } = Translation({ ns: 'detail' });
 
@@ -45,10 +46,11 @@ export default () => {
   };
 
   const loadMinerData = async () => {
+    setLoading(true);
     const result: any = await fetchData(apiUrl.detail_account, {
       account_id: miner,
     });
-
+    setLoading(false);
     setData(result?.account_info?.account_miner || {});
   };
 
@@ -63,10 +65,14 @@ export default () => {
     return newTabs;
   }, [method]);
 
+  console.log('====35', data);
   return (
     <div className='main_contain'>
       <div className='flex w-full card_shadow rounded-xl'>
-        <AccountBalance data={data} />
+        <AccountBalance
+          data={data?.account_indicator || {}}
+          loading={loading}
+        />
         <Power data={data?.account_indicator || {}} />
       </div>
       <OverView overView={miner_overview} accountId={miner} />

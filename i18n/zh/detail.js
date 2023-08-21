@@ -98,6 +98,9 @@ const detail = {
     contract_name:'合约名称',
     //miner 
     //pool_overview_title:'账户',
+    //power_change
+    power_change: '算力变化',
+    owned_active_miners:'实际工作节点',
 
     // message
     message_overview_detail: '交易明细',
