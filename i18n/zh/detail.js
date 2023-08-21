@@ -64,7 +64,7 @@ const detail = {
     net_profit_per_tb:'单T消耗',
     net_profit_per_tb_tip:'选定周期内单T封装扇区大小Gas消耗',
     //账户变化
-    owner_account_change:'账户变化',
+    account_change:'账户变化',
     power:'有效算力',
     power_increase:'有效算力增长',
     quality_adjust_power: '有效算力',

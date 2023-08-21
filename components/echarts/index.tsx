@@ -62,7 +62,7 @@ const EChartsComponent: React.FC<EChartsComponentProps> = ({
           top: isMobile() ? 100 : 10,
           left: 20,
           right: 20,
-          bottom: '10%',
+          bottom: 20,
           containLabel: true,
         },
       };

@@ -8,6 +8,7 @@ import AccountBalance from '@/src/detail/accountBalance';
 import Power from '@/src/detail/Power';
 import OverView from '@/src/detail/overView';
 import { miner_overview } from '@/contents/detail';
+import AccountChange from '@/src/detail/accountChange';
 
 export default () => {
   const router = useRouter();
@@ -33,8 +34,11 @@ export default () => {
         <AccountBalance data={data} />
         <Power data={data?.account_indicator || {}} />
       </div>
-      <div>
-        <OverView overView={miner_overview} accountId={miner} />
+      <OverView overView={miner_overview} accountId={miner} />
+
+      <div className='flex mt-6 gap-x-5'>
+        <AccountChange accountId={miner} interval={'30d'} />
+        <AccountChange accountId={miner} interval={'30d'} />
       </div>
     </div>
   );

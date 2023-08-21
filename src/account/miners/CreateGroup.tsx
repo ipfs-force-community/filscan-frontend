@@ -21,7 +21,6 @@ export default ({
     //添加分组
     setLoading(true);
     const data = await fetchData(proApi.createGroup, { group_name: value });
-    console.log('===45', data);
     setLoading(false);
     onChange(false);
   };

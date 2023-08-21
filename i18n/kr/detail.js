@@ -63,7 +63,7 @@ const detail = {
     net_profit_per_tb:'1T당 Gas 소비량',
     net_profit_per_tb_tip:'선택한 주기 동안 1T 섹터 크기의 Gas 소비량',
     //账户变化
-    owner_account_change: '계정 변동',
+    account_change: '계정 변동',
     power: '파워',
     power_increase: '유효 체굴 파워 성장',
     quality_adjust_power: '유효 체굴 파워',

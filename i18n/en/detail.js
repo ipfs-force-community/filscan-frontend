@@ -70,7 +70,7 @@ const detail = {
 
 
     //账户变化
-    owner_account_change:'Account Changes',
+    account_change:'Account Changes',
     power:'Pool Overview',
     power_increase: 'Power Increase',
     quality_adjust_power: 'Quality Adjusted Power',

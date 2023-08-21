@@ -195,20 +195,42 @@ export const miner_overview = {
       render: (text: string | number) =>
         text ? unitConversion(text, 2) : '--',
     },
+  ],
+};
 
-    // {
-    //   title: 'sector_increase',
-    //   style: { width: '22%', textAlign: 'left' },
-    //   dataIndex: 'sector_increase',
-    //   render: (text: string | number) =>
-    //     text ? unitConversion(text, 2) : '--',
-    // },
-    // {
-    //   title: 'sector_ratio',
-    //   style: { width: '33%', textAlign: 'center' },
-    //   dataIndex: 'sector_ratio',
-    //   render: (text: string | number) =>
-    //     text ? unitConversion(text, 2) + '/D' : '--',
-    // },
+/*
+  available_balance: [], //可用余额
+                locked_balance: [], //锁仓奖励	
+                initial_pledge: [],//扇区抵押，
+                balance:[]
+*/
+export const account_change = {
+  title: 'account_change',
+  list: [
+    {
+      title: 'balance',
+      dataIndex: 'balance',
+      color: '#FFC53D',
+      type: 'line',
+    },
+
+    {
+      title: 'available_balance',
+      dataIndex: 'available_balance',
+      color: '#4ACAB4',
+      type: 'line',
+    },
+    {
+      title: 'init_pledge',
+      dataIndex: 'initial_pledge',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+    {
+      title: 'locked_balance',
+      dataIndex: 'locked_funds',
+      type: 'line',
+      color: '#6E69CF',
+    },
   ],
 };

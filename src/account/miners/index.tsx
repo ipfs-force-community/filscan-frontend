@@ -46,7 +46,6 @@ export default () => {
     return undefined;
   }, [group, groups]);
 
-  console.log('----35', type, group);
   if (type === 'miner_add') {
     return <MinerAdd groups={groups} />;
   }

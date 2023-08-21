@@ -16,7 +16,6 @@ export default ({ data }: { data: any }) => {
   const { tr } = Translation({ ns: 'detail' });
 
   const loading = useMemo(() => {
-    console.log('===4324', data);
     if (data.hasOwnProperty('quality_power_percentage')) {
       return false;
     }

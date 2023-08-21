@@ -37,25 +37,6 @@ a{
   border-color: var(--border-color);
 }
 
-//flex_contain 第1列靠左对齐，第四列靠右对齐，中间列居中对齐
-.flex_contain{
-  display: flex;
-  flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    &_col{
-      flex:1;
-      // align-self: center;
-      &:first-child {
-       // align-self: flex-start;
-      }
-      &:last-child{
-        margin-left: auto;
-      }
-    }
-
-
-}
 
 .last_item{
   align-self: flex-start;
