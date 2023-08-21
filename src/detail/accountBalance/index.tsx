@@ -69,7 +69,7 @@ export default ({ data }: { data: any }) => {
             },
           },
           data: [],
-          center: ['45%', '40%'],
+          center: ['55%', '50%'],
         },
       ],
     };
@@ -129,7 +129,7 @@ export default ({ data }: { data: any }) => {
   }, [data?.account_indicator]);
 
   return (
-    <div className='flex h-[340px] w-1/2  p-7 '>
+    <div className='flex h-[340px] w-1/2 p-7'>
       <div className='flex-1'>
         <div className='flex flex-col'>
           <span className='text-sm text_des'>{tr(account_balance.title)}</span>
@@ -172,7 +172,7 @@ export default ({ data }: { data: any }) => {
 
                   {tr(balance_item.title)}
                 </span>
-                <span className='font-DINPro-Medium text-sm font-medium'>
+                <span className='font-DINPro-Medium text-sm font-medium  ml-2'>
                   {loading ? (
                     <SkeletonScreen />
                   ) : value ? (

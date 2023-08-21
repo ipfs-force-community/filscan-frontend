@@ -26,9 +26,11 @@ export default () => {
     setData(result?.account_info?.account_miner || {});
   };
   return (
-    <div className='main_contain flex '>
-      <AccountBalance data={data} />
-      <Power />
+    <div className='main_contain '>
+      <div className='flex card_shadow rounded-xl'>
+        <AccountBalance data={data} />
+        <Power data={data?.account_indicator || {}} />
+      </div>
     </div>
   );
 };
