@@ -123,7 +123,12 @@ export const unitConversion = (
 };
 
 export function formatNumber(v: number | string, len = 4) {
-  return Number(v).toLocaleString('en', { maximumFractionDigits: len });
+  if (Number(v) === 0) {
+    return v;
+  }
+  return v
+    ? Number(v).toLocaleString('en', { maximumFractionDigits: len })
+    : '--';
 }
 
 export function formatDateTime(

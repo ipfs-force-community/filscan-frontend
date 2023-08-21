@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="41px" height="41px" viewBox="0 0 41 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 8</title>
+    <defs>
+        <linearGradient x1="63.2979127%" y1="76.6522377%" x2="30.2134474%" y2="27.5667474%" id="linearGradient-1">
+            <stop stop-color="#1764FF" offset="0%"></stop>
+            <stop stop-color="#4093ED" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.13">
+        <g id="存储池详情" transform="translate(-1271.000000, -205.000000)">
+            <g id="编组-8" transform="translate(1271.000000, 205.000000)">
+                <g id="编组-4备份" transform="translate(25.283019, 23.396226)" fill="url(#linearGradient-1)">
+                    <polygon id="路径-6" points="7.34217095 5.48748382 9.53180166 1.55717547 14.0393823 4.18460104 14.0393823 12.5328963 6.90479752 16.5197007 5.70454247 15.6877104 10.4018123 7.43524435"></polygon>
+                    <polygon id="路径-6备份" transform="translate(4.167420, 7.481263) scale(-1, -1) translate(-4.167420, -7.481263) " points="1.63762848 3.93030835 3.82725918 -1.65866053e-14 8.33483978 2.62742557 8.33483978 10.9757208 1.20025505 14.9625252 3.61040486e-16 14.130535 4.69726983 5.87806888"></polygon>
+                </g>
+                <g id="编组-6">
+                    <rect id="矩形" fill="#1C6AFD" x="10.9082931" y="0" width="27.2049144" height="8.77577885"></rect>
+                    <rect id="矩形备份-6" fill="#1C6AFD" x="10.9082931" y="11.1540149" width="27.2049144" height="8.77577885"></rect>
+                    <rect id="矩形备份-7" fill="#529BF4" opacity="0.8" x="10.9082931" y="22.5625274" width="8.77577885" height="8.77577885"></rect>
+                    <rect id="矩形备份-8" fill="#57A0FC" x="0" y="11.1540149" width="8.77577885" height="8.77577885"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

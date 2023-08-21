@@ -77,7 +77,7 @@ const detail = {
     total_win_count: '30일 우승 횟수',
     total_win_count_tip: '최근 30일간 해당 노드에서 채굴한 블록의 총 우승 횟수',
     sector_size: '섹터 크기',
-    sector_stauts: '섹터 상태',
+    sector_status: '섹터 상태',
     
     //账户总览
     account_overview: '계정 개요',

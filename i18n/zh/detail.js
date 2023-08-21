@@ -78,7 +78,7 @@ const detail = {
     total_win_count: '30天赢票',
     total_win_count_tip:'近30天总赢票',
     sector_size:'扇区大小',
-    sector_stauts: '扇区状态',
+    sector_status: '扇区状态',
     
     //账户总览
     account_overview:'账户总览',

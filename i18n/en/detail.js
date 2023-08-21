@@ -84,7 +84,7 @@ const detail = {
     total_win_count: '30/D  Wincount',
     total_win_count_tip:'Total Wincount in the past 30 days',
     sector_size:'Sector Size',
-    sector_stauts: 'Sector Status',
+    sector_status: 'Sector Status',
   contract_verify:'Contract',
         
     //账户总览

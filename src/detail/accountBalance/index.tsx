@@ -133,7 +133,7 @@ export default ({ data }: { data: any }) => {
       <div className='flex-1'>
         <div className='flex flex-col'>
           <span className='text-sm text_des'>{tr(account_balance.title)}</span>
-          <span className='font-DINPro-Bold text-lg'>
+          <span className='font-DINPro-Bold text-xl text_clip'>
             {loading ? (
               <SkeletonScreen />
             ) : data?.account_indicator?.balance ? (
