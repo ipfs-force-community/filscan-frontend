@@ -44,7 +44,17 @@ const account = {
      "30d_lucky":"30天幸运值",
      "1year_lucky": "1年的幸运值",
      tag: '标签',
-     miner_id:'节点ID',
+     miner_id: '节点ID',
+     
+     //地址余额
+     miner_balance: '节点余额',
+     owner_balance: 'Owner余额',
+     worker_balance:'Worker余额',
+     controller_0_balance: 'Controller0余额',
+     controller_1_balance: 'Controller1余额',
+     controller_2_balance: 'Controller2余额',
+     beneficiary_balance: 'Beneficiary余额',
+     market_balance:'MarketBalance余额',
 
      //个人中心
      default_user: '普通用户',

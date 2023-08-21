@@ -68,9 +68,17 @@ body {
   max-width: 1440px;
   height: 100%;
   width: 100%;
-  padding: 20px 90px;
+  margin: auto;
+  padding:0px;
   box-sizing: content-box;
   color: var(--font-color);
   background-color: var(--main-bg-color); 
   overflow: auto;
+}
+
+@media only screen and (max-width: 1440px){
+  .main_contain{
+    padding: 20px 90px;
+  }
+ 
 }

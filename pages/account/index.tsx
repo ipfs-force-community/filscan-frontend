@@ -9,6 +9,7 @@ import Overview from '@/src/account/overview';
 import Miners from '@/src/account/miners';
 import Personal from '@/src/account/personal';
 import Lucky from '@/src/account/lucky';
+import Balance from '@/src/account/balance';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -76,7 +77,7 @@ const Account: React.FC = () => {
           </ul>
         </div>
         <div
-          className='flex flex-col px-5 py-10 w-full'
+          className='flex w_account flex-col px-5 py-10'
           style={{ height: 'inherit' }}>
           {selectedKey === 'overview' && (
             <Overview selectedKey='overview' noMiners={true} />
@@ -84,6 +85,9 @@ const Account: React.FC = () => {
           {selectedKey === 'miners' && <Miners />}
           {selectedKey === 'lucky' && (
             <Lucky noMiners={false} selectedKey={'overview_lucky'} />
+          )}
+          {selectedKey === 'balance' && (
+            <Balance noMiners={false} selectedKey={'overview_balance'} />
           )}
 
           {selectedKey === 'personal' && <Personal />}

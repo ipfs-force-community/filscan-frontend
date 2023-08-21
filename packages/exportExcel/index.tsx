@@ -25,13 +25,13 @@ const ExportExcel: FC<ExportToExcelProps> = ({ columns, data, fileName }) => {
     columns: {
       title: any;
       dataIndex: any;
+      render?: (text: string, record: any) => JSX.Element;
     }[],
     data: { [key: string]: any }[],
     fileName?: string
   ) => {
     const headers = columns.map((col) => col.title);
     const accessors = columns.map((col) => col.dataIndex);
-
     const dataArray = data.map((row) => accessors.map((field) => row[field]));
     dataArray.unshift(headers);
 

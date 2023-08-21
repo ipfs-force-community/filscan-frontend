@@ -90,6 +90,7 @@ export default (props: Props) => {
       rowKey={new Date().getTime()}
       onChange={onChange}
       loading={loading}
+      scroll={{ x: 'max-content' }}
       // loading={{
       //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
       //   indicator: <Skeleton active />,

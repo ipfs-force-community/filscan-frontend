@@ -95,7 +95,7 @@ font-display: auto;
              background-color: var(--bgColor);
             .ant-table-thead{
                 .ant-table-cell{
-                    background-color: transparent ;
+                    background-color:  var(--bgColor) ;
                     border-bottom:none;
                     font-size: 12px;
                     font-family: PingFangSC-Medium, PingFang SC;
@@ -118,7 +118,7 @@ font-display: auto;
             }
             .ant-table-tbody{
                 .ant-table-placeholder{
-                    background-color: transparent;
+                        background-color:  var(--bgColor) ;
                     .ant-empty-description{
                          color: var(--font_des);
                     }
@@ -127,7 +127,7 @@ font-display: auto;
                     }
                     &:hover{
                         .ant-table-cell{
-                            background-color: transparent;
+                            background-color:  var(--bgColor) ;
                         }
                       
                     }
@@ -137,12 +137,13 @@ font-display: auto;
                         .ant-table-cell{
                             background-color: var(--border-color) !important;
                         }
-                        .ant-table-column-sort{
-                            background-color: transparent;
+                        .ant-table-column-sort{            
+                             background-color:  var(--bgColor) ;
                         }
                         }
                         .ant-table-column-sort{
-                            background-color: transparent;
+                            background-color:  var(--bgColor) ;
+
                         
                         }
                         .ant-table-cell{

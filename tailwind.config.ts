@@ -18,6 +18,9 @@ const config: Config = {
   },
   theme: {
     extend: {
+       width: {
+        'inherit': 'inherit',
+      },
        screens: {
           sm: '480px',
           md: '768px',

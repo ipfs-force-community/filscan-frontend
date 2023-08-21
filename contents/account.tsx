@@ -3,6 +3,7 @@
 import { getSvgIcon } from '@/svgsIcon';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { MenuItem } from './type';
+import Link from 'next/link';
 
 export const logTabs = [
   {
@@ -235,11 +236,91 @@ export const account_lucky = {
     },
   ],
   columns: [
-    { title: 'tag', dataIndex: 'tag', width: '20%' },
-    { title: 'miner_id', dataIndex: 'miner_id', width: '15%' },
-    { title: 'group_name', dataIndex: 'group_name', width: '20%' },
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      width: '20%',
+      fixed: 'left',
+
+      render: (text: string) => (
+        <span className='des_bg_color  p-2  rounded-[5px]'>{text}</span>
+      ),
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: '15%',
+      fixed: 'left',
+
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      fixed: 'left',
+      width: '20%',
+    },
     { title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%' },
     { title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%' },
     { title: '30d_lucky', dataIndex: 'lucky_rate_30d', width: '15%' },
+  ],
+};
+
+export const account_balance = {
+  columns: [
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      fixed: 'left',
+      width: 100,
+      render: (text: string) => (
+        <span className='des_bg_color  p-2  rounded-[5px]'>{text}</span>
+      ),
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: 100,
+      fixed: 'left',
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: 100,
+      fixed: 'left',
+    },
+    { title: 'miner_balance', dataIndex: 'miner_balance', width: 200 },
+    { title: 'owner_balance', dataIndex: 'owner_balance', width: 200 },
+    { title: 'worker_balance', dataIndex: 'worker_balance', width: 200 },
+    {
+      title: 'controller_0_balance',
+      dataIndex: 'controller_0_balance',
+      width: 200,
+    },
+    {
+      title: 'controller_1_balance',
+      dataIndex: 'controller_1_balance',
+      width: 200,
+    },
+    {
+      title: 'controller_2_balance',
+      dataIndex: 'controller_2_balance',
+      width: 200,
+    },
+    {
+      title: 'beneficiary_balance',
+      dataIndex: 'beneficiary_balance',
+      width: 200,
+    },
+    { title: 'market_balance', dataIndex: 'market_balance', width: 200 },
   ],
 };
