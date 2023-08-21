@@ -198,12 +198,6 @@ export const miner_overview = {
   ],
 };
 
-/*
-  available_balance: [], //可用余额
-                locked_balance: [], //锁仓奖励	
-                initial_pledge: [],//扇区抵押，
-                balance:[]
-*/
 export const account_change = {
   title: 'account_change',
   list: [
@@ -231,6 +225,23 @@ export const account_change = {
       dataIndex: 'locked_funds',
       type: 'line',
       color: '#6E69CF',
+    },
+  ],
+};
+
+export const power_change = {
+  title: 'quality_adjust_power',
+  tabList: [
+    { title: '7d', dataIndex: '7d' },
+    { title: '30d', dataIndex: '1m' },
+  ],
+  list: [
+    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' },
+    {
+      title: 'power_increase',
+      dataIndex: 'power_increase',
+      type: 'bar',
+      color: '#1C6AFD',
     },
   ],
 };

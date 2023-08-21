@@ -3,23 +3,19 @@
 import { apiUrl } from '@/apiUrl';
 import Echarts from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
-import { account_change } from '@/contents/detail';
+import { power_change } from '@/contents/detail';
+import Segmented from '@/packages/segmented';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, formatFil, formatFilNum, isMobile } from '@/utils';
+import { formatDateTime, isMobile, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 
-export default ({
-  accountId,
-  interval,
-}: {
-  accountId?: string | string[];
-  interval: string;
-}) => {
+export default ({ accountId }: { accountId?: string | string[] }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
+  const [interval, setInterval] = useState('7d');
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
 
@@ -43,15 +39,9 @@ export default ({
       yAxis: {
         type: 'value',
         scale: true,
-        nameTextStyle: {
-          color: color.textStyle,
-          align: 'left',
-        },
-
         axisLine: {
           show: false,
         },
-
         axisTick: {
           show: false,
         },
@@ -64,16 +54,21 @@ export default ({
             color: color.textStyle,
           },
           formatter(v: string) {
-            return v + ' FIL';
+            return v + ' TiB';
           },
         },
         splitLine: {
-          show: true,
           lineStyle: {
             type: 'dashed',
             color: color.splitLine,
           },
         },
+        // name: vm.tr("chart.title"),
+        nameTextStyle: {
+          color: color.textStyle,
+          align: 'left',
+        },
+        //nameGap: 22 * rate
       },
       tooltip: {
         trigger: 'axis',
@@ -84,7 +79,7 @@ export default ({
           color: '#ffffff',
         },
         formatter(p: Array<any>) {
-          let result = p[0].data.showTime || p[0].name;
+          let result = p[0].name;
           p.forEach((item: any, index: number) => {
             if (item.data) {
               result +=
@@ -109,110 +104,87 @@ export default ({
     }
   }, [accountId]);
 
-  const load = async () => {
-    const result: any = await fetchData(apiUrl.account_change, {
+  const load = async (inter?: string) => {
+    const showInter = inter || interval;
+    const seriesObj: any = {
+      power: [], //有效算力
+      power_increase: [], //算力增长
+    };
+    const timeData: any = [];
+    const legendData: any = [];
+    const seriesData: any = [];
+
+    const result: any = await fetchData(apiUrl.account_trend, {
       account_id: accountId,
       filters: {
-        interval: interval,
+        interval: showInter,
       },
     });
-    const dateList: Array<string> = [];
-    const seriesObj: Record<string, any> = {
-      balance: [], //当前余额
-      available_balance: [], //可用余额
-      initial_pledge: [], //扇区抵押，
-      locked_funds: [], //锁仓奖励
-    };
-    const seriesData: any = [];
-    const legendData: any = [];
-    (result?.balance_trend_by_account_id_list || []).forEach((item: any) => {
-      const {
-        block_time,
-        available_balance,
-        balance,
-        //precommit_deposits,
-        locked_funds,
-        initial_pledge,
-      } = item;
-      const showTime: string =
-        interval === '24h'
-          ? formatDateTime(block_time, 'HH:mm')
-          : formatDateTime(block_time, 'MM-DD HH:mm');
-      dateList.push(showTime);
-      const [balance_amount, balance_unit] = balance
-        ? formatFilNum(balance, false, false, 4, false)?.split(' ')
-        : [];
-      const [available_balance_amount, available_balance_unit] =
-        available_balance
-          ? formatFilNum(available_balance, false, false, 4, false)?.split(' ')
+    (result?.power_trend_by_account_id_list?.reverse() || []).forEach(
+      (value: any) => {
+        const { block_time, power, power_increase } = value;
+        let showTime: string = '';
+        showTime = formatDateTime(block_time, 'MM-DD HH:mm');
+        timeData.push(showTime);
+        //y轴
+        const [powerValue, powerUnit] = power
+          ? unitConversion(power, 4, 4).split(' ')
           : [];
-      //   const [precommit_deposits_amount, precommit_deposits_unit] =
-      //     precommit_deposits
-      //       ? formatFilNum(precommit_deposits, false, false, 4, false)?.split(' ')
-      //       : [];
-      const [locked_funds_amount, locked_funds_unit] = locked_funds
-        ? formatFilNum(locked_funds, false, false, 4, false)?.split(' ')
-        : [];
-      const [initial_pledge_amount, initial_pledge_unit] = initial_pledge
-        ? formatFilNum(initial_pledge, false, false, 4, false)?.split(' ')
-        : [];
-      if (available_balance) {
-        seriesObj.available_balance.push({
-          amount: available_balance_amount,
-          value: formatFil(available_balance, 'FIL', 4),
-          unit: available_balance_unit,
-          showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
+        const [increaseValue, increaseUnit] = power_increase
+          ? unitConversion(power_increase, 4, 4)?.split(' ')
+          : [];
+
+        //amount
+        const [powerValue_amount, powerValue_unit] = power
+          ? unitConversion(power, 4)?.split(' ')
+          : [];
+        const [power_increase_amount, power_increase_unit] = power_increase
+          ? unitConversion(power_increase, 4)?.split(' ')
+          : [];
+        seriesObj.power.push({
+          value: powerValue,
+          unit: powerValue_unit,
+          amount: powerValue_amount,
+        });
+        seriesObj.power_increase.push({
+          value: increaseValue,
+          unit: power_increase_unit,
+          amount: power_increase_amount,
         });
       }
-      if (balance) {
-        seriesObj.balance.push({
-          amount: balance_amount,
-          value: formatFil(balance, 'FIL', 4),
-          unit: balance_unit,
-          showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
-        });
-      }
-      if (initial_pledge) {
-        seriesObj.initial_pledge.push({
-          amount: initial_pledge_amount,
-          value: formatFil(initial_pledge, 'FIL', 4),
-          unit: initial_pledge_unit,
-          showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
-        });
-      }
-      if (locked_funds) {
-        seriesObj.locked_funds.push({
-          amount: locked_funds_amount,
-          value: formatFil(locked_funds, 'FIL', 4),
-          unit: locked_funds_unit,
-          showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
-        });
-      }
-    });
-    account_change.list.forEach((item: any) => {
-      const dataIndex = item?.dataIndex;
+    );
+    power_change.list.forEach((item: any) => {
+      const { dataIndex, color, title } = item;
       legendData.push({
         dataIndex,
-        color: item.color,
-        title: item.title,
+        color: color,
+        title: title,
       });
       seriesData.push({
         type: item.type,
         smooth: true,
         data: seriesObj[dataIndex],
-        name: item.title,
-        dataIndex,
+        name: title,
         symbol: 'circle',
+        barMaxWidth: '30',
+        backgroundStyle: {
+          color: item?.color || '',
+        },
         itemStyle: {
           color: item.color,
         },
       });
     });
     setOptions({
+      xData: timeData,
       series: seriesData,
-      xData: dateList,
-      legendData: legendData,
+      legendData,
     });
+  };
+
+  const handleTabChange = (value: string) => {
+    setInterval(value);
+    load(value);
   };
 
   const newOptions = useMemo(() => {
@@ -235,9 +207,19 @@ export default ({
   return (
     <div className='flex-1'>
       <div className='flex justify-between items-center mb-2'>
-        <span className='text-lg font-semibold mr-5'>
-          {tr(account_change.title)}
-        </span>
+        <div className='flex gpa-x-5 items-center'>
+          <span className='text-lg font-semibold mr-5'>
+            {tr(power_change.title)}
+          </span>
+          <Segmented
+            data={power_change.tabList}
+            ns='detail'
+            defaultValue={interval}
+            isHash={false}
+            onChange={handleTabChange}
+          />
+        </div>
+
         <span className='flex gap-x-4'>
           {options?.legendData?.map((v: any) => {
             return (
