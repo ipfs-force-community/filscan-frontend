@@ -62,6 +62,8 @@ a{
 }
 
 
+
+
 /*主题文字渐变text*/
 .clip_text{
     background: linear-gradient(279deg, #0052F8 0%, #0A96E9 100%);
@@ -124,6 +126,9 @@ a{
   color:#1C6AFD ; 
 }
 
+/*message successICon*/
+
+
 /*rank icon*/
 .rank_icon{
   display: inline-flex;
@@ -149,7 +154,6 @@ a{
  font-family: DINPro-Medium, DINPro;
 font-weight: 500;
 color: #1C6AFD;
-font-size: 14px;
 cursor: pointer;
   &:hover{
     color: #1C6AFD;

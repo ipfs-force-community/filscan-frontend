@@ -72,7 +72,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <UserStoreContext.Provider value={userInfo}>
             <Layout className={`container_body ${theme}`}>
               <HeaderMain />
-              <Content>
+              <Content className='text-sm'>
                 <Component {...pageProps} />
               </Content>
             </Layout>

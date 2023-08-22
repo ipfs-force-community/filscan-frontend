@@ -3,13 +3,17 @@
 import {
   formatDateTime,
   formatFilNum,
+  formatNumber,
   get_account_type,
   isIndent,
+  isMobile,
   unitConversion,
 } from '@/utils';
 import { Item } from './type';
 import Link from 'next/link';
 import Copy from '@/components/copy';
+import { getSvgIcon } from '@/svgsIcon';
+import { space } from 'postcss/lib/list';
 
 //储存池概览 账户余额 & 有效算力
 
@@ -112,7 +116,6 @@ export const power_list = {
 };
 
 //miner_统计指标
-
 export const miner_overview = {
   title: 'indicators',
   tabList: [
@@ -257,6 +260,312 @@ export const owner_detail = {
         );
       },
     },
+  ],
+};
+
+//message detail
+export const message_detail = {
+  title: 'message_overview_detail',
+  content: [
+    [
+      {
+        dataIndex: 'cid',
+        title: 'cid',
+        type: ['message_basic'],
+        render: (text: string) => {
+          if (!text) return '--';
+          return (
+            <span className='flex items-center gap-x-2'>
+              {text}
+              <Copy text={text} />
+            </span>
+          );
+        },
+      },
+      {
+        dataIndex: 'eth_message',
+        title: 'eth_message',
+        elasticity: true,
+        render: (text: string) => {
+          if (!text) return null;
+          return (
+            <span className='flex items-center gap-x-2'>
+              {text}
+              <Copy text={text} />
+            </span>
+          );
+        },
+      },
+      {
+        dataIndex: 'exit_code',
+        title: 'exit_code',
+        type: ['message_basic'],
+        render: (text: any) => {
+          if (text?.startsWith('Ok')) {
+            return (
+              <span className='flex px-2 py-1 gap-x-1 bg-success_bg rounded-sm items-center'>
+                {getSvgIcon('successIcon')}
+                <span className='text-success text-cm'>Success</span>
+              </span>
+            );
+          }
+          if (text?.startsWith('Err')) {
+            return (
+              <span className='flex px-2 py-1 gap-x-1 rounded-sm items-center'>
+                {getSvgIcon('errorIcon')}
+                <span className='text_red text-cm'>Error</span>
+              </span>
+            );
+          }
+
+          return (
+            <span className='flex px-2 py-1 gap-x-1  rounded-sm items-center'>
+              {getSvgIcon('pendingIcon')}
+              <span className='text-cm'>Pending</span>
+            </span>
+          );
+        },
+      },
+      {
+        dataIndex: 'value',
+        title: 'value',
+        type: ['message_basic'],
+        render: (text: number) => {
+          return formatFilNum(text, false, false, 4);
+        },
+      },
+      {
+        dataIndex: 'height',
+        title: 'height',
+        type: ['message_basic'],
+        render: (text: string) => {
+          return (
+            <Link className='link' href={`/tipset/chain?height=${text}`}>
+              {text}
+            </Link>
+          );
+        },
+      },
+      {
+        dataIndex: 'block_time',
+        title: 'time',
+        type: ['message_basic'],
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD HH:mm:ss'),
+      },
+      {
+        dataIndex: 'method_name',
+        title: 'method_name',
+        type: ['message_basic'],
+      },
+      {
+        dataIndex: 'from',
+        title: 'from',
+        borderTop: true,
+        type: ['message_basic'],
+        render: (text: string, record: any) => (
+          <span className='flex items-center gap-x-2'>
+            {get_account_type(text, 0)}
+          </span>
+        ),
+      },
+      {
+        dataIndex: 'to',
+        title: 'to',
+        type: ['message_basic'],
+        render: (text: string, record: any) => {
+          return (
+            <span className='flex items-center gap-x-2'>
+              {get_account_type(text, 0)}
+            </span>
+          );
+        },
+      },
+      //转账信息
+      {
+        title: 'message_tranf',
+        dataIndex: 'consume_list',
+        elasticity: true,
+        borderTop: true,
+        render: (text: any, record: any, tr: any) => {
+          if (Array.isArray(text)) {
+            if (text.length === 0) return null;
+            return (
+              <div className='flex flex-col gap-y-4 align-baseline'>
+                {text.map((item: any, index) => {
+                  return (
+                    <li key={index} className='flex gap-x-2.5'>
+                      <span className='flex items-center gap-x-1'>
+                        <span className='text_des'>{tr('from_ath')}</span>
+                        <span className='flex gap-x-1 items-center'>
+                          {get_account_type(item.from)}
+                        </span>
+                      </span>
+                      <span className='flex items-center gap-x-1 '>
+                        <span className='text_des'>{tr('to_ath')}</span>{' '}
+                        <span className='flex gap-x-1 items-center'>
+                          {get_account_type(item.to)}
+                        </span>
+                      </span>
+                      <span className='flex items-center font-DINPro-Medium gap-x-1 '>
+                        <span className='font_weight'>For</span>
+                        <span>
+                          {formatFilNum(item.value, false, false, 4) || '--'}
+                        </span>
+                        <span className='text_des font-PingFang'>
+                          ({tr(item.consume_type)})
+                        </span>
+                      </span>
+                    </li>
+                  );
+                })}
+              </div>
+            );
+          }
+          return null;
+        },
+      },
+    ],
+    // [
+    //   //erc20 transfer
+    //   {
+    //     title: 'message_ERC20Trans',
+    //     elasticity: true,
+    //     dataIndex: 'message_ERC20Trans',
+    //     borderTop: true,
+    //     render: (text: any, record: any, tr: any) => {
+    //       if (Array.isArray(text)) {
+    //         if (text.length === 0) return null;
+    //         return (
+    //           <div className='array_item_column'>
+    //             {text.map((item: any, index) => {
+    //               return (
+    //                 <li key={index} className='array_item_column_li'>
+    //                   <div className='flex_align_center '>
+    //                     <span className='font_weight'>{tr('from_ath')}</span>
+    //                     <span>{get_account_type(item.from)}</span>
+    //                   </div>
+    //                   <div className='flex_align_center'>
+    //                     <span className='font_weight'>{tr('to_ath')}</span>{' '}
+    //                     <span>{get_account_type(item.to)}</span>
+    //                   </div>
+    //                   <div className='flex_align_center'>
+    //                     <span className='font_weight'>For</span>
+    //                     <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+    //                     <span>{item?.token_name}</span>
+    //                   </div>
+    //                 </li>
+    //               );
+    //             })}
+    //           </div>
+    //         );
+    //       }
+    //       return null;
+    //     },
+    //   },
+    // ],
+
+    [
+      {
+        dataIndex: 'nonce',
+        title: 'nonce',
+
+        render: (text: any) => text,
+      },
+
+      {
+        borderTop: true,
+        dataIndex: 'all_gas_fee',
+        title: 'all_gas_fee',
+        render: (text: string) => formatFilNum(text, false, false, 4),
+      },
+      {
+        dataIndex: 'base_fee',
+        title: 'base_fee',
+
+        render: (text: string) => {
+          return formatFilNum(text, false, false, 4);
+        },
+      },
+
+      {
+        dataIndex: 'gas_fee_cap',
+        title: 'gas_fee_cap',
+        render: (text: string) => formatFilNum(text, false, false, 4),
+      },
+      {
+        dataIndex: 'gas_premium',
+        title: 'gas_premium',
+        render: (text: string) => formatFilNum(text, false, false, 4),
+      },
+      {
+        dataIndex: 'gas_limit',
+        title: 'gas_limit',
+        render: (text: string) => formatNumber(text),
+      },
+      {
+        dataIndex: 'gas_used',
+        title: 'gas_used',
+        render: (text: string) => formatNumber(text),
+      },
+      {
+        dataIndex: 'blk_cids',
+        title: 'blk_cids',
+        borderTop: true,
+        render: (text: Array<string>) => {
+          if (!Array.isArray(text) || !text) return '--';
+          return (
+            <div className='flex flex-col'>
+              {text.map((item: string, index: number) => {
+                if (!text) return '--';
+                return (
+                  <span className='flex gap-x-2 items-center  mb-2 last:mb-0'>
+                    <Link
+                      key={index}
+                      className='link link-html'
+                      href={`/tipset/chain?cid=${item}`}>
+                      {item}
+                    </Link>
+                    <Copy text={item} />
+                  </span>
+                );
+              })}
+            </div>
+          );
+        },
+      },
+      {
+        dataIndex: 'version',
+        title: 'version',
+        borderTop: true,
+        render: (text: any) => text,
+      },
+      {
+        dataIndex: 'params_detail',
+        title: 'params',
+        render: (text: string, record?: any) => {
+          const showValue = text || record?.params;
+          if (!showValue) return null;
+          if (typeof showValue === 'string')
+            return JSON.stringify(showValue, undefined, 4);
+          return (
+            <span>
+              <pre>{JSON.stringify(showValue, undefined, 4)}</pre>
+            </span>
+          );
+        },
+      },
+      {
+        dataIndex: 'returns_detail',
+        title: 'returns',
+        render: (text: string, record?: any) => {
+          const showValue = text || record?.returns;
+          if (!showValue) return null;
+          if (typeof showValue === 'string')
+            return JSON.stringify(showValue, undefined, 4);
+          return <pre>{JSON.stringify(showValue, undefined, 4)}</pre>;
+        },
+      },
+    ],
   ],
 };
 
