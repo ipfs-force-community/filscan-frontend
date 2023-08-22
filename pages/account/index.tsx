@@ -10,6 +10,7 @@ import Miners from '@/src/account/miners';
 import Personal from '@/src/account/personal';
 import Lucky from '@/src/account/lucky';
 import Balance from '@/src/account/balance';
+import Reward from '@/src/account/reward';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -88,6 +89,9 @@ const Account: React.FC = () => {
           )}
           {selectedKey === 'balance' && (
             <Balance noMiners={false} selectedKey={'overview_balance'} />
+          )}
+          {selectedKey === 'reward' && (
+            <Reward noMiners={false} selectedKey={'overview_balance'} />
           )}
 
           {selectedKey === 'personal' && <Personal />}
