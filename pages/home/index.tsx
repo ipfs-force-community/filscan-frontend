@@ -36,7 +36,7 @@ function Home(props: any) {
     <>
       <Banner />
       <div className='main_contain !mt-[26px]'>
-        <div className='flex justify-between h-[270px]'>
+        <div className='flex justify-between h-[270px] gap-x-5'>
           <Meta />
           <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color'>
             <div className={`flex justify-between text-xs font-PingFang p-5`}>

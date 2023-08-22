@@ -8,15 +8,19 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime, formatFil, formatFilNum, isMobile } from '@/utils';
-import { getColor, get_xAxis } from '@/utils/echarts';
+import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 
 export default ({
   accountId,
   interval,
+  list,
+  header,
 }: {
   accountId?: string | string[];
   interval: string;
+  list?: Array<any>;
+  header?: JSX.Element;
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
@@ -36,7 +40,7 @@ export default ({
       grid: {
         top: isMobile() ? 100 : 10,
         left: 20,
-        right: '8%',
+        right: list ? 10 : '8%',
         bottom: 20,
         containLabel: true,
       },
@@ -107,7 +111,7 @@ export default ({
     if (accountId) {
       load();
     }
-  }, [accountId]);
+  }, [accountId, interval]);
 
   const load = async () => {
     const result: any = await fetchData(apiUrl.account_change, {
@@ -189,14 +193,19 @@ export default ({
         });
       }
     });
-    account_change.list.forEach((item: any) => {
+    (list || account_change.list).forEach((item: any) => {
       const dataIndex = item?.dataIndex;
+      let otherObj = {};
+      if (item.seriesArea) {
+        otherObj = { ...seriesArea };
+      }
       legendData.push({
         dataIndex,
         color: item.color,
         title: item.title,
       });
       seriesData.push({
+        ...otherObj,
         type: item.type,
         smooth: true,
         data: seriesObj[dataIndex],
@@ -234,29 +243,37 @@ export default ({
 
   return (
     <div className='flex-1'>
-      <div className='flex justify-between items-center mb-2'>
-        <span className='text-lg font-semibold mr-5'>
-          {tr(account_change.title)}
-        </span>
-        <span className='flex gap-x-4'>
-          {options?.legendData?.map((v: any) => {
-            return (
-              <span
-                className='text-xs flex cursor-pointer items-center gap-x-1'
-                key={v.dataIndex}
-                onClick={() => {
-                  setNoShow({ ...noShow, [v.dataIndex]: !noShow[v.dataIndex] });
-                }}
-                style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
-                {getSvgIcon('legendIcon')}
-                <span className='text-xs text_des font-normal'>
-                  {tr(v.title)}
+      {header ? (
+        header
+      ) : (
+        <div className='flex justify-between items-center mb-2'>
+          <span className='text-lg font-semibold mr-5'>
+            {tr(account_change.title)}
+          </span>
+          <span className='flex gap-x-4'>
+            {options?.legendData?.map((v: any) => {
+              return (
+                <span
+                  className='text-xs flex cursor-pointer items-center gap-x-1'
+                  key={v.dataIndex}
+                  onClick={() => {
+                    setNoShow({
+                      ...noShow,
+                      [v.dataIndex]: !noShow[v.dataIndex],
+                    });
+                  }}
+                  style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
+                  {getSvgIcon('legendIcon')}
+                  <span className='text-xs text_des font-normal'>
+                    {tr(v.title)}
+                  </span>
                 </span>
-              </span>
-            );
-          })}
-        </span>
-      </div>
+              );
+            })}
+          </span>
+        </div>
+      )}
+
       <div className='card_shadow w-full h-[348px] border rounded-xl p-5 border_color'>
         <Echarts options={newOptions} />
       </div>

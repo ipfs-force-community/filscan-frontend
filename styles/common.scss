@@ -2,6 +2,20 @@
 @function px-to-rem($px, $base-font-size: 16px) {
   @return #{$px / $base-font-size}rem;
 }
+
+.main_contain{
+  max-width: 1440px;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  padding:0px;
+  font-size: px-to-rem(14px);
+  box-sizing: content-box;
+  color: var(--font-color);
+  background-color: var(--main-bg-color); 
+  overflow: auto;
+}
+
 a{
   &:hover{
     color: #1C6AFD;
@@ -246,3 +260,10 @@ cursor: pointer;
 }
 
 
+
+@media only screen and (max-width: 1440px){
+  .main_contain{
+    padding: 20px 90px;
+  }
+ 
+}

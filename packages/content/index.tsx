@@ -2,20 +2,31 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { getShowData } from '@/utils';
+import { useMemo } from 'react';
 
 export default ({
   content,
   data,
+  columns = 1,
   ns,
 }: {
   content: Array<any>;
   ns: string;
+  columns: number;
   data: Record<string, any>;
 }) => {
   const { tr } = Translation({ ns: 'detail' });
-
+  const showWidth = useMemo(() => {
+    if (columns !== 1) {
+      return Math.abs(100 / columns) + '%';
+    }
+    return '100%';
+  }, [columns]);
   return (
-    <ul className='flex flex-col gap-y-4'>
+    <ul
+      className={`flex w-full max-h-full flex-col p-2.5 ${
+        columns !== 1 ? 'flex-wrap' : 'gap-y-5'
+      } `}>
       {content.map((item, index) => {
         const {
           title,
@@ -26,7 +37,7 @@ export default ({
           render,
         } = item;
         const itemData = getShowData(item, data);
-        const value = itemData[dataIndex];
+        const value = itemData && itemData[dataIndex];
         const renderValue = render ? render(value, data, tr) : value;
         const showTitle =
           typeof title === 'string' ? tr(title) : title(tr, index);
@@ -38,12 +49,17 @@ export default ({
           <li
             className={`flex items-baseline gap-x-2.5 ${
               borderTop ? 'pt-5 border-t border_color' : ''
-            }`}
-            style={{ ...style }}>
-            <span className='w-28 min-w-28 flex-shrink-0 text_des'>
+            }${columns !== 1 ? 'px-5 h-9 ' : ''}`}
+            style={{ width: showWidth, ...style }}>
+            <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
               {showTitle}:
             </span>
-            <span className='flex-grow overflow-auto'>{renderValue}</span>
+            <span
+              className={`flex-grow overflow-auto ${
+                columns !== 1 ? 'flex justify-end' : ''
+              }`}>
+              {renderValue}
+            </span>
           </li>
         );
       })}

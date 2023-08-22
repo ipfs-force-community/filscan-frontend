@@ -6,12 +6,33 @@ import { Item } from '@/contents/type';
 import fetchData from '@/store/server';
 import BigNumber from 'bignumber.js';
 import dayjs from 'dayjs';
-import Link from 'next/link';
 import router from 'next/router';
 
 export const pageLimit = 15;
 export const detailPageLimit = 10;
 export const max_name_length = 10;
+
+// 账户类型
+/*
+account:一般账户
+
+*/
+export function parseQueryString(queryString: string) {
+  const params: Record<string, any> = new URLSearchParams(queryString);
+  const obj: Record<string, any> = {};
+  for (const [key, value] of params.entries()) {
+    if (obj[key]) {
+      if (Array.isArray(obj[key])) {
+        obj[key].push(value);
+      } else {
+        obj[key] = [obj[key], value];
+      }
+    } else {
+      obj[key] = value;
+    }
+  }
+  return obj;
+}
 
 export function getShowData(item: any, data: { [key: string]: any }): any {
   let showData: any = data;

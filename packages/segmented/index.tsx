@@ -7,6 +7,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
+function extractPathParam(route: string) {
+  const match = route.match(/\[([^\]]+)\]/);
+  return match ? match[1] : null;
+}
+
 //分段控制器，添加锚点
 
 export default ({
@@ -35,17 +40,30 @@ export default ({
     // 在当前路由上添加锚点 '#section1'
     const scrollPosition =
       window.pageYOffset || document.documentElement.scrollTop;
-
     event.preventDefault();
     setActive(tabId);
     if (onChange) onChange(tabId);
-    const pathValue = router.asPath.split('#')[0];
-
     if (isHash) {
-      router.push(`${pathValue}#${tabId}`, undefined, {
-        shallow: false,
-        scroll: false,
-      });
+      // 获取动态路由参数的名称
+      const paramName: string | null = extractPathParam(router.pathname);
+      // 获取动态路由参数的值
+      const paramValue = paramName ? router.query[paramName] : null;
+
+      const newQuery = paramName ? { [paramName]: paramValue } : {};
+      const newAsPath = paramValue
+        ? `${router.pathname.split('[')[0]}${paramValue}#${tabId}`
+        : `${router.pathname}#${tabId}`;
+      router.push(
+        {
+          pathname: `${router.pathname}`,
+          query: { ...newQuery },
+        },
+        newAsPath,
+        {
+          shallow: false,
+          scroll: false,
+        }
+      );
     }
     // 恢复滚动条位置
     window.scrollTo(0, scrollPosition);

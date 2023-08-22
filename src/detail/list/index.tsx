@@ -41,10 +41,6 @@ export default ({
     return tabList.find((v) => v.dataIndex === activeTab);
   }, [activeTab, tabList]);
 
-  const handleTabChange = (value: string) => {
-    console.log(value);
-  };
-
   return (
     <div className='mt-5'>
       <div className='flex justify-between items-center'>
@@ -52,7 +48,6 @@ export default ({
           data={tabList || []}
           ns='detail'
           defaultValue={activeTab}
-          onChange={handleTabChange}
           isHash={true}
         />
         {activeItem?.headerOptions && (
@@ -70,7 +65,7 @@ export default ({
         )}
       </div>
 
-      <div className='card_shadow p-5 mt-5 min-h-[400px] '>
+      <div className='card_shadow p-5 mt-5 min-h-[200px] '>
         {activeTab === 'message_list' && (
           <MessageList accountId={accountId} methodName={method} />
         )}

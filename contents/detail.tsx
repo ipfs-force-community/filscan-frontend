@@ -569,6 +569,122 @@ export const message_detail = {
   ],
 };
 
+const default_content = [
+  {
+    title: 'account_address',
+    dataIndex: 'account_address',
+    type: ['account_basic'],
+    render: (text: string, record: any, tr: any) => {
+      const owned_miners = record?.account_basic?.owned_miners || [];
+      if (!text) return '--';
+      // if (owned_miners.length > 0) {
+      //   return (
+      //     <div>
+      //       <span className='flex_align_center'>
+      //         {isMobile() || (text && text.length > 50)
+      //           ? isIndent(text, 10)
+      //           : text}
+      //         {text && <Copy text={text} />}
+      //       </span>
+
+      //       <Button
+      //         className='btn-link'
+      //         onClick={() => {
+      //           Router.push(`/owner/${record?.account_basic?.account_id}`);
+      //         }}>
+      //         {tr('account_detail')}
+      //       </Button>
+      //     </div>
+      //   );
+      // }
+      return (
+        <span className='flex gap-x-2'>
+          {text}
+          {text && <Copy text={text} />}
+        </span>
+      );
+    },
+  },
+  {
+    title: 'base_account_id',
+    dataIndex: 'account_id',
+    type: ['account_basic'],
+    elasticity: true,
+    render: (text: string, record: any) => {
+      if (!text) return text;
+      return (
+        <span className='flex gap-x-2 items-center'>
+          {text} <Copy text={text} />
+        </span>
+      );
+    },
+  },
+  {
+    title: 'account_type',
+    dataIndex: 'account_type',
+    type: ['account_basic'],
+    render: (text: string, record: any, tr: any) => (text ? tr(text) : '--'),
+  },
+  {
+    title: 'balance',
+    dataIndex: 'account_balance',
+    type: ['account_basic'],
+    render: (text: string) => (text ? formatFilNum(text) : '--'),
+  },
+  {
+    title: 'message_count',
+    dataIndex: 'message_count',
+    type: ['account_basic'],
+    render: (text: any) => text,
+  },
+  {
+    title: 'nonce',
+    dataIndex: 'nonce',
+    type: ['account_basic'],
+    render: (text: any) => text,
+  },
+  {
+    title: 'create_time',
+    dataIndex: 'create_time',
+    type: ['account_basic'],
+    render: (text: number | string) => formatDateTime(text),
+  },
+  {
+    title: 'latest_transfer_time',
+    dataIndex: 'latest_transfer_time',
+    type: ['account_basic'],
+    render: (text: number | string) => formatDateTime(text),
+  },
+];
+
+export const address_detail = {
+  title: 'general_overview_title',
+  content: (type: string) => {
+    switch (type) {
+      case 'account':
+        return [...default_content];
+      default:
+        return [...default_content];
+    }
+  },
+  account_change: {
+    tabsList: [
+      { title: '24h', dataIndex: '24h' },
+      { title: '7d', dataIndex: '7d' },
+      { title: '30d', dataIndex: '1m' },
+    ],
+    list: [
+      {
+        title: 'balance',
+        type: 'line',
+        dataIndex: 'balance',
+        color: '#1C6AFD',
+        seriesArea: true,
+      },
+    ],
+  },
+};
+
 export const account_change = {
   title: 'account_change',
   list: [
@@ -617,6 +733,25 @@ export const power_change = {
   ],
 };
 
+export const address_tabs = [
+  {
+    title: 'message_list',
+    dataIndex: 'message_list',
+    optionsUrl: 'AllMethodByAccountID',
+  },
+  {
+    title: 'traces_list',
+    dataIndex: 'traces_list',
+    headerOptions: [
+      { label: 'all', value: 'all' },
+      { label: 'Blockreward', value: 'blockreward' },
+      { label: 'Burn', value: 'burn' },
+      { label: 'Transfer', value: 'transfer' },
+      { label: 'Send', value: 'send', isIndent: true },
+      { label: 'Receive', value: 'receive', isIndent: true },
+    ],
+  },
+];
 export const minerTabs = [
   {
     title: 'message_list',
@@ -630,7 +765,14 @@ export const minerTabs = [
   {
     title: 'traces_list',
     dataIndex: 'traces_list',
-    optionsUrl: 'AllMethodByAccountID',
+    headerOptions: [
+      { label: 'all', value: 'all' },
+      { label: 'Blockreward', value: 'blockreward' },
+      { label: 'Burn', value: 'burn' },
+      { label: 'Transfer', value: 'transfer' },
+      { label: 'Send', value: 'send', isIndent: true },
+      { label: 'Receive', value: 'receive', isIndent: true },
+    ],
   },
 ];
 

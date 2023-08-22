@@ -1,5 +1,6 @@
 /** @format */
 
+import { parseQueryString } from '@/utils';
 import { useRouter } from 'next/router';
 
 type QueryParam = {
@@ -11,13 +12,20 @@ const useUpdateQuery = () => {
 
   const updateQuery = (newQuery: QueryParam) => {
     const isHash = router.asPath.includes('#');
+    const hash = router.asPath.split('#')[1];
     if (isHash) {
-      const isSearch = router.asPath.includes('?') ? '&' : '?';
-      const key = Object.keys(newQuery)[0];
-      console.log('-----444', newQuery, router.asPath);
+      const hashParams = router.asPath?.split('?')[1];
+      const result = parseQueryString(hashParams);
+      const query = {
+        ...result,
+        ...newQuery,
+      };
       router.push(
-        `${router.asPath}`,
-        `${router.asPath}${isSearch}${key}=${newQuery[key]}`,
+        {
+          pathname: router.pathname,
+          query: { ...router.query, ...newQuery },
+        },
+        `${router.pathname}?${new URLSearchParams(query).toString()}#${hash}`,
         {
           scroll: false,
           shallow: false,

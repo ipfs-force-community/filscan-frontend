@@ -1,5 +1,7 @@
 
-
+@function px-to-rem($px, $base-font-size: 16px) {
+  @return #{$px / $base-font-size}rem;
+}
 
 @font-face {
   font-family: "DINPro"; /* Project id 1544881 */
@@ -97,7 +99,7 @@ font-display: auto;
                 .ant-table-cell{
                     background-color:  var(--bgColor) ;
                     border-bottom:none;
-                    font-size: 12px;
+                    font-size: px-to-rem(12px);
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 500;
                     color: var(--font_des);
@@ -148,7 +150,6 @@ font-display: auto;
                         }
                         .ant-table-cell{
                         height: 58px;
-                        font-size: 14px;
                         font-family: DINPro-Medium, DINPro;
                         font-weight: 500;
                         color:var(--font-color);

@@ -169,6 +169,7 @@ const detail = {
     //general 
     general_overview_title:'账户概览',
     base_account_id: '账户ID',
+    message_count:'消息数',
     
     //dns detail 
     deal_details:'订单详情',
