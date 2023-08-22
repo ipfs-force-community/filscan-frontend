@@ -90,7 +90,6 @@ export default ({
           data={mockData}
           columns={columns}
           loading={false}
-          scroll={{ x: 'max-content' }}
           onChange={handleChange}
         />
       </div>

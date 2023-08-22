@@ -14,6 +14,7 @@ const useUpdateQuery = () => {
     if (isHash) {
       const isSearch = router.asPath.includes('?') ? '&' : '?';
       const key = Object.keys(newQuery)[0];
+      console.log('-----444', newQuery, router.asPath);
       router.push(
         `${router.asPath}`,
         `${router.asPath}${isSearch}${key}=${newQuery[key]}`,

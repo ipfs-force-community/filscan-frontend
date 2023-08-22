@@ -118,7 +118,9 @@ export default () => {
             } else {
               removeQueryParam('name');
             }
-            removeQueryParam('p');
+            if (p) {
+              removeQueryParam('p');
+            }
           }}
         />
       </div>

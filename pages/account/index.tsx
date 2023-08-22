@@ -77,9 +77,7 @@ const Account: React.FC = () => {
             })}
           </ul>
         </div>
-        <div
-          className='flex w_account flex-col px-5 py-10'
-          style={{ height: 'inherit' }}>
+        <div className='flex flex-col px-5 py-10' style={{ height: 'inherit' }}>
           {selectedKey === 'overview' && (
             <Overview selectedKey='overview' noMiners={true} />
           )}
