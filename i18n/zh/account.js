@@ -11,7 +11,7 @@ const account = {
      welcome: '欢迎来到Filscan!',
      welcome_text1: '恭喜！您的账户已成功注册,您可以使用您的邮箱号和密码继续登录。',
      welcome_text2: '请登录您的账户并享受您的Filscan服务!',
-     last_time:'最新更新时间',
+     last_time: '最新更新时间',
      
      //数据概览
      overview_power: '算力概览',

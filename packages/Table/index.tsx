@@ -15,7 +15,7 @@ interface Props {
   current?: number;
   total?: number;
   className?: string;
-  onChange: (pagination: any, filters?: any, sorter?: any) => void;
+  onChange?: (pagination: any, filters?: any, sorter?: any) => void;
 }
 
 export default (props: Props) => {

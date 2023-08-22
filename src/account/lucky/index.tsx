@@ -10,31 +10,16 @@ import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
 
-const mockData = [
-  {
-    tag: '标签一',
-    miner_id: 'f02438',
-    group_name: '分组-',
-    lucky_rate_24h: '100%',
-    lucky_rate_7d: '30%',
-    lucky_rate_30d: '80%',
-  },
-];
-
 export default ({
   selectedKey,
-  noMiners,
+  groups,
 }: {
   selectedKey: string;
-  noMiners: boolean;
+  groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const [data, setData] = useState<any>({});
-  const options = useMemo(() => {
-    return account_lucky.headerOptions.map((item) => {
-      return { ...item, label: tr(item.label) };
-    });
-  }, []);
+  const [data, setData] = useState<any>([]);
+  const [active, setActive] = useState<string | number>(0);
 
   const columns = useMemo(() => {
     return account_lucky.columns.map((item) => {
@@ -46,27 +31,11 @@ export default ({
     load();
   }, []);
 
-  const load = async () => {
-    const result = await fetchData(proApi.getLucky);
+  const load = async (groupId?: string | number) => {
+    const group_id = groupId || active;
+    const result: any = await fetchData(proApi.getLucky, { group_id });
+    setData(result?.lucky_rate_list || []);
   };
-
-  const handleChange = (pagination: any, filters?: any, sorter?: any) => {
-    // let cur: number = pagination.current || current;
-    // let order = { ...sort };
-    // if (sorter.field) {
-    //   order = {
-    //     field: sorter.field,
-    //     order: sorter.order,
-    //   };
-    // }
-    // setCurrent(cur);
-    // setSort(order);
-    // load(active, cur, order);
-  };
-
-  if (noMiners) {
-    return <NoMiner selectedKey={selectedKey} />;
-  }
 
   return (
     <>
@@ -81,17 +50,19 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects value={'all'} options={options} onChange={() => {}} />
-          <ExportExcel columns={columns} data={mockData} />
+          <Selects
+            value={'all'}
+            options={groups}
+            onChange={(v: string | number) => {
+              setActive(v);
+              load(v);
+            }}
+          />
+          <ExportExcel columns={columns} data={data} />
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>
-        <Table
-          data={mockData}
-          columns={columns}
-          loading={false}
-          onChange={handleChange}
-        />
+        <Table data={data} columns={columns} loading={false} />
       </div>
     </>
   );

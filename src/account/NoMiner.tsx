@@ -14,7 +14,7 @@ export default ({ selectedKey }: { selectedKey: string }) => {
       </p>
       <div
         className='flex-1 w-full flex flex-col gap-y-5 mt-20
-      items-center justify-center'>
+          items-center justify-center'>
         <span>{getSvgIcon('no_nodes')}</span>
         <span className='flex gap-x-2'>
           {tr('no_node_data')}

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
@@ -11,6 +11,9 @@ import Personal from '@/src/account/personal';
 import Lucky from '@/src/account/lucky';
 import Balance from '@/src/account/balance';
 import Reward from '@/src/account/reward';
+import fetchData from '@/store/server';
+import { proApi } from '@/contents/apiUrl';
+import NoMiner from '@/src/account/NoMiner';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -18,6 +21,8 @@ const Account: React.FC = () => {
 
   const rootSubmenuKeys: Array<string> = [];
   const navigateWithNoScroll = useAnchorLink();
+  const [minersNum, setMinersNum] = useState<any>({});
+  const [groups, setGroups] = useState<any>([]);
 
   const selectedKey = useMemo(() => {
     if (hash) {
@@ -25,6 +30,20 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  const load = async () => {
+    const result = await fetchData(proApi.account_miners);
+    setMinersNum(result || {});
+    const groups: any = await fetchData(proApi.getGroupsId);
+    const groupsOptions = (groups?.group_info_list || [])?.map((v: any) => {
+      return { ...v, value: v?.group_id, label: tr(v?.group_name) };
+    });
+    setGroups([{ label: 'all', value: 0, group_id: 0 }, ...groupsOptions]);
+  };
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {
@@ -77,22 +96,30 @@ const Account: React.FC = () => {
             })}
           </ul>
         </div>
-        <div className='flex flex-col px-5 py-10' style={{ height: 'inherit' }}>
-          {selectedKey === 'overview' && (
-            <Overview selectedKey='overview' noMiners={true} />
-          )}
-          {selectedKey === 'miners' && <Miners />}
-          {selectedKey === 'lucky' && (
-            <Lucky noMiners={false} selectedKey={'overview_lucky'} />
-          )}
-          {selectedKey === 'balance' && (
-            <Balance noMiners={false} selectedKey={'overview_balance'} />
-          )}
-          {selectedKey === 'reward' && (
-            <Reward noMiners={false} selectedKey={'overview_balance'} />
-          )}
+        <div
+          className='flex-grow flex flex-col px-5 py-10 w_account'
+          style={{ height: 'inherit' }}>
+          {!minersNum?.miners_count ? (
+            <NoMiner selectedKey={selectedKey} />
+          ) : (
+            <>
+              {selectedKey === 'overview' && (
+                <Overview selectedKey='overview' noMiners={true} />
+              )}
+              {selectedKey === 'miners' && <Miners />}
+              {selectedKey === 'lucky' && (
+                <Lucky selectedKey={selectedKey} groups={groups} />
+              )}
+              {selectedKey === 'balance' && (
+                <Balance selectedKey={selectedKey} groups={groups} />
+              )}
+              {selectedKey === 'reward' && (
+                <Reward selectedKey={selectedKey} groups={groups} />
+              )}
 
-          {selectedKey === 'personal' && <Personal />}
+              {selectedKey === 'personal' && <Personal />}
+            </>
+          )}
         </div>
       </div>
     </div>

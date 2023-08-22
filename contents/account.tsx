@@ -243,7 +243,7 @@ export const account_lucky = {
       fixed: 'left',
 
       render: (text: string) => (
-        <span className='des_bg_color  p-2  rounded-[5px]'>{text}</span>
+        <span className='des_bg_color  p-2  rounded-[5px]'>{text || '--'}</span>
       ),
     },
     {
