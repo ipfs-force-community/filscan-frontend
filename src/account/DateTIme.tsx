@@ -31,9 +31,15 @@ export default ({
 
   return (
     <div className='flex items-center gap-x-2'>
-      <PickDate onChange={(value) => handleDateChange('start', value)} />
+      <PickDate
+        timeType='utc'
+        onChange={(value) => handleDateChange('start', value)}
+      />
       <span>{getSvgIcon('dateArrowIcon')}</span>
-      <PickDate onChange={(value) => handleDateChange('end', value)} />
+      <PickDate
+        timeType='utc'
+        onChange={(value) => handleDateChange('end', value)}
+      />
     </div>
   );
 };

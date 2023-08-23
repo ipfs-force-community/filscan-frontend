@@ -2,11 +2,18 @@
 
 import { getSvgIcon } from '@/svgsIcon';
 import { DatePicker } from 'antd';
+import dayjs from 'dayjs';
 
-export default ({ onChange }: { onChange: (value: string) => void }) => {
+export default ({
+  onChange,
+  timeType,
+}: {
+  onChange: (value: string) => void;
+  timeType?: string;
+}) => {
   function handleDateChange(date: any, dateString: string) {
-    //console.log('---3', date, date, dateString);
-    onChange(dateString);
+    let showDate = date.format('YYYY-MM-DDTHH:mm:ssZ') || dateString;
+    onChange(showDate);
   }
   return (
     <span className='custom_picker'>

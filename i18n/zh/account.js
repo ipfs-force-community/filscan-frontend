@@ -61,7 +61,16 @@ const account = {
      block_count:'爆块',
      win_count:'赢票',
      block_reward:'奖励',
-     total_reward:"总奖励",
+     total_reward: "总奖励",
+     
+     //算力概览
+     quality_power: '有效算力',
+     dc_power:'DC算力',
+     raw_power: '原值算力',
+     cc_power: 'CC算力',
+     sector_size: '扇区大小',
+     sector_power_change: '扇区算力变化',
+     sector_count_change:'扇区数量变化',
 
      //个人中心
      default_user: '普通用户',

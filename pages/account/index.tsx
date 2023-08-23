@@ -15,6 +15,7 @@ import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import NoMiner from '@/src/account/NoMiner';
 import useAxiosData from '@/store/useAxiosData';
+import Power from '@/src/account/power';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -40,7 +41,7 @@ const Account: React.FC = () => {
       (groupsData.group_list || []).forEach((group: any) => {
         newGroups.push({
           ...group,
-          value: group?.group_id,
+          value: String(group.group_id),
           label: tr(group?.group_name),
         });
       });
@@ -113,6 +114,12 @@ const Account: React.FC = () => {
               {selectedKey === 'miners' && <Miners />}
               {selectedKey === 'lucky' && (
                 <Lucky
+                  selectedKey={'overview_' + selectedKey}
+                  groups={groups}
+                />
+              )}
+              {selectedKey === 'power' && (
+                <Power
                   selectedKey={'overview_' + selectedKey}
                   groups={groups}
                 />

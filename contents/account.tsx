@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
-import { formatFilNum } from '@/utils';
+import { formatFilNum, unitConversion } from '@/utils';
 
 export const logTabs = [
   {
@@ -170,35 +170,6 @@ export const personal_setting = [
     rules: [{ required: true, message: '${confirm_password} is required' }],
   },
 ];
-
-export const account_power = {
-  columns: [
-    {
-      title: '',
-      dataIndex: '',
-    },
-    {
-      title: '',
-      dataIndex: '',
-    },
-    {
-      title: '',
-      dataIndex: '',
-    },
-    {
-      title: '',
-      dataIndex: '',
-    },
-    {
-      title: '',
-      dataIndex: '',
-    },
-    {
-      title: '',
-      dataIndex: '',
-    },
-  ],
-};
 
 /*
 24h幸运值：近24h的幸运值
@@ -544,5 +515,113 @@ export const account_reward = {
     { title: 'win_count', dataIndex: 'win_count', width: '10%' },
     { title: 'block_reward', dataIndex: 'block_reward', width: '10%' },
     { title: 'total_reward', dataIndex: 'total_reward', width: '15%' },
+  ],
+};
+export const account_power = {
+  columns: [
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      fixed: 'left',
+      width: 100,
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: 100,
+      fixed: 'left',
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: 100,
+      fixed: 'left',
+    },
+    {
+      title: 'quality_power',
+      dataIndex: 'quality_power',
+      amountUnit: {
+        unit: 'power',
+        number: 2,
+      },
+      width: 200,
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'raw_power',
+      dataIndex: 'raw_power',
+      width: 200,
+      amountUnit: {
+        unit: 'power',
+        number: 2,
+      },
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'dc_power',
+      dataIndex: 'dc_power',
+      width: 200,
+      amountUnit: {
+        unit: 'power',
+        number: 2,
+      },
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'cc_power',
+      dataIndex: 'cc_power',
+      width: 200,
+      amountUnit: {
+        unit: 'power',
+        number: 2,
+      },
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'sector_size',
+      dataIndex: 'sector_size',
+      width: 200,
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'sector_power_change',
+      dataIndex: 'sector_power_change',
+      exports: ['sector_count_change'],
+      textUnit: 'power',
+      width: 200,
+      render: (text: any, record: any) => {
+        const changeText = record.sector_count_change
+          ? Number(record.sector_count_change)
+          : record.sector_count_change;
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span>
+            <span className={className}>
+              {flag}
+              {changeText}
+            </span>
+            <span>/{unitConversion(text, 2)}</span>
+          </span>
+        );
+      },
+    },
+    // {
+    //   title: 'sector_count_change',
+    //   dataIndex: 'sector_count_change',
+    //   width: 200,
+    // },
   ],
 };
