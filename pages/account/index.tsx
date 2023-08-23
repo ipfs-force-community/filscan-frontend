@@ -17,6 +17,7 @@ import NoMiner from '@/src/account/NoMiner';
 import useAxiosData from '@/store/useAxiosData';
 import Power from '@/src/account/power';
 import Gas from '@/src/account/gas';
+import Expired from '@/src/account/expired';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -130,6 +131,12 @@ const Account: React.FC = () => {
               )}
               {selectedKey === 'balance' && (
                 <Balance
+                  selectedKey={'overview_' + selectedKey}
+                  groups={groups}
+                />
+              )}
+              {selectedKey === 'expired' && (
+                <Expired
                   selectedKey={'overview_' + selectedKey}
                   groups={groups}
                 />

@@ -31,6 +31,7 @@ export const proApi = {
     getReward: proUrl + '/RewardDetail',
     getGas: proUrl + '/GasCostDetail',
     getPower: proUrl + '/PowerDetail',
+    getSector:proUrl + '/SectorDetail',
     account_miners: proUrl + '/CountUserMiners',
 
 }

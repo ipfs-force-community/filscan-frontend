@@ -4,7 +4,7 @@ import { getSvgIcon } from '@/svgsIcon';
 import Link from 'next/link';
 
 interface ITEM {
-  title: string;
+  title: string | JSX.Element;
   path: string;
 }
 

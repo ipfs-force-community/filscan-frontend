@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
-import { formatFilNum, unitConversion } from '@/utils';
+import { formatFilNum, formatNumber, unitConversion } from '@/utils';
 
 export const logTabs = [
   {
@@ -724,6 +724,99 @@ export const account_gas = {
         wd_post_gas_per_t: { unit: 'fil/T', number: 4 },
       },
       render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+    },
+  ],
+};
+
+export const account_expired = {
+  headerList: [
+    {
+      title: 'exp_month',
+      dataIndex: 'exp_month',
+      width: '20%',
+      render: (text: string, record: any, tr: any) => {
+        const [year, month] = text.split('-');
+        return <span>{tr('exp_month', { year, month })}</span>;
+      },
+    },
+    {
+      title: 'miner_count',
+      dataIndex: 'total_miner_count',
+      width: '20%',
+      render: (text: string | number) => formatNumber(text),
+    },
+    {
+      title: 'exp_power',
+      dataIndex: 'total_exp_power',
+      width: '15%',
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'sector_count',
+      dataIndex: 'total_exp_sector_count',
+      width: '15%',
+      render: (text: string | number) => formatNumber(text),
+    },
+    {
+      title: 'exp_dc',
+      dataIndex: 'total_exp_dc',
+      width: '15%',
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'exp_pledge',
+      dataIndex: 'total_exp_pledge',
+      width: '15%',
+      render: (text: string | number) => formatFilNum(text, false, false, 4),
+    },
+  ],
+  columns: [
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      width: '15%',
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: '10%',
+      render: (text: string) => (
+        <Link href={`/account#expired?miner=${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: '15%',
+    },
+    {
+      title: 'exp_power',
+      dataIndex: 'exp_power',
+      width: '15%',
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'sector_count',
+      dataIndex: 'exp_sector_count',
+      width: '15%',
+      render: (text: string | number) => formatNumber(text),
+    },
+    {
+      title: 'exp_dc',
+      dataIndex: 'exp_dc',
+      width: '15%',
+      render: (text: string, record: any) => unitConversion(text, 2),
+    },
+    {
+      title: 'exp_pledge',
+      dataIndex: 'exp_pledge',
+      width: '15%',
+      render: (text: string | number) => formatFilNum(text, false, false, 4),
     },
   ],
 };

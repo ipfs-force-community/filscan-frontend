@@ -80,6 +80,15 @@ const account = {
      wd_post_gas_cost: '时空证明Gas',
      wd_post_gas_per_t:'时空证明Gas/T',
 
+
+     //到期扇区
+     exp_month: '{{year}}年{{month}}月到期',
+     exp_time:'到期时间',
+     miner_count: '节点数',
+     exp_power: '到期算力',
+     sector_count: '到期扇区数',
+     exp_dc:'到期DC',
+     exp_pledge:'到期抵押',
      //个人中心
      default_user: '普通用户',
      last_login: '上次登录时间',
