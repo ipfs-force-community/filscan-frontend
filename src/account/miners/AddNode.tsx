@@ -7,22 +7,25 @@ import messageManager from '@/packages/message';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getSvgIcon } from '@/svgsIcon';
+import { MinerNum } from '../type';
 
 export default ({
   className,
   defaultMiners,
+  minersNum,
 }: {
   className?: string;
-  defaultMiners?: Array<string>;
+  defaultMiners?: Array<any>;
+  minersNum: MinerNum;
 }) => {
-  const [addMiners, setAddMiner] = useState<string[]>(defaultMiners || []);
+  const [addMiners, setAddMiner] = useState<Array<any>>(defaultMiners || []);
 
   useEffect(() => {
     setAddMiner(defaultMiners || []);
   }, [defaultMiners]);
 
   const handleSearch = (values: any) => {
-    if (addMiners.length > 4) {
+    if (addMiners.length > Number(minersNum?.max_miners_count)) {
       return messageManager.showMessage({
         type: 'error',
         content: '添加节点已达上限，请删除部分节点后添加新',
@@ -38,7 +41,7 @@ export default ({
         ),
       });
     }
-    setAddMiner([...addMiners, values]);
+    setAddMiner([...addMiners, { miner_id: values }]);
   };
 
   return (
@@ -62,7 +65,7 @@ export default ({
               <li
                 className='bg-bg_hover px-2 py-1 w-fit rounded-[5px] flex items-center justify-between gap-x-6'
                 key={miner + index}>
-                {miner}
+                {miner.miner_id}
                 <Image
                   className='cursor-pointer'
                   width={12}

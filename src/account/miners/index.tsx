@@ -4,64 +4,60 @@ import { Translation } from '@/components/hooks/Translation';
 import MinerAdd from './Add';
 import { useHash } from '@/components/hooks/useHash';
 import { proApi } from '@/contents/apiUrl';
-import { Option_Item } from '@/contents/type';
-import fetchData from '@/store/server';
-
-import { useEffect, useMemo, useState } from 'react';
-import { spawn } from 'child_process';
+import { useMemo, useState } from 'react';
 import { getSvgIcon } from '@/svgsIcon';
-import { Button, Collapse } from 'antd';
+import { Collapse } from 'antd';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
-import { Group } from '../type';
+import { Group, MinerNum } from '../type';
+import useAxiosData from '@/store/useAxiosData';
 
-const maxGroups = 5;
-
-export default () => {
+export default ({ minersNum }: { minersNum: MinerNum }) => {
   const { hashParams } = useHash();
   const { type, group } = hashParams || {};
   const { tr } = Translation({ ns: 'account' });
-  const [groups, setGroups] = useState<Array<Group>>([]);
   const [showGroup, setShowGroup] = useState<Record<string, boolean>>({});
   const [editOpen, setEditOpen] = useState<Group>();
 
-  useEffect(() => {
-    loadGroups();
-  }, []);
+  const { data: groupsData, loading: loading } = useAxiosData(proApi.getGroups);
 
-  const loadGroups = async () => {
-    const groups: any = await fetchData(proApi.getGroups);
-    const data =
-      groups?.group_info_list?.map((item: Group) => {
+  const groups = useMemo(() => {
+    const new_data =
+      groupsData?.group_info_list?.map((item: Group) => {
         return { ...item, label: tr(item.group_name), value: item.group_id };
       }) || [];
-    setGroups(data);
-  };
+    return new_data;
+  }, [groupsData]);
 
   const groupDetail = useMemo(() => {
     if (group) {
-      const file = groups.find((v) => v.group_id === Number(group));
+      const file = groups?.find((v: any) => v.group_id === Number(group));
       return file;
     }
     return undefined;
   }, [group, groups]);
 
   if (type === 'miner_add') {
-    return <MinerAdd groups={groups} />;
+    return <MinerAdd groups={groups} minersNum={minersNum} />;
   }
 
-  if (type === 'miners_group') {
-    return <GroupAdd groupId={group} groupDetail={groupDetail} />;
+  if (type === 'miners_group' && groupDetail) {
+    return (
+      <GroupAdd
+        groupId={group}
+        groupDetail={groupDetail}
+        minersNum={minersNum}
+      />
+    );
   }
 
-  console.log('====3', showGroup);
   return (
     <div>
       <p className='w-full mb-5 flex align-baseline justify-between	'>
         <span className='font-semibold text-lg	 font-PingFang'>
           {tr('miners')}
           <span className='text_des text-sm ml-2 font-DIN'>
-            {groups.length}/{maxGroups}
+            {minersNum?.miners_count}/{minersNum?.max_miners_count}
           </span>
         </span>
         <Link
@@ -74,7 +70,7 @@ export default () => {
       </p>
 
       <ul className='flex gap-y-5 flex-col '>
-        {groups.map((item, index) => {
+        {groups.map((item: any, index: number) => {
           return (
             <Collapse
               collapsible='header'
@@ -94,7 +90,7 @@ export default () => {
                         </span>
                         <span>
                           {tr('item_value', {
-                            value: item?.miners_id?.length || 0,
+                            value: item?.miners_info?.length || 0,
                           })}
                         </span>
                       </span>
@@ -112,16 +108,20 @@ export default () => {
                   ),
                   children: (
                     <>
-                      {item?.miners_id?.length > 0 && (
+                      {item?.miners_info?.length > 0 && (
                         <div>
-                          {(item?.miners_id || [])?.map((minerItem) => {
-                            return <span>{minerItem}</span>;
+                          {(item?.miners_info || [])?.map((minerItem: any) => {
                             return (
-                              <li>
-                                <span>{minerItem.minerId || ''}</span>
-                                <span>{minerItem.minerTag || ''}</span>
-                              </li>
+                              <span key={minerItem.miner_id}>
+                                {minerItem.miner_id || ''}
+                              </span>
                             );
+                            // return (
+                            //   <li>
+                            //     <span>{minerItem.miner_id || ''}</span>
+                            //     {/* <span>{minerItem.minerTag || ''}</span> */}
+                            //   </li>
+                            // );
                           })}
                         </div>
                       )}

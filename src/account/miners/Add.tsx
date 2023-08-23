@@ -15,14 +15,21 @@ import { proApi } from '@/contents/apiUrl';
 import { Button, Input } from 'antd';
 import SearchSelect from '@/packages/searchSelect';
 import { Option_Item } from '@/contents/type';
+import { MinerNum } from '../type';
 
 interface Group extends Option_Item {
   group_name: string;
   group_id: number | string;
-  miners_id: Array<any>;
+  miners_info: Array<any>;
 }
 
-export default ({ groups }: { groups: Array<Group> }) => {
+export default ({
+  groups,
+  minersNum,
+}: {
+  groups: Array<Group>;
+  minersNum: MinerNum;
+}) => {
   let defaut_groupId;
   const { tr } = Translation({ ns: 'account' });
   const routerItems = [
@@ -31,7 +38,7 @@ export default ({ groups }: { groups: Array<Group> }) => {
   ];
 
   //const [groups, setGroups] = useState<Array<Group>>([]);
-  const [addMiners, setAddMiner] = useState<string[]>([]);
+  const [addMiners, setAddMiner] = useState<Array<any>>([]);
   const [show, setShow] = useState<boolean>(false);
   const [selectGroup, setSelectGroup] = useState<string | number>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,7 +57,7 @@ export default ({ groups }: { groups: Array<Group> }) => {
   // };
 
   const handleSearch = (values: any) => {
-    if (addMiners.length > 4) {
+    if (addMiners.length > Number(minersNum?.max_miners_count)) {
       return messageManager.showMessage({
         type: 'error',
         content: '添加节点已达上限，请删除部分节点后添加新',
@@ -66,7 +73,7 @@ export default ({ groups }: { groups: Array<Group> }) => {
         ),
       });
     }
-    setAddMiner([...addMiners, values]);
+    setAddMiner([...addMiners, { miner_id: values }]);
   };
 
   const handleSave = async () => {
@@ -75,7 +82,7 @@ export default ({ groups }: { groups: Array<Group> }) => {
       const selectedGroup = selectGroup || '12';
       const groupsUpdated = await fetchData(proApi.saveGroup, {
         group_id: selectedGroup,
-        miners_id: addMiners,
+        miners_info: addMiners,
       });
     }
   };
@@ -106,8 +113,8 @@ export default ({ groups }: { groups: Array<Group> }) => {
                 return (
                   <li
                     className='bg-bg_hover px-2 py-1 w-fit rounded-[5px] flex items-center justify-between gap-x-6'
-                    key={miner + index}>
-                    {miner}
+                    key={miner.miner_id + index}>
+                    {miner.miner_id}
                     <Image
                       className='cursor-pointer'
                       width={12}
