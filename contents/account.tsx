@@ -620,6 +620,43 @@ export const account_power = {
         );
       },
     },
+
+    {
+      title: 'pledge_changed',
+      dataIndex: 'pledge_changed',
+      width: 200,
+      amountUnit: {
+        pledge_changed: { unit: 'fil', number: 2 },
+      },
+      render: (text: string, record: any) =>
+        formatFilNum(text, false, false, 2),
+    },
+    {
+      title: 'pledge_changed_per_t',
+      dataIndex: 'pledge_changed_per_t',
+      width: 200,
+      amountUnit: {
+        pledge_changed_per_t: { unit: 'fil/T', number: 2 },
+      },
+      render: (text: string, record: any) =>
+        formatFilNum(text, false, false, 2),
+    },
+    {
+      title: 'penalty',
+      dataIndex: 'penalty',
+      width: 200,
+      amountUnit: {
+        penalty: { unit: 'fil', number: 2 },
+      },
+      render: (text: string, record: any) =>
+        formatFilNum(text, false, false, 2),
+    },
+    {
+      title: 'fault_sectors',
+      dataIndex: 'fault_sectors',
+      width: 200,
+      render: (text: string, record: any) => formatNumber(text),
+    },
   ],
 };
 
