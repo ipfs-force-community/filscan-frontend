@@ -111,7 +111,7 @@ const Account: React.FC = () => {
           ) : (
             <>
               {selectedKey === 'overview' && (
-                <Overview selectedKey='overview' />
+                <Overview selectedKey='overview' groups={groups} />
               )}
               {selectedKey === 'miners' && <Miners />}
               {selectedKey === 'lucky' && (

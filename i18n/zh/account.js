@@ -24,7 +24,11 @@ const account = {
      no_node_data:'暂未添加节点，去',
      miners_add: '添加节点',
      group_add: '添加分组',
-     miners_group_manage:'分组设置',
+     miners_group_manage: '分组设置',
+     total_out_come_gas: '总支出/Gas消耗',
+     pledge_amount_24: '质押FIL/24h变化',
+     balance_24:'可用余额/24h变化',
+ quality_power_24:'有效算力/24h变化',
      
 
      //添加节点
@@ -62,6 +66,7 @@ const account = {
      win_count:'赢票',
      block_reward:'奖励',
      total_reward: "总奖励",
+     total_reward_24:'总奖励/24h奖励',
      
      //算力概览
      quality_power: '有效算力',

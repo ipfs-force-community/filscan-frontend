@@ -6,6 +6,12 @@ import { MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
 import { formatFilNum, formatNumber, unitConversion } from '@/utils';
+import Image from 'next/image';
+import power from '@/assets/images/power.svg';
+import pledge from '@/assets/images/pledge.svg';
+import gas from '@/assets/images/gas.svg';
+import reward from '@/assets/images/reward.svg';
+import balance from '@/assets/images/balance.svg';
 
 export const logTabs = [
   {
@@ -171,20 +177,247 @@ export const personal_setting = [
   },
 ];
 
-/*
-24h幸运值：近24h的幸运值
+export const overview = {
+  headerList: [
+    [
+      {
+        title: 'quality_power_24',
+        icon: <Image src={power} width={40} height={40} alt='' />,
+        dataIndex: 'sum_quality_adj_power',
+        render: (text: any, record: any, tr: any) => {
+          const changeText = record?.sum_power_change_24h
+            ? Number(record.sum_power_change_24h)
+            : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
+            ' '
+          );
+          return (
+            <div className='flex w-full h-full flex-col justify-between'>
+              <span className='flex flex-col'>
+                <span className='text-sm text_des'>
+                  {tr('quality_power_24')}
+                </span>
+                <span className={className}>
+                  {flag}
+                  {changeText || '--'}
+                </span>
+              </span>
+              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+                {textValue}
+                <span className='text-sm'>{unit}</span>
+              </span>
+            </div>
+          );
+        },
+      },
+      {
+        title: 'total_reward_24',
+        icon: <Image src={reward} width={40} height={40} alt='' />,
+        dataIndex: 'sum_reward',
+        render: (text: any, record: any, tr: any) => {
+          const changeText = record?.sum_reward_change_24h
+            ? Number(record.sum_reward_change_24h)
+            : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
+            ' '
+          );
+          return (
+            <div className='flex w-full h-full flex-col justify-between'>
+              <span className='flex flex-col'>
+                <span className='text-sm text_des'>
+                  {tr('total_reward_24')}
+                </span>
+                <span className={className}>
+                  {flag}
+                  {changeText || '--'}
+                </span>
+              </span>
+              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+                {textValue}
+                <span className='text-sm'>{unit}</span>
+              </span>
+            </div>
+          );
+        },
+      },
+    ],
+    [
+      {
+        title: 'total_out_come_gas',
+        icon: <Image src={gas} width={40} height={40} alt='' />,
+        dataIndex: 'sum_out_come',
+        render: (text: any, record: any, tr: any) => {
+          const changeText = record?.sum_gas ? Number(record.sum_gas) : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
+            ' '
+          );
+          return (
+            <div className='flex w-full h-full flex-col justify-between'>
+              <span className='flex flex-col'>
+                <span className='text-sm text_des'>
+                  {tr('total_out_come_gas')}
+                </span>
+                <span className={className}>
+                  {flag}
+                  {changeText || '--'}
+                </span>
+              </span>
+              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+                {textValue}
+                <span className='text-sm'>{unit}</span>
+              </span>
+            </div>
+          );
+        },
+      },
+      {
+        title: 'pledge_amount_24',
+        icon: <Image src={pledge} width={40} height={40} alt='' />,
+        dataIndex: 'sum_pledge',
+        render: (text: any, record: any, tr: any) => {
+          const changeText = record?.sum_pledge_change_24h
+            ? Number(record.sum_pledge_change_24h)
+            : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
+            ' '
+          );
+          return (
+            <div className='flex w-full h-full flex-col justify-between'>
+              <span className='flex flex-col'>
+                <span className='text-sm text_des'>
+                  {tr('pledge_amount_24')}
+                </span>
+                <span className={className}>
+                  {flag}
+                  {changeText || '--'}
+                </span>
+              </span>
+              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+                {textValue}
+                <span className='text-sm'>{unit}</span>
+              </span>
+            </div>
+          );
+        },
+      },
+      {
+        title: 'balance_24',
+        icon: <Image src={balance} width={40} height={40} alt='' />,
+        dataIndex: 'sum_balance',
+        render: (text: any, record: any, tr: any) => {
+          const changeText = record?.sum_balance_change_24h
+            ? Number(record.sum_balance_change_24h)
+            : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
+            ' '
+          );
+          return (
+            <div className='flex w-full h-full flex-col justify-between'>
+              <span className='flex flex-col'>
+                <span className='text-sm text_des'>{tr('balance_24')}</span>
+                <span className={className}>
+                  {flag}
+                  {changeText || '--'}
+                </span>
+              </span>
+              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+                {textValue}
+                <span className='text-sm'>{unit}</span>
+              </span>
+            </div>
+          );
+        },
+      },
+    ],
+  ],
+  columns: [
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      fixed: 'left',
+      width: 100,
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: 100,
+      fixed: 'left',
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: 100,
+      fixed: 'left',
+    },
+    {
+      title: 'quality_power',
+      dataIndex: 'total_quality_adj_power',
+    },
+    {
+      title: 'raw_power',
+      dataIndex: 'total_raw_byte_power',
+    },
+    {
+      title: 'total_reward_24',
+      dataIndex: 'total_reward',
+      exports: ['reward_change_24h'],
+    },
+    {
+      title: 'total_out_come_gas',
+      dataIndex: 'total_out_come',
+      exports: ['total_gas'],
+    },
+    {
+      title: 'pledge_amount_24',
+      dataIndex: 'total_pledge_amount',
+      exports: ['pledge_change_24h'],
+    },
+    {
+      title: 'balance_24',
+      dataIndex: 'total_balance',
+      exports: ['balance_change_24h'],
+    },
+  ],
+};
 
-
-
-7天幸运值：近7天的幸运值
-
-
-
-30天幸运值：近30天的幸运值
-
-
-
-1年幸运值：近1年的幸运值*/
 export const account_lucky = {
   columns: [
     {
