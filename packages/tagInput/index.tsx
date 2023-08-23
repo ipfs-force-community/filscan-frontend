@@ -45,7 +45,7 @@ const EditableText: React.FC<EditableTextProps> = ({ text, record }) => {
     <span
       onClick={handleTextClick}
       className='cursor-pointer des_bg_color p-2 rounded-[5px] text-primary'>
-      {currentText}
+      {currentText || '--'}
     </span>
   );
 };

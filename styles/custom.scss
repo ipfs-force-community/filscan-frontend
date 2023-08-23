@@ -103,6 +103,7 @@ font-display: auto;
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 500;
                     color: var(--font_des);
+                    padding: 16px 10px;
                     &::before{
                         display: none;
                     }
@@ -269,11 +270,26 @@ font-display: auto;
     .ant-select-selector{
           cursor: pointer;
         padding: 3px 16px !important;
-        height:38px !important;
+        height:32px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgColor) !important;
+        .ant-select-selection-item{
+            &::after{
+                top: -8px;
+            };
+            display: flex;
+            align-items: center;
+            line-height: 28px;
+              font-size: 12px;
+            font-family: DINPro-Medium, DINPro;
+            font-weight: 500;
+            color: #000000;
+        }
         .ant-select-selection-search-input {
-             height:38px !important;
+            font-size: 12px;
+            font-family: DINPro-Medium, DINPro;
+            font-weight: 500;
+            color: #000000;
              cursor: pointer;
         }
     }
@@ -324,9 +340,9 @@ font-display: auto;
      
         border: 1px solid transparent !important;
         background-color:var(--bgDesColor)!important;
-        .ant-select-selection-search-input {
-             height:42px !important;
-        }
+        // .ant-select-selection-search-input {
+        //      height:42px !important;
+        // }
     }
 }
 
@@ -357,5 +373,59 @@ font-display: auto;
         }
         }
        
+    }
+}
+
+//date 
+.custom_picker{
+    position: relative;
+        border-radius: 5px;
+         width: 120px;
+    height: 32px;
+    background-color: var(--bgDesColor);
+    &_pre{
+        position: absolute;
+        left: 10px;
+        top: 50%;
+     transform: translate(0px, -50%);
+    }
+    .custom_date_picker{
+        .ant-picker-input{
+            padding-left: 20px;
+        }
+    }
+}
+.custom_date_picker{
+    width: auto;
+    height: inherit;
+    .ant-picker-input{
+        font-size: 12px;
+        font-family: DINPro-Medium, DINPro;
+        font-weight: 500;
+        color: #000000;
+    }
+  
+}
+.custom_date_picker_wrap{
+    .ant-picker-date-panel{
+        .ant-picker-content{
+            tbody{
+                tr{
+                    &:last-child{
+                        display: none
+                    }
+                }
+            }
+            .ant-picker-cell-in-view{
+                .ant-picker-cell-inner{
+                     border: 1px solid var(--border-color);
+                border-radius: 5px;
+                min-width: 30px;
+                height: 30px;
+                line-height: 30px;
+                }
+               
+            }
+        }
     }
 }

@@ -2,12 +2,14 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import Table from '@/packages/Table';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { account_reward } from '@/contents/account';
-import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
+import useAxiosData from '@/store/useAxiosData';
+import DateTime from '@/src/account/DateTIme';
+import { formatDateTime } from '@/utils';
 
 const mockData = [
   {
@@ -28,28 +30,28 @@ export default ({
   groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const [data, setData] = useState<any>([]);
   const [active, setActive] = useState<string | number>(0);
+  const [date, setDate] = useState({
+    startTime: '',
+    endTime: '',
+  });
+
   const columns = useMemo(() => {
     return account_reward.columns.map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);
 
-  useEffect(() => {
-    load();
-  }, []);
+  //proApi.getReward
+  const { data: rewardData, loading } = useAxiosData(proApi.getReward, {
+    group_id: active,
+    start_date: date.startTime,
+    end_date: date.endTime,
+  });
 
-  const load = async (groupId?: string | number) => {
-    const group_id = groupId || active;
-
-    //proApi.getReward
-    const result: any = await fetchData(proApi.getReward, { group_id });
-    setData(result?.reward_detail_list || []);
-    console.log('---3', result);
-  };
-
-  console.log('---groups', groups);
+  const data = useMemo(() => {
+    return rewardData?.reward_detail_list || [];
+  }, [rewardData]);
 
   const newGroups = useMemo(() => {
     return groups;
@@ -64,7 +66,9 @@ export default ({
           </span>
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
-            <span className='ml-2'>{data?.last_time || '--'}</span>
+            <span className='ml-2'>
+              {formatDateTime(rewardData?.epoch_time)}
+            </span>
           </span>
         </div>
         <div className='flex gap-x-2.5'>
@@ -73,7 +77,15 @@ export default ({
             options={newGroups}
             onChange={(v: string) => {
               setActive(v);
-              load(v);
+              // load(v);
+            }}
+          />
+          <DateTime
+            onChange={(start, end) => {
+              setDate({
+                startTime: start,
+                endTime: end,
+              });
             }}
           />
           <ExportExcel columns={columns} data={data} />
@@ -81,10 +93,9 @@ export default ({
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>
         <Table
-          data={data}
+          data={rewardData?.reward_detail_list || []}
           columns={columns}
-          loading={false}
-          //onChange={handleChange}
+          loading={loading}
         />
       </div>
     </>

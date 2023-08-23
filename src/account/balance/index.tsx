@@ -9,6 +9,8 @@ import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
+import { formatDateTime } from '@/utils';
+import useAxiosData from '@/store/useAxiosData';
 
 export default ({
   selectedKey,
@@ -18,37 +20,24 @@ export default ({
   groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const [data, setData] = useState<any>([]);
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<string>('0');
   const columns = useMemo(() => {
     return account_balance.columns.map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);
 
-  useEffect(() => {
-    load();
-  }, []);
+  //proApi
+  const { data: balanceData, loading } = useAxiosData(proApi.getBalance, {
+    group_id: active ? Number(active) : null,
+  });
 
-  const load = async (groupId?: string | number) => {
-    const group_id = groupId || active;
-    const result: any = await fetchData(proApi.getBalance, { group_id });
-    setData(result?.address_balance_list || []);
-  };
-
-  const handleChange = (pagination: any, filters?: any, sorter?: any) => {
-    // let cur: number = pagination.current || current;
-    // let order = { ...sort };
-    // if (sorter.field) {
-    //   order = {
-    //     field: sorter.field,
-    //     order: sorter.order,
-    //   };
-    // }
-    // setCurrent(cur);
-    // setSort(order);
-    // load(active, cur, order);
-  };
+  const data = useMemo(() => {
+    return {
+      result: balanceData?.address_balance_list || [],
+      epoch_time: balanceData?.epoch_time,
+    };
+  }, [balanceData]);
 
   return (
     <div className='overflow-auto'>
@@ -59,20 +48,32 @@ export default ({
           </span>
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
-            <span className='ml-2'>{data?.last_time || '--'}</span>
+            <span className='ml-2'>
+              {formatDateTime(data?.epoch_time, 'YYYY/MM/DD hh:mm')}
+            </span>
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects value={'all'} options={groups} onChange={() => {}} />
-          <ExportExcel columns={columns} data={data} />
+          <Selects
+            value={active}
+            options={groups}
+            onChange={(value: string) => {
+              setActive(value);
+            }}
+          />
+          <ExportExcel
+            columns={columns}
+            data={data.result}
+            fileName={'balance'}
+          />
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
         <Table
-          data={data}
+          data={data?.result || []}
           columns={columns}
-          loading={false}
-          onChange={handleChange}
+          loading={loading}
+          // onChange={handleChange}
         />
       </div>
     </div>

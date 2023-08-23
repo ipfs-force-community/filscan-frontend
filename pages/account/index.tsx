@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
@@ -14,6 +14,7 @@ import Reward from '@/src/account/reward';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import NoMiner from '@/src/account/NoMiner';
+import useAxiosData from '@/store/useAxiosData';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -21,8 +22,6 @@ const Account: React.FC = () => {
 
   const rootSubmenuKeys: Array<string> = [];
   const navigateWithNoScroll = useAnchorLink();
-  const [minersNum, setMinersNum] = useState<any>({});
-  const [groups, setGroups] = useState<any>([]);
 
   const selectedKey = useMemo(() => {
     if (hash) {
@@ -30,24 +29,25 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
+  const minersNum: any = useAxiosData(proApi.account_miners)?.data || {};
+  const { data: groupsData, loading: groupsLoading } = useAxiosData(
+    proApi.getGroupsId
+  );
 
-  useEffect(() => {
-    load();
-  }, []);
+  const groups = useMemo(() => {
+    const newGroups: any = [{ label: tr('all'), value: '0', group_id: '0' }];
+    if (groupsData && groupsData.group_list) {
+      (groupsData.group_list || []).forEach((group: any) => {
+        newGroups.push({
+          ...group,
+          value: group?.group_id,
+          label: tr(group?.group_name),
+        });
+      });
+    }
 
-  const load = async () => {
-    const result = await fetchData(proApi.account_miners);
-    setMinersNum(result || {});
-    const groups: any = await fetchData(proApi.getGroupsId);
-    const groupsOptions = (groups?.group_list || [])?.map((v: any) => {
-      return { ...v, value: v?.group_id, label: tr(v?.group_name) };
-    });
-
-    setGroups([
-      { label: tr('all'), value: '0', group_id: '0' },
-      ...groupsOptions,
-    ]);
-  };
+    return newGroups;
+  }, [groupsData]);
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {

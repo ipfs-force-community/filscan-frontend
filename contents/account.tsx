@@ -5,6 +5,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
+import { formatFilNum } from '@/utils';
 
 export const logTabs = [
   {
@@ -214,28 +215,6 @@ export const account_power = {
 
 1年幸运值：近1年的幸运值*/
 export const account_lucky = {
-  headerOptions: [
-    {
-      label: 'all',
-      value: 'all',
-    },
-    {
-      label: '24h_lucky',
-      value: '24h',
-    },
-    {
-      label: '7d_lucky',
-      value: '7d',
-    },
-    {
-      label: '30d_lucky',
-      value: '30d',
-    },
-    {
-      label: '1year_lucky',
-      value: '1year',
-    },
-  ],
   columns: [
     {
       title: 'tag',
@@ -243,9 +222,9 @@ export const account_lucky = {
       width: '20%',
       fixed: 'left',
 
-      render: (text: string) => (
-        <span className='des_bg_color  p-2  rounded-[5px]'>{text || '--'}</span>
-      ),
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
     },
     {
       title: 'miner_id',
@@ -278,9 +257,9 @@ export const account_balance = {
       dataIndex: 'tag',
       fixed: 'left',
       width: 100,
-      render: (text: string) => (
-        <span className='des_bg_color  p-2  rounded-[5px]'>{text}</span>
-      ),
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
     },
     {
       title: 'miner_id',
@@ -299,30 +278,238 @@ export const account_balance = {
       width: 100,
       fixed: 'left',
     },
-    { title: 'miner_balance', dataIndex: 'miner_balance', width: 200 },
-    { title: 'owner_balance', dataIndex: 'owner_balance', width: 200 },
-    { title: 'worker_balance', dataIndex: 'worker_balance', width: 200 },
+    {
+      title: 'miner_balance',
+      dataIndex: 'miner_balance',
+      exports: ['miner_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      width: 200,
+      render: (text: string, record: any) => {
+        const changeText = record?.miner_balance_changed
+          ? Number(record.miner_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
+    },
+    {
+      title: 'owner_balance',
+      dataIndex: 'owner_balance',
+      width: 200,
+      exports: ['Owner_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.Owner_balance_changed
+          ? Number(record.Owner_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
+    },
+    {
+      title: 'worker_balance',
+      dataIndex: 'worker_balance',
+      width: 200,
+      exports: ['Worker_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.Worker_balance_changed
+          ? Number(record.Worker_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
+    },
     {
       title: 'controller_0_balance',
       dataIndex: 'controller_0_balance',
       width: 200,
+      exports: ['Controller_0_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.Controller_0_balance_changed
+          ? Number(record.Controller_0_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
     {
       title: 'controller_1_balance',
       dataIndex: 'controller_1_balance',
       width: 200,
+      exports: ['controller_1_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.controller_1_balance_changed
+          ? Number(record.controller_1_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
     {
       title: 'controller_2_balance',
-      dataIndex: 'controller_2_balance',
+      dataIndex: 'controller_2_balance_changed',
       width: 200,
+      exports: ['controller_2_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.controller_2_balance_changed
+          ? Number(record.controller_2_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
     {
       title: 'beneficiary_balance',
       dataIndex: 'beneficiary_balance',
       width: 200,
+      exports: ['beneficiary_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.beneficiary_balance_changed
+          ? Number(record.beneficiary_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
-    { title: 'market_balance', dataIndex: 'market_balance', width: 200 },
+    {
+      title: 'market_balance',
+      dataIndex: 'market_balance',
+      width: 200,
+      exports: ['market_balance_changed'],
+      amountUnit: {
+        unit: 'fil',
+        number: 2,
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.market_balance_changed
+          ? Number(record.market_balance_changed)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span className='flex flex-col'>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={`${className}`}>
+              {flag + formatFilNum(changeText, false, false, 2)}
+            </span>
+          </span>
+        );
+      },
+    },
   ],
 };
 export const account_reward = {
@@ -333,12 +520,7 @@ export const account_reward = {
       width: '20%',
       fixed: 'left',
       render: (text: string, record: any) => {
-        return <TagInput text={text || '--'} record={record} />;
-        return (
-          <span className='des_bg_color  p-2 rounded-[5px] text-primary'>
-            {text || '--'}
-          </span>
-        );
+        return <TagInput text={text} record={record} />;
       },
     },
     {

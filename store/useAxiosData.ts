@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios, { CancelTokenSource } from 'axios';
+import useDeepCompareEffect from 'use-deep-compare-effect'
 import { message } from 'antd';
 import Router from 'next/router';
 
-interface FetchDataOptions {
+
+
+interface OPTIONS { 
   method?: 'get' | 'post' | 'put' | 'delete';
-  body?: {};
   maxRetries?: number;
   timeout?: number; // 0 means no timeout
 }
@@ -13,20 +15,22 @@ interface FetchDataOptions {
 interface FetchDataResult<T> {
   result: T | null;
   error?: string | null;
+  [key:string]:any
 }
 
 // 用于存储每个 URL 和方法的取消令牌
 const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
-function useFetchData<T>(url: string, payload: FetchDataOptions = {}) {
+function useAxiosData<T>(url: string, payload?:any, options: OPTIONS = {}  ) {
   const [data, setData] = useState<FetchDataResult<T> | null>(null);
   const [loading, setLoading] = useState(false);
+  const retriesRef = useRef(0); // 使用 useRef 存储重试次数
 
-  useEffect(() => {
-    const fetchData = async () => {
+  useDeepCompareEffect(() => {
+    const axiosData = async () => {
       setLoading(true);
-      const { method = 'post', body = {}, maxRetries = 3, timeout = 0 } = payload;
-      let retries = 0;
+      const { method = 'post', maxRetries = 3, timeout = 0 } = options;
+      const body = payload || {};
       let error: any = null;
       let data: T | null | any = null;
       const token = localStorage.getItem('token'); // 从 localStorage 获取 token
@@ -43,7 +47,7 @@ function useFetchData<T>(url: string, payload: FetchDataOptions = {}) {
       const cancelTokenSource = axios.CancelToken.source();
       cancelTokenSources[key] = cancelTokenSource;
 
-      while (retries < maxRetries) {
+      while (retriesRef.current < maxRetries) {
         try {
           const response = await axios.request({
             url,
@@ -66,17 +70,17 @@ function useFetchData<T>(url: string, payload: FetchDataOptions = {}) {
             });
             return;
           }
-          data = response.data;
-
+          data = response.data || {};
           break; // 请求成功，跳出循环
         } catch (thrown: any) {
-          error = thrown;
-          retries += 1;
-          if (axios.isCancel(thrown)) {
-            console.log('-----3', thrown, axios.isCancel(thrown));
-            retries = 100;
-            //console.log('Request canceled', thrown?.message);
-          }
+              if (axios.isCancel(thrown)) {
+                console.log('Request canceled', thrown.message);
+                 break;  //取消请求，跳出循环
+              } else { 
+              error = thrown;
+              retriesRef.current += 1;     
+              await new Promise(resolve => setTimeout(resolve, 1000)); // 如果请求失败，等待1秒再重试
+              }          
         }
       }
 
@@ -92,17 +96,15 @@ function useFetchData<T>(url: string, payload: FetchDataOptions = {}) {
       setLoading(false);
     };
 
-    fetchData();
+    axiosData();
 
-    // 组件卸载时取消请求
+    // 组件卸载时取消所有请求
     return () => {
-      if (cancelTokenSources[url]) {
-        cancelTokenSources[url].cancel('Component unmounted');
-      }
+      Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
-  }, [url, payload]);
+  }, [url, payload,options]);
 
   return { data, loading };
 }
 
-export default useFetchData;
+export default useAxiosData;
