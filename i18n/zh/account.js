@@ -12,6 +12,7 @@ const account = {
      welcome_text1: '恭喜！您的账户已成功注册,您可以使用您的邮箱号和密码继续登录。',
      welcome_text2: '请登录您的账户并享受您的Filscan服务!',
      last_time: '最新更新时间',
+     all:'全部',
      
      //数据概览
      overview_power: '算力概览',
@@ -54,7 +55,13 @@ const account = {
      controller_1_balance: 'Controller1余额',
      controller_2_balance: 'Controller2余额',
      beneficiary_balance: 'Beneficiary余额',
-     market_balance:'MarketBalance余额',
+     market_balance: 'MarketBalance余额',
+     
+     //奖励
+     block_count:'爆块',
+     win_count:'赢票',
+     block_reward:'奖励',
+     total_reward:"总奖励",
 
      //个人中心
      default_user: '普通用户',

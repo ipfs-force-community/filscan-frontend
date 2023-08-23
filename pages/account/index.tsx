@@ -39,10 +39,14 @@ const Account: React.FC = () => {
     const result = await fetchData(proApi.account_miners);
     setMinersNum(result || {});
     const groups: any = await fetchData(proApi.getGroupsId);
-    const groupsOptions = (groups?.group_info_list || [])?.map((v: any) => {
+    const groupsOptions = (groups?.group_list || [])?.map((v: any) => {
       return { ...v, value: v?.group_id, label: tr(v?.group_name) };
     });
-    setGroups([{ label: 'all', value: 0, group_id: 0 }, ...groupsOptions]);
+
+    setGroups([
+      { label: tr('all'), value: '0', group_id: '0' },
+      ...groupsOptions,
+    ]);
   };
 
   function getChildren(arr: Array<any>) {
@@ -104,17 +108,26 @@ const Account: React.FC = () => {
           ) : (
             <>
               {selectedKey === 'overview' && (
-                <Overview selectedKey='overview' noMiners={true} />
+                <Overview selectedKey='overview' />
               )}
               {selectedKey === 'miners' && <Miners />}
               {selectedKey === 'lucky' && (
-                <Lucky selectedKey={selectedKey} groups={groups} />
+                <Lucky
+                  selectedKey={'overview_' + selectedKey}
+                  groups={groups}
+                />
               )}
               {selectedKey === 'balance' && (
-                <Balance selectedKey={selectedKey} groups={groups} />
+                <Balance
+                  selectedKey={'overview_' + selectedKey}
+                  groups={groups}
+                />
               )}
               {selectedKey === 'reward' && (
-                <Reward selectedKey={selectedKey} groups={groups} />
+                <Reward
+                  selectedKey={'overview_' + selectedKey}
+                  groups={groups}
+                />
               )}
 
               {selectedKey === 'personal' && <Personal />}

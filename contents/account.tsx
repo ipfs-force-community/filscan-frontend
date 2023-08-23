@@ -4,6 +4,7 @@ import { getSvgIcon } from '@/svgsIcon';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { MenuItem } from './type';
 import Link from 'next/link';
+import TagInput from '@/packages/tagInput';
 
 export const logTabs = [
   {
@@ -322,5 +323,44 @@ export const account_balance = {
       width: 200,
     },
     { title: 'market_balance', dataIndex: 'market_balance', width: 200 },
+  ],
+};
+export const account_reward = {
+  columns: [
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      width: '20%',
+      fixed: 'left',
+      render: (text: string, record: any) => {
+        return <TagInput text={text || '--'} record={record} />;
+        return (
+          <span className='des_bg_color  p-2 rounded-[5px] text-primary'>
+            {text || '--'}
+          </span>
+        );
+      },
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: '15%',
+      fixed: 'left',
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      fixed: 'left',
+      width: '20%',
+    },
+    { title: 'block_count', dataIndex: 'block_count', width: '10%' },
+    { title: 'win_count', dataIndex: 'win_count', width: '10%' },
+    { title: 'block_reward', dataIndex: 'block_reward', width: '10%' },
+    { title: 'total_reward', dataIndex: 'total_reward', width: '15%' },
   ],
 };

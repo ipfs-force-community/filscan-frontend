@@ -1,10 +1,9 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import NoMiner from '../NoMiner';
 import Table from '@/packages/Table';
 import { useEffect, useMemo, useState } from 'react';
-import { account_lucky } from '@/contents/account';
+import { account_reward } from '@/contents/account';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
@@ -32,7 +31,7 @@ export default ({
   const [data, setData] = useState<any>([]);
   const [active, setActive] = useState<string | number>(0);
   const columns = useMemo(() => {
-    return account_lucky.columns.map((item) => {
+    return account_reward.columns.map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);
@@ -45,10 +44,16 @@ export default ({
     const group_id = groupId || active;
 
     //proApi.getReward
-    const result: any = await fetchData(proApi.getPower, { group_id });
+    const result: any = await fetchData(proApi.getReward, { group_id });
     setData(result?.reward_detail_list || []);
     console.log('---3', result);
   };
+
+  console.log('---groups', groups);
+
+  const newGroups = useMemo(() => {
+    return groups;
+  }, [groups]);
 
   return (
     <>
@@ -65,7 +70,7 @@ export default ({
         <div className='flex gap-x-2.5'>
           <Selects
             value={String(active)}
-            options={groups}
+            options={newGroups}
             onChange={(v: string) => {
               setActive(v);
               load(v);

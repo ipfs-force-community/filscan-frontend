@@ -1,23 +1,10 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import { getSvgIcon } from '@/svgsIcon';
-import Link from 'next/link';
-import NoMiner from './NoMiner';
 
-export default ({
-  selectedKey,
-  noMiners,
-}: {
-  selectedKey: string;
-  noMiners: boolean;
-}) => {
+export default ({ selectedKey }: { selectedKey: string }) => {
   const { tr } = Translation({ ns: 'account' });
   console.log();
-
-  if (noMiners) {
-    return <NoMiner selectedKey={selectedKey} />;
-  }
 
   return (
     <>
