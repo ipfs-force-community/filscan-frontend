@@ -6,13 +6,29 @@ import * as XLSX from 'xlsx';
 import { Button } from 'antd';
 import { getSvgIcon } from '@/svgsIcon';
 import { Translation } from '@/components/hooks/Translation';
-import { formatDateTime, formatFilNum } from '@/utils';
+import { formatDateTime, formatFilNum, unitConversion } from '@/utils';
 
 interface ExportToExcelProps {
   columns: { title: string; dataIndex: string; [key: string]: any }[];
   data: { [key: string]: any }[];
   fileName?: string;
   ns?: string;
+}
+
+function getUnitValue(
+  value: any,
+  amountUnit: { unit: string; number?: number }
+) {
+  if (amountUnit.unit.includes('fil')) {
+    const otherUnit = amountUnit?.unit?.split('/')[1];
+    const filValue = formatFilNum(value, false, false, amountUnit.number || 2);
+    return otherUnit ? filValue + `/${otherUnit}` : filValue;
+  } else if (amountUnit.unit === 'prow') {
+    const otherUnit = amountUnit?.unit?.split('/')[1];
+    const powerValue = unitConversion(value, amountUnit.number || 2);
+    return otherUnit ? powerValue + `/${otherUnit}` : powerValue;
+  }
+  return value;
 }
 
 const ExportExcel: FC<ExportToExcelProps> = ({
@@ -59,26 +75,22 @@ const ExportExcel: FC<ExportToExcelProps> = ({
       columns.forEach((col: any) => {
         const dataIndex = col.dataIndex;
         let value = dataItem[dataIndex];
-        if (col.amountUnit && col?.amountUnit?.unit === 'fil') {
-          value = formatFilNum(
-            value,
-            false,
-            false,
-            col?.amountUnit?.number || 2
-          );
+        const showUnit =
+          col?.amountUnit &&
+          col.amountUnit[dataIndex] &&
+          col?.amountUnit[dataIndex]?.unit;
+        if (showUnit) {
+          value = getUnitValue(value, col.amountUnit[dataIndex]);
         }
         dataRow.push(value);
         if (col.exports && Array.isArray(col.exports)) {
           col.exports.forEach((v: string) => {
             const otherKey = v;
             let otherValue = dataItem[otherKey];
-            if (col.amountUnit && col?.amountUnit?.unit === 'fil') {
-              otherValue = formatFilNum(
-                value,
-                false,
-                false,
-                col?.amountUnit?.number || 2
-              );
+            const otherShow =
+              col?.amountUnit && col.amountUnit[v] && col?.amountUnit[v]?.unit;
+            if (otherShow) {
+              otherValue = getUnitValue(otherValue, col?.amountUnit[v]);
             }
             dataRow.push(otherValue);
           });

@@ -69,8 +69,16 @@ const account = {
      raw_power: '原值算力',
      cc_power: 'CC算力',
      sector_size: '扇区大小',
-     sector_power_change: '扇区算力变化',
-     sector_count_change:'扇区数量变化',
+     sector_power_change: '扇区变化',
+     sector_count_change: '扇区数量变化',
+     
+     //gas 
+     total_gas_cost: 'Gas总消耗',
+     seal_gas_cost: '封装Gas',
+     seal_gas_per_t: '封装Gas/T',
+     deal_gas_cost: '发单Gas',
+     wd_post_gas_cost: '时空证明Gas',
+     wd_post_gas_per_t:'时空证明Gas/T',
 
      //个人中心
      default_user: '普通用户',

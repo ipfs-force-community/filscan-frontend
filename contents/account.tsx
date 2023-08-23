@@ -254,9 +254,10 @@ export const account_balance = {
       dataIndex: 'miner_balance',
       exports: ['miner_balance_changed'],
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        miner_balance_changed: { unit: 'fil', number: 2 },
+        miner_balance: { unit: 'fil', number: 2 },
       },
+
       width: 200,
       render: (text: string, record: any) => {
         const changeText = record?.miner_balance_changed
@@ -284,9 +285,10 @@ export const account_balance = {
       width: 200,
       exports: ['Owner_balance_changed'],
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        owner_balance: { unit: 'fil', number: 2 },
+        Owner_balance_changed: { unit: 'fil', number: 2 },
       },
+
       render: (text: string, record: any) => {
         const changeText = record?.Owner_balance_changed
           ? Number(record.Owner_balance_changed)
@@ -312,9 +314,10 @@ export const account_balance = {
       dataIndex: 'worker_balance',
       width: 200,
       exports: ['Worker_balance_changed'],
+
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        worker_balance: { unit: 'fil', number: 2 },
+        Worker_balance_changed: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
         const changeText = record?.Worker_balance_changed
@@ -342,8 +345,8 @@ export const account_balance = {
       width: 200,
       exports: ['Controller_0_balance_changed'],
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        controller_0_balance: { unit: 'fil', number: 2 },
+        Controller_0_balance_changed: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
         const changeText = record?.Controller_0_balance_changed
@@ -370,9 +373,10 @@ export const account_balance = {
       dataIndex: 'controller_1_balance',
       width: 200,
       exports: ['controller_1_balance_changed'],
+
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        controller_1_balance: { unit: 'fil', number: 2 },
+        controller_1_balance_changed: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
         const changeText = record?.controller_1_balance_changed
@@ -400,8 +404,8 @@ export const account_balance = {
       width: 200,
       exports: ['controller_2_balance_changed'],
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        controller_2_balance: { unit: 'fil', number: 2 },
+        controller_2_balance_changed: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
         const changeText = record?.controller_2_balance_changed
@@ -429,8 +433,8 @@ export const account_balance = {
       width: 200,
       exports: ['beneficiary_balance_changed'],
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        beneficiary_balance: { unit: 'fil', number: 2 },
+        beneficiary_balance_changed: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
         const changeText = record?.beneficiary_balance_changed
@@ -458,8 +462,8 @@ export const account_balance = {
       width: 200,
       exports: ['market_balance_changed'],
       amountUnit: {
-        unit: 'fil',
-        number: 2,
+        market_balance: { unit: 'fil', number: 2 },
+        market_balance_changed: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
         const changeText = record?.market_balance_changed
@@ -549,8 +553,7 @@ export const account_power = {
       title: 'quality_power',
       dataIndex: 'quality_power',
       amountUnit: {
-        unit: 'power',
-        number: 2,
+        quality_power: { unit: 'power', number: 2 },
       },
       width: 200,
       render: (text: string, record: any) => unitConversion(text, 2),
@@ -560,8 +563,7 @@ export const account_power = {
       dataIndex: 'raw_power',
       width: 200,
       amountUnit: {
-        unit: 'power',
-        number: 2,
+        raw_power: { unit: 'power', number: 2 },
       },
       render: (text: string, record: any) => unitConversion(text, 2),
     },
@@ -570,8 +572,7 @@ export const account_power = {
       dataIndex: 'dc_power',
       width: 200,
       amountUnit: {
-        unit: 'power',
-        number: 2,
+        dc_power: { unit: 'power', number: 2 },
       },
       render: (text: string, record: any) => unitConversion(text, 2),
     },
@@ -580,8 +581,7 @@ export const account_power = {
       dataIndex: 'cc_power',
       width: 200,
       amountUnit: {
-        unit: 'power',
-        number: 2,
+        cc_power: { unit: 'power', number: 2 },
       },
       render: (text: string, record: any) => unitConversion(text, 2),
     },
@@ -595,7 +595,9 @@ export const account_power = {
       title: 'sector_power_change',
       dataIndex: 'sector_power_change',
       exports: ['sector_count_change'],
-      textUnit: 'power',
+      amountUnit: {
+        sector_power_change: { unit: 'power', number: 2 },
+      },
       width: 200,
       render: (text: any, record: any) => {
         const changeText = record.sector_count_change
@@ -618,10 +620,110 @@ export const account_power = {
         );
       },
     },
-    // {
-    //   title: 'sector_count_change',
-    //   dataIndex: 'sector_count_change',
-    //   width: 200,
-    // },
+  ],
+};
+
+export const account_gas = {
+  columns: [
+    {
+      title: 'tag',
+      dataIndex: 'tag',
+      fixed: 'left',
+      width: 100,
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
+    },
+    {
+      title: 'miner_id',
+      dataIndex: 'miner_id',
+      width: 100,
+      fixed: 'left',
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
+    {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: 100,
+      fixed: 'left',
+    },
+    {
+      title: 'sector_power_change',
+      dataIndex: 'sector_count_change',
+      exports: ['sector_count_change'],
+      amountUnit: {
+        sector_power_change: { unit: 'power', number: 2 },
+      },
+      width: 200,
+      render: (text: any, record: any) => {
+        const changeText = record.sector_count_change
+          ? Number(record.sector_count_change)
+          : record.sector_count_change;
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span>
+            <span className={className}>
+              {flag}
+              {changeText}
+            </span>
+            <span>/{unitConversion(text, 2)}</span>
+          </span>
+        );
+      },
+    },
+    {
+      title: 'total_gas_cost',
+      dataIndex: 'total_gas_cost',
+      width: 200,
+      amountUnit: {
+        total_gas_cost: { unit: 'fil', number: 4 },
+      },
+      render: (text: any) => formatFilNum(text, false, false, 2),
+    },
+    {
+      title: 'seal_gas_per_t',
+      dataIndex: 'seal_gas_per_t',
+      width: 200,
+      amountUnit: {
+        total_gas_cost: { unit: 'fil/T', number: 4 },
+      },
+      render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+    },
+    {
+      title: 'deal_gas_cost',
+      dataIndex: 'deal_gas_cost',
+      width: 200,
+      amountUnit: {
+        deal_gas_cost: { unit: 'fil', number: 4 },
+      },
+      render: (text: any) => formatFilNum(text, false, false, 2),
+    },
+    {
+      title: 'wd_post_gas_cost',
+      dataIndex: 'wd_post_gas_cost',
+      width: 200,
+      amountUnit: {
+        wd_post_gas_cost: { unit: 'fil', number: 4 },
+      },
+      render: (text: any) => formatFilNum(text, false, false, 2),
+    },
+    {
+      title: 'wd_post_gas_per_t',
+      dataIndex: 'wd_post_gas_per_t',
+      width: 200,
+      amountUnit: {
+        wd_post_gas_per_t: { unit: 'fil/T', number: 4 },
+      },
+      render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+    },
   ],
 };
