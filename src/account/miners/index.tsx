@@ -25,6 +25,7 @@ export default ({ minersNum }: { minersNum: MinerNum }) => {
   const { data: groupsData, loading: loading } = useAxiosData(proApi.getGroups);
 
   useEffect(() => {
+    console.log('==---3groupsData', groupsData);
     calcGroups(groupsData?.group_info_list || []);
   }, [groupsData]);
 
@@ -53,6 +54,7 @@ export default ({ minersNum }: { minersNum: MinerNum }) => {
     return undefined;
   }, [group, groups]);
 
+  console.log('---3', groups, groupsData);
   const renderChildren = () => {
     if (type === 'miner_add') {
       return (

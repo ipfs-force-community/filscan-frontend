@@ -737,7 +737,7 @@ export const account_reward = {
       width: '15%',
       fixed: 'left',
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/account#reward?miner=${text}`} className='link_text'>
           {text}
         </Link>
       ),

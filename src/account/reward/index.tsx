@@ -10,17 +10,8 @@ import ExportExcel from '@/packages/exportExcel';
 import useAxiosData from '@/store/useAxiosData';
 import DateTime from '@/src/account/DateTIme';
 import { formatDateTime } from '@/utils';
-
-const mockData = [
-  {
-    tag: '标签一',
-    miner_id: 'f02438',
-    group_name: '分组-',
-    lucky_rate_24h: '100%',
-    lucky_rate_7d: '30%',
-    lucky_rate_30d: '80%',
-  },
-];
+import { useHash } from '@/components/hooks/useHash';
+import Detail from './Detail';
 
 export default ({
   selectedKey,
@@ -30,10 +21,17 @@ export default ({
   groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
+  const { hashParams } = useHash();
   const [active, setActive] = useState<string | number>(0);
   const [date, setDate] = useState({
-    startTime: '',
-    endTime: '',
+    startTime: formatDateTime(
+      new Date().getTime() / 1000,
+      'YYYY-MM-DDTHH:mm:ssZ'
+    ),
+    endTime: formatDateTime(
+      new Date().getTime() / 1000,
+      'YYYY-MM-DDTHH:mm:ssZ'
+    ),
   });
 
   const columns = useMemo(() => {
@@ -44,7 +42,7 @@ export default ({
 
   //proApi.getReward
   const { data: rewardData, loading } = useAxiosData(proApi.getReward, {
-    group_id: active,
+    group_id: active ? Number(active) : 0,
     start_date: date.startTime,
     end_date: date.endTime,
   });
@@ -57,6 +55,9 @@ export default ({
     return groups;
   }, [groups]);
 
+  if (hashParams?.miner) {
+    return <Detail miner={hashParams.miner} data={rewardData} />;
+  }
   return (
     <>
       <div className='flex justify-between items-center'>
@@ -81,6 +82,7 @@ export default ({
             }}
           />
           <DateTime
+            defaultValue={[date.startTime, date.endTime]}
             onChange={(start, end) => {
               setDate({
                 startTime: start,

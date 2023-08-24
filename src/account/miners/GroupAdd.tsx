@@ -44,7 +44,7 @@ export default ({
     //添加分组及节点
     setSaveLoading(true);
     const data = await axiosData(proApi.saveGroup, {
-      group_id: groupId,
+      group_id: Number(groupId),
       group_name: groupName,
       miners_info: groupMinders,
     });

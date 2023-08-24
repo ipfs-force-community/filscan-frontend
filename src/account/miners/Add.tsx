@@ -77,16 +77,29 @@ export default ({
     if (addMiners.length > 0) {
       setLoading(false);
       const selectedGroup = selectGroup || defaultId;
-      const data = await axiosData(proApi.saveGroup, {
-        group_id: selectedGroup,
-        miners_info: addMiners,
-      });
-      console.log('---d', data);
+      const groupDetail = groups.find((v) => v.value === selectedGroup);
+      let payload = {};
+      if (groupDetail) {
+        //更新旧分组
+        payload = {
+          group_id: selectedGroup,
+          group_name: groupDetail?.group_name,
+          miners_info: groupDetail?.miners_info.concat(addMiners),
+        };
+      } else {
+        //添加新分组
+        payload = {
+          group_id: selectedGroup,
+          miners_info: addMiners,
+        };
+      }
+      const data = await axiosData(proApi.saveGroup, payload);
       setLoading(false);
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups.group_info_list || []);
     }
   };
+  console.log('----33', groups);
   return (
     <>
       <Breadcrumb items={routerItems} />
@@ -159,7 +172,8 @@ export default ({
       </div>
       <CreateGroup
         show={show}
-        onChange={() => {
+        onChange={(name) => {
+          //  setGroupsName(value)
           setShow(false);
         }}
       />

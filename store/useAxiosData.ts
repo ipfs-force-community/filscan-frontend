@@ -105,7 +105,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
   };
 
   useDeepCompareEffect(() => {
-    
     if (initialUrl) { 
          axiosData(initialUrl);
     }
@@ -116,6 +115,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
     };
   }, [initialUrl, initialPayload, initialOptions]);
 
+  console.log('---data',data)
   return { data, loading, axiosData };
 }
 

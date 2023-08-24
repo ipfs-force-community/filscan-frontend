@@ -34,7 +34,7 @@ export default ({
 
   useEffect(() => {
     if (value) {
-      setValue(value);
+      setValue(value.trim());
     }
   }, [value]);
 

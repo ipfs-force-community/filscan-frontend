@@ -6,8 +6,10 @@ import { useState } from 'react';
 import { message } from 'antd';
 
 export default ({
+  defaultValue,
   onChange,
 }: {
+  defaultValue: Array<string>;
   onChange: (start: string, end: string) => void;
 }) => {
   const [startTime, setStartTime] = useState('');
@@ -32,11 +34,13 @@ export default ({
   return (
     <div className='flex items-center gap-x-2'>
       <PickDate
+        defaultValue={defaultValue[0]}
         timeType='utc'
         onChange={(value) => handleDateChange('start', value)}
       />
       <span>{getSvgIcon('dateArrowIcon')}</span>
       <PickDate
+        defaultValue={defaultValue[1]}
         timeType='utc'
         onChange={(value) => handleDateChange('end', value)}
       />

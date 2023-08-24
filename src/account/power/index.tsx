@@ -21,8 +21,14 @@ export default ({
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string | number>(0);
   const [date, setDate] = useState({
-    startTime: '',
-    endTime: '',
+    startTime: formatDateTime(
+      new Date().getTime() / 1000,
+      'YYYY-MM-DDTHH:mm:ssZ'
+    ),
+    endTime: formatDateTime(
+      new Date().getTime() / 1000,
+      'YYYY-MM-DDTHH:mm:ssZ'
+    ),
   });
 
   const columns = useMemo(() => {
@@ -33,7 +39,7 @@ export default ({
 
   //proApi
   const { data: powerData, loading } = useAxiosData(proApi.getPower, {
-    group_id: active ? Number(active) : null,
+    group_id: active ? Number(active) : 0,
     start_date: date.startTime,
     end_date: date.endTime,
   });
@@ -70,6 +76,7 @@ export default ({
             }}
           />
           <DateTime
+            defaultValue={[date.startTime, date.endTime]}
             onChange={(start, end) => {
               setDate({
                 startTime: start,

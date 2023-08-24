@@ -203,6 +203,14 @@ export function getClassName(str: string | number) {
   return showNum < 0 ? 'text_red' : 'text_green';
 }
 
+//获取当天的日期
+export function getCalcTime(startTime?: number): number {
+  if (startTime) {
+    return (new Date().getTime() - startTime * 24 * 60 * 60 * 1000) / 1000;
+  }
+  return new Date().getTime() / 1000;
+}
+
 //密码校验规则
 export function validatePassword(password: string, email: string): boolean {
   // 8-20个字符
