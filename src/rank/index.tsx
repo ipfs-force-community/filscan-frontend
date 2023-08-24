@@ -22,7 +22,6 @@ const defaultData = {
 
 export default ({ origin }: { origin: string }) => {
   const { hash } = useHash();
-  console.log('----34345', hash);
   const { tr } = Translation({ ns: 'rank' });
   const { theme, lang } = useFilscanStore();
 
@@ -45,8 +44,6 @@ export default ({ origin }: { origin: string }) => {
     setActive(showHash);
     load(showHash, undefined, undefined, defaultFilter);
   }, [hash]);
-
-  console.log('----hash', hash);
 
   const load = async (
     tab?: string,

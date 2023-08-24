@@ -31,6 +31,7 @@ import useObserver from '@/components/hooks/useObserver';
 function Home(props: any) {
   const { tr } = Translation({ ns: 'home' });
   const ref = useObserver();
+  const ref1 = useObserver();
 
   return (
     <>
@@ -61,8 +62,8 @@ function Home(props: any) {
         <div className='mt-32' ref={ref}>
           <Rank origin={'home'} />
         </div>
-        <div className='flex mt-12 gap-x-5 h-[489px] '>
-          <div className=''>
+        <div className='flex w-full mt-12 gap-x-5 h-[489px]  ' ref={ref1}>
+          <div className='flex-1'>
             <div className={`flex justify-between`}>
               <div className='font-PingFang font-semibold text-lg	'>
                 {tr('contract_rank')}
@@ -79,7 +80,7 @@ function Home(props: any) {
             </div>
             <ContractRank origin='home' />
           </div>
-          <div className=''>
+          <div className='flex-1'>
             <div className={`flex justify-between `}>
               <div className='font-PingFang font-semibold text-lg	'>
                 {tr('defi_list')}

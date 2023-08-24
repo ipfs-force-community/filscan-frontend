@@ -620,7 +620,7 @@ const deleteIcon = (
         <g id='编组-4备份-6' transform='translate(89.000000, 393.000000)'>
           <rect
             id='矩形备份-2'
-            stroke-opacity='0.2'
+            strokeOpacity='0.2'
             stroke='currentColor'
             stroke-width='0.5'
             x='0.25'
@@ -666,25 +666,4 @@ const svgTypes: Record<string, JSX.Element> = {
 
 export const getSvgIcon = (type: string) => {
   return svgTypes[type] || '';
-};
-
-const arr = [
-  [1, 2, 4],
-  [5, 6, 7],
-];
-
-export default () => {
-  return (
-    <div>
-      {arr.map((vItem) => {
-        return (
-          <ul>
-            {vItem.map((item) => {
-              return <li>item</li>;
-            })}
-          </ul>
-        );
-      })}
-    </div>
-  );
 };

@@ -25,7 +25,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
   const retriesRef = useRef(0); // 使用 useRef 存储重试次数
 
   const axiosData = async (url: string, payload = initialPayload, options = initialOptions) => {
-    setLoading(true);
     retriesRef.current = 0;
     const { method = 'post', maxRetries = 3, timeout = 0 } = options;
     const body = payload || {};
@@ -99,12 +98,13 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
         error: error ? error.message : '请求失败',
       });
     }
-        setLoading(false);
+     setLoading(false);
     return data?.result || data || {};
   };
 
   useDeepCompareEffect(() => {
     if (initialUrl) { 
+      setLoading(true);
       axiosData(initialUrl);
       
     }
@@ -115,7 +115,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
     };
   }, [initialUrl, initialPayload, initialOptions]);
 
-  console.log('---data',data)
   return { data, loading, axiosData };
 }
 

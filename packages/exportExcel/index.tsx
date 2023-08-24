@@ -70,8 +70,9 @@ const ExportExcel: FC<ExportToExcelProps> = ({
         });
       }
     });
-    const dataRow: Array<any> = [];
+    const dataRows: Array<any> = [];
     data.forEach((dataItem) => {
+      const row: any = [];
       columns.forEach((col: any) => {
         const dataIndex = col.dataIndex;
         let value = dataItem[dataIndex];
@@ -82,7 +83,7 @@ const ExportExcel: FC<ExportToExcelProps> = ({
         if (showUnit) {
           value = getUnitValue(value, col.amountUnit[dataIndex]);
         }
-        dataRow.push(value);
+        row.push(value);
         if (col.exports && Array.isArray(col.exports)) {
           col.exports.forEach((v: string) => {
             const otherKey = v;
@@ -92,16 +93,18 @@ const ExportExcel: FC<ExportToExcelProps> = ({
             if (otherShow) {
               otherValue = getUnitValue(otherValue, col?.amountUnit[v]);
             }
-            dataRow.push(otherValue);
+            row.push(otherValue);
           });
         }
       });
+      dataRows.push(row);
     });
+
+    const dataArray = [headers, ...dataRows];
 
     //const dataArray = data.map((row) => accessors.map((field) => row[field]));
     //dataArray.unshift(headers);
 
-    const dataArray = [headers, dataRow];
     const ws = XLSX.utils.aoa_to_sheet(dataArray);
     const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });

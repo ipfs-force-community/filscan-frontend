@@ -522,7 +522,7 @@ export const account_lucky = {
       fixed: 'left',
 
       render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />;
       },
     },
     {
@@ -557,7 +557,7 @@ export const account_balance = {
       fixed: 'left',
       width: 100,
       render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />;
       },
     },
     {
@@ -823,7 +823,7 @@ export const account_reward = {
       width: '20%',
       fixed: 'left',
       render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />;
       },
     },
     {
@@ -857,7 +857,7 @@ export const account_power = {
       fixed: 'left',
       width: 100,
       render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />;
       },
     },
     {
@@ -996,7 +996,7 @@ export const account_gas = {
       fixed: 'left',
       width: 100,
       render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />;
       },
     },
     {
@@ -1196,7 +1196,16 @@ export const account_miners = {
         return <TagInput text={text} record={record} />;
       },
     },
-    { dataIndex: 'miner_id', title: 'miner_id', width: '45%' },
+    {
+      dataIndex: 'miner_id',
+      title: 'miner_id',
+      width: '45%',
+      render: (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
+          {text}
+        </Link>
+      ),
+    },
     {
       dataIndex: 'edit',
       title: 'edit',

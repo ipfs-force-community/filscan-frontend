@@ -6,9 +6,14 @@ import { Input, InputRef } from 'antd';
 interface EditableTextProps {
   text: string;
   record: any; // 你可以替换为你需要的类型
+  isEdit?: boolean;
 }
 
-const EditableText: React.FC<EditableTextProps> = ({ text, record }) => {
+const EditableText: React.FC<EditableTextProps> = ({
+  text,
+  record,
+  isEdit = true,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentText, setCurrentText] = useState(text);
 
@@ -33,7 +38,7 @@ const EditableText: React.FC<EditableTextProps> = ({ text, record }) => {
     //save current
   };
 
-  return isEditing ? (
+  return isEditing && isEdit ? (
     <Input
       ref={inputRef}
       value={currentText}

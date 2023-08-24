@@ -23,32 +23,34 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
 
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
-      console.log('---4', result);
-    } else {
-      const { source, destination } = result;
-      const sourceIndex: number = source.index; //移动的index
-      const destinationIndex = destination.index; //目标index
-      const [groupId, groupIndex] = source.droppableId.split('_');
-      const sourceMinerItem = data[groupIndex].miners_info[sourceIndex];
-
-      const [dest_itemId, dest_index] = destination.droppableId.split('_');
-      const groupItem: any = data[Number(groupIndex)]; //内容group minerIem
-      const destinationGroup = data[Number(dest_index)]; //移动
-
-      if (groupId !== dest_itemId) {
-        //不同的组内拖拽
-        destinationGroup.miners_info = destinationGroup?.miners_info || [];
-        destinationGroup.miners_info?.splice(
-          destinationIndex,
-          0,
-          sourceMinerItem
-        );
-        groupItem?.miners_info?.splice(sourceIndex, 1);
-      } else {
-        //同组内拖拽
-        groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
-      }
+      return;
     }
+    // else
+    // {
+    const { source, destination } = result;
+    const sourceIndex: number = source.index; //移动的index
+    const destinationIndex = destination.index; //目标index
+    const [groupId, groupIndex] = source.droppableId.split('_');
+    const sourceMinerItem = data[groupIndex].miners_info[sourceIndex];
+
+    const [dest_itemId, dest_index] = destination.droppableId.split('_');
+    const groupItem: any = data[Number(groupIndex)]; //内容group minerIem
+    const destinationGroup = data[Number(dest_index)]; //移动
+
+    if (groupId !== dest_itemId) {
+      //不同的组内拖拽
+      destinationGroup.miners_info = destinationGroup?.miners_info || [];
+      destinationGroup.miners_info?.splice(
+        destinationIndex,
+        0,
+        sourceMinerItem
+      );
+      groupItem?.miners_info?.splice(sourceIndex, 1);
+    } else {
+      //同组内拖拽
+      groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
+    }
+    // }
 
     setData([...data]);
     //保存分组 todo
@@ -157,7 +159,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  className='main_bgColor text-sm font-medium text_des rounded-xl min-h-[200px]'>
+                  className='main_bgColor text-sm font-medium text_des rounded-xl'>
                   <ul className='flex p-5'>
                     {account_miners.groups_miners_columns.map((minerHeader) => {
                       return (
