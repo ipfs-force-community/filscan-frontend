@@ -3,11 +3,12 @@
 import { Translation } from '@/components/hooks/Translation';
 import { Button, Input } from 'antd';
 import AddNode from './AddNode';
-import { Group, MinerNum } from '../type';
+import { Group, MinerNum, groupsItem } from '../type';
 import Breadcrumb from '@/packages/breadcrumb';
 import { useEffect, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
+import { useGroupsStore } from './content';
 
 /** @format */
 
@@ -17,10 +18,11 @@ export default ({
   minersNum,
 }: {
   groupId?: string | number | null;
-  groupDetail?: Group;
+  groupDetail?: groupsItem;
   minersNum: MinerNum;
 }) => {
   const { tr } = Translation({ ns: 'account' });
+  const { setGroups } = useGroupsStore();
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     {
@@ -47,6 +49,8 @@ export default ({
       miners_info: groupMinders,
     });
     setSaveLoading(false);
+    const newGroups = await axiosData(proApi.getGroups);
+    setGroups(newGroups.group_info_list || []);
   };
 
   return (

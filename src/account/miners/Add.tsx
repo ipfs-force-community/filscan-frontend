@@ -12,36 +12,33 @@ import CreateGroup from './CreateGroup';
 import { getSvgIcon } from '@/svgsIcon';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import SearchSelect from '@/packages/searchSelect';
-import { Option_Item } from '@/contents/type';
-import { MinerNum } from '../type';
-
-interface Group extends Option_Item {
-  group_name: string;
-  group_id: number | string;
-  miners_info: Array<any>;
-}
+import { MinerNum, groupsItem } from '../type';
+import useAxiosData from '@/store/useAxiosData';
+import { useGroupsStore } from './content';
 
 export default ({
   groups,
   minersNum,
+  defaultId,
 }: {
-  groups: Array<Group>;
+  groups: Array<any>;
   minersNum: MinerNum;
+  defaultId?: number;
 }) => {
-  let defaut_groupId;
   const { tr } = Translation({ ns: 'account' });
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     { title: tr('miners_add'), path: '/account#miners?type=miner_add' },
   ];
 
-  //const [groups, setGroups] = useState<Array<Group>>([]);
   const [addMiners, setAddMiner] = useState<Array<any>>([]);
   const [show, setShow] = useState<boolean>(false);
   const [selectGroup, setSelectGroup] = useState<string | number>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const { axiosData } = useAxiosData();
+  const { setGroups } = useGroupsStore();
 
   // useEffect(() => {
   //   loadGroups();
@@ -79,11 +76,15 @@ export default ({
   const handleSave = async () => {
     if (addMiners.length > 0) {
       setLoading(false);
-      const selectedGroup = selectGroup || '12';
-      const groupsUpdated = await fetchData(proApi.saveGroup, {
+      const selectedGroup = selectGroup || defaultId;
+      const data = await axiosData(proApi.saveGroup, {
         group_id: selectedGroup,
         miners_info: addMiners,
       });
+      console.log('---d', data);
+      setLoading(false);
+      const newGroups = await axiosData(proApi.getGroups);
+      setGroups(newGroups.group_info_list || []);
     }
   };
   return (
@@ -134,11 +135,12 @@ export default ({
           <SearchSelect
             ns='account'
             options={groups}
+            isShow={true}
             onChange={(value) => {
               setSelectGroup(value);
             }}
             suffix={
-              <li className='mt-4'>
+              <li className='mt-4' onClick={() => setShow(true)}>
                 <hr className=' border_color' />
                 <span className='w-full py-4 px-5 flex rounded-[5px] items-center gap-x-2 mt-4 cursor-pointer hover:text-primary hover:bg-bg_hover'>
                   {getSvgIcon('addIcon')}

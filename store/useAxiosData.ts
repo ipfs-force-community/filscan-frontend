@@ -101,7 +101,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
     }
 
     setLoading(false);
-    return data;
+    return data?.result || data || {};
   };
 
   useDeepCompareEffect(() => {

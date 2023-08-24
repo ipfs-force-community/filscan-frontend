@@ -22,6 +22,7 @@ export const proApi = {
     byCode: proUrl + '/ResetPasswordByCode',
     login: proUrl + '/Login',
     userInfo: proUrl + '/UserInfo',
+    updateInfo: proUrl + '/UpdateUserInfo',
     getOverview: proUrl + '/MinerInfoDetail',
     getGroups: proUrl + '/GetUserGroups',
     getGroupsId: proUrl + '/GetGroup',

@@ -2,8 +2,8 @@
 
 import success from '@/assets/images/success.svg';
 import { Translation } from '@/components/hooks/Translation';
-import { Button } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
@@ -18,7 +18,11 @@ export default () => {
         <span>{tr('welcome_text2')}</span>
       </div>
       <div className='mt-5'>
-        <Button>{tr('go_home')}</Button>
+        <Link
+          href={'/home'}
+          className='border border_color rounded-[5px] px-4 py-2'>
+          {tr('go_home')}
+        </Link>
       </div>
     </div>
   );

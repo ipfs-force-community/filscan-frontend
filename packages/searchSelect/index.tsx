@@ -16,10 +16,12 @@ export default ({
   options,
   suffix,
   onChange,
+  isShow,
 }: {
   ns: string;
   options: Array<Item>;
   suffix?: JSX.Element;
+  isShow?: boolean;
   onChange: (value: string | number) => void;
 }) => {
   const { tr } = Translation({ ns });
@@ -37,30 +39,55 @@ export default ({
         }}
         // onChange={(e) => handleSearch(e.target.value)}
       />
-
-      <ul
-        className={`mt-1 card_shadow p-4  ${
-          showGroup ? 'block' : 'hidden'
-        } absolute w-full z-10`}>
-        {options.map((item) => {
-          return (
-            <li
-              onClick={() => {
-                setShowGroup(false);
-                setInputValue({
-                  label: item.label,
-                  value: item.value,
-                });
-                onChange(item.value);
-              }}
-              key={item.value}
-              className='py-4 px-5 hover:text-primary hover:bg-bg_hover rounded-[5px] cursor-pointer'>
-              {item.label}
-            </li>
-          );
-        })}
-        {suffix && suffix}
-      </ul>
+      {isShow ? (
+        <ul
+          className={`mt-1 card_shadow p-4  ${
+            showGroup ? 'block' : 'hidden'
+          } w-full z-10`}>
+          {options.map((item) => {
+            return (
+              <li
+                onClick={() => {
+                  setShowGroup(false);
+                  setInputValue({
+                    label: item.label,
+                    value: item.value,
+                  });
+                  onChange(item.value);
+                }}
+                key={item.value}
+                className='py-4 px-5 hover:text-primary hover:bg-bg_hover rounded-[5px] cursor-pointer'>
+                {item.label}
+              </li>
+            );
+          })}
+          {suffix && suffix}
+        </ul>
+      ) : (
+        <ul
+          className={`mt-1 card_shadow p-4  ${
+            showGroup ? 'block' : 'hidden'
+          } absolute w-full z-10`}>
+          {options.map((item) => {
+            return (
+              <li
+                onClick={() => {
+                  setShowGroup(false);
+                  setInputValue({
+                    label: item.label,
+                    value: item.value,
+                  });
+                  onChange(item.value);
+                }}
+                key={item.value}
+                className='py-4 px-5 hover:text-primary hover:bg-bg_hover rounded-[5px] cursor-pointer'>
+                {item.label}
+              </li>
+            );
+          })}
+          {suffix && suffix}
+        </ul>
+      )}
     </div>
   );
 };

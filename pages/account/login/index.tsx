@@ -20,8 +20,6 @@ export default () => {
   const userInfo = UserInfo();
   const [success, setSuccess] = useState(false);
 
-  console.log('---userInfo', userInfo);
-
   const onFinish = async () => {
     //登录
     const data = form.getFieldsValue();
@@ -87,15 +85,23 @@ export default () => {
                     name={item.name}
                     key={item.name}
                     rules={item.rules}>
-                    <Input
-                      prefix={item.prefix}
-                      placeholder={tr(item.placeholder)}
-                      suffix={
-                        showButton && (
-                          <SendCode mail={form.getFieldValue('email')} />
-                        )
-                      }
-                    />
+                    {item?.name?.includes('password') ? (
+                      <Input.Password
+                        className='h-12'
+                        prefix={item.prefix}
+                        placeholder={tr(item.placeholder)}
+                      />
+                    ) : (
+                      <Input
+                        prefix={item.prefix}
+                        placeholder={tr(item.placeholder)}
+                        suffix={
+                          showButton && (
+                            <SendCode mail={form.getFieldValue('email')} />
+                          )
+                        }
+                      />
+                    )}
                   </Form.Item>
                 );
               })}

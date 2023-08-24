@@ -10,3 +10,10 @@ export interface MinerNum {
   miners_count: number | string,
   max_miners_count:number | string
 }
+
+export interface groupsItem { 
+  group_id: string;
+group_name: string;
+  miners_info: Array<MinerNum>,
+  [key:string]: any
+}
