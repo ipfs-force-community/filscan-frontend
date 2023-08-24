@@ -99,14 +99,13 @@ export default ({
       setGroups(newGroups.group_info_list || []);
     }
   };
-  console.log('----33', groups);
   return (
     <>
       <Breadcrumb items={routerItems} />
       <div className='mt-8 mb-10 font-PingFang font-semibold text-lg'>
         {tr('miners_add')}
       </div>
-      <div className='border-color card_shadow px-5 py-7 rounded-xl	flex-1 flex flex-col'>
+      <div className='border_color card_shadow px-5 py-7 rounded-xl	flex-1 flex flex-col'>
         <div className='text_des'>{tr('miners_add')}</div>
         <div className='flex-1'>
           <Search
@@ -122,7 +121,7 @@ export default ({
             onSearch={handleSearch}
           />
           {addMiners.length > 0 && (
-            <ul className='list-none border border-color rounded-[5px] mt-5 p-4 w-full h-fit flex gap-x-4 flex-wrap'>
+            <ul className='list-none border border_color rounded-[5px] mt-5 p-4 w-full h-fit flex gap-x-4 flex-wrap'>
               {addMiners?.map((miner, index: number) => {
                 return (
                   <li

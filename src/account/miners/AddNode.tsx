@@ -13,10 +13,12 @@ export default ({
   className,
   defaultMiners,
   minersNum,
+  onChange,
 }: {
   className?: string;
   defaultMiners?: Array<any>;
   minersNum: MinerNum;
+  onChange?: (minerArr: Array<any>) => void;
 }) => {
   const [addMiners, setAddMiner] = useState<Array<any>>(defaultMiners || []);
 
@@ -41,7 +43,9 @@ export default ({
         ),
       });
     }
-    setAddMiner([...addMiners, { miner_id: values }]);
+    const newMiners = [...addMiners, { miner_id: values }];
+    setAddMiner(newMiners);
+    if (onChange) onChange(newMiners);
   };
 
   return (
@@ -59,7 +63,7 @@ export default ({
         onSearch={handleSearch}
       />
       {addMiners.length > 0 && (
-        <ul className='list-none border border-color rounded-[5px] mt-5 p-4 w-full h-fit flex gap-x-4 flex-wrap'>
+        <ul className='list-none border border_color rounded-[5px] mt-5 p-4 w-full h-fit flex gap-x-4 flex-wrap'>
           {addMiners?.map((miner, index: number) => {
             return (
               <li

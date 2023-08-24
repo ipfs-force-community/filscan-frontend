@@ -12,7 +12,8 @@ const account = {
      welcome_text1: '恭喜！您的账户已成功注册,您可以使用您的邮箱号和密码继续登录。',
      welcome_text2: '请登录您的账户并享受您的Filscan服务!',
      last_time: '最新更新时间',
-     all:'全部',
+    all: '全部',
+     edit:'操作',
      
      //数据概览
      overview_power: '算力概览',
@@ -32,6 +33,7 @@ const account = {
      
 
      //添加节点
+     custom_tag:'自定义标签',
      miner_add_placeholder: '输入您要添加的矿工号',
      miner_select_group_placeholder: '选择分组（如未选择组，添加的节点将全部进入“未分组”中',
 

@@ -83,6 +83,7 @@ font-display: auto;
 .ant-input{
     background-color: transparent !important;
     color: var(--font-color);
+    border-color: var(--border-color);
 
    
 }
@@ -120,6 +121,9 @@ font-display: auto;
                 }
             }
             .ant-table-tbody{
+                .ant-table-cell-fix-left{
+                    background-color: var(--bgColor);
+                }
                 .ant-table-placeholder{
                         background-color:  var(--bgColor) ;
                     .ant-empty-description{
@@ -358,14 +362,38 @@ font-display: auto;
     }
 }
 
-
-.custom_Collapse{
-    .ant-collapse-item{
+.custom_collapse_gaps{
+    border: none;
+            background-color: var(--bgColor) !important; 
+     .ant-collapse-item{
+        margin-top: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        background-color: var(--bgColor);
+        border-bottom:1px solid var(--border-color)
+     }
+     .ant-collapse-content{
+                   background-color: var(--bgColor);
+                       border-top: 1px solid var(--border-color);
+            border-radius: 0px 0px 12px 12px;
+        .ant-collapse-content-box{
+             border-radius: 0px 0px 12px 12px;
+              background-color: var(--bgColor)
+        }
+     }
+}
+// .custom_Collapse{
+  
+// }
+  .ant-collapse-item{
         width: 100%;
         .ant-collapse-header{
-            display: flex;
-            align-items: center;
+            display: flex !important; 
+            align-items: center !important;
             padding: 20px 30px ;
+            .ant-collapse-expand-icon{
+                cursor: pointer;
+            }
              .ant-collapse-header-text{
             flex: 1 !important;
             .custom_Collapse_item{
@@ -375,7 +403,6 @@ font-display: auto;
         }
        
     }
-}
 
 //date 
 .custom_picker{
@@ -428,5 +455,40 @@ font-display: auto;
                
             }
         }
+    }
+}
+
+//tooltip 
+.ant-popover-arrow{
+    &::before{
+        background-color: var(--bgColor) !important;
+        box-shadow: 0px 2px 30px -2px var(--card-shadow);          
+
+    }
+    
+}
+.ant-popover-content{
+    background-color: var(--bgColor);
+    .ant-popover-inner{
+        background-color: var(--bgColor);
+          box-shadow: 0px 2px 30px -2px var(--card-shadow);          
+          color: var(--font-color);
+          .ant-popconfirm-title,.ant-popconfirm-description{
+             color: var(--font-color);
+          }
+          .ant-popconfirm-buttons{
+            color: var(--font-color);
+            .button{
+ border: 1px solid var(--border-color);
+
+            }
+            .ant-btn-default{
+                color: var(--font-color);
+               
+            }
+            .ant-btn-primary{
+                color: var(--font-color);
+            }
+          }
     }
 }

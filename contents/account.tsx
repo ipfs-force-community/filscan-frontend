@@ -1090,3 +1090,22 @@ export const account_expired = {
     },
   ],
 };
+
+export const account_miners = {
+  groups_miners_columns: [
+    {
+      dataIndex: 'miner_tag',
+      title: 'custom_tag',
+      width: '45%',
+      render: (text: string, record: any) => {
+        return <TagInput text={text} record={record} />;
+      },
+    },
+    { dataIndex: 'miner_id', title: 'miner_id', width: '45%' },
+    {
+      dataIndex: 'edit',
+      title: 'edit',
+      width: '10%',
+    },
+  ],
+};

@@ -32,6 +32,7 @@ export default ({
   ];
   const [groupName, setGroupName] = useState(groupDetail?.label);
   const [groupMinders, setGroupMiners] = useState(groupDetail?.miners_info);
+  const [newMiners, setNewMiners] = useState<Array<any>>([]);
   const [saveLoading, setSaveLoading] = useState(false);
   const { loading, axiosData } = useAxiosData();
 
@@ -41,12 +42,14 @@ export default ({
   }, [groupDetail, groupId]);
 
   const handleSave = async () => {
+    console.log('---newMiners', newMiners);
     //添加分组及节点
     setSaveLoading(true);
+    // const detail
     const data = await axiosData(proApi.saveGroup, {
       group_id: Number(groupId),
       group_name: groupName,
-      miners_info: groupMinders,
+      miners_info: newMiners,
     });
     setSaveLoading(false);
     const newGroups = await axiosData(proApi.getGroups);
@@ -59,7 +62,7 @@ export default ({
       <div className='mt-8 mb-10 font-PingFang font-semibold text-lg'>
         {tr('miners_group_manage')}
       </div>
-      <div className='border-color card_shadow px-5 py-7 rounded-xl	 flex flex-col flex-1'>
+      <div className='border_color card_shadow px-5 py-7 rounded-xl	 flex flex-col flex-1'>
         <ul className='flex-1'>
           <li className='flex flex-col'>
             <span className='text_des'>{tr('group_name')}</span>
@@ -78,6 +81,9 @@ export default ({
               className='mt-2'
               defaultMiners={groupMinders}
               minersNum={minersNum}
+              onChange={(values) => {
+                setNewMiners(values);
+              }}
             />
           </li>
         </ul>
