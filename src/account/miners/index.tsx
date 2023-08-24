@@ -17,7 +17,7 @@ import Drag from '@/packages/drag';
 import Groups from './Groups';
 import GroupsT from './Groups';
 
-export default ({ minersNum }: { minersNum: MinerNum }) => {
+export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const { hashParams } = useHash();
   const { type, group } = hashParams || {};
   const { tr } = Translation({ ns: 'account' });

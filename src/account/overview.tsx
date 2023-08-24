@@ -8,6 +8,7 @@ import ExportExcel from '@/packages/exportExcel';
 import Selects from '@/packages/selects';
 import useAxiosData from '@/store/useAxiosData';
 import { formatDateTime } from '@/utils';
+import { Skeleton } from 'antd';
 import { data } from 'autoprefixer';
 import { useMemo, useState } from 'react';
 
@@ -32,6 +33,17 @@ export default ({
     group_id: active ? Number(active) : '',
   });
 
+  console.log('--overviewData-3', overviewData, loading);
+
+  if (loading) {
+    return (
+      <div className='mt-10'>
+        <Skeleton active />
+        <Skeleton active />
+        <Skeleton active />
+      </div>
+    );
+  }
   return (
     <>
       <div className='flex justify-between items-center'>
@@ -62,9 +74,9 @@ export default ({
         </div>
       </div>
       <div className='mt-5 flex flex-col gap-y-5'>
-        {overview.headerList.map((itemArray) => {
+        {overview.headerList.map((itemArray, index) => {
           return (
-            <ul className={`flex flex-wrap gap-x-5 min-h-[133px]`}>
+            <ul className={`flex flex-wrap gap-x-5 min-h-[133px]`} key={index}>
               {itemArray.map((item) => {
                 const { icon, dataIndex, render } = item;
                 const showValue = render(
@@ -73,7 +85,9 @@ export default ({
                   tr
                 );
                 return (
-                  <li className='flex flex-1 p-6 card_shadow border border_color rounded-xl justify-between items-start'>
+                  <li
+                    key={item.dataIndex}
+                    className='flex flex-1 p-6 card_shadow border border_color rounded-xl justify-between items-start'>
                     {showValue}
                     <span>{icon && icon}</span>
                   </li>

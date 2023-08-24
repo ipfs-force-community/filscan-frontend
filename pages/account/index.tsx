@@ -18,6 +18,7 @@ import useAxiosData from '@/store/useAxiosData';
 import Power from '@/src/account/power';
 import Gas from '@/src/account/gas';
 import Expired from '@/src/account/expired';
+import { Skeleton } from 'antd';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -32,7 +33,8 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
-  const minersNum: any = useAxiosData(proApi.account_miners)?.data || {};
+  const { data: minersNum, loading: minerLoading } =
+    useAxiosData(proApi.account_miners) || {};
   const { data: groupsData, loading: groupsLoading } = useAxiosData(
     proApi.getGroupsId
   );
@@ -74,6 +76,17 @@ const Account: React.FC = () => {
     });
     return itemsArr;
   }, []);
+
+  console.log('-minerLoading--loading', minerLoading);
+  if (minerLoading) {
+    return (
+      <div className='mt-10'>
+        <Skeleton active />
+        <Skeleton active />
+        <Skeleton active />
+      </div>
+    );
+  }
 
   return (
     <div className='main_contain !py-6 '>

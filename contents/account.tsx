@@ -390,30 +390,125 @@ export const overview = {
     {
       title: 'quality_power',
       dataIndex: 'total_quality_adj_power',
+      render: (text: string, record: any) => unitConversion(text, 2),
     },
     {
       title: 'raw_power',
       dataIndex: 'total_raw_byte_power',
+      render: (text: string, record: any) => unitConversion(text, 2),
     },
     {
       title: 'total_reward_24',
       dataIndex: 'total_reward',
       exports: ['reward_change_24h'],
+      amountUnit: {
+        reward_change_24h: { unit: 'fil', number: 2 },
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.reward_change_24h
+          ? Number(record.reward_change_24h)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={className}>
+              /{flag}
+              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
     {
       title: 'total_out_come_gas',
       dataIndex: 'total_out_come',
       exports: ['total_gas'],
+      amountUnit: {
+        total_out_come: { unit: 'fil', number: 2 },
+        total_gas: { unit: 'fil', number: 2 },
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.total_gas ? Number(record.total_gas) : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={className}>
+              /{flag}
+              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
     {
       title: 'pledge_amount_24',
       dataIndex: 'total_pledge_amount',
       exports: ['pledge_change_24h'],
+      amountUnit: {
+        pledge_change_24h: { unit: 'fil', number: 2 },
+        total_pledge_amount: { unit: 'fil', number: 2 },
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.pledge_change_24h
+          ? Number(record.pledge_change_24h)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={className}>
+              /{flag}
+              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
     {
       title: 'balance_24',
       dataIndex: 'total_balance',
       exports: ['balance_change_24h'],
+      amountUnit: {
+        balance_change_24h: { unit: 'fil', number: 2 },
+        total_balance: { unit: 'fil', number: 2 },
+      },
+      render: (text: string, record: any) => {
+        const changeText = record?.balance_change_24h
+          ? Number(record.balance_change_24h)
+          : '';
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const className = changeText
+          ? changeText > 0
+            ? 'text_green'
+            : 'text_red'
+          : '';
+        return (
+          <span>
+            <span>{formatFilNum(text, false, false, 2)}</span>
+            <span className={className}>
+              /{flag}
+              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
+            </span>
+          </span>
+        );
+      },
     },
   ],
 };

@@ -21,12 +21,12 @@ const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
 function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOptions: OPTIONS = {}  ) {
   const [data, setData] = useState<FetchDataResult<T> | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const retriesRef = useRef(0); // 使用 useRef 存储重试次数
 
-  const axiosData = async (url:string, payload = initialPayload, options = initialOptions) => {
-    retriesRef.current = 0;
+  const axiosData = async (url: string, payload = initialPayload, options = initialOptions) => {
     setLoading(true);
+    retriesRef.current = 0;
     const { method = 'post', maxRetries = 3, timeout = 0 } = options;
     const body = payload || {};
     let error: any = null;
@@ -44,7 +44,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
     // 创建一个新的取消令牌
     const cancelTokenSource = axios.CancelToken.source();
     cancelTokenSources[key] = cancelTokenSource;
-    console.log('==url=34',url)
     while (retriesRef.current < maxRetries) {
       try {
         const response = await axios.request({
@@ -79,6 +78,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
           retriesRef.current += 1;     
           if (retriesRef.current >= maxRetries) { 
             // 返回错误并退出自动重试 
+             setLoading(false);
             return notification.error({
                 className: 'custom-notification',
                 message: 'Error',
@@ -99,14 +99,14 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
         error: error ? error.message : '请求失败',
       });
     }
-
-    setLoading(false);
+        setLoading(false);
     return data?.result || data || {};
   };
 
   useDeepCompareEffect(() => {
     if (initialUrl) { 
-         axiosData(initialUrl);
+      axiosData(initialUrl);
+      
     }
 
     // 组件卸载时取消所有请求
