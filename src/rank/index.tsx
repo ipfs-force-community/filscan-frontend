@@ -130,7 +130,7 @@ export default ({ origin }: { origin: string }) => {
       content.push({ ...item, title: tr(item.title) });
     });
     return content;
-  }, [active, progress[active], theme, lang]);
+  }, [active, progress[active], theme, tr]);
 
   const handleHeaderChange = (type: string, value: string) => {
     let newActive = active;

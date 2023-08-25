@@ -195,13 +195,13 @@ export default (props: Props) => {
     });
     power_trend.list.forEach((item: any) => {
       legendList.push({
-        name: tr(item.dataIndex),
+        name: item.dataIndex,
         color: item.color,
       });
       seriesData.push({
         type: item.type,
         data: seriesObj[item.dataIndex],
-        name: tr(item.dataIndex),
+        name: item.dataIndex,
         yAxisIndex: item.yIndex,
         symbol: 'circle',
         smooth: true,
@@ -252,8 +252,7 @@ export default (props: Props) => {
                   style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
                   {getSvgIcon('legendIcon')}
                   <span className='text-xs text_des font-normal'>
-                    {' '}
-                    {v.name}
+                    {tr(v.name)}
                   </span>
                 </span>
               );

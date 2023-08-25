@@ -8,10 +8,10 @@ const navMenu:Array<Menu_Info> = [
     {
           key: 'tipset',
           children: [
-              {
-                  key: 'tipset_chain',
-                  link:'/tipset/chain/'
-              },
+            //   {
+            //       key: 'tipset_chain',
+            //       link:'/tipset/chain/'
+            //   },
               {
                   key: 'tipset_message',
                    link:'/tipset/message-list/'

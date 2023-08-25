@@ -79,7 +79,7 @@ export default () => {
       return { ...v, title: tr(v.title) };
     });
     return content;
-  }, [theme, lang]);
+  }, [theme, tr]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     const showCurrent = pagination?.current;

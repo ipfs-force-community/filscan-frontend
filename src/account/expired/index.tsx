@@ -12,6 +12,7 @@ import { formatDateTime } from '@/utils';
 import { Collapse } from 'antd';
 import { useHash } from '@/components/hooks/useHash';
 import Detail from './Detail';
+import useAxiosData from '@/store/useAxiosData';
 
 export default ({
   selectedKey,

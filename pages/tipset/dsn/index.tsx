@@ -61,7 +61,7 @@ export default () => {
       return { ...v, title: tr(v.title) };
     });
     return content;
-  }, [theme, lang]);
+  }, [theme, tr]);
 
   const handleSearch = (search: string) => {
     setSearch(search);
