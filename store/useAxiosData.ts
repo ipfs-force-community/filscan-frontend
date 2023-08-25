@@ -85,8 +85,8 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
-          if (retriesRef.current < maxRetries) {
             retriesRef.current += 1;     
+          if (retriesRef.current < maxRetries) {
             return axiosData(url,payload,options);
           } else {
             setError(thrown);

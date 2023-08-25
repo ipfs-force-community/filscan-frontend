@@ -26,13 +26,11 @@ function VerifyCodeButton({
   const sendCode = async () => {
     // 假设验证码发送后，倒计时60秒
     if (mail && validateEmail(mail)) {
+      resetCountdown(60); // 证码有效期为60秒
       const result: any = await fetchData(proApi.send_code, { mail: mail });
       if (result?.token) {
         if (onChange) onChange(result?.token);
-        //token 存入localStorage
-        // localStorage.setItem('token',result.token)
       }
-    } else {
     }
   };
 

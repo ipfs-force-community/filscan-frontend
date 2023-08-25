@@ -4,14 +4,16 @@ import { Translation } from '@/components/hooks/Translation';
 import { logTabs, login_list } from '@/contents/account';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import SendCode from '@/src/account/sendCode';
-import fetchData from '@/store/server';
 import Success from '@/src/account/success';
 import { proApi } from '@/contents/apiUrl';
 import { UserInfo } from '@/store/UserStore';
 import { useHash } from '@/components/hooks/useHash';
 import useAxiosData from '@/store/useAxiosData';
+import errorIcon from '@/assets/images/error.svg';
+import Link from 'next/link';
+import Image from 'next/image';
+import messageManager from '@/packages/message';
 
 export default () => {
   const [form] = Form.useForm();
@@ -20,13 +22,26 @@ export default () => {
   const userInfo = UserInfo();
   const [success, setSuccess] = useState(false);
   const { axiosData } = useAxiosData();
+  //const [accountStatus, setAccountStatus] = useState(0);
+
   const onFinish = async () => {
     //登录
     const data = form.getFieldsValue();
+    console.log('===d', data);
     const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
     });
+    if (result.code === 1) {
+      //未注册
+      //      setAccountStatus(result.code);
+
+      messageManager.showMessage({
+        type: 'error',
+        content: tr('no_account'),
+        icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
+      });
+    }
     if (result.token) {
       setSuccess(true);
       localStorage.setItem('token', result.token);
@@ -51,26 +66,24 @@ export default () => {
               {logTabs?.map((log_item, index) => {
                 return (
                   <Link
-                    href={`/account${
-                      log_item.dataIndex !== 'login'
-                        ? '#' + log_item.dataIndex
-                        : ''
-                    }`}
-                    as={`/account${
-                      log_item.dataIndex !== 'login'
-                        ? '#' + log_item.dataIndex
-                        : ''
-                    }`}
+                    href={`/account/login?type=${log_item.dataIndex}`}
                     key={index}
+                    scroll={false}
                     id={log_item.dataIndex}
                     className={`text-lg text-font_des hover:text-font ${
-                      hash === log_item.dataIndex ? 'highlight' : ''
+                      hashParams.type === log_item.dataIndex ? 'highlight' : ''
                     }`}>
                     {tr(log_item.title)}
                   </Link>
                 );
               })}
             </ul>
+            {/* {accountStatus === 1 && (
+              <div className='mt-5'>
+                <Image src={errorIcon} width={14} height={14} alt='error' />
+                <span>{tr('no_account')}</span>
+              </div>
+            )} */}
             <Form
               form={form}
               size='large'
@@ -78,7 +91,7 @@ export default () => {
               className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
               initialValues={{ remember: true }}
               onFinish={onFinish}>
-              {login_list(hash).map((item) => {
+              {login_list(hashParams && hashParams?.type).map((item) => {
                 const showButton = item.name === 'code';
                 return (
                   <Form.Item

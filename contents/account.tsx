@@ -24,7 +24,7 @@ export const logTabs = [
   },
 ];
 
-export const login_list = (type: string) => {
+export const login_list = (type?: string) => {
   const arr = [
     {
       label: 'email',

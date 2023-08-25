@@ -16,7 +16,7 @@ const messageManager = {
     type: string;
     content: string;
     duration?: number;
-    icon: JSX.Element;
+    icon?: JSX.Element;
     suffix?: JSX.Element;
   }) => {
     if (messageManager.hideMessage) {

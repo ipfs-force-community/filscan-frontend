@@ -17,7 +17,11 @@ const common = {
     message_id: '消息ID',
     height: '高度',
     cid: '区块CID',
-    node: '节点',
+  node: '节点',
+    
+
+  //messages
+  no_account:'该邮箱未注册,请先注册',
 
     //登录注册
     register:'邮箱注册',

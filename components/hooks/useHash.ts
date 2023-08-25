@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 interface HashParams {
-  [key: string]: string | null;
+  [key: string]: string | undefined;
 }
 
 // 自定义Hook，用于获取hash
