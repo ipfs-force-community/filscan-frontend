@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default () => {
+export default ({ type = '' }: { type?: string }) => {
   const { tr } = Translation({ ns: 'account' });
   return (
     <div className='m-auto flex items-center flex-col pt-12 card_bg_color'>
@@ -18,11 +18,14 @@ export default () => {
         <span>{tr('welcome_text2')}</span>
       </div>
       <div className='mt-5 flex items-center gap-x-5'>
-        <Link
-          href={'/account/login'}
-          className='border border_color rounded-[5px] px-4 py-2'>
-          {tr('go_login')}
-        </Link>
+        {type !== 'login' && (
+          <Link
+            href={'/account/login'}
+            className='border border_color rounded-[5px] px-4 py-2'>
+            {tr('go_login')}
+          </Link>
+        )}
+
         <Link
           href={'/home'}
           className='border border_color rounded-[5px] px-4 py-2'>

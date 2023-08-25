@@ -93,7 +93,6 @@ const Account: React.FC = () => {
       </div>
     );
   }
-
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -125,7 +124,7 @@ const Account: React.FC = () => {
         <div
           className='flex-grow flex flex-col px-5 py-10 w_account'
           style={{ height: 'inherit' }}>
-          {!minersNum?.miners_count && !hashParams ? (
+          {minersNum?.miners_count === 0 && hashParams.type !== 'miner_add' ? (
             <NoMiner selectedKey={selectedKey} />
           ) : (
             <>

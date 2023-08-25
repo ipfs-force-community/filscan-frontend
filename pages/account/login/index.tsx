@@ -59,7 +59,7 @@ export default () => {
       <div className='bg-black w-full h-[200px]'>Banner</div>
       <>
         {success ? (
-          <Success />
+          <Success type='login' />
         ) : (
           <div className='!w-[404px] !p-0 !mt-14 !m-auto'>
             <ul className='flex gap-x-6 list-none'>
