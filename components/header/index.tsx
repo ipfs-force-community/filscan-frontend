@@ -42,8 +42,8 @@ export default () => {
     //切换语言
     setLang(value);
     localStorage.setItem('lang', value);
-    i18n.changeLanguage(lang);
     router.push(router.asPath, router.asPath, { locale: value });
+    i18n.changeLanguage(lang); // 更改i18n语言
   };
 
   // px-24

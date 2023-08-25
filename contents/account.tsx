@@ -415,10 +415,10 @@ export const overview = {
             : 'text_red'
           : '';
         return (
-          <span>
+          <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={className}>
-              /{flag}
+              {flag}
               {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
@@ -442,10 +442,10 @@ export const overview = {
             : 'text_red'
           : '';
         return (
-          <span>
+          <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={className}>
-              /{flag}
+              {flag}
               {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
@@ -471,10 +471,10 @@ export const overview = {
             : 'text_red'
           : '';
         return (
-          <span>
+          <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={className}>
-              /{flag}
+              {flag}
               {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
@@ -500,10 +500,10 @@ export const overview = {
             : 'text_red'
           : '';
         return (
-          <span>
+          <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={className}>
-              /{flag}
+              {flag}
               {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>

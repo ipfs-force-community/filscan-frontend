@@ -21,10 +21,12 @@ const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
 function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOptions: OPTIONS = {}  ) {
   const [data, setData] = useState<FetchDataResult<T> | null>(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const retriesRef = useRef(0); // 使用 useRef 存储重试次数
 
-  const axiosData = async (url: string, payload = initialPayload, options = initialOptions) => {
+  const axiosData = async (url: string, payload?:any, options?:any): Promise<any> => {
+    setLoading(true);
     retriesRef.current = 0;
     const { method = 'post', maxRetries = 3, timeout = 0 } = options;
     const body = payload || {};
@@ -43,6 +45,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
     // 创建一个新的取消令牌
     const cancelTokenSource = axios.CancelToken.source();
     cancelTokenSources[key] = cancelTokenSource;
+
     while (retriesRef.current < maxRetries) {
       try {
         const response = await axios.request({
@@ -64,49 +67,39 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
             result: null,
             error: 'Invalid credentials',
           });
-          return;
+          return response.data;;
         }
         data = response.data || {};
-        break; // 请求成功，跳出循环
+        setData(data?.result || data || {});
+        setLoading(false);
+        return response.data; // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
-        } else { 
-          error = thrown;
-          retriesRef.current += 1;     
-          if (retriesRef.current >= maxRetries) { 
-            // 返回错误并退出自动重试 
-             setLoading(false);
+        } else {
+          if (retriesRef.current < maxRetries) {
+            retriesRef.current += 1;     
+            return axiosData(url,payload,options);
+          } else {
+            setError(thrown);
+            setLoading(false);
             return notification.error({
-                className: 'custom-notification',
-                message: 'Error',
-                duration: 100,
-                description: error?.message||'Network Error'
+              className: 'custom-notification',
+              message: 'Error',
+              duration: 100,
+              description: error?.message||'Network Error'
             })
           }
-          await new Promise(resolve => setTimeout(resolve)); // 如果请求失败，继续重试
-        }          
+        }         
       }
     }
-
-    if (data) {
-      setData(data?.result || data || {});
-    } else if( retriesRef.current === maxRetries){
-      setData({
-        result: null,
-        error: error ? error.message : '请求失败',
-      });
-    }
-     setLoading(false);
-    return data?.result || data || {};
   };
 
   useDeepCompareEffect(() => {
     if (initialUrl) { 
       setLoading(true);
-      axiosData(initialUrl);
-      
+      axiosData(initialUrl, initialPayload, initialOptions);
     }
 
     // 组件卸载时取消所有请求
@@ -115,7 +108,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
     };
   }, [initialUrl, initialPayload, initialOptions]);
 
-  return { data, loading, axiosData };
+  return { data, loading,error, axiosData };
 }
 
 export default useAxiosData;

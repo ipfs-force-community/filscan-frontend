@@ -33,8 +33,6 @@ export default ({
     group_id: active ? Number(active) : '',
   });
 
-  console.log('--overviewData-3', overviewData, loading);
-
   if (loading) {
     return (
       <div className='mt-10'>

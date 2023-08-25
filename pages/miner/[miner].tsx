@@ -65,7 +65,6 @@ export default () => {
     return newTabs;
   }, [method]);
 
-  console.log('====35', data);
   return (
     <div className='main_contain'>
       <div className='flex w-full card_shadow rounded-xl'>

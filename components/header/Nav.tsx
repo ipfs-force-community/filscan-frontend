@@ -55,7 +55,7 @@ export default () => {
             <Link
               href={`${nav.link}`}
               key={nav.key}
-              className='cursor-pointer link_text  hover:text-primary'>
+              className='cursor-pointer text_color  hover:text-primary'>
               {tr(nav.key)}
             </Link>
           );

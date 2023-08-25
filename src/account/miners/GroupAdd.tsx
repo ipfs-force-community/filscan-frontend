@@ -42,7 +42,6 @@ export default ({
   }, [groupDetail, groupId]);
 
   const handleSave = async () => {
-    console.log('---newMiners', newMiners);
     //添加分组及节点
     setSaveLoading(true);
     // const detail

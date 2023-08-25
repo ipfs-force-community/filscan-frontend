@@ -6,16 +6,12 @@ import { useHash } from '@/components/hooks/useHash';
 import { proApi } from '@/contents/apiUrl';
 import { useEffect, useMemo, useState } from 'react';
 import { getSvgIcon } from '@/svgsIcon';
-import { Collapse } from 'antd';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
-import { Group, MinerNum, groupsItem } from '../type';
+import { MinerNum, groupsItem } from '../type';
 import useAxiosData from '@/store/useAxiosData';
 import { GroupsStoreContext } from './content';
-import { account_miners } from '@/contents/account';
-import Drag from '@/packages/drag';
 import Groups from './Groups';
-import GroupsT from './Groups';
 
 export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const { hashParams } = useHash();
@@ -24,10 +20,13 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const [groups, setGroups] = useState<Array<groupsItem>>([]);
   const [defaultGroupsId, setDefaultGroupsId] = useState();
 
-  const { data: groupsData, loading: loading } = useAxiosData(proApi.getGroups);
+  const {
+    data: groupsData,
+    loading: loading,
+    error,
+  } = useAxiosData(proApi.getGroups);
 
   useEffect(() => {
-    console.log('==---3groupsData', groupsData);
     calcGroups(groupsData?.group_info_list || []);
   }, [groupsData]);
 
@@ -54,10 +53,10 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
       return file;
     }
     return undefined;
-  }, [group, groups]);
+  }, [group, groupsData]);
 
   const renderChildren = () => {
-    if (type === 'miner_add') {
+    if (type === 'miner_add' && groupsData) {
       return (
         <MinerAdd
           groups={groups}
@@ -87,6 +86,21 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
           calcGroups(groupsArr);
         },
       }}>
+      <p className='w-full mb-5 flex align-baseline justify-between	'>
+        <span className='font-semibold text-lg	 font-PingFang'>
+          {tr('miners')}
+          <span className='text_des text-sm ml-2 font-DIN'>
+            {minersNum?.miners_count}/{minersNum?.max_miners_count}
+          </span>
+        </span>
+        <Link
+          href={`/account#miners?type=miner_add`}
+          scroll={false}
+          className='confirm_btn flex rounded-[5px] items-center gap-x-5 text_color'>
+          {getSvgIcon('addIcon')}
+          {tr('miners_add')}
+        </Link>
+      </p>
       {renderChildren()}
     </GroupsStoreContext.Provider>
   );

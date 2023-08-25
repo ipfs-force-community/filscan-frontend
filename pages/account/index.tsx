@@ -11,7 +11,6 @@ import Personal from '@/src/account/personal';
 import Lucky from '@/src/account/lucky';
 import Balance from '@/src/account/balance';
 import Reward from '@/src/account/reward';
-import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import NoMiner from '@/src/account/NoMiner';
 import useAxiosData from '@/store/useAxiosData';
@@ -23,7 +22,7 @@ import { Skeleton } from 'antd';
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
   const { hash } = useHash();
-
+  const { hashParams } = useHash();
   const rootSubmenuKeys: Array<string> = [];
   const navigateWithNoScroll = useAnchorLink();
 
@@ -77,7 +76,6 @@ const Account: React.FC = () => {
     return itemsArr;
   }, []);
 
-  console.log('-minerLoading--loading', minerLoading);
   if (minerLoading) {
     return (
       <div className='mt-10'>
@@ -119,7 +117,7 @@ const Account: React.FC = () => {
         <div
           className='flex-grow flex flex-col px-5 py-10 w_account'
           style={{ height: 'inherit' }}>
-          {!minersNum?.miners_count ? (
+          {!minersNum?.miners_count && !hashParams ? (
             <NoMiner selectedKey={selectedKey} />
           ) : (
             <>

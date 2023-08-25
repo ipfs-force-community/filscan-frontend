@@ -38,7 +38,7 @@ export default ({
   const [selectGroup, setSelectGroup] = useState<string | number>('');
   const [loading, setLoading] = useState<boolean>(false);
   const { axiosData } = useAxiosData();
-  const { setGroups } = useGroupsStore();
+  const { groups: groupsD, setGroups } = useGroupsStore();
 
   // useEffect(() => {
   //   loadGroups();
@@ -84,7 +84,7 @@ export default ({
         payload = {
           group_id: selectedGroup,
           group_name: groupDetail?.group_name,
-          miners_info: groupDetail?.miners_info.concat(addMiners),
+          miners_info: (groupDetail?.miners_info || []).concat(addMiners),
         };
       } else {
         //添加新分组
@@ -121,7 +121,7 @@ export default ({
             onSearch={handleSearch}
           />
           {addMiners.length > 0 && (
-            <ul className='list-none border border_color rounded-[5px] mt-5 p-4 w-full h-fit flex gap-x-4 flex-wrap'>
+            <ul className='list-none border border_color rounded-[5px] mt-5 p-4 w-full h-fit flex gap-x-4 gap-y-2.5 flex-wrap'>
               {addMiners?.map((miner, index: number) => {
                 return (
                   <li

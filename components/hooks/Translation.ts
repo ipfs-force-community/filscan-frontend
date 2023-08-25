@@ -1,5 +1,5 @@
 import { useFilscanStore } from '@/store/FilscanStore';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type TranslationProps = {
@@ -13,14 +13,16 @@ export const Translation = ({ ns }: TranslationProps) => {
   // 当 lang 状态改变时，重新设置语言
   useEffect(() => {
     i18n.changeLanguage(lang);
-  }, [lang,i18n]);
+  }, [lang, i18n]);
 
-  const tr = (label: string, value?: Record<string, any>) => {
+  const tr = useCallback( (label: string, value?: Record<string, any>) => {
     if (value) {
       return t(label, { ...value, ns: ns });
     }
     return t(label, { ns: ns });
-  };
+  
+   },[i18n.language])
 
   return { tr };
 };
+

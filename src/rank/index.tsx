@@ -10,6 +10,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { pageLimit } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const defaultFilter = {
   sector_size: 'all',
@@ -22,7 +23,12 @@ const defaultData = {
 
 export default ({ origin }: { origin: string }) => {
   const { hash } = useHash();
-  const { tr } = Translation({ ns: 'rank' });
+  // const { tr } = Translation({ ns: 'rank' });
+
+  const { t } = useTranslation();
+  const tr = (label: string) => {
+    return t(label, { ns: 'rank' });
+  };
   const { theme, lang } = useFilscanStore();
 
   const [active, setActive] = useState('provider');
@@ -63,7 +69,6 @@ export default ({ origin }: { origin: string }) => {
       const showFilter = filter || headerFilter;
       setLoading(true);
       const linkUrl: any = `rank_${showActive}`;
-      console.log('===3', showFilter, headerFilter);
       const filters = showFilter
         ? {
             ...showFilter,
@@ -120,8 +125,9 @@ export default ({ origin }: { origin: string }) => {
   };
 
   const columns = useMemo(() => {
-    let content = getColumn(active, progress[active]).map((item) => {
-      return { ...item, title: tr(item.title) };
+    const content: any = [];
+    getColumn(active, progress[active]).forEach((item) => {
+      content.push({ ...item, title: tr(item.title) });
     });
     return content;
   }, [active, progress[active], theme, lang]);

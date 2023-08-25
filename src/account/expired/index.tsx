@@ -3,13 +3,11 @@
 import { Translation } from '@/components/hooks/Translation';
 import NoMiner from '../NoMiner';
 import Table from '@/packages/Table';
-import { useEffect, useMemo, useState } from 'react';
-import { account_expired, account_lucky } from '@/contents/account';
-import fetchData from '@/store/server';
+import { useMemo, useState } from 'react';
+import { account_expired } from '@/contents/account';
 import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
-import useAxiosData from '@/store/useAxiosData';
 import { formatDateTime } from '@/utils';
 import { Collapse } from 'antd';
 import { useHash } from '@/components/hooks/useHash';
@@ -25,8 +23,6 @@ export default ({
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string>('0');
   const { hashParams } = useHash();
-
-  console.log('---hashParams', hashParams);
 
   const columns = useMemo(() => {
     return account_expired.columns.map((item) => {

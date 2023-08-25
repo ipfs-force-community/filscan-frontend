@@ -54,8 +54,6 @@ export default () => {
     setLoading(false);
     setData(result?.account_info || {});
     setAccountType(result?.account_type || '');
-
-    console.log('-----3', result);
   };
 
   const contentList = useMemo(() => {
