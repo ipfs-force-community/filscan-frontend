@@ -63,16 +63,18 @@ const Account: React.FC = () => {
   const menuData = useMemo(() => {
     let itemsArr: any = [];
     account_manager.forEach((item) => {
-      rootSubmenuKeys.push(item.key);
-      let others = [];
-      const obj = { ...item, label: item.label };
-      delete obj.children;
-      if (item?.children) {
-        others = getChildren(item?.children || []);
-        itemsArr.push({ ...obj });
-        itemsArr.push(...others);
-      } else {
-        itemsArr.push({ ...obj });
+      if (item.key !== 'logout') {
+        rootSubmenuKeys.push(item.key);
+        let others = [];
+        const obj = { ...item, label: item.label };
+        delete obj.children;
+        if (item?.children) {
+          others = getChildren(item?.children || []);
+          itemsArr.push({ ...obj });
+          itemsArr.push(...others);
+        } else {
+          itemsArr.push({ ...obj });
+        }
       }
     });
     return itemsArr;
@@ -124,7 +126,9 @@ const Account: React.FC = () => {
         <div
           className='flex-grow flex flex-col px-5 py-10 w_account'
           style={{ height: 'inherit' }}>
-          {minersNum?.miners_count === 0 && hashParams.type !== 'miner_add' ? (
+          {minersNum?.miners_count === 0 &&
+          hashParams.type !== 'miner_add' &&
+          selectedKey !== 'personal' ? (
             <NoMiner selectedKey={selectedKey} />
           ) : (
             <>
