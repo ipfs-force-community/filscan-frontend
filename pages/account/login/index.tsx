@@ -124,7 +124,7 @@ export default () => {
                 valuePropName='checked'
                 className='!m-0 !p-0'>
                 <div className='!flex !justify-between'>
-                  <Checkbox>{tr('remember_me')}</Checkbox>
+                  <Checkbox defaultChecked={true}>{tr('remember_me')}</Checkbox>
                   <a href=''>{tr('forgot_password')}</a>
                 </div>
               </Form.Item>
