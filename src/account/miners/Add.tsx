@@ -4,17 +4,16 @@ import { Translation } from '@/components/hooks/Translation';
 import Search from '@/components/search';
 import Breadcrumb from '@/packages/breadcrumb';
 import del_light from '@/assets/images/del_light.svg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import errorIcon from '@/assets/images/error.svg';
 import messageManager from '@/packages/message';
 import CreateGroup from './CreateGroup';
 import { getSvgIcon } from '@/svgsIcon';
-import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import { Button } from 'antd';
 import SearchSelect from '@/packages/searchSelect';
-import { MinerNum, groupsItem } from '../type';
+import { MinerNum } from '../type';
 import useAxiosData from '@/store/useAxiosData';
 import { useGroupsStore } from './content';
 
@@ -39,19 +38,6 @@ export default ({
   const [loading, setLoading] = useState<boolean>(false);
   const { axiosData } = useAxiosData();
   const { groups: groupsD, setGroups } = useGroupsStore();
-
-  // useEffect(() => {
-  //   loadGroups();
-  // }, []);
-
-  // const loadGroups = async () => {
-  //   const groups: any = await fetchData(proApi.getGroups);
-  //   const data =
-  //     groups?.group_info_list?.map((item: Group) => {
-  //       return { ...item, label: tr(item.group_name), value: item.group_id };
-  //     }) || [];
-  //   setGroups(data);
-  // };
 
   const handleSearch = (values: any) => {
     if (addMiners.length > Number(minersNum?.max_miners_count)) {
@@ -97,6 +83,15 @@ export default ({
       setLoading(false);
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups.group_info_list || []);
+      messageManager.showMessage({
+        type: 'success',
+        content: 'Add Miner successfully',
+      });
+    } else {
+      messageManager.showMessage({
+        type: 'warning',
+        content: 'Please add miner',
+      });
     }
   };
   return (

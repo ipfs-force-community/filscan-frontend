@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 import { useGroupsStore } from './content';
+import messageManager from '@/packages/message';
 
 /** @format */
 
@@ -53,6 +54,12 @@ export default ({
     setSaveLoading(false);
     const newGroups = await axiosData(proApi.getGroups);
     setGroups(newGroups.group_info_list || []);
+    if (data) {
+      messageManager.showMessage({
+        type: 'success',
+        content: 'Save Group successfully',
+      });
+    }
   };
 
   return (

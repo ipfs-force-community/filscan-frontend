@@ -30,10 +30,10 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const retriesRef = useRef(0); // 使用 useRef 存储重试次数
+  retriesRef.current = 0;
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
     setLoading(true);
-    retriesRef.current = 0;
     const { method , maxRetries , timeout } = options;
     const body = payload || {};
     let error: any = null;
