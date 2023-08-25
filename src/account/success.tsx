@@ -32,11 +32,11 @@ export default ({ type = '' }: { type?: string }) => {
           </Link>
         )}
 
-        <li
+        <div
           onClick={handleClick}
-          className='border border_color rounded-[5px] px-4 py-2'>
+          className='border cursor-pointer border_color rounded-[5px] px-4 py-2'>
           {tr('go_home')}
-        </li>
+        </div>
       </div>
     </div>
   );
