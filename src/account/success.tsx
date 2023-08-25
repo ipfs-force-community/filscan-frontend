@@ -17,7 +17,12 @@ export default () => {
         <span>{tr('welcome_text1')}</span>
         <span>{tr('welcome_text2')}</span>
       </div>
-      <div className='mt-5'>
+      <div className='mt-5 flex items-center gap-x-5'>
+        <Link
+          href={'/account/login'}
+          className='border border_color rounded-[5px] px-4 py-2'>
+          {tr('go_login')}
+        </Link>
         <Link
           href={'/home'}
           className='border border_color rounded-[5px] px-4 py-2'>

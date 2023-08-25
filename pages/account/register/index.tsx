@@ -62,6 +62,9 @@ export default () => {
                     if (!result?.exists) {
                       return Promise.resolve();
                     }
+                    if (result.exists) {
+                      return Promise.reject(new Error(tr('email_exists')));
+                    }
                     return Promise.reject(new Error(tr('email_rules')));
                   },
                 }));
@@ -106,6 +109,7 @@ export default () => {
                 className='!m-0  !h-[48px]'
                 name={item.name}
                 key={item.name}
+                validateTrigger='submit'
                 rules={newRules}>
                 {item?.name?.includes('password') ? (
                   <Input.Password
@@ -133,9 +137,11 @@ export default () => {
             <span>{tr('have_account')}</span>
             <Link href='/account/login'>{tr('login')}</Link>
           </div>
-          <Form.Item className='!mt-5'>
-            <Button type='primary' htmlType='submit' className='!w-full'>
-              {tr('login')}
+          <Form.Item className='!w-full !text-white'>
+            <Button
+              htmlType='submit'
+              className='!w-full !bg-primary !text-white'>
+              {tr('register')}
             </Button>
           </Form.Item>
         </Form>

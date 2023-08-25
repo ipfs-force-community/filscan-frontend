@@ -74,6 +74,7 @@ export default () => {
             <Form
               form={form}
               size='large'
+              validateTrigger='submit'
               className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
               initialValues={{ remember: true }}
               onFinish={onFinish}>

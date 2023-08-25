@@ -66,14 +66,14 @@ export const registerList = [
     prefix: <UserOutlined className='site-form-item-icon' />,
     placeholder: 'email_placeholder',
     rules: [
+      // {
+      //   required: true,
+      //   message: 'email_required',
+      // },
       {
         type: 'email',
         required: true,
         message: 'email_rules',
-      },
-      {
-        required: true,
-        message: 'email_required',
       },
     ],
   },

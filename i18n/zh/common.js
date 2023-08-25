@@ -9,7 +9,7 @@ const common = {
     base_fee: 'Base Fee',
     last_height: '最新区块高度',
     go_home:'返回首页',
-    
+    go_login:'去登录',
      //search 
     'search_holder':'请输入地址/消息ID/高度/区块Cid/节点ID/FNS',
     all: '全部筛选类型',
@@ -43,7 +43,7 @@ const common = {
     code_rules:'请正确输入6位数字验证码',
     password_rules: '请输入 8-20 个字符，需同时包含数字、字母以及特殊符号,密码不能与您的邮箱地址相同',
   confirm_password_rules: '两次输入的密码不一致，请重新输入',
-    
+    email_exists:'邮箱已存在',
   Export:'下载Excel'
 
     
