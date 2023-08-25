@@ -35,7 +35,7 @@ export default () => {
   };
 
   return (
-    <div className=''>
+    <>
       <p className='font-semibold text-lg	 font-PingFang'>{tr('personal')}</p>
       <div className='card_shadow mt-8 p-5 border border_color rounded-xl'>
         <div className='flex justify-between'>
@@ -65,7 +65,7 @@ export default () => {
           {tr('personal_setting')}
         </p>
         {success ? (
-          <Success />
+          <Success type='login' />
         ) : (
           <>
             <Form
@@ -140,6 +140,6 @@ export default () => {
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };

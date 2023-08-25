@@ -24,7 +24,7 @@
 }
 
  :root,:root[theme='dark'] {
-   --bgColor:#000000;
+   --bgColor:#121212;
     --main-bg-color:#090A0A;
    --reverse-color:'#FFFFFF';
    --font-color:#ffffff;
