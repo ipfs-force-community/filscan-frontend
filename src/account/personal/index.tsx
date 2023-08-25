@@ -24,7 +24,12 @@ export default () => {
 
   const handleSave = async () => {
     setLoading(true);
-    const result = await axiosData(proApi.updateInfo, { ...form });
+    const payload = form.getFieldsValue();
+    console.log('---344', payload);
+    const result = await axiosData(proApi.updateInfo, {
+      ...payload,
+    });
+    console.log('---233', result);
     setLoading(false);
     setSuccess(true);
   };
@@ -62,63 +67,68 @@ export default () => {
         {success ? (
           <Success />
         ) : (
-          <Form
-            form={form}
-            layout='vertical'
-            className='!grid w-full grid-cols-2	 gap-x-4 mt-5'>
-            {personal_setting.map((item: any) => {
-              const objShow: any = {};
-              if (item.dataIndex === 'name') {
-                objShow.showCount = true;
-                objShow.maxLength = max_name_length;
-              }
-              const newRules: any = [];
-              item?.rules?.forEach((v: any) => {
-                newRules.push({ ...v, message: tr(v.message) });
-                if (item.name === 'new_password') {
-                  newRules.push(() => ({
-                    validator(_: any, value: any) {
-                      if (
-                        !value ||
-                        validatePassword(
-                          value,
-                          form.getFieldValue('old_password')
-                        )
-                      ) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error(tr('password_rules')));
-                    },
-                  }));
-                } else if (item.name === 'confirm_password') {
-                  newRules.push(
-                    ({ getFieldValue }: { getFieldValue: Function }) => ({
+          <>
+            <Form
+              form={form}
+              layout='vertical'
+              className='!grid w-full grid-cols-2	 gap-x-4 mt-5'>
+              {personal_setting.map((item: any) => {
+                const objShow: any = {};
+                if (item.dataIndex === 'name') {
+                  objShow.showCount = true;
+                  objShow.maxLength = max_name_length;
+                }
+                const newRules: any = [];
+                item?.rules?.forEach((v: any) => {
+                  newRules.push({ ...v, message: tr(v.message) });
+                  if (item.name === 'new_password') {
+                    newRules.push(() => ({
                       validator(_: any, value: any) {
-                        if (!value || getFieldValue('new_password') === value) {
+                        if (
+                          !value ||
+                          validatePassword(
+                            value,
+                            form.getFieldValue('old_password')
+                          )
+                        ) {
                           return Promise.resolve();
                         }
-                        return Promise.reject(
-                          new Error(tr('confirm_password_rules'))
-                        );
+                        return Promise.reject(new Error(tr('password_rules')));
                       },
-                    })
-                  );
-                }
-              });
-              return (
-                <Form.Item
-                  name={item.dataIndex}
-                  label={tr(item.title)}
-                  key={item.dataIndex}>
-                  {item?.dataIndex?.includes('password') ? (
-                    <Input.Password className='h-12' {...objShow} />
-                  ) : (
-                    <Input className='h-12' {...objShow} />
-                  )}
-                </Form.Item>
-              );
-            })}
-            <div className='mt-5 flex gap-x-4 justify-end'>
+                    }));
+                  } else if (item.name === 'confirm_password') {
+                    newRules.push(
+                      ({ getFieldValue }: { getFieldValue: Function }) => ({
+                        validator(_: any, value: any) {
+                          if (
+                            !value ||
+                            getFieldValue('new_password') === value
+                          ) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(
+                            new Error(tr('confirm_password_rules'))
+                          );
+                        },
+                      })
+                    );
+                  }
+                });
+                return (
+                  <Form.Item
+                    name={item.dataIndex}
+                    label={tr(item.title)}
+                    key={item.dataIndex}>
+                    {item?.dataIndex?.includes('password') ? (
+                      <Input.Password className='h-12' {...objShow} />
+                    ) : (
+                      <Input className='h-12' {...objShow} />
+                    )}
+                  </Form.Item>
+                );
+              })}
+            </Form>
+            <div className='mt-5 !w-full flex gap-x-4 items-center justify-center'>
               <Button className='cancel_btn'>{tr('cancel')}</Button>
               <Button
                 className='confirm_btn'
@@ -127,7 +137,7 @@ export default () => {
                 {tr('confirm')}
               </Button>
             </div>
-          </Form>
+          </>
         )}
       </div>
     </div>
