@@ -1,29 +1,29 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import useHashScroll from '@/components/hooks/useHashScroll';
 import { logTabs, login_list } from '@/contents/account';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import SendCode from '@/src/account/sendCode';
 import fetchData from '@/store/server';
 import Success from '@/src/account/success';
 import { proApi } from '@/contents/apiUrl';
 import { UserInfo } from '@/store/UserStore';
+import { useHash } from '@/components/hooks/useHash';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const [form] = Form.useForm();
   const { tr } = Translation({ ns: 'common' });
-  const [hash, setHash] = useState('login');
+  const { hash, hashParams } = useHash();
   const userInfo = UserInfo();
   const [success, setSuccess] = useState(false);
-
+  const { axiosData } = useAxiosData();
   const onFinish = async () => {
     //登录
     const data = form.getFieldsValue();
-    const result: any = await fetchData(proApi.login, {
+    const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
     });
@@ -115,7 +115,9 @@ export default () => {
                 </div>
               </Form.Item>
               <Form.Item className='!mt-6'>
-                <Button type='primary' htmlType='submit' className='!w-full'>
+                <Button
+                  htmlType='submit'
+                  className='!w-full !bg-primary !text-white'>
                   {tr('login')}
                 </Button>
               </Form.Item>

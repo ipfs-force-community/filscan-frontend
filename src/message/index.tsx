@@ -6,7 +6,7 @@ import { message_detail } from '@/contents/detail';
 import Content from '@/packages/content';
 import NoData from '@/packages/noData';
 import fetchData from '@/store/server';
-import { Skeleton, message } from 'antd';
+import { Skeleton } from 'antd';
 import { useEffect, useState } from 'react';
 
 export default ({ cid }: { cid: string | string[] }) => {
@@ -31,8 +31,6 @@ export default ({ cid }: { cid: string | string[] }) => {
     setData(result?.MessageDetails || {});
     if (result?.MessageDetails?.message_basic?.cid) {
       loadTrans(result?.MessageDetails?.message_basic?.cid);
-      // setCid(result?.MessageDetails?.message_basic?.cid);
-      // setIsF4(result?.MessageDetails?.message_basic?.to.startsWith('f4'));
     }
   };
 

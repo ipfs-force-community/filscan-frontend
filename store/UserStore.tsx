@@ -6,6 +6,7 @@ export interface UserInfo {
   name: string;
   mail: string;
   last_login: number | string;
+  // setUserInfo: (value: any) => void;
 }
 
 export const UserStoreContext = createContext<UserInfo | null>(null);

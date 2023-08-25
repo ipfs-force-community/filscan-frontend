@@ -45,8 +45,8 @@ async function fetchData<T>(
         signal: controller.signal,
       });
       if (response.status === 401) {
-        message.warning('please login ');
-        Router.push('/account/login');
+        //message.warning('please login ');
+        // Router.push('/account/login');
         return {
           result: null,
           error: 'Invalid credentials',

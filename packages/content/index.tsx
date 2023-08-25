@@ -12,7 +12,7 @@ export default ({
 }: {
   content: Array<any>;
   ns: string;
-  columns: number;
+  columns?: number;
   data: Record<string, any>;
 }) => {
   const { tr } = Translation({ ns: 'detail' });

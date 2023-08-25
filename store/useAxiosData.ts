@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
+import {  useState, useRef } from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import useDeepCompareEffect from 'use-deep-compare-effect'
-import { message, notification } from 'antd';
-import Router from 'next/router';
+import {  notification } from 'antd';
+import Router  from 'next/router';
 
 interface OPTIONS { 
   method?: 'get' | 'post' | 'put' | 'delete';
@@ -16,19 +16,25 @@ interface FetchDataResult<T> {
   [key:string]:any
 }
 
+const DefaultOptions = {
+  method: 'post',
+  maxRetries: 3,
+  timeout:0
+}
+
 // 用于存储每个 URL 和方法的取消令牌
 const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
-function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOptions: OPTIONS = {}  ) {
+function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any  ) {
   const [data, setData] = useState<FetchDataResult<T> | null>(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const retriesRef = useRef(0); // 使用 useRef 存储重试次数
 
-  const axiosData = async (url: string, payload?:any, options?:any): Promise<any> => {
+  const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
     setLoading(true);
     retriesRef.current = 0;
-    const { method = 'post', maxRetries = 3, timeout = 0 } = options;
+    const { method , maxRetries , timeout } = options;
     const body = payload || {};
     let error: any = null;
     let data: T | null | any = null;
@@ -59,20 +65,21 @@ function useAxiosData<T>(initialUrl?: string, initialPayload?:any, initialOption
           timeout: timeout,
           cancelToken: cancelTokenSource.token,
         });
-
+      
+      
         if (response.status === 401) {
-          message.warning('please login ');
           Router.push('/account/login');
+          retriesRef.current = 100;
           setData({
             result: null,
             error: 'Invalid credentials',
           });
           return response.data;;
         }
-        data = response.data || {};
+        data = response.data|| {};
         setData(data?.result || data || {});
         setLoading(false);
-        return response.data; // 请求成功，跳出循环
+        return data?.result || data ; // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
           console.log('Request canceled', thrown.message);

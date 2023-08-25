@@ -57,12 +57,22 @@ export default function App({ Component, pageProps }: AppProps) {
   // }, [router]);
 
   useEffect(() => {
+    if (localStorage?.getItem('userInfo')) {
+      const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '');
+      if (lastUser) {
+        setUserInfo(lastUser);
+      }
+    }
     loadUser();
   }, []);
 
   const loadUser = async () => {
     const userData: any = await fetchData(proApi.userInfo);
     setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
+    );
   };
 
   return (

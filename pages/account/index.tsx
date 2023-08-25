@@ -1,10 +1,9 @@
 /** @format */
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
-import useAnchorLink from '@/components/hooks/useAnchorLink';
 import Overview from '@/src/account/overview';
 import Miners from '@/src/account/miners';
 import Personal from '@/src/account/personal';
@@ -18,20 +17,23 @@ import Power from '@/src/account/power';
 import Gas from '@/src/account/gas';
 import Expired from '@/src/account/expired';
 import { Skeleton } from 'antd';
+import { UserInfo } from '@/store/UserStore';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
-  const { hash } = useHash();
-  const { hashParams } = useHash();
+  const { hash, hashParams } = useHash();
   const rootSubmenuKeys: Array<string> = [];
-  const navigateWithNoScroll = useAnchorLink();
-
+  const userInfo = UserInfo();
+  const router = useRouter();
   const selectedKey = useMemo(() => {
     if (hash) {
       return hash;
     }
     return 'overview';
   }, [hash]);
+
   const { data: minersNum, loading: minerLoading } =
     useAxiosData(proApi.account_miners) || {};
   const { data: groupsData, loading: groupsLoading } = useAxiosData(
@@ -76,6 +78,12 @@ const Account: React.FC = () => {
     return itemsArr;
   }, []);
 
+  useEffect(() => {
+    if (!userInfo.mail && !localStorage.getItem('token')) {
+      router.push('/account/login');
+    }
+  }, [userInfo.mail]);
+
   if (minerLoading) {
     return (
       <div className='mt-10'>
@@ -96,20 +104,20 @@ const Account: React.FC = () => {
           <ul className='list-none px-4'>
             {menuData.map((parent: any) => {
               return (
-                <li
+                <Link
                   key={parent.label}
-                  className={`cursor-pointer  flex gap-x-2 items-center p-2.5 rounded-[5px] hover:text-primary ${
+                  href={`/account#${parent.key}`}
+                  scroll={false}
+                  className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
                     parent?.icon ? 'font-medium' : 'ml-5 font-normal'
                   } ${
                     selectedKey === parent.key ? 'text-primary bg-bg_hover' : ''
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithNoScroll(`/account#${parent.key}`);
-                  }}>
-                  {parent.icon}
-                  {tr(parent.label)}
-                </li>
+                  }`}>
+                  <span className='flex items-center gap-x-2 px-4'>
+                    {parent.icon}
+                    {tr(parent.label)}
+                  </span>
+                </Link>
               );
             })}
           </ul>
