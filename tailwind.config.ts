@@ -46,7 +46,7 @@ const config: Config = {
         font: '#000000',
         font_des:'rgba(0,0,0,0.6)',
         border_des: '#F0F1F3',
-        border: '#EEEFF1',
+        border: '#E6E8Eb',
         primary: '#1C6AFD',
         bg_hover: 'rgba(28, 106, 253, 0.1)',
         select_bg:'rgba(28, 106, 253, 0.6)',

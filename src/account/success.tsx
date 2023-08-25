@@ -10,7 +10,7 @@ export default ({ type = '' }: { type?: string }) => {
   const { tr } = Translation({ ns: 'account' });
   const router = useRouter();
   const handleClick = () => {
-    router.reload();
+    //router.reload();
     router.push('/home');
   };
   return (

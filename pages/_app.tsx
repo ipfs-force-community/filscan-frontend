@@ -17,8 +17,9 @@ import { UserInfo, UserStoreContext } from '@/store/UserStore';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
+import Footer from '@/components/footer';
 
-const { Content, Footer, Header } = Layout;
+const { Content, Header } = Layout;
 
 const defaultUerInfo: UserInfo = {
   name: '',
@@ -33,6 +34,30 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
 
+  useEffect(() => {
+    // (function setRem() {
+    //   try {
+    //     const dom = document.documentElement;
+    //     const resize =
+    //       'orientationchange' in window ? 'orientationchange' : 'resize';
+    //     // 设计稿宽度 1440px
+    //     const DESIGN = 1440,
+    //       MAX = 1920,
+    //       MIN = 1024;
+    //     const calculate = function () {
+    //       const clientWidth = dom.clientWidth;
+    //       const designWidth = clientWidth > MIN ? DESIGN : MIN;
+    //       const screenWidth = clientWidth > MAX ? MAX : clientWidth;
+    //       const size = (screenWidth / designWidth) * 10;
+    //       dom.style.setProperty('font-size', size + 'px', 'important');
+    //     };
+    //     calculate();
+    //     window.addEventListener(resize, calculate);
+    //   } catch (error) {
+    //     console.error('setRem error');
+    //   }
+    // })();
+  }, []);
   // useEffect(() => {
   //   // 在路由改变开始时禁用滚动到顶部
   //   function handleChangeStart(url: string) {
@@ -84,6 +109,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <HeaderMain />
               <Content className='text-sm'>
                 <Component {...pageProps} />
+                <Footer />
               </Content>
             </Layout>
           </UserStoreContext.Provider>

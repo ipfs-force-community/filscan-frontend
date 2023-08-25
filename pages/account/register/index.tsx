@@ -58,112 +58,120 @@ export default () => {
         {success ? (
           <Success />
         ) : (
-          <Form
-            form={form}
-            size='large'
-            className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            scrollToFirstError>
-            {registerList.map((item) => {
-              const showButton = item.label === 'code';
-              const newRules: any = [];
-              item.rules.forEach((v) => {
-                newRules.push({ ...v, message: tr(v.message) });
-                if (item.name === 'email') {
-                  newRules.push(() => ({
-                    async validator(_: any, value: any) {
-                      const result: any = await fetchData(proApi.mail_exists, {
-                        mail: value,
-                      });
-                      if (!result?.exists) {
-                        return Promise.resolve();
-                      }
-                      if (result.exists) {
-                        return Promise.reject(new Error(tr('email_exists')));
-                      }
-                      return Promise.reject(new Error(tr('email_rules')));
-                    },
-                  }));
-                } else if (item.name === 'token') {
-                  newRules.push(() => ({
-                    validator(_: any, value: any) {
-                      if (!value || (value && validateCode(value))) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error(tr('code_rules')));
-                    },
-                  }));
-                } else if (item.name === 'new_password') {
-                  newRules.push(() => ({
-                    validator(_: any, value: any) {
-                      if (
-                        !value ||
-                        validatePassword(value, form.getFieldValue('email'))
-                      ) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error(tr('password_rules')));
-                    },
-                  }));
-                } else if (item.name === 'confirm_password') {
-                  newRules.push(
-                    ({ getFieldValue }: { getFieldValue: Function }) => ({
-                      validator(_: any, value: any) {
-                        if (!value || getFieldValue('new_password') === value) {
+          <>
+            <Form
+              form={form}
+              size='large'
+              className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
+              initialValues={{ remember: true }}
+              onFinish={onFinish}
+              scrollToFirstError>
+              {registerList.map((item) => {
+                const showButton = item.label === 'code';
+                const newRules: any = [];
+                item.rules.forEach((v) => {
+                  newRules.push({ ...v, message: tr(v.message) });
+                  if (item.name === 'email') {
+                    newRules.push(() => ({
+                      async validator(_: any, value: any) {
+                        const result: any = await fetchData(
+                          proApi.mail_exists,
+                          {
+                            mail: value,
+                          }
+                        );
+                        if (!result?.exists) {
                           return Promise.resolve();
                         }
-                        return Promise.reject(
-                          new Error(tr('confirm_password_rules'))
-                        );
+                        if (result.exists) {
+                          return Promise.reject(new Error(tr('email_exists')));
+                        }
+                        return Promise.reject(new Error(tr('email_rules')));
                       },
-                    })
-                  );
-                }
-              });
-              return (
-                <Form.Item
-                  className='!m-0  !h-[48px]'
-                  name={item.name}
-                  key={item.name}
-                  validateTrigger='submit'
-                  rules={newRules}>
-                  {item?.name?.includes('password') ? (
-                    <Input.Password
-                      prefix={item.prefix}
-                      placeholder={tr(item.placeholder)}
-                    />
-                  ) : (
-                    <Input
-                      prefix={item.prefix}
-                      placeholder={tr(item.placeholder)}
-                      suffix={
-                        showButton && (
-                          <SendCode
-                            mail={mail}
-                            onChange={(token) => setToken(token)}
-                          />
-                        )
-                      }
-                    />
-                  )}
-                </Form.Item>
-              );
-            })}
-            <div className='!flex !gap-x-2'>
-              <span>{tr('have_account')}</span>
-              <Link href='/account/login'>{tr('login')}</Link>
-            </div>
-            <Form.Item className='!w-full !text-white'>
-              <Button
-                htmlType='submit'
-                className='!w-full !bg-primary !text-white'>
-                {tr('register')}
-              </Button>
-            </Form.Item>
-          </Form>
+                    }));
+                  } else if (item.name === 'token') {
+                    newRules.push(() => ({
+                      validator(_: any, value: any) {
+                        if (!value || (value && validateCode(value))) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(new Error(tr('code_rules')));
+                      },
+                    }));
+                  } else if (item.name === 'new_password') {
+                    newRules.push(() => ({
+                      validator(_: any, value: any) {
+                        if (
+                          !value ||
+                          validatePassword(value, form.getFieldValue('email'))
+                        ) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(new Error(tr('password_rules')));
+                      },
+                    }));
+                  } else if (item.name === 'confirm_password') {
+                    newRules.push(
+                      ({ getFieldValue }: { getFieldValue: Function }) => ({
+                        validator(_: any, value: any) {
+                          if (
+                            !value ||
+                            getFieldValue('new_password') === value
+                          ) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(
+                            new Error(tr('confirm_password_rules'))
+                          );
+                        },
+                      })
+                    );
+                  }
+                });
+                return (
+                  <Form.Item
+                    className='!m-0  !h-[48px]'
+                    name={item.name}
+                    key={item.name}
+                    validateTrigger='submit'
+                    rules={newRules}>
+                    {item?.name?.includes('password') ? (
+                      <Input.Password
+                        prefix={item.prefix}
+                        placeholder={tr(item.placeholder)}
+                      />
+                    ) : (
+                      <Input
+                        prefix={item.prefix}
+                        placeholder={tr(item.placeholder)}
+                        suffix={
+                          showButton && (
+                            <SendCode
+                              mail={mail}
+                              onChange={(token) => setToken(token)}
+                            />
+                          )
+                        }
+                      />
+                    )}
+                  </Form.Item>
+                );
+              })}
+              <div className='!flex !gap-x-2'>
+                <span>{tr('have_account')}</span>
+                <Link href='/account/login'>{tr('login')}</Link>
+              </div>
+              <Form.Item className='!w-full !text-white'>
+                <Button
+                  htmlType='submit'
+                  className='!w-full !bg-primary !text-white'>
+                  {tr('register')}
+                </Button>
+              </Form.Item>
+            </Form>
+            <div className=''>{tr('agreement')}</div>
+          </>
         )}
-        <div className=''>{tr('agreement')}</div>
       </div>
     </>
   );
