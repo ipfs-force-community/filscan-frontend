@@ -97,7 +97,7 @@ a{
 
 /*文字渐变*/
 .text_clip{
-  background: linear-gradient(131deg, #131254 0%, #000000 100%);
+  background: linear-gradient(131deg, var(--text_clip) 0%, var(--font-color) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

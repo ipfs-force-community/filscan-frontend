@@ -13,6 +13,7 @@
     --bg_hover:rgba(28, 106, 253, 0.1);
     --font_des:rgba(0,0,0,0.6);
     --primary: #1C6AFD;
+    --text_clip:#131254;
      --border-color:#e6e8eb;
     --bgDesColor:#F6F6F6;
     --table-hover:#F8F8F8
@@ -29,6 +30,8 @@
     --main-bg-color:#090A0A;
    --reverse-color:'#FFFFFF';
    --font-color:#ffffff;
+       --text_clip:#ffffff;
+
     --bg_hover:rgba(28, 106, 253, 0.1);
     --bgDesColor: #1C1C1C;
    --font_des:rgba(255,255,255,0.6);

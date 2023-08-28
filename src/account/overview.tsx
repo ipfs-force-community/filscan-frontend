@@ -85,7 +85,7 @@ export default ({
                 return (
                   <li
                     key={item.dataIndex}
-                    className='flex flex-1 p-6 card_shadow border border_color rounded-xl justify-between items-start'>
+                    className='flex flex-1 p-6 card_shadow border border_color  rounded-xl justify-between items-start'>
                     {showValue}
                     <span>{icon && icon}</span>
                   </li>
