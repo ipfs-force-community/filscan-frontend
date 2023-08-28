@@ -35,8 +35,7 @@ export default (props: Props) => {
 
     return (
       current &&
-      (current < validRange.startDate.startOf('day') ||
-        current > validRange.endDate.endOf('day'))
+      (current < dayjs().subtract(30, 'day') || current > dayjs().endOf('day'))
     );
   };
 

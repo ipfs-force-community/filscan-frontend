@@ -236,6 +236,9 @@ font-display: auto;
 
 //custom_message
 .ant-message{
+    .ant-message-custom-content{
+        display: flex;
+    }
        .ant-message-notice-error{
          .ant-message-notice-content{
             background: rgba(225,82,82,0.09) !important;
@@ -422,7 +425,9 @@ font-display: auto;
             padding-left: 20px;
         }
     }
+
 }
+
 .custom_date_picker{
     width: auto;
     height: inherit;
@@ -444,15 +449,20 @@ font-display: auto;
                     }
                 }
             }
+            
             .ant-picker-cell-in-view{
                 .ant-picker-cell-inner{
-                     border: 1px solid var(--border-color);
+                border: 1px solid var(--border-color);
                 border-radius: 5px;
                 min-width: 30px;
                 height: 30px;
                 line-height: 30px;
                 }
-               
+            }
+            .ant-picker-cell-disabled{
+                .ant-picker-cell-inner {
+                    background-color: var(--bgDesColor) !important;
+                }
             }
         }
     }

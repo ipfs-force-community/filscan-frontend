@@ -25,11 +25,9 @@ export default () => {
   const handleSave = async () => {
     setLoading(true);
     const payload = form.getFieldsValue();
-    console.log('---344', payload);
     const result = await axiosData(proApi.updateInfo, {
       ...payload,
     });
-    console.log('---233', result);
     setLoading(false);
     setSuccess(true);
   };

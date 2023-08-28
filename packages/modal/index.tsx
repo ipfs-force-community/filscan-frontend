@@ -20,6 +20,7 @@ export default (props: ModalProps) => {
 
   return (
     <Modal
+      key={new Date().getTime()}
       {...props}
       title={title}
       open={show}

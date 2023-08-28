@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Collapse, Popconfirm } from 'antd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { getSvgIcon } from '@/svgsIcon';
@@ -12,6 +12,7 @@ import { proApi } from '@/contents/apiUrl';
 import { useGroupsStore } from './content';
 import Modal from '@/packages/modal';
 import TagInput from '@/packages/tagInput';
+import messageManager from '@/packages/message';
 
 const Groups = ({ groups }: { groups: Array<any> }) => {
   const { tr } = Translation({ ns: 'account' });
@@ -20,12 +21,13 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
   const [data, setData] = useState<any>(groups);
   const [deleteLoading, setDeleteLoading] = useState<any>(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [modalItems, setModalItems] = useState<any>({});
 
   useEffect(() => {
     setData(groups || []);
   }, [groups]);
 
-  const handleDragEnd = (result: any) => {
+  const handleDragEnd = async (result: any) => {
     if (!result.destination) {
       return;
     }
@@ -50,6 +52,8 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
         sourceMinerItem
       );
       groupItem?.miners_info?.splice(sourceIndex, 1);
+      //给予目标group，miner_id 是唯一的
+      const result = await axiosData(proApi.saveMiner, destinationGroup);
     } else {
       //同组内拖拽
       groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
@@ -60,18 +64,16 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
     //保存分组 todo
   };
 
-  const handleDelMiner = async (
-    minerItem: any,
-    minerIndex: number,
-    groupItem: any
-  ) => {
+  const handleDelMiner = async (modalItem: any) => {
     setDeleteLoading(true);
+    const { minerIndex, groupItem } = modalItem;
     groupItem.miners_info.splice(minerIndex, 1);
     const data = await axiosData(proApi.saveGroup, { ...groupItem });
-    const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups?.group_info_list || []);
+    if (data) {
+      const newGroups = await axiosData(proApi.getGroups);
+      setGroups(newGroups?.group_info_list || []);
+    }
     setDeleteLoading(false);
-    setShowDeleteModal(false);
   };
 
   const handleDelGroup = async (id: string | number) => {
@@ -81,17 +83,29 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups?.group_info_list || []);
       setDeleteLoading(false);
-      setShowDeleteModal(false);
     }
   };
 
   const handleSaveMiners = async (group_id: any, minerInfo: any) => {
-    console.log('---45', group_id, minerInfo);
     const saveResult = await axiosData(proApi.saveMiner, {
       group_id: Number(group_id),
       miner_info_list: [minerInfo],
     });
-    console.log('---4456', saveResult);
+    if (saveResult) {
+      return messageManager.showMessage({
+        type: 'success',
+        content: '保存成功',
+        suffix: (
+          <span
+            className='cursor-pointer'
+            onClick={() => {
+              messageManager.hide();
+            }}>
+            {getSvgIcon('closeIcon')}
+          </span>
+        ),
+      });
+    }
   };
 
   const GroupItemHeader = (item: any) => {
@@ -121,32 +135,16 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                 className='cursor-pointer hover:text-primary'
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShowDeleteModal(true);
+                  setModalItems({
+                    id: item.group_name,
+                    group_id: item.group_id,
+                    type: 'group',
+                    show: true,
+                    groupItem: item,
+                  });
                 }}>
                 {getSvgIcon('deleteIcon')}
               </span>
-              <Modal
-                closeIcon={false}
-                title={tr('delete_group')}
-                show={showDeleteModal}
-                loading={deleteLoading}
-                onOk={(e) => {
-                  e.stopPropagation();
-                  handleDelGroup(item.group_id);
-                }}
-                onCancel={(e) => {
-                  e.stopPropagation();
-                  setShowDeleteModal(false);
-                }}>
-                <div className='m-5'>
-                  <div className='mb-1'>
-                    {tr('delete_record_group', {
-                      value: tr(item.group_name),
-                    })}
-                  </div>
-                  <div>{tr('delete_group_text')}</div>
-                </div>
-              </Modal>
             </>
           )}
         </div>
@@ -181,8 +179,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                 }
               />
             );
-          }
-          if (dataIndex == 'edit') {
+          } else if (dataIndex == 'edit') {
             showValue = (
               <span className='flex items-center gap-x-2'>
                 <span className='cursor-pointer hover:text-primary'>
@@ -192,28 +189,17 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                   <span
                     className='cursor-pointer hover:text-primary'
                     onClick={() => {
-                      setShowDeleteModal(true);
+                      setModalItems({
+                        id: minerItem.miner_id,
+                        minerItem,
+                        type: 'miner',
+                        show: true,
+                        groupItem,
+                        minerIndex,
+                      });
                     }}>
                     {getSvgIcon('deleteIcon')}
                   </span>
-                  <Modal
-                    closeIcon={false}
-                    title={tr('delete_miner')}
-                    show={showDeleteModal}
-                    loading={deleteLoading}
-                    onOk={() =>
-                      handleDelMiner(minerItem, minerIndex, groupItem)
-                    }
-                    onCancel={() => setShowDeleteModal(false)}>
-                    <div className='m-5'>
-                      <div className='mb-1'>
-                        {tr('delete_record_miner', {
-                          value: minerItem?.miner_id,
-                        })}
-                      </div>
-                      <div>{tr('delete_miner_text')}</div>
-                    </div>
-                  </Modal>
                 </>
               </span>
             );
@@ -227,59 +213,98 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       </ul>
     );
   };
-
+  const showType = useMemo(() => {
+    return modalItems?.type || 'miner';
+  }, [modalItems]);
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <Collapse
-        className='custom_collapse_gaps'
-        collapsible='header'
-        expandIconPosition='end'>
-        {data.map((groupItem: any, dataIndex: number) => (
-          <Collapse.Panel
-            header={GroupItemHeader(groupItem)}
-            key={groupItem.group_id}>
-            <Droppable droppableId={groupItem.group_id + '_' + dataIndex}>
-              {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className='main_bgColor text-sm font-medium text_des rounded-xl'>
-                  <ul className='flex p-5'>
-                    {account_miners.groups_miners_columns.map((minerHeader) => {
-                      return (
-                        <li
-                          className='w-full'
-                          style={{ width: minerHeader.width }}>
-                          {tr(minerHeader.title)}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  {groupItem?.miners_info?.map(
-                    (minerItem: any, minerIndex: number) => (
-                      <Draggable
-                        key={minerItem.miner_id}
-                        draggableId={minerItem.miner_id + '_' + minerIndex}
-                        index={minerIndex}>
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}>
-                            {minersChildren(minerItem, minerIndex, groupItem)}
-                          </div>
-                        )}
-                      </Draggable>
-                    )
-                  )}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </Collapse.Panel>
-        ))}
-      </Collapse>
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Collapse
+          className='custom_collapse_gaps'
+          collapsible='header'
+          expandIconPosition='end'>
+          {data.map((groupItem: any, dataIndex: number) => (
+            <Collapse.Panel
+              header={GroupItemHeader(groupItem)}
+              key={groupItem.group_id}>
+              <Droppable droppableId={groupItem.group_id + '_' + dataIndex}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className='main_bgColor text-sm font-medium text_des rounded-xl'>
+                    <ul className='flex p-5'>
+                      {account_miners.groups_miners_columns.map(
+                        (minerHeader) => {
+                          return (
+                            <li
+                              className='w-full'
+                              style={{ width: minerHeader.width }}>
+                              {tr(minerHeader.title)}
+                            </li>
+                          );
+                        }
+                      )}
+                    </ul>
+                    {groupItem?.miners_info?.map(
+                      (minerItem: any, minerIndex: number) => (
+                        <Draggable
+                          key={minerItem.miner_id}
+                          draggableId={minerItem.miner_id + '_' + minerIndex}
+                          index={minerIndex}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}>
+                              {minersChildren(minerItem, minerIndex, groupItem)}
+                            </div>
+                          )}
+                        </Draggable>
+                      )
+                    )}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </Collapse.Panel>
+          ))}
+        </Collapse>
+      </DragDropContext>
+      <Modal
+        closeIcon={false}
+        title={tr(`delete_${showType}`)}
+        show={modalItems.show}
+        loading={deleteLoading}
+        onOk={(e: any) => {
+          //  e.stopPropagation();
+
+          if (modalItems.type === 'miner') {
+            handleDelMiner(modalItems);
+          } else {
+            handleDelGroup(modalItems.group_id);
+          }
+          setModalItems({
+            show: false,
+          });
+        }}
+        onCancel={(e: any) => {
+          e.stopPropagation();
+          setModalItems({
+            show: false,
+          });
+          //  setShowDeleteModal(false);
+        }}>
+        <div className='m-5'>
+          <div className='mb-1'>
+            {tr(`delete_record_${showType}`, {
+              value: modalItems?.id,
+            })}
+          </div>
+          <div>{tr(`delete_${showType}_text`)}</div>
+        </div>
+      </Modal>
+    </>
   );
 };
 

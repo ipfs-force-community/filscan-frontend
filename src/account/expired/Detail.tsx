@@ -35,7 +35,7 @@ export default ({
     return [];
   }, [miner]);
   const columns = useMemo(() => {
-    return account_expired.columns.map((item) => {
+    return account_expired.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);

@@ -2,18 +2,25 @@
 
 import PickDate from '@/packages/pickDate';
 import { getSvgIcon } from '@/svgsIcon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { message } from 'antd';
 
 export default ({
   defaultValue,
   onChange,
+  showEnd,
 }: {
+  showEnd?: boolean;
   defaultValue: Array<string>;
   onChange: (start: string, end: string) => void;
 }) => {
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [startTime, setStartTime] = useState(defaultValue[0]);
+  const [endTime, setEndTime] = useState(defaultValue[1]);
+
+  useEffect(() => {
+    setStartTime(defaultValue[0] || '');
+    setEndTime(defaultValue[1] || '');
+  }, [defaultValue]);
 
   const handleDateChange = (type: string, value: string) => {
     if (type === 'start') {
@@ -25,10 +32,19 @@ export default ({
         return message.warning('endTime must be greater than startTime');
       }
     }
-    onChange(
-      type === 'start' ? value : startTime,
-      type === 'end' ? value : endTime
-    );
+    if (showEnd) {
+      if (type === 'start') {
+        onChange(value, endTime);
+      } else if (type === 'end') {
+        onChange(startTime, value);
+      }
+    } else {
+      // 只有一个date card
+      onChange(
+        type === 'start' ? value : value,
+        type === 'end' ? value : value
+      );
+    }
   };
 
   return (
@@ -38,12 +54,16 @@ export default ({
         timeType='utc'
         onChange={(value) => handleDateChange('start', value)}
       />
-      <span>{getSvgIcon('dateArrowIcon')}</span>
-      <PickDate
-        defaultValue={defaultValue[1]}
-        timeType='utc'
-        onChange={(value) => handleDateChange('end', value)}
-      />
+      {showEnd && (
+        <>
+          <span>{getSvgIcon('dateArrowIcon')}</span>
+          <PickDate
+            defaultValue={defaultValue[1]}
+            timeType='utc'
+            onChange={(value) => handleDateChange('end', value)}
+          />
+        </>
+      )}
     </div>
   );
 };

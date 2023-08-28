@@ -42,7 +42,7 @@ export default ({
   const { data: gasData, loading } = useAxiosData(proApi.getGas, {
     group_id: active ? Number(active) : 0,
     start_date: date.startTime,
-    end_date: date.endTime,
+    end_date: date.startTime,
   });
 
   const data = useMemo(() => {

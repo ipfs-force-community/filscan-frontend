@@ -45,7 +45,6 @@ export default ({
         ),
       });
     }
-    console.log('-----3', addMiners, { miner_id: values });
     const newMiners = [...addMiners, { miner_id: values }];
     setAddMiner(newMiners);
     if (onChange) onChange(newMiners);

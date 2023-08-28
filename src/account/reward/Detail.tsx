@@ -2,7 +2,7 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import Breadcrumb from '@/packages/breadcrumb';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { formatDateTime, getCalcTime } from '@/utils';
 import ExportExcel from '@/packages/exportExcel';
 import Table from '@/packages/Table';
@@ -46,14 +46,6 @@ export default ({
     ),
   });
 
-  const payload = useMemo(() => {
-    return {
-      miner_id: miner,
-      start_date: date.startTime,
-      end_date: date.endTime,
-    };
-  }, [miner, date]);
-
   //proApi.getReward
   const { data: rewardDataDetail, loading } = useAxiosData(proApi.getReward, {
     miner_id: miner,
@@ -62,7 +54,7 @@ export default ({
   });
 
   const columns = useMemo(() => {
-    return account_reward.columns.map((item) => {
+    return account_reward.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);
@@ -93,6 +85,7 @@ export default ({
         </div>
         <div className='flex gap-x-2.5'>
           <DateTime
+            showEnd={true}
             defaultValue={[date.startTime, date.endTime]}
             onChange={(start, end) => {
               setDate({
@@ -105,7 +98,7 @@ export default ({
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
-        <Table data={showData} columns={columns} loading={false} />
+        <Table data={showData} columns={columns} loading={loading} />
       </div>
     </>
   );

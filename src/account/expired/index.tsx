@@ -110,7 +110,7 @@ export default ({
                       <Table
                         data={sector_item?.sector_detail_list || []}
                         columns={columns}
-                        loading={false}
+                        loading={loading}
                       />
                     ),
                   },

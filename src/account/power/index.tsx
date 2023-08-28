@@ -41,7 +41,7 @@ export default ({
   const { data: powerData, loading } = useAxiosData(proApi.getPower, {
     group_id: active ? Number(active) : 0,
     start_date: date.startTime,
-    end_date: date.endTime,
+    end_date: date.endTime || date.startTime,
   });
 
   const data = useMemo(() => {
