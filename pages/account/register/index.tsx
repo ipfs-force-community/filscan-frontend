@@ -4,7 +4,6 @@ import { Translation } from '@/components/hooks/Translation';
 import { registerList } from '@/contents/account';
 import { proApi } from '@/contents/apiUrl';
 import SendCode from '@/src/account/sendCode';
-import fetchData from '@/store/server';
 import { validateCode, validatePassword } from '@/utils';
 import { Button, Form, Input } from 'antd';
 import { useState } from 'react';
@@ -14,17 +13,19 @@ import Image from 'next/image';
 import errorIcon from '@/assets/images/error.svg';
 import { root } from 'postcss';
 import Success from '@/src/account/success';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
   const [token, setToken] = useState('token');
   const [success, setSuccess] = useState(false);
+  const { axiosData } = useAxiosData();
   const [form] = Form.useForm();
 
   const onFinish = async () => {
     //注册
     const data = form.getFieldsValue();
-    const result: any = await fetchData(proApi.login, {
+    const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
       password: data.new_password,
@@ -74,7 +75,7 @@ export default () => {
                   if (item.name === 'email') {
                     newRules.push(() => ({
                       async validator(_: any, value: any) {
-                        const result: any = await fetchData(
+                        const result: any = await axiosData(
                           proApi.mail_exists,
                           {
                             mail: value,
