@@ -54,9 +54,18 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       groupItem?.miners_info?.splice(sourceIndex, 1);
       //给予目标group，miner_id 是唯一的
       const result = await axiosData(proApi.saveMiner, destinationGroup);
+      if (result) {
+        const newGroups = await axiosData(proApi.getGroups);
+        setGroups(newGroups?.group_info_list || []);
+      }
     } else {
       //同组内拖拽
       groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
+      const result = await axiosData(proApi.saveMiner, groupItem);
+      if (result) {
+        const newGroups = await axiosData(proApi.getGroups);
+        setGroups(newGroups?.group_info_list || []);
+      }
     }
     // }
 
@@ -89,7 +98,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
   const handleSaveMiners = async (group_id: any, minerInfo: any) => {
     const saveResult = await axiosData(proApi.saveMiner, {
       group_id: Number(group_id),
-      miner_info_list: [minerInfo],
+      miners_info: [minerInfo],
     });
     if (saveResult) {
       return messageManager.showMessage({
