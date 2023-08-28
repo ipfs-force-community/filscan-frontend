@@ -2,12 +2,12 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import { block_list, message_list } from '@/contents/detail';
+import { block_list } from '@/contents/detail';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import fetchData from '@/store/server';
 import { detailPageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
+import useAxiosData from '@/store/useAxiosData';
 
 export default ({
   methodName,
@@ -18,6 +18,7 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
+  const { axiosData } = useAxiosData();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     dataSource: [],
@@ -43,7 +44,7 @@ export default ({
     setLoading(true);
     const showIndex = cur || current;
     const showMethod = method || methodName;
-    const result: any = await fetchData(apiUrl.detail_block_list, {
+    const result: any = await axiosData(apiUrl.detail_block_list, {
       account_id: accountId,
       filters: {
         index: showIndex - 1,
