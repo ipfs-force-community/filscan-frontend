@@ -8,6 +8,7 @@ import EChart from '@/components/echarts';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
 import { formatFilNum } from '@/utils';
+import useAxiosData from '@/store/useAxiosData';
 
 interface Props {
   active?: string;
@@ -28,6 +29,7 @@ function Gas(props: Props) {
   const { tr } = Translation({ ns: 'static' });
   const { active = '24h', className = '' } = props;
   const [value, setValue] = useState(active);
+  const { axiosData } = useAxiosData();
 
   const color = useMemo(() => {
     return getColor(theme);
@@ -116,7 +118,7 @@ function Gas(props: Props) {
       base_fee: [],
     };
     const newOpt: any = {};
-    fetchData(apiUrl.static_gas, { interval }).then((res: any) => {
+    axiosData(apiUrl.static_gas, { interval }).then((res: any) => {
       res?.list?.reverse().forEach((dataItem: any) => {
         const { timestamp, base_fee, gas_in_32g, gas_in_64g } = dataItem;
         let showTime: string = '';

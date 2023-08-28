@@ -1,5 +1,6 @@
 
 const statistic = {
+  gas_total:'Gas 统计',
   show_more: '更多',
   '24h': '24时',
   '7d': '7天',
