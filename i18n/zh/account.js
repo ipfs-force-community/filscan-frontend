@@ -30,7 +30,17 @@ const account = {
      total_out_come_gas: '总支出/Gas消耗',
      pledge_amount_24: '质押FIL/24h变化',
      balance_24:'可用余额/24h变化',
- quality_power_24:'有效算力/24h变化',
+  quality_power_24: '有效算力/24h变化',
+ 
+  //节点管理
+    delete_group: '删除分组',
+  delete_record_group: '确定删除分组“{{value}}”吗？',
+  delete_group_text: '删除后该分组将不在列表中显示',
+  
+  delete_miner: '删除节点',
+  delete_record_miner: '确定删除节点“{{value}}”吗？',
+  delete_miner_text:'删除后该节点将不在分组中显示',
+  
      
 
      //添加节点

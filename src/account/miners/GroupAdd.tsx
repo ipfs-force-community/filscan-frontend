@@ -53,7 +53,7 @@ export default ({
     });
     setSaveLoading(false);
     const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups.group_info_list || []);
+    setGroups(newGroups?.group_info_list || []);
     if (data) {
       messageManager.showMessage({
         type: 'success',

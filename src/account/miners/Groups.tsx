@@ -10,12 +10,15 @@ import { account_miners } from '@/contents/account';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 import { useGroupsStore } from './content';
+import Modal from '@/packages/modal';
 
 const Groups = ({ groups }: { groups: Array<any> }) => {
   const { tr } = Translation({ ns: 'account' });
   const { axiosData } = useAxiosData();
   const { setGroups } = useGroupsStore();
   const [data, setData] = useState<any>(groups);
+  const [deleteLoading, setDeleteLoading] = useState<any>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
     setData(groups || []);
@@ -61,13 +64,24 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
     minerIndex: number,
     groupItem: any
   ) => {
+    setDeleteLoading(true);
     groupItem.miners_info.splice(minerIndex, 1);
-
     const data = await axiosData(proApi.saveGroup, { ...groupItem });
     const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups.group_info_list || []);
-    // setLoading(false);
-    // onChange(false);
+    setGroups(newGroups?.group_info_list || []);
+    setDeleteLoading(false);
+    setShowDeleteModal(false);
+  };
+
+  const handleDelGroup = async (id: string | number) => {
+    const del = await axiosData(proApi.delGroup, { group_id: Number(id) });
+    if (del.group_id) {
+      //删除成功
+      const newGroups = await axiosData(proApi.getGroups);
+      setGroups(newGroups?.group_info_list || []);
+      setDeleteLoading(false);
+      setShowDeleteModal(false);
+    }
   };
 
   const GroupItemHeader = (item: any) => {
@@ -91,6 +105,40 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
             className='cursor-pointer text_color'>
             {getSvgIcon('editIcon')}
           </Link>
+          {item.group_name !== 'default_group' && (
+            <>
+              <span
+                className='cursor-pointer hover:text-primary'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowDeleteModal(true);
+                }}>
+                {getSvgIcon('deleteIcon')}
+              </span>
+              <Modal
+                closeIcon={false}
+                title={tr('delete_group')}
+                show={showDeleteModal}
+                loading={deleteLoading}
+                onOk={(e) => {
+                  e.stopPropagation();
+                  handleDelGroup(item.group_id);
+                }}
+                onCancel={(e) => {
+                  e.stopPropagation();
+                  setShowDeleteModal(false);
+                }}>
+                <div className='m-5'>
+                  <div className='mb-1'>
+                    {tr('delete_record_group', {
+                      value: tr(item.group_name),
+                    })}
+                  </div>
+                  <div>{tr('delete_group_text')}</div>
+                </div>
+              </Modal>
+            </>
+          )}
         </div>
       </li>
     );
@@ -118,19 +166,33 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                 <span className='cursor-pointer hover:text-primary'>
                   {getSvgIcon('openAllIcon')}
                 </span>
-                <Popconfirm
-                  title='Delete the miner'
-                  overlayClassName='custom_Popconfirm'
-                  description='Are you sure to delete this miner?'
-                  onConfirm={() =>
-                    handleDelMiner(minerItem, minerIndex, groupItem)
-                  }
-                  okText='Yes'
-                  cancelText='No'>
-                  <span className='cursor-pointer hover:text-primary'>
+                <>
+                  <span
+                    className='cursor-pointer hover:text-primary'
+                    onClick={() => {
+                      setShowDeleteModal(true);
+                    }}>
                     {getSvgIcon('deleteIcon')}
                   </span>
-                </Popconfirm>
+                  <Modal
+                    closeIcon={false}
+                    title={tr('delete_miner')}
+                    show={showDeleteModal}
+                    loading={deleteLoading}
+                    onOk={() =>
+                      handleDelMiner(minerItem, minerIndex, groupItem)
+                    }
+                    onCancel={() => setShowDeleteModal(false)}>
+                    <div className='m-5'>
+                      <div className='mb-1'>
+                        {tr('delete_record_miner', {
+                          value: minerItem?.miner_id,
+                        })}
+                      </div>
+                      <div>{tr('delete_miner_text')}</div>
+                    </div>
+                  </Modal>
+                </>
               </span>
             );
           }

@@ -26,7 +26,7 @@ export default ({
     setLoading(true);
     const data = await axiosData(proApi.saveGroup, { group_name: value });
     const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups.group_info_list || []);
+    setGroups(newGroups?.group_info_list || []);
     setLoading(false);
     onChange(false);
   };

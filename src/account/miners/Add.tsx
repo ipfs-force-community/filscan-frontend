@@ -82,7 +82,7 @@ export default ({
       const data = await axiosData(proApi.saveGroup, payload);
       setLoading(false);
       const newGroups = await axiosData(proApi.getGroups);
-      setGroups(newGroups.group_info_list || []);
+      setGroups(newGroups?.group_info_list || []);
       messageManager.showMessage({
         type: 'success',
         content: 'Add Miner successfully',

@@ -28,6 +28,7 @@ export const proApi = {
     getGroupsId: proUrl + '/GetGroup',
     createGroup: proUrl + '/CreateGroup',
     saveGroup: proUrl + '/SaveGroupMiners',
+    delGroup:   proUrl + '/DeleteGroup',
     getLucky: proUrl + '/LuckyRateDetail',
     getBalance: proUrl + '/BalanceDetail',
     getReward: proUrl + '/RewardDetail',
