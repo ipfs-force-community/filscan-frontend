@@ -8,7 +8,7 @@ const account = {
      miners: '节点管理',
      personal: '账号信息',
      logout: '退出登录',
-     default_group: '未分组',
+     default_group: '默认分组',
      welcome: '欢迎来到Filscan!',
      welcome_text1: '恭喜！您的账户已成功注册,您可以使用您的邮箱号和密码继续登录。',
      welcome_text2: '请登录您的账户并享受您的Filscan服务!',
