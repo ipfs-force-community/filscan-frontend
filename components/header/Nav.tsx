@@ -6,8 +6,11 @@ import { navMenu } from '@/contents/nav';
 import down from '@/assets/images/down.svg';
 import { Translation } from '@/components/hooks/Translation';
 import Link from 'next/link';
+import Search from './Search';
+import { useRouter } from 'next/router';
 export default () => {
   const { tr } = Translation({ ns: 'nav' });
+  const router = useRouter();
 
   const renderChild = (children: Array<any>, num: number) => {
     return (
@@ -28,6 +31,8 @@ export default () => {
     );
   };
 
+  const isHome = router.asPath === '/home' || router.asPath === '/';
+
   return (
     <div className='flex items-center px-24 h-[60px] justify-between text-sm  font-medium '>
       <Link
@@ -36,6 +41,10 @@ export default () => {
         <Image src={logo} width={32} height={32} alt='logo' />
         <span className='font-Barlow font-bold text-xl '>Filscan</span>
       </Link>
+      <div className='flex-1 ml-5 mr-10'>
+        {!isHome && <Search className='!h-10' />}
+      </div>
+
       <div className='flex gap-x-8 h-full justify-between items-center'>
         {navMenu.map((nav, index) => {
           if (nav?.children) {
