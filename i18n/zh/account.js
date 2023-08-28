@@ -15,7 +15,7 @@ const account = {
     last_time: '最新更新时间',
     all: '全部',
      edit:'操作',
-     
+     miner_add:'添加',
      //数据概览
      overview_power: '算力概览',
      overview_gas: 'Gas 消耗',

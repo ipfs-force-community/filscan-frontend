@@ -10,6 +10,7 @@ import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 import { useGroupsStore } from './content';
 import messageManager from '@/packages/message';
+import { useRouter } from 'next/router';
 
 /** @format */
 
@@ -31,6 +32,7 @@ export default ({
       path: '/account#miners?type=miners_group',
     },
   ];
+  const router = useRouter();
   const [groupName, setGroupName] = useState(groupDetail?.label);
   const [groupMinders, setGroupMiners] = useState(groupDetail?.miners_info);
   const [newMiners, setNewMiners] = useState<Array<any>>([]);
@@ -52,13 +54,15 @@ export default ({
       miners_info: newMiners,
     });
     setSaveLoading(false);
-    const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups?.group_info_list || []);
+
     if (data) {
+      const newGroups = await axiosData(proApi.getGroups);
+      setGroups(newGroups?.group_info_list || []);
       messageManager.showMessage({
         type: 'success',
         content: 'Save Group successfully',
       });
+      router.push('/account#miners');
     }
   };
 

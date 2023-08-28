@@ -11,6 +11,7 @@ import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 import { useGroupsStore } from './content';
 import Modal from '@/packages/modal';
+import TagInput from '@/packages/tagInput';
 
 const Groups = ({ groups }: { groups: Array<any> }) => {
   const { tr } = Translation({ ns: 'account' });
@@ -82,6 +83,15 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       setDeleteLoading(false);
       setShowDeleteModal(false);
     }
+  };
+
+  const handleSaveMiners = async (group_id: any, minerInfo: any) => {
+    console.log('---45', group_id, minerInfo);
+    const saveResult = await axiosData(proApi.saveMiner, {
+      group_id: Number(group_id),
+      miner_info_list: [minerInfo],
+    });
+    console.log('---4456', saveResult);
   };
 
   const GroupItemHeader = (item: any) => {
@@ -157,9 +167,21 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
         {account_miners.groups_miners_columns.map((itemDate, index) => {
           const { render, title, width, dataIndex } = itemDate;
           const value = minerItem[dataIndex];
-          let showValue = render
-            ? render(value, minerItem)
-            : minerItem[dataIndex];
+          let showValue = render ? render(value) : minerItem[dataIndex];
+          if (dataIndex === 'miner_tag') {
+            showValue = (
+              <TagInput
+                text={value}
+                record={{ ...minerItem }}
+                onChange={(value) =>
+                  handleSaveMiners(groupItem.group_id, {
+                    ...minerItem,
+                    miner_tag: value,
+                  })
+                }
+              />
+            );
+          }
           if (dataIndex == 'edit') {
             showValue = (
               <span className='flex items-center gap-x-2'>

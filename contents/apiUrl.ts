@@ -36,6 +36,7 @@ export const proApi = {
     getPower: proUrl + '/PowerDetail',
     getSector:proUrl + '/SectorDetail',
     account_miners: proUrl + '/CountUserMiners',
+    saveMiner: proUrl + '/SaveUserMiners'
 
 }
 

@@ -33,7 +33,7 @@ export default ({
   });
 
   const columns = useMemo(() => {
-    return account_gas.columns.map((item) => {
+    return account_gas.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);

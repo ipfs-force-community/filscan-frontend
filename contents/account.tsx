@@ -360,7 +360,7 @@ export const overview = {
       },
     ],
   ],
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -386,6 +386,7 @@ export const overview = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
+      render: (text: string) => tr(text),
     },
     {
       title: 'quality_power',
@@ -514,7 +515,7 @@ export const overview = {
 };
 
 export const account_lucky = {
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -542,6 +543,7 @@ export const account_lucky = {
       dataIndex: 'group_name',
       fixed: 'left',
       width: '20%',
+      render: (text: string) => tr(text),
     },
     { title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%' },
     { title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%' },
@@ -550,7 +552,7 @@ export const account_lucky = {
 };
 
 export const account_balance = {
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -576,6 +578,7 @@ export const account_balance = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
+      render: (text: string) => tr(text),
     },
     {
       title: 'miner_balance',
@@ -816,7 +819,7 @@ export const account_balance = {
   ],
 };
 export const account_reward = {
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -842,6 +845,7 @@ export const account_reward = {
       dataIndex: 'group_name',
       fixed: 'left',
       width: '20%',
+      render: (text: string) => tr(text),
     },
     { title: 'block_count', dataIndex: 'block_count', width: '10%' },
     { title: 'win_count', dataIndex: 'win_count', width: '10%' },
@@ -850,7 +854,7 @@ export const account_reward = {
   ],
 };
 export const account_power = {
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -876,6 +880,7 @@ export const account_power = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
+      render: (text: string) => tr(text),
     },
     {
       title: 'quality_power',
@@ -989,7 +994,7 @@ export const account_power = {
 };
 
 export const account_gas = {
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -1015,6 +1020,7 @@ export const account_gas = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
+      render: (text: string) => tr(text),
     },
     {
       title: 'sector_power_change',
@@ -1135,7 +1141,7 @@ export const account_expired = {
       render: (text: string | number) => formatFilNum(text, false, false, 4),
     },
   ],
-  columns: [
+  columns: (tr: any) => [
     {
       title: 'tag',
       dataIndex: 'tag',
@@ -1158,6 +1164,7 @@ export const account_expired = {
       title: 'group_name',
       dataIndex: 'group_name',
       width: '15%',
+      render: (text: string, record: any) => tr(text),
     },
     {
       title: 'exp_power',
@@ -1192,9 +1199,6 @@ export const account_miners = {
       dataIndex: 'miner_tag',
       title: 'custom_tag',
       width: '45%',
-      render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
-      },
     },
     {
       dataIndex: 'miner_id',

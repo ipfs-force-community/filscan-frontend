@@ -2,13 +2,18 @@
 
 import success from '@/assets/images/success.svg';
 import { Translation } from '@/components/hooks/Translation';
+import { proApi } from '@/contents/apiUrl';
+import { UserInfo } from '@/store/UserStore';
+import useAxiosData from '@/store/useAxiosData';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default ({ type = '' }: { type?: string }) => {
   const { tr } = Translation({ ns: 'account' });
   const router = useRouter();
+
   const handleClick = () => {
     //router.reload();
     router.push('/home');

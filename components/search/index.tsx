@@ -12,6 +12,7 @@ export default ({
   className,
   origin,
   onSearch,
+  onClick,
   ns,
   placeholder = '',
   suffix,
@@ -27,6 +28,7 @@ export default ({
   placeholder?: string;
   suffix?: JSX.Element;
   clear?: boolean;
+  onClick?: (value: string) => void;
   onSearch: (value: string) => void;
 }) => {
   const { tr } = Translation({ ns });
@@ -57,7 +59,16 @@ export default ({
           onSearch(inputValue);
         }}
         suffix={
-          suffix || (
+          (
+            <span
+              onClick={() => {
+                if (onClick) {
+                  onSearch(inputValue);
+                }
+              }}>
+              {suffix}
+            </span>
+          ) || (
             <Image
               src={origin === 'banner' ? IconB : IconW}
               width={34}

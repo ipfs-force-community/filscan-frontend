@@ -22,7 +22,7 @@ export default ({
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string>('0');
   const columns = useMemo(() => {
-    return account_lucky.columns.map((item) => {
+    return account_lucky.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);

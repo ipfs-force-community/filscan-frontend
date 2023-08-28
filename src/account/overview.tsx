@@ -23,7 +23,7 @@ export default ({
   const [active, setActive] = useState<string>('0');
 
   const columns = useMemo(() => {
-    return overview.columns.map((item) => {
+    return overview.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);

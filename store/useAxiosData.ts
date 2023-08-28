@@ -26,7 +26,7 @@ const DefaultOptions = {
 const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
 function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any  ) {
-  const [data, setData] = useState<FetchDataResult<T> | null>(null);
+  const [data, setData] = useState<FetchDataResult<T> | null>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const retriesRef = useRef(0); // 使用 useRef 存储重试次数
@@ -91,12 +91,15 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           } else {
             setError(thrown);
             setLoading(false);
-            return notification.error({
+            if (retriesRef.current === maxRetries) { 
+               return notification.error({
               className: 'custom-notification',
               message: 'Error',
               duration: 100,
-              description: error?.message||'Network Error'
+              description: thrown?.message||'Network Error'
             })
+            }
+           
           }
         }         
       }

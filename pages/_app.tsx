@@ -21,14 +21,14 @@ import Footer from '@/components/footer';
 
 const { Content, Header } = Layout;
 
-const defaultUerInfo: UserInfo = {
-  name: '',
-  mail: '',
-  last_login: '',
-};
+// const defaultUerInfo: UserInfo = {
+//   name: '',
+//   mail: '',
+//   last_login: '',
+// };
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [userInfo, setUserInfo] = useState<any>({ ...defaultUerInfo });
+  const [userInfo, setUserInfo] = useState<any>();
   const [locale, setLocale] = useState('zh');
   const [theme, setTheme] = useState('light');
 
@@ -104,7 +104,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ErrorBoundary>
       <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
         <FilscanStoreProvider>
-          <UserStoreContext.Provider value={userInfo}>
+          <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
             <Layout className={`container_body ${theme}`}>
               <HeaderMain />
               <Content className='text-sm'>

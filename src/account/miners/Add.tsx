@@ -16,6 +16,7 @@ import SearchSelect from '@/packages/searchSelect';
 import { MinerNum } from '../type';
 import useAxiosData from '@/store/useAxiosData';
 import { useGroupsStore } from './content';
+import { useRouter } from 'next/router';
 
 export default ({
   groups,
@@ -27,6 +28,7 @@ export default ({
   defaultId?: number;
 }) => {
   const { tr } = Translation({ ns: 'account' });
+  const router = useRouter();
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     { title: tr('miners_add'), path: '/account#miners?type=miner_add' },
@@ -81,12 +83,15 @@ export default ({
       }
       const data = await axiosData(proApi.saveGroup, payload);
       setLoading(false);
-      const newGroups = await axiosData(proApi.getGroups);
-      setGroups(newGroups?.group_info_list || []);
-      messageManager.showMessage({
-        type: 'success',
-        content: 'Add Miner successfully',
-      });
+      if (data) {
+        const newGroups = await axiosData(proApi.getGroups);
+        setGroups(newGroups?.group_info_list || []);
+        messageManager.showMessage({
+          type: 'success',
+          content: 'Add Miner successfully',
+        });
+        router.push('/account#miners');
+      }
     } else {
       messageManager.showMessage({
         type: 'warning',
@@ -108,9 +113,10 @@ export default ({
             className='w-full mt-4'
             placeholder='miner_add_placeholder'
             clear
+            onClick={handleSearch}
             suffix={
               <span className='p-2 w-fit h-8 rounded-[5px] reverse_color flex items-center cursor-pointer'>
-                回车确认
+                {tr('miner_add')}
               </span>
             }
             onSearch={handleSearch}

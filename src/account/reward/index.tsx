@@ -35,7 +35,7 @@ export default ({
   });
 
   const columns = useMemo(() => {
-    return account_reward.columns.map((item) => {
+    return account_reward.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
   }, []);

@@ -27,15 +27,12 @@ export default () => {
   const onFinish = async () => {
     //登录
     const data = form.getFieldsValue();
-    console.log('===d', data);
     const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
     });
     if (result.code === 1) {
       //未注册
-      //      setAccountStatus(result.code);
-
       messageManager.showMessage({
         type: 'error',
         content: tr('no_account'),
@@ -45,6 +42,11 @@ export default () => {
     if (result.token) {
       setSuccess(true);
       localStorage.setItem('token', result.token);
+      userInfo.setUserInfo({
+        last_login: result?.expired_at || '',
+        mail: data?.email || result?.mail,
+        name: result?.name,
+      });
     }
   };
 

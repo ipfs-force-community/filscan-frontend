@@ -28,12 +28,19 @@ export default ({
 
   const [inputValue, setInputValue] = useState<Item>();
   const [showGroup, setShowGroup] = useState<boolean>(false);
+
+  const handleInput = (e: any) => {
+    if (isShow) {
+      setInputValue({ label: '', value: '' });
+    }
+  };
   return (
     <div className='mt-5 group relative'>
       <Input
         className='w-full mt-4 h-12 focus:outline-none'
         placeholder={tr('miner_select_group_placeholder')}
         value={inputValue?.label}
+        onChange={(e) => handleInput(e)}
         onFocus={() => {
           setShowGroup(true);
         }}

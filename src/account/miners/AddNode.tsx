@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getSvgIcon } from '@/svgsIcon';
 import { MinerNum } from '../type';
+import { Translation } from '@/components/hooks/Translation';
 
 export default ({
   className,
@@ -21,6 +22,7 @@ export default ({
   onChange?: (minerArr: Array<any>) => void;
 }) => {
   const [addMiners, setAddMiner] = useState<Array<any>>(defaultMiners || []);
+  const { tr } = Translation({ ns: 'account' });
 
   useEffect(() => {
     setAddMiner(defaultMiners || []);
@@ -43,6 +45,7 @@ export default ({
         ),
       });
     }
+    console.log('-----3', addMiners, { miner_id: values });
     const newMiners = [...addMiners, { miner_id: values }];
     setAddMiner(newMiners);
     if (onChange) onChange(newMiners);
@@ -55,9 +58,10 @@ export default ({
         className={`w-full mt-4 ${className}`}
         placeholder='miner_add_placeholder'
         clear
+        onClick={handleSearch}
         suffix={
           <span className='p-2 w-fit h-8 rounded-[5px] reverse_color flex items-center cursor-pointer'>
-            回车确认
+            {tr('miner_add')}
           </span>
         }
         onSearch={handleSearch}
@@ -76,7 +80,9 @@ export default ({
                   height={12}
                   onClick={() => {
                     const newArr = [...addMiners];
-                    newArr.splice(index, 1), setAddMiner(newArr);
+                    newArr.splice(index, 1);
+                    setAddMiner(newArr);
+                    if (onChange) onChange(newArr);
                   }}
                   alt='del'
                   src={del_light}
