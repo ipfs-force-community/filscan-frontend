@@ -878,7 +878,7 @@ export const account_power = {
       width: 100,
       fixed: 'left',
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/account#power?miner=${text}`} className='link_text'>
           {text}
         </Link>
       ),

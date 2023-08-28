@@ -9,7 +9,7 @@ import Table from '@/packages/Table';
 import DateTime from '@/src/account/DateTIme';
 import {
   account_expired,
-  account_gas,
+  account_power,
   account_reward,
 } from '@/contents/account';
 import useAxiosData from '@/store/useAxiosData';
@@ -31,11 +31,11 @@ export default ({
       return [
         {
           title: tr('overview_expired'),
-          path: '/account#gas',
+          path: '/account#power',
         },
         {
           title: <span>{miner}</span>,
-          path: `/account#gas?miner=${miner}`,
+          path: `/account#power?miner=${miner}`,
         },
       ];
     }
@@ -50,23 +50,23 @@ export default ({
     ),
   });
 
-  //proApi.getReward
-  const { data: gasData, loading } = useAxiosData(proApi.getGas, {
+  //proApi
+  const { data: powerDataDetail, loading } = useAxiosData(proApi.getPower, {
     miner_id: miner,
     start_date: date.startTime,
     end_date: date.endTime,
   });
 
   const columns = useMemo(() => {
-    return account_gas.columns(tr).map((item) => {
+    return account_power.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, [tr]);
+  }, []);
 
   const showData = useMemo(() => {
-    const newData = gasData?.gas_cost_detail_list || [];
+    const newData = powerDataDetail?.reward_detail_list || [];
     return newData || [];
-  }, [gasData]);
+  }, [powerDataDetail]);
 
   return (
     <>
@@ -81,7 +81,7 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(gasData?.epoch_time, 'YYYY/MM/DD HH:mm')}
+              {formatDateTime(powerDataDetail?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>

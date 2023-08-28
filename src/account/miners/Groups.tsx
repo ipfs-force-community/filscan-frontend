@@ -20,7 +20,6 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
   const { setGroups } = useGroupsStore();
   const [data, setData] = useState<any>(groups);
   const [deleteLoading, setDeleteLoading] = useState<any>(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [modalItems, setModalItems] = useState<any>({});
 
   useEffect(() => {
@@ -138,7 +137,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
             className='cursor-pointer text_color'>
             {getSvgIcon('editIcon')}
           </Link>
-          {item.group_name !== 'default_group' && (
+          {!item.is_default && (
             <>
               <span
                 className='cursor-pointer hover:text-primary'
