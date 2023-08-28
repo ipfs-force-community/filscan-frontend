@@ -28,6 +28,7 @@ export default () => {
   });
 
   const method = useMemo(() => {
+    console.log('---name', name);
     if (name && typeof name === 'string') {
       return name;
     }
@@ -73,6 +74,7 @@ export default () => {
         method_name,
       },
     });
+    console.log('---44', result);
     setLoading(false);
     setDataSource({
       data: result?.message_list || [],
