@@ -15,6 +15,7 @@
     --primary: #1C6AFD;
      --border-color:#e6e8eb;
     --bgDesColor:#F6F6F6;
+    --table-hover:#F8F8F8
 
 
 
@@ -36,6 +37,9 @@
   --card-shadow: rgba(0,0,0,0.4);
   --tab-shadow:rgba(0,0,0,0.1);
     --border-color:#222222;
+        --table-hover:#262626;
+
+
 
 
 

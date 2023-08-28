@@ -12,12 +12,14 @@ import fetchData from '@/store/server';
 import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
+  const { axiosData } = useAxiosData();
   const { name, p } = useRouter().query;
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState({
@@ -53,7 +55,7 @@ export default () => {
     setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
-    const result: any = await fetchData(apiUrl.tipset_address, {
+    const result: any = await axiosData(apiUrl.tipset_address, {
       index: showIndex - 1,
       limit: pageLimit,
       order: {
@@ -91,6 +93,7 @@ export default () => {
       }
     }
   };
+
   return (
     <div className='main_contain'>
       <div className='flex justify-between items-center'>

@@ -147,7 +147,7 @@ font-display: auto;
                     }
                     &:hover{
                         .ant-table-cell{
-                            background-color:  var(--bgColor) ;
+                            background-color:  var(--table-hove) ;
                         }
                       
                     }
@@ -155,10 +155,10 @@ font-display: auto;
                 .custom_table_row{
                      &:hover{
                         .ant-table-cell{
-                            background-color: var(--border-color) !important;
+                            background-color: var( --table-hover) !important;
                         }
                         .ant-table-column-sort{            
-                             background-color:  var(--bgColor) ;
+                             background-color:  var(--table-hove) ;
                         }
                         }
                         .ant-table-column-sort{
@@ -315,13 +315,13 @@ font-display: auto;
               font-size: 12px;
             font-family: DINPro-Medium, DINPro;
             font-weight: 500;
-            color: #000000;
+            color: var(--font-color);
         }
         .ant-select-selection-search-input {
             font-size: 12px;
             font-family: DINPro-Medium, DINPro;
             font-weight: 500;
-            color: #000000;
+            color: var(--font-color);
              cursor: pointer;
         }
     }
@@ -329,13 +329,13 @@ font-display: auto;
 }
 .custom_select_wrapper{
     padding: 16px;
-  background-color: var(--bgColor);
+  background-color: var(--bgColor) !important;
   color: var(--font-color);
-  border: var(--border-color);
-  box-shadow: 0px 2px 30px -2px var(--card-shadow);
-
+  border: var(--border-color) !important;
+  box-shadow: 0px 2px 30px -2px var(--card-shadow) !important;
+    
   .ant-select-item:not(.custom_options_item){
-    color: var(--font-color) ;
+    color: var(--font-color) !important;
     margin-bottom: 4px;
      &:hover{
         color: var(--primary) !important;
@@ -345,6 +345,9 @@ font-display: auto;
         cursor: pointer;
      }
      
+  }
+  .ant-select-item-option-selected{
+  background-color: var(--bg_hover) !important;
   }
   .custom_options_item{
     .ant-select-item-option-content{
