@@ -8,7 +8,6 @@ import Search from '@/components/search';
 import { dsn_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import fetchData from '@/store/server';
 import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';

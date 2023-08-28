@@ -5,12 +5,9 @@ import { Translation } from '@/components/hooks/Translation';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import { message_list } from '@/contents/tipset';
-import { Item } from '@/contents/type';
 import Table from '@/packages/Table';
-import Select from '@/packages/select';
 import Selects from '@/packages/selects';
 import { useFilscanStore } from '@/store/FilscanStore';
-import fetchData from '@/store/server';
 import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
@@ -69,7 +66,7 @@ export default () => {
     setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
-    const result: any = await fetchData(apiUrl.tipset_message, {
+    const result: any = await axiosData(apiUrl.tipset_message, {
       filters: {
         index: showIndex - 1,
         limit: pageLimit,
