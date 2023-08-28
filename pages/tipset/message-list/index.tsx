@@ -13,13 +13,15 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
+  const { axiosData } = useAxiosData();
   const { name, p } = useRouter().query;
   const [loading, setLoading] = useState(false);
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
@@ -47,7 +49,7 @@ export default () => {
   }, [lang]);
 
   const loadOptions = async () => {
-    const result: any = await fetchData(apiUrl.tipset_message_opt);
+    const result: any = await axiosData(apiUrl.tipset_message_opt);
     const obj = result?.method_name_list || {};
     const options = Object.keys(obj).map((v: string) => {
       return { value: v, label: tr(v) };
@@ -114,12 +116,9 @@ export default () => {
           options={headerOptions}
           onChange={(value) => {
             if (value !== 'all') {
-              updateQuery({ name: value });
+              updateQuery({ name: value, p: 'removed' });
             } else {
               removeQueryParam('name');
-            }
-            if (p) {
-              removeQueryParam('p');
             }
           }}
         />

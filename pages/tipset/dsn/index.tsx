@@ -13,11 +13,14 @@ import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
+  const { axiosData } = useAxiosData();
   const updateQuery = useUpdateQuery();
+
   const removeQueryParam = useRemoveQueryParam();
   const { p } = useRouter().query;
   const [loading, setLoading] = useState(false);
@@ -42,7 +45,7 @@ export default () => {
     setLoading(true);
     const showIndex = cur || current;
     const input = searching || search;
-    const result: any = await fetchData(apiUrl.tipset_Dsn, {
+    const result: any = await axiosData(apiUrl.tipset_Dsn, {
       input,
       filters: {
         index: showIndex - 1,
@@ -90,7 +93,7 @@ export default () => {
           </div>
         </div>
         <Search
-          className='w-[400px]'
+          className='!w-[400px]'
           placeholder={dsn_list.placeholder}
           onSearch={handleSearch}
           ns='tipset'

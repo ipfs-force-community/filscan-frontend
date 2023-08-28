@@ -110,11 +110,10 @@ export default () => {
           options={headerOptions}
           onChange={(value) => {
             if (value !== 'all') {
-              updateQuery({ name: value });
+              updateQuery({ name: value, p: 'removed' });
             } else {
               removeQueryParam('name');
             }
-            removeQueryParam('p');
           }}
         />
       </div>

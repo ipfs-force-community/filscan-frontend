@@ -604,7 +604,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -634,7 +635,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -664,7 +666,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -693,7 +696,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -723,7 +727,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -752,7 +757,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -781,7 +787,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -810,7 +817,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
