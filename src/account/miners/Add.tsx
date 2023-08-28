@@ -110,7 +110,7 @@ export default ({
         <div className='flex-1'>
           <Search
             ns={'account'}
-            className='w-full mt-4'
+            className='w-full mt-4 !h-12'
             placeholder='miner_add_placeholder'
             clear
             onClick={handleSearch}
@@ -164,7 +164,13 @@ export default ({
           />
         </div>
         <div className='mt-5 flex gap-x-4 justify-end'>
-          <Button className='cancel_btn'>{tr('cancel')}</Button>
+          <Button
+            className='cancel_btn'
+            onClick={() => {
+              router.back();
+            }}>
+            {tr('back')}
+          </Button>
           <Button className='confirm_btn' onClick={handleSave}>
             {tr('confirm')}
           </Button>

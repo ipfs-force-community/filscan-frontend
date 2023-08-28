@@ -78,6 +78,7 @@ font-display: auto;
 
 //input 
 
+
 .ant-input-affix-wrapper{
  border: 1px solid var(--border-color) !important;
 }
@@ -85,12 +86,10 @@ font-display: auto;
     background-color: transparent !important;
     color: var(--font-color);
     border-color: var(--border-color);
-   
 }
 .custom_input_banner{
    border: 1px solid rgba(255,255,255,0.5) !important;
-            background: rgba(255,255,255,0.04) !important;
-
+     background: rgba(255,255,255,0.04) !important;
     .ant-input{
         &::placeholder{
             color:  rgba(255,255,255,0.5);

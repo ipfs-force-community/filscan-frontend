@@ -2,8 +2,6 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { Option_Item } from '@/contents/type';
-import Image from 'next/image';
-import down from '@/assets/images/down.svg';
 import { useEffect, useState } from 'react';
 import { getSvgIcon } from '@/svgsIcon';
 
@@ -56,7 +54,6 @@ export default ({
         <span className='flex justify-between items-center font-PingFang des_bg_color rounded-[5px] p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
           {tr(showLabel)}
           {getSvgIcon('downIcon')}
-          {/* <Image src={down} width={8} height={4} alt='down' /> */}
         </span>
       )}
 

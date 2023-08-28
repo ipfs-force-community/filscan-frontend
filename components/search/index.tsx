@@ -45,8 +45,10 @@ export default ({
       <Input
         className={`${
           style.search_input
-        } text-color custom_input_banner ${className} ${
-          origin === 'banner' ? style.banner_search : ''
+        } text-color custom_input  ${className} ${
+          origin === 'banner'
+            ? `custom_input_banner ${style.banner_search}`
+            : ''
         }`}
         placeholder={tr(placeholder)}
         value={inputValue}
