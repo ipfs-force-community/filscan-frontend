@@ -437,7 +437,8 @@ font-display: auto;
 .custom_picker{
     position: relative;
         border-radius: 5px;
-         width: 120px;
+         min-width: 120px;
+         width: fit-content;
     height: 32px;
     background-color: var(--bgDesColor);
     &_pre{

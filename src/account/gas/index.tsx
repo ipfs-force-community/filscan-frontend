@@ -10,6 +10,8 @@ import ExportExcel from '@/packages/exportExcel';
 import useAxiosData from '@/store/useAxiosData';
 import DateTime from '@/src/account/DateTIme';
 import { formatDateTime } from '@/utils';
+import { useHash } from '@/components/hooks/useHash';
+import Detail from './Detail';
 
 export default ({
   selectedKey,
@@ -19,6 +21,7 @@ export default ({
   groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
+  const { hashParams } = useHash();
   const [active, setActive] = useState<string | number>(0);
 
   const [date, setDate] = useState({
@@ -36,7 +39,7 @@ export default ({
     return account_gas.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: gasData, loading } = useAxiosData(proApi.getGas, {
@@ -52,6 +55,11 @@ export default ({
   const newGroups = useMemo(() => {
     return groups;
   }, [groups]);
+  console.log('---hashParams', hashParams);
+
+  if (hashParams?.miner) {
+    return <Detail miner={hashParams.miner} data={gasData} />;
+  }
 
   return (
     <>

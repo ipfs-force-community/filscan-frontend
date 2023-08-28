@@ -1010,7 +1010,7 @@ export const account_gas = {
       width: 100,
       fixed: 'left',
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/account#gas?miner=${text}`} className='link_text'>
           {text}
         </Link>
       ),

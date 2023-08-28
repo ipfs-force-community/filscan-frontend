@@ -30,11 +30,11 @@ export default (props: ModalProps) => {
       className='custom_modal'
       wrapClassName='custom_modal_wrapper'
       footer={[
-        <Button className='confirm_btn' loading={loading} onClick={onOk}>
-          {tr('confirm')}
-        </Button>,
         <Button className='cancel_btn' onClick={onCancel}>
           {tr('cancel')}
+        </Button>,
+        <Button className='confirm_btn' loading={loading} onClick={onOk}>
+          {tr('confirm')}
         </Button>,
       ]}>
       {children}
