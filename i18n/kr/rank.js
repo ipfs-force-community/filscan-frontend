@@ -1,4 +1,5 @@
 const rankZh = {
+            rank:'Rank',
     pool: '스토리지 풀 랭킹',
     provider: '노드 랭킹',
     growth:'파워 증가율',

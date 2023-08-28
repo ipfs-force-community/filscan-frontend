@@ -48,7 +48,7 @@ export default () => {
 
   // px-24
   return (
-    <Header className='custom_header !h-[106px] !p-0 '>
+    <Header className='custom_header !h-[106px] !p-0 fixed !w-full z-50	  '>
       <div className='flex justify-between items-center px-24  h-[45px] text-xs  font-PingFang font-medium border-b border_color '>
         <ul className='flex gap-x-5 list-none '>
           {header_top.left.map((item) => {

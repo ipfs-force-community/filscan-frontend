@@ -1,4 +1,6 @@
 const rankZh = {
+        rank:'Rank',
+
     pool: 'Storage Pool',
     provider: 'Storage Provider',
     growth:'Power Growth',

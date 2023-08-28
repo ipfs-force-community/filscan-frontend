@@ -118,7 +118,7 @@ font-display: auto;
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 500;
                     color: var(--font_des);
-                    padding: 16px 10px;
+                    padding: 6px 10px;
                     &::before{
                         display: none;
                     }
@@ -172,7 +172,7 @@ font-display: auto;
                         font-family: DINPro-Medium, DINPro;
                         font-weight: 500;
                         color:var(--font-color);
-                        padding: 16px 10px;
+                        padding: 6px 10px;
                         border-bottom:1px solid var(--border-color);
                     }
                     &:last-child{
@@ -214,6 +214,8 @@ font-display: auto;
         height: 28px !important;
         border: 1px solid var(--border-color);
         .ant-pagination-item-link{
+                color: var(--font-color) !important;
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -229,6 +231,9 @@ font-display: auto;
         align-items: center;
         justify-content: center;
         border: 1px solid var(--border-color);
+        a{
+             color: var(--font-color) !important;
+        }
     }
     .ant-pagination-item-active{
         background-color: var(--primary);
@@ -241,10 +246,17 @@ font-display: auto;
     }
    
 }
-.ant-pagination-options-quick-jumper input{
+.ant-pagination-options-quick-jumper{
+    color: var(--font-color);
+     input{
        width: 40px !important;
     height: 28px !important;
+    color: var(--font-color) !important;
     margin-inline-start:4px !important;
+    background-color: var(--bgColor) !important;
+    border-color: var(--border-color) !important;
+}
+
 }
 
 

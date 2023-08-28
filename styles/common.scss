@@ -8,12 +8,12 @@
   height: 100%;
   width: 100%;
   margin: auto;
-  padding:0px 90px;
+  padding:25px 90px;
   font-size: px-to-rem(14px);
   box-sizing: content-box;
   color: var(--font-color);
   background-color: var(--main-bg-color); 
-  overflow: auto;
+  overflow: hidden;
 }
 
 a{
@@ -151,8 +151,10 @@ a{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: px-to-rem(20px);
-  height: px-to-rem(20px);
+  min-width: px-to-rem(20px);
+  min-height: px-to-rem(20px);
+    padding: 2px 4px;
+ // padding-top: 50%;
   background: var(--font-color);
   color: var(--bgColor);
   border-radius: px-to-rem(6px);
