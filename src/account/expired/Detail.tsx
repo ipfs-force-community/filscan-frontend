@@ -38,7 +38,7 @@ export default ({
     return account_expired.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   const showData = useMemo(() => {
     const newData = data?.sector_detail_day?.sector_detail_list?.filter(

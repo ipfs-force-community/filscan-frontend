@@ -49,7 +49,6 @@ export default ({
   const handleTabChange = (value: string) => {
     setInterval(value);
     load(value);
-    console.log(value);
   };
 
   return (

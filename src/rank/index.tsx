@@ -11,6 +11,7 @@ import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { pageLimit } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import useAxiosData from '@/store/useAxiosData';
 
 const defaultFilter = {
   sector_size: 'all',
@@ -41,6 +42,7 @@ export default ({ origin }: { origin: string }) => {
   const [current, setCurrent] = useState(1);
   const [headerFilter, setHeaderFilter] = useState<any>();
   const [sort, setSort] = useState<any>({});
+  const { axiosData } = useAxiosData();
 
   useEffect(() => {
     const showHash = hash || 'provider';
@@ -48,7 +50,17 @@ export default ({ origin }: { origin: string }) => {
       setHeaderFilter({ ...defaultFilter });
     }
     setActive(showHash);
-    load(showHash, undefined, undefined, defaultFilter);
+    setCurrent(1);
+    setSort({});
+    load(
+      showHash,
+      1,
+      {
+        field: getDefaultSort[showHash],
+        order: 'descend',
+      },
+      defaultFilter
+    );
   }, [hash]);
 
   const load = async (
@@ -78,7 +90,7 @@ export default ({ origin }: { origin: string }) => {
                 : showFilter?.sector_size || '',
           }
         : {};
-      const data: any = await fetchData(apiUrl[linkUrl], {
+      const data: any = await axiosData(apiUrl[linkUrl], {
         index: index - 1,
         limit: origin === 'home' ? 7 : pageLimit,
         order: {
@@ -88,38 +100,42 @@ export default ({ origin }: { origin: string }) => {
         ...filters,
       });
       setLoading(false);
-      const showData = data?.items || [];
-      if (
-        showOrder.field === getDefaultSort[showActive] &&
-        showOrder.order === 'descend' &&
-        showActive !== 'rewards'
-      ) {
-        setProgress({
-          ...progress,
-          [showActive]:
-            showData.length > 0 ? showData[0][getDefaultSort[showActive]] : '',
-        });
-      }
-      if (showActive === 'pool') {
-        setPoolData({
-          dataSource: showData,
-          total: data.total || 0,
-        });
-      } else if (showActive === 'growth') {
-        setGrowthData({
-          dataSource: showData,
-          total: data.total || 0,
-        });
-      } else if (showActive === 'rewards') {
-        setRewardsData({
-          dataSource: showData,
-          total: data.total || 0,
-        });
-      } else {
-        setData({
-          dataSource: showData,
-          total: data.total || 0,
-        });
+      if (data) {
+        const showData = data?.items || [];
+        if (
+          showOrder.field === getDefaultSort[showActive] &&
+          showOrder.order === 'descend' &&
+          showActive !== 'rewards'
+        ) {
+          setProgress({
+            ...progress,
+            [showActive]:
+              showData.length > 0
+                ? showData[0][getDefaultSort[showActive]]
+                : '',
+          });
+        }
+        if (showActive === 'pool') {
+          setPoolData({
+            dataSource: showData,
+            total: data?.total || 0,
+          });
+        } else if (showActive === 'growth') {
+          setGrowthData({
+            dataSource: showData,
+            total: data?.total || 0,
+          });
+        } else if (showActive === 'rewards') {
+          setRewardsData({
+            dataSource: showData,
+            total: data?.total || 0,
+          });
+        } else {
+          setData({
+            dataSource: showData,
+            total: data?.total || 0,
+          });
+        }
       }
     }
   };
@@ -133,6 +149,7 @@ export default ({ origin }: { origin: string }) => {
   }, [active, progress[active], theme, tr]);
 
   const handleHeaderChange = (type: string, value: string) => {
+    console.log('---4', type, value);
     let newActive = active;
     let activeHeader = headerFilter;
     if (type === 'active') {
@@ -176,11 +193,14 @@ export default ({ origin }: { origin: string }) => {
 
   return (
     <>
+      {origin !== 'home' && (
+        <div className='font-xl font-semibold mb-2.5'>{tr('rank')}</div>
+      )}
       <Header origin={origin} active={active} onChange={handleHeaderChange} />
       <div
         className={`mt-4 ${
-          origin === 'home' ? 'h-[491px]' : 'h-full'
-        } border  rounded-xl p-5	card_shadow border_color`}>
+          origin === 'home' ? 'h-[481px]' : 'h-full'
+        } border  rounded-xl p-5	card_shadow border_color flex items-center`}>
         <Table
           className='-mt-2.5 '
           key={active}

@@ -49,6 +49,8 @@
         position: absolute;
         z-index: 1;
         top: 102px;
+        height: max-content;
+        width: auto;
         left: 127px;
          & > &_input{
             width: 500px;

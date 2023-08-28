@@ -1,4 +1,5 @@
 const rankZh = {
+    rank:'排行榜',
     pool: '存储池排行',
     provider: '节点排行',
     growth:'算力增速',

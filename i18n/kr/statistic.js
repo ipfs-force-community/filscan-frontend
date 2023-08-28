@@ -1,5 +1,6 @@
 
 const statistic = {
+gas_total:'Gas',
 show_more: '더 보기',
 '24h': '24시간',
 '7d': '7일',

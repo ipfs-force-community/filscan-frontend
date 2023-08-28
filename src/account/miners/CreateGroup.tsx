@@ -40,7 +40,13 @@ export default ({
       closeIcon={false}
       footer={
         <span className='flex justify-center gap-x-4'>
-          <Button className='cancel_btn'>{tr('cancel')}</Button>
+          <Button
+            className='cancel_btn'
+            onClick={() => {
+              onChange(false);
+            }}>
+            {tr('cancel')}
+          </Button>
           <Button
             className='confirm_btn'
             loading={loading}

@@ -62,7 +62,7 @@ export default ({
         )}
       </div>
       {origin === 'home' && (
-        <Link href={`/statistics/gas/`}>
+        <Link href={`/rank#${active}`}>
           <Image
             className='cursor-pointer'
             src={go}

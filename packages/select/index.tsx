@@ -2,9 +2,8 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { Option_Item } from '@/contents/type';
-import Image from 'next/image';
-import down from '@/assets/images/down.svg';
 import { useEffect, useState } from 'react';
+import { getSvgIcon } from '@/svgsIcon';
 
 export default ({
   options,
@@ -52,14 +51,14 @@ export default ({
       {header ? (
         header
       ) : (
-        <span className='flex justify-between font-PingFang des_bg_color rounded-[5px] p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
+        <span className='flex justify-between items-center font-PingFang des_bg_color rounded-[5px] p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
           {tr(showLabel)}
-          <Image src={down} width={8} height={4} alt='down' />
+          {getSvgIcon('downIcon')}
         </span>
       )}
 
       <ul
-        className={`invisible group-hover:visible absolute  z-10 inset-y-full max-h-fit w-max list-none p-4  border  rounded-[5px]  select_shadow card_bg_color  border_color ${className}`}>
+        className={`invisible group-hover:visible absolute  z-10 inset-y-full max-h-fit w-max list-none p-4  border  rounded-[5px]  card_bg_color  border_color ${className}`}>
         {options.map((item) => {
           return (
             <li

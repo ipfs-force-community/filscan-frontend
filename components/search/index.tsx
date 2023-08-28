@@ -41,11 +41,16 @@ export default ({
   }, [value]);
 
   return (
-    <div className={style.box_input}>
+    <>
       <Input
-        className={`${style.search_input} text-color ${className}`}
+        className={`${
+          style.search_input
+        } text-color custom_input  ${className} ${
+          origin === 'banner'
+            ? `custom_input_banner ${style.banner_search}`
+            : ''
+        }`}
         placeholder={tr(placeholder)}
-        style={{ color: origin === 'banner' ? '#fff' : '' }}
         value={inputValue}
         onChange={(e) => {
           if (!disabled) {
@@ -78,6 +83,6 @@ export default ({
           )
         }
       />
-    </div>
+    </>
   );
 };

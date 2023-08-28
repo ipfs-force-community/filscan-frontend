@@ -7,7 +7,11 @@ import { formatDateTime, getCalcTime } from '@/utils';
 import ExportExcel from '@/packages/exportExcel';
 import Table from '@/packages/Table';
 import DateTime from '@/src/account/DateTIme';
-import { account_expired, account_reward } from '@/contents/account';
+import {
+  account_expired,
+  account_gas,
+  account_reward,
+} from '@/contents/account';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 
@@ -47,22 +51,22 @@ export default ({
   });
 
   //proApi.getReward
-  const { data: rewardDataDetail, loading } = useAxiosData(proApi.getReward, {
+  const { data: gasData, loading } = useAxiosData(proApi.getGas, {
     miner_id: miner,
     start_date: date.startTime,
     end_date: date.endTime,
   });
 
   const columns = useMemo(() => {
-    return account_reward.columns(tr).map((item) => {
+    return account_gas.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   const showData = useMemo(() => {
-    const newData = rewardDataDetail?.reward_detail_list || [];
+    const newData = gasData?.gas_cost_detail_list || [];
     return newData || [];
-  }, [rewardDataDetail]);
+  }, [gasData]);
 
   return (
     <>
@@ -77,7 +81,7 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(rewardDataDetail?.epoch_time, 'YYYY/MM/DD HH:mm')}
+              {formatDateTime(gasData?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>

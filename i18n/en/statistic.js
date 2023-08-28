@@ -1,5 +1,6 @@
 
 const statistic = {
+    gas_total:'Gas',
   show_more: 'More',
    '24h': '24H',
   '7d': '7D',

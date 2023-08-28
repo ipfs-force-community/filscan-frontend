@@ -29,7 +29,7 @@ export default ({
     return account_expired.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: expiredData, loading } = useAxiosData(proApi.getSector, {

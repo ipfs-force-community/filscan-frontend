@@ -77,7 +77,7 @@ export default ({
             // href={hash ? `${pathValue}#${item.dataIndex}` : ''}
             key={item.dataIndex}
             onClick={(e) => handleClick(e, item.dataIndex)}
-            className={`px-4 py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des_hover  ${
+            className={`px-4  text-xs font-medium py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des_hover  ${
               active === item.dataIndex
                 ? 'tab_shadow highlight  rounded-[5px] card_bg_color'
                 : ''

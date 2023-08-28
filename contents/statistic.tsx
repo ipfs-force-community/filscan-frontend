@@ -1,5 +1,7 @@
 /** @format */
 
+import { formatFilNum, formatNumber } from '@/utils';
+
 export const gas = {
   title: 'trend_24', //基础手续费
   list: [
@@ -19,6 +21,63 @@ export const gas = {
       label: '1year',
       value: '1year',
     },
+  ],
+};
+
+export const gas_24 = {
+  title: {
+    label: 'gas_24',
+  },
+
+  columns: [
+    { dataIndex: 'method_name', title: 'method_name', align: 'left' }, //消息类型
+    {
+      dataIndex: 'avg_gas_premium',
+      title: 'avg_gas_premium',
+      render: (text: string | number) => formatFilNum(text, false, false),
+    },
+    {
+      dataIndex: 'avg_gas_limit',
+      title: 'avg_gas_limit',
+      render: (v: string) => formatNumber(v),
+    }, //平均Gas限额
+    {
+      dataIndex: 'avg_gas_used',
+      title: 'avg_gas_used',
+      render: (text: string | number) => formatNumber(text),
+    }, //平均Gas消耗
+    {
+      dataIndex: 'avg_gas_fee',
+      title: 'avg_gas_fee',
+      render: (v: string) => {
+        if (Number(v) === 0) {
+          return 0;
+        }
+        return formatFilNum(v, false, false);
+      },
+    }, //平均手续费
+    {
+      dataIndex: 'sum_gas_fee',
+      title: 'sum_gas_fee/ratio',
+      render: (text: string, record: any) => {
+        if (Number(text) === 0) {
+          return 0;
+        }
+
+        return `${formatFilNum(text, false, false)}/${Number(
+          record.gas_fee_ratio * 100
+        ).toFixed(2)}%`;
+      },
+    }, //合计手续费/占比
+    {
+      dataIndex: 'message_count',
+      title: 'message_count/ratio',
+      render: (text: string, record: any) => {
+        return `${formatNumber(text)}/${(
+          record.message_count_ratio * 100
+        ).toFixed(2)}%`;
+      },
+    }, //消息数/占比
   ],
 };
 
