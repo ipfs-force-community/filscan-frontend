@@ -272,11 +272,11 @@ export const account_link = async (value: string) => {
   show_type = result?.result?.result_type;
 
   switch (show_type) {
-    case 'miner':
-      return router.push(`/miner/${value}`);
-    case 'storageminer':
-      return router.push(`/miner/${value}`);
-    default:
-      return router.push(`/address/${value}`);
+  case 'miner':
+    return router.push(`/miner/${value}`);
+  case 'storageminer':
+    return router.push(`/miner/${value}`);
+  default:
+    return router.push(`/address/${value}`);
   }
 };

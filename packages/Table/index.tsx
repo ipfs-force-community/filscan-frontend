@@ -99,13 +99,13 @@ export default (props: Props) => {
       pagination={
         total > showLimit
           ? {
-              position: ['bottomRight'],
-              current: current,
-              showQuickJumper: true,
-              pageSize: pageLimit,
-              showSizeChanger: false,
-              total,
-            }
+            position: ['bottomRight'],
+            current: current,
+            showQuickJumper: true,
+            pageSize: pageLimit,
+            showSizeChanger: false,
+            total,
+          }
           : false
       }
     />

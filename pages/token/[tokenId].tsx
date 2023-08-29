@@ -45,11 +45,11 @@ export default () => {
         {overviewData?.token_name?.toLocaleUpperCase()}
       </div>
       <div className='flex gap-x-5'>
-        {token_details.headerList.map((tokenItem) => {
+        {token_details.headerList.map((tokenItem,index) => {
           const showData =
             tokenItem.title === 'market' ? marketData : overviewData;
           return (
-            <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5'>
+            <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5' key={index}>
               <div className='text-base font-medium px-2.5'>
                 {tr(tokenItem.title)}
               </div>

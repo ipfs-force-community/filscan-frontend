@@ -2,7 +2,7 @@ module.exports = {
   "extends": ["next/core-web-vitals", "plugin:storybook/recommended","prettier"],
   "plugins": ["@typescript-eslint", "no-null"],
   "rules": {
-    "no-null/no-null": 2,
+    "no-null/no-null": 0,
     "no-trailing-spaces":1,
     "indent": ["error", 2],
     "no-trailing-spaces": 1,

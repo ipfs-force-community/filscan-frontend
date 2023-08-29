@@ -1,10 +1,10 @@
-import {  useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import useDeepCompareEffect from 'use-deep-compare-effect'
-import {  notification } from 'antd';
-import Router  from 'next/router';
+import { notification } from 'antd';
+import Router from 'next/router';
 
-interface OPTIONS { 
+interface OPTIONS {
   method?: 'get' | 'post' | 'put' | 'delete';
   maxRetries?: number;
   timeout?: number; // 0 means no timeout
@@ -25,7 +25,7 @@ const DefaultOptions = {
 // 用于存储每个 URL 和方法的取消令牌
 const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
-function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any  ) {
+function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any ) {
   const [data, setData] = useState<FetchDataResult<T> | null>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,8 +65,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           timeout: timeout,
           cancelToken: cancelTokenSource.token,
         });
-      
-      
+
         if (response.status === 401) {
           Router.push('/account/login');
           retriesRef.current = 100;
@@ -85,29 +84,29 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
-            retriesRef.current += 1;     
+          retriesRef.current += 1;
           if (retriesRef.current < maxRetries) {
             return axiosData(url,payload,options);
           } else {
             setError(thrown);
             setLoading(false);
-            if (retriesRef.current === maxRetries) { 
-               return notification.error({
-              className: 'custom-notification',
-              message: 'Error',
-              duration: 100,
-              description: thrown?.message||'Network Error'
-            })
+            if (retriesRef.current === maxRetries) {
+              return notification.error({
+                className: 'custom-notification',
+                message: 'Error',
+                duration: 100,
+                description: thrown?.message||'Network Error'
+              })
             }
-           
+
           }
-        }         
+        }
       }
     }
   };
 
   useDeepCompareEffect(() => {
-    if (initialUrl) { 
+    if (initialUrl) {
       setLoading(true);
       axiosData(initialUrl, initialPayload, initialOptions);
     }
