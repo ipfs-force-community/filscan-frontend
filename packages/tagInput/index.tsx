@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Input, InputRef } from 'antd';
-import useAxiosData from '@/store/useAxiosData';
-import { proApi } from '@/contents/apiUrl';
+import TextTooltip from '../textTooltip';
 
 interface EditableTextProps {
   text: string;

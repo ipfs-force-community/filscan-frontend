@@ -39,7 +39,7 @@ export default ({
       destroyOnClose={true}
       closeIcon={false}
       footer={
-        <span className='flex justify-center gap-x-4'>
+        <span className='flex justify-center gap-x-4 mt-5'>
           <Button
             className='cancel_btn'
             onClick={() => {
@@ -56,7 +56,7 @@ export default ({
         </span>
       }>
       <Input
-        className='mt-5 h-12'
+        className='mt-5 custom_input h-12'
         showCount
         placeholder={tr('create_group_holder')}
         maxLength={10}

@@ -1,7 +1,8 @@
 /** @format */
 
 import Copy from '@/components/copy';
-import { formatFilNum, formatNumber, isIndent } from '@/utils';
+import Tooltip from '@/packages/tooltip';
+import { formatFilNum, formatNumber, get$Number, isIndent } from '@/utils';
 import Link from 'next/link';
 
 export const contract_rank = {
@@ -80,4 +81,66 @@ export const homeContractRank: any = {
   contract_name: '25%',
   transfer_count: '20%',
   user_count: '20%',
+};
+
+export const contract_token = {
+  columns: (tr: any) => {
+    return [
+      {
+        dataIndex: 'rank',
+        title: 'rank',
+        width: '10%',
+        render: (text: any, record: any, index: any) => {
+          return <span className='rank-icon'>{index + 1}</span>;
+        },
+      },
+      {
+        dataIndex: 'token_name',
+        title: 'token_name',
+        // render: (text: string, record: any) => {
+        //   return (
+        //     <Link href={`/token/${record.contract_id}`}>
+        //       <Image
+        //         className='fvm_img_url'
+        //         src={getImgUrl(text)}
+        //         alt=''
+        //         height={38}
+        //         width={38}></Image>
+        //       <span className='margin-6'>{text}</span>
+        //     </Link>
+        //   );
+        // },
+      },
+      {
+        dataIndex: 'total_supply',
+        title: () => {
+          return (
+            <span className='flex items-center gap-x-2'>
+              {tr('total_supply')}
+              <Tooltip context={tr('total_supply_tip')} />
+            </span>
+          );
+        },
+        render: (text: string | number) => {
+          return text ? formatNumber(text, 4) : text;
+        },
+      },
+      {
+        dataIndex: 'vol_24',
+        title: 'vol_24',
+        render: (text: string) => get$Number(text),
+      },
+      {
+        dataIndex: 'latest_price',
+        title: 'latest_price',
+        render: (text: string) => (text ? '$' + text : text),
+      },
+      {
+        dataIndex: 'market_cap',
+        title: 'market_value',
+        render: (text: string) => (text ? '$' + formatNumber(text, 4) : '--'),
+      },
+      { dataIndex: 'owners', title: 'owners' },
+    ];
+  },
 };

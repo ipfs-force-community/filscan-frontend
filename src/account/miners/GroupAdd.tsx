@@ -75,10 +75,10 @@ export default ({
       <div className='border_color card_shadow px-5 py-7 rounded-xl	 flex flex-col flex-1'>
         <ul className='flex-1'>
           <li className='flex flex-col'>
-            <span className='text_des'>{tr('group_name')}</span>
+            <span className='text_des mb-2'>{tr('group_name')}</span>
             <Input
               placeholder={tr('create_group_holder')}
-              className='h-12 w-full mt-2'
+              className='h-12 w-full custom_input mt-2'
               value={groupName}
               onChange={(e) => {
                 setGroupName(e.target.value);

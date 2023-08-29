@@ -133,7 +133,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
         </span>
         <div className='flex gap-x-5 items-center'>
           <Link
-            href={`/account#miners?type=miners_group&group=${item.group_id}`}
+            href={`/account#miners?group=${item.group_id}`}
             className='cursor-pointer text_color'>
             {getSvgIcon('editIcon')}
           </Link>

@@ -367,7 +367,7 @@ export const overview = {
       fixed: 'left',
       width: 100,
       render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+        return <TagInput text={text} isEdit={false} record={record} />;
       },
     },
     {

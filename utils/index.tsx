@@ -188,12 +188,12 @@ export function isIndent(str: string, unit: number = 5, unitNum: number = 4) {
 }
 
 // $ + number
-export function get$Number(str: string | number) {
+export function get$Number(str: string | number, len?: number) {
   const showNum = Number(str);
   const newNum =
     showNum < 0
-      ? '-$' + formatNumber(Math.abs(showNum))
-      : '$' + formatNumber(showNum);
+      ? '-$' + formatNumber(Math.abs(showNum), len)
+      : '$' + formatNumber(showNum, len);
   return newNum;
 }
 

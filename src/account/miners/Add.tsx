@@ -146,6 +146,7 @@ export default ({
             </ul>
           )}
           <SearchSelect
+            className='caret-transparent'
             ns='account'
             options={groups}
             isShow={true}

@@ -20,16 +20,13 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const [groups, setGroups] = useState<Array<groupsItem>>([]);
   const [defaultGroupsId, setDefaultGroupsId] = useState();
 
-  const {
-    data: groupsData,
-    loading: loading,
-    error,
-  } = useAxiosData(proApi.getGroups);
+  const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
 
   useEffect(() => {
     calcGroups(groupsData?.group_info_list || []);
   }, [groupsData]);
 
+  //组成公共select item
   const calcGroups = (groupResult: Array<groupsItem>) => {
     const new_data: any = [];
     let default_groups_id;
@@ -49,7 +46,9 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
 
   const groupDetail = useMemo(() => {
     if (group) {
-      const file = groups?.find((v: any) => v.group_id === Number(group));
+      const file = groupsData?.group_info_list?.find(
+        (v: any) => v.group_id === Number(group)
+      );
       return file;
     }
     return undefined;
@@ -66,7 +65,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
       );
     }
 
-    if (type === 'miners_group' && groupDetail) {
+    if (group && groupDetail) {
       return (
         <GroupAdd
           groupId={group}
