@@ -89,7 +89,11 @@ const account = {
      cc_power: 'CC算力',
      sector_size: '扇区大小',
      sector_power_change: '扇区变化',
-     sector_count_change: '扇区数量变化',
+    sector_count_change: '扇区数量变化',
+    pledge_changed: '质押变化',
+    pledge_changed_per_t: '质押变化/T',
+    penalty: '惩罚',
+    fault_sectors:'错误扇区',
      
      //gas 
      total_gas_cost: 'Gas总消耗',
