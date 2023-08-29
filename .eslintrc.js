@@ -1,33 +1,20 @@
-// .eslintrc.js
-
 module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    jest: true,
-    es6: true,
-    es2020: true, // <- activate “es2020” globals
-    node: true,
-    mocha: true,
-  },
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    parser: 'babel-eslint',
-  },
-  parser: '@typescript-eslint/parser',
+  "extends": ["next/core-web-vitals", "plugin:storybook/recommended","prettier"],
+  "plugins": ["@typescript-eslint", "no-null"],
+  "rules": {
+    "no-null/no-null": 2,
+    "no-trailing-spaces":1,
+    "indent": ["error", 2],
+    "no-trailing-spaces": 1,
+    "space-after-keywords": [0, "always"],
+    "space-before-blocks": [0, "always"],
+    "curly": ["error", "multi-line", "consistent"],
+    "nonblock-statement-body-position": ["error", "beside"],
+    "no-multi-spaces": ["error", { ignoreEOLComments: true }],
+    "import/no-anonymous-default-export": "off",
+    'space-before-function-paren': 0,
+    'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
 
-    settings: {
-   
-    indent: ["error", 2],
-    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
-    },
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-    },
-  },
-};
+    "react/display-name":"off"
+  }
+}

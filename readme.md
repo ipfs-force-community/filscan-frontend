@@ -27,3 +27,5 @@ ps -ef |grep 端口号
 
 杀死某进程
 kill -9  进程号
+
+eslint --fix src pages packages store utils

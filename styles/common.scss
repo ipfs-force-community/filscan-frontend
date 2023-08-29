@@ -3,8 +3,16 @@
   @return #{$px / $base-font-size}rem;
 }
 
+.custom_header{
+  max-width: 1440px;
+  min-width: 1440;
+  width: 100%;
+  margin: auto;
+  padding:0px 90px;
+}
+
 .main_contain{
-  max-width: 1920px;
+  max-width: 1440px;
   min-width: 1440;
   min-height: 500px;
   height: 100%;

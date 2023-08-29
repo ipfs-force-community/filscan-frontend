@@ -61,12 +61,15 @@ body {
 .container_body{
    width: inherit;
   height: inherit;
-
+}
+.ant-layout-header{
+  color: var(--font-color)!important;
+  background-color: var(--bgColor) !important;
 }
 .ant-layout-content{
    color: var(--font-color);
   background-color: var(--main-bg-color);
-  padding-top: 110px;
+  padding-top: 106px;
   overflow: auto;
 }
 

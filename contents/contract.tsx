@@ -530,3 +530,43 @@ export const nft_details = {
     },
   ],
 };
+
+export const nft_transfer_columns = (fromList: any, toList: any) => {
+  return [
+
+    {
+      dataIndex: 'cid', title: 'message_cid',
+      render: (text: string) => text? <Link href={`/message/${text}` }className='link'>{ text?isIndent(text,6):''}</Link>:'--'
+    },
+    {dataIndex:'method',title:'method',render: (text: string) => <span className="bg-render">{ titleCase(text)}</span>},
+    {dataIndex:'time',title:'time', render: (text: string|number)=> formatDateTime(text,'YYYY-MM-DD HH:mm')},
+    {
+      dataIndex: "from", title: "from", render: (text: string, record: any) => {
+        if (!text) return '--';
+        return <span className="table_li">
+          {get_account_type(text)}
+          {fromList?.domains && fromList?.domains[text] && <Link href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>({fromList.domains[text]})</Link>
+          }
+        </span>
+      }},
+    { dataIndex: "to", title: "to" , render: (text: string, record: any) => {
+      if (!text) return '--';
+      return <div className="table_li">
+        <div>
+          {get_account_type(text)}
+        </div>
+
+        {toList?.domains && toList?.domains[text] &&<Link href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>({toList.domains[text]})</Link>
+
+        }
+      </div>
+    }},
+    {
+      dataIndex: 'item', title: 'item', render: (text: string, record: any) => {
+        if (record.url) {
+          return <Image className="fvm_img_url" alt="" width={25} height={ 25} src={record.url} />
+        }
+        return text || '--'
+      }},
+  ]
+}
