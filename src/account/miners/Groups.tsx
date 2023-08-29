@@ -17,7 +17,7 @@ import messageManager from '@/packages/message';
 const Groups = ({ groups }: { groups: Array<any> }) => {
   const { tr } = Translation({ ns: 'account' });
   const { axiosData } = useAxiosData();
-  const { setGroups } = useGroupsStore();
+  const { setGroups, setMinerNum } = useGroupsStore();
   const [data, setData] = useState<any>(groups);
   const [deleteLoading, setDeleteLoading] = useState<any>(false);
   const [modalItems, setModalItems] = useState<any>({});
@@ -54,21 +54,23 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       //给予目标group，miner_id 是唯一的
       const result = await axiosData(proApi.saveMiner, destinationGroup);
       if (result) {
+        setData([...data]);
         const newGroups = await axiosData(proApi.getGroups);
         setGroups(newGroups?.group_info_list || []);
       }
     } else {
       //同组内拖拽
+      groupItem?.miners_info?.splice(sourceIndex, 1);
       groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
       const result = await axiosData(proApi.saveMiner, groupItem);
       if (result) {
+        setData([...data]);
         const newGroups = await axiosData(proApi.getGroups);
         setGroups(newGroups?.group_info_list || []);
       }
     }
     // }
 
-    setData([...data]);
     //保存分组 todo
   };
 
@@ -80,6 +82,8 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
     if (data) {
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups?.group_info_list || []);
+      const minerNumResult: any = await axiosData(proApi.account_miners);
+      setMinerNum(minerNumResult);
     }
     setDeleteLoading(false);
   };
@@ -133,7 +137,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
         </span>
         <div className='flex gap-x-5 items-center'>
           <Link
-            href={`/account#miners?type=miners_group&group=${item.group_id}`}
+            href={`/account#miners?group=${item.group_id}`}
             className='cursor-pointer text_color'>
             {getSvgIcon('editIcon')}
           </Link>

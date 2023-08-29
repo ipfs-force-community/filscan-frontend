@@ -42,7 +42,7 @@ export default () => {
         <span className='font-Barlow font-bold text-xl '>Filscan</span>
       </Link>
       <div className='flex-1 ml-5 mr-10'>
-        {!isHome && <Search className='!h-10' />}
+        {!isHome && <Search className='!h-10 !max-w-lg	' />}
       </div>
 
       <div className='flex gap-x-8 h-full justify-between items-center'>

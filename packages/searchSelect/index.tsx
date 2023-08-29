@@ -17,11 +17,13 @@ export default ({
   suffix,
   onChange,
   isShow,
+  className,
 }: {
   ns: string;
   options: Array<Item>;
   suffix?: JSX.Element;
   isShow?: boolean;
+  className?: string;
   onChange: (value: string | number) => void;
 }) => {
   const { tr } = Translation({ ns });
@@ -37,7 +39,7 @@ export default ({
   return (
     <div className='mt-5 group relative'>
       <Input
-        className='w-full mt-4 h-12 focus:outline-none'
+        className={`w-full mt-4 h-12 custom_input focus:outline-none ${className}`}
         placeholder={tr('miner_select_group_placeholder')}
         value={inputValue?.label}
         onChange={(e) => handleInput(e)}

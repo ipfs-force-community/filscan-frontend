@@ -78,13 +78,31 @@ font-display: auto;
 
 //input 
 
+.custom_input{
+    color: var(--font-color) !important;
+    background-color: var(--bgDesColor) !important; 
+     border: 1px solid var(--border-color) !important;
+    .ant-input-show-count-suffix{
+         color: var(--font-color) !important;
+    }
+     input{
+        color: var(--font-color);   
+        &::placeholder{
+            color: var(--font_des);   
+        }
+     }
+     &:hover{
+         border: 1px solid var(--primary) !important;
+     }
+
+}
+
 
 .ant-input-affix-wrapper{
  border: 1px solid var(--border-color) !important;
 }
 .ant-input{
     background-color: transparent !important;
-    color: var(--font-color);
     border-color: var(--border-color);
 }
 .custom_input_banner{
@@ -95,8 +113,7 @@ font-display: auto;
             color:  rgba(255,255,255,0.5);
         }
        color: #ffffff;
-            border-radius: 5px;
-         
+            border-radius: 5px 
    
 }
 }
@@ -302,7 +319,7 @@ font-display: auto;
     .ant-select-selector{
           cursor: pointer;
         padding: 3px 16px !important;
-        height:32px !important;
+        height:36px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgColor) !important;
         .ant-select-selection-item{
@@ -388,28 +405,36 @@ font-display: auto;
 
 //ant-modal
 .ant-modal-root{
+
     .ant-modal-content{
         background-color: var(--bgColor) !important;
         color: var(--font-color) !important;
         .ant-modal-header{
             text-align: center;
+            background-color: transparent;
+            .ant-modal-title{
+                color: var(--font-color) !important;
+            }
+            
         }
     }
 }
 
 .custom_collapse_gaps{
-    border: none;
-            background-color: var(--bgColor) !important; 
-     .ant-collapse-item{
+        border: none;
+        background-color: var(--bgColor) !important;
+         color: var(--font-color);
+    .ant-collapse-item{
+        color: var(--font-color);
         margin-top: 20px;
         border: 1px solid var(--border-color);
-        border-radius: 12px;
+        border-radius: 12px !important;
         background-color: var(--bgColor);
         border-bottom:1px solid var(--border-color)
      }
      .ant-collapse-content{
-                   background-color: var(--bgColor);
-                       border-top: 1px solid var(--border-color);
+            background-color: var(--bgColor);
+            border-top: 1px solid var(--border-color);
             border-radius: 0px 0px 12px 12px;
         .ant-collapse-content-box{
              border-radius: 0px 0px 12px 12px;
@@ -426,6 +451,7 @@ font-display: auto;
             display: flex !important; 
             align-items: center !important;
             padding: 20px 30px ;
+             color: var(--font-color) !important;
             .ant-collapse-expand-icon{
                 cursor: pointer;
             }
@@ -436,7 +462,11 @@ font-display: auto;
             }
         }
         }
-       
+    &:last-child{
+         .ant-collapse-header{
+            border-radius: 12px !important;
+         }
+    }
     }
 
 //date 
@@ -445,7 +475,7 @@ font-display: auto;
         border-radius: 5px;
          min-width: 120px;
          width: fit-content;
-    height: 32px;
+    height: 36px;
     background-color: var(--bgDesColor);
     &_pre{
         position: absolute;
@@ -551,7 +581,7 @@ font-display: auto;
           .ant-popconfirm-buttons{
             color: var(--font-color);
             .button{
- border: 1px solid var(--border-color);
+        border: 1px solid var(--border-color);
 
             }
             .ant-btn-default{

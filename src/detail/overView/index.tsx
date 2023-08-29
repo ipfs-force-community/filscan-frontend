@@ -2,7 +2,6 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import useColumnAlign from '@/components/hooks/useColumns';
 import Segmented from '@/packages/segmented';
 import SkeletonScreen from '@/packages/skeleton';
 import { useFilscanStore } from '@/store/FilscanStore';

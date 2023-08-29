@@ -24,7 +24,7 @@ export default ({
   minersNum: MinerNum;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const { setGroups } = useGroupsStore();
+  const { setGroups, setMinerNum } = useGroupsStore();
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     {
@@ -54,15 +54,23 @@ export default ({
       miners_info: newMiners,
     });
     setSaveLoading(false);
-
-    if (data) {
+    if (data?.group_id) {
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups?.group_info_list || []);
+      const minerNum: any = await axiosData(proApi.account_miners);
+      setMinerNum(minerNum);
       messageManager.showMessage({
         type: 'success',
-        content: 'Save Group successfully',
+        content: 'Add Miner successfully',
       });
       router.push('/account#miners');
+    } else {
+      if (data && data?.code) {
+        messageManager.showMessage({
+          type: 'error',
+          content: data?.message || '',
+        });
+      }
     }
   };
 
@@ -75,10 +83,10 @@ export default ({
       <div className='border_color card_shadow px-5 py-7 rounded-xl	 flex flex-col flex-1'>
         <ul className='flex-1'>
           <li className='flex flex-col'>
-            <span className='text_des'>{tr('group_name')}</span>
+            <span className='text_des mb-2'>{tr('group_name')}</span>
             <Input
               placeholder={tr('create_group_holder')}
-              className='h-12 w-full mt-2'
+              className='h-12 w-full custom_input mt-2'
               value={groupName}
               onChange={(e) => {
                 setGroupName(e.target.value);

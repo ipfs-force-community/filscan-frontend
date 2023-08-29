@@ -19,17 +19,19 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const { tr } = Translation({ ns: 'account' });
   const [groups, setGroups] = useState<Array<groupsItem>>([]);
   const [defaultGroupsId, setDefaultGroupsId] = useState();
+  const [minerNum, setMinerNum] = useState(minersNum);
 
-  const {
-    data: groupsData,
-    loading: loading,
-    error,
-  } = useAxiosData(proApi.getGroups);
+  const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
+
+  useEffect(() => {
+    setMinerNum(minersNum);
+  }, [minersNum]);
 
   useEffect(() => {
     calcGroups(groupsData?.group_info_list || []);
   }, [groupsData]);
 
+  //组成公共select item
   const calcGroups = (groupResult: Array<groupsItem>) => {
     const new_data: any = [];
     let default_groups_id;
@@ -39,7 +41,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
       }
       new_data.push({
         ...item,
-        label: tr(item.group_name),
+        label: item.is_default ? tr('default_group') : item.group_name,
         value: item.group_id,
       });
     });
@@ -53,7 +55,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
       return file;
     }
     return undefined;
-  }, [group, groupsData]);
+  }, [group, groups]);
 
   const renderChildren = () => {
     if (type === 'miner_add' && groupsData) {
@@ -61,17 +63,17 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
         <MinerAdd
           groups={groups}
           defaultId={defaultGroupsId}
-          minersNum={minersNum}
+          minersNum={minerNum}
         />
       );
     }
 
-    if (type === 'miners_group' && groupDetail) {
+    if (group && groupDetail) {
       return (
         <GroupAdd
           groupId={group}
           groupDetail={groupDetail}
-          minersNum={minersNum}
+          minersNum={minerNum}
         />
       );
     }
@@ -82,6 +84,9 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
     <GroupsStoreContext.Provider
       value={{
         groups,
+        setMinerNum: (mineNum) => {
+          setMinerNum(mineNum);
+        },
         setGroups: (groupsArr: Array<groupsItem>) => {
           calcGroups(groupsArr);
         },
@@ -90,7 +95,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
         <span className='font-semibold text-lg	 font-PingFang'>
           {tr('miners')}
           <span className='text_des text-sm ml-2 font-DIN'>
-            {minersNum?.miners_count}/{minersNum?.max_miners_count}
+            {minerNum?.miners_count}/{minerNum?.max_miners_count}
           </span>
         </span>
         <Link

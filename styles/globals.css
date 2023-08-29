@@ -7,7 +7,7 @@
      --main-bg-color:#F9F9F9;
      --reverse-color:'#000000';
     --font-color:#000000;
-    --select-shadow: gba(223,227,234,0.6);
+    --select-shadow: rgba(223,227,234,0.6);
         --select-bgColor:#ffffff ;
     --card-shadow: rgba(223,227,234,0.6);
      --tab-shadow:rgba(0,0,0,0.1);

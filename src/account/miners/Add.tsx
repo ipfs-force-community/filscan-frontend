@@ -17,6 +17,7 @@ import { MinerNum } from '../type';
 import useAxiosData from '@/store/useAxiosData';
 import { useGroupsStore } from './content';
 import { useRouter } from 'next/router';
+import { data } from 'autoprefixer';
 
 export default ({
   groups,
@@ -39,7 +40,7 @@ export default ({
   const [selectGroup, setSelectGroup] = useState<string | number>('');
   const [loading, setLoading] = useState<boolean>(false);
   const { axiosData } = useAxiosData();
-  const { groups: groupsD, setGroups } = useGroupsStore();
+  const { setMinerNum, setGroups } = useGroupsStore();
 
   const handleSearch = (values: any) => {
     if (addMiners.length > Number(minersNum?.max_miners_count)) {
@@ -81,16 +82,25 @@ export default ({
           miners_info: addMiners,
         };
       }
-      const data = await axiosData(proApi.saveGroup, payload);
+      const data: any = await axiosData(proApi.saveGroup, payload);
       setLoading(false);
-      if (data) {
+      if (data?.group_id) {
         const newGroups = await axiosData(proApi.getGroups);
         setGroups(newGroups?.group_info_list || []);
+        const minerNum: any = await axiosData(proApi.account_miners);
+        setMinerNum(minerNum);
         messageManager.showMessage({
           type: 'success',
           content: 'Add Miner successfully',
         });
         router.push('/account#miners');
+      } else {
+        if (data && data?.code) {
+          messageManager.showMessage({
+            type: 'error',
+            content: data?.message || '',
+          });
+        }
       }
     } else {
       messageManager.showMessage({
@@ -146,6 +156,7 @@ export default ({
             </ul>
           )}
           <SearchSelect
+            className='caret-transparent'
             ns='account'
             options={groups}
             isShow={true}
