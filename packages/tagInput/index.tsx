@@ -50,15 +50,17 @@ const EditableText: React.FC<EditableTextProps> = ({
       value={currentText}
       onChange={handleInputChange}
       onBlur={handleBlur}
+      showCount={true}
+      maxLength={20}
       onPressEnter={handleBlur}
-      className='rounded-md w-4/5' // tailwindcss样式
+      className='!rounded-md custom_input !w-4/5' // tailwindcss样式
     />
   ) : (
-    <span
+    <div
       onClick={handleTextClick}
-      className='cursor-pointer des_bg_color p-2 rounded-[5px] text-primary'>
-      {currentText || '--'}
-    </span>
+      className='flex des_bg_color h-8 w-fit max-w-[200px] items-center p-2 rounded-[5px] text-primary'>
+      <TextTooltip text={currentText || '--'} />
+    </div>
   );
 };
 

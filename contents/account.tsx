@@ -868,6 +868,9 @@ export const account_power = {
       dataIndex: 'tag',
       fixed: 'left',
       width: 100,
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput isEdit={false} text={text} record={record} />;
       },
