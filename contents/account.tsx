@@ -389,7 +389,12 @@ export const overview = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
-      render: (text: string) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     {
       title: 'quality_power',
@@ -548,7 +553,12 @@ export const account_lucky = {
       dataIndex: 'group_name',
       fixed: 'left',
       width: '20%',
-      render: (text: string) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     { title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%' },
     { title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%' },
@@ -586,7 +596,12 @@ export const account_balance = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
-      render: (text: string) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     {
       title: 'miner_balance',
@@ -864,7 +879,12 @@ export const account_reward = {
       dataIndex: 'group_name',
       fixed: 'left',
       width: '20%',
-      render: (text: string) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     { title: 'block_count', dataIndex: 'block_count', width: '10%' },
     { title: 'win_count', dataIndex: 'win_count', width: '10%' },
@@ -902,7 +922,12 @@ export const account_power = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
-      render: (text: string) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     {
       title: 'quality_power',
@@ -1045,7 +1070,12 @@ export const account_gas = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
-      render: (text: string) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     {
       title: 'sector_power_change',
@@ -1192,7 +1222,12 @@ export const account_expired = {
       title: 'group_name',
       dataIndex: 'group_name',
       width: '15%',
-      render: (text: string, record: any) => tr(text),
+      render: (text: string, record: any) => {
+        if (record.is_default) {
+          return tr('group_default');
+        }
+        return text;
+      },
     },
     {
       title: 'exp_power',
