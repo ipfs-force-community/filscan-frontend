@@ -15,9 +15,7 @@ interface ModalProps {
 
 export default (props: ModalProps) => {
   const { title, children, show, onCancel, loading, onOk } = props;
-
   const { tr } = Translation({ ns: 'common' });
-
   return (
     <Modal
       {...props}
