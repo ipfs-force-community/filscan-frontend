@@ -20,21 +20,22 @@ export default ({
   ns,
   isHash = true,
   onChange,
+  defaultActive,
 }: {
   data: Array<Item>;
   defaultValue: string;
   ns: string;
   isHash: boolean;
+  defaultActive?: string;
   onChange?: (value: string) => void;
 }) => {
   const { tr } = Translation({ ns });
   const router = useRouter();
   const [active, setActive] = useState(defaultValue);
 
-  const { hash } = useHash();
   useEffect(() => {
-    setActive(hash || defaultValue);
-  }, [hash]);
+    setActive(defaultValue);
+  }, [defaultValue]);
 
   const handleClick = (event: any, tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
@@ -48,11 +49,13 @@ export default ({
       const paramName: string | null = extractPathParam(router.pathname);
       // 获取动态路由参数的值
       const paramValue = paramName ? router.query[paramName] : null;
-
       const newQuery = paramName ? { [paramName]: paramValue } : {};
-      const newAsPath = paramValue
+      let newAsPath = paramValue
         ? `${router.pathname.split('[')[0]}${paramValue}#${tabId}`
         : `${router.pathname}#${tabId}`;
+      if (tabId === defaultActive) {
+        newAsPath = newAsPath.split('#')[0];
+      }
       router.push(
         {
           pathname: `${router.pathname}`,

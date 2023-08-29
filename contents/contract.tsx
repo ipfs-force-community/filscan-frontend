@@ -213,19 +213,16 @@ export const token_details = {
     {
       title: 'transfer',
       dataIndex: 'transfer',
-      url: 'ERC20Transfer',
       total: 'transfer_total',
     },
     {
       title: 'owner',
       dataIndex: 'owner',
-      url: 'ERC20Owner',
       total: 'owner_total',
     },
     {
       title: 'dex',
       dataIndex: 'dex',
-      url: 'ERC20DexTrade',
       total: 'dex_total',
     },
   ],
@@ -309,21 +306,28 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
   ];
 };
 
-const token_owner_columns = (fromList: any) => {
+export const token_owner_columns = (ownerList: any) => {
   return [
-    { dataIndex: 'rank', title: 'rank' },
+    {
+      dataIndex: 'rank',
+      title: 'rank',
+      width: '10%',
+      render: (text: string) => <span className='rank_icon'>{text}</span>,
+    },
     {
       dataIndex: 'owner',
       title: 'owner',
+      width: '35%',
       render: (text: string, record: any) => {
         if (!text) return '--';
         return (
-          <span className='table_li'>
-            {text}
-            {fromList?.domains && fromList?.domains[text] && (
+          <span className='flex link_text items-center gap-x-1'>
+            <span> {text}</span>
+            {text && <Copy text={text} />}
+            {ownerList?.domains && ownerList?.domains[text] && (
               <Link
-                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
-                ({fromList.domains[text]})
+                href={`/domain/${ownerList.domains[text]}?provider=${ownerList.provider}`}>
+                ({ownerList.domains[text]})
               </Link>
             )}
           </span>
@@ -333,35 +337,38 @@ const token_owner_columns = (fromList: any) => {
     {
       dataIndex: 'amount',
       title: 'amount',
+      width: '20%',
       render: (text: string, record: any) =>
         text ? formatNumber(text, 4) : text || '--',
     },
     {
       dataIndex: 'rate',
       title: 'percentage',
+      width: '15%',
       render: (text: string, record: any) =>
         text ? Number(text).toFixed(4) + '%' : text || '--',
     },
     {
       dataIndex: 'value',
       title: 'Value',
+      width: '20%',
       render: (text: any) => (text ? get$Number(text) : ''),
     },
   ];
 };
 
-const token_Dex_columns = [
+export const token_Dex_columns = [
   {
     dataIndex: 'cid',
     title: 'message_cid',
-    render: (text: string) =>
-      text ? (
-        <Link href={`/message/${text}`} className='link'>
-          {text ? isIndent(text, 6) : ''}
+    render: (text: string) => {
+      if (!text) return '--';
+      return (
+        <Link href={`/message/${text}`} className='link_text'>
+          {isIndent(text)}
         </Link>
-      ) : (
-        '--'
-      ),
+      );
+    },
   },
   {
     dataIndex: 'time',
@@ -418,13 +425,7 @@ const token_Dex_columns = [
               window.open(record.dex_url);
             }
           }}>
-          <Image
-            className='fvm_img_url'
-            alt=''
-            width={25}
-            height={25}
-            src={getImgUrl(text)}
-          />
+          <Image className='fvm_img_url' alt='' width={25} height={25} />
         </span>
       );
     },

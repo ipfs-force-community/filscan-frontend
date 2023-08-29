@@ -4,7 +4,8 @@
 }
 
 .main_contain{
-  max-width: 1440px;
+  max-width: 1920px;
+  min-width: 1440;
   min-height: 500px;
   height: 100%;
   width: 100%;
@@ -15,6 +16,7 @@
   color: var(--font-color);
   background-color: var(--main-bg-color); 
   overflow: hidden;
+
 }
 
 a{

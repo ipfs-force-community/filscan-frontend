@@ -7,10 +7,19 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { detailPageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
-import { token_transfer_columns } from '@/contents/contract';
+import {
+  token_owner_columns,
+  token_transfer_columns,
+} from '@/contents/contract';
 
-export default ({ id }: { id?: string | string[] }) => {
-  const { theme } = useFilscanStore();
+export default ({
+  methodName,
+  id,
+}: {
+  methodName?: string;
+  id?: string | string[];
+}) => {
+  const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
   const [data, setData] = useState({
@@ -19,7 +28,7 @@ export default ({ id }: { id?: string | string[] }) => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [current, setCurrent] = useState(1);
-  const [fromList, setFrom] = useState({});
+  const [ownerList, setOwner] = useState({});
   const [toList, setTo] = useState({});
 
   useEffect(() => {
@@ -31,7 +40,7 @@ export default ({ id }: { id?: string | string[] }) => {
   const load = async (cur?: number) => {
     setLoading(true);
     const index = cur || current;
-    const result = await axiosData(apiUrl.contract_ERC20Transfer, {
+    const result = await axiosData(apiUrl.contract_ERC20Owner, {
       contract_id: id,
       page: index - 1,
       limit: detailPageLimit,
@@ -42,10 +51,8 @@ export default ({ id }: { id?: string | string[] }) => {
       total: result?.total || 0,
     });
     if (result?.items && result.items.length > 0) {
-      const formItems = result?.items.map((v: any) => v.from);
-      const toItems = result?.items.map((v: any) => v.to);
-      loadFnsUrl(formItems, 'form');
-      loadFnsUrl(toItems, 'to');
+      const formItems = result?.items.map((v: any) => v.owner);
+      loadFnsUrl(formItems, 'owner');
     }
   };
 
@@ -54,30 +61,25 @@ export default ({ id }: { id?: string | string[] }) => {
       const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
         addresses: items,
       });
-      if (type === 'form') {
-        setFrom(fnsData);
-      } else {
-        setTo(fnsData);
-      }
+      setOwner(fnsData);
     }
   };
 
   const columns = useMemo(() => {
-    return token_transfer_columns(fromList, toList).map((v) => {
+    return token_owner_columns(ownerList).map((v) => {
       return { ...v, title: tr(v.title) };
     });
-  }, [theme, tr, fromList, toList]);
+  }, [theme, tr, ownerList, toList]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     let cur: number = pagination.current || current;
     setCurrent(cur);
     load(cur);
   };
-
   return (
     <>
       <span className='text_des text-sm'>
-        {tr('transfer_total', { value: data.total })}
+        {tr('owner_total', { value: data.total })}
       </span>
       <div className='card_shadow p-5 mt-5 '>
         <Table
