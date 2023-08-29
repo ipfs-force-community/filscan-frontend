@@ -366,6 +366,9 @@ export const overview = {
       dataIndex: 'tag',
       fixed: 'left',
       width: 100,
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput text={text} isEdit={false} record={record} />;
       },
@@ -521,7 +524,9 @@ export const account_lucky = {
       dataIndex: 'tag',
       width: '20%',
       fixed: 'left',
-
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput isEdit={false} text={text} record={record} />;
       },
@@ -558,6 +563,9 @@ export const account_balance = {
       dataIndex: 'tag',
       fixed: 'left',
       width: 100,
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput isEdit={false} text={text} record={record} />;
       },
@@ -833,6 +841,9 @@ export const account_reward = {
       dataIndex: 'tag',
       width: '20%',
       fixed: 'left',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput isEdit={false} text={text} record={record} />;
       },
@@ -1011,6 +1022,9 @@ export const account_gas = {
       dataIndex: 'tag',
       fixed: 'left',
       width: 100,
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput isEdit={false} text={text} record={record} />;
       },
@@ -1157,6 +1171,9 @@ export const account_expired = {
       title: 'tag',
       dataIndex: 'tag',
       width: '15%',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         return <TagInput text={text} record={record} />;
       },
