@@ -243,7 +243,12 @@ export function isMobile() {
   }
 }
 
-//不同账户 ,
+//首字母大写,其余不变
+export function titleCase(str: string | number | boolean) {
+  const Str = String(str);
+  const newStr = Str.slice(0, 1).toUpperCase() + Str.slice(1);
+  return newStr;
+}
 
 //不同账户 ,
 export const get_account_type = (value: string = '', unit: number = 6) => {

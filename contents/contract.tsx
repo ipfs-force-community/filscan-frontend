@@ -2,7 +2,15 @@
 
 import Copy from '@/components/copy';
 import Tooltip from '@/packages/tooltip';
-import { formatFilNum, formatNumber, get$Number, isIndent } from '@/utils';
+import {
+  formatDateTime,
+  formatFilNum,
+  formatNumber,
+  get$Number,
+  get_account_type,
+  isIndent,
+  titleCase,
+} from '@/utils';
 import Image from '@/packages/image';
 import Link from 'next/link';
 
@@ -145,3 +153,280 @@ export const contract_token = {
     ];
   },
 };
+
+export const token_details = {
+  headerList: [
+    {
+      title: 'overview',
+      list: [
+        {
+          title: 'total_supply',
+          dataIndex: 'total_supply',
+          render: (text: string) => {
+            return text ? formatNumber(text, 4) : text || '--';
+          },
+        },
+        {
+          title: 'owners',
+          dataIndex: 'owners',
+        },
+        {
+          title: 'transfers',
+          dataIndex: 'transfers',
+        },
+      ],
+    },
+    {
+      title: 'market',
+      list: [
+        {
+          title: 'latest_price',
+          dataIndex: 'latest_price',
+          render: (text: string) => (text ? get$Number(text) : text || '--'),
+        },
+        {
+          title: 'market_value',
+          dataIndex: 'market_cap',
+          render: (text: string) => (text ? get$Number(text) : text || '--'),
+        },
+        {
+          title: 'token_contract',
+          dataIndex: 'contract_id',
+          render: (text: string, record: any) => {
+            if (!text) {
+              return '--';
+            }
+            return (
+              <span className='flex items-center gap-x-2'>
+                <Link href={`/address/${text}`} className='link'>
+                  {text}
+                </Link>
+                <Copy text={text} />
+              </span>
+            );
+          },
+        },
+      ],
+    },
+  ],
+  tabList: [
+    {
+      title: 'transfer',
+      dataIndex: 'transfer',
+      url: 'ERC20Transfer',
+      total: 'transfer_total',
+    },
+    {
+      title: 'owner',
+      dataIndex: 'owner',
+      url: 'ERC20Owner',
+      total: 'owner_total',
+    },
+    {
+      title: 'dex',
+      dataIndex: 'dex',
+      url: 'ERC20DexTrade',
+      total: 'dex_total',
+    },
+  ],
+};
+
+export const token_transfer_columns = (fromList: any, toList: any) => {
+  return [
+    {
+      dataIndex: 'cid',
+      title: 'message_cid',
+      width: '15%',
+      render: (text: string) =>
+        text ? (
+          <Link href={`/message/${text}`} className='link'>
+            {text ? isIndent(text, 6) : ''}
+          </Link>
+        ) : (
+          '--'
+        ),
+    },
+    {
+      dataIndex: 'method',
+      title: 'method',
+      width: '15%',
+      render: (text: string) => (
+        <span className='bg-render'>{titleCase(text)}</span>
+      ),
+    },
+    {
+      dataIndex: 'time',
+      title: 'time',
+      width: '15%',
+      render: (text: string | number) =>
+        formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+    },
+    {
+      dataIndex: 'from',
+      title: 'from',
+      width: '15%',
+      render: (text: string, record: any) => {
+        if (!text) return '--';
+        return (
+          <span className='flex items-center gap-x-1'>
+            {get_account_type(text)}
+            {fromList?.domains && fromList?.domains[text] && (
+              <Link
+                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
+                ({fromList.domains[text]})
+              </Link>
+            )}
+          </span>
+        );
+      },
+    },
+    {
+      dataIndex: 'to',
+      title: 'to',
+      width: '15%',
+      render: (text: string, record: any) => {
+        if (!text) return '--';
+        return (
+          <div className='flex items-center gap-x-1'>
+            {get_account_type(text)}
+            {toList?.domains && toList?.domains[text] && (
+              <Link
+                href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
+                ({toList.domains[text]})
+              </Link>
+            )}
+          </div>
+        );
+      },
+    },
+    {
+      dataIndex: 'amount',
+      title: 'amount',
+      width: '15%',
+      render: (text: string, record: any) =>
+        text ? formatNumber(text, 4) : text || '--',
+    },
+  ];
+};
+
+const token_owner_columns = (fromList: any) => {
+  return [
+    { dataIndex: 'rank', title: 'rank' },
+    {
+      dataIndex: 'owner',
+      title: 'owner',
+      render: (text: string, record: any) => {
+        if (!text) return '--';
+        return (
+          <span className='table_li'>
+            {text}
+            {fromList?.domains && fromList?.domains[text] && (
+              <Link
+                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
+                ({fromList.domains[text]})
+              </Link>
+            )}
+          </span>
+        );
+      },
+    },
+    {
+      dataIndex: 'amount',
+      title: 'amount',
+      render: (text: string, record: any) =>
+        text ? formatNumber(text, 4) : text || '--',
+    },
+    {
+      dataIndex: 'rate',
+      title: 'percentage',
+      render: (text: string, record: any) =>
+        text ? Number(text).toFixed(4) + '%' : text || '--',
+    },
+    {
+      dataIndex: 'value',
+      title: 'Value',
+      render: (text: any) => (text ? get$Number(text) : ''),
+    },
+  ];
+};
+
+const token_Dex_columns = [
+  {
+    dataIndex: 'cid',
+    title: 'message_cid',
+    render: (text: string) =>
+      text ? (
+        <Link href={`/message/${text}`} className='link'>
+          {text ? isIndent(text, 6) : ''}
+        </Link>
+      ) : (
+        '--'
+      ),
+  },
+  {
+    dataIndex: 'time',
+    title: 'time',
+    render: (text: string) => formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+  },
+  {
+    dataIndex: 'action',
+    title: 'Action',
+    render: (text: string) => {
+      const color = text === 'buy' ? 'green' : text === 'sell' ? 'red' : '';
+      return (
+        <span style={{ color }}>
+          {text ? text[0].toUpperCase() + text.substr(1) : text}
+        </span>
+      );
+    },
+  },
+
+  {
+    dataIndex: 'amount_out',
+    title: 'Token_Amount_out',
+    render: (text: number, record: any) => {
+      return formatNumber(text, 4) + ' ' + record?.amount_out_token_name;
+    },
+  },
+  {
+    dataIndex: 'amount_in',
+    title: 'Token_Amount_in',
+    render: (text: number, record: any) => {
+      return formatNumber(text, 4) + ' ' + record?.amount_in_token_name;
+    },
+  },
+  {
+    dataIndex: 'swap_rate',
+    title: 'swapped_Rate',
+    render: (text: string, record: any) =>
+      text ? text + ' ' + record.swap_token_name : '',
+  },
+  {
+    dataIndex: 'value',
+    title: 'Txn_Value',
+    render: (text: string) => get$Number(text),
+  },
+  {
+    dataIndex: 'dex',
+    title: 'platform',
+    render: (text: string, record: any) => {
+      return (
+        <span
+          className='link'
+          onClick={() => {
+            if (record.dex_url) {
+              window.open(record.dex_url);
+            }
+          }}>
+          <Image
+            className='fvm_img_url'
+            alt=''
+            width={25}
+            height={25}
+            src={getImgUrl(text)}
+          />
+        </span>
+      );
+    },
+  },
+];

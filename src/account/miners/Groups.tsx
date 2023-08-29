@@ -54,21 +54,23 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       //给予目标group，miner_id 是唯一的
       const result = await axiosData(proApi.saveMiner, destinationGroup);
       if (result) {
+        setData([...data]);
         const newGroups = await axiosData(proApi.getGroups);
         setGroups(newGroups?.group_info_list || []);
       }
     } else {
       //同组内拖拽
+      groupItem?.miners_info?.splice(sourceIndex, 1);
       groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
       const result = await axiosData(proApi.saveMiner, groupItem);
       if (result) {
+        setData([...data]);
         const newGroups = await axiosData(proApi.getGroups);
         setGroups(newGroups?.group_info_list || []);
       }
     }
     // }
 
-    setData([...data]);
     //保存分组 todo
   };
 

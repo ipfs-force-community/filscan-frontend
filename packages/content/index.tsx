@@ -15,7 +15,7 @@ export default ({
   columns?: number;
   data: Record<string, any>;
 }) => {
-  const { tr } = Translation({ ns: 'detail' });
+  const { tr } = Translation({ ns: ns });
   const showWidth = useMemo(() => {
     if (columns !== 1) {
       return Math.abs(100 / columns) + '%';
