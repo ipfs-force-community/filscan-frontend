@@ -30,7 +30,7 @@ export default ({
     if (miner && typeof miner === 'string') {
       return [
         {
-          title: tr('overview_expired'),
+          title: tr('overview_power'),
           path: '/account#power',
         },
         {
