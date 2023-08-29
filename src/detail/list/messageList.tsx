@@ -5,9 +5,9 @@ import { Translation } from '@/components/hooks/Translation';
 import { message_list } from '@/contents/detail';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import fetchData from '@/store/server';
 import { detailPageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
+import useAxiosData from '@/store/useAxiosData';
 
 export default ({
   methodName,
@@ -19,6 +19,7 @@ export default ({
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const [loading, setLoading] = useState(false);
+  const { axiosData } = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
@@ -43,7 +44,7 @@ export default ({
     setLoading(true);
     const showIndex = cur || current;
     const showMethod = method || methodName;
-    const result: any = await fetchData(apiUrl.detail_message_list, {
+    const result: any = await axiosData(apiUrl.detail_message_list, {
       account_id: accountId,
       filters: {
         index: showIndex - 1,
@@ -67,7 +68,7 @@ export default ({
 
   const loadFnsUrl = async (items: Array<any>, type: string) => {
     if (items.length > 0) {
-      const fnsData = await fetchData(`${apiUrl.contract_fnsUrl}`, {
+      const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
         addresses: items,
       });
       if (type === 'form') {

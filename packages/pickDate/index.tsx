@@ -45,6 +45,7 @@ export default (props: Props) => {
       <DatePicker
         bordered={false}
         showToday={false}
+        allowClear={false}
         disabledDate={disabledDate}
         defaultValue={dayjs(defaultValue, 'YYYY-MM-DD')}
         className='custom_date_picker'

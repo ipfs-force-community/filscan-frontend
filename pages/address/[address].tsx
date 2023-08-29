@@ -7,9 +7,8 @@ import Content from '@/packages/content';
 import Segmented from '@/packages/segmented';
 import AccountChange from '@/src/detail/accountChange';
 import List from '@/src/detail/list';
-import fetchData from '@/store/server';
+import useAxiosData from '@/store/useAxiosData';
 import { useRouter } from 'next/router';
-import { type } from 'os';
 import { useEffect, useMemo, useState } from 'react';
 
 /** @format */
@@ -21,6 +20,7 @@ export default () => {
   const [accountType, setAccountType] = useState('');
   const [interval, setInterval] = useState('24h');
   const [methodOptions, setMethodOptions] = useState([]);
+  const { axiosData } = useAxiosData();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default () => {
     }
   }, [address]);
   const loadMethod = async () => {
-    const result: any = await fetchData(apiUrl.detail_list_method, {
+    const result: any = await axiosData(apiUrl.detail_list_method, {
       account_id: address,
     });
     const newMethod: any = [
@@ -48,7 +48,7 @@ export default () => {
 
   const load = async () => {
     setLoading(true);
-    const result: any = await fetchData(apiUrl.detail_account, {
+    const result: any = await axiosData(apiUrl.detail_account, {
       account_id: address,
     });
     setLoading(false);

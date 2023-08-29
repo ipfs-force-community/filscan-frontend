@@ -10,6 +10,8 @@ import ExportExcel from '@/packages/exportExcel';
 import useAxiosData from '@/store/useAxiosData';
 import DateTime from '@/src/account/DateTIme';
 import { formatDateTime } from '@/utils';
+import { useHash } from '@/components/hooks/useHash';
+import Detail from './Detail';
 
 export default ({
   selectedKey,
@@ -19,6 +21,7 @@ export default ({
   groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
+  const { hashParams } = useHash();
   const [active, setActive] = useState<string | number>(0);
   const [date, setDate] = useState({
     startTime: formatDateTime(
@@ -51,6 +54,10 @@ export default ({
   const newGroups = useMemo(() => {
     return groups;
   }, [groups]);
+
+  if (hashParams?.miner) {
+    return <Detail miner={hashParams.miner} data={powerData} />;
+  }
 
   return (
     <>

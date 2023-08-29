@@ -5,44 +5,37 @@ import { apiUrl } from '@/contents/apiUrl';
 import { message_detail } from '@/contents/detail';
 import Content from '@/packages/content';
 import NoData from '@/packages/noData';
-import fetchData from '@/store/server';
+import useAxiosData from '@/store/useAxiosData';
 import { Skeleton } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
-  const [data, setData] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const { axiosData } = useAxiosData();
   const [TransferData, setTransfer] = useState<any>(undefined);
   const [TransferNFTData, setTransferNft] = useState<any>(undefined);
 
-  useEffect(() => {
-    if (cid) {
-      load();
-    }
-  }, [cid]);
+  const { data: result, loading } = useAxiosData(apiUrl.detail_message, {
+    message_cid: cid,
+  });
 
-  const load = async () => {
-    setLoading(true);
-    const result: any = await fetchData(apiUrl.detail_message, {
-      message_cid: cid,
-    });
-    setLoading(false);
-    setData(result?.MessageDetails || {});
-    if (result?.MessageDetails?.message_basic?.cid) {
-      loadTrans(result?.MessageDetails?.message_basic?.cid);
-    }
-  };
+  const data = useMemo(() => {
+    return result?.MessageDetails || {};
+  }, [result]);
+
+  useEffect(() => {
+    loadTrans(data?.message_basic?.cid);
+  }, [data?.message_basic?.cid]);
 
   const loadTrans = (id: string) => {
     //erc20
-    fetchData(apiUrl.contract_transferInMessage, { cid: id }).then(
+    axiosData(apiUrl.contract_transferInMessage, { cid: id }).then(
       (result: any) => {
         setTransfer(result?.items || []);
       }
     );
     //nft
-    fetchData(apiUrl.contract_transferInMessageNft, { cid: id }).then(
+    axiosData(apiUrl.contract_transferInMessageNft, { cid: id }).then(
       (result: any) => {
         setTransferNft(result?.items || []);
       }

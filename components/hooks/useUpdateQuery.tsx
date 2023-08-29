@@ -1,6 +1,7 @@
 /** @format */
 
 import { parseQueryString } from '@/utils';
+import { error } from 'console';
 import { useRouter } from 'next/router';
 
 type QueryParam = {
@@ -32,14 +33,24 @@ const useUpdateQuery = () => {
         }
       );
     } else {
-      router.push(
-        {
-          pathname: router.pathname,
-          query: { ...router.query, ...newQuery },
-        },
-        undefined,
-        { scroll: false }
-      );
+      const newParams = { ...router.query, ...newQuery };
+      Object.keys(newQuery).forEach((key) => {
+        if (newQuery[key] === 'removed') {
+          delete newParams[key];
+        }
+      });
+      router
+        .push(
+          {
+            pathname: router.pathname,
+            query: { ...newParams },
+          },
+          undefined,
+          { scroll: false }
+        )
+        .catch((error) => {
+          console.log('===-345545', error);
+        });
     }
   };
 

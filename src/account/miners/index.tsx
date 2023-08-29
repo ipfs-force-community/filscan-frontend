@@ -34,7 +34,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
     const new_data: any = [];
     let default_groups_id;
     groupResult?.forEach((item: groupsItem) => {
-      if (item.group_name === 'default_group') {
+      if (item.is_default) {
         default_groups_id = item.group_id;
       }
       new_data.push({
@@ -96,7 +96,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
         <Link
           href={`/account#miners?type=miner_add`}
           scroll={false}
-          className='confirm_btn flex rounded-[5px] items-center gap-x-5 text_color'>
+          className='confirm_btn flex rounded-[5px] items-center gap-x-2.5 text_color'>
           {getSvgIcon('addIcon')}
           {tr('miners_add')}
         </Link>

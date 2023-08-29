@@ -5,21 +5,20 @@ import { Translation } from '@/components/hooks/Translation';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import { pool_list } from '@/contents/tipset';
-import { Item } from '@/contents/type';
 import Table from '@/packages/Table';
-import Select from '@/packages/select';
 import Selects from '@/packages/selects';
 import { useFilscanStore } from '@/store/FilscanStore';
-import fetchData from '@/store/server';
 import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
+  const { axiosData } = useAxiosData();
   const { name, p } = useRouter().query;
   const [loading, setLoading] = useState(false);
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
@@ -29,6 +28,7 @@ export default () => {
   });
 
   const method = useMemo(() => {
+    console.log('----ee', name);
     if (name && typeof name === 'string') {
       return name;
     }
@@ -47,7 +47,7 @@ export default () => {
   }, [lang]);
 
   const loadOptions = async () => {
-    const result: any = await fetchData(apiUrl.tipset_message_pool_opt);
+    const result: any = await axiosData(apiUrl.tipset_message_pool_opt);
     const obj = result?.method_name_list || {};
     const options = Object.keys(obj).map((v: string) => {
       return { value: v, label: tr(v) };
@@ -67,7 +67,7 @@ export default () => {
     setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
-    const result: any = await fetchData(apiUrl.tipset_message, {
+    const result: any = await axiosData(apiUrl.tipset_message, {
       filters: {
         index: showIndex - 1,
         limit: pageLimit,
@@ -114,12 +114,12 @@ export default () => {
           value={method}
           options={headerOptions}
           onChange={(value) => {
+            console.log('---4', value);
             if (value !== 'all') {
-              updateQuery({ name: value });
+              updateQuery({ name: value, p: 'removed' });
             } else {
               removeQueryParam('name');
             }
-            removeQueryParam('p');
           }}
         />
       </div>

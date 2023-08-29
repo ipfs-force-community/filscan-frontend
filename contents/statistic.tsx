@@ -46,6 +46,7 @@ export const gas_24 = {
       title: 'avg_gas_used',
       render: (text: string | number) => formatNumber(text),
     }, //平均Gas消耗
+
     {
       dataIndex: 'avg_gas_fee',
       title: 'avg_gas_fee',

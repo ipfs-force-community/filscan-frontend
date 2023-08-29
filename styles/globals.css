@@ -7,14 +7,17 @@
      --main-bg-color:#F9F9F9;
      --reverse-color:'#000000';
     --font-color:#000000;
-    --select-shadow: rgba(223,227,234,0.6);
+    --select-shadow: gba(223,227,234,0.6);
+        --select-bgColor:#ffffff ;
     --card-shadow: rgba(223,227,234,0.6);
      --tab-shadow:rgba(0,0,0,0.1);
     --bg_hover:rgba(28, 106, 253, 0.1);
     --font_des:rgba(0,0,0,0.6);
     --primary: #1C6AFD;
+    --text_clip:#131254;
      --border-color:#e6e8eb;
     --bgDesColor:#F6F6F6;
+    --table-hover:#F8F8F8
 
 
 
@@ -28,14 +31,19 @@
     --main-bg-color:#090A0A;
    --reverse-color:'#FFFFFF';
    --font-color:#ffffff;
+       --text_clip:#ffffff;
+    --select-shadow: rgba(0,0,0,0.6);
+        --select-bgColor: #1E1E1E;
     --bg_hover:rgba(28, 106, 253, 0.1);
     --bgDesColor: #1C1C1C;
    --font_des:rgba(255,255,255,0.6);
    --primary: #1C6AFD;
-   --select-shadow: rgba(223,227,234,0.6);
   --card-shadow: rgba(0,0,0,0.4);
   --tab-shadow:rgba(0,0,0,0.1);
     --border-color:#222222;
+        --table-hover:#1B1B1B;
+
+
 
 
 

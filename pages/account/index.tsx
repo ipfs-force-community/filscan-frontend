@@ -112,7 +112,9 @@ const Account: React.FC = () => {
                   className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
                     parent?.icon ? 'font-medium' : 'ml-5 font-normal'
                   } ${
-                    selectedKey === parent.key ? 'text-primary bg-bg_hover' : ''
+                    selectedKey === parent.key
+                      ? '!text-primary bg-bg_hover'
+                      : ''
                   }`}>
                   <span className='flex items-center gap-x-2 px-4'>
                     {parent.icon}

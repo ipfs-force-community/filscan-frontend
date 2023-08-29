@@ -12,11 +12,10 @@ import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { useMemo } from 'react';
 import Select from '@/packages/select';
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import CompoundedSpace from 'antd/es/space';
 import { getSvgIcon } from '@/svgsIcon';
 import i18n from '@/i18n';
+import Search from './Search';
 
 const { Header } = Layout;
 const data: any = {
@@ -108,6 +107,7 @@ export default () => {
           <Account />
         </div>
       </div>
+
       <Nav />
     </Header>
   );

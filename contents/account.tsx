@@ -210,7 +210,7 @@ export const overview = {
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className='text-sm text_color'>{unit}</span>
               </span>
             </div>
           );
@@ -604,7 +604,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -634,7 +635,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -664,7 +666,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -693,7 +696,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -723,7 +727,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -752,7 +757,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -781,7 +787,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -810,7 +817,8 @@ export const account_balance = {
           <span className='flex flex-col'>
             <span>{formatFilNum(text, false, false, 2)}</span>
             <span className={`${className}`}>
-              {flag + formatFilNum(changeText, false, false, 2)}
+              {flag +
+                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
             </span>
           </span>
         );
@@ -870,7 +878,7 @@ export const account_power = {
       width: 100,
       fixed: 'left',
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/account#power?miner=${text}`} className='link_text'>
           {text}
         </Link>
       ),
