@@ -14,8 +14,10 @@ export default ({
   id,
   tabList,
   defaultActive,
+  type,
 }: {
   id?: string | string[];
+  type: string;
   tabList: Array<any>;
   defaultActive: string;
 }) => {

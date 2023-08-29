@@ -3,9 +3,8 @@
 import useAxiosData from '@/store/useAxiosData';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import token from '../contract/token';
 import { apiUrl } from '@/contents/apiUrl';
-import { token_details } from '@/contents/contract';
+import { nft_details } from '@/contents/contract';
 import Content from '@/packages/content';
 import Image from '@/packages/image';
 import { Translation } from '@/components/hooks/Translation';
@@ -16,21 +15,14 @@ export default () => {
   const { tokenId } = router.query;
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
-
-  const [marketData, setMarket] = useState({});
   const [overviewData, setOverview] = useState<any>({});
 
   useEffect(() => {
     if (tokenId) {
-      axiosData(apiUrl.contract_ERC20Summary, {
+      axiosData(apiUrl.contract_FnsSummary, {
         contract_id: tokenId,
       }).then((res: any) => {
         setOverview(res || {});
-      });
-      axiosData(apiUrl.contract_ERC20Market, {
-        contract_id: tokenId,
-      }).then((res: any) => {
-        setMarket({ ...res, tokenName: res?.token_name } || {});
       });
     }
     load();
@@ -45,9 +37,7 @@ export default () => {
         {overviewData?.token_name?.toLocaleUpperCase()}
       </div>
       <div className='flex gap-x-5'>
-        {token_details.headerList.map((tokenItem) => {
-          const showData =
-            tokenItem.title === 'market' ? marketData : overviewData;
+        {nft_details.headerList.map((tokenItem) => {
           return (
             <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5'>
               <div className='text-base font-medium px-2.5'>
@@ -56,16 +46,16 @@ export default () => {
               <Content
                 content={tokenItem.list}
                 ns={'contract'}
-                data={showData || {}}
+                data={overviewData || {}}
               />
             </div>
           );
         })}
       </div>
       <List
-        tabList={token_details.tabList}
+        tabList={nft_details.tabList}
         defaultActive={'transfer'}
-        type='token'
+        type='nfts'
         id={tokenId}
       />
     </div>

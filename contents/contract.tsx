@@ -431,3 +431,102 @@ export const token_Dex_columns = [
     },
   },
 ];
+
+export const contract_nfts = {
+  columns: [
+    {
+      dataIndex: 'rank',
+      title: 'rank',
+      render: (text: any, record: any, index: any) => {
+        return <span className='rank_icon'>{index + 1}</span>;
+      },
+    },
+    {
+      dataIndex: 'collection',
+      title: 'Collection',
+      render: (text: string, record: any) => {
+        if (!text) return '--';
+        return (
+          <Link
+            href={`/nft/${record.provider}`}
+            className='flex items-center gap-x-2'>
+            <Image
+              className='fvm_img_url'
+              src={record.icon}
+              alt=''
+              height={36}
+              width={36}
+            />
+            <span className='text_color'> {text}</span>
+          </Link>
+        );
+      },
+    },
+    // { dataIndex: 'trading_volume', title: 'Volume' },
+    { dataIndex: 'holders', title: 'owners' },
+    {
+      dataIndex: 'transfers',
+      title: 'transfers',
+      render: (text: string) => (text ? formatNumber(text, 4) : '--'),
+    },
+  ],
+};
+
+export const nft_details = {
+  headerList: [
+    {
+      title: 'overview',
+      list: [
+        {
+          title: 'total_supply',
+          dataIndex: 'total_supply',
+          render: (text: string) => {
+            return text ? formatNumber(text, 4) : text || '--';
+          },
+        },
+        {
+          title: 'owners',
+          dataIndex: 'owners',
+        },
+        {
+          title: 'transfers',
+          dataIndex: 'transfers',
+        },
+      ],
+    },
+    {
+      title: 'market',
+      list: [
+        {
+          title: 'token_contract',
+          dataIndex: 'contract',
+          render: (text: string) => {
+            if (text) {
+              return (
+                <span className='flex-center'>
+                  <Link href={`/address/${text}`} className='link'>
+                    {text}
+                  </Link>
+                  <Copy text={text} />
+                </span>
+              );
+            }
+            return '--';
+          },
+        },
+      ],
+    },
+  ],
+  tabList: [
+    {
+      title: 'transfer',
+      dataIndex: 'transfer',
+      total: 'transfer_total',
+    },
+    {
+      title: 'owner',
+      dataIndex: 'owner',
+      total: 'owner_total',
+    },
+  ],
+};

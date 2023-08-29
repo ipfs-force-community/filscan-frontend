@@ -13,13 +13,7 @@ import {
   token_transfer_columns,
 } from '@/contents/contract';
 
-export default ({
-  methodName,
-  id,
-}: {
-  methodName?: string;
-  id?: string | string[];
-}) => {
+export default ({ id }: { id?: string | string[] }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
