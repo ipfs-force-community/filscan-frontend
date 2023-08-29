@@ -4,8 +4,9 @@ import { MinerNum, groupsItem } from "../type";
 
 
 interface groupsStore {
-              groups: Array<groupsItem>
-              setGroups:(groups:Array<groupsItem>)=>void
+  groups: Array<groupsItem>
+  setGroups: (groups: Array<groupsItem>) => void
+  setMinerNum:(value:MinerNum)=>void
 }
 
 export const GroupsStoreContext = createContext<groupsStore | null>(null);

@@ -6,15 +6,12 @@ import { fvmUrl } from '@/contents/apiUrl';
 
 const ImageWithFallback = (props: any) => {
   const { src, fallbackSrc = fvmUrl + `/images/default.png`, ...rest } = props;
-  const [imgSrc, setImgSrc] = useState(src);
+  const [imgSrc, setImgSrc] = useState(src || fallbackSrc);
 
   useEffect(() => {
     const showSrc = src || fallbackSrc;
     setImgSrc(showSrc);
   }, [src]);
-  if (!src) {
-    return null;
-  }
 
   return (
     <Image

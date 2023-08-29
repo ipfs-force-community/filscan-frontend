@@ -3,6 +3,7 @@
 import Copy from '@/components/copy';
 import Tooltip from '@/packages/tooltip';
 import { formatFilNum, formatNumber, get$Number, isIndent } from '@/utils';
+import Image from '@/packages/image';
 import Link from 'next/link';
 
 export const contract_rank = {
@@ -91,25 +92,25 @@ export const contract_token = {
         title: 'rank',
         width: '10%',
         render: (text: any, record: any, index: any) => {
-          return <span className='rank-icon'>{index + 1}</span>;
+          return <span className='rank_icon'>{index + 1}</span>;
         },
       },
       {
         dataIndex: 'token_name',
         title: 'token_name',
-        // render: (text: string, record: any) => {
-        //   return (
-        //     <Link href={`/token/${record.contract_id}`}>
-        //       <Image
-        //         className='fvm_img_url'
-        //         src={getImgUrl(text)}
-        //         alt=''
-        //         height={38}
-        //         width={38}></Image>
-        //       <span className='margin-6'>{text}</span>
-        //     </Link>
-        //   );
-        // },
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <Link
+                href={`/token/${record.contract_id}`}
+                className='flex items-center gap-x-1'>
+                <Image src={record?.icon_url} alt='' height={38} width={38} />
+                <span className='margin-6 text_color'>{text}</span>
+              </Link>
+              {}
+            </>
+          );
+        },
       },
       {
         dataIndex: 'total_supply',

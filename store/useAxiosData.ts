@@ -79,6 +79,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         data = response.data|| {};
         setData(data?.result || data || {});
         setLoading(false);
+        console.log('---334',response,data?.resul,data)
         return data?.result || data ; // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {

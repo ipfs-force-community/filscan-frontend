@@ -17,7 +17,7 @@ import messageManager from '@/packages/message';
 const Groups = ({ groups }: { groups: Array<any> }) => {
   const { tr } = Translation({ ns: 'account' });
   const { axiosData } = useAxiosData();
-  const { setGroups } = useGroupsStore();
+  const { setGroups, setMinerNum } = useGroupsStore();
   const [data, setData] = useState<any>(groups);
   const [deleteLoading, setDeleteLoading] = useState<any>(false);
   const [modalItems, setModalItems] = useState<any>({});
@@ -80,6 +80,8 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
     if (data) {
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups?.group_info_list || []);
+      const minerNumResult: any = await axiosData(proApi.account_miners);
+      setMinerNum(minerNumResult);
     }
     setDeleteLoading(false);
   };

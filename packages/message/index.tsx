@@ -1,5 +1,6 @@
 /** @format */
 
+import { getSvgIcon } from '@/svgsIcon';
 import { message } from 'antd';
 
 // 创建一个全局的消息管理器
@@ -34,7 +35,16 @@ const messageManager = {
           {content} {suffix}
         </span>
       ) : (
-        content
+        <span className='flex gap-x-4 items-center'>
+          {content}
+          <span
+            className='cursor-pointer'
+            onClick={() => {
+              messageManager.hide();
+            }}>
+            {getSvgIcon('closeIcon')}
+          </span>
+        </span>
       ),
       duration,
       type,

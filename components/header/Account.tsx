@@ -14,7 +14,6 @@ export default () => {
   const { tr } = Translation({ ns: 'account' });
   const userInfo = UserInfo();
   const router = useRouter();
-  console.log('---userInfo', userInfo);
   const name = userInfo?.name || userInfo?.mail || '';
 
   if (!name) {
