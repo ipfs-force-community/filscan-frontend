@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { trance_list } from '@/contents/detail';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { detailPageLimit } from '@/utils';
+import { pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 
@@ -49,7 +49,7 @@ export default ({
       account_id: accountId,
       filters: {
         index: showIndex - 1,
-        limit: detailPageLimit,
+        limit: pageLimit,
         method_name: showMethod === 'all' ? '' : showMethod,
       },
     });

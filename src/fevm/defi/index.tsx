@@ -2,15 +2,13 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import { contract_rank, homeContractRank } from '@/contents/contract';
+import { homeContractRank } from '@/contents/contract';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { useEffect, useMemo, useState } from 'react';
-import verifySvg from '@/assets/images/verify.svg';
-import Image from 'next/image';
-import Link from 'next/link';
 import { homeDefiColumns, defi_list } from '@/contents/fevm';
+import { pageHomeLimit, pageLimit } from '@/utils';
 
 const default_sort = {
   field: 'tvl',
@@ -18,11 +16,11 @@ const default_sort = {
 };
 export default ({ origin }: { origin?: string }) => {
   const { tr } = Translation({ ns: 'fevm' });
-  const { theme, lang } = useFilscanStore();
+  const { theme } = useFilscanStore();
   const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(1);
   const [sort, setSort] = useState<any>({ ...default_sort });
-
+  const [progress,setProgress] = useState<number>(0)
   const [dataSource, setDataSource] = useState({
     data: [],
     total: undefined,
@@ -38,11 +36,10 @@ export default ({ origin }: { origin?: string }) => {
     const sortData = sorter || sort;
     const result: any = await fetchData(apiUrl.fevm_defiList, {
       page: page - 1,
-      limit: 7,
+      limit: origin === 'home'? pageLimit:pageHomeLimit,
       field: sortData.field,
       reverse: sortData.order === 'ascend',
     });
-    // setMax(res?.result?.items[0]?.tvl);
     setLoading(false);
     setDataSource({
       data:
@@ -51,11 +48,16 @@ export default ({ origin }: { origin?: string }) => {
         }) || [],
       total: result?.total,
     });
+    if (sortData.field === default_sort.field && sortData.order === 'descend') {
+      //默认排序，pr
+      setProgress(result?.items[0]?.tvl || 0)
+    }
   };
 
   const columns = useMemo(() => {
     const newArr: any = [];
-    defi_list.columns.forEach((col: any) => {
+
+    defi_list.columns(progress,origin).forEach((col: any) => {
       if (origin === 'home') {
         if (homeDefiColumns.hasOwnProperty(col.dataIndex)) {
           newArr.push({
@@ -70,7 +72,7 @@ export default ({ origin }: { origin?: string }) => {
     });
 
     return newArr;
-  }, [theme, lang]);
+  }, [theme, tr,progress]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     let cur: number = pagination.current || current;

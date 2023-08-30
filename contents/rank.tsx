@@ -32,29 +32,29 @@ export const rank_header:
       rewards: Record<string, Array<Option_Item>>;
     }
   | any = {
-  tabList: [
-    {
-      title: 'provider',
-      dataIndex: 'provider',
-    },
-    {
-      title: 'pool',
-      dataIndex: 'pool',
-    },
-    {
-      title: 'growth',
-      dataIndex: 'growth',
-      options: ['sectorOptions', 'timeList'],
-    },
-    {
-      title: 'rewards',
-      dataIndex: 'rewards',
-      options: ['sectorOptions', 'timeList'],
-    },
-  ],
-  growth: { sector_size: sectorOptions, interval: timeList },
-  rewards: { sector_size: sectorOptions, interval: timeList },
-};
+    tabList: [
+      {
+        title: 'provider',
+        dataIndex: 'provider',
+      },
+      {
+        title: 'pool',
+        dataIndex: 'pool',
+      },
+      {
+        title: 'growth',
+        dataIndex: 'growth',
+        options: ['sectorOptions', 'timeList'],
+      },
+      {
+        title: 'rewards',
+        dataIndex: 'rewards',
+        options: ['sectorOptions', 'timeList'],
+      },
+    ],
+    growth: { sector_size: sectorOptions, interval: timeList },
+    rewards: { sector_size: sectorOptions, interval: timeList },
+  };
 
 export const providerList = (progress: any): Array<any> => {
   return [
@@ -331,16 +331,16 @@ const rewardsList = () => {
 
 export const getColumn = (type: string, progress: number | string) => {
   switch (type) {
-    case 'provider':
-      return providerList(progress);
-    case 'pool':
-      return poolList(progress);
-    case 'growth':
-      return growthList(progress);
-    case 'rewards':
-      return rewardsList();
-    default:
-      return providerList(progress);
+  case 'provider':
+    return providerList(progress);
+  case 'pool':
+    return poolList(progress);
+  case 'growth':
+    return growthList(progress);
+  case 'rewards':
+    return rewardsList();
+  default:
+    return providerList(progress);
   }
 };
 

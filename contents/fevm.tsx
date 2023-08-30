@@ -2,11 +2,53 @@
 import Image from '@/packages/image';
 import { formatNumber, get$Number } from '@/utils';
 import TextTip from '@/packages/textTooltip';
+import Progress from '@/packages/progress';
+
+export const defi_market = [
+  {
+    title: 'fevm_staked',
+    dataIndex: 'fevm_staked',
+    render: (text:string,record:any) => get$Number(text)
+  },
+  {
+    title: 'staked_change_in_24h',
+    dataIndex: 'staked_change_in_24h',
+    render: (text:string,record:any) => {
+      return <span className={Number(text) < 0 ? 'down-color':'ups-color' }>
+        {get$Number(text)}
+      </span>
+
+    }
+  },
+  {
+    title: 'total_user',
+    dataIndex: 'total_user',
+    render: (text:string,record:any) => {
+      return formatNumber(text,2)
+    }
+  },
+  {
+    title: 'user_change_in_24h',
+    dataIndex: 'user_change_in_24h',
+    render: (text:string,record:any) => {
+      return <span className={Number(text) < 0 ? 'down-color':'ups-color' }>
+        {formatNumber(text, 2)}
+      </span>
+    }
+  },
+  {
+    title: 'fil_staked',
+    dataIndex: 'fil_staked',
+    render: (text:string,record:any) => {
+      return formatNumber(text,2) + ' FIL'
+    }
+  }
+]
 
 export const defi_list = {
   title: 'defi_list',
   total_msg: 'defi_list_total',
-  columns: [
+  columns:(progress:number,origin?:string)=> [
     {
       title: 'rank',
       dataIndex: 'rank',
@@ -15,7 +57,7 @@ export const defi_list = {
     },
     {
       title: 'Protocol',
-      width: '25%',
+      width: '15%',
       dataIndex: 'protocol',
       ellipsis: {
         showTitle: false,
@@ -43,15 +85,22 @@ export const defi_list = {
     {
       title: 'tvl',
       dataIndex: 'tvl',
-      width: '15%',
+      width: '20%',
       defaultSortOrder: 'descend',
       sorter: true,
       ellipsis: {
         showTitle: false,
       },
-      render: (text: string, record: any) => (
-        <TextTip text={get$Number(text)} />
-      ),
+      render: (text: string, record: any) => {
+        if (origin === 'home') {
+          return <TextTip text={get$Number(text)} />
+        }
+        const left = 100 - (Number(text) / Number(progress)) * 100;
+        return <span className='flex items-center gap-x-2'>
+          <Progress left={left + '%'} />
+          <TextTip text={get$Number(text)} />
+        </span>
+      }
     },
     {
       dataIndex: 'tvl_change_rate_in_24h',
@@ -91,10 +140,10 @@ export const defi_list = {
       render: (text: any) => {
         if (Array.isArray(text)) {
           return (
-            <div>
+            <ul className='flex items-center gap-x-4'>
               {text.map((item_t, index) => {
                 return (
-                  <li key={index} className='flex_align_center'>
+                  <li key={index} className='flex items-center gap-x-1'>
                     <Image
                       src={item_t.icon_url}
                       width={20}
@@ -106,7 +155,7 @@ export const defi_list = {
                   </li>
                 );
               })}
-            </div>
+            </ul>
           );
         }
         return '--';

@@ -35,7 +35,7 @@ export default ({
   const [inputValue, setValue] = useState('');
 
   useEffect(() => {
-    if (value) {
+    if (value ) {
       setValue(value.trim());
     }
   }, [value]);
@@ -61,13 +61,16 @@ export default ({
           if (clear) {
             setValue('');
           }
-          onSearch(inputValue);
+          if (inputValue.length > 0) {
+            onSearch(inputValue);
+          }
+
         }}
         suffix={
           (
             <span
               onClick={() => {
-                if (onClick) {
+                if (onClick && inputValue?.length > 0) {
                   onSearch(inputValue);
                 }
               }}>

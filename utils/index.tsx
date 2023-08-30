@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import router from 'next/router';
 
 export const pageLimit = 15;
-export const detailPageLimit = 10;
+export const pageHomeLimit = 7;
 export const max_name_length = 10;
 
 // 账户类型

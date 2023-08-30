@@ -4,7 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { detailPageLimit } from '@/utils';
+import { pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import {
@@ -44,7 +44,7 @@ export default ({
     const result = await axiosData(axiosUrl, {
       contract_id: id,
       page: index - 1,
-      limit: detailPageLimit,
+      limit: pageLimit,
     });
     setLoading(false);
     setData({
