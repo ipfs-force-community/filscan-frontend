@@ -240,11 +240,6 @@ export function validateCode(code: number | string) {
   const newCode = Number(code);
   return newCode > 99999 && newCode < 1000000;
 }
-export function isMobile() {
-  if (typeof window !== 'undefined') {
-    return window.innerWidth < 1100;
-  }
-}
 
 //首字母大写,其余不变
 export function titleCase(str: string | number | boolean) {
