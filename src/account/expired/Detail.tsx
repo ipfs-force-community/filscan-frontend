@@ -7,15 +7,15 @@ import { formatDateTime } from '@/utils';
 import ExportExcel from '@/packages/exportExcel';
 import Table from '@/packages/Table';
 import { account_expired } from '@/contents/account';
-import { proApi } from '@/contents/apiUrl';
-import useAxiosData from '@/store/useAxiosData';
 
 /** @format */
 
 export default ({
-  miner
+  miner,
+  data,
 }: {
   miner?: string | number | null;
+  data?: any;
 }) => {
   const { tr } = Translation({ ns: 'account' });
 
@@ -41,17 +41,12 @@ export default ({
     });
   }, [tr]);
 
-  const { data: sectorData, loading } = useAxiosData(proApi.getSector, {
-    miner_id: miner,
-
-  });
-
-  const showData =useMemo(() => {
-    if (sectorData) {
-      return sectorData.sector_detail_month
-    }
-    return [];
-  },[])
+  const showData = useMemo(() => {
+    const newData = data?.sector_detail_day?.sector_detail_list?.filter(
+      (v: any) => v.miner_id === miner
+    );
+    return newData || [];
+  }, [miner, data]);
 
   return (
     <>
@@ -66,7 +61,7 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(sectorData?.epoch_time, 'YYYY/MM/DD HH:mm')}
+              {formatDateTime(data?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>

@@ -1270,7 +1270,7 @@ export const account_expired = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          return <TagInput text={text} record={record} />;
+          return <TagInput isEdit={false} text={text} record={record} />;
         },
       },
       {
@@ -1330,8 +1330,8 @@ export const account_expired = {
     ]
     if (type&&type === 'detail') {
       arr.unshift({
-        title: 'date',
-        dataIndex: 'date',
+        title: 'exp_time',
+        dataIndex: 'exp_date',
         fixed: 'left',
         width: '10%',
         render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')

@@ -111,6 +111,7 @@ a{
   background: linear-gradient(131deg, var(--text_clip) 0%, var(--font-color) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: DINPro-Bold, DINPro;
 }
 /*子元素不渐变*/
 .solid_text {
