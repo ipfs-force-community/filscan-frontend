@@ -5,7 +5,7 @@ const account = {
   go_home: '返回首页',
   go_login: '去登录',
   back:'返回',
-  account_title:'节点仪表盘',
+  account_title:'节点管理',
   overview: '数据概览',
   miners: '节点管理',
   personal: '账号信息',
@@ -17,7 +17,11 @@ const account = {
   last_time: '最新更新时间',
   all: '全部',
   edit:'操作',
-  miner_add:'添加',
+  miner_add: '添加',
+  //个人账户
+  register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
+  register_btn:'开启服务',
+
   //数据概览
   overview_power: '算力概览',
   overview_gas: 'Gas 消耗',

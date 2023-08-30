@@ -57,7 +57,7 @@ export default () => {
           {tr('register')}
         </div>
         {success ? (
-          <Success />
+          <Success text='register_success' btnText='register_btn'/>
         ) : (
           <>
             <Form

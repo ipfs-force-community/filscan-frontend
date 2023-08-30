@@ -173,6 +173,7 @@ export const personal_setting = [
   {
     title: 'confirm_password',
     dataIndex: 'confirm_password',
+    placeholder: 'confirm_password',
     rules: [{ required: true, message: '${confirm_password} is required' }],
   },
 ];

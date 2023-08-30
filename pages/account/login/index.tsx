@@ -46,12 +46,17 @@ export default () => {
         mail: data?.email || result?.mail,
         name: result?.name,
       });
+      messageManager.showMessage({
+        type: 'success',
+        content: 'login successful',
+      });
       router.push('/account#overview')
     }
   };
 
   useEffect(() => {
     if (userInfo.mail) {
+
       router.push('/account#overview')
     }
   }, [userInfo.mail]);
