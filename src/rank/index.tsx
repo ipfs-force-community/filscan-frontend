@@ -74,21 +74,21 @@ export default ({ origin }: { origin: string }) => {
       const index = cur || current;
       const showOrder = orders ||
         (sort.field && sort) || {
-          field: getDefaultSort[showActive],
-          order: 'descend',
-        };
+        field: getDefaultSort[showActive],
+        order: 'descend',
+      };
 
       const showFilter = filter || headerFilter;
       setLoading(true);
       const linkUrl: any = `rank_${showActive}`;
       const filters = showFilter
         ? {
-            ...showFilter,
-            sector_size:
+          ...showFilter,
+          sector_size:
               showFilter?.sector_size === 'all'
                 ? null
                 : showFilter?.sector_size || '',
-          }
+        }
         : {};
       const data: any = await axiosData(apiUrl[linkUrl], {
         index: index - 1,

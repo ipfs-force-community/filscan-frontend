@@ -46,8 +46,8 @@ const account = {
 
      //添加节点
      custom_tag:'自定义标签',
-     miner_add_placeholder: '输入您要添加的矿工号',
-     miner_select_group_placeholder: '选择分组（如未选择组，添加的节点将全部进入“未分组”中',
+     miner_add_placeholder: '输入您要添加的节点账户ID',
+     miner_select_group_placeholder: '选择分组（如未选择组，添加的节点将全部进入“默认分组”中',
 
      //分组
      create_group: '创建分组',

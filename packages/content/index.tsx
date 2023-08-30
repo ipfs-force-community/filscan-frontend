@@ -47,6 +47,7 @@ export default ({
         }
         return (
           <li
+            key={index}
             className={`flex items-baseline gap-x-2.5 ${
               borderTop ? 'pt-5 border-t border_color' : ''
             }${columns !== 1 ? 'px-5 h-9 ' : ''}`}

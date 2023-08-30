@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import { token_transfer_columns } from '@/contents/contract';
 
-export default ({ id }: { id?: string | string[] }) => {
+export default ({ id ,type}: { id?: string | string[],type:string }) => {
   const { theme } = useFilscanStore();
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
@@ -63,7 +63,8 @@ export default ({ id }: { id?: string | string[] }) => {
   };
 
   const columns = useMemo(() => {
-    return token_transfer_columns(fromList, toList).map((v) => {
+    const newColumns = type ==='nfts'? token_transfer_columns:token_transfer_columns
+    return newColumns(fromList, toList).map((v) => {
       return { ...v, title: tr(v.title) };
     });
   }, [theme, tr, fromList, toList]);

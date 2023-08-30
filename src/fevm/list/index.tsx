@@ -43,7 +43,7 @@ export default ({
         isHash={true}
       />
       <div className='min-h-[200px] mt-2.5'>
-        {activeTab === 'transfer' && <Transfer id={id} />}
+        {activeTab === 'transfer' && <Transfer id={id} type={ type} />}
         {activeTab === 'owner' && <Owner id={id} />}
         {activeTab === 'dex' && <Dex id={id} />}
       </div>

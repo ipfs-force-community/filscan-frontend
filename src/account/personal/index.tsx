@@ -28,6 +28,10 @@ export default () => {
     const result = await axiosData(proApi.updateInfo, {
       ...payload,
     });
+    if (result) { 
+      const newInfo:any = await axiosData(proApi.userInfo);
+      userInfo.setUserInfo({...newInfo, last_login: newInfo?.last_login_at || ''})
+    }
     setLoading(false);
     setSuccess(true);
   };

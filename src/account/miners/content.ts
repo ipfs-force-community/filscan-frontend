@@ -1,8 +1,6 @@
 import { createContext, useContext } from "react";
 import { MinerNum, groupsItem } from "../type";
 
-
-
 interface groupsStore {
   groups: Array<groupsItem>
   setGroups: (groups: Array<groupsItem>) => void

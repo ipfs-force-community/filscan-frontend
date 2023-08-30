@@ -247,9 +247,10 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                     className='main_bgColor text-sm font-medium text_des rounded-xl'>
                     <ul className='flex p-5'>
                       {account_miners.groups_miners_columns.map(
-                        (minerHeader) => {
+                        (minerHeader,index) => {
                           return (
                             <li
+                              key={index}
                               className='w-full'
                               style={{ width: minerHeader.width }}>
                               {tr(minerHeader.title)}

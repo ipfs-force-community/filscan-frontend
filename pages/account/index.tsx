@@ -131,50 +131,50 @@ const Account: React.FC = () => {
           {minersNum?.miners_count === 0 &&
           hashParams.type !== 'miner_add' &&
           selectedKey !== 'personal' ? (
-            <NoMiner selectedKey={selectedKey} />
-          ) : (
-            <>
-              {selectedKey === 'overview' && (
-                <Overview selectedKey='overview' groups={groups} />
-              )}
-              {selectedKey === 'miners' && <Miners minersNum={minersNum} />}
-              {selectedKey === 'lucky' && (
-                <Lucky
-                  selectedKey={'overview_' + selectedKey}
-                  groups={groups}
-                />
-              )}
-              {selectedKey === 'power' && (
-                <Power
-                  selectedKey={'overview_' + selectedKey}
-                  groups={groups}
-                />
-              )}
-              {selectedKey === 'gas' && (
-                <Gas selectedKey={'overview_' + selectedKey} groups={groups} />
-              )}
-              {selectedKey === 'balance' && (
-                <Balance
-                  selectedKey={'overview_' + selectedKey}
-                  groups={groups}
-                />
-              )}
-              {selectedKey === 'expired' && (
-                <Expired
-                  selectedKey={'overview_' + selectedKey}
-                  groups={groups}
-                />
-              )}
-              {selectedKey === 'reward' && (
-                <Reward
-                  selectedKey={'overview_' + selectedKey}
-                  groups={groups}
-                />
-              )}
+              <NoMiner selectedKey={selectedKey} />
+            ) : (
+              <>
+                {selectedKey === 'overview' && (
+                  <Overview selectedKey='overview' groups={groups} />
+                )}
+                {selectedKey === 'miners' && <Miners minersNum={minersNum} />}
+                {selectedKey === 'lucky' && (
+                  <Lucky
+                    selectedKey={'overview_' + selectedKey}
+                    groups={groups}
+                  />
+                )}
+                {selectedKey === 'power' && (
+                  <Power
+                    selectedKey={'overview_' + selectedKey}
+                    groups={groups}
+                  />
+                )}
+                {selectedKey === 'gas' && (
+                  <Gas selectedKey={'overview_' + selectedKey} groups={groups} />
+                )}
+                {selectedKey === 'balance' && (
+                  <Balance
+                    selectedKey={'overview_' + selectedKey}
+                    groups={groups}
+                  />
+                )}
+                {selectedKey === 'expired' && (
+                  <Expired
+                    selectedKey={'overview_' + selectedKey}
+                    groups={groups}
+                  />
+                )}
+                {selectedKey === 'reward' && (
+                  <Reward
+                    selectedKey={'overview_' + selectedKey}
+                    groups={groups}
+                  />
+                )}
 
-              {selectedKey === 'personal' && <Personal />}
-            </>
-          )}
+                {selectedKey === 'personal' && <Personal />}
+              </>
+            )}
         </div>
       </div>
     </div>

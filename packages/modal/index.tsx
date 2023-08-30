@@ -15,9 +15,7 @@ interface ModalProps {
 
 export default (props: ModalProps) => {
   const { title, children, show, onCancel, loading, onOk } = props;
-
   const { tr } = Translation({ ns: 'common' });
-
   return (
     <Modal
       {...props}
@@ -29,10 +27,10 @@ export default (props: ModalProps) => {
       className='custom_modal'
       wrapClassName='custom_modal_wrapper'
       footer={[
-        <Button className='cancel_btn' onClick={onCancel}>
+        <Button className='cancel_btn' key='cancel' onClick={onCancel}>
           {tr('cancel')}
         </Button>,
-        <Button className='confirm_btn' loading={loading} onClick={onOk}>
+        <Button className='confirm_btn' key='confirm' loading={loading} onClick={onOk}>
           {tr('confirm')}
         </Button>,
       ]}>
