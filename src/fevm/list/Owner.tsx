@@ -13,10 +13,10 @@ import {
 } from '@/contents/contract';
 
 export default ({
-  methodName,
+  type,
   id,
 }: {
-  methodName?: string;
+  type: string;
   id?: string | string[];
 }) => {
   const { theme, lang } = useFilscanStore();
@@ -35,12 +35,13 @@ export default ({
     if (id) {
       load();
     }
-  }, [id]);
+  }, [id,type]);
 
   const load = async (cur?: number) => {
     setLoading(true);
     const index = cur || current;
-    const result = await axiosData(apiUrl.contract_ERC20Owner, {
+    const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTOwners : apiUrl.contract_ERC20Owner;
+    const result = await axiosData(axiosUrl, {
       contract_id: id,
       page: index - 1,
       limit: detailPageLimit,
