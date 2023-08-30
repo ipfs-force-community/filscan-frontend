@@ -121,6 +121,9 @@ export function formatFilNum(
     unit = ' attoFIL';
   }
 
+  if (res === 0 && unit === ' attoFIL') {
+    return '0 FIL'
+  }
   return toLocal
     ? flag + formatNumber(res) + (pure ? '' : unit)
     : flag + res + (pure ? '' : unit);

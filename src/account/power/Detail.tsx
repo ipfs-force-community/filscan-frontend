@@ -58,10 +58,10 @@ export default ({
   });
 
   const columns = useMemo(() => {
-    return account_power.columns(tr).map((item) => {
-      return { ...item, title: tr(item.title) };
+    return account_power.columns(tr,'detail').map((item) => {
+      return { ...item, title: tr(item.title) } ;
     });
-  }, []);
+  }, [tr]);
 
   const showData = useMemo(() => {
     const newData = powerDataDetail?.reward_detail_list || [];

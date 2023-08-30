@@ -2,10 +2,10 @@
 
 import { getSvgIcon } from '@/svgsIcon';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { MenuItem } from './type';
+import { Item, MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
-import { formatFilNum, formatNumber, unitConversion } from '@/utils';
+import { formatDateTime, formatFilNum, formatNumber, unitConversion } from '@/utils';
 import Image from 'next/image';
 import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg';
@@ -850,308 +850,371 @@ export const account_balance = {
   ],
 };
 export const account_reward = {
-  columns: (tr: any) => [
-    {
-      title: 'tag',
-      dataIndex: 'tag',
-      width: '20%',
-      fixed: 'left',
-      ellipsis: {
-        showTitle: false,
+  columns: (tr: any, type?: string) => {
+    let arr = [
+      {
+        title: 'tag',
+        dataIndex: 'tag',
+        width: '20%',
+        fixed: 'left',
+        ellipsis: {
+          showTitle: false,
+        },
+        render: (text: string, record: any) => {
+          return <TagInput isEdit={false} text={text} record={record} />;
+        },
       },
-      render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />;
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: '15%',
+        fixed: 'left',
+        render: (text: string) => (
+          <Link href={`/account#reward?miner=${text}`} className='link_text'>
+            {text}
+          </Link>
+        ),
       },
-    },
-    {
-      title: 'miner_id',
-      dataIndex: 'miner_id',
-      width: '15%',
-      fixed: 'left',
-      render: (text: string) => (
-        <Link href={`/account#reward?miner=${text}`} className='link_text'>
+      {
+        title: 'group_name',
+        dataIndex: 'group_name',
+        fixed: 'left',
+        width: '20%',
+        render: (text: string, record: any) => {
+          if (record.is_default) {
+            return tr('group_default');
+          }
+          return text;
+        },
+      },
+      { title: 'block_count', dataIndex: 'block_count', width: '10%' },
+      { title: 'win_count', dataIndex: 'win_count', width: '10%' },
+      {
+        title: 'block_reward', dataIndex: 'block_reward', width: '10%',
+        amountUnit: {
+          block_reward: { unit: 'fil', number: 4 },
+        },render:(text:string)=>formatFilNum(text)},
+      {
+        title: 'total_reward', dataIndex: 'total_reward', width: '15%',
+        amountUnit: {
+          total_reward: { unit: 'fil', number: 4 }
+        },
+        render: (text: string) => formatFilNum(text)
+      },
+    ]
+    if (type&&type === 'detail') {
+      arr.unshift({
+        title: 'date',
+        dataIndex: 'date',
+        fixed: 'left',
+        width: '10%',
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
+      },)
+      arr[1].width = '15%';
+      arr[2].width = '10%';
+      arr[2].render = (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
           {text}
         </Link>
-      ),
-    },
-    {
-      title: 'group_name',
-      dataIndex: 'group_name',
-      fixed: 'left',
-      width: '20%',
-      render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
-      },
-    },
-    { title: 'block_count', dataIndex: 'block_count', width: '10%' },
-    { title: 'win_count', dataIndex: 'win_count', width: '10%' },
-    { title: 'block_reward', dataIndex: 'block_reward', width: '10%' },
-    { title: 'total_reward', dataIndex: 'total_reward', width: '15%' },
-  ],
+      )
+    }
+    return arr;
+  },
 };
 export const account_power = {
-  columns: (tr: any) => [
-    {
-      title: 'tag',
-      dataIndex: 'tag',
-      fixed: 'left',
-      width: 100,
-      ellipsis: {
-        showTitle: false,
+  columns: (tr: any,type?:string) => {
+    let arr:Array<any> = [
+      {
+        title: 'tag',
+        dataIndex: 'tag',
+        fixed: 'left',
+        width: 100,
+        ellipsis: {
+          showTitle: false,
+        },
+        render: (text: string, record: any) => {
+          return <TagInput isEdit={false} text={text} record={record} />;
+        },
       },
-      render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />;
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: 100,
+        fixed: 'left',
+        render: (text: string) => (
+          <Link href={`/account#power?miner=${text}`} className='link_text'>
+            {text}
+          </Link>
+        ),
       },
-    },
-    {
-      title: 'miner_id',
-      dataIndex: 'miner_id',
-      width: 100,
-      fixed: 'left',
-      render: (text: string) => (
-        <Link href={`/account#power?miner=${text}`} className='link_text'>
+      {
+        title: 'group_name',
+        dataIndex: 'group_name',
+        width: 100,
+        fixed: 'left',
+        render: (text: string, record: any) => {
+          if (record.is_default) {
+            return tr('group_default');
+          }
+          return text;
+        },
+      },
+      {
+        title: 'quality_power',
+        dataIndex: 'quality_power',
+        amountUnit: {
+          quality_power: { unit: 'power', number: 2 },
+        },
+        width: 200,
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'raw_power',
+        dataIndex: 'raw_power',
+        width: 200,
+        amountUnit: {
+          raw_power: { unit: 'power', number: 2 },
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'dc_power',
+        dataIndex: 'dc_power',
+        width: 200,
+        amountUnit: {
+          dc_power: { unit: 'power', number: 2 },
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'cc_power',
+        dataIndex: 'cc_power',
+        width: 200,
+        amountUnit: {
+          cc_power: { unit: 'power', number: 2 },
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'sector_size',
+        dataIndex: 'sector_size',
+        width: 200,
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'sector_power_change',
+        dataIndex: 'sector_power_change',
+        exports: ['sector_count_change'],
+        amountUnit: {
+          sector_power_change: { unit: 'power', number: 2 },
+        },
+        width: 200,
+        render: (text: any, record: any) => {
+          const changeText = record.sector_count_change
+            ? Number(record.sector_count_change)
+            : record.sector_count_change;
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          return (
+            <span>
+              <span className={className}>
+                {flag}
+                {changeText}
+              </span>
+              <span>/{unitConversion(text, 2)}</span>
+            </span>
+          );
+        },
+      },
+
+      {
+        title: 'pledge_changed',
+        dataIndex: 'pledge_changed',
+        width: 200,
+        amountUnit: {
+          pledge_changed: { unit: 'fil', number: 2 },
+        },
+        render: (text: string, record: any) =>
+          formatFilNum(text, false, false, 2),
+      },
+      {
+        title: 'pledge_changed_per_t',
+        dataIndex: 'pledge_changed_per_t',
+        width: 200,
+        amountUnit: {
+          pledge_changed_per_t: { unit: 'fil/T', number: 2 },
+        },
+        render: (text: string, record: any) =>
+          formatFilNum(text, false, false, 2),
+      },
+      {
+        title: 'penalty',
+        dataIndex: 'penalty',
+        width: 200,
+        amountUnit: {
+          penalty: { unit: 'fil', number: 2 },
+        },
+        render: (text: string, record: any) =>
+          formatFilNum(text, false, false, 2),
+      },
+      {
+        title: 'fault_sectors',
+        dataIndex: 'fault_sectors',
+        width: 200,
+        render: (text: string, record: any) => formatNumber(text),
+      },
+    ]
+    if (type&&type === 'detail') {
+      arr.unshift({
+        title: 'date',
+        dataIndex: 'date',
+        fixed: 'left',
+        width: 200,
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
+      },)
+      arr[2].render = (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
           {text}
         </Link>
-      ),
-    },
-    {
-      title: 'group_name',
-      dataIndex: 'group_name',
-      width: 100,
-      fixed: 'left',
-      render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
-      },
-    },
-    {
-      title: 'quality_power',
-      dataIndex: 'quality_power',
-      amountUnit: {
-        quality_power: { unit: 'power', number: 2 },
-      },
-      width: 200,
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'raw_power',
-      dataIndex: 'raw_power',
-      width: 200,
-      amountUnit: {
-        raw_power: { unit: 'power', number: 2 },
-      },
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'dc_power',
-      dataIndex: 'dc_power',
-      width: 200,
-      amountUnit: {
-        dc_power: { unit: 'power', number: 2 },
-      },
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'cc_power',
-      dataIndex: 'cc_power',
-      width: 200,
-      amountUnit: {
-        cc_power: { unit: 'power', number: 2 },
-      },
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'sector_size',
-      dataIndex: 'sector_size',
-      width: 200,
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'sector_power_change',
-      dataIndex: 'sector_power_change',
-      exports: ['sector_count_change'],
-      amountUnit: {
-        sector_power_change: { unit: 'power', number: 2 },
-      },
-      width: 200,
-      render: (text: any, record: any) => {
-        const changeText = record.sector_count_change
-          ? Number(record.sector_count_change)
-          : record.sector_count_change;
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
-        const className = changeText
-          ? changeText > 0
-            ? 'text_green'
-            : 'text_red'
-          : '';
-        return (
-          <span>
-            <span className={className}>
-              {flag}
-              {changeText}
-            </span>
-            <span>/{unitConversion(text, 2)}</span>
-          </span>
-        );
-      },
-    },
-
-    {
-      title: 'pledge_changed',
-      dataIndex: 'pledge_changed',
-      width: 200,
-      amountUnit: {
-        pledge_changed: { unit: 'fil', number: 2 },
-      },
-      render: (text: string, record: any) =>
-        formatFilNum(text, false, false, 2),
-    },
-    {
-      title: 'pledge_changed_per_t',
-      dataIndex: 'pledge_changed_per_t',
-      width: 200,
-      amountUnit: {
-        pledge_changed_per_t: { unit: 'fil/T', number: 2 },
-      },
-      render: (text: string, record: any) =>
-        formatFilNum(text, false, false, 2),
-    },
-    {
-      title: 'penalty',
-      dataIndex: 'penalty',
-      width: 200,
-      amountUnit: {
-        penalty: { unit: 'fil', number: 2 },
-      },
-      render: (text: string, record: any) =>
-        formatFilNum(text, false, false, 2),
-    },
-    {
-      title: 'fault_sectors',
-      dataIndex: 'fault_sectors',
-      width: 200,
-      render: (text: string, record: any) => formatNumber(text),
-    },
-  ],
+      )
+    }
+    return arr;
+  }
 };
 
 export const account_gas = {
-  columns: (tr: any) => [
-    {
-      title: 'tag',
-      dataIndex: 'tag',
-      fixed: 'left',
-      width: 100,
-      ellipsis: {
-        showTitle: false,
+  columns: (tr: any, type?: string) => {
+    let arr:Array<any> = [
+      {
+        title: 'tag',
+        dataIndex: 'tag',
+        fixed: 'left',
+        width: 100,
+        ellipsis: {
+          showTitle: false,
+        },
+        render: (text: string, record: any) => {
+          return <TagInput isEdit={false} text={text} record={record} />;
+        },
       },
-      render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />;
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: 100,
+        fixed: 'left',
+        render: (text: string) => (
+          <Link href={`/account#gas?miner=${text}`} className='link_text'>
+            {text}
+          </Link>
+        ),
       },
-    },
-    {
-      title: 'miner_id',
-      dataIndex: 'miner_id',
-      width: 100,
-      fixed: 'left',
-      render: (text: string) => (
-        <Link href={`/account#gas?miner=${text}`} className='link_text'>
+      {
+        title: 'group_name',
+        dataIndex: 'group_name',
+        width: 100,
+        fixed: 'left',
+        render: (text: string, record: any) => {
+          if (record.is_default) {
+            return tr('group_default');
+          }
+          return text;
+        },
+      },
+      {
+        title: 'sector_power_change',
+        dataIndex: 'sector_count_change',
+        exports: ['sector_count_change'],
+        amountUnit: {
+          sector_power_change: { unit: 'power', number: 2 },
+        },
+        width: 200,
+        render: (text: any, record: any) => {
+          const changeText = record.sector_count_change
+            ? Number(record.sector_count_change)
+            : record.sector_count_change;
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const className = changeText
+            ? changeText > 0
+              ? 'text_green'
+              : 'text_red'
+            : '';
+          return (
+            <span>
+              <span className={className}>
+                {flag}
+                {changeText}
+              </span>
+              <span>/{unitConversion(text, 2)}</span>
+            </span>
+          );
+        },
+      },
+      {
+        title: 'total_gas_cost',
+        dataIndex: 'total_gas_cost',
+        width: 200,
+        amountUnit: {
+          total_gas_cost: { unit: 'fil', number: 4 },
+        },
+        render: (text: any) => formatFilNum(text, false, false, 2),
+      },
+      {
+        title: 'seal_gas_per_t',
+        dataIndex: 'seal_gas_per_t',
+        width: 200,
+        amountUnit: {
+          total_gas_cost: { unit: 'fil/T', number: 4 },
+        },
+        render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+      },
+      {
+        title: 'deal_gas_cost',
+        dataIndex: 'deal_gas_cost',
+        width: 200,
+        amountUnit: {
+          deal_gas_cost: { unit: 'fil', number: 4 },
+        },
+        render: (text: any) => formatFilNum(text, false, false, 2),
+      },
+      {
+        title: 'wd_post_gas_cost',
+        dataIndex: 'wd_post_gas_cost',
+        width: 200,
+        amountUnit: {
+          wd_post_gas_cost: { unit: 'fil', number: 4 },
+        },
+        render: (text: any) => formatFilNum(text, false, false, 2),
+      },
+      {
+        title: 'wd_post_gas_per_t',
+        dataIndex: 'wd_post_gas_per_t',
+        width: 200,
+        amountUnit: {
+          wd_post_gas_per_t: { unit: 'fil/T', number: 4 },
+        },
+        render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+      },
+    ];
+    if (type&&type === 'detail') {
+      arr.unshift({
+        title: 'date',
+        dataIndex: 'date',
+        fixed: 'left',
+        width: 200,
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
+      },)
+      arr[2].render = (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
           {text}
         </Link>
-      ),
-    },
-    {
-      title: 'group_name',
-      dataIndex: 'group_name',
-      width: 100,
-      fixed: 'left',
-      render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
-      },
-    },
-    {
-      title: 'sector_power_change',
-      dataIndex: 'sector_count_change',
-      exports: ['sector_count_change'],
-      amountUnit: {
-        sector_power_change: { unit: 'power', number: 2 },
-      },
-      width: 200,
-      render: (text: any, record: any) => {
-        const changeText = record.sector_count_change
-          ? Number(record.sector_count_change)
-          : record.sector_count_change;
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
-        const className = changeText
-          ? changeText > 0
-            ? 'text_green'
-            : 'text_red'
-          : '';
-        return (
-          <span>
-            <span className={className}>
-              {flag}
-              {changeText}
-            </span>
-            <span>/{unitConversion(text, 2)}</span>
-          </span>
-        );
-      },
-    },
-    {
-      title: 'total_gas_cost',
-      dataIndex: 'total_gas_cost',
-      width: 200,
-      amountUnit: {
-        total_gas_cost: { unit: 'fil', number: 4 },
-      },
-      render: (text: any) => formatFilNum(text, false, false, 2),
-    },
-    {
-      title: 'seal_gas_per_t',
-      dataIndex: 'seal_gas_per_t',
-      width: 200,
-      amountUnit: {
-        total_gas_cost: { unit: 'fil/T', number: 4 },
-      },
-      render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
-    },
-    {
-      title: 'deal_gas_cost',
-      dataIndex: 'deal_gas_cost',
-      width: 200,
-      amountUnit: {
-        deal_gas_cost: { unit: 'fil', number: 4 },
-      },
-      render: (text: any) => formatFilNum(text, false, false, 2),
-    },
-    {
-      title: 'wd_post_gas_cost',
-      dataIndex: 'wd_post_gas_cost',
-      width: 200,
-      amountUnit: {
-        wd_post_gas_cost: { unit: 'fil', number: 4 },
-      },
-      render: (text: any) => formatFilNum(text, false, false, 2),
-    },
-    {
-      title: 'wd_post_gas_per_t',
-      dataIndex: 'wd_post_gas_per_t',
-      width: 200,
-      amountUnit: {
-        wd_post_gas_per_t: { unit: 'fil/T', number: 4 },
-      },
-      render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
-    },
-  ],
+      )
+    }
+    return arr;
+  }
 };
 
 export const account_expired = {
@@ -1196,64 +1259,92 @@ export const account_expired = {
       render: (text: string | number) => formatFilNum(text, false, false, 4),
     },
   ],
-  columns: (tr: any) => [
-    {
-      title: 'tag',
-      dataIndex: 'tag',
-      width: '15%',
-      ellipsis: {
-        showTitle: false,
+  columns: (tr: any, type?: 'detail') => {
+    let arr:Array<any> = [
+      {
+        title: 'tag',
+        dataIndex: 'tag',
+        width: '15%',
+        ellipsis: {
+          showTitle: false,
+        },
+        render: (text: string, record: any) => {
+          return <TagInput text={text} record={record} />;
+        },
       },
-      render: (text: string, record: any) => {
-        return <TagInput text={text} record={record} />;
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: '10%',
+        render: (text: string) => (
+          <Link href={`/account#expired?miner=${text}`} className='link_text'>
+            {text}
+          </Link>
+        ),
       },
-    },
-    {
-      title: 'miner_id',
-      dataIndex: 'miner_id',
-      width: '10%',
-      render: (text: string) => (
-        <Link href={`/account#expired?miner=${text}`} className='link_text'>
+      {
+        title: 'group_name',
+        dataIndex: 'group_name',
+        width: '15%',
+        render: (text: string, record: any) => {
+          if (record.is_default) {
+            return tr('group_default');
+          }
+          return text;
+        },
+      },
+      {
+        title: 'exp_power',
+        dataIndex: 'exp_power',
+        width: '15%',
+        amountUnit: {
+          exp_power: { unit: 'power', number: 2 }
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'sector_count',
+        dataIndex: 'exp_sector_count',
+        width: '15%',
+        render: (text: string | number) => formatNumber(text),
+      },
+      {
+        title: 'exp_dc',
+        dataIndex: 'exp_dc',
+        width: '15%',
+        amountUnit: {
+          exp_dc: { unit: 'power', number: 2 }
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'exp_pledge',
+        dataIndex: 'exp_pledge',
+        amountUnit: {
+          exp_dc: { unit: 'fil', number: 4 }
+        },
+        width: '15%',
+        render: (text: string | number) => formatFilNum(text, false, false, 4),
+      },
+    ]
+    if (type&&type === 'detail') {
+      arr.unshift({
+        title: 'date',
+        dataIndex: 'date',
+        fixed: 'left',
+        width: '10%',
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
+      },)
+      arr[1].width = '10%',
+      arr[3].width = '10%',
+      arr[2].render = (text: string) => (
+        <Link href={`/miner/${text}`} className='link_text'>
           {text}
         </Link>
-      ),
-    },
-    {
-      title: 'group_name',
-      dataIndex: 'group_name',
-      width: '15%',
-      render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
-      },
-    },
-    {
-      title: 'exp_power',
-      dataIndex: 'exp_power',
-      width: '15%',
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'sector_count',
-      dataIndex: 'exp_sector_count',
-      width: '15%',
-      render: (text: string | number) => formatNumber(text),
-    },
-    {
-      title: 'exp_dc',
-      dataIndex: 'exp_dc',
-      width: '15%',
-      render: (text: string, record: any) => unitConversion(text, 2),
-    },
-    {
-      title: 'exp_pledge',
-      dataIndex: 'exp_pledge',
-      width: '15%',
-      render: (text: string | number) => formatFilNum(text, false, false, 4),
-    },
-  ],
+      )
+    }
+    return arr
+  },
 };
 
 export const account_miners = {

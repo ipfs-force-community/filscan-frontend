@@ -75,7 +75,8 @@ export default ({
         ),
       });
     }
-    setAddMiner([...addMiners, { miner_id: values }]);
+    console.log('--values',values,values.trim())
+    setAddMiner([...addMiners, { miner_id: values?.trim() }]);
   };
 
   const handleSave = async () => {

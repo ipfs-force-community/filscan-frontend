@@ -23,7 +23,7 @@ function getUnitValue(
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const filValue = formatFilNum(value, false, false, amountUnit.number || 2);
     return otherUnit ? filValue + `/${otherUnit}` : filValue;
-  } else if (amountUnit.unit === 'prow') {
+  } else if (amountUnit.unit === 'power') {
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const powerValue = unitConversion(value, amountUnit.number || 2);
     return otherUnit ? powerValue + `/${otherUnit}` : powerValue;

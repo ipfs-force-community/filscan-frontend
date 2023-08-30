@@ -25,7 +25,7 @@ export default ({
     return account_balance.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: balanceData, loading } = useAxiosData(proApi.getBalance, {

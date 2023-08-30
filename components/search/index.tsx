@@ -54,7 +54,7 @@ export default ({
         value={inputValue}
         onChange={(e) => {
           if (!disabled) {
-            setValue(e.target.value);
+            setValue(e.target.value.trim());
           }
         }}
         onPressEnter={() => {
