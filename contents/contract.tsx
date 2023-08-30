@@ -92,6 +92,33 @@ export const homeContractRank: any = {
   user_count: '20%',
 };
 
+export const contract_list:any={
+  columns: [
+    {
+      dataIndex: 'rank',
+      title: 'rank',
+      width:'10%',
+      render: (text: any, record: any) => {
+        return <span className='rank_icon'>{ text}</span>
+      } },
+    {
+      dataIndex: 'contract_address', title: 'contract_address',
+      width:'20%',
+      render: (text: any, record: any) => {
+        if (!text) return '--'
+        return <Link className="link" href={`/address/${text}`} >{ text}</Link>
+      } },
+    { dataIndex: 'contract_name', width:'10%', title: 'contract_name',render: (text:any,record:any) => {
+      if (!text) return '--'
+      return <Link href={`/address/${record.contract_address}`} >{ text}</Link>
+    } },
+    { dataIndex: 'language', title: 'language' , width:'10%',},
+    { dataIndex: 'compiler', title: 'compile_version' ,width:'15%',},
+    { dataIndex: 'optimize_runs', title: 'Optimizations' ,width:'15%',},
+    { dataIndex: 'license', title: 'license',render:(text:any)=> text || 'No License(None)',width:'20%' }
+  ]
+}
+
 export const contract_token = {
   columns: (tr: any) => {
     return [
