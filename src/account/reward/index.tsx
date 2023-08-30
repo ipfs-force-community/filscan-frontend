@@ -38,7 +38,7 @@ export default ({
     return account_reward.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi.getReward
   const { data: rewardData, loading } = useAxiosData(proApi.getReward, {

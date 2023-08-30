@@ -13,6 +13,104 @@ import {
 } from '@/utils';
 import Image from '@/packages/image';
 import Link from 'next/link';
+import { spawn } from 'child_process';
+
+//合约验证
+export const verify_first = {
+  list: [
+    {
+      type: 'Input',
+      dataIndex: 'contract_address',
+      title: 'address',
+      placeholder: 'address_placeholder',
+      rules: [{ required: true, message: '' }, {
+        validator: (_:any, value:string) => {
+          if (!value ||value.length == 0 || value.startsWith('0x') || value.startsWith('f') || value.startsWith('t')) {
+            return Promise.resolve();
+          }
+          return Promise.reject('');
+        },
+      },],
+
+    },
+    {
+      type: 'Select',
+      title: 'verify_address',
+      dataIndex: 'compile_version',
+      placeholder: 'verify_select_placeholder',
+      //rules: [{ required: true, message: '${compile_version} is required' }],
+    },
+    {
+      type: 'Select',
+      title: 'verify_model',
+      dataIndex: 'verify_model',
+      placeholder: 'verify_model_placeholder',
+      // rules: [{ required: true, message: '${verify_model} is required' }],
+      options: [
+        {
+          label: 'Solidity File',
+          value: 'single'
+        },
+        {
+          label: 'Solidity File with Metadata',
+          value: 'multi'
+        },
+        {
+          label: 'Hardhat Support (Quickly)',
+          value: 'standard'
+        },
+      ]
+    },
+    {
+      type: 'Select',
+      title: 'license_type',
+      dataIndex: 'license',
+      placeholder: 'verify_select_placeholder',
+      options: [
+        {
+          label: 'No License(None)',
+          value: 'No license(None)'
+        },
+        {
+          label: 'MIT License(MIT)',
+          value: 'MIT license(MIT)'
+        }
+      ]
+    }
+  ],
+}
+export const verify = {
+  tabList: [
+    { dataIndex: 'source_code', title: 'source_code' },
+    { dataIndex: 'compile_output', title: 'compile_output' }
+  ],
+
+}
+
+export const verify_source={
+  desList: [
+    { title: 'content_des1', },
+    { title: 'content_des2', },
+    { title: 'content_des3'},
+  ],
+  headerList: [
+    { title: 'contract_address', dataIndex: 'contract_address'},
+    {title:'compile_version',dataIndex:'compile_version'},
+    {title:'optimize',dataIndex:'optimize', type: 'Select', options: [
+      {
+        label: 'Yes',
+        value: true
+      },
+      {
+        label: 'No',
+        value: false
+      }
+    ],
+
+    },
+    {title:'run_optimizer',dataIndex:'optimize_runs',type:'Input'},
+  ]
+}
 
 export const contract_rank = {
   title: 'contract_rank',
@@ -91,6 +189,33 @@ export const homeContractRank: any = {
   transfer_count: '20%',
   user_count: '20%',
 };
+
+export const contract_list:any={
+  columns: [
+    {
+      dataIndex: 'rank',
+      title: 'rank',
+      width:'10%',
+      render: (text: any, record: any) => {
+        return <span className='rank_icon'>{ text}</span>
+      } },
+    {
+      dataIndex: 'contract_address', title: 'contract_address',
+      width:'20%',
+      render: (text: any, record: any) => {
+        if (!text) return '--'
+        return <Link className="link" href={`/address/${text}`} >{ text}</Link>
+      } },
+    { dataIndex: 'contract_name', width:'10%', title: 'contract_name',render: (text:any,record:any) => {
+      if (!text) return '--'
+      return <Link href={`/address/${record.contract_address}`} >{ text}</Link>
+    } },
+    { dataIndex: 'language', title: 'language' , width:'10%',},
+    { dataIndex: 'compiler', title: 'compile_version' ,width:'15%',},
+    { dataIndex: 'optimize_runs', title: 'Optimizations' ,width:'15%',},
+    { dataIndex: 'license', title: 'license',render:(text:any)=> text || 'No License(None)',width:'20%' }
+  ]
+}
 
 export const contract_token = {
   columns: (tr: any) => {

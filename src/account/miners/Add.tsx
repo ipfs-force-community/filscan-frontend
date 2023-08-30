@@ -43,6 +43,22 @@ export default ({
   const { setMinerNum, setGroups } = useGroupsStore();
 
   const handleSearch = (values: any) => {
+    if (!values.startsWith('f0')){
+      return messageManager.showMessage({
+        type: 'error',
+        content: 'please add minerId',
+        icon: <Image src={errorIcon} width={18} height={18} alt='' />,
+        suffix: (
+          <span
+            className='cursor-pointer'
+            onClick={() => {
+              messageManager.hide();
+            }}>
+            {getSvgIcon('closeIcon')}
+          </span>
+        ),
+      });
+    }
     if (addMiners.length > Number(minersNum?.max_miners_count)) {
       return messageManager.showMessage({
         type: 'error',
@@ -59,12 +75,13 @@ export default ({
         ),
       });
     }
-    setAddMiner([...addMiners, { miner_id: values }]);
+    console.log('--values',values,values.trim())
+    setAddMiner([...addMiners, { miner_id: values?.trim() }]);
   };
 
   const handleSave = async () => {
     if (addMiners.length > 0) {
-      setLoading(false);
+      setLoading(true);
       const selectedGroup = selectGroup || defaultId;
       const groupDetail = groups.find((v) => v.value === selectedGroup);
       let payload = {};
@@ -182,7 +199,7 @@ export default ({
             }}>
             {tr('back')}
           </Button>
-          <Button className='confirm_btn' onClick={handleSave}>
+          <Button className='confirm_btn' loading={loading} onClick={handleSave}>
             {tr('confirm')}
           </Button>
         </div>

@@ -6,7 +6,6 @@ import {
   formatNumber,
   get_account_type,
   isIndent,
-  isMobile,
   unitConversion,
 } from '@/utils';
 import { Item } from './type';
@@ -518,7 +517,7 @@ export const message_detail = {
               {text.map((item: string, index: number) => {
                 if (!text) return '--';
                 return (
-                  <span className='flex gap-x-2 items-center  mb-2 last:mb-0'>
+                  <span className='flex gap-x-2 items-center  mb-2 last:mb-0' key={index}>
                     <Link
                       key={index}
                       className='link link-html'
@@ -545,8 +544,7 @@ export const message_detail = {
         render: (text: string, record?: any) => {
           const showValue = text || record?.params;
           if (!showValue) return null;
-          if (typeof showValue === 'string')
-            return JSON.stringify(showValue, undefined, 4);
+          if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
           return (
             <span>
               <pre>{JSON.stringify(showValue, undefined, 4)}</pre>
@@ -560,8 +558,7 @@ export const message_detail = {
         render: (text: string, record?: any) => {
           const showValue = text || record?.returns;
           if (!showValue) return null;
-          if (typeof showValue === 'string')
-            return JSON.stringify(showValue, undefined, 4);
+          if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
           return <pre>{JSON.stringify(showValue, undefined, 4)}</pre>;
         },
       },
@@ -661,10 +658,10 @@ export const address_detail = {
   title: 'general_overview_title',
   content: (type: string) => {
     switch (type) {
-      case 'account':
-        return [...default_content];
-      default:
-        return [...default_content];
+    case 'account':
+      return [...default_content];
+    default:
+      return [...default_content];
     }
   },
   account_change: {

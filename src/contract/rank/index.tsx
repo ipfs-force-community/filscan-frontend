@@ -8,8 +8,10 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { useEffect, useMemo, useState } from 'react';
 import verifySvg from '@/assets/images/verify.svg';
+import go from '@/assets/images/black_go.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatDateTime } from '@/utils';
 
 const default_sort = {
   field: 'transfer_count',
@@ -25,6 +27,7 @@ export default ({ origin }: { origin?: string }) => {
   const [dataSource, setDataSource] = useState({
     data: [],
     total: undefined,
+    update_time:''
   });
 
   useEffect(() => {
@@ -45,6 +48,7 @@ export default ({ origin }: { origin?: string }) => {
     setDataSource({
       data: data?.evm_contract_list || [],
       total: data?.total,
+      update_time:data?.update_time||''
     });
   };
 
@@ -97,15 +101,35 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>
-      <Table
-        key='contract_rank'
-        className='-mt-2.5 '
-        data={dataSource?.data || []}
-        columns={columns || []}
-        loading={loading}
-        onChange={handleChange}
-      />
-    </div>
+    <>
+      <div className={`flex justify-between items-center h-[30px]`}>
+        <div className='font-PingFang font-semibold text-lg	'>
+          {tr('contract_rank')}
+          { origin !== 'home' && <span className='text_des text-xs font-normal ml-2'>{tr(contract_rank.title_des,{value:formatDateTime(dataSource.update_time,"YYYY-MM-DD HH:mm")})}</span>
+          }
+        </div>
+        { origin === 'home' && <Link href={`/contract/rank`}>
+          <Image
+            className='cursor-pointer'
+            src={go}
+            width={18}
+            height={18}
+            alt='go'
+          />
+        </Link>}
+      </div>
+      {origin !== 'home' && <div className='text-xs text_des'> {tr('contract_list_total', {value:dataSource.total})}</div>}
+      <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>
+        <Table
+          key='contract_rank'
+          className='-mt-2.5 '
+          data={dataSource?.data || []}
+          columns={columns || []}
+          loading={loading}
+          onChange={handleChange}
+        />
+      </div>
+    </>
+
   );
 };

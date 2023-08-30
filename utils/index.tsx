@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import router from 'next/router';
 
 export const pageLimit = 15;
-export const detailPageLimit = 10;
+export const pageHomeLimit = 7;
 export const max_name_length = 10;
 
 // 账户类型
@@ -121,6 +121,9 @@ export function formatFilNum(
     unit = ' attoFIL';
   }
 
+  if (res === 0 && unit === ' attoFIL') {
+    return '0 FIL'
+  }
   return toLocal
     ? flag + formatNumber(res) + (pure ? '' : unit)
     : flag + res + (pure ? '' : unit);
@@ -237,11 +240,6 @@ export function validateCode(code: number | string) {
   const newCode = Number(code);
   return newCode > 99999 && newCode < 1000000;
 }
-export function isMobile() {
-  if (typeof window !== 'undefined') {
-    return window.innerWidth < 1100;
-  }
-}
 
 //首字母大写,其余不变
 export function titleCase(str: string | number | boolean) {
@@ -259,7 +257,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
         onClick={() => {
           account_link(value);
         }}>
-        {isIndent(value, isMobile() ? 6 : unit)}
+        {isIndent(value, unit)}
       </span>
       {value && <Copy text={value} />}
     </>

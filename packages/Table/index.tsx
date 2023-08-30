@@ -1,8 +1,7 @@
 /** @format */
 
 import { BrowserView, MobileView } from '@/components/device-detect';
-import { useFilscanStore } from '@/store/FilscanStore';
-import { isMobile, pageLimit } from '@/utils';
+import { pageLimit } from '@/utils';
 import { Pagination, Table, Skeleton } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo } from 'react';

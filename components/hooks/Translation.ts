@@ -15,14 +15,12 @@ export const Translation = ({ ns }: TranslationProps) => {
     i18n.changeLanguage(lang);
   }, [lang, i18n]);
 
-  const tr = useCallback( (label: string, value?: Record<string, any>) => {
+  const tr = useCallback((label: string, value?: Record<string, any>) => {
     if (value) {
       return t(label, { ...value, ns: ns });
     }
     return t(label, { ns: ns });
-  
-   },[i18n.language])
+  }, [i18n.language])
 
   return { tr };
 };
-

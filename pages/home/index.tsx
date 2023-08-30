@@ -64,20 +64,6 @@ function Home(props: any) {
         </div>
         <div className='flex w-full mt-12 gap-x-5 h-[489px]  ' ref={ref1}>
           <div className='flex-1'>
-            <div className={`flex justify-between items-center h-[30px]`}>
-              <div className='font-PingFang font-semibold text-lg	'>
-                {tr('contract_rank')}
-              </div>
-              <Link href={`/contract/rank`}>
-                <Image
-                  className='cursor-pointer'
-                  src={go}
-                  width={18}
-                  height={18}
-                  alt='go'
-                />
-              </Link>
-            </div>
             <ContractRank origin='home' />
           </div>
           <div className='flex-1'>

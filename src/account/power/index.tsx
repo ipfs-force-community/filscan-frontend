@@ -38,7 +38,7 @@ export default ({
     return account_power.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: powerData, loading } = useAxiosData(proApi.getPower, {

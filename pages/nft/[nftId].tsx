@@ -12,21 +12,22 @@ import List from '@/src/fevm/list';
 
 export default () => {
   const router = useRouter();
-  const { tokenId } = router.query;
+  const { nftId } = router.query;
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
   const [overviewData, setOverview] = useState<any>({});
 
+  console.log('====v',nftId)
   useEffect(() => {
-    if (tokenId) {
+    if (nftId) {
       axiosData(apiUrl.contract_FnsSummary, {
-        contract_id: tokenId,
+        contract_id: nftId,
       }).then((res: any) => {
         setOverview(res || {});
       });
     }
     load();
-  }, [tokenId]);
+  }, [nftId]);
   const load = () => {};
   return (
     <div className='main_contain'>
@@ -56,7 +57,7 @@ export default () => {
         tabList={nft_details.tabList}
         defaultActive={'transfer'}
         type='nfts'
-        id={tokenId}
+        id={nftId}
       />
     </div>
   );

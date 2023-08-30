@@ -19,7 +19,3 @@ export function useCountdown(initialCount: number) {
 
   return { count, resetCountdown };
 }
-
- 
-
-

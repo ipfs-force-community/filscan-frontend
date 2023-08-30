@@ -54,10 +54,11 @@ export default ({
   });
 
   const columns = useMemo(() => {
-    return account_reward.columns(tr).map((item) => {
+    return account_reward.columns(tr,'detail').map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+
+  }, [tr]);
 
   const showData = useMemo(() => {
     const newData = rewardDataDetail?.reward_detail_list || [];

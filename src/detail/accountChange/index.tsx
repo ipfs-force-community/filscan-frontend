@@ -7,7 +7,7 @@ import { account_change } from '@/contents/detail';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, formatFil, formatFilNum, isMobile } from '@/utils';
+import { formatDateTime, formatFil, formatFilNum } from '@/utils';
 import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -38,7 +38,7 @@ export default ({
   const defaultOptions = useMemo(() => {
     return {
       grid: {
-        top: isMobile() ? 100 : 10,
+        top: 10,
         left: 20,
         right: list ? 10 : '8%',
         bottom: 20,

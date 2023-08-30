@@ -4,7 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { detailPageLimit } from '@/utils';
+import { pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import { token_transfer_columns } from '@/contents/contract';
@@ -26,15 +26,16 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
     if (id) {
       load();
     }
-  }, [id]);
+  }, [id,type]);
 
   const load = async (cur?: number) => {
     setLoading(true);
     const index = cur || current;
-    const result = await axiosData(apiUrl.contract_ERC20Transfer, {
+    const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTTransfers : apiUrl.contract_ERC20Transfer;
+    const result = await axiosData(axiosUrl, {
       contract_id: id,
       page: index - 1,
-      limit: detailPageLimit,
+      limit: pageLimit,
     });
     setLoading(false);
     setData({
@@ -80,7 +81,7 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
       <span className='text_des text-sm'>
         {tr('transfer_total', { value: data.total })}
       </span>
-      <div className='card_shadow p-5 mt-5 '>
+      <div className='card_shadow p-5 mt-5 rounded-xl border border_color min-h-[260px]'>
         <Table
           data={data.dataSource}
           total={data.total}

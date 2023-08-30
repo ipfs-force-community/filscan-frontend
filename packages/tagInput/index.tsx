@@ -58,7 +58,7 @@ const EditableText: React.FC<EditableTextProps> = ({
   ) : (
     <div
       onClick={handleTextClick}
-      className='flex des_bg_color h-8 w-fit max-w-[200px] items-center p-2 rounded-[5px] text-primary'>
+      className='flex des_bg_color h-8 w-fit max-w-[200px] items-center p-2 rounded-[5px] cursor-default'>
       <TextTooltip text={currentText || '--'} />
     </div>
   );
