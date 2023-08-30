@@ -3,6 +3,8 @@ import { apiUrl } from "@/contents/apiUrl"
 import { defi_market } from "@/contents/fevm";
 import useAxiosData from "@/store/useAxiosData";
 import DefiList from '@/src/fevm/defi'
+import { formatDateTime } from "@/utils";
+import { data } from "autoprefixer";
 
 export default () => {
   const { data: defiData, loading } = useAxiosData(apiUrl.fevm_defiSummary);
@@ -23,7 +25,10 @@ export default () => {
       })}
     </ul>
     <div className="mt-5">
-      <span className="text-lg font-DINPro-Bold"> {tr('defi_overview')}</span>
+      <span>
+        <span className="text-lg font-DINPro-Bold"> {tr('defi_overview')}</span>
+        { defiData?.updated_at &&<span className="text_des text-xs ml-2">{tr('defi_list_time', {value:formatDateTime(defiData?.updated_at)}) }</span>}
+      </span>
       <DefiList />
     </div>
 

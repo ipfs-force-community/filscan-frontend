@@ -5,7 +5,7 @@ const account = {
   go_home: '返回首页',
   go_login: '去登录',
   back:'返回',
-  account_title:'节点管理',
+  account_title:'节点管家',
   overview: '数据概览',
   miners: '节点管理',
   personal: '账号信息',

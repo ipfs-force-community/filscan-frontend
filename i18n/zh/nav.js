@@ -26,7 +26,7 @@ const zh ={
   resources_tools: '常用工具',
   provider: '存储提供者',
   fvm: 'FVM生态总览',
-  account:'节点管理'
+  account:'节点管家'
 
 }
 export default zh
