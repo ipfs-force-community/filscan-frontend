@@ -1,10 +1,10 @@
 /** @format */
 
+import { BrowserView, MobileView } from '@/components/device-detect';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { isMobile, pageLimit } from '@/utils';
 import { Pagination, Table, Skeleton } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-//import Skeleton from '../skeleton';
 import { useMemo } from 'react';
 
 interface Props {
@@ -34,8 +34,8 @@ export default (props: Props) => {
     return limit || pageLimit;
   }, [limit]);
 
-  if (isMobile()) {
-    return (
+  return <>
+    <MobileView>
       <div className='mobile_table'>
         {data.map((dataSource, data_index) => {
           return (
@@ -76,38 +76,37 @@ export default (props: Props) => {
           }}
         />
       </div>
-    );
-  }
-
-  return (
-    <Table
-      tableLayout='fixed'
-      bordered={false}
-      className={`custom_table ${className} w-full h-full`}
-      dataSource={[...data]}
-      columns={columns}
-      rowClassName={'custom_table_row'}
-      rowKey={new Date().getTime()}
-      onChange={onChange}
-      loading={loading}
-      scroll={{ x: 'max-content' }}
-      // loading={{
-      //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
-      //   indicator: <Skeleton active />,
-      //   wrapperClassName: 'custom_table_loading',
-      // }}
-      pagination={
-        total > showLimit
-          ? {
-            position: ['bottomRight'],
-            current: current,
-            showQuickJumper: true,
-            pageSize: pageLimit,
-            showSizeChanger: false,
-            total,
-          }
-          : false
-      }
-    />
-  );
+    </MobileView>
+    <BrowserView>
+      <Table
+        tableLayout='fixed'
+        bordered={false}
+        className={`custom_table ${className} w-full h-full`}
+        dataSource={[...data]}
+        columns={columns}
+        rowClassName={'custom_table_row'}
+        rowKey={new Date().getTime()}
+        onChange={onChange}
+        loading={loading}
+        scroll={{ x: 'max-content' }}
+        // loading={{
+        //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
+        //   indicator: <Skeleton active />,
+        //   wrapperClassName: 'custom_table_loading',
+        // }}
+        pagination={
+          total > showLimit
+            ? {
+              position: ['bottomRight'],
+              current: current,
+              showQuickJumper: true,
+              pageSize: pageLimit,
+              showSizeChanger: false,
+              total,
+            }
+            : false
+        }
+      />
+    </BrowserView>
+  </>
 };

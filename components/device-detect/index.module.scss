@@ -1,0 +1,13 @@
+.mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    .browser {
+        display: none;
+    }
+    .mobile {
+        display: block;
+    }
+}
+
