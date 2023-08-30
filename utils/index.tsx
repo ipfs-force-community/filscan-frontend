@@ -240,11 +240,6 @@ export function validateCode(code: number | string) {
   const newCode = Number(code);
   return newCode > 99999 && newCode < 1000000;
 }
-export function isMobile() {
-  if (process.browser) {
-    return window.innerWidth < 1100;
-  }
-}
 
 //首字母大写,其余不变
 export function titleCase(str: string | number | boolean) {
@@ -262,7 +257,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
         onClick={() => {
           account_link(value);
         }}>
-        {isIndent(value, isMobile() ? 6 : unit)}
+        {isIndent(value, unit)}
       </span>
       {value && <Copy text={value} />}
     </>

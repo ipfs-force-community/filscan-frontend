@@ -17,7 +17,6 @@ import type {
 } from 'echarts/components';
 import type { ComposeOption } from 'echarts/core';
 import { useEffect, useRef } from 'react';
-import { isMobile } from '@/utils';
 import { useFilscanStore } from '@/store/FilscanStore';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
@@ -59,7 +58,7 @@ const EChartsComponent: React.FC<EChartsComponentProps> = ({
       const default_options = {
         backgroundColor: 'transparent',
         grid: {
-          top: isMobile() ? 100 : 10,
+          top:  10,
           left: 20,
           right: 20,
           bottom: 20,

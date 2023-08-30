@@ -226,6 +226,17 @@ cursor: pointer;
     }
 
 }
+.primary_btn{
+  display: flex  !important;;
+  align-items: center  !important;
+  justify-content: center;
+  width: fit-content;
+   min-width: 80px;
+   padding: 6px 15px  !important;
+  background: linear-gradient(315deg, #1764FF 0%, #4093ED 100%) !important;
+  border-radius: 5px  !important;
+ color: #fff !important;
+}
 
 .animated-div {
   animation: myAnimation 6s linear infinite;

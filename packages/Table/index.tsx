@@ -1,10 +1,8 @@
 /** @format */
 
-import { useFilscanStore } from '@/store/FilscanStore';
-import { isMobile, pageLimit } from '@/utils';
-import { Pagination, Table, Skeleton } from 'antd';
+import { pageLimit } from '@/utils';
+import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-//import Skeleton from '../skeleton';
 import { useMemo } from 'react';
 
 interface Props {
@@ -34,50 +32,50 @@ export default (props: Props) => {
     return limit || pageLimit;
   }, [limit]);
 
-  if (isMobile()) {
-    return (
-      <div className='mobile_table'>
-        {data.map((dataSource, data_index) => {
-          return (
-            <div className='mobile_table_card' key={data_index}>
-              {columns.map((item: any, index: number) => {
-                const { title, dataIndex, render } = item;
-                const showTitle =
-                  typeof item.title === 'function' ? item.title() : item.title;
-                let showValue = dataSource[dataIndex];
-                if (render) {
-                  showValue = render(
-                    dataSource[dataIndex],
-                    dataSource,
-                    data_index
-                  );
-                }
-                return (
-                  <div className='mobile_table_card_item' key={index}>
-                    <div className='mobile_table_card_item_label'>
-                      {showTitle}
-                    </div>
-                    <div className='mobile_table_card_item_value'>
-                      {showValue}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
-        <Pagination
-          current={current}
-          total={total}
-          onChange={(cur: number) => {
-            if (onChange) {
-              onChange({ current: cur });
-            }
-          }}
-        />
-      </div>
-    );
-  }
+  // if (isMobile()) {
+  //   return (
+  //     <div className='mobile_table'>
+  //       {data.map((dataSource, data_index) => {
+  //         return (
+  //           <div className='mobile_table_card' key={data_index}>
+  //             {columns.map((item: any, index: number) => {
+  //               const { title, dataIndex, render } = item;
+  //               const showTitle =
+  //                 typeof item.title === 'function' ? item.title() : item.title;
+  //               let showValue = dataSource[dataIndex];
+  //               if (render) {
+  //                 showValue = render(
+  //                   dataSource[dataIndex],
+  //                   dataSource,
+  //                   data_index
+  //                 );
+  //               }
+  //               return (
+  //                 <div className='mobile_table_card_item' key={index}>
+  //                   <div className='mobile_table_card_item_label'>
+  //                     {showTitle}
+  //                   </div>
+  //                   <div className='mobile_table_card_item_value'>
+  //                     {showValue}
+  //                   </div>
+  //                 </div>
+  //               );
+  //             })}
+  //           </div>
+  //         );
+  //       })}
+  //       <Pagination
+  //         current={current}
+  //         total={total}
+  //         onChange={(cur: number) => {
+  //           if (onChange) {
+  //             onChange({ current: cur });
+  //           }
+  //         }}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <Table

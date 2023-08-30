@@ -8,7 +8,7 @@ import Segmented from '@/packages/segmented';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, isMobile, unitConversion } from '@/utils';
+import { formatDateTime, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -30,7 +30,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
   const defaultOptions = useMemo(() => {
     return {
       grid: {
-        top: isMobile() ? 100 : 10,
+        top:  10,
         left: 20,
         right: '8%',
         bottom: 20,

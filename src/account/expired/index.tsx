@@ -37,7 +37,7 @@ export default ({
   });
 
   if (hashParams?.miner) {
-    return <Detail miner={hashParams.miner} data={expiredData} />;
+    return <Detail miner={hashParams.miner} />;
   }
   return (
     <>
