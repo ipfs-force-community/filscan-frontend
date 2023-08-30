@@ -9,13 +9,13 @@ interface HashParams {
 export function useHash() {
   const router = useRouter()
   const [hash, setHash] = useState('')
-    const [hashParams, setHashParams] = useState<HashParams>({});
+  const [hashParams, setHashParams] = useState<HashParams>({});
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       let hashParams = router.asPath?.split('?')[1];
-      if (hashParams?.includes('#')) { 
-        hashParams= hashParams.split('#')[0]
+      if (hashParams?.includes('#')) {
+        hashParams = hashParams.split('#')[0]
       }
       const params: Record<string, any> = new URLSearchParams(hashParams);
       const result: HashParams = {};
@@ -26,15 +26,12 @@ export function useHash() {
       setHashParams(result);
       let currentHash = router.asPath?.split('#')[1];
       if (hashParams) {
-        currentHash= currentHash?.split('?')[0]
+        currentHash = currentHash?.split('?')[0]
       }
-    setHash(currentHash);
+      setHash(currentHash);
     }
-    
+
   }, [router])
-  
-  
 
-  return { hash ,hashParams}
+  return { hash, hashParams }
 }
-

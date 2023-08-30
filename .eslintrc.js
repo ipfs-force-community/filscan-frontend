@@ -14,7 +14,6 @@ module.exports = {
     "import/no-anonymous-default-export": "off",
     'space-before-function-paren': 0,
     'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
-
     "react/display-name":"off"
   }
 }

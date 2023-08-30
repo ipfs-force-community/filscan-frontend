@@ -27,14 +27,8 @@ export default () => {
   return (
     <div className='group relative text-sm'>
       <div className=' flex gap-x-2 items-center cursor-pointer'>
-        <Image
-          src={author}
-          width={32}
-          height={32}
-          className='rounded-full'
-          alt=''
-        />
-        <span>{name.length >  5?name?.slice(0, 5) + '...':name}</span>
+        <Image src={author} width={32} height={32} className='rounded-full' alt=''/>
+        <span>{name?.length > 5? name?.slice(0, 5) + '...' : name}</span>
         <Image src={down} width={8} height={4} alt='down' />
       </div>
       <ul className='hidden group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow card_bg_color  border_color'>
