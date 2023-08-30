@@ -342,6 +342,10 @@ font-display: auto;
              cursor: pointer;
         }
     }
+    .ant-select-selection-placeholder{
+        display: flex;
+        align-items: center;
+    }
 
 }
 .custom_select_wrapper{
