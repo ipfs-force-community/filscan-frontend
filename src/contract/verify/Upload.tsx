@@ -93,8 +93,8 @@ export default ({ onChange ,fileData}: {fileData:any,onChange:(file:any,type:str
       </Upload>
       {fileData&&Object.keys(fileData)?.map((acekey: string,index:number) => {
         const aceItem = fileData[acekey]
-        return <div key={index} className="mt-5" >
-          <div className="flex justify-between items-center">
+        return <div key={index} className="my-2.5" >
+          <div className="flex justify-between items-center mb-2.5">
             <span className="flex gap-x-2 text_des items-center" >
               { getSvgIcon('fileIcon')}
               {aceItem.name}

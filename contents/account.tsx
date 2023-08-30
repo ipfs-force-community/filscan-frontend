@@ -561,9 +561,26 @@ export const account_lucky = {
         return text;
       },
     },
-    { title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%' },
-    { title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%' },
-    { title: '30d_lucky', dataIndex: 'lucky_rate_30d', width: '15%' },
+    {
+      title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%',
+      amountUnit: {
+        lucky_rate_24h: { unit: '%', number: 2 },
+      },
+      render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+    },
+    {
+      title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%',
+      amountUnit: {
+        'lucky_rate_7d': { unit: '%', number: 2 },
+      },
+      render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+    },
+    {
+      title: '30d_lucky', dataIndex: 'lucky_rate_30d',
+      amountUnit: {
+        'lucky_rate_30d': { unit: '%', number: 2 },
+      }, width: '15%', render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+    },
   ],
 };
 
@@ -894,7 +911,9 @@ export const account_reward = {
         title: 'block_reward', dataIndex: 'block_reward', width: '10%',
         amountUnit: {
           block_reward: { unit: 'fil', number: 4 },
-        },render:(text:string)=>formatFilNum(text)},
+        },
+        render: (text: string) => formatFilNum(text)
+      },
       {
         title: 'total_reward', dataIndex: 'total_reward', width: '15%',
         amountUnit: {
