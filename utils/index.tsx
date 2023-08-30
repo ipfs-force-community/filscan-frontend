@@ -238,7 +238,7 @@ export function validateCode(code: number | string) {
   return newCode > 99999 && newCode < 1000000;
 }
 export function isMobile() {
-  if (process.browser) {
+  if (typeof window !== 'undefined') {
     return window.innerWidth < 1100;
   }
 }
