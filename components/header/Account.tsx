@@ -15,7 +15,6 @@ export default () => {
   const userInfo = UserInfo();
   const router = useRouter();
   const name = userInfo?.name || userInfo?.mail || '';
-
   if (!name) {
     return (
       <Link href='/account/login' as='/account/login' scroll={false}>
@@ -35,7 +34,7 @@ export default () => {
           className='rounded-full'
           alt=''
         />
-        <span>{name?.slice(0, 5) + '...'}</span>
+        <span>{name.length >  5?name?.slice(0, 5) + '...':name}</span>
         <Image src={down} width={8} height={4} alt='down' />
       </div>
       <ul className='hidden group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow card_bg_color  border_color'>
