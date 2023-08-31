@@ -35,7 +35,10 @@
   --mobile-link-color: #1d6bfc;
   --mobile-bg-black: #000000;
   --mobile-text-minor: #666666;
-  --mobile-divide-line:#EEEFF1
+  --mobile-text-unimportant: #ffffff;
+  --mobile-divide-line: #eeeff1;
+  --mobile-footer-bg: #222121;
+  --mobile-text-60: rgba(255, 255, 255, 0.6);
 }
 
 :root,
