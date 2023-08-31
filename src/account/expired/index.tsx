@@ -53,7 +53,7 @@ export default ({
   },[groupsData?.group_list, tr])
 
   if (hashParams?.miner) {
-    return <Detail miner={hashParams.miner} data={expiredData} />;
+    return <Detail miner={hashParams.miner} data={expiredData} selectedKey={ selectedKey} />;
   }
 
   return (

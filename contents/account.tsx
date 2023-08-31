@@ -606,7 +606,7 @@ export const account_balance = {
     {
       title: 'group_name',
       dataIndex: 'group_name',
-      width: 100,
+      width: 150,
       fixed: 'left',
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
@@ -1123,7 +1123,7 @@ export const account_gas = {
       {
         title: 'group_name',
         dataIndex: 'group_name',
-        width: 100,
+        width: 150,
         fixed: 'left',
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text

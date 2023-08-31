@@ -73,7 +73,7 @@ font-display: auto;
                 background-color: transparent !important;
                 .ant-input{
                     &::value{
-  background-color: var(--bgColor) !important;
+                        background-color: var(--bgColor) !important;
                     }
                 }
             }
@@ -106,11 +106,6 @@ font-display: auto;
 
 }
 
-input:-webkit-autofill {
-    -webkit-text-fill-color: white !important;
-    transition: background-color 5000s ease-in-out 0s;
-    -webkit-box-shadow: 0 0 0px 1000px var(--bgColor) inset;
-}
 
 
 .ant-input-affix-wrapper{
@@ -118,7 +113,7 @@ input:-webkit-autofill {
 }
 .ant-input{
     background-color: transparent !important;
-    border-color: var(--border-color) !important;
+    border-color: var(--border-color);
    
 }
 .custom_input_banner{
@@ -652,4 +647,14 @@ input:-webkit-autofill {
 //custom_checkbox
 .custom_checkbox{
     color: var(--font-color) !important;
+}
+
+
+
+
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: var(--font-color) !important;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0px 1000px var(--bgColor) inset;
 }

@@ -23,7 +23,7 @@ export default ({
     return account_lucky.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: luckyData, loading } = useAxiosData(proApi.getLucky, {
@@ -74,7 +74,7 @@ export default ({
               setActive(v);
             }}
           />
-          <ExportExcel columns={columns} data={data} />
+          <ExportExcel columns={columns} data={data} fileName={tr(selectedKey)}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>

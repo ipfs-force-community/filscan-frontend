@@ -59,7 +59,7 @@ const Account: React.FC = () => {
       }
     });
     return itemsArr;
-  }, []);
+  }, [tr]);
 
   useEffect(() => {
     if (!userInfo.mail && !localStorage.getItem('token')) {
@@ -69,7 +69,7 @@ const Account: React.FC = () => {
 
   if (minerLoading) {
     return (
-      <div className='mt-10'>
+      <div className='mt-10 main_contain'>
         <Skeleton active />
         <Skeleton active />
         <Skeleton active />
@@ -108,12 +108,12 @@ const Account: React.FC = () => {
           </ul>
         </div>
         <div
-          className='flex-grow flex flex-col px-5 py-10 w_account'
+          className='flex-grow flex flex-col px-5 py-10 w_account min-h-full'
           style={{ height: 'inherit' }}>
           {minersNum?.miners_count === 0 &&
           hashParams.type !== 'miner_add' &&
-          selectedKey !== 'personal' && selectedKey !== 'miner' ? (
-              <NoMiner selectedKey={selectedKey} />
+          selectedKey !== 'personal' && selectedKey !== 'miners' ? (
+              <NoMiner selectedKey={selectedKey === 'overview'? 'overview':'overview_' + selectedKey} />
             ) : (
               <>
                 {selectedKey === 'overview' && (

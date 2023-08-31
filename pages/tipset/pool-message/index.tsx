@@ -28,7 +28,6 @@ export default () => {
   });
 
   const method = useMemo(() => {
-    console.log('----ee', name);
     if (name && typeof name === 'string') {
       return name;
     }
@@ -114,7 +113,6 @@ export default () => {
           value={method}
           options={headerOptions}
           onChange={(value) => {
-            console.log('---4', value);
             if (value !== 'all') {
               updateQuery({ name: value, p: 'removed' });
             } else {

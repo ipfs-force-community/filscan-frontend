@@ -20,9 +20,11 @@ import { proApi } from '@/contents/apiUrl';
 export default ({
   miner,
   data,
+  selectedKey
 }: {
   miner?: string | number | null;
   data?: any;
+  selectedKey:string
 }) => {
   const { tr } = Translation({ ns: 'account' });
 
@@ -96,7 +98,7 @@ export default ({
               });
             }}
           />
-          <ExportExcel columns={columns} data={showData} />
+          <ExportExcel columns={columns} data={showData} fileName={tr(selectedKey)+miner?`(${miner})`:""} />
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>

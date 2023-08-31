@@ -17,7 +17,6 @@ export default () => {
   const { axiosData } = useAxiosData();
   const [overviewData, setOverview] = useState<any>({});
 
-  console.log('====v',nftId)
   useEffect(() => {
     if (nftId) {
       axiosData(apiUrl.contract_FnsSummary, {

@@ -70,7 +70,7 @@ export default ({
   }, [gasData]);
 
   if (hashParams?.miner) {
-    return <Detail miner={hashParams.miner} data={gasData} />;
+    return <Detail miner={hashParams.miner} data={gasData} selectedKey={ selectedKey} />;
   }
 
   return (

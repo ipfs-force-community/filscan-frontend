@@ -82,7 +82,7 @@ export default ({
           <ExportExcel
             columns={columns}
             data={data.result}
-            fileName={'balance'}
+            fileName={tr(selectedKey)}
           />
         </div>
       </div>

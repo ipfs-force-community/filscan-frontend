@@ -149,7 +149,6 @@ export default ({ origin }: { origin: string }) => {
   }, [active, progress[active], theme, tr]);
 
   const handleHeaderChange = (type: string, value: string) => {
-    console.log('---4', type, value);
     let newActive = active;
     let activeHeader = headerFilter;
     if (type === 'active') {

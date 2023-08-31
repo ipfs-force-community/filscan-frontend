@@ -21,7 +21,7 @@
 .main_contain{
   max-width: 1440px;
   min-width: 1440;
-  min-height: 500px;
+  min-height:calc(100% - 500px);
   height:100%;
   width: 100%;
   margin: auto;

@@ -67,7 +67,7 @@ export default ({
   }, [powerData]);
 
   if (hashParams?.miner) {
-    return <Detail miner={hashParams.miner} data={powerData} />;
+    return <Detail miner={hashParams.miner} data={powerData} selectedKey={selectedKey } />;
   }
 
   return (
@@ -102,7 +102,7 @@ export default ({
               });
             }}
           />
-          <ExportExcel columns={columns} data={data} />
+          <ExportExcel columns={columns} data={data} fileName={tr(selectedKey)}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>
