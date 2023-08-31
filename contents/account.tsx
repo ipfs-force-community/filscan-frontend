@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Item, MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
-import { formatDateTime, formatFilNum, formatNumber, unitConversion } from '@/utils';
+import { formatDateTime, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
 import Image from 'next/image';
 import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg';
@@ -566,20 +566,20 @@ export const account_lucky = {
       amountUnit: {
         lucky_rate_24h: { unit: '%', number: 2 },
       },
-      render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+      render: (text: string | number) => text ? formatNumberPercentage(text) + '%' : text
     },
     {
       title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%',
       amountUnit: {
         'lucky_rate_7d': { unit: '%', number: 2 },
       },
-      render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+      render: (text: string | number) => text ? formatNumberPercentage(text) + '%' : text
     },
     {
       title: '30d_lucky', dataIndex: 'lucky_rate_30d',
       amountUnit: {
         'lucky_rate_30d': { unit: '%', number: 2 },
-      }, width: '15%', render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+      }, width: '15%', render: (text: string | number) => text ?formatNumberPercentage(text) + '%' : text
     },
   ],
 };

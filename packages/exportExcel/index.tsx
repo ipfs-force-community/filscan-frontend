@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import { Button } from 'antd';
 import { getSvgIcon } from '@/svgsIcon';
 import { Translation } from '@/components/hooks/Translation';
-import { formatDateTime, formatFilNum, unitConversion } from '@/utils';
+import { formatDateTime, formatFilNum, formatNumberPercentage, unitConversion } from '@/utils';
 
 interface ExportToExcelProps {
   columns: { title: string; dataIndex: string; [key: string]: any }[];
@@ -27,6 +27,9 @@ function getUnitValue(
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const powerValue = unitConversion(value, amountUnit.number || 2);
     return otherUnit ? powerValue + `/${otherUnit}` : powerValue;
+  } else if (amountUnit.unit === '%') {
+    const powerValue = formatNumberPercentage(value,amountUnit.number)
+    return powerValue +'%';
   }
   return value;
 }

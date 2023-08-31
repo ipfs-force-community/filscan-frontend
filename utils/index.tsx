@@ -199,7 +199,10 @@ export function get$Number(str: string | number, len?: number) {
       : '$' + formatNumber(showNum, len);
   return newNum;
 }
-
+//%
+export function formatNumberPercentage(num:string|number, decimalPlaces:number =2) {
+  return parseFloat(Number(num).toFixed(decimalPlaces));
+}
 export function getClassName(str: string | number) {
   const showNum = Number(str);
   if (showNum === 0) return '';
