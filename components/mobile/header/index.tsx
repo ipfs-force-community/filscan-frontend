@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { mobileNavMenu } from '@/contents/nav'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
-const rootSubmenuKeys = ['1', '2', '3'];
+const rootSubmenuKeys = ['1', '2', '3','4','5'];
 
 const Header = () => {
   const {t} = useTranslation("nav")
@@ -41,6 +41,7 @@ const Header = () => {
   };
 
   const onSelect:MenuProps['onSelect'] = (select)=>{
+    setOpen(false)
     setSelectKeys(select.selectedKeys)
     const link = _.get(mobileNavMenu,select.key).link
     router.push(link)
