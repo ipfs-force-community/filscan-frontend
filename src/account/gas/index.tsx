@@ -15,10 +15,9 @@ import Detail from './Detail';
 
 export default ({
   selectedKey,
-  groups,
+
 }: {
   selectedKey: string;
-  groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
   const { hashParams } = useHash();
@@ -48,14 +47,27 @@ export default ({
     end_date: date.startTime,
   });
 
+  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
+    group_id: active ? Number(active) : null,
+  });
+  const groups:Array<any> = useMemo(() => {
+    let newGroups: Array<any> = [{
+      value: '0',
+      label:'all'
+    }];
+    (groupsData?.group_list || []).forEach((group: any) => {
+      newGroups.push({
+        ...group,
+        value: String(group.group_id),
+        label: tr(group?.group_name),
+      });
+    });
+    return newGroups
+  },[groupsData?.group_list, tr])
+
   const data = useMemo(() => {
     return gasData?.gas_cost_detail_list || [];
   }, [gasData]);
-
-  const newGroups = useMemo(() => {
-    return groups;
-  }, [groups]);
-  console.log('---hashParams', hashParams);
 
   if (hashParams?.miner) {
     return <Detail miner={hashParams.miner} data={gasData} />;
@@ -76,7 +88,7 @@ export default ({
         <div className='flex gap-x-2.5'>
           <Selects
             value={String(active)}
-            options={newGroups}
+            options={groups}
             onChange={(v: string) => {
               setActive(v);
               // load(v);

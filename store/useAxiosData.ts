@@ -78,7 +78,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         data = response.data || {};
         setData(data?.result || data || {});
         setLoading(false);
-        return { data: data?.result || data, loading, error }; // 请求成功，跳出循环
+        return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
           console.log('Request canceled', thrown.message);
@@ -110,7 +110,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
 
   useDeepCompareEffect(() => {
     if (initialUrl) {
-      setLoading(true);
       axiosData(initialUrl, initialPayload, initialOptions);
     }
 

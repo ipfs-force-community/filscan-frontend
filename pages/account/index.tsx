@@ -24,9 +24,7 @@ import Link from 'next/link';
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
   const { hash, hashParams } = useHash();
-  const { axiosData } = useAxiosData();
   const rootSubmenuKeys: Array<string> = [];
-  const [groups,setGroups] =useState<Array<any> >([])
   const userInfo = UserInfo();
   const router = useRouter();
   const selectedKey = useMemo(() => {
@@ -37,27 +35,6 @@ const Account: React.FC = () => {
   }, [hash]);
   const { data: minersNum, loading: minerLoading } =
     useAxiosData(proApi.account_miners) || {};
-
-  useEffect(() => {
-    load()
-  }, [])
-
-  const load = () => {
-    axiosData(proApi.getGroupsId).then(result => {
-      let newGroups: Array<any> = [{
-        value: '0',
-        label:'all'
-      }];
-      (result?.group_list || []).forEach((group: any) => {
-        newGroups.push({
-          ...group,
-          value: String(group.group_id),
-          label: tr(group?.group_name),
-        });
-      });
-      setGroups(newGroups)
-    })
-  }
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {
@@ -100,7 +77,6 @@ const Account: React.FC = () => {
     );
   }
 
-  console.log('===ff',groups)
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -111,13 +87,10 @@ const Account: React.FC = () => {
           <ul className='list-none px-4'>
             {menuData.map((parent: any) => {
               return (
-                <li
+                <Link
                   key={parent.label}
-                  onClick={() => {
-                    load()
-                    router.push(`/account#${parent.key}`, undefined, { scroll:false})
-                  }}
-
+                  href={ `/account#${parent.key}`}
+                  scroll={ false}
                   className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
                     parent?.icon ? 'font-medium' : 'ml-5 font-normal'
                   } ${
@@ -129,7 +102,7 @@ const Account: React.FC = () => {
                     {parent.icon}
                     {tr(parent.label)}
                   </span>
-                </li>
+                </Link>
               );
             })}
           </ul>
@@ -144,40 +117,40 @@ const Account: React.FC = () => {
             ) : (
               <>
                 {selectedKey === 'overview' && (
-                  <Overview selectedKey='overview' groups={groups} />
+                  <Overview selectedKey='overview' />
                 )}
                 {selectedKey === 'miners' && <Miners minersNum={minersNum} />}
                 {selectedKey === 'lucky' && (
                   <Lucky
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'power' && (
                   <Power
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'gas' && (
-                  <Gas selectedKey={'overview_' + selectedKey} groups={groups} />
+                  <Gas selectedKey={'overview_' + selectedKey} />
                 )}
                 {selectedKey === 'balance' && (
                   <Balance
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'expired' && (
                   <Expired
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'reward' && (
                   <Reward
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
 

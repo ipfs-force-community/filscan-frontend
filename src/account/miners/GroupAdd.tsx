@@ -72,7 +72,6 @@ export default ({
       }
     }
   };
-  console.log('---e',groupDetail)
   return (
     <>
       <Breadcrumb items={routerItems} />
