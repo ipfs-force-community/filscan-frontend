@@ -190,7 +190,7 @@ export const overview = {
           const changeText = record?.sum_power_change_24h
             ? Number(record.sum_power_change_24h)
             : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '') : '';
           const className = changeText
             ? changeText > 0
               ? 'text_green'
@@ -204,7 +204,7 @@ export const overview = {
                   {tr('quality_power_24')}
                 </span>
                 <span className={className}>
-                  {changeText? unitConversion(changeText,2) : '--'}
+                  { changeText? flag + unitConversion(changeText,2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -240,7 +240,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -276,7 +276,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -312,7 +312,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -346,7 +346,7 @@ export const overview = {
                 <span className='text-sm text_des'>{tr('balance_24')}</span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>

@@ -38,7 +38,7 @@ export default ({
   const groups:Array<any> = useMemo(() => {
     let newGroups: Array<any> = [{
       value: '0',
-      label:'all'
+      label:tr('all')
     }];
     (groupsData?.group_list || []).forEach((group: any) => {
       newGroups.push({

@@ -55,3 +55,4 @@ const common = {
   'footer_des2':'one stop data services such as mining ranking, blockchain data query and visualization chart',
 
 }
+export default common
