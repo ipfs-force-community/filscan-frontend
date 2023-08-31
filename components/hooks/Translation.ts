@@ -20,7 +20,8 @@ export const Translation = ({ ns }: TranslationProps) => {
       return t(label, { ...value, ns: ns });
     }
     return t(label, { ns: ns });
-  }, [i18n.language])
+
+  },[i18n.language])
 
   return { tr };
 };
