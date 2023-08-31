@@ -36,7 +36,7 @@ function VerifyCodeButton({
 
   return (
     <button
-      className='text_primary text-sm border-s pl-2 cursor-pointer'
+      className='text_primary text-sm border-s border_color pl-2 cursor-pointer'
       disabled={count > 0}
       onClick={sendCode}>
       {count > 0 ? `${tr('retry_code')}(${count})` : tr('get_code')}

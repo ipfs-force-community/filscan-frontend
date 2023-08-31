@@ -31,12 +31,13 @@ export default () => {
     });
     if (result) {
       const newInfo:any = await axiosData(proApi.userInfo);
-      userInfo.setUserInfo({ ...newInfo, last_login: newInfo?.last_login_at || '' })
       messageManager.showMessage({
         type: 'success',
         content: 'login successful',
       });
-      router.push('/account#overview')
+      localStorage.removeItem('token');
+      userInfo.setUserInfo({ })
+      router.push('/account/login')
     }
     setLoading(false);
 
@@ -129,9 +130,9 @@ export default () => {
                   label={tr(item.title)}
                   key={item.dataIndex}>
                   {item?.dataIndex?.includes('password') ? (
-                    <Input.Password className='h-12' {...objShow} defaultValue={''} placeholder={ tr(item.placeholder)} />
+                    <Input.Password className='h-12 custom_input' {...objShow} defaultValue={''} placeholder={ tr(item.placeholder)} />
                   ) : (
-                    <Input className='h-12' defaultValue={''} {...objShow} placeholder={ tr(item.placeholder)}/>
+                    <Input className='h-12 custom_input' defaultValue={''} {...objShow} placeholder={ tr(item.placeholder)}/>
                   )}
                 </Form.Item>
               );

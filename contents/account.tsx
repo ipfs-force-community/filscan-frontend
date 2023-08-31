@@ -204,8 +204,7 @@ export const overview = {
                   {tr('quality_power_24')}
                 </span>
                 <span className={className}>
-                  {flag}
-                  {changeText?unitConversion(changeText,2) : '--'}
+                  {changeText? unitConversion(changeText,2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>

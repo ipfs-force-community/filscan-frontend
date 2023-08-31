@@ -70,6 +70,12 @@ font-display: auto;
             height: 100%;
             .ant-input-affix-wrapper{
                 height: 100%;
+                background-color: transparent !important;
+                .ant-input{
+                    &::value{
+  background-color: var(--bgColor) !important;
+                    }
+                }
             }
         }
        }
@@ -82,6 +88,9 @@ font-display: auto;
     color: var(--font-color) !important;
     background-color: var(--bgDesColor) !important; 
      border: 1px solid var(--border-color) !important;
+     .anticon{
+        color: var(--font-color) !important;
+     }
     .ant-input-show-count-suffix{
          color: var(--font-color) !important;
     }
@@ -97,13 +106,20 @@ font-display: auto;
 
 }
 
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0px 1000px var(--bgColor) inset;
+}
+
 
 .ant-input-affix-wrapper{
  border: 1px solid var(--border-color) !important;
 }
 .ant-input{
     background-color: transparent !important;
-    border-color: var(--border-color);
+    border-color: var(--border-color) !important;
+   
 }
 .custom_input_banner{
    border: 1px solid rgba(255,255,255,0.5) !important;
@@ -590,6 +606,7 @@ font-display: auto;
             }
             .ant-btn-default{
                 color: var(--font-color);
+                background-color: transparent !important;
                
             }
             .ant-btn-primary{
@@ -626,4 +643,13 @@ font-display: auto;
         column-gap: 10px;
     }
 
+}
+
+.ant-btn-default{
+    border-color: transparent !important;
+}
+
+//custom_checkbox
+.custom_checkbox{
+    color: var(--font-color) !important;
 }

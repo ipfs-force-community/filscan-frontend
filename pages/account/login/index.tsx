@@ -62,9 +62,9 @@ export default () => {
   }, [userInfo.mail]);
 
   return (
-    <>
+    <div className='main_contain'>
       <div className='bg-black w-full h-[200px]'>Banner</div>
-      <div className='!w-[404px] !p-0 !mt-10 !m-auto min-h-[350px]'>
+      <div className='!w-[404px] !p-0 !mt-10 !m-auto min-h-[350px] '>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {
             return (
@@ -73,7 +73,7 @@ export default () => {
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
-                className={`text-lg text-font_des hover:text-font ${
+                className={`text-lg text_color  ${
                   hashParams.type === log_item.dataIndex ? 'highlight' : ''
                 }`}>
                 {tr(log_item.title)}
@@ -104,13 +104,15 @@ export default () => {
                 rules={item.rules}>
                 {item?.name?.includes('password') ? (
                   <Input.Password
-                    className='h-12'
+                    className='h-12 custom_input'
                     prefix={item.prefix}
                     placeholder={tr(item.placeholder)}
                   />
                 ) : (
                   <Input
+                    className='custom_input'
                     prefix={item.prefix}
+                    style={{background:'transparent'}}
                     placeholder={tr(item.placeholder)}
                     suffix={
                       showButton && (
@@ -127,14 +129,14 @@ export default () => {
             valuePropName='checked'
             className='!m-0 !p-0'>
             <div className='!flex !justify-between'>
-              <Checkbox defaultChecked={true}>{tr('remember_me')}</Checkbox>
+              <Checkbox className='custom_checkbox !text_color' defaultChecked={true}>{tr('remember_me')}</Checkbox>
               <a href=''>{tr('forgot_password')}</a>
             </div>
           </Form.Item>
           <Form.Item className='!mt-6'>
             <Button
               htmlType='submit'
-              className='!w-full !bg-primary !text-white'>
+              className='!w-full primary_btn'>
               {tr('login')}
             </Button>
           </Form.Item>
@@ -144,6 +146,6 @@ export default () => {
           <Link href={'/account/register'}>{tr('go_register')}</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };

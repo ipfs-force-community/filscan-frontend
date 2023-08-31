@@ -50,10 +50,10 @@ export default () => {
 
   //注册
   return (
-    <>
+    <div className='main_contain'>
       <div className='bg-black w-full h-[200px]'>Banner</div>
       <div className='main_contain !w-[404px] !p-0 !mt-14'>
-        <div className={`text-lg text-font hover:text-font`}>
+        <div className={`text-lg tex_color`}>
           {tr('register')}
         </div>
         {success ? (
@@ -138,11 +138,13 @@ export default () => {
                     rules={newRules}>
                     {item?.name?.includes('password') ? (
                       <Input.Password
+                        className='custom_input'
                         prefix={item.prefix}
                         placeholder={tr(item.placeholder)}
                       />
                     ) : (
                       <Input
+                        className='custom_input'
                         prefix={item.prefix}
                         placeholder={tr(item.placeholder)}
                         suffix={
@@ -158,7 +160,7 @@ export default () => {
                   </Form.Item>
                 );
               })}
-              <div className='!flex !gap-x-2'>
+              <div className='!flex text_color !gap-x-2'>
                 <span>{tr('have_account')}</span>
                 <Link href='/account/login'>{tr('login')}</Link>
               </div>
@@ -174,7 +176,7 @@ export default () => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 // document.querySelector('[name="1"]');

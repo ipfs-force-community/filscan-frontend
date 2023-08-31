@@ -88,7 +88,7 @@ Hardhat 将编译输出存储在项目内的“artifacts/build-info/”目录中
   //nft list
   nfts_list:'全部 NFTs',
   trading_volume: '全部成交量',
-  nfts_trans: 'NFT代币转移',
+  nfts_trans: 'NFT转移',
 
   // ft /fns dashborad
   'total_supply': '供应量',
