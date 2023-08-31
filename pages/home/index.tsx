@@ -2,8 +2,8 @@
 
 //import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import Banner from '@/components/banner';
-import MobileBanner from '@/mobile/home/banner';
-import MobileMeta from '@/mobile/home/meta';
+import MobileBanner from '@/components/mobile/home/banner';
+import MobileMeta from '@/components/mobile/home/meta';
 import Meta from '@/src/home/meta';
 import Gas from '@/src/statistics/Gas';
 import Rank from '@/src/rank';
