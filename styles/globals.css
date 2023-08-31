@@ -2,27 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root,:root[theme='light']{
-     --bgColor:#FFFFFF;
-     --main-bg-color:#F9F9F9;
-     --reverse-color:'#000000';
-    --font-color:#000000;
-    --select-shadow: rgba(223,227,234,0.6);
-        --select-bgColor:#ffffff ;
-    --card-shadow: rgba(223,227,234,0.6);
-     --tab-shadow:rgba(0,0,0,0.1);
-    --bg_hover:rgba(28, 106, 253, 0.1);
-    --font_des:rgba(0,0,0,0.6);
-    --primary: #1C6AFD;
-    --text_clip:#131254;
-     --border-color:#e6e8eb;
-    --bgDesColor:#F6F6F6;
-    --table-hover:#F8F8F8
+  /*
+  PC端
+  */
+  --bgColor:#FFFFFF;
+  --main-bg-color:#F9F9F9;
+  --reverse-color:'#000000';
+  --font-color:#000000;
+  --select-shadow: rgba(223,227,234,0.6);
+      --select-bgColor:#ffffff ;
+  --card-shadow: rgba(223,227,234,0.6);
+    --tab-shadow:rgba(0,0,0,0.1);
+  --bg_hover:rgba(28, 106, 253, 0.1);
+  --font_des:rgba(0,0,0,0.6);
+  --primary: #1C6AFD;
+  --text_clip:#131254;
+    --border-color:#e6e8eb;
+  --bgDesColor:#F6F6F6;
+  --table-hover:#F8F8F8;
 
-
-
-
-
+  /*
+  手机端
+  */
+  --mobile-page-padding:12px;
+  --mobile-title-color:#333333;
+  --mobile-des-color:#B3B3B3;
+  --mobile-down-color:#E15252;
+  --mobile-up-color:#40A291;
+  --mobile-link-color:#1D6BFC;
+  --mobile-bg-black:#000000;
 
 }
 

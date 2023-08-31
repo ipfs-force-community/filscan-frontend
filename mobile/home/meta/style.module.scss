@@ -1,0 +1,16 @@
+.meta{
+    .cards{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap:10px;
+        .card{
+            padding: 10px;
+            background: #FFFFFF;
+            border-radius: 6px;
+            border: 1px solid #EEEFF1;
+            .card-top{
+                display: flex;
+            }
+        }
+    } 
+}
