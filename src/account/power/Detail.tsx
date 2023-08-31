@@ -43,7 +43,7 @@ export default ({
   }, [miner]);
 
   const [date, setDate] = useState({
-    startTime: formatDateTime(getCalcTime(7), 'YYYY-MM-DDTHH:mm:ssZ'),
+    startTime: formatDateTime(getCalcTime(6), 'YYYY-MM-DDTHH:mm:ssZ'),
     endTime: formatDateTime(
       new Date().getTime() / 1000,
       'YYYY-MM-DDTHH:mm:ssZ'

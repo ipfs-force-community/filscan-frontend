@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
@@ -24,7 +24,9 @@ import Link from 'next/link';
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
   const { hash, hashParams } = useHash();
+  const { axiosData } = useAxiosData();
   const rootSubmenuKeys: Array<string> = [];
+  const [groups,setGroups] =useState<Array<any> >([])
   const userInfo = UserInfo();
   const router = useRouter();
   const selectedKey = useMemo(() => {
@@ -33,27 +35,29 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
-
   const { data: minersNum, loading: minerLoading } =
     useAxiosData(proApi.account_miners) || {};
-  const { data: groupsData, loading: groupsLoading } = useAxiosData(
-    proApi.getGroupsId
-  );
 
-  const groups = useMemo(() => {
-    const newGroups: any = [{ label: tr('all'), value: '0', group_id: '0' }];
-    if (groupsData && groupsData.group_list) {
-      (groupsData.group_list || []).forEach((group: any) => {
+  useEffect(() => {
+    load()
+  }, [])
+
+  const load = () => {
+    axiosData(proApi.getGroupsId).then(result => {
+      let newGroups: Array<any> = [{
+        value: '0',
+        label:'all'
+      }];
+      (result?.group_list || []).forEach((group: any) => {
         newGroups.push({
           ...group,
           value: String(group.group_id),
           label: tr(group?.group_name),
         });
       });
-    }
-
-    return newGroups;
-  }, [groupsData]);
+      setGroups(newGroups)
+    })
+  }
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {
@@ -95,6 +99,8 @@ const Account: React.FC = () => {
       </div>
     );
   }
+
+  console.log('===ff',groups)
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -105,10 +111,13 @@ const Account: React.FC = () => {
           <ul className='list-none px-4'>
             {menuData.map((parent: any) => {
               return (
-                <Link
+                <li
                   key={parent.label}
-                  href={`/account#${parent.key}`}
-                  scroll={false}
+                  onClick={() => {
+                    load()
+                    router.push(`/account#${parent.key}`, undefined, { scroll:false})
+                  }}
+
                   className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
                     parent?.icon ? 'font-medium' : 'ml-5 font-normal'
                   } ${
@@ -120,7 +129,7 @@ const Account: React.FC = () => {
                     {parent.icon}
                     {tr(parent.label)}
                   </span>
-                </Link>
+                </li>
               );
             })}
           </ul>
@@ -130,7 +139,7 @@ const Account: React.FC = () => {
           style={{ height: 'inherit' }}>
           {minersNum?.miners_count === 0 &&
           hashParams.type !== 'miner_add' &&
-          selectedKey !== 'personal' ? (
+          selectedKey !== 'personal' && selectedKey !== 'miner' ? (
               <NoMiner selectedKey={selectedKey} />
             ) : (
               <>

@@ -35,7 +35,7 @@ export default () => {
       //未注册
       messageManager.showMessage({
         type: 'error',
-        content: tr('no_account'),
+        content: 'invalid mail or password',
         icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
       });
     }
@@ -64,7 +64,7 @@ export default () => {
   return (
     <>
       <div className='bg-black w-full h-[200px]'>Banner</div>
-      <div className='!w-[404px] !p-0 !mt-14 !m-auto'>
+      <div className='!w-[404px] !p-0 !mt-10 !m-auto min-h-[350px]'>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {
             return (

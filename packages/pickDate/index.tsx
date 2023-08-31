@@ -18,21 +18,8 @@ export default (props: Props) => {
     let showDate = date.format('YYYY-MM-DDTHH:mm:ssZ') || dateString;
     onChange(showDate);
   }
-  const validRange = {
-    startDate: dayjs().subtract(30, 'days'),
-    endDate: dayjs(),
-  };
 
   const disabledDate: RangePickerProps['disabledDate'] = (current: any) => {
-    // Can not select days before today and today
-
-    // if (!dates) {
-    //   return false;
-    // }
-    // const tooLate = startTime && current.diff(startTime, 'days') >= 30;
-    // const tooEarly = endTime && current.diff(current, 'days') >= 7;
-    // return !!tooEarly || !!tooLate;
-
     return (
       current &&
       (current < dayjs().subtract(30, 'day') || current > dayjs().endOf('day'))

@@ -77,7 +77,7 @@ export default () => {
           <Form
             initialValues={{
               old_password: '',
-            }}
+              name: userInfo?.name||'' }}
             form={form}
             layout='vertical'
             className='!grid w-full grid-cols-2	 gap-x-4 mt-5'>

@@ -3,7 +3,7 @@
 import { Translation } from '@/components/hooks/Translation';
 import { Button, Input } from 'antd';
 import AddNode from './AddNode';
-import { Group, MinerNum, groupsItem } from '../type';
+import { MinerNum, groupsItem } from '../type';
 import Breadcrumb from '@/packages/breadcrumb';
 import { useEffect, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
@@ -35,7 +35,6 @@ export default ({
   const router = useRouter();
   const [groupName, setGroupName] = useState(groupDetail?.label);
   const [groupMinders, setGroupMiners] = useState(groupDetail?.miners_info);
-  const [newMiners, setNewMiners] = useState<Array<any>>([]);
   const [saveLoading, setSaveLoading] = useState(false);
   const { loading, axiosData } = useAxiosData();
 
@@ -51,7 +50,7 @@ export default ({
     const data = await axiosData(proApi.saveGroup, {
       group_id: Number(groupId),
       group_name: groupName,
-      miners_info: newMiners,
+      miners_info: groupMinders,
     });
     setSaveLoading(false);
     if (data?.group_id) {
@@ -61,7 +60,7 @@ export default ({
       setMinerNum(minerNum);
       messageManager.showMessage({
         type: 'success',
-        content: 'Add Miner successfully',
+        content: 'Save Group successfully',
       });
       router.push('/account#miners');
     } else {
@@ -73,7 +72,7 @@ export default ({
       }
     }
   };
-
+  console.log('---e',groupDetail)
   return (
     <>
       <Breadcrumb items={routerItems} />
@@ -85,6 +84,7 @@ export default ({
           <li className='flex flex-col'>
             <span className='text_des mb-2'>{tr('group_name')}</span>
             <Input
+              disabled={groupDetail&&groupDetail.is_default}
               placeholder={tr('create_group_holder')}
               className='h-12 w-full custom_input mt-2'
               value={groupName}
@@ -100,7 +100,7 @@ export default ({
               defaultMiners={groupMinders}
               minersNum={minersNum}
               onChange={(values) => {
-                setNewMiners(values);
+                setGroupMiners(values);
               }}
             />
           </li>

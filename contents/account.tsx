@@ -157,6 +157,7 @@ export const personal_setting = [
   {
     title: 'personal_name',
     dataIndex: 'name',
+    placeholder: 'personal_name',
   },
   {
     title: 'old_password',
@@ -389,10 +390,8 @@ export const overview = {
       width: 100,
       fixed: 'left',
       render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
+        const showText = record.is_default ? tr('default_group'):text
+        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
       },
     },
     {
@@ -553,10 +552,8 @@ export const account_lucky = {
       fixed: 'left',
       width: '20%',
       render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
+        const showText = record.is_default ? tr('default_group'):text
+        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
       },
     },
     {
@@ -613,10 +610,8 @@ export const account_balance = {
       width: 100,
       fixed: 'left',
       render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
+        const showText = record.is_default ? tr('default_group'):text
+        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
       },
     },
     {
@@ -867,7 +862,7 @@ export const account_balance = {
 };
 export const account_reward = {
   columns: (tr: any, type?: string) => {
-    let arr = [
+    let arr:Array<any> = [
       {
         title: 'tag',
         dataIndex: 'tag',
@@ -897,10 +892,8 @@ export const account_reward = {
         fixed: 'left',
         width: '20%',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '10%' },
@@ -971,10 +964,8 @@ export const account_power = {
         width: 100,
         fixed: 'left',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       {
@@ -1136,10 +1127,8 @@ export const account_gas = {
         width: 100,
         fixed: 'left',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       {
@@ -1305,10 +1294,8 @@ export const account_expired = {
         dataIndex: 'group_name',
         width: '15%',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       {

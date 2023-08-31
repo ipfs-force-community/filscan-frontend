@@ -39,6 +39,7 @@ export default ({
   if (hashParams?.miner) {
     return <Detail miner={hashParams.miner} data={expiredData} />;
   }
+  console.log('===--33',groups)
   return (
     <>
       <div className='flex justify-between items-center'>

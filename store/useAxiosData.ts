@@ -13,19 +13,19 @@ interface OPTIONS {
 interface FetchDataResult<T> {
   result: T | null;
   error?: string | null;
-  [key:string]:any
+  [key: string]: any
 }
 
 const DefaultOptions = {
   method: 'post',
   maxRetries: 3,
-  timeout:0
+  timeout: 0
 }
 
 // 用于存储每个 URL 和方法的取消令牌
 const cancelTokenSources: Record<string, CancelTokenSource> = {};
 
-function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any ) {
+function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any) {
   const [data, setData] = useState<FetchDataResult<T> | null>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
     setLoading(true);
-    const { method , maxRetries , timeout } = options;
+    const { method, maxRetries, timeout } = options;
     const body = payload || {};
     let error: any = null;
     let data: T | null | any = null;
@@ -75,10 +75,10 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           });
           return response.data;;
         }
-        data = response.data|| {};
+        data = response.data || {};
         setData(data?.result || data || {});
         setLoading(false);
-        return data?.result || data ; // 请求成功，跳出循环
+        return { data: data?.result || data, loading, error }; // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
           console.log('Request canceled', thrown.message);
@@ -86,16 +86,19 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         } else {
           retriesRef.current += 1;
           if (retriesRef.current < maxRetries) {
-            return axiosData(url,payload,options);
+            return axiosData(url, payload, options);
           } else {
             setError(thrown);
             setLoading(false);
             if (retriesRef.current === maxRetries) {
+              if (thrown?.response?.status === 401) {
+                return null
+              }
               return notification.error({
                 className: 'custom-notification',
                 message: 'Error',
                 duration: 100,
-                description: thrown?.message||'Network Error'
+                description: thrown?.message || 'Network Error'
               })
             }
 
@@ -117,7 +120,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     };
   }, [initialUrl, initialPayload, initialOptions]);
 
-  return { data, loading,error, axiosData };
+  return { data, loading, error, axiosData };
 }
 
 export default useAxiosData;
