@@ -1,15 +1,19 @@
 import { Translation } from "@/components/hooks/Translation";
 import { useHash } from "@/components/hooks/useHash";
 import { verify_source } from "@/contents/contract"
-import { Button, Input, Select } from "antd";
+import { Button, Input, Select, notification } from "antd";
 import { useEffect, useState } from "react";
 import Upload from "./Upload";
+import { apiUrl } from "@/contents/apiUrl";
+import useAxiosData from "@/store/useAxiosData";
 
 const { TextArea } = Input;
 
 export default () => {
   const { tr } = Translation({ ns: 'contract' });
+  const {axiosData } = useAxiosData()
   const { hashParams } = useHash();
+  const {type } = hashParams;
   const [data,setData] = useState<any>({
     contract_address: '',
     compile_version: '',
@@ -17,7 +21,8 @@ export default () => {
     optimize_runs: 200,
     arguments:'',
   })
-  const [files, setFiles] = useState({})
+  const [files, setFiles] = useState<any>({})
+  const [loading,setLoading] = useState<boolean>(false)
   const [configFile, setConfigFile] = useState({})
 
   useEffect(() => {
@@ -28,7 +33,61 @@ export default () => {
         compile_version:hashParams.version||""
       })
     }
-  },[hashParams])
+  }, [hashParams])
+
+  const handleSave = () => {
+    const obj = { ...data };
+    const filesList = Object.keys(files) || [];
+    if (filesList.length === 0) {
+      return notification.warning({
+        className: 'custom-notification',
+        message: 'Warning',
+        duration: 100,
+        description: 'please select file'
+      })
+    }
+    const source_file: any = [];
+    filesList.forEach((v) => {
+      const show_file = files[v];
+      const item = {
+        file_name: show_file.name,
+        source_code: show_file.value
+      };
+      source_file.push(item)
+
+    })
+    obj.source_file = source_file;
+    obj.optimize_runs = data.optimize_runs ? Number(data.optimize_runs) : undefined;
+
+    setLoading(true)
+    const url = type === 'standard' ? apiUrl.contract_hard_verify : apiUrl.contract_verify;
+
+    // axiosData(url, { ...obj }).then((res: any) => {
+    //   setLoading(false)
+    //   if (res && res.result) {
+    //     setOutData({ ...res?.result?.compiled_file || {}, is_verified: res.result.is_verified });
+    //     setActive('compile_output')
+    //     setDisable(false);
+    //     if (res.result.is_verified) {
+    //       notification.success({
+    //         className: 'custom-notification',
+    //         message: 'success',
+    //         duration: 100,
+    //         description: 'Success'
+    //       })
+    //     } else {
+    //       notification.error({
+    //         className: 'custom-notification',
+    //         message: 'Error',
+    //         duration: 100,
+    //         description: 'Invalid Arguments'
+    //       })
+    //     }
+
+    //   }
+
+    // })
+  }
 
   const renderChildren = (item: any) => {
     const { dataIndex, title, placeholder = '' } = item;
@@ -79,7 +138,7 @@ export default () => {
         className="custom_input"
         onChange={(e: any) => { setData({ ...data, arguments: e.target.value }) }} />
       <div className="flex gap-x-2 mt-5">
-        <Button className="primary_btn flex items-center gap-x-2 h-8">   {tr('confirm')}</Button>
+        <Button className="primary_btn flex items-center gap-x-2 h-8" onClick={ handleSave}> {tr('confirm')}</Button>
         <Button className="cancel_btn"> { tr('reset')}</Button>
         <Button className="cancel_btn"> { tr('back')}</Button>
       </div>

@@ -201,7 +201,7 @@ export function get$Number(str: string | number, len?: number) {
 }
 //%
 export function formatNumberPercentage(num:string|number, decimalPlaces:number =2) {
-  return parseFloat(Number(num).toFixed(decimalPlaces));
+  return parseFloat((Number(num)*100).toFixed(decimalPlaces));
 }
 export function getClassName(str: string | number) {
   const showNum = Number(str);

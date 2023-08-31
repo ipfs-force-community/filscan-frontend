@@ -195,9 +195,7 @@ export const overview = {
               ? 'text_green'
               : 'text_red'
             : '';
-          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
-            ' '
-          );
+          const [textValue, unit] = unitConversion(text, 2).split( ' ' );
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -206,7 +204,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?unitConversion(changeText,2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -242,7 +240,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -278,7 +276,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -314,7 +312,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -348,7 +346,7 @@ export const overview = {
                 <span className='text-sm text_des'>{tr('balance_24')}</span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(changeText, false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>

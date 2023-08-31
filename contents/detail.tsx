@@ -79,6 +79,7 @@ export const power_list = {
     {
       title: 'total_reward',
       dataIndex: 'total_reward',
+      render: (text:string) => text ? formatFilNum(text, false, false) : '--',
     },
     {
       title: 'sector_size',
