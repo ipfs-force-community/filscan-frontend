@@ -20,6 +20,15 @@ import Footer from '@/components/footer';
 
 const { Content, Header } = Layout;
 
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+console.log("+=====================xxxxx")
+
 // const defaultUerInfo: UserInfo = {
 //   name: '',
 //   mail: '',
