@@ -53,12 +53,12 @@ const EditableText: React.FC<EditableTextProps> = ({
       showCount={true}
       maxLength={20}
       onPressEnter={handleBlur}
-      className='!rounded-md custom_input !w-4/5' // tailwindcss样式
+      className='!rounded-md custom_input  !w-4/5' // tailwindcss样式
     />
   ) : (
     <div
       onClick={handleTextClick}
-      className='flex des_bg_color h-8 w-fit max-w-[200px] items-center p-2 rounded-[5px] cursor-default'>
+      className='flex des_bg_color h-8 w-fit max-w-[200px] text-xs items-center p-2 rounded-[5px] cursor-default'>
       <TextTooltip text={currentText || '--'} />
     </div>
   );

@@ -50,74 +50,67 @@ export default () => {
   // px-24
   return (
     <>
-      <MobileView>
-        <MHeader/>
-      </MobileView>
-      <BrowserView>
-        <Header className='!h-[106px] !p-0 fixed !w-full z-50	'>
-          <div className='flex justify-between items-center custom_header  h-[45px] text-xs font-PingFang font-medium'>
-            <ul className='flex gap-x-5 list-none max-w-[1440px]'>
-              {header_top?.left.map((item) => {
-                const { title, dataIndex, render } = item;
-                const value = data[dataIndex];
-                const renderDom = render && render(value, data);
-                return (
-                  <li key={dataIndex} className='flex gap-x-1'>
-                    <span>{tr(title)}:</span>
-                    <span>{renderDom || value}</span>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className='flex gap-x-2.5 items-center'>
-              <Image
-                src={network}
-                width={28}
-                height={28}
-                alt='network'
-                key='network'
-              />
-              <Select
-                ns=''
-                wrapClassName='!bg-bgColor'
-                className='!-inset-x-1/2	'
-                header={
-                  <span className='flex items-center justify-center w-7 h-7 border card_bg_color  border_color cursor-pointer rounded-[5px]'>
-                    {tr(lang)}
-                  </span>
-                }
-                value={lang}
-                onChange={handleLangChange}
-                options={langOptions}
-              />
-              <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] card_bg_color  border_color '>
-                {getSvgIcon('network')}
+      <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
+        <ul className='flex gap-x-5 list-none'>
+          {header_top?.left.map((item) => {
+            const { title, dataIndex, render } = item;
+            const value = data[dataIndex];
+            const renderDom = render && render(value, data);
+            return (
+              <li key={dataIndex} className='flex gap-x-1'>
+                <span>{tr(title)}:</span>
+                <span>{renderDom || value}</span>
+              </li>
+            );
+          })}
+        </ul>
+        <div className='flex gap-x-2.5 items-center'>
+          <Image
+            src={network}
+            width={28}
+            height={28}
+            alt='network'
+            key='network'
+          />
+          <Select
+            ns=''
+            wrapClassName='!bg-bgColor'
+            className='!-inset-x-1/2	'
+            header={
+              <span className='flex items-center justify-center w-7 h-7 border main_bg_color  border_color cursor-pointer rounded-[5px]'>
+                {tr(lang)}
               </span>
-              <Image
-                src={showTheme}
-                width={28}
-                height={28}
-                alt='theme'
-                className='cursor-pointer'
-                key='moon'
-                onClick={() => {
-                  localStorage.setItem(
-                    'theme',
-                    theme === 'dark' ? 'light' : 'dark'
-                  );
-                  setTheme(theme === 'dark' ? 'light' : 'dark');
-                }}
-              />
-              {/* <Link href='/account/login' as='/account/login' scroll={ false}>
+            }
+            value={lang}
+            onChange={handleLangChange}
+            options={langOptions}
+          />
+          <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] main_bg_color  border_color '>
+            {getSvgIcon('network')}
+          </span>
+          <Image
+            src={showTheme}
+            width={28}
+            height={28}
+            alt='theme'
+            className='cursor-pointer'
+            key='moon'
+            onClick={() => {
+              localStorage.setItem(
+                'theme',
+                theme === 'dark' ? 'light' : 'dark'
+              );
+              setTheme(theme === 'dark' ? 'light' : 'dark');
+            }}
+          />
+          {/* <Link href='/account/login' as='/account/login' scroll={ false}>
                      <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
                 </Link> */}
-              <Account />
-            </div>
-          </div>
-          <hr className='border_color'/>
-          <Nav />
-        </Header>
-      </BrowserView>
+          <Account />
+        </div>
+      </div>
+      <hr className='border_color'/>
+      <Nav />
     </>
   );
 };

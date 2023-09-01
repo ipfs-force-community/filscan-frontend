@@ -18,7 +18,7 @@ export default () => {
   if (!name) {
     return (
       <Link href='/account/login' as='/account/login' scroll={false}>
-        <span className='flex items-center justify-center w-14 h-7 border border_color card_bg_color  rounded-[5px] text_color hover:bg-primary hover:text-white'>
+        <span className='flex items-center justify-center !w-14 h-7 border border_color main_bg_color  rounded-[5px] primary_btn '>
           {tr('login')}
         </span>
       </Link>
@@ -31,7 +31,7 @@ export default () => {
         <span>{name?.length > 5? name?.slice(0, 5) + '...' : name}</span>
         <Image src={down} width={8} height={4} alt='down' />
       </div>
-      <ul className='hidden group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow card_bg_color  border_color'>
+      <ul className='hidden group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow main_bg_color  border_color'>
         {account_manager.map((item, index) => {
           if (item.key === 'logout') {
             return (

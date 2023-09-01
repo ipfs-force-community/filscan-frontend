@@ -34,9 +34,9 @@ const account = {
   group_add: '添加分组',
   miners_group_manage: '分组设置',
   total_out_come_gas: '总支出/Gas消耗',
-  pledge_amount_24: '质押FIL/24h变化',
-  balance_24:'可用余额/24h变化',
-  quality_power_24: '有效算力/24h变化',
+  pledge_amount_24: '质押FIL/今日变化',
+  balance_24:'可用余额/今日变化',
+  quality_power_24: '有效算力/今日变化',
 
   //节点管理
   delete_group: '删除分组',
@@ -68,21 +68,21 @@ const account = {
   miner_id: '节点ID',
 
   //地址余额
-  miner_balance: '节点余额',
-  owner_balance: 'Owner余额',
-  worker_balance:'Worker余额',
-  controller_0_balance: 'Controller0余额',
-  controller_1_balance: 'Controller1余额',
-  controller_2_balance: 'Controller2余额',
-  beneficiary_balance: 'Beneficiary余额',
-  market_balance: 'MarketBalance余额',
+  miner_balance: '节点余额/今日变化',
+  owner_balance: 'Owner余额/今日变化',
+  worker_balance:'Worker余额/今日变化',
+  controller_0_balance: 'Controller0余额/今日变化',
+  controller_1_balance: 'Controller1余额/今日变化',
+  controller_2_balance: 'Controller2余额/今日变化',
+  beneficiary_balance: 'Beneficiary余额/今日变化',
+  market_balance: 'MarketBalance余额/今日变化',
 
   //奖励
   block_count:'爆块',
   win_count:'赢票',
   block_reward:'奖励',
   total_reward: "总奖励",
-  total_reward_24:'总奖励/24h奖励',
+  total_reward_24:'总奖励/今日变化',
 
   //算力概览
   quality_power: '有效算力',
@@ -124,6 +124,7 @@ const account = {
   new_placeholder:'输入新密码',
   confirm_password: '确认密码',
   confirm_placeholder: '重新输入新密码',
+  personal_name:'请输入账户名称'
 
 }
 

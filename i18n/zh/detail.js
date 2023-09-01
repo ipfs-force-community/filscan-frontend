@@ -164,7 +164,7 @@ const detail = {
     message_list_total:'共 {{value}} 条消息',
     block_list_total: '总计 {{value}} 区块',
     traces_list_total: "总计 {{value}} 条消息",
-    contract_token_list_total: '总计 {{value}} 条代币',
+    contract_token_list_total: '总计 {{value}} 条Token',
     erc20_transfer_total:'总计 {{value}} 条转账',
     //general 
     general_overview_title:'账户概览',
@@ -189,13 +189,13 @@ const detail = {
     transfer_count:'交易次数',
         go_verify:'去验证',
 
-    contract_token_list: '代币',
+    contract_token_list: 'Token',
     token_name: 'Token Name',
     contract_id: 'Contract Id',
     amount: "Amount",
 
     //erc20 transfer
-    erc20_transfer:'代币交易',
+    erc20_transfer:'Token交易',
     platform:'交易平台'
 
     

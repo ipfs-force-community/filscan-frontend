@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
@@ -33,27 +33,8 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
-
   const { data: minersNum, loading: minerLoading } =
     useAxiosData(proApi.account_miners) || {};
-  const { data: groupsData, loading: groupsLoading } = useAxiosData(
-    proApi.getGroupsId
-  );
-
-  const groups = useMemo(() => {
-    const newGroups: any = [{ label: tr('all'), value: '0', group_id: '0' }];
-    if (groupsData && groupsData.group_list) {
-      (groupsData.group_list || []).forEach((group: any) => {
-        newGroups.push({
-          ...group,
-          value: String(group.group_id),
-          label: tr(group?.group_name),
-        });
-      });
-    }
-
-    return newGroups;
-  }, [groupsData]);
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {
@@ -78,7 +59,7 @@ const Account: React.FC = () => {
       }
     });
     return itemsArr;
-  }, []);
+  }, [tr]);
 
   useEffect(() => {
     if (!userInfo.mail && !localStorage.getItem('token')) {
@@ -88,13 +69,14 @@ const Account: React.FC = () => {
 
   if (minerLoading) {
     return (
-      <div className='mt-10'>
+      <div className='mt-10 main_contain'>
         <Skeleton active />
         <Skeleton active />
         <Skeleton active />
       </div>
     );
   }
+
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -107,8 +89,8 @@ const Account: React.FC = () => {
               return (
                 <Link
                   key={parent.label}
-                  href={`/account#${parent.key}`}
-                  scroll={false}
+                  href={ `/account#${parent.key}`}
+                  scroll={ false}
                   className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
                     parent?.icon ? 'font-medium' : 'ml-5 font-normal'
                   } ${
@@ -126,49 +108,49 @@ const Account: React.FC = () => {
           </ul>
         </div>
         <div
-          className='flex-grow flex flex-col px-5 py-10 w_account'
+          className='flex-grow flex flex-col px-5 py-10 w_account min-h-full'
           style={{ height: 'inherit' }}>
           {minersNum?.miners_count === 0 &&
           hashParams.type !== 'miner_add' &&
-          selectedKey !== 'personal' ? (
-              <NoMiner selectedKey={selectedKey} />
+          selectedKey !== 'personal' && selectedKey !== 'miners' ? (
+              <NoMiner selectedKey={selectedKey === 'overview'? 'overview':'overview_' + selectedKey} />
             ) : (
               <>
                 {selectedKey === 'overview' && (
-                  <Overview selectedKey='overview' groups={groups} />
+                  <Overview selectedKey='overview' />
                 )}
                 {selectedKey === 'miners' && <Miners minersNum={minersNum} />}
                 {selectedKey === 'lucky' && (
                   <Lucky
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'power' && (
                   <Power
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'gas' && (
-                  <Gas selectedKey={'overview_' + selectedKey} groups={groups} />
+                  <Gas selectedKey={'overview_' + selectedKey} />
                 )}
                 {selectedKey === 'balance' && (
                   <Balance
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'expired' && (
                   <Expired
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
                 {selectedKey === 'reward' && (
                   <Reward
                     selectedKey={'overview_' + selectedKey}
-                    groups={groups}
+
                   />
                 )}
 

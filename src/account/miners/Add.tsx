@@ -17,7 +17,6 @@ import { MinerNum } from '../type';
 import useAxiosData from '@/store/useAxiosData';
 import { useGroupsStore } from './content';
 import { useRouter } from 'next/router';
-import { data } from 'autoprefixer';
 
 export default ({
   groups,
@@ -75,7 +74,6 @@ export default ({
         ),
       });
     }
-    console.log('--values',values,values.trim())
     setAddMiner([...addMiners, { miner_id: values?.trim() }]);
   };
 
@@ -207,7 +205,6 @@ export default ({
       <CreateGroup
         show={show}
         onChange={(name) => {
-          //  setGroupsName(value)
           setShow(false);
         }}
       />

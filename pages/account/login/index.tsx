@@ -15,6 +15,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
+import Banner from '@/src/account/Banner';
 
 export default () => {
   const [form] = Form.useForm();
@@ -35,7 +36,7 @@ export default () => {
       //未注册
       messageManager.showMessage({
         type: 'error',
-        content: tr('no_account'),
+        content: 'invalid mail or password',
         icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
       });
     }
@@ -62,9 +63,11 @@ export default () => {
   }, [userInfo.mail]);
 
   return (
-    <>
-      <div className='bg-black w-full h-[200px]'>Banner</div>
-      <div className='!w-[404px] !p-0 !mt-14 !m-auto'>
+    < >
+      <div className='bg-black w-full h-[200px]'>
+        <Banner />
+      </div>
+      <div className='main_contain !w-[404px] !min-w-[404px] !mb-10 !mt-8 '>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {
             return (
@@ -73,7 +76,7 @@ export default () => {
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
-                className={`text-lg text-font_des hover:text-font ${
+                className={`text-lg text_color  ${
                   hashParams.type === log_item.dataIndex ? 'highlight' : ''
                 }`}>
                 {tr(log_item.title)}
@@ -104,13 +107,15 @@ export default () => {
                 rules={item.rules}>
                 {item?.name?.includes('password') ? (
                   <Input.Password
-                    className='h-12'
+                    className='h-12 custom_input'
                     prefix={item.prefix}
                     placeholder={tr(item.placeholder)}
                   />
                 ) : (
                   <Input
+                    className='custom_input'
                     prefix={item.prefix}
+                    style={{background:'transparent'}}
                     placeholder={tr(item.placeholder)}
                     suffix={
                       showButton && (
@@ -127,21 +132,21 @@ export default () => {
             valuePropName='checked'
             className='!m-0 !p-0'>
             <div className='!flex !justify-between'>
-              <Checkbox defaultChecked={true}>{tr('remember_me')}</Checkbox>
+              <Checkbox className='custom_checkbox !text_color' defaultChecked={true}>{tr('remember_me')}</Checkbox>
               <a href=''>{tr('forgot_password')}</a>
             </div>
           </Form.Item>
           <Form.Item className='!mt-6'>
             <Button
               htmlType='submit'
-              className='!w-full !bg-primary !text-white'>
+              className='!w-full primary_btn'>
               {tr('login')}
             </Button>
           </Form.Item>
         </Form>
         <div className='flex gap-x-2'>
           <span>{tr('no_account')}</span>
-          <Link href={'/account/register'}>{tr('go_register')}</Link>
+          <Link href={'/account/register'} className='text-primary'>{tr('go_register')}</Link>
         </div>
       </div>
     </>

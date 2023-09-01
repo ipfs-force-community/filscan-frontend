@@ -30,19 +30,17 @@ const footerLinks = [
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
-
-  console.log('====eee');
   return (
     <>
       <MobileView>
         <MFooter/>
       </MobileView>
       <BrowserView>
-        <Footer className='footer !bg-black h-[140px] flex justify-between flex-col'>
-          <span className='!text-white flex items-center'>
+        <div className='custom_footer flex justify-between flex-col'>
+          <div className='!text-white flex items-center'>
             <Image src={logo} width={45} height={45} alt='logo' />
             <span className='font-Barlow font-medium text-xl ml-2'>Filscan.io </span>
-          </span>
+          </div>
           <div className='flex justify-between text-border_des'>
             <div className='flex flex-col gap-y-1 text-xs'>
               <span>
@@ -62,7 +60,8 @@ export default () => {
               })}
             </ul>
           </div>
-        </Footer>
+
+        </div>
       </BrowserView>
     </>
   );

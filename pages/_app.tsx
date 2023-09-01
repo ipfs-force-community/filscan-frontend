@@ -105,13 +105,16 @@ export default function App({ Component, pageProps }: AppProps) {
       <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
         <FilscanStoreProvider>
           <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
-            <Layout className={`container_body ${theme}`}>
-              <HeaderMain />
-              <Content className='text-sm'>
-                <Component {...pageProps} />
+            <div className={`container_body text-sm ${theme}`}>
+              <div className='w-full h-[110px] main_bg_color'>
+                <HeaderMain />
+              </div>
+              <Component {...pageProps} />
+              <div className='w-full h-[140px] bg-footerColor'>
                 <Footer />
-              </Content>
-            </Layout>
+              </div>
+
+            </div>
           </UserStoreContext.Provider>
         </FilscanStoreProvider>
       </ConfigProvider>

@@ -9,15 +9,12 @@ import Selects from '@/packages/selects';
 import useAxiosData from '@/store/useAxiosData';
 import { formatDateTime } from '@/utils';
 import { Skeleton } from 'antd';
-import { data } from 'autoprefixer';
 import { useMemo, useState } from 'react';
 
 export default ({
   selectedKey,
-  groups,
 }: {
   selectedKey: string;
-  groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string>('0');
@@ -26,12 +23,30 @@ export default ({
     return overview.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: overviewData, loading } = useAxiosData(proApi.getOverview, {
     group_id: active ? Number(active) : '',
   });
+
+  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
+    group_id: active ? Number(active) : null,
+  });
+  const groups:Array<any> = useMemo(() => {
+    let newGroups: Array<any> = [{
+      value: '0',
+      label:tr('all')
+    }];
+    (groupsData?.group_list || []).forEach((group: any) => {
+      newGroups.push({
+        ...group,
+        value: String(group.group_id),
+        label: tr(group?.group_name),
+      });
+    });
+    return newGroups
+  }, [groupsData?.group_list, tr])
 
   if (loading) {
     return (

@@ -272,7 +272,7 @@ export default (props: Props) => {
         )}
       </div>
 
-      <div className={`h-[350px] w-full card_shadow rounded-xl`}>
+      <div className={`h-[350px] w-full card_shadow border border_color rounded-xl`}>
         <EChart options={newOptions} />
       </div>
     </div>

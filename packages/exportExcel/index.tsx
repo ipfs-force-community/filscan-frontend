@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import { Button } from 'antd';
 import { getSvgIcon } from '@/svgsIcon';
 import { Translation } from '@/components/hooks/Translation';
-import { formatDateTime, formatFilNum, unitConversion } from '@/utils';
+import { formatDateTime, formatFilNum, formatNumberPercentage, unitConversion } from '@/utils';
 
 interface ExportToExcelProps {
   columns: { title: string; dataIndex: string; [key: string]: any }[];
@@ -17,16 +17,20 @@ interface ExportToExcelProps {
 
 function getUnitValue(
   value: any,
-  amountUnit: { unit: string; number?: number }
+  amountUnit: { unit: string; number?: number },
+
 ) {
-  if (amountUnit.unit.includes('fil')) {
+  if (amountUnit?.unit?.includes('fil')) {
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const filValue = formatFilNum(value, false, false, amountUnit.number || 2);
     return otherUnit ? filValue + `/${otherUnit}` : filValue;
-  } else if (amountUnit.unit === 'power') {
+  } else if (amountUnit?.unit === 'power') {
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const powerValue = unitConversion(value, amountUnit.number || 2);
     return otherUnit ? powerValue + `/${otherUnit}` : powerValue;
+  } else if (amountUnit?.unit === '%') {
+    const powerValue = formatNumberPercentage(value,amountUnit.number)
+    return powerValue +'%';
   }
   return value;
 }
@@ -55,20 +59,20 @@ const ExportExcel: FC<ExportToExcelProps> = ({
     const headers: Array<string> = [];
     columns.forEach((col: any) => {
       headers.push(col.title);
-      if (col.exports && Array.isArray(col.exports)) {
-        col.exports.forEach((v: string) => {
-          headers.push(tr(v));
-        });
-      }
+      // if (col.exports && Array.isArray(col.exports)) {
+      //   col.exports.forEach((v: string) => {
+      //     headers.push(tr(v));
+      //   });
+      // }
     });
     const accessors: Array<string> = [];
     columns.forEach((col: any) => {
       accessors.push(col.dataIndex);
-      if (col.exports && Array.isArray(col.exports)) {
-        col.exports.forEach((v: string) => {
-          accessors.push(tr(v));
-        });
-      }
+      // if (col.exports && Array.isArray(col.exports)) {
+      //   col.exports.forEach((v: string) => {
+      //     accessors.push(tr(v));
+      //   });
+      // }
     });
     const dataRows: Array<any> = [];
     data.forEach((dataItem) => {
@@ -76,6 +80,7 @@ const ExportExcel: FC<ExportToExcelProps> = ({
       columns.forEach((col: any) => {
         const dataIndex = col.dataIndex;
         let value = dataItem[dataIndex];
+        let otherValue = '';
         const showUnit =
           col?.amountUnit &&
           col.amountUnit[dataIndex] &&
@@ -83,36 +88,41 @@ const ExportExcel: FC<ExportToExcelProps> = ({
         if (showUnit) {
           value = getUnitValue(value, col.amountUnit[dataIndex]);
         }
-        row.push(value);
-        if (col.exports && Array.isArray(col.exports)) {
-          col.exports.forEach((v: string) => {
-            const otherKey = v;
-            let otherValue = dataItem[otherKey];
-            const otherShow =
-              col?.amountUnit && col.amountUnit[v] && col?.amountUnit[v]?.unit;
-            if (otherShow) {
-              otherValue = getUnitValue(otherValue, col?.amountUnit[v]);
-            }
-            row.push(otherValue);
-          });
+        if (col.exports) {
+          if (col.exports && Array.isArray(col.exports)) {
+            col.exports.forEach((v: string) => {
+              otherValue = otherValue + '/' + String(getUnitValue(dataItem[v], col.amountUnit[v]));
+            });
+          }
         }
+        row.push(String(value)+otherValue);
+        // if (col.exports && Array.isArray(col.exports)) {
+        //   col.exports.forEach((v: string) => {
+        //     const otherKey = v;
+        //     let otherValue = dataItem[otherKey];
+        //     const otherShow =
+        //       col?.amountUnit && col.amountUnit[v] && col?.amountUnit[v]?.unit;
+        //     if (otherShow) {
+        //       otherValue = getUnitValue(otherValue, col?.amountUnit[v]);
+        //     }
+        //     row.push(otherValue);
+        //   });
+        // }
       });
       dataRows.push(row);
     });
 
     const dataArray = [headers, ...dataRows];
-
     //const dataArray = data.map((row) => accessors.map((field) => row[field]));
     //dataArray.unshift(headers);
-
+    const showFileName = fileName
+      ? fileName +
+        formatDateTime(Number(new Date().getTime() / 1000), 'MM_DD hh:mm:ss')
+      : formatDateTime(Number(new Date().getTime() / 1000), 'MM_DD hh:mm:ss');
     const ws = XLSX.utils.aoa_to_sheet(dataArray);
     const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const blobData = new Blob([excelBuffer], { type: fileType });
-    const showFileName = fileName
-      ? fileName +
-        formatDateTime(Number(new Date().getTime() / 1000), 'MM-DD HH:mm')
-      : formatDateTime(Number(new Date().getTime() / 1000), 'MM-DD HH:mm');
 
     FileSaver.saveAs(blobData, showFileName + fileExtension);
   };

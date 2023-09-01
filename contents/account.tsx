@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Item, MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
-import { formatDateTime, formatFilNum, formatNumber, unitConversion } from '@/utils';
+import { formatDateTime, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
 import Image from 'next/image';
 import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg';
@@ -157,6 +157,7 @@ export const personal_setting = [
   {
     title: 'personal_name',
     dataIndex: 'name',
+    placeholder: 'personal_name',
   },
   {
     title: 'old_password',
@@ -189,15 +190,13 @@ export const overview = {
           const changeText = record?.sum_power_change_24h
             ? Number(record.sum_power_change_24h)
             : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const flag = changeText ? (changeText > 0 ? '+' : '') : '';
           const className = changeText
             ? changeText > 0
               ? 'text_green'
               : 'text_red'
             : '';
-          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
-            ' '
-          );
+          const [textValue, unit] = unitConversion(text, 2).split( ' ' );
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -205,8 +204,7 @@ export const overview = {
                   {tr('quality_power_24')}
                 </span>
                 <span className={className}>
-                  {flag}
-                  {changeText || '--'}
+                  { changeText? flag + unitConversion(changeText,2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -242,7 +240,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -278,7 +276,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -314,7 +312,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -348,7 +346,7 @@ export const overview = {
                 <span className='text-sm text_des'>{tr('balance_24')}</span>
                 <span className={className}>
                   {flag}
-                  {changeText || '--'}
+                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -391,10 +389,8 @@ export const overview = {
       width: 100,
       fixed: 'left',
       render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
+        const showText = record.is_default ? tr('default_group'):text
+        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
       },
     },
     {
@@ -555,10 +551,8 @@ export const account_lucky = {
       fixed: 'left',
       width: '20%',
       render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
+        const showText = record.is_default ? tr('default_group'):text
+        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
       },
     },
     {
@@ -566,20 +560,20 @@ export const account_lucky = {
       amountUnit: {
         lucky_rate_24h: { unit: '%', number: 2 },
       },
-      render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+      render: (text: string | number) => text ? formatNumberPercentage(text) + '%' : text
     },
     {
       title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%',
       amountUnit: {
         'lucky_rate_7d': { unit: '%', number: 2 },
       },
-      render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+      render: (text: string | number) => text ? formatNumberPercentage(text) + '%' : text
     },
     {
       title: '30d_lucky', dataIndex: 'lucky_rate_30d',
       amountUnit: {
         'lucky_rate_30d': { unit: '%', number: 2 },
-      }, width: '15%', render: (text: string | number) => text ? Number(text) * 100 + '%' : text
+      }, width: '15%', render: (text: string | number) => text ?formatNumberPercentage(text) + '%' : text
     },
   ],
 };
@@ -612,13 +606,11 @@ export const account_balance = {
     {
       title: 'group_name',
       dataIndex: 'group_name',
-      width: 100,
+      width: 150,
       fixed: 'left',
       render: (text: string, record: any) => {
-        if (record.is_default) {
-          return tr('group_default');
-        }
-        return text;
+        const showText = record.is_default ? tr('default_group'):text
+        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
       },
     },
     {
@@ -869,7 +861,7 @@ export const account_balance = {
 };
 export const account_reward = {
   columns: (tr: any, type?: string) => {
-    let arr = [
+    let arr:Array<any> = [
       {
         title: 'tag',
         dataIndex: 'tag',
@@ -899,10 +891,8 @@ export const account_reward = {
         fixed: 'left',
         width: '20%',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '10%' },
@@ -973,10 +963,8 @@ export const account_power = {
         width: 100,
         fixed: 'left',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       {
@@ -997,24 +985,24 @@ export const account_power = {
         },
         render: (text: string, record: any) => unitConversion(text, 2),
       },
-      {
-        title: 'dc_power',
-        dataIndex: 'dc_power',
-        width: 200,
-        amountUnit: {
-          dc_power: { unit: 'power', number: 2 },
-        },
-        render: (text: string, record: any) => unitConversion(text, 2),
-      },
-      {
-        title: 'cc_power',
-        dataIndex: 'cc_power',
-        width: 200,
-        amountUnit: {
-          cc_power: { unit: 'power', number: 2 },
-        },
-        render: (text: string, record: any) => unitConversion(text, 2),
-      },
+      // {
+      //   title: 'dc_power',
+      //   dataIndex: 'dc_power',
+      //   width: 200,
+      //   amountUnit: {
+      //     dc_power: { unit: 'power', number: 2 },
+      //   },
+      //   render: (text: string, record: any) => unitConversion(text, 2),
+      // },
+      // {
+      //   title: 'cc_power',
+      //   dataIndex: 'cc_power',
+      //   width: 200,
+      //   amountUnit: {
+      //     cc_power: { unit: 'power', number: 2 },
+      //   },
+      //   render: (text: string, record: any) => unitConversion(text, 2),
+      // },
       {
         title: 'sector_size',
         dataIndex: 'sector_size',
@@ -1135,13 +1123,11 @@ export const account_gas = {
       {
         title: 'group_name',
         dataIndex: 'group_name',
-        width: 100,
+        width: 150,
         fixed: 'left',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       {
@@ -1245,7 +1231,8 @@ export const account_expired = {
       width: '20%',
       render: (text: string, record: any, tr: any) => {
         const [year, month] = text.split('-');
-        return <span>{tr('exp_month', { year, month })}</span>;
+        return <span>{ formatDateTime(text,'YYYY-MM-DD')}</span>
+        // return <span>{tr('exp_month', { year, month })}</span>;
       },
     },
     {
@@ -1307,10 +1294,8 @@ export const account_expired = {
         dataIndex: 'group_name',
         width: '15%',
         render: (text: string, record: any) => {
-          if (record.is_default) {
-            return tr('group_default');
-          }
-          return text;
+          const showText = record.is_default ? tr('default_group'):text
+          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
         },
       },
       {

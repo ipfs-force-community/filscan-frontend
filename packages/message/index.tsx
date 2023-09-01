@@ -9,7 +9,7 @@ const messageManager = {
 
   showMessage: ({
     type,
-    duration = 3,
+    duration = 10,
     content,
     icon,
     suffix,

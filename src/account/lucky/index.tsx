@@ -14,10 +14,8 @@ import { formatDateTime } from '@/utils';
 
 export default ({
   selectedKey,
-  groups,
 }: {
   selectedKey: string;
-  groups: Array<any>;
 }) => {
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string>('0');
@@ -25,7 +23,7 @@ export default ({
     return account_lucky.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
     });
-  }, []);
+  }, [tr]);
 
   //proApi
   const { data: luckyData, loading } = useAxiosData(proApi.getLucky, {
@@ -35,6 +33,24 @@ export default ({
   const data = useMemo(() => {
     return luckyData?.lucky_rate_list || [];
   }, [luckyData]);
+
+  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
+    group_id: active ? Number(active) : null,
+  });
+  const groups:Array<any> = useMemo(() => {
+    let newGroups: Array<any> = [{
+      value: '0',
+      label:tr('all')
+    }];
+    (groupsData?.group_list || []).forEach((group: any) => {
+      newGroups.push({
+        ...group,
+        value: String(group.group_id),
+        label: tr(group?.group_name),
+      });
+    });
+    return newGroups
+  },[groupsData?.group_list, tr])
 
   return (
     <>
@@ -58,7 +74,7 @@ export default ({
               setActive(v);
             }}
           />
-          <ExportExcel columns={columns} data={data} />
+          <ExportExcel columns={columns} data={data} fileName={tr(selectedKey)}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>

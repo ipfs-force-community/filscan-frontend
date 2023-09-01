@@ -10,7 +10,6 @@ export default () => {
   const { hashParams } = useHash();
   const { tr } = Translation({ ns: 'contract' });
   const [active,setActive] = useState('source_code')
-  console.log('===',hashParams)
   return <div>
     <div className="mb-10">
       <span className='flex flex-col text-xl font-medium gap-y-2.5'>{tr('verify_title')}</span>

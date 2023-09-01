@@ -16,9 +16,11 @@ import { proApi } from '@/contents/apiUrl';
 export default ({
   miner,
   data,
+  selectedKey
 }: {
   miner?: string | number | null;
-  data?: any;
+    data?: any;
+  selectedKey:string
 }) => {
   const { tr } = Translation({ ns: 'account' });
 
@@ -39,7 +41,7 @@ export default ({
   }, [miner]);
 
   const [date, setDate] = useState({
-    startTime: formatDateTime(getCalcTime(7), 'YYYY-MM-DDTHH:mm:ssZ'),
+    startTime: formatDateTime(getCalcTime(6), 'YYYY-MM-DDTHH:mm:ssZ'),
     endTime: formatDateTime(
       new Date().getTime() / 1000,
       'YYYY-MM-DDTHH:mm:ssZ'
@@ -54,7 +56,7 @@ export default ({
   });
 
   const columns = useMemo(() => {
-    return account_reward.columns(tr,'detail').map((item) => {
+    return account_reward.columns(tr,'detail').map((item:any) => {
       return { ...item, title: tr(item.title) };
     });
 
@@ -93,7 +95,7 @@ export default ({
               });
             }}
           />
-          <ExportExcel columns={columns} data={showData} />
+          <ExportExcel columns={columns} data={showData} fileName={tr(selectedKey)+miner?String(miner):""}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>

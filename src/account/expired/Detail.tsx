@@ -13,9 +13,11 @@ import { account_expired } from '@/contents/account';
 export default ({
   miner,
   data,
+  selectedKey
 }: {
   miner?: string | number | null;
-  data?: any;
+    data?: any;
+  selectedKey:string,
 }) => {
   const { tr } = Translation({ ns: 'account' });
 
@@ -66,7 +68,7 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <ExportExcel columns={columns} data={showData} />
+          <ExportExcel columns={columns} data={showData} fileName={tr(selectedKey)+miner?String(miner):""}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
