@@ -447,13 +447,12 @@ font-display: auto;
         border: 1px solid var(--border-color);
         border-radius: 12px !important;
         background-color: var(--bgColor);
-        border-bottom: transparent !important;
        // border-bottom:1px solid var(--border-color)
      }
      .ant-collapse-content{
             background-color: var(--bgColor);
             border-top: 1px solid var(--border-color);
-            border-radius: 0px 0px 12px 12px;
+            border-radius: 0px 0px 12px 12px !important;
         .ant-collapse-content-box{
              border-radius: 0px 0px 12px 12px;
               background-color: var(--bgColor)
