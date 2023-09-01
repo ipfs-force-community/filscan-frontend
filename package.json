@@ -69,7 +69,8 @@
     "postcss-preset-env": "^9.1.1",
     "react-ace": "^10.1.0",
     "react-i18next": "^13.1.1",
-    "use-deep-compare-effect": "^1.8.1"
+    "use-deep-compare-effect": "^1.8.1",
+    "classnames": "^2.3.2"
   },
   "config": {
     "commitizen": {
