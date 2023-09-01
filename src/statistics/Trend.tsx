@@ -13,7 +13,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import useObserver from '@/components/hooks/useObserver';
-
+import styles from './trend.module.scss'
+import classNames from 'classnames';
 interface Props {
   origin?: string;
   className?: string;
@@ -233,7 +234,7 @@ export default (props: Props) => {
 
   return (
     <div
-      className={`w-full h-[full]  ${className} mt-20`}
+      className={classNames(styles.trend,`w-full h-[full]  ${className} mt-20`)}
       ref={origin === 'home' ? ref : ''}>
       <div className='flex justify-between flex-wrap items-center mb-5'>
         <div className='flex gap-x-10 items-center'>

@@ -1,5 +1,4 @@
 /** @format */
-
 import '@/styles/globals.css';
 import '@/styles/common.scss';
 import '@/styles/custom.scss';

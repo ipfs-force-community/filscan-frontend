@@ -1,5 +1,26 @@
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1000px){
     .home-page{
-        padding: 12px;
+        :global{
+            .main_contain{
+                padding: 12px;
+                .meta-gas{
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 10px;
+                    margin-bottom: 18px;
+                    .gas-wrap{
+                        width: 100%;
+                    }
+                }
+                .box-column{
+                    display: flex;
+                    flex-direction: column;
+                    height: auto;
+                    row-gap:18px;
+                    margin-top: 0;
+                }
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ import fetchData from '../server';
 import { apiUrl } from '@/contents/apiUrl';
 import { get } from 'lodash';
 import { unitConversion } from '@/utils';
-import { metaModel } from '@/models/metaModel';
+import { MetaModel } from '@/models/metaModel';
 import { DefiProtocol } from '../homeData';
 
 class HomeStore {
@@ -34,8 +34,8 @@ class HomeStore {
     });
   }
   get formatMeta (){
-    const [power_increase_24h, power_increase_24h_unit] = unitConversion(this.meta.power_increase_24h, 2).split(' ');
-    const meta:metaModel={
+    const [ power_increase_24h, power_increase_24h_unit ] = unitConversion(this.meta.power_increase_24h, 2).split(' ');
+    const meta:MetaModel={
       power_increase_24h,
       power_increase_24h_unit,
       power_increase_24h_increase:'',
@@ -78,14 +78,14 @@ class HomeStore {
   async fetchHomeMeta() {
     try{
       const res = await fetchData(apiUrl.home_meta)
-      const power_increase_24h:string = get(res,'total_indicators.power_increase_24h')??'0'
-      const add_power_in_32g:string = get(res,'total_indicators.add_power_in_32g')??'0';
-      const miner_initial_pledge:string = get(res,'total_indicators.miner_initial_pledge')??'0';
-      const fil_per_tera_24h:string = get(res,'total_indicators.fil_per_tera_24h')??'0';
-      const total_contract:string = get(res,'total_indicators.total_contract')??'0';
-      const contract_transaction:string = get(res,'total_indicators.contract_transaction')??'0';
-      const contract_address:string = get(res,'total_indicators.contract_address')??'0';
-      const gas_24:string = get(res,'total_indicators.gas_24')??'0';
+      const power_increase_24h:string = get(res,'total_indicators.power_increase_24h') ?? '0'
+      const add_power_in_32g:string = get(res,'total_indicators.add_power_in_32g') ?? '0';
+      const miner_initial_pledge:string = get(res,'total_indicators.miner_initial_pledge') ?? '0';
+      const fil_per_tera_24h:string = get(res,'total_indicators.fil_per_tera_24h') ?? '0';
+      const total_contract:string = get(res,'total_indicators.total_contract') ?? '0';
+      const contract_transaction:string = get(res,'total_indicators.contract_transaction') ?? '0';
+      const contract_address:string = get(res,'total_indicators.contract_address') ?? '0';
+      const gas_24:string = get(res,'total_indicators.gas_24') ?? '0';
 
       this.SET_META({
         power_increase_24h,
