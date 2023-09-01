@@ -3,6 +3,48 @@ import Image from '@/packages/image';
 import { formatNumber, get$Number } from '@/utils';
 import TextTip from '@/packages/textTooltip';
 import Progress from '@/packages/progress';
+import { ColumnsType } from 'antd/es/table';
+import { DefiProtocol } from '@/store/homeData';
+
+const mobilColumns :ColumnsType<DefiProtocol> = [
+  {
+    title: 'rank',
+    dataIndex: 'rank',
+    key:'rank',
+    render(value, record, index) {
+      return <div>{index + 1}</div>
+    },
+  },
+  {
+    title: 'Protocol',
+    // width: '25%',
+    dataIndex: 'protocol',
+    key:'protocol',
+    render(value, record, index) {
+      return <div>{value}</div>
+    },
+  },
+  {
+    title: 'tvl',
+    // width: '15%',
+    dataIndex: 'tvl',
+    key:'tvl',
+    render(value, record, index) {
+      return <div>{value}</div>
+    },
+  },
+  {
+    title: 'tvl_change_rate_in_24h',
+    sorter: true,
+    // width: '20%',
+    dataIndex: 'tvl_change_rate_in_24h',
+    key:'tvl_change_rate_in_24h',
+    render(value, record, index) {
+      return <div>{value}</div>
+    },
+  },
+>>>>>>> 68c5c64 (feat: add home defi module)
+]
 
 export const defi_market = [
   {
@@ -162,6 +204,7 @@ export const defi_list = {
       },
     },
   ],
+  mobilColumns:mobilColumns,
 };
 
 export const homeDefiColumns: any = {
@@ -171,3 +214,11 @@ export const homeDefiColumns: any = {
   tvl_change_rate_in_24h: '10%',
   users: '10%',
 };
+
+export const mobileHomeDefiColumns: string[] = [
+  'rank',
+  'protocol',
+  'tvl',
+  'tvl_change_rate_in_24h',
+];
+

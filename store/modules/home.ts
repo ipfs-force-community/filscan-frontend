@@ -4,6 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { get } from 'lodash';
 import { unitConversion } from '@/utils';
 import { metaModel } from '@/models/metaModel';
+import { DefiProtocol } from '../homeData';
 
 class HomeStore {
   meta = {
@@ -18,11 +19,17 @@ class HomeStore {
   }
   fee :any[]= []
 
+  defiData?:{
+    total:number,
+    items:DefiProtocol[]
+  }
   constructor() {
+    this.defiData = undefined
     makeObservable(this, {
       meta: observable,
       fee: observable,
       formatMeta:computed,
+      defiData:observable,
       fetchHomeMeta: action,
     });
   }
@@ -102,7 +109,18 @@ class HomeStore {
       this.SET_FEE(list.reverse())
       resolve(list)
     })
+  }
 
+  /**
+   *
+   * @param psrams
+   */
+  async fetchHomeDefi(params:{page:number,limit:number,field?:string,reverse?:boolean}) {
+    params.page = params.page - 1
+    const result:any = await fetchData(apiUrl.fevm_defiList, params);
+    if (!result.error) {
+      this.defiData = result
+    }
   }
 }
 

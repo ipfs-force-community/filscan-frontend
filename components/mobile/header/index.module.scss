@@ -29,16 +29,17 @@
   .body {
     position: fixed;
     overflow: hidden;
-    overflow-y: auto;
     margin-top: 44px;
     min-height: 0px;
     width: 100%;
+    height: 0px;
     background: #00000099;
     opacity: 0;
     transition: min-height 0.3s, opacity 0.3s;
   }
   .body.active {
     min-height: 100%;
+    height: auto;
     opacity: 1;
   }
 
