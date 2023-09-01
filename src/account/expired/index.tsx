@@ -7,7 +7,6 @@ import { useMemo, useState } from 'react';
 import { account_expired } from '@/contents/account';
 import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
-import ExportExcel from '@/packages/exportExcel';
 import { formatDateTime } from '@/utils';
 import { Collapse } from 'antd';
 import { useHash } from '@/components/hooks/useHash';
@@ -82,7 +81,7 @@ export default ({
         </div>
       </div>
       <div className='mt-5'>
-        <ul className='flex mb-5 card_shadow border border_color rounded-xl px-16 py-5 text-sm text_des font-medium'>
+        <ul className='flex mb-5 card_shadow border border_color rounded-xl px-10 py-5 text-sm text_des font-medium '>
           {account_expired?.headerList.map((titleItem, index) => {
             let showTitle = titleItem.title;
             if (showTitle === 'exp_month') {
@@ -101,14 +100,14 @@ export default ({
               <Collapse
                 key={index}
                 collapsible='header'
-                className='card_shadow custom_Collapse '
+                className='card_shadow custom_Collapse mb-2.5'
                 expandIconPosition='end'
                 defaultActiveKey={[1]}
                 items={[
                   {
                     key: index,
                     label: (
-                      <ul className='flex text-base font-semibold'>
+                      <ul className='flex text-base font-semibold px-10'>
                         {account_expired?.headerList.map((item: any) => {
                           const { dataIndex, width, title, render } = item;
                           const value = sector_item[dataIndex];

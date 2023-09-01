@@ -1231,7 +1231,8 @@ export const account_expired = {
       width: '20%',
       render: (text: string, record: any, tr: any) => {
         const [year, month] = text.split('-');
-        return <span>{tr('exp_month', { year, month })}</span>;
+        return <span>{ formatDateTime(text,'YYYY-MM-DD')}</span>
+        // return <span>{tr('exp_month', { year, month })}</span>;
       },
     },
     {

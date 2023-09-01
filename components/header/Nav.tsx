@@ -16,7 +16,7 @@ export default () => {
     return (
       <ul
         key={num}
-        className='hidden  group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border p-4 rounded-[5px] select_shadow  card_bg_color  border_color'>
+        className='hidden  group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border p-4 rounded-[5px] select_shadow  main_bg_color  border_color'>
         {children.map((item, index) => {
           return (
             <Link

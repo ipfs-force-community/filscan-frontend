@@ -106,7 +106,7 @@ const account = {
   wd_post_gas_per_t:'Wd Post Gas Cost/T',
 
   //到期扇区 Exp. Sector
-  exp_month: 'Expires in xx year xx month',
+  exp_month: 'Expires in {{value}} year {{value}} month',
   exp_time:'Exp. Time',
   miner_count: 'Miner Count',
   exp_power: 'Exp. Power',

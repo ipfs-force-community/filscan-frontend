@@ -41,6 +41,7 @@ const config: Config = {
         // 亮色模式颜色配置
         bgColor: '#FFFFFF',
         bgDesColor: '#F6F6F6',
+        footerColor: '#222121',
         font: '#000000',
         font_des: 'rgba(0,0,0,0.6)',
         border_des: '#F0F1F3',
