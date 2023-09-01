@@ -1,4 +1,5 @@
 .meta{
+    margin-bottom: 20px;
     .cards{
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -10,6 +11,48 @@
             border: 1px solid #EEEFF1;
             .card-top{
                 display: flex;
+                align-items: end;
+                margin-bottom: 7.5px;
+                .value{
+                    font-size: 18px;
+                    font-family: DINPro-Bold, DINPro;
+                    font-weight: bold;
+                    color: var(--mobile-title-color);
+                    line-height: 16px;
+                    margin-right: 2px;
+                }
+                .unit{
+                    font-size: 12px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: var(--mobile-des-color);
+                    line-height: 12px;
+                }
+                .increase{
+                    font-size: 12px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: var(--mobile-down-color);
+                    line-height: 12px;
+                    margin-left: 5px;
+                }
+                .reduce{
+                    font-size: 12px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: var(--mobile-up-color);
+                    line-height: 12px;
+                    margin-left: 5px;
+                }
+            }
+            .card-bottom{
+                .label{
+                    font-size: 12px;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    font-weight: 400;
+                    color: var(--mobile-des-color);
+                    line-height: 12px;
+                }
             }
         }
     } 

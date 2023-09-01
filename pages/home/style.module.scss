@@ -1,3 +1,5 @@
-.mobile-home{
-    padding: var(--mobile-page-padding);
+@media screen and (max-width: 1024px){
+    .home-page{
+        padding: 12px;
+    }
 }

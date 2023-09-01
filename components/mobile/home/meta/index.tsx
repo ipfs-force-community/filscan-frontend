@@ -6,31 +6,47 @@ import { useTranslation } from 'react-i18next';
 import { getShowData } from '@/utils';
 import _ from 'lodash';
 import Tooltip from '@/packages/tooltip';
-
-interface cardType {
+interface TipsType {
+  label:string,
+  value:string,
+  unit:string,
+}
+interface CardType {
   label:string,
   value:string,
   unit:string,
   increase:string,
   inCount:string,
-  tooltip:boolean
+  tooltip:boolean,
+  tips: TipsType[]
 }
 
 const Meta = (props: any)=> {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   useEffect(() => {
-    console.log(homeStore,123);
     homeStore.fetchHomeMeta()
   }, []);
 
-  const cards:Array<cardType> = [
+  const cards:Array<CardType> = [
     {
       label:'power_increase_24h',
-      value:"19.74",
-      unit:'EIB',
+      value:homeStore.formatMeta.power_increase_24h,
+      unit:homeStore.formatMeta.power_increase_24h_unit,
       increase:'increase',
       inCount:"46.23",
-      tooltip:true
+      tooltip:true,
+      tips:[
+        {
+          label:'',
+          value:'',
+          unit:''
+        },
+        {
+          label:'',
+          value:'',
+          unit:''
+        }
+      ]
     },
     {
       label:'add_power_in_32g',
@@ -38,7 +54,8 @@ const Meta = (props: any)=> {
       unit:'EIB',
       increase:'',
       inCount:"",
-      tooltip:false
+      tooltip:false,
+      tips:[]
     },
     {
       label:'miner_initial_pledge',
@@ -46,7 +63,8 @@ const Meta = (props: any)=> {
       unit:'EIB',
       increase:'',
       inCount:"",
-      tooltip:false
+      tooltip:false,
+      tips:[]
     },
     {
       label:'fil_per_tera_24h',
@@ -54,7 +72,8 @@ const Meta = (props: any)=> {
       unit:'EIB',
       increase:'',
       inCount:"",
-      tooltip:false
+      tooltip:false,
+      tips:[]
     },
     {
       label:`total_contract/24h_contract`,
@@ -62,7 +81,8 @@ const Meta = (props: any)=> {
       unit:'',
       increase:'reduce',
       inCount:"46.23",
-      tooltip:true
+      tooltip:true,
+      tips:[]
     },
     {
       label:`contract_transaction/24h_change`,
@@ -70,7 +90,8 @@ const Meta = (props: any)=> {
       unit:'',
       increase:'reduce',
       inCount:"463",
-      tooltip:true
+      tooltip:true,
+      tips:[]
     },
     {
       label:`contract_address/24h_change`,
@@ -78,7 +99,8 @@ const Meta = (props: any)=> {
       unit:'',
       increase:'increase',
       inCount:"246",
-      tooltip:true
+      tooltip:true,
+      tips:[]
     },
     {
       label:'gas_24',
@@ -86,15 +108,16 @@ const Meta = (props: any)=> {
       unit:'FIL',
       increase:'',
       inCount:"",
-      tooltip:false
+      tooltip:false,
+      tips:[]
     }
   ]
 
-  const renderCard = (n:cardType)=>{
+  const renderCard = (n:CardType)=>{
     const renderIncrease = (key:string)=>{
       const obj = {
-        increase:<>+{n.inCount}</>,
-        reduce:<>-{n.inCount}</>,
+        increase:<div className={styles.increase}>+{n.inCount}</div>,
+        reduce:<div className={styles.reduce}>-{n.inCount}</div>,
         '':<></>
       }
       const res = _.get(obj,key)
@@ -111,8 +134,7 @@ const Meta = (props: any)=> {
       </div>
       <div className={styles['card-bottom']}>
         <div className={styles.label}>
-          {
-            t(n.label,{ns:'home'})}
+          {t(n.label)}
         </div>
       </div>
     </>
