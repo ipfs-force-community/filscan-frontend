@@ -81,7 +81,7 @@ export default ({
         </div>
       </div>
       <div className='mt-5'>
-        <ul className='flex mb-5 card_shadow border border_color rounded-xl px-10 py-5 text-sm text_des font-medium '>
+        <ul className='flex mb-5 card_shadow border border_color rounded-xl px-10 py-4 text-sm text_des font-medium '>
           {account_expired?.headerList.map((titleItem, index) => {
             let showTitle = titleItem.title;
             if (showTitle === 'exp_month') {
@@ -100,14 +100,14 @@ export default ({
               <Collapse
                 key={index}
                 collapsible='header'
-                className='card_shadow custom_Collapse mb-2.5'
+                className='card_shadow custom_Collapse  !rounded-xl mb-2.5'
                 expandIconPosition='end'
                 defaultActiveKey={[1]}
                 items={[
                   {
                     key: index,
                     label: (
-                      <ul className='flex text-base font-semibold px-10'>
+                      <ul className='flex text-base  font-semibold pl-7'>
                         {account_expired?.headerList.map((item: any) => {
                           const { dataIndex, width, title, render } = item;
                           const value = sector_item[dataIndex];

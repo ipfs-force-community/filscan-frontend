@@ -442,11 +442,13 @@ font-display: auto;
          color: var(--font-color);
     .ant-collapse-item{
         color: var(--font-color);
-        margin-top: 20px;
+        margin: 20px 0px;
+        height: calc(100% - 20px);
         border: 1px solid var(--border-color);
         border-radius: 12px !important;
         background-color: var(--bgColor);
-        border-bottom:1px solid var(--border-color)
+        border-bottom: transparent !important;
+       // border-bottom:1px solid var(--border-color)
      }
      .ant-collapse-content{
             background-color: var(--bgColor);
