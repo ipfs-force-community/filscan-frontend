@@ -43,7 +43,6 @@ const mobilColumns :ColumnsType<DefiProtocol> = [
       return <div>{value}</div>
     },
   },
->>>>>>> 68c5c64 (feat: add home defi module)
 ]
 
 export const defi_market = [
