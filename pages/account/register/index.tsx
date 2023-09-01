@@ -11,9 +11,9 @@ import messageManager from '@/packages/message';
 import Link from 'next/link';
 import Image from 'next/image';
 import errorIcon from '@/assets/images/error.svg';
-import { root } from 'postcss';
 import Success from '@/src/account/success';
 import useAxiosData from '@/store/useAxiosData';
+import Banner from '@/src/account/Banner';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
@@ -50,9 +50,11 @@ export default () => {
 
   //注册
   return (
-    <div className='main_contain'>
-      <div className='bg-black w-full h-[200px]'>Banner</div>
-      <div className='main_contain !w-[404px] !p-0 !mt-14'>
+    <>
+      <div className='bg-black w-full h-[200px]'>
+        <Banner />
+      </div>
+      <div className='main_contain !w-[404px] !min-w-[404px]  !mb-10 !mt-8'>
         <div className={`text-lg tex_color`}>
           {tr('register')}
         </div>
@@ -176,7 +178,7 @@ export default () => {
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 // document.querySelector('[name="1"]');

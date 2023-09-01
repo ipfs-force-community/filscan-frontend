@@ -2,13 +2,8 @@
 
 import success from '@/assets/images/success.svg';
 import { Translation } from '@/components/hooks/Translation';
-import { proApi } from '@/contents/apiUrl';
-import { UserInfo } from '@/store/UserStore';
-import useAxiosData from '@/store/useAxiosData';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export default ({ type = '',text ,btnText}: { type?: string,btnText:string,text:string }) => {
   const { tr } = Translation({ ns: 'account' });
@@ -35,13 +30,13 @@ export default ({ type = '',text ,btnText}: { type?: string,btnText:string,text:
         }
       </div>
       <div className='mt-5 flex items-center gap-x-5'>
-        {type !== 'login' && (
+        {/* {type !== 'login' && (
           <Link
             href={'/account/login'}
             className='border border_color rounded-[5px] px-4 py-2'>
             {tr('go_login')}
           </Link>
-        )}
+        )} */}
         <div
           onClick={handleClick}
           className='border cursor-pointer primary_btn px-4 py-2'>

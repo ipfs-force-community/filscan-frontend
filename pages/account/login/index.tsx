@@ -15,6 +15,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
+import Banner from '@/src/account/Banner';
 
 export default () => {
   const [form] = Form.useForm();
@@ -62,9 +63,11 @@ export default () => {
   }, [userInfo.mail]);
 
   return (
-    <div className='main_contain'>
-      <div className='bg-black w-full h-[200px]'>Banner</div>
-      <div className='!w-[404px] !p-0 !mt-10 !m-auto min-h-[350px] '>
+    < >
+      <div className='bg-black w-full h-[200px]'>
+        <Banner />
+      </div>
+      <div className='main_contain !w-[404px] !min-w-[404px] !mb-10 !mt-8 '>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {
             return (
@@ -143,9 +146,9 @@ export default () => {
         </Form>
         <div className='flex gap-x-2'>
           <span>{tr('no_account')}</span>
-          <Link href={'/account/register'}>{tr('go_register')}</Link>
+          <Link href={'/account/register'} className='text-primary'>{tr('go_register')}</Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };
