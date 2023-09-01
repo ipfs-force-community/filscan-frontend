@@ -29,3 +29,7 @@ ps -ef |grep 端口号
 kill -9  进程号
 
 eslint --fix src pages packages store utils
+
+
+
+xxxxxxxxxxxx88888dxxxxxx

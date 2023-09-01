@@ -1,4 +1,4 @@
-export interface metaModel{
+export interface MetaModel{
   power_increase_24h:string;
   power_increase_24h_unit:string;
   power_increase_24h_increase:'increase'|'reduce'|'';

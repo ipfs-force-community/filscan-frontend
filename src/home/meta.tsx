@@ -9,6 +9,8 @@ import fetchData from '@/store/server';
 import { Skeleton } from 'antd';
 import { data } from 'autoprefixer';
 import { useEffect, useMemo, useState } from 'react';
+import styles from './style.module.scss';
+import classNames from 'classnames';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -70,7 +72,7 @@ function Meta() {
   return (
     <div
       //ref={ref}
-      className='border card_shadow flex-1 h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color'>
+      className={classNames(styles.meta,`border card_shadow flex-1 h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color`)}>
       {home_meta.map((item: Item, index: number) => {
         const { render, dataIndex, title } = item;
         const value = (data && data[dataIndex]) || '';
@@ -79,7 +81,7 @@ function Meta() {
           renderDom = render && render(value, data);
         }
         return (
-          <div key={item.dataIndex}>
+          <div className={styles['meta-item']} key={item.dataIndex}>
             <div className='text_clip DINPro-Bold font-bold	 text-xl'>
               {renderDom || value}
             </div>
