@@ -14,6 +14,7 @@ import errorIcon from '@/assets/images/error.svg';
 import Success from '@/src/account/success';
 import useAxiosData from '@/store/useAxiosData';
 import Banner from '@/src/account/Banner';
+import { UserInfo } from '@/store/UserStore';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
@@ -21,6 +22,7 @@ export default () => {
   const [success, setSuccess] = useState(false);
   const { axiosData } = useAxiosData();
   const [form] = Form.useForm();
+  const userInfo = UserInfo();
 
   const onFinish = async () => {
     //注册
@@ -33,6 +35,7 @@ export default () => {
     });
 
     if (result.token) {
+      userInfo.setUserInfo({...result})
       setSuccess(true);
       localStorage.setItem('token', result.token);
       localStorage.setItem('expired_at', result.expired_at); //过期时间
