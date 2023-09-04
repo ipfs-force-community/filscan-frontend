@@ -1,31 +1,72 @@
-// .rank {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 16px;
-//   height: 16px;
-//   border-radius: 3px;
-//   background: var(--mobile-title-color);
-//   color: var(--mobile-text-unimportant);
-//   font-size: 12px;
-//   font-family: "DINPro-Medium";
-// }
+.rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--mobile-title-color);
+  color: var(--mobile-text-unimportant);
+  font-size: 12px;
+  font-family: "DINPro-Medium";
+}
 
-// .protocol {
-//   display: flex;
-//   align-items: center;
-//   img {
-//     position: relative !important;
-//     width: 15px !important;
-//     height: 15px !important;
-//     border-radius: 2.5px;
-//   }
-// }
+.protocol {
+  display: flex;
+  align-items: center;
+  //   font-size: 50%;
+
+  //   div {
+  //     width: 100%;
+  //     text-overflow: ellipsis;
+  //   }
+  img {
+    position: relative !important;
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 2.5px;
+  }
+}
 
 .defiWrap {
+  // border-radius: 6px;
+  // background: white;
+
   .title {
     padding: 10px 0px;
     font-size: 16px;
     font-family: "DINPro-Medium";
+  }
+  :global {
+    td {
+      padding: 0;
+    }
+    .ant-table {
+      padding: 0px 12px !important;
+      border: 1px solid #eeeff1;
+      border-radius: 6px !important;
+      .ant-table-thead {
+        th {
+          padding: 0px;
+          height: 38px;
+        }
+        .ant-table-cell {
+          border: none;
+          background: transparent;
+          color: var(--mobile-des-color);
+          font-weight: 400;
+          font-size: 12px;
+        }
+        .ant-table-cell::before {
+          display: none;
+        }
+      }
+      .ant-table-tbody {
+        td {
+          padding: 0px;
+          height: 40px;
+        }
+      }
+    }
   }
 }

@@ -14,20 +14,3 @@ export interface DefiToken {
     icon_url: string;
     rate: number;
   }
-
-export interface EvmContractData {
-  evm_contract_list: EvmContract[];
-  total: number;
-  update_time: number;
-}
-interface EvmContract {
-  rank: number;
-  actor_id: string;
-  actor_address: string;
-  contract_address: string;
-  contract_name: string;
-  transfer_count: number;
-  user_count: number;
-  actor_balance: string;
-  gas_cost: string;
-}

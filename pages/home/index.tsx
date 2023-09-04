@@ -18,7 +18,7 @@ import useObserver from '@/components/hooks/useObserver';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss';
 import Defi from '@/components/mobile/home/defi';
-import MobileContractRank from '@/components/mobile/home/contractRank'
+
 //import fetchData from '@/store/server';
 
 // type HomeProps = {
