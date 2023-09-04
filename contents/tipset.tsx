@@ -10,6 +10,7 @@ import {
   unitConversion,
 } from '@/utils';
 import Link from 'next/link';
+import { Item } from './type';
 
 //消息列表
 export const message_list = {
@@ -290,3 +291,97 @@ export const pool_list = {
     { dataIndex: 'method_name', title: 'method_name', width: '15%' },
   ],
 };
+
+// 区块
+export const chain_list: {
+  columns: Array<Item>,
+} = {
+  columns:  [
+    {
+      dataIndex: "height",
+      title: "height",
+      width:'15%',
+      render: (text: string) => {
+        return <Link className="link" href={`/height/${text}`}>{text}</Link>
+      }
+    },
+    {
+      dataIndex: "block_time",
+      title: "block_time",
+      width:'20%',
+      type: ["blocks", "block_basic"],
+      render: (text: any, rowData: any) => {
+        const record = rowData.block_basic;
+        const time = record.length > 0 && record[0]?.block_time;
+        if (time) {
+          return <div >{formatDateTime(time)}</div>
+        }
+        return '--'
+
+      }
+    },
+    {
+      dataIndex: "cid",
+      title: "blocks_cid",
+      width:'20%',
+      type:['block_basic'],
+      render: (text: any, rowData: any) => {
+        const record:any = rowData?.block_basic;
+        return <div className="flex flex-col gap-y-2">
+          {record.map((data:any,index:number) => {
+            if (data?.cid) {
+              return <Link key={ index} className="link" href={`/cid/${data.cid }`}>{isIndent(data.cid)}</Link>
+            }
+            return '--'
+          })}
+        </div>
+      }
+    },
+    {
+      dataIndex: "miner_id",
+      title: "blocks_miner",
+      width:'15%',
+      render: (text: any, rowData:any) => {
+        const record:any = rowData?.block_basic;
+        return <div className="flex flex-col gap-y-2">
+          {record.map((data:any,index:number) => {
+            if (data?.miner_id) {
+              return <Link key={index} className="link" href={`/miner/${data.miner_id }`}>{data.miner_id}</Link>
+            }
+            return '--'
+          })}
+        </div>
+      }
+
+    },
+    {
+      dataIndex: "messages_count",
+      title: "blocks_messages",
+      width:'10%',
+      render: (text: any, rowData: any) => {
+        const record = rowData.block_basic;
+        return <div className="flex flex-col gap-y-2">
+          {record.map((data:any,index:number) => {
+            return <div key={index}>{data?.messages_count ||0}</div>
+          })}
+        </div>
+      }
+    },
+    {
+      dataIndex: "reward",
+      title: "blocks_reward",
+      width:'10%',
+      render: (text: any, rowData: any) => {
+        const record = rowData.block_basic;
+        return <div className="flex flex-col gap-y-2">
+          {record.map((data:any,index:number) => {
+            return <div key={ index}>{data?.reward ? formatFilNum(data.reward,false,false) :''}</div>
+          })}
+        </div>
+      }
+    },
+
+  ],
+
+}
+
