@@ -36,7 +36,7 @@ export default () => {
         <MFooter/>
       </MobileView>
       <BrowserView>
-        <div className='custom_footer flex justify-between flex-col'>
+        <div className='custom_footer flex justify-between flex-col bg-footerColor'>
           <div className='!text-white flex items-center'>
             <Image src={logo} width={45} height={45} alt='logo' />
             <span className='font-Barlow font-medium text-xl ml-2'>Filscan.io </span>

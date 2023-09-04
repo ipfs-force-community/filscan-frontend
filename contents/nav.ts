@@ -17,10 +17,6 @@ const navMenu: Array<Menu_Info> = [
         link: '/tipset/message-list/'
       },
       {
-        key: 'tipset_ranking',
-        link: '/tipset/address-list/'
-      },
-      {
         key: 'tipset_dsn',
         link: '/tipset/dsn/'
       },
@@ -57,11 +53,9 @@ const navMenu: Array<Menu_Info> = [
       },
     ]
   },
-  { key: 'ranking', link: '/rank' },
   {
     key: 'statistics',
     children: [
-      { key: 'statistics_gas', link: '/statistics/gas' },
       { key: 'statistics_base', link: '/statistics/power' },
       { key: 'statistics_fil', link: '/statistics/fil' },
       { key: 'statistics_charts', link: '/statistics/charts' },
@@ -73,10 +67,20 @@ const navMenu: Array<Menu_Info> = [
     color: '#F44C30',
     link: '/fvm'
   },
+
   {
-    out_key: 'account',
-    key: 'account',
-    link: '/account'
+    key: 'network_overview', link: '/rank', children: [
+      {
+        key: 'ranking',
+        link: '/rank',
+      },
+      {
+        key: 'tipset_ranking',
+        link: '/tipset/address-list/'
+      },
+      { key: 'statistics_gas', link: '/statistics/gas' },
+
+    ]
   },
   {
     key: 'develop',
@@ -86,7 +90,12 @@ const navMenu: Array<Menu_Info> = [
         link: '/contract/verify/'
       }
     ]
-  }
+  },
+  {
+    out_key: 'account',
+    key: 'account',
+    link: '/account'
+  },
 ]
 
 const mobileNavMenu: Menu_Info[] = [

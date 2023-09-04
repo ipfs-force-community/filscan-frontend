@@ -17,6 +17,7 @@ const zh ={
   tipset_dsn: '订单',
   "tipset_pool-message": '消息池',
   ranking: '排行榜',
+  network_overview:'网络概览',
   statistics: '统计',
   statistics_gas: 'Gas费趋势',
   statistics_base: '算力走势',

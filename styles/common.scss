@@ -4,13 +4,14 @@
 }
 
 .custom_header{
-  min-width: 1200px;
+  max-width: 1440px;
+  min-width: 1000px;
   margin: auto;
   padding: 0px 90px;
 }
 .custom_footer{
   max-width: 1440px;
-  min-width: 1200px;
+  min-width: 1000px;
   margin: auto;
   padding: 20px 90px;
   width: 100%;
@@ -19,8 +20,8 @@
 
 .main_contain{
   max-width: 1440px;
-  min-width: 1200px;
-  min-height:calc(100% - 110px);
+  min-width: 1000px;
+  min-height:calc(100% - 245px);
   width: 100%;
   margin:  auto;
   padding: 20px 90px;

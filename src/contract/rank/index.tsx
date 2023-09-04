@@ -130,6 +130,5 @@ export default ({ origin }: { origin?: string }) => {
         />
       </div>
     </>
-
-  );
-};
+  )
+}
