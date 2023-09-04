@@ -124,7 +124,7 @@ const account = {
   new_placeholder:'Please enter new password',
   confirm_password: 'Confirm',
   confirm_placeholder: 'Please enter new password again',
-
+  personal_name_holder:'Please enter your account name',
 }
 
 export default account

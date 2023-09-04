@@ -5,9 +5,10 @@ import { Tooltip } from 'antd';
 
 interface Props {
   text: string;
+  className?: string;
 }
 
-const EllipsisText: React.FC<Props> = ({ text }) => {
+const EllipsisText: React.FC<Props> = ({ text ,className}) => {
   const textRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
@@ -34,11 +35,8 @@ const EllipsisText: React.FC<Props> = ({ text }) => {
     <Tooltip title={isOverflowing ? text : ''}>
       <div
         ref={textRef}
-        style={{
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          cursor: 'pointer',
-        }}>
+        className={ `overflow-hidden text-ellipsis cursor-pointer ${className}`}
+      >
         {text}
       </div>
     </Tooltip>

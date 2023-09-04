@@ -101,7 +101,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <div className={`container_body text-sm ${theme}`}>
               <HeaderMain />
               <Component {...pageProps} />
-              <div className='w-full h-[140px] bg-footerColor'>
+              <div className='w-screen h-[140px] bg-footerColor'>
                 <Footer />
               </div>
             </div>

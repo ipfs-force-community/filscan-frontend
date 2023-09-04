@@ -8,6 +8,7 @@ import { Translation } from '@/components/hooks/Translation';
 import Link from 'next/link';
 import Search from './Search';
 import { useRouter } from 'next/router';
+import { getSvgIcon } from '@/svgsIcon';
 export default () => {
   const { tr } = Translation({ ns: 'nav' });
   const router = useRouter();
@@ -52,9 +53,10 @@ export default () => {
               <div
                 key={index}
                 className='group h-full flex cursor-pointer items-center relative hover:text-primary'>
-                <span className='flex gap-x-1 '>
+                <span className='flex gap-x-1 items-center'>
                   {tr(nav.key)}
-                  <Image src={down} width={8} height={4} alt='down' />
+                  <span>{getSvgIcon('downIcon') }</span>
+                  {/* <Image src={down} width={8} height={4} alt='down' /> */}
                 </span>
                 {renderChild(nav.children, index)}
               </div>

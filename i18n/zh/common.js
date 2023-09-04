@@ -27,6 +27,7 @@ const common = {
   //登录注册
   register:'邮箱注册',
   password_login: '密码登录',
+  reset_password:'重置密码',
   verification_code: '验证码登录',
   email_placeholder: '输入邮箱号',
   password_placeholder: '输入密码',

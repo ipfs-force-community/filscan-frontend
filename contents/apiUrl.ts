@@ -1,6 +1,6 @@
 
 const mianUrl = process.env.APP_BASE_URL;
-const proUrl = process.env.APP_BASE_URL_PRO;
+const proUrl = process.env.APP_BASE_URL_PRO || 'http://192.168.1.177:27000/pro/v1';
 export const fvmUrl = process.env.FVM_URL;
 
 export interface API {

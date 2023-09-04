@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Item, MenuItem } from './type';
 import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
-import { formatDateTime, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
+import { formatDateTime, formatFil, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
 import Image from 'next/image';
 import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg';
@@ -157,7 +157,7 @@ export const personal_setting = [
   {
     title: 'personal_name',
     dataIndex: 'name',
-    placeholder: 'personal_name',
+    placeholder: 'personal_name_holder',
   },
   {
     title: 'old_password',
@@ -411,24 +411,17 @@ export const overview = {
         reward_change_24h: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
-        const changeText = record?.reward_change_24h
+        const changeText = Number(record?.reward_change_24h)
           ? Number(record.reward_change_24h)
-          : '';
+          :'';
         const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={className}>
-              {flag}
-              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text, changeText, flag, className)
+
       },
     },
     {
@@ -447,15 +440,7 @@ export const overview = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={className}>
-              {flag}
-              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -476,15 +461,7 @@ export const overview = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={className}>
-              {flag}
-              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -505,15 +482,7 @@ export const overview = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={className}>
-              {flag}
-              {formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text, changeText, flag, className)
       },
     },
   ],
@@ -619,7 +588,7 @@ export const account_balance = {
       exports: ['miner_balance_changed'],
       amountUnit: {
         miner_balance_changed: { unit: 'fil', number: 2 },
-        miner_balance: { unit: 'fil', number: 2 },
+        miner_balance: { unit: 'fil', number: 0 },
       },
 
       width: 200,
@@ -633,15 +602,16 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
+        //   (
+        //   <span className='flex flex-col'>
+        //     <span>{formatFilNum(text, false, false, 2)}</span>
+        //     <span className={`${className}`}>
+        //       {flag +
+        //         formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
+        //     </span>
+        //   </span>
+        // );
       },
     },
     {
@@ -650,8 +620,8 @@ export const account_balance = {
       width: 200,
       exports: ['Owner_balance_changed'],
       amountUnit: {
-        owner_balance: { unit: 'fil', number: 2 },
-        Owner_balance_changed: { unit: 'fil', number: 2 },
+        owner_balance: { unit: 'fil', number: 0 },
+        Owner_balance_changed: { unit: 'fil', number: 0 },
       },
 
       render: (text: string, record: any) => {
@@ -664,15 +634,8 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
+
       },
     },
     {
@@ -682,8 +645,8 @@ export const account_balance = {
       exports: ['Worker_balance_changed'],
 
       amountUnit: {
-        worker_balance: { unit: 'fil', number: 2 },
-        Worker_balance_changed: { unit: 'fil', number: 2 },
+        worker_balance: { unit: 'fil'},
+        Worker_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.Worker_balance_changed
@@ -695,15 +658,7 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
       },
     },
     {
@@ -712,8 +667,8 @@ export const account_balance = {
       width: 200,
       exports: ['Controller_0_balance_changed'],
       amountUnit: {
-        controller_0_balance: { unit: 'fil', number: 2 },
-        Controller_0_balance_changed: { unit: 'fil', number: 2 },
+        controller_0_balance: { unit: 'fil'},
+        Controller_0_balance_changed: { unit: 'fil'},
       },
       render: (text: string, record: any) => {
         const changeText = record?.Controller_0_balance_changed
@@ -725,15 +680,7 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
       },
     },
     {
@@ -743,8 +690,8 @@ export const account_balance = {
       exports: ['controller_1_balance_changed'],
 
       amountUnit: {
-        controller_1_balance: { unit: 'fil', number: 2 },
-        controller_1_balance_changed: { unit: 'fil', number: 2 },
+        controller_1_balance: { unit: 'fil' },
+        controller_1_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.controller_1_balance_changed
@@ -756,15 +703,7 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
       },
     },
     {
@@ -773,8 +712,8 @@ export const account_balance = {
       width: 200,
       exports: ['controller_2_balance_changed'],
       amountUnit: {
-        controller_2_balance: { unit: 'fil', number: 2 },
-        controller_2_balance_changed: { unit: 'fil', number: 2 },
+        controller_2_balance: { unit: 'fil', },
+        controller_2_balance_changed: { unit: 'fil', },
       },
       render: (text: string, record: any) => {
         const changeText = record?.controller_2_balance_changed
@@ -786,15 +725,7 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
       },
     },
     {
@@ -803,8 +734,8 @@ export const account_balance = {
       width: 200,
       exports: ['beneficiary_balance_changed'],
       amountUnit: {
-        beneficiary_balance: { unit: 'fil', number: 2 },
-        beneficiary_balance_changed: { unit: 'fil', number: 2 },
+        beneficiary_balance: { unit: 'fil', },
+        beneficiary_balance_changed: { unit: 'fil', },
       },
       render: (text: string, record: any) => {
         const changeText = record?.beneficiary_balance_changed
@@ -816,15 +747,7 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
       },
     },
     {
@@ -833,8 +756,8 @@ export const account_balance = {
       width: 200,
       exports: ['market_balance_changed'],
       amountUnit: {
-        market_balance: { unit: 'fil', number: 2 },
-        market_balance_changed: { unit: 'fil', number: 2 },
+        market_balance: { unit: 'fil', },
+        market_balance_changed: { unit: 'fil',},
       },
       render: (text: string, record: any) => {
         const changeText = record?.market_balance_changed
@@ -846,15 +769,8 @@ export const account_balance = {
             ? 'text_green'
             : 'text_red'
           : '';
-        return (
-          <span className='flex flex-col'>
-            <span>{formatFilNum(text, false, false, 2)}</span>
-            <span className={`${className}`}>
-              {flag +
-                formatFilNum(Math.abs(Number(changeText)), false, false, 2)}
-            </span>
-          </span>
-        );
+        return renderFil(text,changeText,flag,className);
+
       },
     },
   ],
@@ -1231,7 +1147,7 @@ export const account_expired = {
       width: '20%',
       render: (text: string, record: any, tr: any) => {
         const [year, month] = text.split('-');
-        return <span>{ formatDateTime(text,'YYYY-MM-DD')}</span>
+        return <span>{ formatDateTime(text,'YYYY-MM')}</span>
         // return <span>{tr('exp_month', { year, month })}</span>;
       },
     },
@@ -1263,7 +1179,7 @@ export const account_expired = {
       title: 'exp_pledge',
       dataIndex: 'total_exp_pledge',
       width: '15%',
-      render: (text: string | number) => formatFilNum(text, false, false, 4),
+      render: (text: string | number) => formatFil(text,"FIL",4,true),
     },
   ],
   columns: (tr: any, type?: 'detail') => {
@@ -1329,7 +1245,7 @@ export const account_expired = {
           exp_dc: { unit: 'fil', number: 4 }
         },
         width: '15%',
-        render: (text: string | number) => formatFilNum(text, false, false, 4),
+        render: (text: string | number) => formatFil(text,"FIL",4,true),
       },
     ]
     if (type&&type === 'detail') {
@@ -1376,3 +1292,15 @@ export const account_miners = {
     },
   ],
 };
+
+function renderFil (text:string|number,changeText:number|string,flag:string='',className?:string) {
+  return (
+    <span className='flex flex-col'>
+      <span>{formatFil(text, 'FIL', 4, true)}</span>
+      <span className={className}>
+        {flag + ' '}
+        {formatFil(Math.abs(Number(changeText)), 'FIL', 4, true)}
+      </span>
+    </span>
+  );
+}

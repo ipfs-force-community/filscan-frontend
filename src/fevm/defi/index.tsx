@@ -36,7 +36,7 @@ export default ({ origin }: { origin?: string }) => {
     const sortData = sorter || sort;
     const result: any = await fetchData(apiUrl.fevm_defiList, {
       page: page - 1,
-      limit: origin === 'home'? pageLimit:pageHomeLimit,
+      limit: origin === 'home'? pageHomeLimit:pageLimit,
       field: sortData.field,
       reverse: sortData.order === 'ascend',
     });
@@ -90,7 +90,7 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className='mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color'>
+    <div className='mt-4 h-[491px] border rounded-xl p-5	card_shadow border_color'>
       <Table
         key='contract_rank'
         className='-mt-2.5 '

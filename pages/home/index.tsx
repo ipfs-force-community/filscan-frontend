@@ -74,6 +74,28 @@ function Home(props: any) {
             <div className='mt-32' ref={ref}>
               <Rank origin={'home'} />
             </div>
+            <div className='flex gap-x-5 '>
+              <div className='w-1/2'>
+                <ContractRank origin='home'/>
+              </div>
+              <div className='w-1/2'>
+                <div className={`flex justify-between items-center h-[30px]`}>
+                  <div className='font-PingFang font-semibold text-lg'>
+                    {tr('defi_list')}
+                  </div>
+                  <Link href={`/contract/rank`}>
+                    <Image
+                      className='cursor-pointer'
+                      src={go}
+                      width={18}
+                      height={18}
+                      alt='go'
+                    />
+                  </Link>
+                </div>
+                <DefiList origin='home' />
+              </div>
+            </div>
           </div>
 
         </BrowserView>

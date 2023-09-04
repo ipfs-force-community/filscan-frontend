@@ -2,6 +2,7 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { Option_Item } from '@/contents/type';
+import { getSvgIcon } from '@/svgsIcon';
 import { Input } from 'antd';
 import { useState } from 'react';
 
@@ -46,6 +47,7 @@ export default ({
         onFocus={() => {
           setShowGroup(true);
         }}
+        suffix={<span className='text-xl'>{ getSvgIcon('downIcon')}</span> }
         // onChange={(e) => handleSearch(e.target.value)}
       />
       {isShow ? (
