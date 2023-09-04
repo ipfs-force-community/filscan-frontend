@@ -180,6 +180,64 @@ export const contract_rank = {
       sorter: true,
     },
   ],
+  mobileColumns: [
+    {
+      title: 'rank',
+      dataIndex: 'rank',
+      width: '10%',
+      render: (text: string) => <span className='rank_icon'>{text}</span>,
+    },
+    {
+      title: 'contract_address',
+      dataIndex: 'contract_address',
+      width: '10%',
+      render: (text: any, record: any) => {
+        if (!text) return '--';
+        return (
+          <span className='flex gap-x-2 items-center'>
+            <Link className='link_text' href={`/address/${text}`}>
+              {isIndent(text, 5, 4)}
+            </Link>
+            <Copy text={text} />
+          </span>
+        );
+      },
+    },
+    {
+      title: 'contract_name',
+      dataIndex: 'contract_name',
+      width: '20%',
+    },
+    {
+      title: 'transaction_count',
+      dataIndex: 'transfer_count',
+      width: '15%',
+      sorter: true,
+      defaultSortOrder: 'descend',
+      render: (text: number) => formatNumber(text),
+    },
+    {
+      title: 'user_count',
+      dataIndex: 'user_count',
+      width: '15%',
+      sorter: true,
+      render: (text: number) => formatNumber(text),
+    },
+    {
+      title: 'actor_balance',
+      dataIndex: 'actor_balance',
+      width: '15%',
+      render: (text: number) => formatFilNum(text),
+      sorter: true,
+    },
+    {
+      title: 'gas_cost',
+      dataIndex: 'gas_cost',
+      width: '15%',
+      render: (text: number) => formatFilNum(text),
+      sorter: true,
+    },
+  ],
 };
 
 export const homeContractRank: any = {
@@ -189,6 +247,13 @@ export const homeContractRank: any = {
   transfer_count: '20%',
   user_count: '20%',
 };
+
+export const mobileHomeContractRank: string[] = [
+  "rank",
+  "contract_address",
+  "contract_name",
+  "transfer_count"
+];
 
 export const contract_list:any={
   columns: [
