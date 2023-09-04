@@ -32,7 +32,7 @@ export default () => {
       ...data,
       mail: data.email,
     });
-    if (result.code === 1) {
+    if (result?.code === 1) {
       //未注册
       messageManager.showMessage({
         type: 'error',

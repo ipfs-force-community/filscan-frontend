@@ -20,21 +20,6 @@ import Footer from '@/components/footer';
 
 const { Content, Header } = Layout;
 
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-console.log("+=====================xxxxx")
-
-// const defaultUerInfo: UserInfo = {
-//   name: '',
-//   mail: '',
-//   last_login: '',
-// };
-
 export default function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState<any>();
   const [locale, setLocale] = useState('zh');
@@ -114,14 +99,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <FilscanStoreProvider>
           <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
             <div className={`container_body text-sm ${theme}`}>
-              <div className='w-full h-[110px] main_bg_color'>
-                <HeaderMain />
-              </div>
+              <HeaderMain />
               <Component {...pageProps} />
               <div className='w-full h-[140px] bg-footerColor'>
                 <Footer />
               </div>
-
             </div>
           </UserStoreContext.Provider>
         </FilscanStoreProvider>
