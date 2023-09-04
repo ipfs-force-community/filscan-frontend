@@ -1,0 +1,34 @@
+.wrap {
+    :global {
+        td {
+          padding: 0;
+        }
+        .ant-table {
+          padding: 0px 12px !important;
+        //   border: 1px solid #eeeff1;
+        //   border-radius: 6px !important;
+          .ant-table-thead {
+            th {
+              padding: 0px;
+              height: 38px;
+            }
+            .ant-table-cell {
+              border: none;
+              background: transparent;
+              color: var(--mobile-des-color);
+              font-weight: 400;
+              font-size: 12px;
+            }
+            .ant-table-cell::before {
+              display: none;
+            }
+          }
+          .ant-table-tbody {
+            td {
+              padding: 0px;
+              height: 40px;
+            }
+          }
+        }
+      }
+}

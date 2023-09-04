@@ -5,8 +5,8 @@ import { Tooltip } from 'antd';
 import { ReactNode } from 'react';
 interface TooltipProps{
   context: string|ReactNode;
-  children:ReactNode;
-  icon:boolean
+  children?:ReactNode;
+  icon?:boolean
 }
 
 export default (props: TooltipProps) => {
