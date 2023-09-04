@@ -75,10 +75,10 @@ function Home(props: any) {
               <Rank origin={'home'} />
             </div>
             <div className='flex gap-x-5 '>
-              <div className='flex-1'>
+              <div className='w-1/2'>
                 <ContractRank origin='home'/>
               </div>
-              <div className='flex-1'>
+              <div className='w-1/2'>
                 <div className={`flex justify-between items-center h-[30px]`}>
                   <div className='font-PingFang font-semibold text-lg'>
                     {tr('defi_list')}
