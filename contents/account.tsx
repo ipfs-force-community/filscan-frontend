@@ -157,7 +157,7 @@ export const personal_setting = [
   {
     title: 'personal_name',
     dataIndex: 'name',
-    placeholder: 'personal_name',
+    placeholder: 'personal_name_holder',
   },
   {
     title: 'old_password',

@@ -2,13 +2,9 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import useInterval from '@/components/hooks/useInterval';
-import useObserver from '@/components/hooks/useObserver';
 import { home_meta } from '@/contents/home';
 import fetchData from '@/store/server';
-import { Skeleton } from 'antd';
-import { data } from 'autoprefixer';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames';
 
