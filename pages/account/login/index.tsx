@@ -57,7 +57,6 @@ export default () => {
 
   useEffect(() => {
     if (userInfo.mail) {
-
       router.push('/account#overview')
     }
   }, [userInfo.mail]);
@@ -133,7 +132,7 @@ export default () => {
             className='!m-0 !p-0'>
             <div className='!flex !justify-between'>
               <Checkbox className='custom_checkbox !text_color' defaultChecked={true}>{tr('remember_me')}</Checkbox>
-              <a href=''>{tr('forgot_password')}</a>
+              <Link href='/account/password'>{tr('forgot_password')}</Link>
             </div>
           </Form.Item>
           <Form.Item className='!mt-6'>
