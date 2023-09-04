@@ -70,13 +70,9 @@ export default () => {
               })}
             </ul>
             <div className='flex gap-x-2.5 items-center'>
-              <Image
-                src={network}
-                width={28}
-                height={28}
-                alt='network'
-                key='network'
-              />
+              <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] main_bg_color border_color '>
+                {getSvgIcon('network')}
+              </span>
               <Select
                 ns=''
                 wrapClassName='!bg-bgColor'
@@ -90,10 +86,17 @@ export default () => {
                 onChange={handleLangChange}
                 options={langOptions}
               />
-              <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] main_bg_color  border_color '>
-                {getSvgIcon('network')}
+
+              <span className={ theme === 'dark'?'text-white cursor-pointer w-7 h-7 border border_color rounded-[5px]':'cursor-pointer'} onClick={() => {
+                localStorage.setItem(
+                  'theme',
+                  theme === 'dark' ? 'light' : 'dark'
+                );
+                setTheme(theme === 'dark' ? 'light' : 'dark');
+              }}>
+                { getSvgIcon(theme === 'dark' ? 'sun' : 'moon')}
               </span>
-              <Image
+              {/* <Image
                 src={showTheme}
                 width={28}
                 height={28}
@@ -107,7 +110,7 @@ export default () => {
                   );
                   setTheme(theme === 'dark' ? 'light' : 'dark');
                 }}
-              />
+              /> */}
               {/* <Link href='/account/login' as='/account/login' scroll={ false}>
                      <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
                 </Link> */}
