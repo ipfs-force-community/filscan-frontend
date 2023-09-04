@@ -39,66 +39,62 @@ function Home(props: any) {
 
   return (
     <div className={styles['home-page']}>
-
-      <MobileView>
-        <MobileBanner />
-      </MobileView>
       <div className='main_bg_color'>
+        <MobileView>
+          <MobileBanner />
+        </MobileView>
         <BrowserView>
           <Banner />
         </BrowserView>
-        <BrowserView>
-          <div className='main_contain !mt-[26px]'>
-            <div className='flex justify-between h-[270px] gap-x-5 meta-gas'>
-              <Meta />
-              <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
-                <div className={`flex justify-between text-xs font-PingFang p-5`}>
-                  {tr('base_gas')}
-                  <Link href={`/statistics/gas/`}>
-                    <Image
-                      className='cursor-pointer'
-                      src={go}
-                      width={18}
-                      height={18}
-                      alt='go'
-                    />
-                  </Link>
-                </div>
-                <Gas className={'w-full !h-[210px]'} />
+        <div className='main_contain !mt-[26px]'>
+          <div className='flex justify-between h-[270px] gap-x-5 meta-gas'>
+            <Meta />
+            <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
+              <div className={`flex justify-between text-xs font-PingFang p-5`}>
+                {tr('base_gas')}
+                <Link href={`/statistics/gas/`}>
+                  <Image
+                    className='cursor-pointer'
+                    src={go}
+                    width={18}
+                    height={18}
+                    alt='go'
+                  />
+                </Link>
               </div>
-            </div>
-            <div className='flex justify-between mt-12 gap-x-5 h-[400px] box-column'>
-              <Trend origin='home' className={'w-full !h-full'} />
-              <Trend origin='home' className={'w-full !h-full'} />
-            </div>
-            <div className='mt-32' ref={ref}>
-              <Rank origin={'home'} />
-            </div>
-            <div className='flex gap-x-5 '>
-              <div className='w-1/2'>
-                <ContractRank origin='home'/>
-              </div>
-              <div className='w-1/2'>
-                <div className={`flex justify-between items-center h-[30px]`}>
-                  <div className='font-PingFang font-semibold text-lg'>
-                    {tr('defi_list')}
-                  </div>
-                  <Link href={`/contract/rank`}>
-                    <Image
-                      className='cursor-pointer'
-                      src={go}
-                      width={18}
-                      height={18}
-                      alt='go'
-                    />
-                  </Link>
-                </div>
-                <DefiList origin='home' />
-              </div>
+              <Gas className={'w-full !h-[210px]'} />
             </div>
           </div>
-
-        </BrowserView>
+          <div className='flex justify-between mt-12 gap-x-5 h-[400px] box-column'>
+            <Trend origin='home' className={'w-full !h-full'} />
+            <Trend origin='home' className={'w-full !h-full'} />
+          </div>
+          <div className='mt-32' ref={ref}>
+            <Rank origin={'home'} />
+          </div>
+          <div className='flex gap-x-5 '>
+            <div className='w-1/2'>
+              <ContractRank origin='home'/>
+            </div>
+            <div className='w-1/2'>
+              <div className={`flex justify-between items-center h-[30px]`}>
+                <div className='font-PingFang font-semibold text-lg'>
+                  {tr('defi_list')}
+                </div>
+                <Link href={`/contract/rank`}>
+                  <Image
+                    className='cursor-pointer'
+                    src={go}
+                    width={18}
+                    height={18}
+                    alt='go'
+                  />
+                </Link>
+              </div>
+              <DefiList origin='home' />
+            </div>
+          </div>
+        </div>
       </div>
 
       <MobileView>

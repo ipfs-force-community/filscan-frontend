@@ -15,6 +15,7 @@ import { useEffect, useMemo, useState } from 'react';
 import useObserver from '@/components/hooks/useObserver';
 import styles from './trend.module.scss'
 import classNames from 'classnames';
+import { BrowserView } from '@/components/device-detect';
 interface Props {
   origin?: string;
   className?: string;
@@ -241,24 +242,26 @@ export default (props: Props) => {
           <span className='font-PingFang font-semibold text-lg '>
             {tr('power')}
           </span>
-          <span className='flex gap-x-4'>
-            {options?.legendData?.map((v: any) => {
-              return (
-                <span
-                  className='text-xs flex cursor-pointer items-center gap-x-1'
-                  key={v.name}
-                  onClick={() => {
-                    setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
-                  }}
-                  style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                  {getSvgIcon('legendIcon')}
-                  <span className='text-xs text_des font-normal'>
-                    {tr(v.name)}
+          <BrowserView>
+            <span className='flex gap-x-4'>
+              {options?.legendData?.map((v: any) => {
+                return (
+                  <span
+                    className='text-xs flex cursor-pointer items-center gap-x-1'
+                    key={v.name}
+                    onClick={() => {
+                      setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                    }}
+                    style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                    {getSvgIcon('legendIcon')}
+                    <span className='text-xs text_des font-normal'>
+                      {tr(v.name)}
+                    </span>
                   </span>
-                </span>
-              );
-            })}
-          </span>
+                );
+              })}
+            </span>
+          </BrowserView>
         </div>
         {origin === 'home' && (
           <Link href={`/statistics/power/`}>

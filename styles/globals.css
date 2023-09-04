@@ -79,6 +79,11 @@ body {
   background-color: var(--main-bg-color);
   overflow: auto;
 }
+@media screen and (max-width: 1000px){
+    .container_body{
+      padding-top: 44px;
+    }
+}
 
 
 
