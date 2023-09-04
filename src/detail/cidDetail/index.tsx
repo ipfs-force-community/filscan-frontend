@@ -64,7 +64,7 @@ export default ({
     const showIndex = cur || current;
     const showMethod = method;
     const result: any = await axiosData(apiUrl.tipset_Block_messages, {
-      cid: cid,
+      block_cid: cid,
       filters: {
         index: showIndex - 1,
         limit: pageLimit,
