@@ -57,7 +57,7 @@ const ContractRank =()=>{
     })
   },[])
   return <div className={styles.rankWrap}>
-    <div className={styles.title}>Defi Protocol</div>
+    <div className={styles.title}>{t(contract_rank.title)}</div>
     <div className="bg-mobile-bgColor rounded-[6px] overflow-hidden">
       <Table
         columns={columns}
