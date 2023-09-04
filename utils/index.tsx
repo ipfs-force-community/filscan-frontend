@@ -72,7 +72,7 @@ export function formatFil(
       return <span className='text_des_unit'>{`${returnValue} ${unit}`}</span>
     }
     if (returnValue < 0.0001) {
-      return '< 0.0001 FIL'
+      return '<0.0001 FIL'
     }
     return flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + unit
   }

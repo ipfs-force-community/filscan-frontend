@@ -741,12 +741,12 @@ export const address_tabs = [
     title: 'traces_list',
     dataIndex: 'traces_list',
     headerOptions: [
-      { label: 'all', value: 'all' },
-      { label: 'Blockreward', value: 'blockreward' },
-      { label: 'Burn', value: 'burn' },
-      { label: 'Transfer', value: 'transfer' },
-      { label: 'Send', value: 'send', isIndent: true },
-      { label: 'Receive', value: 'receive', isIndent: true },
+      { title: 'all', value: 'all' },
+      { title: 'Blockreward', value: 'blockreward' },
+      { title: 'Burn', value: 'burn' },
+      { title: 'Transfer', value: 'transfer' },
+      { title: 'Send', value: 'send', isIndent: true },
+      { title: 'Receive', value: 'receive', isIndent: true },
     ],
   },
 ];
@@ -764,12 +764,12 @@ export const minerTabs = [
     title: 'traces_list',
     dataIndex: 'traces_list',
     headerOptions: [
-      { label: 'all', value: 'all' },
-      { label: 'Blockreward', value: 'blockreward' },
-      { label: 'Burn', value: 'burn' },
-      { label: 'Transfer', value: 'transfer' },
-      { label: 'Send', value: 'send', isIndent: true },
-      { label: 'Receive', value: 'receive', isIndent: true },
+      { title: 'all', value: 'all' },
+      { title: 'Blockreward', value: 'blockreward' },
+      { title: 'Burn', value: 'burn' },
+      { title: 'Transfer', value: 'transfer' },
+      { title: 'Send', value: 'send', isIndent: true },
+      { title: 'Receive', value: 'receive', isIndent: true },
     ],
   },
 ];
@@ -974,3 +974,135 @@ export const trance_list = (fromList: any, toList: any) => [
   },
   { dataIndex: 'method_name', width: '20%', title: 'method_name' },
 ];
+
+//height
+export const height_list = {
+  headerList: [
+    { dataIndex: "blcok_time",
+      title: "blcok_time",
+    },
+    { dataIndex: "message_count_deduplicate",
+      title: "message_count_deduplicate",
+    },
+  ],
+  columns: [
+    { dataIndex: "cid",
+      title: "block_cid",
+    },
+    { dataIndex: "miner_id",
+      title: "miner_id",
+    },
+    { dataIndex: "messages_count",
+      title: "messages_count",
+    },
+    { dataIndex: "blocks_reward",
+      title: "reward",
+    },
+
+  ]
+
+}
+
+//cid detail
+export const cid_list = {
+  headerList:[
+    {
+      title: 'blocks_cid', dataIndex: 'cid', type: ['block_basic'],
+    },
+    {
+      title: 'cid_height', dataIndex: 'height', type: ['block_basic'],
+      render: (text: any) => {
+        if(!text) return '--'
+        return <Link href={`/height/${text}`} className='link'>{formatNumber(text)}</Link>
+      }
+    },
+    {
+      title: 'block_time', dataIndex: 'block_time', type: ['block_basic'],
+      render: (text: any, data:any) => formatDateTime(text,'YYYY-MM-DD')
+    },
+    {
+      title: 'blocks_messages', dataIndex: 'messages_count', type: ['block_basic'],
+
+    },
+    {
+      title: 'blocks_miner', dataIndex: 'miner_id', type: ['block_basic'],
+      render: (text: any) => {
+        return <Link href={`/miner/${text}`} className='link'>{ text}</Link>
+      }
+    },
+    {
+      title:'win_count',dataIndex:'win_count',
+    },
+    {
+      title: 'blocks_reward', dataIndex: 'mined_reward', type: ['block_basic'],
+      render: (text: any, data:any) => text ? formatFilNum(text, false, false) : text || '--',
+    },
+    {
+      title: 'parents_cid', dataIndex: 'parents', type: ['block_basic'],
+      render: (text:any, data:any) => {
+        return <div className='flex flex-col gap-y-2'>
+          {data?.parents?.map((item:string) => {
+            return <Link href={`/cid/${item}`} key={ item} className='link'>{item}</Link>
+          })}
+        </div>
+      }
+    },
+    {
+      title:'parent_weight',dataIndex:'parent_weight',
+    },
+    {
+      title:'parent_base_fee',dataIndex:'parent_base_fee',
+    },
+    {
+      title:'ticket_value',dataIndex:'ticket_value',
+    },
+    {
+      title:'state_root',dataIndex:'state_root',
+    },
+
+  ],
+  columns:(fromList:any,toList:any)=>[
+    {
+      dataIndex: "cid", title: "cid",
+      render: (text: string) => <Link href={`/message/${text}`} className='link'>{text ? isIndent(text, 6) : ''}</Link>
+    },
+    { dataIndex: "height", title: "height",render: (text: string) => <Link href={`/tipset/chain?height=${text}` }className='link'>{ text}</Link> },
+    { dataIndex: "block_time", title: "block_time", render: (text: string|number)=> formatDateTime(text,'YYYY-MM-DD HH:mm')},
+    {
+      dataIndex: "from", title: "from",
+      render: (text: string, record: any) => {
+        if (!text) return '--';
+        return (
+          <span className='flex items-center gap-x-1'>
+            {get_account_type(text)}
+            {fromList?.domains && fromList?.domains[text] && (
+              <Link
+                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
+              ({fromList.domains[text]})
+              </Link>
+            )}
+          </span>
+        );
+      },},
+    {
+      dataIndex: "to", title: "to",
+      render: (text: string, record: any) => {
+        if (!text) return '--';
+        return (
+          <div className='flex items-center gap-x-1'>
+            {get_account_type(text)}
+            {toList?.domains && toList?.domains[text] && (
+              <Link
+                href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
+                ({toList.domains[text]})
+              </Link>
+            )}
+          </div>
+        )
+      }
+    },
+    { dataIndex: "value", title: "value" ,render:(text:number)=>text ? formatFilNum(text, false, false) : text || '--',},
+    { dataIndex: "exit_code", title: "status" },
+    { dataIndex: "method_name", title: "method_name" },
+  ],
+}
