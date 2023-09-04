@@ -62,6 +62,11 @@ const config: Config = {
         //   bgDesColor: 'rgba(255,255,255,0.1)',
         //   font_des:'rgba(255,255,255,0.6)',
         // },
+        'mobile-bgColor':'var(--mobile-bgColor)',
+        'mobile-title-color':'var(--mobile-title-color)',
+        'mobile-text-unimportant':'var(--mobile-text-unimportant)',
+        'mobile-border-color':'var(--mobile-border-color)',
+        'mobile-text-warning':'var(--mobile-text-warning)'
       },
 
     },

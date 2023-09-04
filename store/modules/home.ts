@@ -1,10 +1,10 @@
-import { action, computed, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import fetchData from '../server';
 import { apiUrl } from '@/contents/apiUrl';
 import { get } from 'lodash';
 import { unitConversion } from '@/utils';
 import { MetaModel } from '@/models/metaModel';
-import { DefiProtocol } from '../homeData';
+import { DefiProtocol, EvmContractData } from '../homeData';
 
 class HomeStore {
   meta = {
@@ -23,14 +23,20 @@ class HomeStore {
     total:number,
     items:DefiProtocol[]
   }
+
+  contractData?:EvmContractData
+
   constructor() {
     this.defiData = undefined
+    this.contractData = undefined
     makeObservable(this, {
       meta: observable,
       fee: observable,
       formatMeta:computed,
       defiData:observable,
+      contractData:observable,
       fetchHomeMeta: action,
+      fetchContractRank:action,
     });
   }
   get formatMeta (){
@@ -120,6 +126,21 @@ class HomeStore {
     const result:any = await fetchData(apiUrl.fevm_defiList, params);
     if (!result.error) {
       this.defiData = result
+    }
+  }
+
+  async fetchContractRank(data:{
+    page:number,
+    limit:number,
+    sort:string,
+    field:string
+  }){
+    data.page = data.page - 1
+    const res: any = await fetchData(apiUrl.contract_rank, data);
+    if (!res.error) {
+      runInAction(()=>{
+        this.contractData = res;
+      })
     }
   }
 }

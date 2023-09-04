@@ -1,13 +1,15 @@
 import { defi_list, mobileHomeDefiColumns } from "@/contents/fevm"
 import { DefiProtocol } from "@/store/homeData"
 import homeStore from "@/store/modules/home"
-import { Table } from "antd"
 import { ColumnsType } from "antd/es/table"
 import { observer } from "mobx-react"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import styles from './index.module.scss'
 import Image from "next/image"
+import Table from "@/packages/mobile/table"
+import classNames from "classnames"
+import { get$Number } from "@/utils"
 interface Sort {
   field:string,
   order:string
@@ -20,14 +22,18 @@ const Defi = ()=>{
     order:'descend'
   })
 
-  const columns :ColumnsType<DefiProtocol> = [
+  const columns:ColumnsType<DefiProtocol> = [
     {
       title: `${t('rank')}`,
       dataIndex: 'rank',
       key:'rank',
       width:'15%',
       render(value, record, index) {
-        return <div className={styles.rank}>{index + 1}</div>
+        return <div
+          className={'flex justify-center items-center rounded-[3px] bg-mobile-title-color w-[16px] text-mobile-text-unimportant font-DINPro-Medium text-[12px]'}
+        >
+          {index + 1}
+        </div>
       },
     },
     {
@@ -38,14 +44,10 @@ const Defi = ()=>{
         showTitle: false,
       },
       render(value, record, index) {
-        return <div className={styles.protocol}>
-          <Image fill src={record.icon_url} alt="" />
+        return <div className='flex items-center'>
+          <Image className="!relative !w-[15px] !h-[15px] !rounded-[2.5px] mr-[4px]" fill src={record.icon_url} alt="" />
           <div
-            style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              cursor: 'pointer',
-            }}
+            className={'font-DINPro-Medium text-[14px] overflow-hidden text-ellipsis cursor-pointer'}
           >{value}</div>
         </div>
       },
@@ -56,7 +58,7 @@ const Defi = ()=>{
       key:'tvl',
       align:"right",
       render(value, record, index) {
-        return <div>{value}</div>
+        return <div className="font-DINPro-Medium text-[14px]">{get$Number(value)}</div>
       },
     },
   ]
@@ -70,11 +72,14 @@ const Defi = ()=>{
   },[sort])
   return <div className={styles.defiWrap}>
     <div className={styles.title}>Defi Protocol</div>
-    <Table
-      columns={columns}
-      dataSource={homeStore.defiData?.items}
-      pagination={false}
-    ></Table>
+    <div className="bg-mobile-bgColor rounded-[6px] overflow-hidden">
+      <Table
+        columns={columns}
+        dataSource={homeStore.defiData?.items}
+        pagination={false}
+      ></Table>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">FIL Staking</div>
+    </div>
   </div>
 }
 
