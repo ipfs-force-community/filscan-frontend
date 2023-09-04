@@ -49,18 +49,34 @@ export function getShowData(item: any, data: { [key: string]: any }): any {
   return showData;
 }
 export function formatFil(
-  num: string | number,
-  unit?: string,
-  len: number = 0
+  number: string | number,
+  unit = 'FIL',
+  len =4,
+  isAccount?: boolean,
 ) {
+  let returnValue;
+  const num = Math.abs(Number(number));
+  const flag = Number(number) < 0 ? '-':''
   if (unit === 'FIL') {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 18));
-    return Number(Number(showNum)?.toFixed(len));
+    returnValue = Number(showNum)
   } else if (unit === 'nanoFiL') {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 9));
-    return Number(Number(Number(showNum)?.toFixed(len)));
+    returnValue = Number(showNum)
+  } else {
+    returnValue = Number(num);
   }
-  return Number(num);
+  if (isAccount) {
+    //unit === 'FIL',len=4
+    if (returnValue === 0) {
+      return <span className='text_des_unit'>{`${returnValue} ${unit}`}</span>
+    }
+    if (returnValue < 0.0001) {
+      return '< 0.0001 FIL'
+    }
+    return flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + unit
+  }
+  return flag+ Number(returnValue).toLocaleString('en', { maximumFractionDigits: len })
 }
 
 export function formatFilNum(

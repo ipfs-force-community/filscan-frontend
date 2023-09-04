@@ -63,9 +63,7 @@ export default () => {
 
   return (
     < >
-      <div className='bg-black w-full h-[200px]'>
-        <Banner />
-      </div>
+      <Banner />
       <div className='main_contain !w-2/5 !min-w-[404px] !mb-10 !mt-8 '>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {

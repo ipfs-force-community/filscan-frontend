@@ -163,7 +163,7 @@ export default ({
       if (available_balance) {
         seriesObj.available_balance.push({
           amount: available_balance_amount,
-          value: formatFil(available_balance, 'FIL', 4),
+          value: formatFil(available_balance),
           unit: available_balance_unit,
           showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         });
@@ -171,7 +171,7 @@ export default ({
       if (balance) {
         seriesObj.balance.push({
           amount: balance_amount,
-          value: formatFil(balance, 'FIL', 4),
+          value: formatFil(balance),
           unit: balance_unit,
           showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         });
@@ -179,7 +179,7 @@ export default ({
       if (initial_pledge) {
         seriesObj.initial_pledge.push({
           amount: initial_pledge_amount,
-          value: formatFil(initial_pledge, 'FIL', 4),
+          value: formatFil(initial_pledge),
           unit: initial_pledge_unit,
           showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         });
@@ -187,7 +187,7 @@ export default ({
       if (locked_funds) {
         seriesObj.locked_funds.push({
           amount: locked_funds_amount,
-          value: formatFil(locked_funds, 'FIL', 4),
+          value: formatFil(locked_funds),
           unit: locked_funds_unit,
           showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         });

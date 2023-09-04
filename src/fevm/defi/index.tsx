@@ -36,7 +36,7 @@ export default ({ origin }: { origin?: string }) => {
     const sortData = sorter || sort;
     const result: any = await fetchData(apiUrl.fevm_defiList, {
       page: page - 1,
-      limit: origin === 'home'? pageLimit:pageHomeLimit,
+      limit: origin === 'home'? pageHomeLimit:pageLimit,
       field: sortData.field,
       reverse: sortData.order === 'ascend',
     });

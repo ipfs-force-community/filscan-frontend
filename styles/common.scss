@@ -3,33 +3,37 @@
   @return #{$px / $base-font-size}rem;
 }
 
+
 .custom_header{
-  max-width: 1440px;
-  min-width: 1000px;
   margin: auto;
-  padding: 0px 90px;
 }
 .custom_footer{
-  max-width: 1440px;
-  min-width: 1000px;
   margin: auto;
-  padding: 20px 90px;
   width: 100%;
   height: 140px;
 }
 
 .main_contain{
-  max-width: 1440px;
-  min-width: 1000px;
   min-height:calc(100% - 245px);
   width: 100%;
   margin:  auto;
-  padding: 20px 90px;
   font-size: px-to-rem(14px);
   color: var(--font-color);
   background-color:transparent; 
   overflow: hidden;
+}
 
+@media screen and (min-width: 1000px){
+  .main_contain,.custom_footer{
+  max-width: 1440px;
+  min-width: 1000px;
+   padding: 20px 90px;
+  }
+  .custom_header{
+    max-width: 1440px;
+    min-width: 1000px;
+    padding: 0px 90px;
+  }
 }
 
 //色值改变
@@ -45,6 +49,9 @@
 }
 .text_des{
    color: var(--font_des);
+}
+.text_des_unit{
+  color: var(--font_des_unit);
 }
 
 .text_des_hover{
