@@ -80,6 +80,7 @@ function Home(props: any) {
       </div>
 
       <MobileView>
+        <MobileContractRank/>
         <Defi/>
       </MobileView>
     </div>
