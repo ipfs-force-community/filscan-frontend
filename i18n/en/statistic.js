@@ -1,22 +1,22 @@
 
 const statistic = {
-    gas_total:'Gas',
+  gas_total:'Gas',
   show_more: 'More',
-   '24h': '24H',
+  '24h': '24H',
   '7d': '7D',
   '30d': '30D',
   year:'1Y',
-    // power 
-    "power": 'Storage Power Trend',
-    power_tips: 'The network baseline is the scale of network growth required by the Filecoin Network, which was 2.5 EiB when the Mainnet launched, with a growth rate of 100% per year',
-    trend_24: '24h Base Fee Variations',
-    total_raw_byte_power: 'Network Raw Byte Power',
-    base_line_power: 'BaseLine',
-    total_quality_adj_power: 'Quality Adjusted Power',
-    change_quality_adj_power: 'Quality Adjusted Power Fluctuations',
-    gas: 'Base Fee Variations',
-    base_fee: 'Base Fee',
-    gas_in_32g: 'Gas Cost of Sealing a 32GiB Sector',
+  // power
+  "power": 'Storage Power Trend',
+  power_tips: 'The network baseline is the scale of network growth required by the Filecoin Network, which was 2.5 EiB when the Mainnet launched, with a growth rate of 100% per year',
+  trend_24: '24h Base Fee Variations',
+  total_raw_byte_power: 'Network Raw Byte Power',
+  base_line_power: 'BaseLine',
+  total_quality_adj_power: 'Quality Adjusted Power',
+  change_quality_adj_power: 'Quality Adjusted Power Fluctuations',
+  gas: 'Base Fee Variations',
+  base_fee: 'Base Fee',
+  gas_in_32g: 'Gas Cost of Sealing a 32GiB Sector',
   gas_in_64g: 'Gas Cost of Sealing a  64GiB Sector',
   //24_gas
   gas_24:'24h Gas Data',
@@ -27,7 +27,7 @@ const statistic = {
   avg_gas_fee: 'Avg. Gas Fee',
   'sum_gas_fee/ratio': 'Total Fees/Percentage',
   'message_count/ratio': 'Total Messages/Percentage',
-    //fil
+  //fil
   TokenRules:'FIL Allocation',
   FilecoinFoundation: 'Filecoin Foundation',
   FundraisingRemainder: 'Fundraising-Remainder',
@@ -51,8 +51,7 @@ const statistic = {
   protocolLab_des: 'allocated for Protocol Labs',
   Contributors_des: '4.5% for the PL team & contributors',
 
-
-   //charts 
+  //charts
   pie_title: 'Chart Statistics',
   block_trend: 'Block Rewards',
   block_reward_per_TiB: 'Output Efficiency',
@@ -76,8 +75,5 @@ const statistic = {
   burnt: 'Total FIL Burned',
   circulating:'Circulating Supply'
 }
-
-
-
 
 export default statistic
