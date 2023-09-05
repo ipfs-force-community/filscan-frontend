@@ -4,7 +4,8 @@ import { apiUrl } from '@/contents/apiUrl';
 import { get } from 'lodash';
 import { unitConversion } from '@/utils';
 import { MetaModel } from '@/models/metaModel';
-import { DefiProtocol, EvmContractData } from '../homeData';
+import { DefiProtocol, EvmContractData, MinerPowerRankData } from '../homeData';
+import { data } from 'autoprefixer';
 
 class HomeStore {
   meta = {
@@ -25,10 +26,11 @@ class HomeStore {
   }
 
   contractData?:EvmContractData
-
+  minerPowerRankData?: MinerPowerRankData
   constructor() {
     this.defiData = undefined
     this.contractData = undefined
+    this.minerPowerRankData = undefined
     makeObservable(this, {
       meta: observable,
       fee: observable,
@@ -119,7 +121,7 @@ class HomeStore {
 
   /**
    *
-   * @param psrams
+   * @param params
    */
   async fetchHomeDefi(params:{page:number,limit:number,field?:string,reverse?:boolean}) {
     params.page = params.page - 1
@@ -140,6 +142,21 @@ class HomeStore {
     if (!res.error) {
       runInAction(()=>{
         this.contractData = res;
+      })
+    }
+  }
+
+  async fetchMinerPowerRank(data:{
+    index:number,
+    limit:number,
+    interval:string,
+    order:{field:string,sort:string},
+    sector_size?:string | null
+  }){
+    const res: any = await fetchData(apiUrl.rank_growth,data)
+    if (!res.error) {
+      runInAction(()=>{
+        this.minerPowerRankData = res;
       })
     }
   }

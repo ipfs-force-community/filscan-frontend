@@ -19,6 +19,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss';
 import Defi from '@/components/mobile/home/defi';
 import MobileContractRank from '@/components/mobile/home/contractRank'
+import MobileRank from '@/components/mobile/home/rank'
 //import fetchData from '@/store/server';
 
 // type HomeProps = {
@@ -39,38 +40,37 @@ function Home(props: any) {
 
   return (
     <div className={styles['home-page']}>
-
-      <MobileView>
-        <MobileBanner />
-      </MobileView>
       <div className='main_bg_color'>
+        <MobileView>
+          <MobileBanner />
+        </MobileView>
         <BrowserView>
           <Banner />
         </BrowserView>
-        <BrowserView>
-          <div className='main_contain !mt-[26px]'>
-            <div className='flex justify-between h-[270px] gap-x-5 meta-gas'>
-              <Meta />
-              <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
-                <div className={`flex justify-between text-xs font-PingFang p-5`}>
-                  {tr('base_gas')}
-                  <Link href={`/statistics/gas/`}>
-                    <Image
-                      className='cursor-pointer'
-                      src={go}
-                      width={18}
-                      height={18}
-                      alt='go'
-                    />
-                  </Link>
-                </div>
-                <Gas className={'w-full !h-[210px]'} />
+        <div className='main_contain !mt-[26px]'>
+          <div className='flex justify-between h-[270px] gap-x-5 meta-gas'>
+            <Meta />
+            <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
+              <div className={`flex justify-between text-xs font-PingFang p-5`}>
+                {tr('base_gas')}
+                <Link href={`/statistics/gas/`}>
+                  <Image
+                    className='cursor-pointer'
+                    src={go}
+                    width={18}
+                    height={18}
+                    alt='go'
+                  />
+                </Link>
               </div>
+              <Gas className={'w-full !h-[210px]'} />
             </div>
-            <div className='flex justify-between mt-12 gap-x-5 h-[400px] box-column'>
-              <Trend origin='home' className={'w-full !h-full'} />
-              <Trend origin='home' className={'w-full !h-full'} />
-            </div>
+          </div>
+          <div className='flex justify-between mt-12 gap-x-5 h-[400px] box-column'>
+            <Trend origin='home' className={'w-full !h-full'} />
+            <Trend origin='home' className={'w-full !h-full'} />
+          </div>
+          <BrowserView>
             <div className='mt-32' ref={ref}>
               <Rank origin={'home'} />
             </div>
@@ -96,12 +96,11 @@ function Home(props: any) {
                 <DefiList origin='home' />
               </div>
             </div>
-          </div>
-
-        </BrowserView>
+          </BrowserView>
+        </div>
       </div>
-
       <MobileView>
+        <MobileRank/>
         <MobileContractRank/>
         <Defi/>
       </MobileView>

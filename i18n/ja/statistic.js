@@ -5,17 +5,17 @@ const statistic = {
   '7d': '7日間',
   '30d': '30日',
   year:'1年',
-    // power 
-    "power": 'ベースラインとハッシュレートの傾向',
-    power_tips: 'ベースライン基準は、Filecoinに要求されるネットワーク成長規模であり、メインネットがオンラインになったときに2.5EiBであり、年間成長率は100％となる。',
-    trend_24: '24h基础手续费走势',
-    total_raw_byte_power: '全ネットーワークの計算力',
-    base_line_power: 'ベースライントレンド',
-    change_quality_adj_power: 'リング間の実効計算能力',
-    total_quality_adj_power:'計算能力を高める',
-    gas: '基本手数料トレンド',
-    base_fee: '基本手数料',
-    gas_in_32g: '32GiBディスクセクターGas消耗',
+  // power
+  "power": 'ベースラインとハッシュレートの傾向',
+  power_tips: 'ベースライン基準は、Filecoinに要求されるネットワーク成長規模であり、メインネットがオンラインになったときに2.5EiBであり、年間成長率は100％となる。',
+  trend_24: '24h基础手续费走势',
+  total_raw_byte_power: '全ネットーワークの計算力',
+  base_line_power: 'ベースライントレンド',
+  change_quality_adj_power: 'リング間の実効計算能力',
+  total_quality_adj_power:'計算能力を高める',
+  gas: '基本手数料トレンド',
+  base_fee: '基本手数料',
+  gas_in_32g: '32GiBディスクセクターGas消耗',
   gas_in_64g: '64GiBディスクセクターGas消耗',
   //24_gas
   gas_24:'24h Gas データ',
@@ -49,8 +49,8 @@ const statistic = {
   Funds_des: '用作生态发展和后续融资',
   protocolLab_des: '用作协议实验室的相关工作',
   Contributors_des: '4.5%给协议实验室团队和贡献者',
-  
-  //charts 
+
+  //charts
   pie_title: '图表统计',
   block_trend: '区块奖励',
   block_reward_per_TiB: '产出效率',
@@ -61,8 +61,5 @@ const statistic = {
   message_count:'单消息走势',
   all_message_count:'总消息走势'
 }
-
-
-
 
 export default statistic

@@ -267,6 +267,12 @@ const growthList = (progress: number | string) => {
   ];
 };
 
+export const homeGrowthList = [
+  'ranking',
+  'miner',
+  'power_ratio'
+]
+
 const rewardsList = () => {
   return [
     {

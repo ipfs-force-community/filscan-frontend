@@ -26,7 +26,7 @@ const ContractRank =()=>{
   const {t} = useTranslation('contract')
 
   const columns = useMemo(()=>{
-    return contract_rank.mobileColumns.filter((value,index)=>{
+    return contract_rank.columns.filter((value,index)=>{
       if (value.dataIndex === 'contract_name') {
         value.render = (text: string, record: any) => {
           if (text) {
@@ -53,18 +53,18 @@ const ContractRank =()=>{
       page:1,
       limit:10,
       sort: sort.order === 'ascend' ? 'asc' : 'desc',
-      field: sort.field,
+      field: sort.field
     })
   },[])
-  return <div className={styles.rankWrap}>
-    <div className={styles.title}>Defi Protocol</div>
-    <div className="bg-mobile-bgColor rounded-[6px] overflow-hidden">
+  return <div className={styles.wrap}>
+    <div className={styles.title}>{t(contract_rank.title)}</div>
+    <div className={styles.content}>
       <Table
         columns={columns}
         dataSource={homeStore.contractData?.evm_contract_list}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">FIL Staking</div>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看所有合约</div>
     </div>
   </div>
 }

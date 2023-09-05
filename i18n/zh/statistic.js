@@ -6,17 +6,17 @@ const statistic = {
   '7d': '7天',
   '30d': '30天',
   year:'1年',
-    // power 
-    "power": '算力走势',
-    power_tips: '基线标准即是Filecoin网络要求的网络增长规模，主网上线时2.5EiB，每年100%增长率。',
-    trend_24: '24h基础手续费走势',
-    total_raw_byte_power: '原值算力',
-    base_line_power: '基线走势',
-    change_quality_adj_power: '环比有效算力变化',
-    total_quality_adj_power:'有效算力',
-    gas: '基础手续费走势',
-    base_fee: '基础手续费',
-    gas_in_32g: '32GiB 扇区Gas消耗',
+  // power
+  "power": '算力走势',
+  power_tips: '基线标准即是Filecoin网络要求的网络增长规模，主网上线时2.5EiB，每年100%增长率。',
+  trend_24: '24h基础手续费走势',
+  total_raw_byte_power: '原值算力',
+  base_line_power: '基线走势',
+  change_quality_adj_power: '环比有效算力变化',
+  total_quality_adj_power:'有效算力',
+  gas: '基础手续费走势',
+  base_fee: '基础手续费',
+  gas_in_32g: '32GiB 扇区Gas消耗',
   gas_in_64g: '64GiB 扇区Gas消耗',
   //24_gas
   gas_24:'24h Gas 数据',
@@ -50,8 +50,8 @@ const statistic = {
   Funds_des: '用作生态发展和后续融资',
   protocolLab_des: '用作协议实验室的相关工作',
   Contributors_des: '4.5%给协议实验室团队和贡献者',
-  
-  //charts 
+
+  //charts
   pie_title: '图表统计',
   block_trend: '区块奖励',
   block_reward_per_TiB: '产出效率',
@@ -74,8 +74,5 @@ const statistic = {
   burnt: '已销毁的Fil',
   circulating:'可交易流通的Fil'
 }
-
-
-
 
 export default statistic

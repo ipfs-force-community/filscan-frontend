@@ -1,7 +1,7 @@
 const common = {
   date: '날짜',
   confirm: 'Confirm',
-  cancel:'Cancel', 
+  cancel:'Cancel',
   go_home: '홈으로',
   go_login: '로그인하다',
   back:'뒤로',
@@ -96,7 +96,7 @@ const common = {
   pledge_changed_per_t: '플레지 변경/T',
   penalty: '벌칙',
   fault_sectors:'오류',
-  //gas 
+  //gas
 
   total_gas_cost: '가스 총 소비량',
   seal_gas_cost:'Seal Gas',
@@ -126,6 +126,5 @@ const common = {
   confirm_placeholder: '새 비밀번호를 다시 입력해주세요',
   personal_name_holder:'계정을 입력해주세요',
 }
-
 
 export default common
