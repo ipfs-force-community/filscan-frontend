@@ -1,7 +1,7 @@
 @media screen and (max-width: 1000px){
-    .mobile_table{
+    .mobile-table{
         border-radius: 6px;
-        .mobile_table_card{
+        .mobile-table-card{
             background: #FFFFFF;
             border-radius: 6px;
             border: 1px solid #EEEFF1;
@@ -10,11 +10,11 @@
             &:last-child{
                 margin-bottom: 0;
             }
-            .mobile_table_card_item{
+            .mobile-table-card-item{
                 display: flex;
                 align-items: flex-start;
                 padding: 12px;
-                .mobile_table_card_item_label{
+                .mobile-table-card-item-label{
                     font-size: 15px;
                     font-family: PingFangSC-Regular, PingFang SC;
                     font-weight: 400;
@@ -22,7 +22,7 @@
                     line-height: 17px;
                     flex: 1;
                 }
-                .mobile_table_card_item_value{
+                .mobile-table-card-item-value{
                     flex: 2;
                     font-size: 15px;
                     font-family: DINPro-Medium, DINPro;

@@ -276,7 +276,6 @@ export default (props: Props) => {
           <Link href={`/statistics/power/`}>
             <MobileView>
               <Image
-                className='cursor-pointer'
                 src={goMobile}
                 width={18}
                 height={18}

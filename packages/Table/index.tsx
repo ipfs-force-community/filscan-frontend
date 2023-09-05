@@ -37,10 +37,10 @@ export default (props: Props) => {
 
   return <>
     <MobileView>
-      <div className={styles.mobile_table}>
+      <div className={styles['mobile-table']}>
         {data.map((dataSource, data_index) => {
           return (
-            <div className={styles.mobile_table_card} key={data_index}>
+            <div className={styles['mobile-table-card']} key={data_index}>
               {columns.map((item: any, index: number) => {
                 const { title, dataIndex, render } = item;
                 const showTitle =
@@ -54,11 +54,11 @@ export default (props: Props) => {
                   );
                 }
                 return (
-                  <div className={styles.mobile_table_card_item} key={index}>
-                    <div className={styles.mobile_table_card_item_label}>
+                  <div className={styles['mobile-table-card-item']} key={index}>
+                    <div className={styles['mobile-table-card-item-label']}>
                       {showTitle}：
                     </div>
-                    <div className={styles.mobile_table_card_item_value}>
+                    <div className={styles['mobile-table-card-item-value']}>
                       {showValue}
                     </div>
                   </div>
