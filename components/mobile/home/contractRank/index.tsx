@@ -64,7 +64,7 @@ const ContractRank =()=>{
         dataSource={homeStore.contractData?.evm_contract_list}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看所有合约</div>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }

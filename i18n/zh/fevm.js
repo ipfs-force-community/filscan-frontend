@@ -15,7 +15,8 @@ const fevm = {
   tvl_change_in_24h: '24小时质押',
   tokens: '占比',
   tokens_tip:'质押在该协议的各Token占比',
-  users:'用户数'
+  users:'用户数',
+  see_more:'查看更多'
 }
 
 export default fevm

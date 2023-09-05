@@ -62,7 +62,7 @@ const Rank = ()=>{
         dataSource={homeStore.minerPowerRankData?.items}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看更多</div>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }

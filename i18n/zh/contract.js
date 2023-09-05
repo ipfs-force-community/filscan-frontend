@@ -155,6 +155,7 @@ Hardhat 将编译输出存储在项目内的“artifacts/build-info/”目录中
   user_count: '交易地址',
   actor_balance: 'Balance',
   gas_cost: 'Gas消耗',
+  see_more:'查看更多',
 
   //log
   epoch: '高度',

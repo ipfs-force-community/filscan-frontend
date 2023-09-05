@@ -12,7 +12,7 @@ const rankZh = {
   select_rank_64: '64G 섹터',
   more: '더보기',
   rank_time:'마지막 업데이트 시간:',
-  // table columns title
+  see_more:'더보기',
 
   //存储池排行
   ranking: '순위',

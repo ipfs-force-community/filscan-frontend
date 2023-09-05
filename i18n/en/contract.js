@@ -137,6 +137,7 @@ Hardhat stores the compilation outputs in the "artifacts/build-info/" directory 
   actor_balance: 'Balance',
   gas_cost: 'Gas Cost',
   ver_address: 'Pending Verification',
+  see_more:'See More',
 
   //log
   epoch: 'Height',
