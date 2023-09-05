@@ -51,8 +51,8 @@ const common = {
   email_exists:'Email exists',
   Export: 'Download Excel',
   //footer
-  'footer_des1':'Filecoin blockchain browser and data service platform.It provides XX based on Filecoin.Filecoin',
-  'footer_des2':'one stop data services such as mining ranking, blockchain data query and visualization chart',
+  'footer_des1':'Filecoin blockchain browser and data service platform.It provides XX based on Filecoin.',
+  'footer_des2':'Filecoin one stop data services such as mining ranking, blockchain data query and visualization chart',
 
 }
 export default common
