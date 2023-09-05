@@ -5,12 +5,12 @@
     width: 100%;
     .header {
       position: fixed;
+      top:  0;
       display: flex;
       justify-content: space-between;
       width: 100%;
       height: 44px;
       background: white;
-      top:  0;
       & > div {
         display: flex;
         align-items: center;
@@ -31,7 +31,6 @@
     .body {
       position: fixed;
       overflow: hidden;
-      margin-top: 44px;
       min-height: 0px;
       width: 100%;
       height: 0px;
@@ -61,7 +60,7 @@
         margin: 0px;
         padding-left: 0px !important;
         width: 100% !important;
-  
+
         margin-inline: 0px !important;
         padding-inline: 0px !important;
         margin-block: 0px !important;
