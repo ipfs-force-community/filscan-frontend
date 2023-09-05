@@ -245,7 +245,7 @@ export const overview = {
                 {/* {flag}
                 {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
-                <span className='text-sm'>{'FIL'}</span>
+                <span className='text-sm'>{unit}</span>
               </span>
             </div>
           );
@@ -279,7 +279,7 @@ export const overview = {
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>{'FIL'}</span>
+                <span className='text-sm'>{unit}</span>
               </span>
             </div>
           );
