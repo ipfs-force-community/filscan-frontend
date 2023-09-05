@@ -155,6 +155,7 @@ export const contract_rank = {
       dataIndex: 'transfer_count',
       width: '15%',
       sorter: true,
+      align:'left',
       defaultSortOrder: 'descend',
       render: (text: number) => formatNumber(text),
     },
@@ -190,7 +191,7 @@ export const contract_rank = {
     {
       title: 'contract_address',
       dataIndex: 'contract_address',
-      width: '10%',
+      width: '30%',
       render: (text: any, record: any) => {
         if (!text) return '--';
         return (
@@ -212,31 +213,9 @@ export const contract_rank = {
       title: 'transaction_count',
       dataIndex: 'transfer_count',
       width: '15%',
-      sorter: true,
-      defaultSortOrder: 'descend',
+      align:"right",
       render: (text: number) => formatNumber(text),
-    },
-    {
-      title: 'user_count',
-      dataIndex: 'user_count',
-      width: '15%',
-      sorter: true,
-      render: (text: number) => formatNumber(text),
-    },
-    {
-      title: 'actor_balance',
-      dataIndex: 'actor_balance',
-      width: '15%',
-      render: (text: number) => formatFilNum(text),
-      sorter: true,
-    },
-    {
-      title: 'gas_cost',
-      dataIndex: 'gas_cost',
-      width: '15%',
-      render: (text: number) => formatFilNum(text),
-      sorter: true,
-    },
+    }
   ],
 };
 

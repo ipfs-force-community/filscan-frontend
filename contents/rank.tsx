@@ -268,8 +268,8 @@ const growthList = (progress: number | string) => {
 };
 
 export const homeGrowthList = [
-  'ranking',
-  'miner',
+  'rank',
+  'miner_id',
   'power_ratio'
 ]
 

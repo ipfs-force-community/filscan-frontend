@@ -154,6 +154,7 @@ class HomeStore {
     order:{field:string,sort:string},
     sector_size?:string | null
   }){
+    data.index = data.index - 1
     const res: any = await fetchData(apiUrl.rank_growth,data)
     if (!res.error) {
       runInAction(()=>{
