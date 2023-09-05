@@ -20,7 +20,6 @@
   --bg_hover: rgba(28, 106, 253, 0.1);
   --font_des: rgba(0, 0, 0, 0.6);
   --font_des_unit: rgba(0, 0, 0, 0.4);
-
   --primary: #1c6afd;
   --text_clip: #131254;
   --bgDesColor: #f6f6f6;
@@ -29,6 +28,7 @@
   手机端
   */
   --mobile-bgColor: #ffffff;
+  --mobile-bg-3: rgba(0, 0, 0, 0.03);
   --mobile-title-color: #333333;
   --mobile-des-color: #b3b3b3;
   --mobile-down-color: #e15252;
@@ -40,6 +40,8 @@
   --mobile-divide-line: #eeeff1;
   --mobile-footer-bg: #222121;
   --mobile-text-60: rgba(255, 255, 255, 0.6);
+  --mobile-text-placeholder:#CCCCCC
+
 }
 
 :root,
@@ -74,10 +76,10 @@ body {
 }
 
 .container_body{
+  overflow: auto;
   width: 100%;
   height: 100%;
   background-color: var(--main-bg-color);
-  overflow: auto;
 }
 @media screen and (max-width: 1000px){
     .container_body{

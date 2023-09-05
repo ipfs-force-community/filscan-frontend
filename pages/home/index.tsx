@@ -20,6 +20,8 @@ import styles from './style.module.scss';
 import Defi from '@/components/mobile/home/defi';
 import MobileContractRank from '@/components/mobile/home/contractRank'
 import MobileRank from '@/components/mobile/home/rank'
+import Search from '@/components/mobile/search';
+import classNames from 'classnames';
 //import fetchData from '@/store/server';
 
 // type HomeProps = {
@@ -40,7 +42,14 @@ function Home(props: any) {
 
   return (
     <div className={styles['home-page']}>
-      <div className='main_bg_color'>
+      <MobileView>
+        <div className={classNames(styles.title)}>
+          <span>Filecoin</span>
+          <span>区块链浏览器</span>
+        </div>
+        <Search/>
+      </MobileView>
+      <div className={classNames('px-[12px]')}>
         <MobileView>
           <MobileBanner />
         </MobileView>
@@ -100,9 +109,11 @@ function Home(props: any) {
         </div>
       </div>
       <MobileView>
-        <MobileRank/>
-        <MobileContractRank/>
-        <Defi/>
+        <div className={classNames('px-[12px]')}>
+          <MobileRank/>
+          <MobileContractRank/>
+          <Defi/>
+        </div>
       </MobileView>
     </div>
   );
