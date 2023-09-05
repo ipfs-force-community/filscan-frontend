@@ -12,6 +12,7 @@ import DateTime from '@/src/account/DateTIme';
 import { formatDateTime } from '@/utils';
 import { useHash } from '@/components/hooks/useHash';
 import Detail from './Detail';
+import Tooltip from '@/packages/tooltip';
 
 export default ({
   selectedKey,
@@ -36,7 +37,15 @@ export default ({
 
   const columns = useMemo(() => {
     return account_gas.columns(tr).map((item) => {
-      return { ...item, title: tr(item.title) };
+      if (item.titleTip) {
+        item.title = <span className='flex items-center gap-x-1'>
+          {tr(item.title)}
+          <Tooltip context={tr(item.titleTip)} />
+        </span>
+      } else {
+        item.title= tr(item.title)
+      }
+      return { ...item };
     });
   }, [tr]);
 

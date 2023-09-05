@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import { Button } from 'antd';
 import { getSvgIcon } from '@/svgsIcon';
 import { Translation } from '@/components/hooks/Translation';
-import { formatDateTime, formatFilNum, formatNumberPercentage, unitConversion } from '@/utils';
+import { formatDateTime, formatFil, formatFilNum, formatNumberPercentage, unitConversion } from '@/utils';
 
 interface ExportToExcelProps {
   columns: { title: string; dataIndex: string; [key: string]: any }[];
@@ -22,8 +22,8 @@ function getUnitValue(
 ) {
   if (amountUnit?.unit?.includes('fil')) {
     const otherUnit = amountUnit?.unit?.split('/')[1];
-    const filValue = formatFilNum(value, false, false, amountUnit.number || 2);
-    return otherUnit ? filValue + `/${otherUnit}` : filValue;
+    const filValue = formatFil(value, 'FIL',0);
+    return otherUnit ? filValue + `/${otherUnit}` : filValue+' FIL';
   } else if (amountUnit?.unit === 'power') {
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const powerValue = unitConversion(value, amountUnit.number || 2);
@@ -58,9 +58,17 @@ const ExportExcel: FC<ExportToExcelProps> = ({
   ) => {
     const headers: Array<string> = [];
     columns.forEach((col: any) => {
-      headers.push(col.title);
+      const {dataIndex ,amountUnit} = col
+      let title = col.title
+      if (amountUnit && amountUnit[dataIndex]) {
+        title = title + amountUnit[dataIndex]?.unit?.toUpperCase()
+      }
+      headers.push(title);
       // if (col.exports && Array.isArray(col.exports)) {
       //   col.exports.forEach((v: string) => {
+      //     if (v === col.dataIndex) {
+      //       title = title + col.amountUnit[v]
+      //     }
       //     headers.push(tr(v));
       //   });
       // }

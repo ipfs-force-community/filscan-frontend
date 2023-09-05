@@ -2,25 +2,25 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import Breadcrumb from '@/packages/breadcrumb';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatDateTime } from '@/utils';
 import ExportExcel from '@/packages/exportExcel';
 import Table from '@/packages/Table';
 import { account_expired } from '@/contents/account';
+import useAxiosData from '@/store/useAxiosData';
+import { proApi } from '@/contents/apiUrl';
 
 /** @format */
 
 export default ({
   miner,
-  data,
   selectedKey
 }: {
   miner?: string | number | null;
-    data?: any;
   selectedKey:string,
 }) => {
   const { tr } = Translation({ ns: 'account' });
-
+  const {axiosData } = useAxiosData()
   const routerItems = useMemo(() => {
     if (miner && typeof miner === 'string') {
       return [
@@ -36,6 +36,10 @@ export default ({
     }
     return [];
   }, [miner]);
+  const [data, setData] = useState({
+    epoch_time: '',
+    dataSource:[]
+  })
 
   const columns = useMemo(() => {
     return account_expired.columns(tr,'detail').map((item) => {
@@ -43,12 +47,22 @@ export default ({
     });
   }, [tr]);
 
-  const showData = useMemo(() => {
-    const newData = data?.sector_detail_day?.sector_detail_list?.filter(
-      (v: any) => v.miner_id === miner
-    );
-    return newData || [];
-  }, [miner, data]);
+  useEffect(() => {
+    if (miner) {
+      load()
+    }
+
+  }, [miner])
+
+  const load = async() => {
+    const result:any= await axiosData(proApi.getSector, {
+      miner_id: miner,
+    })
+    setData({
+      dataSource: result?.sector_detail_day || [],
+      epoch_time:result?.epoch_time ||""
+    })
+  }
 
   return (
     <>
@@ -68,11 +82,11 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <ExportExcel columns={columns} data={showData} fileName={tr(selectedKey)+miner?String(miner):""}/>
+          <ExportExcel columns={columns} data={data?.dataSource} fileName={tr(selectedKey)+miner?String(miner):""}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
-        <Table data={showData} columns={columns} loading={false} />
+        <Table data={data?.dataSource} columns={columns} loading={false} />
       </div>
     </>
   );
