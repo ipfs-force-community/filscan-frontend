@@ -106,15 +106,19 @@ const mobileNavMenu: Menu_Info[] = [
     link: '/fvm'
   },
   {
+    key: 'home',
+    link: '/home'
+  },
+  {
     key: 'tipset',
     children: [
       {
-        key: 'tipset_message',
-        link: '/tipset/message-list/'
+        key: 'tipset_chain',
+        link: '/tipset/chain/'
       },
       {
-        key: 'tipset_ranking',
-        link: '/tipset/address-list/'
+        key: 'tipset_message',
+        link: '/tipset/message-list/'
       },
       {
         key: 'tipset_dsn',
@@ -151,11 +155,6 @@ const mobileNavMenu: Menu_Info[] = [
         key: 'contract_list',
         link: '/contract/list/'
       },
-      {
-        key: 'contract_verify',
-        link: '/contract/verify/'
-      },
-
     ]
   },
   {
@@ -165,6 +164,20 @@ const mobileNavMenu: Menu_Info[] = [
       { key: 'statistics_base', link: '/statistics/power' },
       { key: 'statistics_fil', link: '/statistics/fil' },
       { key: 'statistics_charts', link: '/statistics/charts' },
+    ]
+  },
+  {
+    key: 'network_overview', link: '/rank', children: [
+      {
+        key: 'ranking',
+        link: '/rank',
+      },
+      {
+        key: 'tipset_ranking',
+        link: '/tipset/address-list/'
+      },
+      { key: 'statistics_gas', link: '/statistics/gas' },
+
     ]
   },
   //   { key: 'ranking' ,link:'/rank'},
