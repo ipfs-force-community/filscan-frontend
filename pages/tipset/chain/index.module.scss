@@ -17,5 +17,62 @@
                 border-radius: 6px;
             }
         }
+        .ant-pagination{
+            justify-content: flex-end;
+        }
+    }
+    .block-list{
+        .block-item{
+            background: #FFFFFF;
+            border-radius: 6px;
+            border: 1px solid #EEEFF1;
+            margin-bottom: 10px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+            .height{
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #EEEFF1;
+                padding: 17px 12px;
+                .label{
+                    font-size: 16px;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    font-weight: 400;
+                    color: #666666;
+                    line-height: 15px;
+                    margin-right: 15px;
+                }
+                .link{
+                    font-size: 18px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: #1D6BFC;
+                    line-height: 18px;
+                    margin-right: 8px;
+                }
+                .time{
+                    font-size: 12px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: #B3B3B3;
+                    line-height: 12px;
+                }
+            }
+            .rewards{
+                padding: 5px 0;
+                .reward-item{
+                    display: flex;
+                    align-content: center;
+                    justify-content: space-between;
+                    padding: 12px;
+                    font-size: 14px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: #333333;
+                    line-height: 14px;
+                }
+            }
+        }
     }
 }
