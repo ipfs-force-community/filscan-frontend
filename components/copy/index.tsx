@@ -32,7 +32,7 @@ export default ({
       style={{ cursor: 'pointer', color: 'rgb(154,154,154)' }}
       className={`flex-center ${className}`}
       onClick={handleClick}>
-      <Image src={copySvg} width={13} height={14} alt='' />
+      <Image src={icon??copySvg} width={13} height={14} alt='' />
     </span>
   );
 };

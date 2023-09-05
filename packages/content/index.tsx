@@ -3,6 +3,8 @@
 import { Translation } from '@/components/hooks/Translation';
 import { getShowData } from '@/utils';
 import { useMemo } from 'react';
+import styles from './index.module.scss'
+import classNames from 'classnames';
 
 export default ({
   content,
@@ -24,9 +26,9 @@ export default ({
   }, [columns]);
   return (
     <ul
-      className={`flex w-full max-h-full flex-col p-2.5 ${
+      className={classNames(styles['detail-content'],`flex w-full max-h-full flex-col p-2.5 ${
         columns !== 1 ? 'flex-wrap' : 'gap-y-5'
-      } `}>
+      }`)}>
       {content.map((item, index) => {
         const {
           title,

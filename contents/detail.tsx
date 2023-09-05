@@ -13,6 +13,8 @@ import Link from 'next/link';
 import Copy from '@/components/copy';
 import { getSvgIcon } from '@/svgsIcon';
 import { space } from 'postcss/lib/list';
+import { BrowserView, MobileView } from '@/components/device-detect';
+import copySvgMobile from '@/assets/images/icon-copy.svg';
 
 //储存池概览 账户余额 & 有效算力
 
@@ -275,10 +277,21 @@ export const message_detail = {
         render: (text: string) => {
           if (!text) return '--';
           return (
-            <span className='flex items-center gap-x-2'>
-              {text}
-              <Copy text={text} />
-            </span>
+            <>
+              <BrowserView>
+                <span className='flex items-center gap-x-2'>
+                  <span className='text'>{text}</span>
+                  <Copy text={text} />
+                </span>
+              </BrowserView>
+              <MobileView>
+                <span className='copy-row'>
+                  <span className='text'>{text}</span>
+                  <Copy text={text} icon={copySvgMobile} className='copy'/>
+                </span>
+              </MobileView>
+            </>
+
           );
         },
       },
@@ -289,10 +302,20 @@ export const message_detail = {
         render: (text: string) => {
           if (!text) return null;
           return (
-            <span className='flex items-center gap-x-2'>
-              {text}
-              <Copy text={text} />
-            </span>
+            <>
+              <BrowserView>
+                <span className='flex items-center gap-x-2'>
+                  <span className='text'>{text}</span>
+                  <Copy text={text} />
+                </span>
+              </BrowserView>
+              <MobileView>
+                <span className='copy-row'>
+                  <span className='text'>{text}</span>
+                  <Copy text={text} icon={copySvgMobile} className='copy'/>
+                </span>
+              </MobileView>
+            </>
           );
         },
       },

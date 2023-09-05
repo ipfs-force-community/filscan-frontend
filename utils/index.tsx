@@ -8,6 +8,7 @@ import BigNumber from 'bignumber.js';
 import dayjs from 'dayjs';
 import router from 'next/router';
 import { BrowserView, MobileView } from '@/components/device-detect';
+import copySvgMobile from '@/assets/images/icon-copy.svg';
 
 export const pageLimit = 15;
 export const pageHomeLimit = 7;
@@ -280,7 +281,10 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
         <MobileView>{isIndent(value,6,6)}</MobileView>
         <BrowserView>{isIndent(value)}</BrowserView>
       </span>
-      {value && <Copy text={value} />}
+      {value && <>
+        <MobileView><Copy text={value} icon={copySvgMobile} className='copy'/></MobileView>
+        <BrowserView><Copy text={value} /></BrowserView>
+      </>}
     </>
   );
 };
