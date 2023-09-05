@@ -162,20 +162,19 @@ const mobileNavMenu: Menu_Info[] = [
     ]
   },
   {
-    key: 'statistics',
-    children: [
+    key: 'network_overview', link: '/rank', children: [
+      {
+        key: 'ranking',
+        link: '/rank',
+      },
+      {
+        key: 'tipset_ranking',
+        link: '/tipset/address-list/'
+      },
       { key: 'statistics_gas', link: '/statistics/gas' },
-      { key: 'statistics_base', link: '/statistics/power' },
-      { key: 'statistics_fil', link: '/statistics/fil' },
       { key: 'statistics_charts', link: '/statistics/charts' },
     ]
-  },
-  //   { key: 'ranking' ,link:'/rank'},
-  //   {
-  //     out_key: 'provider',
-  //     key:'provider',
-  //     outLink:'http://v1.filscan.io/account?key=login'
-  //   }
+  }
 ]
 
 export { navMenu, mobileNavMenu }
