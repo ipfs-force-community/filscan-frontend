@@ -229,7 +229,7 @@ export const overview = {
           //     ? 'text_green'
           //     : 'text_red'
           //   : '';
-          const textValue = formatFil(text,'FIL',2)
+          const [textValue,unit] = formatFil(text,'FIL',4,true).split(' ')
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -245,7 +245,7 @@ export const overview = {
                 {/* {flag}
                 {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
-                <span className='text-sm'>{'FIL'}</span>
+                <span className='text-sm'>{unit}</span>
               </span>
             </div>
           );
@@ -265,7 +265,7 @@ export const overview = {
               ? 'text_green'
               : 'text_red'
             : 'text_des_unit';
-          const textValue = formatFil(text,'FIL',2)
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -274,12 +274,12 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 2,true) : '--'}
+                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 4,true) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>{'FIL'}</span>
+                <span className='text-sm'>{unit}</span>
               </span>
             </div>
           );
@@ -299,7 +299,7 @@ export const overview = {
               ? 'text_green'
               : 'text_red'
             : '';
-          const textValue = formatFil(text, 'FIL',2)
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -313,7 +313,7 @@ export const overview = {
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>FIL</span>
+                <span className='text-sm'>{ unit}</span>
               </span>
             </div>
           );
@@ -333,7 +333,7 @@ export const overview = {
               ? 'text_green'
               : 'text_red'
             : '';
-          const textValue = formatFil(text, 'FIL',2)
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -345,7 +345,7 @@ export const overview = {
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>FIL</span>
+                <span className='text-sm'>{ unit}</span>
               </span>
             </div>
           );

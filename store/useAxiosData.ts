@@ -3,6 +3,7 @@ import axios, { CancelTokenSource } from 'axios';
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import { notification } from 'antd';
 import Router from 'next/router';
+import messageManager from '@/packages/message';
 
 interface OPTIONS {
   method?: 'get' | 'post' | 'put' | 'delete';
@@ -74,6 +75,12 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
             error: 'Invalid credentials',
           });
           return response.data;;
+        }
+        if (response.data && response.data.code) {
+          messageManager.showMessage({
+            type: 'error',
+            content: response.data.message,
+          });
         }
         data = response.data || {};
         setData(data?.result || data || {});

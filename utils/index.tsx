@@ -76,7 +76,7 @@ export function formatFil(
     if (returnValue < 0.0001) {
       return '<0.0001 FIL'
     }
-    return len ? flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + unit:flag + Number(returnValue)
+    return len ? flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + ' ' + unit:flag + Number(returnValue)
   }
   return len ? flag+ Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }):flag + Number(returnValue)
 }
