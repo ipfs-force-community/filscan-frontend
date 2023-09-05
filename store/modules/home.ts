@@ -37,6 +37,7 @@ class HomeStore {
       formatMeta:computed,
       defiData:observable,
       contractData:observable,
+      minerPowerRankData:observable,
       fetchHomeMeta: action,
       fetchContractRank:action,
     });
