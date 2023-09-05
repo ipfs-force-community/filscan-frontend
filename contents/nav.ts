@@ -2,9 +2,15 @@ import { Menu_Info } from "./type"
 
 const navMenu: Array<Menu_Info> = [
   {
-    key: 'home',
-    link: '/home'
+    key: 'fvm',
+    sufIcon: 'hotIcon',
+    color: '#F44C30',
+    link: '/fvm'
   },
+  // {
+  //   key: 'home',
+  //   link: '/home'
+  // },
   {
     key: 'tipset',
     children: [
@@ -53,20 +59,6 @@ const navMenu: Array<Menu_Info> = [
       },
     ]
   },
-  {
-    key: 'statistics',
-    children: [
-      { key: 'statistics_base', link: '/statistics/power' },
-      { key: 'statistics_fil', link: '/statistics/fil' },
-      { key: 'statistics_charts', link: '/statistics/charts' },
-    ]
-  },
-  {
-    key: 'fvm',
-    sufIcon: 'hotIcon',
-    color: '#F44C30',
-    link: '/fvm'
-  },
 
   {
     key: 'network_overview', link: '/rank', children: [
@@ -79,7 +71,10 @@ const navMenu: Array<Menu_Info> = [
         link: '/tipset/address-list/'
       },
       { key: 'statistics_gas', link: '/statistics/gas' },
-
+      { key: 'statistics_charts', link: '/statistics/charts' },
+      // { key: 'statistics_base', link: '/statistics/power' },
+      // { key: 'statistics_fil', link: '/statistics/fil' },
+      // { key: 'statistics_charts', link: '/statistics/charts' },
     ]
   },
   {

@@ -32,14 +32,14 @@ export default () => {
       ...data,
       mail: data.email,
     });
-    if (result?.code === 1) {
-      //未注册
-      messageManager.showMessage({
-        type: 'error',
-        content: 'invalid mail or password',
-        icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
-      });
-    }
+    // if (result?.code === 1) {
+    //   //未注册
+    //   messageManager.showMessage({
+    //     type: 'error',
+    //     content: 'invalid mail or password',
+    //     icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
+    //   });
+    // }
     if (result.token) {
       localStorage.setItem('token', result.token);
       userInfo.setUserInfo({

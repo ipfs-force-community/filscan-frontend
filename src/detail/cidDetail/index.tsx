@@ -108,7 +108,7 @@ export default ({
       <div className='flex justify-between items-center mt-5'>
         <div>{tr('message_list_total', { value: data.total })}</div>
         <Selects
-          value={'all'}
+          value={method}
           options={options}
           onChange={(value) => {
             if (value !== 'all') {

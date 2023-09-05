@@ -51,6 +51,10 @@ const statistic = {
   protocolLab_des: '用作协议实验室的相关工作',
   Contributors_des: '4.5%给协议实验室团队和贡献者',
 
+  //chartsnav
+  cc_dc_power: 'CC/DC算力走势',
+  static_overview:'网络概览',
+
   //charts
   pie_title: '图表统计',
   block_trend: '区块奖励',

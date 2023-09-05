@@ -17,6 +17,7 @@ import useObserver from '@/components/hooks/useObserver';
 import styles from './trend.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
+import useAxiosData from '@/store/useAxiosData';
 interface Props {
   origin?: string;
   className?: string;
@@ -27,7 +28,7 @@ export default (props: Props) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
   const ref = useObserver();
-
+  const { axiosData } = useAxiosData()
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const [options, setOptions] = useState<any>({});
 
@@ -153,7 +154,7 @@ export default (props: Props) => {
     const dateList: any = [];
     const legendList: any = [];
     const seriesData: any = [];
-    const result: any = await fetchData(apiUrl.line_trend, { interval: '1m' });
+    const result: any = await axiosData(apiUrl.line_trend, { interval: '1m' });
     result?.list?.reverse()?.forEach((value: any) => {
       const {
         timestamp,
@@ -245,7 +246,8 @@ export default (props: Props) => {
   return (
     <div
       className={classNames(styles.trend,`w-full h-[full]  ${className} mt-20`)}
-      ref={origin === 'home' ? ref : ''}>
+      ref={origin === 'home' ? ref : ''}
+    >
       <div className='flex justify-between flex-wrap items-center mb-5'>
         <div className='flex gap-x-10 items-center'>
           <span className='font-PingFang font-semibold text-lg '>

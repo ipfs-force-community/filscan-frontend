@@ -14,6 +14,7 @@ import {
 } from '@/contents/account';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
+import Tooltip from '@/packages/tooltip';
 
 /** @format */
 
@@ -61,12 +62,20 @@ export default ({
 
   const columns = useMemo(() => {
     return account_power.columns(tr,'detail').map((item) => {
-      return { ...item, title: tr(item.title) } ;
+      if (item.titleTip) {
+        item.title = <span className='flex items-center gap-x-1'>
+          {tr(item.title)}
+          <Tooltip context={tr(item.titleTip)} />
+        </span>
+      } else {
+        item.title= tr(item.title)
+      }
+      return { ...item };
     });
   }, [tr]);
 
   const showData = useMemo(() => {
-    const newData = powerDataDetail?.reward_detail_list || [];
+    const newData = powerDataDetail?.power_detail_list || [];
     return newData || [];
   }, [powerDataDetail]);
 

@@ -218,32 +218,32 @@ export const overview = {
       {
         title: 'total_reward_24',
         icon: <Image src={reward} width={40} height={40} alt='' />,
-        dataIndex: 'sum_reward',
+        dataIndex: 'sum_reward_change_24h',
         render: (text: any, record: any, tr: any) => {
-          const changeText = record?.sum_reward_change_24h
-            ? Number(record.sum_reward_change_24h)
-            : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
-          const className = changeText
-            ? changeText > 0
-              ? 'text_green'
-              : 'text_red'
-            : '';
-          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
-            ' '
-          );
+          // const changeText = record?.sum_reward_change_24h
+          //   ? Number(record.sum_reward_change_24h)
+          //   : '';
+          // const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          // const className = changeText
+          //   ? changeText > 0
+          //     ? 'text_green'
+          //     : 'text_red'
+          //   : '';
+          const [textValue,unit] = formatFil(text,'FIL',4,true).split(' ')
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
                 <span className='text-sm text_des'>
                   {tr('total_reward_24')}
                 </span>
-                <span className={className}>
+                {/* <span className={className}>
                   {flag}
                   {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
-                </span>
+                </span> */}
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+                {/* {flag}
+                {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
                 <span className='text-sm'>{unit}</span>
               </span>
@@ -264,10 +264,8 @@ export const overview = {
             ? changeText > 0
               ? 'text_green'
               : 'text_red'
-            : '';
-          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
-            ' '
-          );
+            : 'text_des_unit';
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -276,7 +274,7 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
+                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 4,true) : '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
@@ -301,9 +299,7 @@ export const overview = {
               ? 'text_green'
               : 'text_red'
             : '';
-          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
-            ' '
-          );
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
@@ -312,12 +308,12 @@ export const overview = {
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
+                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 2,true): '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className='text-sm'>{ unit}</span>
               </span>
             </div>
           );
@@ -337,21 +333,19 @@ export const overview = {
               ? 'text_green'
               : 'text_red'
             : '';
-          const [textValue, unit] = formatFilNum(text, false, false, 2).split(
-            ' '
-          );
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
           return (
             <div className='flex w-full h-full flex-col justify-between'>
               <span className='flex flex-col'>
                 <span className='text-sm text_des'>{tr('balance_24')}</span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
+                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 2,true): '--'}
                 </span>
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className='text-sm'>{ unit}</span>
               </span>
             </div>
           );
@@ -388,9 +382,12 @@ export const overview = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
       },
     },
     {
@@ -405,24 +402,25 @@ export const overview = {
     },
     {
       title: 'total_reward_24',
-      dataIndex: 'total_reward',
-      exports: ['reward_change_24h'],
+      dataIndex: 'reward_change_24h',
+      //  exports: ['reward_change_24h'],
       amountUnit: {
-        reward_change_24h: { unit: 'fil', number: 2 },
+        reward_change_24h: { unit: 'fil'},
       },
-      render: (text: string, record: any) => {
-        const changeText = Number(record?.reward_change_24h)
-          ? Number(record.reward_change_24h)
-          :'';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
-        const className = changeText
-          ? changeText > 0
-            ? 'text_green'
-            : 'text_red'
-          : '';
-        return renderFil(text, changeText, flag, className)
+      render: (text:string) => renderFil(text)
+      // render: (text: string, record: any) => {
+      //   const changeText = Number(record?.reward_change_24h)
+      //     ? Number(record.reward_change_24h)
+      //     :'';
+      //   const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+      //   const className = changeText
+      //     ? changeText > 0
+      //       ? 'text_green'
+      //       : 'text_red'
+      //     : '';
+      //   return renderFil(text, changeText, flag, className)
 
-      },
+      // },
     },
     {
       title: 'total_out_come_gas',
@@ -519,9 +517,12 @@ export const account_lucky = {
       dataIndex: 'group_name',
       fixed: 'left',
       width: '20%',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
       },
     },
     {
@@ -577,9 +578,12 @@ export const account_balance = {
       dataIndex: 'group_name',
       width: 150,
       fixed: 'left',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
       },
     },
     {
@@ -806,9 +810,12 @@ export const account_reward = {
         dataIndex: 'group_name',
         fixed: 'left',
         width: '20%',
+        ellipsis: {
+          showTitle: false,
+        },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '10%' },
@@ -825,7 +832,7 @@ export const account_reward = {
         amountUnit: {
           total_reward: { unit: 'fil', number: 4 }
         },
-        render: (text: string) => formatFilNum(text)
+        render: (text: string) => renderFil(text)
       },
     ]
     if (type&&type === 'detail') {
@@ -877,10 +884,13 @@ export const account_power = {
         title: 'group_name',
         dataIndex: 'group_name',
         width: 100,
+        ellipsis: {
+          showTitle: false,
+        },
         fixed: 'left',
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       {
@@ -929,6 +939,7 @@ export const account_power = {
         title: 'sector_power_change',
         dataIndex: 'sector_power_change',
         exports: ['sector_count_change'],
+        titleTip:'sector_power_change_tip',
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
@@ -958,36 +969,43 @@ export const account_power = {
       {
         title: 'pledge_changed',
         dataIndex: 'pledge_changed',
+        titleTip:'pledge_changed_tip',
+
         width: 200,
         amountUnit: {
-          pledge_changed: { unit: 'fil', number: 2 },
+          pledge_changed: { unit: 'fil' },
         },
-        render: (text: string, record: any) =>
-          formatFilNum(text, false, false, 2),
+        render: (text: string, record: any) => renderFil(text)
+
       },
       {
         title: 'pledge_changed_per_t',
         dataIndex: 'pledge_changed_per_t',
+        titleTip:'pledge_changed_per_t_tip',
+
         width: 200,
         amountUnit: {
-          pledge_changed_per_t: { unit: 'fil/T', number: 2 },
+          pledge_changed_per_t: { unit: 'fil/T'},
         },
-        render: (text: string, record: any) =>
-          formatFilNum(text, false, false, 2),
+        render: (text: string, record: any) => {
+          return renderFil(text,undefined,undefined,undefined,'FIL/T')
+        }
       },
       {
         title: 'penalty',
         dataIndex: 'penalty',
+        titleTip:'penalty_tip',
+
         width: 200,
         amountUnit: {
-          penalty: { unit: 'fil', number: 2 },
+          penalty: { unit: 'fil', },
         },
-        render: (text: string, record: any) =>
-          formatFilNum(text, false, false, 2),
+        render: (text: string, record: any) =>renderFil(text)
       },
       {
         title: 'fault_sectors',
         dataIndex: 'fault_sectors',
+        titleTip:'fault_sectors_tip',
         width: 200,
         render: (text: string, record: any) => formatNumber(text),
       },
@@ -1041,14 +1059,18 @@ export const account_gas = {
         dataIndex: 'group_name',
         width: 150,
         fixed: 'left',
+        ellipsis: {
+          showTitle: false,
+        },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       {
         title: 'sector_power_change',
         dataIndex: 'sector_count_change',
+        titleTip:'sector_power_change_tip',
         exports: ['sector_count_change'],
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
@@ -1078,47 +1100,64 @@ export const account_gas = {
       {
         title: 'total_gas_cost',
         dataIndex: 'total_gas_cost',
+        titleTip:'total_gas_cost_tip',
+
         width: 200,
         amountUnit: {
-          total_gas_cost: { unit: 'fil', number: 4 },
+          total_gas_cost: { unit: 'fil' },
         },
-        render: (text: any) => formatFilNum(text, false, false, 2),
+        render: (text: any) => renderFil(text),
+      },
+      {
+        title: 'seal_gas_cost',
+        dataIndex: 'seal_gas_cost',
+        titleTip:'seal_gas_cost_tip',
+        width: 200,
+        amountUnit: {
+          total_gas_cost: { unit: 'fil/T' },
+        },
+        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL/T'),
       },
       {
         title: 'seal_gas_per_t',
         dataIndex: 'seal_gas_per_t',
+        titleTip:'seal_gas_per_t_tip',
         width: 200,
         amountUnit: {
-          total_gas_cost: { unit: 'fil/T', number: 4 },
+          total_gas_cost: { unit: 'fil/T' },
         },
-        render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL/T'),
       },
       {
         title: 'deal_gas_cost',
         dataIndex: 'deal_gas_cost',
+        titleTip:'deal_gas_cost_tip',
+
         width: 200,
         amountUnit: {
-          deal_gas_cost: { unit: 'fil', number: 4 },
+          deal_gas_cost: { unit: 'fil' },
         },
-        render: (text: any) => formatFilNum(text, false, false, 2),
+        render: (text: any) => renderFil(text),
       },
       {
         title: 'wd_post_gas_cost',
+        titleTip:'wd_post_gas_cost_tip',
         dataIndex: 'wd_post_gas_cost',
         width: 200,
         amountUnit: {
-          wd_post_gas_cost: { unit: 'fil', number: 4 },
+          wd_post_gas_cost: { unit: 'fil' },
         },
-        render: (text: any) => formatFilNum(text, false, false, 2),
+        render: (text: any) => renderFil(text),
       },
       {
         title: 'wd_post_gas_per_t',
         dataIndex: 'wd_post_gas_per_t',
+        titleTip:'wd_post_gas_per_t_tip',
         width: 200,
         amountUnit: {
-          wd_post_gas_per_t: { unit: 'fil/T', number: 4 },
+          wd_post_gas_per_t: { unit: 'fil/T' },
         },
-        render: (text: any) => formatFilNum(text, false, false, 2) + '/T',
+        render: (text: any) => renderFil(text,undefined,undefined,undefined,'FIL/T'),
       },
     ];
     if (type&&type === 'detail') {
@@ -1179,7 +1218,7 @@ export const account_expired = {
       title: 'exp_pledge',
       dataIndex: 'total_exp_pledge',
       width: '15%',
-      render: (text: string | number) => formatFil(text,"FIL",4,true),
+      render: (text: string | number) => renderFil(text),
     },
   ],
   columns: (tr: any, type?: 'detail') => {
@@ -1209,9 +1248,12 @@ export const account_expired = {
         title: 'group_name',
         dataIndex: 'group_name',
         width: '15%',
+        ellipsis: {
+          showTitle: false,
+        },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       {
@@ -1245,7 +1287,7 @@ export const account_expired = {
           exp_dc: { unit: 'fil', number: 4 }
         },
         width: '15%',
-        render: (text: string | number) => formatFil(text,"FIL",4,true),
+        render: (text: string | number) => renderFil(text),
       },
     ]
     if (type&&type === 'detail') {
@@ -1293,14 +1335,16 @@ export const account_miners = {
   ],
 };
 
-function renderFil (text:string|number,changeText:number|string,flag:string='',className?:string) {
+function renderFil(text: string | number, changeText?: number | string, flag: string = '', className?: string,unit:string ='FIL') {
+  const textValue = formatFil(text, unit, 4, true)
   return (
     <span className='flex flex-col'>
-      <span>{formatFil(text, 'FIL', 4, true)}</span>
-      <span className={className}>
+      <span className={ `${Number(text) ? '':'text_des_unit'}`}>{textValue}</span>
+      { changeText !== undefined && <span className={`${changeText ? className:'text_des_unit'}`}>
         {flag + ' '}
-        {formatFil(Math.abs(Number(changeText)), 'FIL', 4, true)}
-      </span>
+        {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
+      </span>}
+
     </span>
   );
 }

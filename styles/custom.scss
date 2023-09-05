@@ -556,6 +556,7 @@ font-display: auto;
                     background-color: var(--bgDesColor) !important;
                 } 
             }
+         
             .ant-picker-cell-in-view{
                 .ant-picker-cell-inner{
                       color: var(--font-color);
@@ -565,6 +566,13 @@ font-display: auto;
                 height: 30px;
                 line-height: 30px;
                 }
+            }
+               .ant-picker-cell-selected{
+                .ant-picker-cell-inner{
+                background-color: var(--primary) !important;
+                color: #ffffff !important;
+                }
+              
             }
            
             .ant-picker-cell-disabled{

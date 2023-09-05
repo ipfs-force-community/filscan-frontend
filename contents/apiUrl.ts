@@ -17,7 +17,7 @@ export interface API {
 export const proApi = {
   //登录注册
   mail_exists: proUrl + '/MailExists',
-  resetPassword: proUrl + 'ResetPasswordByCode',
+  resetPassword: proUrl + '/ResetPasswordByCode',
   send_code: proUrl + '/SendVerificationCode',
   byCode: proUrl + '/ResetPasswordByCode',
   login: proUrl + '/Login',
@@ -41,6 +41,7 @@ export const proApi = {
 }
 
 export const heightDetail = mianUrl + '/TipsetDetail';
+export const EvmContractSummary= mianUrl + '/EvmContractSummary'
 
 export const apiUrl: API | any = {
   fvm_hot: mianUrl + '/GetFEvmHotItems',

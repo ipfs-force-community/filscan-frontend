@@ -60,7 +60,7 @@ export default () => {
         <Form
           form={form}
           size='large'
-          className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
+          className='custom_form !w-full !mt-7 !flex !flex-col gap-y-5'
           initialValues={{ remember: true }}
           onFinish={onFinish}
           scrollToFirstError>
@@ -69,7 +69,25 @@ export default () => {
             const newRules: any = [];
             item.rules.forEach((v) => {
               newRules.push({ ...v, message: tr(v.message) });
-              if (item.name === 'token') {
+              if (item.name === 'email') {
+                newRules.push(() => ({
+                  async validator(_: any, value: any) {
+                    const result: any = await axiosData(
+                      proApi.mail_exists,
+                      {
+                        mail: value,
+                      }
+                    );
+                    if (!result?.exists) {
+                      return Promise.reject(new Error(tr('no_account')));
+                    }
+                    if (result.exists) {
+                      return Promise.resolve()
+                    }
+                    return Promise.reject(new Error(tr('email_rules')));
+                  },
+                }));
+              } if (item.name === 'token') {
                 newRules.push(() => ({
                   validator(_: any, value: any) {
                     if (!value || (value && validateCode(value))) {

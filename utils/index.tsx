@@ -53,13 +53,13 @@ export function getShowData(item: any, data: { [key: string]: any }): any {
 export function formatFil(
   number: string | number,
   unit = 'FIL',
-  len =4,
+  len = 4,
   isAccount?: boolean,
 ) {
   let returnValue;
   const num = Math.abs(Number(number));
   const flag = Number(number) < 0 ? '-':''
-  if (unit === 'FIL') {
+  if (unit.startsWith('FIL')) {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 18));
     returnValue = Number(showNum)
   } else if (unit === 'nanoFiL') {
@@ -71,14 +71,14 @@ export function formatFil(
   if (isAccount) {
     //unit === 'FIL',len=4
     if (returnValue === 0) {
-      return <span className='text_des_unit'>{`${returnValue} ${unit}`}</span>
+      return `0 ${unit}`
     }
     if (returnValue < 0.0001) {
       return '<0.0001 FIL'
     }
-    return flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + unit
+    return len ? flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + ' ' + unit:flag + Number(returnValue)
   }
-  return flag+ Number(returnValue).toLocaleString('en', { maximumFractionDigits: len })
+  return len ? flag+ Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }):flag + Number(returnValue)
 }
 
 export function formatFilNum(

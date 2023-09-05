@@ -1,12 +1,13 @@
 /** @format */
 
-import { apiUrl } from '@/contents/apiUrl';
+import { EvmContractSummary, apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import { home_meta } from '@/contents/home';
 import fetchData from '@/store/server';
 import { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames';
+import useAxiosData from '@/store/useAxiosData';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -32,22 +33,27 @@ type Item = ElementType<typeof home_meta>;
 // };
 function Meta() {
   const { tr } = Translation({ ns: 'home' });
+  const { axiosData} = useAxiosData()
   // const ref = useObserver();
 
   const [data, setData] = useState<
     Record<DataIndex, number | undefined> & {
       [key: string]: number | undefined;
     }
-  >();
+    >();
 
   useEffect(() => {
     //loadInterval();
     load();
+
   }, []);
 
   const load = async () => {
-    const data: any = await fetchData(apiUrl.home_meta);
+    const data: any = await axiosData(apiUrl.home_meta);
     setData(data?.total_indicators || {});
+    const contractData: any = await axiosData(EvmContractSummary);
+    console.log('----ff',contractData)
+    //setData(data?.total_indicators || {});
   };
 
   // useInterval(() => {
@@ -55,7 +61,7 @@ function Meta() {
   // }, 15000);
 
   const loadInterval = async () => {
-    const lastData = await fetchData(apiUrl.tipset_chain_FinalHeight);
+    const lastData = await axiosData(apiUrl.tipset_chain_FinalHeight);
     // postAxios(apiUrl.tipset_chain_FinalHeight).then((res: any) => {
     //   const data = res?.result || {};
     //   setLast({
@@ -81,7 +87,7 @@ function Meta() {
             <div className='text_clip DINPro-Bold font-bold	 text-xl'>
               {renderDom || value}
             </div>
-            <div className='text-xs font-PingFang'>{tr(title)}</div>
+            <div className='text-xs text_des mt-1 font-PingFang'>{tr(title)}</div>
           </div>
         );
       })}
