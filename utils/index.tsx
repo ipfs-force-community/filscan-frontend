@@ -7,6 +7,7 @@ import fetchData from '@/store/server';
 import BigNumber from 'bignumber.js';
 import dayjs from 'dayjs';
 import router from 'next/router';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 export const pageLimit = 15;
 export const pageHomeLimit = 7;
@@ -276,7 +277,8 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
         onClick={() => {
           account_link(value);
         }}>
-        {isIndent(value, unit)}
+        <MobileView>{isIndent(value,6,6)}</MobileView>
+        <BrowserView>{isIndent(value)}</BrowserView>
       </span>
       {value && <Copy text={value} />}
     </>
@@ -297,3 +299,12 @@ export const account_link = async (value: string) => {
     return router.push(`/address/${value}`);
   }
 };
+
+export const isMobile = ()=>{
+  try{
+    return window.innerWidth <= 1000;
+  }catch(error){
+    console.log('Error: Window does not exist!');
+    return false
+  }
+}

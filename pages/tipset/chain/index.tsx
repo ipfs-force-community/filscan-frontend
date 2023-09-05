@@ -7,6 +7,8 @@ import useAxiosData from "@/store/useAxiosData";
 import { pageLimit } from "@/utils";
 import { Pagination } from "antd";
 import { useEffect, useMemo, useState } from "react"
+import styles from './index.module.scss'
+import classNames from "classnames";
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
@@ -57,7 +59,7 @@ export default () => {
     </div>
   }
 
-  return <div className="main_contain">
+  return <div className={classNames(styles['chain-list'],'main_contain')}>
     <div className='font-PingFang font-semibold text-lg'>
       {tr('block_list')}
     </div>
