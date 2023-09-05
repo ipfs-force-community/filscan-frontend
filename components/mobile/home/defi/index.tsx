@@ -1,13 +1,13 @@
 import { defi_list, mobileHomeDefiColumns } from "@/contents/fevm"
 import { DefiProtocol } from "@/store/homeData"
 import homeStore from "@/store/modules/home"
-import { Table } from "antd"
 import { ColumnsType } from "antd/es/table"
 import { observer } from "mobx-react"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import styles from './index.module.scss'
 import Image from "next/image"
+import Table from "@/packages/mobile/table"
 interface Sort {
   field:string,
   order:string
@@ -68,13 +68,16 @@ const Defi = ()=>{
       reverse: sort.order.toLocaleLowerCase() === 'ascend',
     })
   },[sort])
-  return <div className={styles.defiWrap}>
+  return <div className={styles.wrap}>
     <div className={styles.title}>Defi Protocol</div>
-    <Table
-      columns={columns}
-      dataSource={homeStore.defiData?.items}
-      pagination={false}
-    ></Table>
+    <div className={styles.content}>
+      <Table
+        columns={columns}
+        dataSource={homeStore.defiData?.items}
+        pagination={false}
+      ></Table>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看 FIL Staking</div>
+    </div>
   </div>
 }
 

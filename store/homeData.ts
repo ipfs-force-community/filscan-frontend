@@ -31,3 +31,19 @@ user_count: number;
 actor_balance: string;
 gas_cost: string;
 }
+
+export interface MinerPowerRankData {
+  updated_at: number;
+  total: number;
+  items: MinerPowerRank[];
+}
+
+export interface MinerPowerRank {
+  rank: number;
+  miner_id: string;
+  power_ratio: string;
+  raw_power: string;
+  quality_adj_power: string;
+  quality_power_increase: string;
+  sector_size: string;
+}
