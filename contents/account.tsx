@@ -245,7 +245,7 @@ export const overview = {
                 {/* {flag}
                 {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className='text-sm'>{'FIL'}</span>
               </span>
             </div>
           );
@@ -279,7 +279,7 @@ export const overview = {
               </span>
               <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className='text-sm'>{'FIL'}</span>
               </span>
             </div>
           );
@@ -1340,7 +1340,11 @@ function renderFil(text: string | number, changeText?: number | string, flag: st
   return (
     <span className='flex flex-col'>
       <span className={ `${Number(text) ? '':'text_des_unit'}`}>{textValue}</span>
+<<<<<<< HEAD
       { changeText !== undefined && <span className={`${changeText ? className:'text_des_unit'}`}>
+=======
+      { changeText && <span className={className}>
+>>>>>>> 77c330f (feat: update account)
         {flag + ' '}
         {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
       </span>}
