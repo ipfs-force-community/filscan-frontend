@@ -1341,10 +1341,14 @@ function renderFil(text: string | number, changeText?: number | string, flag: st
     <span className='flex flex-col'>
       <span className={ `${Number(text) ? '':'text_des_unit'}`}>{textValue}</span>
 <<<<<<< HEAD
+<<<<<<< HEAD
       { changeText !== undefined && <span className={`${changeText ? className:'text_des_unit'}`}>
 =======
       { changeText && <span className={className}>
 >>>>>>> 77c330f (feat: update account)
+=======
+      { changeText !== undefined && <span className={`${changeText ? className:'text_des_unit'}`}>
+>>>>>>> fb8849a (feat: update account)
         {flag + ' '}
         {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
       </span>}
