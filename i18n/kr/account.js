@@ -33,7 +33,11 @@ const account={
   miners_add: '노드 추가',
   group_add: '그룹 추가',
   miners_group_manage: '그룹 설정',
+<<<<<<< HEAD
   total_out_come_gas: '일일 비용/Gas 소비량',
+=======
+  total_out_come_gas: '총 가스 소비 总支出/Gas 소비',
+>>>>>>> e322b5e (feat: update kr)
   pledge_amount_24: '플레지/일일 변동',
   balance_24:'사용 가능한 잔액/일일 변동',
   quality_power_24: '파워/일일 변동',
