@@ -387,7 +387,7 @@ export const overview = {
       },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</div>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
       },
     },
     {
@@ -522,7 +522,7 @@ export const account_lucky = {
       },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
       },
     },
     {
@@ -583,7 +583,7 @@ export const account_balance = {
       },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
       },
     },
     {
@@ -815,7 +815,7 @@ export const account_reward = {
         },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '10%' },
@@ -890,7 +890,7 @@ export const account_power = {
         fixed: 'left',
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       {
@@ -1064,7 +1064,7 @@ export const account_gas = {
         },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       {
@@ -1253,7 +1253,7 @@ export const account_expired = {
         },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
-          return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
       {
