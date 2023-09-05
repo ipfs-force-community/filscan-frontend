@@ -1,0 +1,36 @@
+@media screen and (max-width: 1000px){
+    .mobile_table{
+        border-radius: 6px;
+        .mobile_table_card{
+            background: #FFFFFF;
+            border-radius: 6px;
+            border: 1px solid #EEEFF1;
+            padding: 8px 0;
+            margin-bottom: 10px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+            .mobile_table_card_item{
+                display: flex;
+                align-items: flex-start;
+                padding: 12px;
+                .mobile_table_card_item_label{
+                    font-size: 15px;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    font-weight: 400;
+                    color: #B3B3B3;
+                    line-height: 17px;
+                    flex: 1;
+                }
+                .mobile_table_card_item_value{
+                    flex: 2;
+                    font-size: 15px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: #333333;
+                    line-height: 14px;
+                }
+            }
+        }
+    }
+}

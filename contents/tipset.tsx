@@ -11,6 +11,7 @@ import {
 } from '@/utils';
 import Link from 'next/link';
 import { Item } from './type';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 //消息列表
 export const message_list = {
@@ -24,7 +25,8 @@ export const message_list = {
       render: (text: string) => (
         <span className='flex items-center gap-x-1'>
           <Link href={`/message/${text}`} className='link'>
-            {isIndent(text)}
+            <MobileView>{isIndent(text,6,6)}</MobileView>
+            <BrowserView>{isIndent(text)}</BrowserView>
           </Link>
           <Copy text={text} />
         </span>
@@ -164,7 +166,10 @@ export const dsn_list = {
       title: 'piece_cid',
       width: '10%',
       render: (text: string) => {
-        return <span>{isIndent(text)}</span>;
+        return <span>
+          <MobileView>{isIndent(text,6,6)}</MobileView>
+          <BrowserView>{isIndent(text)}</BrowserView>
+        </span>;
       },
     },
     {

@@ -13,6 +13,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import useAxiosData from '@/store/useAxiosData';
+import styles from './index.module.scss'
+import classNames from 'classnames';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
@@ -81,8 +83,8 @@ export default () => {
     }
   };
   return (
-    <div className='main_contain'>
-      <div className='flex justify-between items-center'>
+    <div className={classNames(styles['dsn-list'],'main_contain')}>
+      <div className={classNames(styles['list-header'],'flex justify-between items-center')}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('dsn_list')}
@@ -92,7 +94,7 @@ export default () => {
           </div>
         </div>
         <Search
-          className='!w-[400px]'
+          className={classNames(styles.search,'!w-[400px]')}
           placeholder={dsn_list.placeholder}
           onSearch={handleSearch}
           ns='tipset'

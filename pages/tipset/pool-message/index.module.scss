@@ -1,0 +1,21 @@
+@media screen and (max-width: 1000px){
+    .pool-message-list{
+        padding: 12px;
+        :global{
+            .card_shadow{
+                padding: 0;
+                background-color:transparent;
+                box-shadow:none;
+                border-color:transparent;
+                overflow:hidden;
+            }
+            .h-full{
+                height: auto;
+            }
+            .border{
+                border-width: 0;
+                border-radius: 6px;
+            }
+        }
+    }
+}

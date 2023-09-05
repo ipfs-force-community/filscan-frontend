@@ -6,16 +6,17 @@ import { power_trend } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, unitConversion } from '@/utils';
+import { formatDateTime, isMobile, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
 import go from '@/assets/images/black_go.svg';
+import goMobile from '@/assets/images/icon-right-white.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import useObserver from '@/components/hooks/useObserver';
 import styles from './trend.module.scss'
 import classNames from 'classnames';
-import { BrowserView } from '@/components/device-detect';
+import { BrowserView, MobileView } from '@/components/device-detect';
 interface Props {
   origin?: string;
   className?: string;
@@ -107,6 +108,14 @@ export default (props: Props) => {
         show: false,
       },
       tooltip: {
+        //@ts-ignore
+        position: function (pos, params, dom, rect, size) {
+          // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+          var obj = {top:80};
+          //@ts-ignore
+          obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+          return isMobile() ? obj:undefined;
+        },
         trigger: 'axis',
         backgroundColor: color.toolbox,
         borderColor: 'transparent',
@@ -265,13 +274,25 @@ export default (props: Props) => {
         </div>
         {origin === 'home' && (
           <Link href={`/statistics/power/`}>
-            <Image
-              className='cursor-pointer'
-              src={go}
-              width={18}
-              height={18}
-              alt='go'
-            />
+            <MobileView>
+              <Image
+                className='cursor-pointer'
+                src={goMobile}
+                width={18}
+                height={18}
+                alt='go'
+              />
+            </MobileView>
+            <BrowserView>
+              <Image
+                className='cursor-pointer'
+                src={go}
+                width={18}
+                height={18}
+                alt='go'
+              />
+            </BrowserView>
+
           </Link>
         )}
       </div>
