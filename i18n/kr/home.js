@@ -45,6 +45,8 @@ const home = {
   search_notFound: '검색 결과 없음',
   warn_text: 'Oops! 입력한 검색어:',
   warn_details: '죄송합니다. 유효하지 않은 문자열입니다.',
-  go_home: '홈으로 돌아가기'
+  go_home: '홈으로 돌아가기',
+  blockchain_browser:'블록 탐색기'
+
 }
 export default home

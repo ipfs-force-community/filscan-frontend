@@ -47,7 +47,8 @@ const home = {
   go_home: 'Back Home',
 
   base_gas: '24h BaseFee',
-  rank:'Rank'
+  rank:'Rank',
+  blockchain_browser:'blockchain browser'
 
 }
 export default home

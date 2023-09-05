@@ -17,14 +17,19 @@ import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
 import Footer from '@/components/footer';
-
+import { MobileView } from '@/components/device-detect';
+import classNames from 'classnames';
+import Search from '@/components/mobile/search';
+import styles from './_app.module.scss'
+import { useTranslation } from 'react-i18next';
 const { Content, Header } = Layout;
 
 export default function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState<any>();
   const [locale, setLocale] = useState('zh');
   const [theme, setTheme] = useState('light');
-
+  const [home, setHome] = useState<boolean>(false);
+  const {t} =useTranslation('home')
   const router = useRouter();
 
   useEffect(() => {
@@ -93,6 +98,11 @@ export default function App({ Component, pageProps }: AppProps) {
     );
   };
 
+  useEffect(()=>{
+    const pathname = router.pathname
+    setHome(pathname === '/' || pathname === '/home')
+  },[router.pathname])
+
   return (
     <ErrorBoundary>
       <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
@@ -100,6 +110,13 @@ export default function App({ Component, pageProps }: AppProps) {
           <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
             <div className={`container_body text-sm ${theme}`}>
               <HeaderMain />
+              <MobileView>
+                {home && <div className={classNames(styles.title)}>
+                  <span>Filecoin </span>
+                  <span>{t('blockchain_browser')}</span>
+                </div>}
+                <Search/>
+              </MobileView>
               <Component {...pageProps} />
               <div className='w-screen h-[140px] bg-footerColor'>
                 <Footer />

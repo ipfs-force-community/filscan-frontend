@@ -105,6 +105,10 @@ const mobileNavMenu: Menu_Info[] = [
     link: '/fvm'
   },
   {
+    key: 'home',
+    link: '/'
+  },
+  {
     key: 'tipset',
     children: [
       {

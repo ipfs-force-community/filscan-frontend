@@ -78,9 +78,13 @@ const Header = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
+  const onClick=()=>{
+    router.push('/')
+  }
+
   return <div className={styles['header-wrap']}>
     <div className={styles['header']}>
-      <div>
+      <div onClick={onClick}>
         <Image src={IconLogo} alt='' />
         <div>Filscan</div>
       </div>
