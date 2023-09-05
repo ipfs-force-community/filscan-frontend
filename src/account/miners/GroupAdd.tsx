@@ -24,7 +24,7 @@ export default ({
   minersNum: MinerNum;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const { setGroups, setMinerNum } = useGroupsStore();
+  const { groups,setGroups, setMinerNum } = useGroupsStore();
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     {
@@ -47,8 +47,10 @@ export default ({
     //添加分组及节点
     setSaveLoading(true);
     // const detail
+    const groupDetail = groups.find((v) => v.value === Number(groupId));
     const data = await axiosData(proApi.saveGroup, {
       group_id: Number(groupId),
+      is_default:groupDetail?.is_default,
       group_name: groupName,
       miners_info: groupMinders,
     });
