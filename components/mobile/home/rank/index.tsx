@@ -23,9 +23,16 @@ const Rank = ()=>{
   const {t} = useTranslation("rank")
   const columns = useMemo(()=>{
     return getColumn('growth','').filter((item)=>{
-      const res = homeGrowthList.includes(item.title)
+      if (item.dataIndex === 'rank') {
+        item.width = '15%'
+        item.align = "left"
+      }
+      if (item.dataIndex === 'miner_id') {
+        item.width = '30%'
+      }
       if (item.title === 'power_ratio') {
         item.align = "right"
+        item.width = '0'
         item.render = (value:any,render:MinerPowerRank)=>{
           const left = 100 - (Number(value) / Number(render.power_ratio)) * 100;
           return (
@@ -37,7 +44,8 @@ const Rank = ()=>{
         }
       }
       item.title = t(item.title)
-      return res
+      return homeGrowthList.includes(item.dataIndex)
+
     }) as ColumnType<MinerPowerRank>[];
   },[])
 
@@ -54,6 +62,10 @@ const Rank = ()=>{
     })
   },[])
 
+  useEffect(()=>{
+    console.log("+===============",homeStore.minerPowerRankData?.items)
+  },[homeStore.minerPowerRankData?.items])
+
   return <div className={styles.wrap}>
     <div className={styles.title}>{t('growth')}</div>
     <div className={styles.content}>
@@ -62,7 +74,7 @@ const Rank = ()=>{
         dataSource={homeStore.minerPowerRankData?.items}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看更多</div>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }

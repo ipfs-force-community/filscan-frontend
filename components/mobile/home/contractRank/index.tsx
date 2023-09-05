@@ -6,8 +6,6 @@ import { ColumnType } from "antd/es/table"
 import homeStore from "@/store/modules/home"
 import { DefiProtocol } from "@/store/homeData"
 import { useTranslation } from "react-i18next"
-import fetchData from "@/store/server"
-import { apiUrl } from "@/contents/apiUrl"
 import { observer } from "mobx-react"
 import Link from "next/link"
 import verifySvg from '@/assets/images/verify.svg';
@@ -26,7 +24,7 @@ const ContractRank =()=>{
   const {t} = useTranslation('contract')
 
   const columns = useMemo(()=>{
-    return contract_rank.columns.filter((value,index)=>{
+    return contract_rank.mobileColumns.filter((value,index)=>{
       if (value.dataIndex === 'contract_name') {
         value.render = (text: string, record: any) => {
           if (text) {
@@ -48,6 +46,7 @@ const ContractRank =()=>{
       return mobileHomeContractRank.includes(value.dataIndex)
     }) as ColumnType<DefiProtocol>[]
   },[])
+
   useEffect(()=>{
     homeStore.fetchContractRank({
       page:1,
@@ -56,6 +55,7 @@ const ContractRank =()=>{
       field: sort.field
     })
   },[])
+
   return <div className={styles.wrap}>
     <div className={styles.title}>{t(contract_rank.title)}</div>
     <div className={styles.content}>
@@ -64,7 +64,7 @@ const ContractRank =()=>{
         dataSource={homeStore.contractData?.evm_contract_list}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看所有合约</div>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }

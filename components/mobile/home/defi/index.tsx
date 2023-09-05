@@ -8,6 +8,9 @@ import { useTranslation } from "react-i18next"
 import styles from './index.module.scss'
 import Image from "next/image"
 import Table from "@/packages/mobile/table"
+import TextTip from '@/packages/textTooltip';
+import { get$Number } from "@/utils"
+
 interface Sort {
   field:string,
   order:string
@@ -55,8 +58,8 @@ const Defi = ()=>{
       dataIndex: 'tvl',
       key:'tvl',
       align:"right",
-      render(value, record, index) {
-        return <div>{value}</div>
+      render(value) {
+        return get$Number(value)
       },
     },
   ]
@@ -76,7 +79,7 @@ const Defi = ()=>{
         dataSource={homeStore.defiData?.items}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">查看 FIL Staking</div>
+      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }

@@ -138,6 +138,7 @@ Hardhat은 컴파일 출력을 프로젝트 내의 "artifacts/build-info/" 디�
   user_count: '거래 주소',
   actor_balance: '잔액',
   gas_cost: 'Gas 소비량',
+  see_more:'더보기',
 
   //log
   epoch: '높이',

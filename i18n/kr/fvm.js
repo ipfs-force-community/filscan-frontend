@@ -6,7 +6,9 @@ const fvm = {
   DID: 'DID',
   NFT: 'NFT',
   MarketPlace: 'MarketPlace',
-  Launchpad:"Launchpad"
+  Launchpad:"Launchpad",
+  see_more:'더보기',
+
 }
 
 export default fvm

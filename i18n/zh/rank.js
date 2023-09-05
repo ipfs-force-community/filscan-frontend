@@ -12,7 +12,7 @@ const rankZh = {
   select_rank_64: '64G 扇区',
   more: '更多',
   rank_time:'上次更新时间为',
-  // table columns title
+  see_more:'查看更多',
 
   //存储池排行
   ranking: '排名',

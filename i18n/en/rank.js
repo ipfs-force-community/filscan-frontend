@@ -13,6 +13,7 @@ const rankZh = {
   select_rank_64: '64GiB',
   more: 'More',
   rank_time:'Latest Update on',
+  see_more:'See More',
 
   // table columns title
 
