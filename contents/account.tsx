@@ -382,9 +382,12 @@ export const overview = {
       dataIndex: 'group_name',
       width: 100,
       fixed: 'left',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
-        return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
+        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</div>
       },
     },
     {
@@ -514,6 +517,9 @@ export const account_lucky = {
       dataIndex: 'group_name',
       fixed: 'left',
       width: '20%',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
         return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
@@ -572,6 +578,9 @@ export const account_balance = {
       dataIndex: 'group_name',
       width: 150,
       fixed: 'left',
+      ellipsis: {
+        showTitle: false,
+      },
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group'):text
         return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
@@ -801,6 +810,9 @@ export const account_reward = {
         dataIndex: 'group_name',
         fixed: 'left',
         width: '20%',
+        ellipsis: {
+          showTitle: false,
+        },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
           return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
@@ -872,6 +884,9 @@ export const account_power = {
         title: 'group_name',
         dataIndex: 'group_name',
         width: 100,
+        ellipsis: {
+          showTitle: false,
+        },
         fixed: 'left',
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
@@ -1044,6 +1059,9 @@ export const account_gas = {
         dataIndex: 'group_name',
         width: 150,
         fixed: 'left',
+        ellipsis: {
+          showTitle: false,
+        },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
           return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
@@ -1230,6 +1248,9 @@ export const account_expired = {
         title: 'group_name',
         dataIndex: 'group_name',
         width: '15%',
+        ellipsis: {
+          showTitle: false,
+        },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group'):text
           return <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2'> {showText}</span>
@@ -1319,7 +1340,7 @@ function renderFil(text: string | number, changeText?: number | string, flag: st
   return (
     <span className='flex flex-col'>
       <span className={ `${Number(text) ? '':'text_des_unit'}`}>{textValue}</span>
-      { changeText && <span className={className}>
+      { changeText !== undefined && <span className={`${changeText ? className:'text_des_unit'}`}>
         {flag + ' '}
         {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
       </span>}

@@ -79,10 +79,10 @@ export default () => {
                       }
                     );
                     if (!result?.exists) {
-                      return Promise.resolve();
+                      return Promise.reject(new Error(tr('no_account')));
                     }
                     if (result.exists) {
-                      return Promise.reject(new Error(tr('email_exists')));
+                      return Promise.resolve()
                     }
                     return Promise.reject(new Error(tr('email_rules')));
                   },
