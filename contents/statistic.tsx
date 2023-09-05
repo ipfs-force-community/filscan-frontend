@@ -1,6 +1,7 @@
 /** @format */
 
 import { formatFilNum, formatNumber } from '@/utils';
+import { Menu_Info } from './type';
 
 export const gas = {
   title: 'trend_24', //基础手续费
@@ -116,3 +117,29 @@ export const power_trend = {
     }, //基线算力
   ],
 };
+
+//charts
+
+export const chartsNav:Array<Menu_Info> = [
+  {
+    key: 'BlockChain',
+    preIcon:'block_chain',
+    children: [
+      {
+        key:'power_trend'
+      },
+      {
+        key:'cc_dc_power'
+      },
+      {
+        key:'block_trend'
+      },
+      {
+        key:'block_reward_per_TiB'
+      },
+      {
+        key:'active_nodes'
+      }
+    ]
+  }
+]
