@@ -13,7 +13,7 @@ export default (props: TooltipProps) => {
   const { context,icon=true } = props;
 
   return (
-    <Tooltip overlayClassName='custom-tooltip-wrap ' title={context}>
+    <Tooltip overlayClassName='custom-tooltip-wrap' title={context}>
       {icon ? <span className='cursor-pointer'>{ getSvgIcon('tip')}</span>:<></>}
       <>{props.children}</>
     </Tooltip>

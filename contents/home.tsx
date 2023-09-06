@@ -13,10 +13,10 @@ export const home_meta = [
   {
     title: 'quality_power/increase_24h',
     dataIndex: 'total_quality_power', //近24h增长算力
-    tipContent: [
-      { title: '', dataIndex: '' },
-      {title:'',dataIndex:''},
-    ],
+    // tipContent: [
+    //   { title: '', dataIndex: '' },
+    //   {title:'',dataIndex:''},
+    // ],
     render: (v: any, record: Record<string, any>) => {
       const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
       const className = changeText ? changeText > 0 ? 'text_red' : 'text_green':'';
@@ -40,8 +40,9 @@ export const home_meta = [
     title_tip: 'add_power_in_32g_tip',
     dataIndex: 'add_power_in_32g',
     tipContent: [
-      { title: 'gas_in_32g', dataIndex: 'gas_in_32g' },
-      {title:'gas_in_64g',dataIndex:'gas_in_64g'},
+      {
+        title: 'gas_in_32g', dataIndex: 'gas_in_32g', render: (text:string|number) => formatFilNum(text, false, false, 4)+'/TIB' },
+      {title:'gas_in_64g',dataIndex:'gas_in_64g',render: (text:string|number) => formatFilNum(text, false, false, 4)+'/TIB'},
     ],
     render: (v: any) => {
       const [show, unit] = formatFilNum(v, false, false, 4).split(' ');
@@ -127,7 +128,7 @@ export const home_meta = [
     title: 'gas_24',
     dataIndex: 'sum',
     tipContent: [
-      { title: 'contract_gas', dataIndex: 'contract_gas' },
+      { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 4) },
     ],
     render: (v: string) => formatFilNum(v,false,false,4)
   }, //近24h产出效率，单位FIL/TiB
