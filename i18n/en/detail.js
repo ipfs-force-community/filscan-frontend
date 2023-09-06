@@ -14,6 +14,7 @@ const detail = {
   owned_miners: 'Nodes',
   account_id:'Account Address',
   look_all:'View All Data',
+  transfer_records:'Transfer records',
 
   //account_type
   miner: 'Miner',

@@ -1,0 +1,83 @@
+@media screen and (max-width: 1000px){
+    .message{
+        padding: 12px;
+        
+        .trans,.detail{
+            margin-bottom: 18px;
+            :global{
+                .card_shadow{
+                    padding: 12px;
+                }
+                .items-baseline{
+                    column-gap: 10px;
+                }
+                .flex-grow{
+                    &.overflow-auto{
+                        font-size: 15px;
+                        font-family: DINPro-Medium, DINPro;
+                        font-weight: 500;
+                        color: #333333;
+                        line-height: 14px;
+                        word-break: break-all;
+                        overflow: unset;
+
+                        .code{
+                            pre{
+                                white-space: pre-wrap;
+                                &::first-line {
+                                    text-indent: -20px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .title{
+            font-size: 16px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: #333333;
+            line-height: 16px;
+            margin-bottom: 10px;
+        }
+        .card{
+            background: #FFFFFF;
+            border-radius: 6px;
+            border: 1px solid #EEEFF1;
+            padding: 8px 0;
+            margin-bottom: 10px;
+            .card-item{
+                display: flex;
+                padding: 12px;
+                column-gap: 10px;
+                .card-item-label{
+                    font-size: 15px;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    font-weight: 400;
+                    color: #B3B3B3;
+                    line-height: 14px;
+                }
+                .card-item-value{
+                    font-size: 15px;
+                    font-family: DINPro-Medium, DINPro;
+                    font-weight: 500;
+                    color: #333333;
+                    line-height: 14px;
+                    :global{
+                        .text{
+                            word-break: break-all;
+                            color: #1D6BFC;
+                        }
+                        .copy{
+                            padding-left: 5px;
+                            img{
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

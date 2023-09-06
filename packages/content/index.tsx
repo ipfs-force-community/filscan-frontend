@@ -47,7 +47,7 @@ export default ({
         if (elasticity && !renderValue) {
           return null;
         }
-        return (
+        return item['mobileHide']?<></>:(
           <li
             key={index}
             className={`flex items-baseline gap-x-2.5 ${
