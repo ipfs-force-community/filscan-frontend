@@ -41,6 +41,7 @@ function Meta() {
       [key: string]: number | undefined;
     }
     >();
+  const [contractData,setContractData] = useState<Record<string,any>>()
 
   useEffect(() => {
     //loadInterval();
@@ -51,8 +52,8 @@ function Meta() {
   const load = async () => {
     const data: any = await axiosData(apiUrl.home_meta);
     setData(data?.total_indicators || {});
-    const contractData: any = await axiosData(EvmContractSummary);
-    console.log('----ff',contractData)
+    const result: any = await axiosData(EvmContractSummary);
+    setContractData(result || {})
     //setData(data?.total_indicators || {});
   };
 
@@ -75,12 +76,16 @@ function Meta() {
     <div
       //ref={ref}
       className={classNames(styles.meta,`border card_shadow flex-1 h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color`)}>
-      {home_meta.map((item: Item, index: number) => {
+      {home_meta.map((item: Item|any, index: number) => {
         const { render, dataIndex, title } = item;
-        const value = (data && data[dataIndex]) || '';
+        const value = (data && data[dataIndex]) ||contractData&&contractData[dataIndex] ||'';
         let renderDom;
+        if (item.tipContent && Array.isArray(item.tipContent)) {
+          const content = <>
+          </>
+        }
         if (data) {
-          renderDom = render && render(value, data);
+          renderDom = render && render(value, {...data,...contractData});
         }
         return (
           <div className={styles['meta-item']} key={item.dataIndex}>

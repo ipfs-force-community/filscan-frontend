@@ -32,19 +32,11 @@ export default () => {
   const { theme, lang, setTheme, setLang } = useFilscanStore();
   const router = useRouter();
 
-  const showTheme = useMemo(() => {
-    if (theme === 'dark') {
-      return light;
-    }
-    return moon;
-  }, [theme]);
-
   const handleLangChange = (value: string) => {
-    //切换语言
-    setLang(value);
     localStorage.setItem('lang', value);
-    router.push(router.asPath, router.asPath, { locale: value });
     i18n.changeLanguage(lang); // 更改i18n语言
+    setLang(value);
+    router.push(router.asPath, router.asPath, { locale: value });
   };
 
   // px-24

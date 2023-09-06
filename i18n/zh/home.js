@@ -11,7 +11,9 @@ const home = {
   'total_contract/24h_contract': '全网合约数/24h变化',
   'contract_transaction/24h_change':'合约交易数/24h变化',
   "contract_address/24h_change": '合约交易地址/24h变化',
-  gas_24:'24h Gas消耗',
+  gas_24: '24h Gas消耗',
+  verified_contracts: '已验证合约',
+  contract_gas:'合约Gas消耗',
 
   //meta
   meta_title: '全网数据指标',
