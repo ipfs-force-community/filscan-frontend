@@ -1,33 +1,37 @@
 @media screen and (max-width: 1000px){
     .mobile-table{
-        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+
+        row-gap: 10px;
         .mobile-table-card{
-            background: #FFFFFF;
-            border-radius: 6px;
-            border: 1px solid #EEEFF1;
             padding: 8px 0;
-            margin-bottom: 10px;
+            border: 1px solid var(--mobile-divide-line);
+            border-radius: 12px;
+            background: var(--mobile-bgColor);
             &:last-child{
                 margin-bottom: 0;
             }
             .mobile-table-card-item{
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 padding: 12px;
+
                 .mobile-table-card-item-label{
-                    font-size: 15px;
-                    font-family: PingFangSC-Regular, PingFang SC;
+                    display: flex;
+                    flex: 2;
+                    max-width: 40%;
+                    color: var(--mobile-des-color);
                     font-weight: 400;
-                    color: #B3B3B3;
+                    font-size: 15px;
                     line-height: 17px;
-                    flex: 1;
                 }
                 .mobile-table-card-item-value{
-                    flex: 2;
-                    font-size: 15px;
-                    font-family: DINPro-Medium, DINPro;
+                    flex: 3;
+                    color: var(--mobile-title-color);
                     font-weight: 500;
-                    color: #333333;
+                    font-size: 15px;
+                    font-family: "DINPro-Medium";
                     line-height: 14px;
                 }
             }

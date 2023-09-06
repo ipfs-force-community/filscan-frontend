@@ -38,19 +38,23 @@ export default (props: Props) => {
   return <>
     <MobileView>
       <div className={styles['mobile-table']}>
-        {data.map((dataSource, data_index) => {
+        {data.map((dataSource, index) => {
           return (
-            <div className={styles['mobile-table-card']} key={data_index}>
+            <div className={styles['mobile-table-card']} key={index}>
               {columns.map((item: any, index: number) => {
                 const { title, dataIndex, render } = item;
                 const showTitle =
-                  typeof item.title === 'function' ? item.title() : item.title;
+                  typeof title === 'function' ? title(
+                    dataSource[dataIndex],
+                    dataSource,
+                    index
+                  ) : title;
                 let showValue = dataSource[dataIndex];
                 if (render) {
                   showValue = render(
                     dataSource[dataIndex],
                     dataSource,
-                    data_index
+                    index
                   );
                 }
                 return (

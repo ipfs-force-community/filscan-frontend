@@ -43,13 +43,6 @@ function Home(props: any) {
 
   return (
     <div className={styles['home-page']}>
-      <MobileView>
-        <div className={classNames(styles.title)}>
-          <span>Filecoin</span>
-          <span>区块链浏览器</span>
-        </div>
-        <Search/>
-      </MobileView>
       <div className={classNames('px-[12px]')}>
         <MobileView>
           <MobileBanner />

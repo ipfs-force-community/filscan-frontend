@@ -1,0 +1,18 @@
+@media only screen and (max-width: 1000px)  {
+    .mobile {
+        display: block;
+        overflow: hidden;
+        padding: 0;
+        padding: 12px;
+        border: none;
+        border-radius: 0%;
+        background: transparent;
+        box-shadow: none;
+
+        .token-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+    }
+}
