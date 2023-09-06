@@ -99,8 +99,9 @@ export default ({
         };
       }
       const data: any = await axiosData(proApi.saveGroup, payload);
+      console.log('---3',data)
       setLoading(false);
-      if (data?.group_id) {
+      if (data) {
         const newGroups = await axiosData(proApi.getGroups);
         setGroups(newGroups?.group_info_list || []);
         const minerNum: any = await axiosData(proApi.account_miners);

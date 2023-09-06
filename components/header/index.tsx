@@ -46,7 +46,7 @@ export default () => {
         <MHeader/>
       </MobileView>
       <BrowserView>
-        <div className='w-full h-[110px] main_bg_color'>
+        <div className='fixed top-0 z-50 w-full h-[110px] main_bg_color'>
           <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
             <ul className='flex gap-x-5 list-none'>
               {header_top?.left.map((item) => {

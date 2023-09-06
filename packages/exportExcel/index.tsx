@@ -60,7 +60,7 @@ const ExportExcel: FC<ExportToExcelProps> = ({
     columns.forEach((col: any) => {
       const {dataIndex ,amountUnit} = col
       let title = col.title
-      if (amountUnit && amountUnit[dataIndex]) {
+      if (amountUnit && amountUnit[dataIndex] && amountUnit[dataIndex]?.unit.includes('fil')) {
         title = title + amountUnit[dataIndex]?.unit?.toUpperCase()
       }
       headers.push(title);

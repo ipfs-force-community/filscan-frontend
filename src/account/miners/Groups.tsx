@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { Collapse, Popconfirm } from 'antd';
+import { Collapse } from 'antd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { getSvgIcon } from '@/svgsIcon';
 import Link from 'next/link';
@@ -90,7 +90,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
 
   const handleDelGroup = async (id: string | number) => {
     const del = await axiosData(proApi.delGroup, { group_id: Number(id) });
-    if (del.group_id) {
+    if (del) {
       //删除成功
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups?.group_info_list || []);

@@ -7,7 +7,7 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
-import { token_transfer_columns } from '@/contents/contract';
+import { nft_transfer_columns, token_transfer_columns } from '@/contents/contract';
 
 export default ({ id ,type}: { id?: string | string[],type:string }) => {
   const { theme } = useFilscanStore();
@@ -34,6 +34,7 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
     const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTTransfers : apiUrl.contract_ERC20Transfer;
     const result = await axiosData(axiosUrl, {
       contract_id: id,
+      contract:id,
       page: index - 1,
       limit: pageLimit,
     });
@@ -64,7 +65,7 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
   };
 
   const columns = useMemo(() => {
-    const newColumns = type ==='nfts'? token_transfer_columns:token_transfer_columns
+    const newColumns = type ==='nfts'? nft_transfer_columns:token_transfer_columns
     return newColumns(fromList, toList).map((v) => {
       return { ...v, title: tr(v.title) };
     });

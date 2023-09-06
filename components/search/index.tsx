@@ -71,6 +71,9 @@ export default ({
             <span
               onClick={() => {
                 if (onClick && inputValue?.length > 0) {
+                  if (clear) {
+                    setValue('');
+                  }
                   onSearch(inputValue);
                 }
               }}>

@@ -45,7 +45,7 @@ const tipset = {
   account_type: '类型',
   latest_transfer_time: '最新交易时间',
   //transfer
-  transfer_list: '大额转账记录',
+  transfer_list: '大额转账',
   transfer_total_list:'共有 {{value}} 条信息',
   //dsn
   dsn_list: '订单列表',

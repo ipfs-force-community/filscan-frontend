@@ -77,7 +77,7 @@ export function formatFil(
     }
     return len ? flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + ' ' + unit:flag + Number(returnValue)
   }
-  return len ? flag+ Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }):flag + Number(returnValue)
+  return len ? flag+ Number(returnValue).toFixed(len):flag + Number(returnValue)
 }
 
 export function formatFilNum(
@@ -282,7 +282,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
       </span>
       {value && <>
         <MobileView><Copy text={value} icon={copySvgMobile} className='copy'/></MobileView>
-        <BrowserView><Copy text={value} /></BrowserView>
+        <BrowserView style={{width:'fit-content'}}><Copy text={value} /></BrowserView>
       </>}
     </>
   );

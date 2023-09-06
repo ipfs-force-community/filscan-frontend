@@ -5,20 +5,28 @@ import { Menu_Info } from './type';
 
 export const timeList = [
   {
-    label: '24h',
+    label:'24h',
+    title: '24h',
     value: '24h',
+    dataIndex:'24h',
   },
   {
-    label: '7d',
+    label:'7d',
+    title: '7d',
     value: '7d',
+    dataIndex:'7d',
   },
   {
     label: '30d',
+    title: '30d',
     value: '1m',
+    dataIndex:'1m',
   },
   {
-    label: '1year',
+    label:'1year',
+    title: '1year',
     value: '1year',
+    dataIndex:'1year',
   },
 ];
 
@@ -149,26 +157,65 @@ export const contract_trend = {
     },
   ],
 };
+
+// 区块奖励走势
+export const block_rewards = {
+  list: [
+    {
+      title: 'acc_block_rewards',
+      dataIndex: 'acc_block_rewards',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ]
+}
+//产出效率
+export const block_rewards_per = {
+  list: [
+    {
+      title: 'block_reward_per_tib',
+      dataIndex: 'block_reward_per_tib',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ]
+}
+export const active_node= {
+  list: [
+    {
+      title: 'active_miner_count',
+      dataIndex: 'active_miner_count',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ]
+}
 //charts
 export const chartsNav:Array<Menu_Info> = [
   {
     key: 'BlockChain',
-    preIcon:'block_chain',
+    preIcon: 'block_chain',
+    title:'BlockChain',
     children: [
       {
-        key:'power_trend'
+        key: 'power',
+        title: 'power',
       },
       {
-        key:'cc_dc_power'
+        key: 'cc_dc_power',
+        title:'cc_dc_power',
       },
       {
-        key:'block_trend'
+        key: 'block_trend',
+        title:'block_trend',
       },
       {
-        key:'block_reward_per_TiB'
+        key: 'block_reward_per',
+        title:'block_reward_per_TiB',
       },
       {
-        key:'active_nodes'
+        key: 'active_nodes',
+        title:'active_nodes',
       }
     ]
   }

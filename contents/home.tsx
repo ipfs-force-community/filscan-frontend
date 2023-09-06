@@ -120,7 +120,7 @@ export const home_meta = [
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-end'>
         {formatNumber(v, 2)}
-        {changeText && <span className={`${className}font-medium  font-DINPro-Medium text-xs solid_text`}>{flag} {changeText}</span>}
+        {changeText && <span className={`${className} font-medium  font-DINPro-Medium text-xs`}>{flag} {changeText}</span>}
       </span>
     },
   }, //合约交易地址/24h变化

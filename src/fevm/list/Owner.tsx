@@ -8,6 +8,7 @@ import { pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import {
+  nft_owner_columns,
   token_owner_columns,
   token_transfer_columns,
 } from '@/contents/contract';
@@ -43,6 +44,7 @@ export default ({
     const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTOwners : apiUrl.contract_ERC20Owner;
     const result = await axiosData(axiosUrl, {
       contract_id: id,
+      contract:id,
       page: index - 1,
       limit: pageLimit,
     });
@@ -67,7 +69,8 @@ export default ({
   };
 
   const columns = useMemo(() => {
-    return token_owner_columns(ownerList).map((v) => {
+    const newColumns = type === 'nfts' ? nft_owner_columns : token_owner_columns;
+    return newColumns(ownerList).map((v) => {
       return { ...v, title: tr(v.title) };
     });
   }, [theme, tr, ownerList, toList]);

@@ -26,15 +26,29 @@ const Account: React.FC = () => {
   const { hash, hashParams } = useHash();
   const rootSubmenuKeys: Array<string> = [];
   const userInfo = UserInfo();
-  const router = useRouter();
+  const router = useRouter()
+  const { axiosData} = useAxiosData()
+  const [minersNum, setMinersNum] = useState<any>({})
+  const [minerLoading,setMinerLoading] = useState(false)
   const selectedKey = useMemo(() => {
     if (hash) {
       return hash;
     }
     return 'overview';
   }, [hash]);
-  const { data: minersNum, loading: minerLoading } =
-    useAxiosData(proApi.account_miners) || {};
+
+  useEffect(() => {
+    setMinerLoading(true)
+    loadMinersNum()
+  },[selectedKey])
+
+  const loadMinersNum =async() => {
+    const result = await axiosData(proApi.account_miners, {}, { isCancel: false });
+    setMinerLoading(false)
+    setMinersNum(result)
+  }
+  // const { data: minersNum, loading: minerLoading } =
+  //   useAxiosData(proApi.account_miners) || {};
 
   function getChildren(arr: Array<any>) {
     return arr.map((v) => {
@@ -110,7 +124,7 @@ const Account: React.FC = () => {
         <div
           className='flex-grow flex flex-col px-5 py-10 w_account min-h-full'
           style={{ height: 'inherit' }}>
-          {minersNum?.miners_count === 0 &&
+          {!minersNum?.miners_count&&
           hashParams.type !== 'miner_add' &&
           selectedKey !== 'personal' && selectedKey !== 'miners' ? (
               <NoMiner selectedKey={selectedKey === 'overview'? 'overview':'overview_' + selectedKey} />

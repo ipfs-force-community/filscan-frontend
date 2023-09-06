@@ -16,6 +16,8 @@ export interface Option_Item {
 }
 export interface Menu_Info {
   key: string;
+  title?: string,
+  href?:string ,
   out_key?: string;
   children?: Array<Menu_Info>;
   preIcon?: string;
