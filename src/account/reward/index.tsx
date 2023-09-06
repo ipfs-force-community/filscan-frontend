@@ -20,7 +20,7 @@ export default ({
 }) => {
   const { tr } = Translation({ ns: 'account' });
   const { hashParams } = useHash();
-  const [active, setActive] = useState<string | number>(0);
+  const [active, setActive] = useState<string | number>('-1');
   const [date, setDate] = useState({
     startTime: formatDateTime(
       new Date().getTime() / 1000,
@@ -54,7 +54,7 @@ export default ({
   });
   const groups:Array<any> = useMemo(() => {
     let newGroups: Array<any> = [{
-      value: '0',
+      value: '-1',
       label:tr('all')
     }];
     (groupsData?.group_list || []).forEach((group: any) => {
@@ -68,7 +68,7 @@ export default ({
   },[groupsData?.group_list, tr])
 
   if (hashParams?.miner) {
-    return <Detail miner={hashParams.miner} data={rewardData} selectedKey={selectedKey}/>;
+    return <Detail miner={hashParams.miner} selectedKey={selectedKey}/>;
   }
   return (
     <>

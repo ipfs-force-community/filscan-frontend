@@ -18,7 +18,7 @@ export default ({
   selectedKey: string;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const [active, setActive] = useState<string>('0');
+  const [active, setActive] = useState<string>('-1');
   const columns = useMemo(() => {
     return account_lucky.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
@@ -39,7 +39,7 @@ export default ({
   });
   const groups:Array<any> = useMemo(() => {
     let newGroups: Array<any> = [{
-      value: '0',
+      value: '-1',
       label:tr('all')
     }];
     (groupsData?.group_list || []).forEach((group: any) => {

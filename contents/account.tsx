@@ -911,24 +911,24 @@ export const account_power = {
         },
         render: (text: string, record: any) => unitConversion(text, 2),
       },
-      // {
-      //   title: 'dc_power',
-      //   dataIndex: 'dc_power',
-      //   width: 200,
-      //   amountUnit: {
-      //     dc_power: { unit: 'power', number: 2 },
-      //   },
-      //   render: (text: string, record: any) => unitConversion(text, 2),
-      // },
-      // {
-      //   title: 'cc_power',
-      //   dataIndex: 'cc_power',
-      //   width: 200,
-      //   amountUnit: {
-      //     cc_power: { unit: 'power', number: 2 },
-      //   },
-      //   render: (text: string, record: any) => unitConversion(text, 2),
-      // },
+      {
+        title: 'dc_power',
+        dataIndex: 'dc_power',
+        width: 200,
+        amountUnit: {
+          dc_power: { unit: 'power', number: 2 },
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
+      {
+        title: 'cc_power',
+        dataIndex: 'cc_power',
+        width: 200,
+        amountUnit: {
+          cc_power: { unit: 'power', number: 2 },
+        },
+        render: (text: string, record: any) => unitConversion(text, 2),
+      },
       {
         title: 'sector_size',
         dataIndex: 'sector_size',
