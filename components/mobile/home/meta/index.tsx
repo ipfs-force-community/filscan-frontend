@@ -23,9 +23,6 @@ interface CardType {
 
 const Meta = (props: any)=> {
   const { t } = useTranslation('home');
-  useEffect(() => {
-    homeStore.fetchHomeMeta()
-  }, []);
 
   const cards:Array<CardType> = [
     {
