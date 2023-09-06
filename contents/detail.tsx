@@ -1021,20 +1021,26 @@ export const height_list = {
   headerList: [
     { dataIndex: "blcok_time",
       title: "blcok_time",
+      render: (text:string) => formatDateTime(text)
     },
-    { dataIndex: "message_count_deduplicate",
+    {
+      dataIndex: "message_count_deduplicate",
       title: "message_count_deduplicate",
+      render: (text: string|number) => formatNumber(text)
     },
   ],
   columns: [
     { dataIndex: "cid",
       title: "block_cid",
+      render: (text: string | number) => <Link href={`/message/${text}`}>{ text}</Link>
     },
     { dataIndex: "miner_id",
       title: "miner_id",
+      render: (text: string | number) => <Link href={`/miner/${text}`}>{ text}</Link>
     },
     { dataIndex: "messages_count",
       title: "messages_count",
+      render: (text: string|number) => formatNumber(text),
     },
     { dataIndex: "blocks_reward",
       title: "reward",
