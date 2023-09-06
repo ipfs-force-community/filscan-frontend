@@ -80,8 +80,9 @@ export default () => {
               old_password: '',
               name: userInfo?.name||'' }}
             form={form}
+            onFinish={handleSave}
             layout='vertical'
-            className='!grid w-full grid-cols-2	 gap-x-4 mt-5'>
+            className='!flex w-full flex-wrap 	 gap-x-4 mt-5'>
             {personal_setting.map((item: any) => {
               const objShow: any = {};
               if (item.dataIndex === 'name') {
@@ -91,6 +92,18 @@ export default () => {
               const newRules: any = [];
               item?.rules?.forEach((v: any) => {
                 newRules.push({ ...v, message: tr(v.message) });
+                if (item.name === 'name') {
+                  newRules.push(() => ({
+                    validator(_: any, value: any) {
+                      if (
+                        !value|| value.length < max_name_length
+                      ) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error(tr('name_length')));
+                    },
+                  }));
+                }
                 if (item.name === 'new_password') {
                   newRules.push(() => ({
                     validator(_: any, value: any) {
@@ -126,6 +139,8 @@ export default () => {
               });
               return (
                 <Form.Item
+                  style={{width:'calc(50% - 10px)'}}
+                  rules={item.rules}
                   name={item.dataIndex}
                   label={tr(item.title)}
                   key={item.dataIndex}>
@@ -137,16 +152,21 @@ export default () => {
                 </Form.Item>
               );
             })}
+            <Form.Item className='mt-5 !w-full flex-1 flex gap-x-4 items-center justify-center'>
+              <Button className='cancel_btn border border_color' onClick={() => {
+                form.resetFields(['old_password','name','new_password','old_password'])
+              }}
+              >{tr('cancel')}</Button>
+              <Button
+                htmlType='submit'
+                className='confirm_btn ml-5'
+                loading={loading}
+              >
+                {tr('confirm')}
+              </Button>
+            </Form.Item>
           </Form>
-          <div className='mt-5 !w-full flex gap-x-4 items-center justify-center'>
-            <Button className='cancel_btn'>{tr('cancel')}</Button>
-            <Button
-              className='confirm_btn'
-              loading={loading}
-              onClick={handleSave}>
-              {tr('confirm')}
-            </Button>
-          </div>
+
         </>
 
       </div>

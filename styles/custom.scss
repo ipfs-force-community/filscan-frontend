@@ -613,7 +613,7 @@ font-display: auto;
             }
             .ant-btn-default{
                 color: var(--font-color);
-                background-color: transparent !important;
+                background-color: var(--border-color) ;
                
             }
             .ant-btn-primary{
@@ -653,7 +653,7 @@ font-display: auto;
 }
 
 .ant-btn-default{
-    border-color: transparent !important;
+    border-color: var(--border-color) !important;
 }
 
 //custom_checkbox

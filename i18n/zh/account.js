@@ -136,7 +136,8 @@ const account = {
   new_placeholder:'输入新密码',
   confirm_password: '确认密码',
   confirm_placeholder: '重新输入新密码',
-  personal_name_holder:'请输入账户名称'
+  personal_name_holder: '请输入账户名称',
+  name_length:'名称长度小于10'
 
 }
 

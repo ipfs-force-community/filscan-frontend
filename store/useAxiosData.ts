@@ -9,7 +9,8 @@ interface OPTIONS {
   method?: 'get' | 'post' | 'put' | 'delete';
   maxRetries?: number;
   timeout?: number; // 0 means no timeout
-  flag?:string
+  flag?: string | boolean
+  isCancel?: boolean;
 }
 
 interface FetchDataResult<T> {
@@ -22,6 +23,7 @@ const DefaultOptions:OPTIONS = {
   method: 'post',
   maxRetries: 3,
   timeout: 0,
+  isCancel:true
 }
 
 // 用于存储每个 URL 和方法的取消令牌
@@ -31,22 +33,21 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
   const [data, setData] = useState<FetchDataResult<T> | null>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const retriesRef = useRef(0); // 使用 useRef 存储重试次数
-  retriesRef.current = 0;
+  let current = 0;
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
     setLoading(true);
-    const { method='post', maxRetries=3, timeout=0,flag } = {...DefaultOptions,...options};
+    const { method='post', maxRetries=3, timeout=0,flag,isCancel=true } = {...DefaultOptions,...options};
     const body = payload || {};
     let error: any = null;
     let data: T | null | any = null;
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
 
     // 创建一个键，包含 URL 和方法
-    const key =flag? `${method}:${url}_${flag}`: `${method}:${url}` ;
+    const key = isCancel &&flag? `${method}:${url}_${flag}`: `${method}:${url}` ;
 
     // 如果这个 URL 和方法已经有一个正在进行的请求，取消它
-    if (cancelTokenSources[key]) {
+    if (isCancel&&cancelTokenSources[key]) {
       cancelTokenSources[key].cancel('Cancelled because of new request');
     }
 
@@ -54,7 +55,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     const cancelTokenSource = axios.CancelToken.source();
     cancelTokenSources[key] = cancelTokenSource;
 
-    while (retriesRef.current < maxRetries) {
+    while (current < maxRetries) {
       try {
         const response = await axios.request({
           url,
@@ -70,12 +71,13 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
 
         if (response.status === 401) {
           Router.push('/account/login');
-          retriesRef.current = 100;
+          current = 100;
           setData({
             result: null,
             error: 'Invalid credentials',
           });
-          return response.data;;
+          current = 0;
+          return response.data;
         }
         if (response.data && response.data.code) {
           messageManager.showMessage({
@@ -86,20 +88,30 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         data = response.data || {};
         setData(data?.result || data || {});
         setLoading(false);
+        current = 0;
         return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
-          retriesRef.current += 1;
-          if (retriesRef.current < maxRetries) {
+          current += 1;
+          if (current < maxRetries) {
             return axiosData(url, payload, options);
           } else {
             setError(thrown);
             setLoading(false);
-            if (retriesRef.current === maxRetries) {
+            setData({
+              result: null,
+              error: 'Error',
+            });
+            if (current === maxRetries) {
+              current=0
               if (thrown?.response?.status === 401) {
+                setData({
+                  result: null,
+                  error: 'Invalid credentials',
+                });
                 return null
               }
               return notification.error({
@@ -114,6 +126,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         }
       }
     }
+
   };
 
   useDeepCompareEffect(() => {

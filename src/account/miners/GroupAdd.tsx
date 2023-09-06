@@ -55,7 +55,8 @@ export default ({
       miners_info: groupMinders,
     });
     setSaveLoading(false);
-    if (data?.group_id) {
+    console.log('---df',data)
+    if (data) {
       const newGroups = await axiosData(proApi.getGroups);
       setGroups(newGroups?.group_info_list || []);
       const minerNum: any = await axiosData(proApi.account_miners);
