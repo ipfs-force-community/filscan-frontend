@@ -16,8 +16,8 @@ export default () => {
   }, [height])
 
   const load = async () => {
-    const result = await axiosData(heightDetail, { height:Number(height) })
-    setData(result.tipset_detail)
+    const result:any = await axiosData(heightDetail, { height:Number(height) })
+    setData(result?.tipset_detail)
   }
   return <div className="main_contain">
     <div className='font-PingFang font-semibold text-lg'>
@@ -29,7 +29,7 @@ export default () => {
         {
           height_list.headerList.map(item => {
             const {dataIndex,render } = item
-            let value = data[dataIndex];
+            let value = data&&data[dataIndex];
             if (render) {
               value = render(value)
             }
@@ -43,7 +43,7 @@ export default () => {
         {
           height_list.columns.map(item => {
             const {dataIndex,render } = item
-            let value = data?.block_basic[dataIndex];
+            let value = data?.block_basic&&data?.block_basic[dataIndex];
             if (render) {
               value = render(value)
             }

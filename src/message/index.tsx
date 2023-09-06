@@ -15,6 +15,7 @@ import Copy from '@/components/copy';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import { get } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
+import { getSvgIcon } from '@/svgsIcon';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
