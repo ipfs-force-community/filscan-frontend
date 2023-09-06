@@ -129,6 +129,7 @@ export default (props: Props) => {
       //amount
       seriesObj.active_miner_count.push({
         value: active_miner_count,
+        amount:active_miner_count,
         unit:''
       })
     });
