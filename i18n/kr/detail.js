@@ -18,6 +18,7 @@ const detail = {
   evm: 'EVM',
   ethaddress: 'ETH 주소',
   ethaccount:'ETH 계정',
+  transfer_records:'이체 기록',
   //account_type
   account_name: '계정',
   latest_transfer_time: '최신 거래 시간',

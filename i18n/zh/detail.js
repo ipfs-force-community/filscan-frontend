@@ -19,6 +19,7 @@ const detail = {
   evm: 'EVM',
   ethaddress: 'ETHAddress',
   ethaccount: 'ETHAccount',
+  transfer_records: '转账记录',
 
   //account_type
   account_name: '账户',
