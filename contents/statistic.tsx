@@ -199,7 +199,8 @@ export const chartsNav:Array<Menu_Info> = [
     children: [
       {
         key: 'power',
-        title:'power',
+        title: 'power',
+        href:'#power'
       },
       {
         key: 'cc_dc_power',
