@@ -5,7 +5,9 @@ import type { DocumentContext } from 'next/document';
 
 const MyDocument = () => (
   <Html lang="en">
-    <Head />
+    <Head >
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
     <body>
       <Main />
       <NextScript />
