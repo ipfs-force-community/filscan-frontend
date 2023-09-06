@@ -1147,3 +1147,29 @@ export const cid_list = {
     { dataIndex: "method_name", title: "method_name" },
   ],
 }
+
+//deal
+export const deal_list = {
+  list: [
+    { dataIndex: 'deal_id', title: 'deal_id' },
+    { dataIndex: 'service_start_time', title: 'service_start_time' ,render:(text:string) =>formatDateTime(text)},
+    { dataIndex: 'epoch', title: 'epoch', render: (text:number|string) => <Link className="link" href={`/tipset/chain?height=${text}`}>{ text}</Link> },
+    {dataIndex:'message_cid',title:'message_cid',render: (text:number|string) => <Link className="link" href={`/message/${text}`}>{ text}</Link> },
+    {dataIndex:'piece_cid',title:'piece_cid'},
+    {
+      dataIndex: 'verified_deal', title: 'verified_deal', render: (text: boolean) => {
+        const icon = typeof text ==='boolean' ? text ? 'successIcon':'errorIcon':'';
+        return <span className='flex gap-x-1 items-center'>
+          {icon&&getSvgIcon(icon)}
+          {String(text)}
+        </span>
+      } },
+  ],
+  content: {
+    left_title: 'deal_left_title',
+    right_title: 'deal_right_title',
+    value: 'deal_value',
+    cash: 'deal_cash',
+    time:'deal_time'
+  }
+}
