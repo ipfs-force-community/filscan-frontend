@@ -41,7 +41,8 @@ export const proApi = {
 }
 
 export const heightDetail = mianUrl + '/TipsetDetail';
-export const EvmContractSummary= mianUrl + '/EvmContractSummary'
+export const EvmContractSummary = mianUrl + '/EvmContractSummary';
+export const EvmTxsHistory = mianUrl+'/EvmTxsHistory'
 
 export const apiUrl: API | any = {
   fvm_hot: mianUrl + '/GetFEvmHotItems',
