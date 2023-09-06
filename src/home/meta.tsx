@@ -3,11 +3,11 @@
 import { EvmContractSummary, apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import { home_meta } from '@/contents/home';
-import fetchData from '@/store/server';
 import { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
+import Skeleton from '@/packages/skeleton';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -75,11 +75,12 @@ function Meta() {
   return (
     <div
       //ref={ref}
-      className={classNames(styles.meta,`border card_shadow flex-1 h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color`)}>
+
+      className={classNames(styles.meta,`border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color'`)} >
       {home_meta.map((item: Item|any, index: number) => {
         const { render, dataIndex, title } = item;
         const value = (data && data[dataIndex]) ||contractData&&contractData[dataIndex] ||'';
-        let renderDom;
+        let renderDom = value;
         if (item.tipContent && Array.isArray(item.tipContent)) {
           const content = <>
           </>
@@ -90,7 +91,8 @@ function Meta() {
         return (
           <div className={styles['meta-item']} key={item.dataIndex}>
             <div className='text_clip DINPro-Bold font-bold	 text-xl'>
-              {renderDom || value}
+              { !value && <Skeleton />}
+              {renderDom}
             </div>
             <div className='text-xs text_des mt-1 font-PingFang'>{tr(title)}</div>
           </div>

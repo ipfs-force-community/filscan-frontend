@@ -12,6 +12,7 @@ const config: Config = {
   variants: {
     extend: {
       visibility: ['group-hover'],
+      content: ['before', 'after'],
     },
   },
   theme: {

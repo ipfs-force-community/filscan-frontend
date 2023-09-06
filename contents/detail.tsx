@@ -1115,7 +1115,7 @@ export const cid_list = {
         if (!text) return '--';
         return (
           <span className='flex items-center gap-x-1'>
-            {get_account_type(text)}
+            {get_account_type(text,0)}
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
@@ -1131,7 +1131,7 @@ export const cid_list = {
         if (!text) return '--';
         return (
           <div className='flex items-center gap-x-1'>
-            {get_account_type(text)}
+            {get_account_type(text,0)}
             {toList?.domains && toList?.domains[text] && (
               <Link
                 href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
