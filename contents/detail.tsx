@@ -15,6 +15,7 @@ import { getSvgIcon } from '@/svgsIcon';
 import { space } from 'postcss/lib/list';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
+import JSONPretty from 'react-json-pretty';
 
 //储存池概览 账户余额 & 有效算力
 
@@ -550,7 +551,8 @@ export const message_detail = {
         if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
         return (
           <span className='code'>
-            <pre>{JSON.stringify(showValue, undefined, 4)}</pre>
+            {/* <pre>{JSON.stringify(showValue, undefined, 4)}</pre> */}
+            <JSONPretty id="json-pretty" data={showValue}></JSONPretty>
           </span>
         );
       },
