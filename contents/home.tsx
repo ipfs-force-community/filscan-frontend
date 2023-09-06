@@ -19,7 +19,7 @@ export const home_meta = [
     // ],
     render: (v: any, record: Record<string, any>) => {
       const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
-      const className = changeText ? changeText > 0 ? 'text_red' : 'text_green':'';
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       const [textValue, unit] = unitConversion(v, 2).split(' ');
 
@@ -27,7 +27,7 @@ export const home_meta = [
         <>
           <span>{textValue}</span>
           <span className='inline text-xs ml-1'>{unit}</span>
-          <span className={`bg-bgColor ${className} text-xs ml-1`}>
+          <span className={`${className} font-DINPro-Medium font-medium text-xs ml-1`}>
             {`${flag}${changeText}`}
           </span>
         </>
@@ -90,11 +90,11 @@ export const home_meta = [
     ],
     render: (v: number | string,record:any) => {
       const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
-      const className = changeText ? changeText > 0 ? 'text_red' : 'text_green':'';
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-end'>
         {formatNumber(v, 2)}
-        {changeText && <span className={`${className} text-xs solid_text`}>{flag}{ changeText}</span>}
+        {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs solid_text`}>{flag}{ changeText}</span>}
       </span>
     },
   }, //全网合约数/24h变化
@@ -103,11 +103,11 @@ export const home_meta = [
     dataIndex: 'contract_txs',
     render: (v: number | string,record:any) => {
       const changeText =record?.contract_txs_change_in_24h&& Number(record.contract_txs_change_in_24h);
-      const className = changeText ? changeText > 0 ? 'text_red' : 'text_green':'';
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-end'>
         {formatNumber(v, 2)}
-        {changeText && <span className={`${className} text-xs solid_text`}>{flag}{changeText}</span>}
+        {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs solid_text`}>{flag}{changeText}</span>}
       </span>
     },
   }, //合约交易数/24h变化
@@ -116,11 +116,11 @@ export const home_meta = [
     dataIndex: 'contract_users',
     render: (v: number | string,record:any) => {
       const changeText =record?.contract_users_change_in_24h&& Number(record.contract_users_change_in_24h);
-      const className = changeText ? changeText > 0 ? 'text_red' : 'text_green':'';
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-end'>
         {formatNumber(v, 2)}
-        {changeText && <span className={`${className} text-xs solid_text`}>{flag} {changeText}</span>}
+        {changeText && <span className={`${className}font-medium  font-DINPro-Medium text-xs solid_text`}>{flag} {changeText}</span>}
       </span>
     },
   }, //合约交易地址/24h变化
