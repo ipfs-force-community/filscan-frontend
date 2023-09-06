@@ -181,39 +181,17 @@ export default (props: Props) => {
       className={classNames(styles.trend,`w-full h-[full]  ${className} mt-20`)}
       ref={origin === 'home' ? ref : ''}
     >
-      <div className='flex justify-between flex-wrap items-center mb-5'>
+      <div className='flex justify-between flex-wrap h-9 items-center mb-2.5'>
         <div className='flex-1 flex flex-row flex-wrap  items-center'>
           <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
             {tr('contract_trend')}
-          </div>
-          <div className='w-fit'>
-            <BrowserView>
-              <span className='flex gap-x-4 '>
-                {options?.legendData?.map((v: any) => {
-                  return (
-                    <span
-                      className='text-xs flex cursor-pointer items-center gap-x-1'
-                      key={v.name}
-                      onClick={() => {
-                        setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
-                      }}
-                      style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                      {getSvgIcon('legendIcon')}
-                      <span className='text-xs text_des font-normal'>
-                        {tr(v.name)}
-                      </span>
-                    </span>
-                  );
-                })}
-              </span>
-            </BrowserView>
           </div>
         </div>
         <div>
           {origin === 'home' && (
             <>
               <MobileView>
-                <Link href={`/statistics/power/`}>
+                <Link href={`/statistics/charts#contract`}>
                   <Image
                     src={goMobile}
                     width={18}
@@ -226,7 +204,7 @@ export default (props: Props) => {
                   <Select ns={'static'} key={`static_${origin}_contract`}
                     options={timeList} value={interval}
                     onChange={(interval) => { setInterval(interval); load(interval) }} />
-                  <Link href={`/statistics/power/`}>
+                  <Link href={`/statistics/charts#contract`}>
                     <Image
                       className='cursor-pointer'
                       src={go}

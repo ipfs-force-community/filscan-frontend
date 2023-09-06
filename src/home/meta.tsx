@@ -76,7 +76,7 @@ function Meta() {
     <div
       //ref={ref}
 
-      className={classNames(styles.meta,`border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color overflow-hidden`)} >
+      className={classNames(styles.meta,`border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 pl-10 pr-6  py-10 rounded-xl border_color overflow-hidden`)} >
       {home_meta.map((item: Item|any, index: number) => {
         const { render, dataIndex, title } = item;
         const value = (data && data[dataIndex]) ||contractData&&contractData[dataIndex] ||'';
