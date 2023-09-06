@@ -67,7 +67,7 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(overviewData?.epoch_time, 'YYYY/MM/DD hh:mm')}
+              {formatDateTime(overviewData?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>

@@ -77,7 +77,7 @@ export function formatFil(
     }
     return len ? flag + Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }) + ' ' + unit:flag + Number(returnValue)
   }
-  return len ? flag+ Number(returnValue).toLocaleString('en', { maximumFractionDigits: len }):flag + Number(returnValue)
+  return len ? flag+ Number(returnValue).toFixed(len):flag + Number(returnValue)
 }
 
 export function formatFilNum(

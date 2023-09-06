@@ -19,7 +19,7 @@
   --tab-shadow: rgba(0, 0, 0, 0.1);
   --bg_hover: rgba(28, 106, 253, 0.1);
   --font_des: rgba(0, 0, 0, 0.6);
-  --font_des_unit: rgba(0, 0, 0, 0.4);
+  --font_des_unit: rgba(0, 0, 0, 0.25);
   --primary: #1c6afd;
   --text_clip: #131254;
   --bgDesColor: #f6f6f6;
@@ -58,7 +58,7 @@
   --bg_hover: rgba(28, 106, 253, 0.1);
   --bgDesColor: #1c1c1c;
   --font_des: rgba(255, 255, 255, 0.6);
-  --font_des_unit: rgba(255, 255, 255, 0.4);
+  --font_des_unit: rgba(255, 255, 255, 0.25);
   --primary: #1c6afd;
   --card-shadow: rgba(0, 0, 0, 0.4);
   --tab-shadow: rgba(0, 0, 0, 0.1);

@@ -809,7 +809,7 @@ export const account_reward = {
         title: 'group_name',
         dataIndex: 'group_name',
         fixed: 'left',
-        width: '20%',
+        width: '25%',
         ellipsis: {
           showTitle: false,
         },
@@ -818,7 +818,7 @@ export const account_reward = {
           return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
-      { title: 'block_count', dataIndex: 'block_count', width: '10%' },
+      { title: 'block_count', dataIndex: 'block_count', width: '20%' },
       { title: 'win_count', dataIndex: 'win_count', width: '10%' },
       {
         title: 'block_reward', dataIndex: 'block_reward', width: '10%',
@@ -827,13 +827,13 @@ export const account_reward = {
         },
         render: (text: string) => formatFilNum(text)
       },
-      {
-        title: 'total_reward', dataIndex: 'total_reward', width: '15%',
-        amountUnit: {
-          total_reward: { unit: 'fil', number: 4 }
-        },
-        render: (text: string) => renderFil(text)
-      },
+      // {
+      //   title: 'total_reward', dataIndex: 'total_reward', width: '15%',
+      //   amountUnit: {
+      //     total_reward: { unit: 'fil', number: 4 }
+      //   },
+      //   render: (text: string) => renderFil(text)
+      // },
     ]
     if (type&&type === 'detail') {
       arr.unshift({

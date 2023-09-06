@@ -9,18 +9,19 @@ interface OPTIONS {
   method?: 'get' | 'post' | 'put' | 'delete';
   maxRetries?: number;
   timeout?: number; // 0 means no timeout
+  flag?:string
 }
 
 interface FetchDataResult<T> {
   result: T | null;
   error?: string | null;
-  [key: string]: any
+  [key: string]: any,
 }
 
-const DefaultOptions = {
+const DefaultOptions:OPTIONS = {
   method: 'post',
   maxRetries: 3,
-  timeout: 0
+  timeout: 0,
 }
 
 // 用于存储每个 URL 和方法的取消令牌
@@ -35,14 +36,14 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
     setLoading(true);
-    const { method, maxRetries, timeout } = options;
+    const { method='post', maxRetries=3, timeout=0,flag } = {...DefaultOptions,...options};
     const body = payload || {};
     let error: any = null;
     let data: T | null | any = null;
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
 
     // 创建一个键，包含 URL 和方法
-    const key = `${method}:${url}`;
+    const key =flag? `${method}:${url}_${flag}`: `${method}:${url}` ;
 
     // 如果这个 URL 和方法已经有一个正在进行的请求，取消它
     if (cancelTokenSources[key]) {
