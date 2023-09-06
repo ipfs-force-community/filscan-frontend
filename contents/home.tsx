@@ -130,7 +130,15 @@ export const home_meta = [
     tipContent: [
       { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 4) },
     ],
-    render: (v: string) => formatFilNum(v,false,false,4)
+    render: (v: any) => {
+      const [show, unit] = formatFilNum(v, false, false, 4).split(' ');
+      return (
+        <>
+          <span>{show}</span>
+          <span className='text-xs ml-1	'>{unit}</span>
+        </>
+      );
+    },
   }, //近24h产出效率，单位FIL/TiB
 ] as const;
 
