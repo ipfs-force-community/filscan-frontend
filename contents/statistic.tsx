@@ -200,7 +200,6 @@ export const chartsNav:Array<Menu_Info> = [
       {
         key: 'power',
         title: 'power',
-        href:'#power'
       },
       {
         key: 'cc_dc_power',
@@ -211,7 +210,7 @@ export const chartsNav:Array<Menu_Info> = [
         title:'block_trend',
       },
       {
-        key: 'block_reward_per_TiB',
+        key: 'block_reward_per',
         title:'block_reward_per_TiB',
       },
       {

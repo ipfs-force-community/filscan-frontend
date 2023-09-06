@@ -672,7 +672,7 @@ export const nft_details = {
           render: (text: string) => {
             if (text) {
               return (
-                <span className='flex-center'>
+                <span className='flex gap-x-1 '>
                   <Link href={`/address/${text}`} className='link'>
                     {text}
                   </Link>
@@ -712,7 +712,7 @@ export const nft_transfer_columns = (fromList: any, toList: any) => {
     {
       dataIndex: "from", title: "from", render: (text: string, record: any) => {
         if (!text) return '--';
-        return <span className="table_li">
+        return <span className="flex items-center gap-x-1">
           {get_account_type(text)}
           {fromList?.domains && fromList?.domains[text] && <Link href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>({fromList.domains[text]})</Link>
           }
@@ -720,11 +720,8 @@ export const nft_transfer_columns = (fromList: any, toList: any) => {
       }},
     { dataIndex: "to", title: "to" , render: (text: string, record: any) => {
       if (!text) return '--';
-      return <div className="table_li">
-        <div>
-          {get_account_type(text)}
-        </div>
-
+      return <div className="flex items-center gap-x-1">
+        {get_account_type(text)}
         {toList?.domains && toList?.domains[text] &&<Link href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>({toList.domains[text]})</Link>
 
         }
@@ -737,5 +734,20 @@ export const nft_transfer_columns = (fromList: any, toList: any) => {
         }
         return text || '--'
       }},
+  ]
+}
+
+export const nft_owner_columns = (ownerList: any) => {
+  return [
+    { dataIndex: 'rank', title: 'rank', width: '10%', },
+    {dataIndex:'owner',title:'owner', width: '50%', render: (text: string, record: any) => {
+      if (!text) return '--';
+      return <span className="flex gap-x-1 items-center">
+        { text}
+        {ownerList?.domains && ownerList?.domains[text] && <Link href={ `/domain/${ownerList.domains[text]}?provider=${ownerList.provider}`}>({ ownerList.domains[text]})</Link>}
+      </span>
+    }},
+    {dataIndex:'amount',title:'amount', width: '20%', render: (text: string,record:any) =>text? formatNumber(text,4) :text ||'--'},
+    { dataIndex: 'percentage', width: '20%', title: 'percentage', render: (text: string,record:any) =>text? Number(Number(text)*100) .toFixed(4) +'%' :text ||'--'},
   ]
 }

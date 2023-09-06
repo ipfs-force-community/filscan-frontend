@@ -20,14 +20,12 @@ export default () => {
   useEffect(() => {
     if (nftId) {
       axiosData(apiUrl.contract_FnsSummary, {
-        contract_id: nftId,
+        contract: nftId,
       }).then((res: any) => {
         setOverview(res || {});
       });
     }
-    load();
   }, [nftId]);
-  const load = () => {};
   return (
     <div className='main_contain'>
       <div className='flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4'>
