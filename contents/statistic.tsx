@@ -153,22 +153,28 @@ export const contract_trend = {
 export const chartsNav:Array<Menu_Info> = [
   {
     key: 'BlockChain',
-    preIcon:'block_chain',
+    preIcon: 'block_chain',
+    title:'BlockChain',
     children: [
       {
-        key:'power_trend'
+        key: 'power',
+        title:'power',
       },
       {
-        key:'cc_dc_power'
+        key: 'cc_dc_power',
+        title:'cc_dc_power',
       },
       {
-        key:'block_trend'
+        key: 'block_trend',
+        title:'block_trend',
       },
       {
-        key:'block_reward_per_TiB'
+        key: 'block_reward_per_TiB',
+        title:'block_reward_per_TiB',
       },
       {
-        key:'active_nodes'
+        key: 'active_nodes',
+        title:'active_nodes',
       }
     ]
   }
