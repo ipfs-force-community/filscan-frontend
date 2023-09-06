@@ -1,7 +1,6 @@
 @media screen and (max-width: 1000px){
     .message{
         padding: 12px;
-        
         .trans,.detail{
             margin-bottom: 18px;
             :global{
@@ -79,5 +78,11 @@
                 }
             }
         }
+    }
+}
+
+.message {
+    .trans{
+        margin-bottom: 18px;
     }
 }
