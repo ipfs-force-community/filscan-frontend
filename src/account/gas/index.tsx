@@ -22,7 +22,7 @@ export default ({
 }) => {
   const { tr } = Translation({ ns: 'account' });
   const { hashParams } = useHash();
-  const [active, setActive] = useState<string | number>(0);
+  const [active, setActive] = useState<string | number>('-1');
 
   const [date, setDate] = useState({
     startTime: formatDateTime(
@@ -61,7 +61,7 @@ export default ({
   });
   const groups:Array<any> = useMemo(() => {
     let newGroups: Array<any> = [{
-      value: '0',
+      value:'-1',
       label:tr('all')
     }];
     (groupsData?.group_list || []).forEach((group: any) => {

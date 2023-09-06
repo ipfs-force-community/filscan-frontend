@@ -10,14 +10,14 @@ export default () => {
   const { height } = router.query;
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData()
-  const [data, setData] = useState({})
+  const [data, setData] = useState<any>({})
   useEffect(() => {
     load()
   }, [height])
 
   const load = async () => {
-    const result = await axiosData(heightDetail, { height:Number(height) })
-    console.log('---dd',result)
+    const result:any = await axiosData(heightDetail, { height:Number(height) })
+    setData(result?.tipset_detail)
   }
   return <div className="main_contain">
     <div className='font-PingFang font-semibold text-lg'>
@@ -28,17 +28,28 @@ export default () => {
       <ul className="flex  flex-col gap-y-2.5 p-5 border-b border_color">
         {
           height_list.headerList.map(item => {
-            return <li key={item.dataIndex}>
+            const {dataIndex,render } = item
+            let value = data&&data[dataIndex];
+            if (render) {
+              value = render(value)
+            }
+            return <li key={item.dataIndex} className="flex items-center">
               <span className="text_des min-w-40">{tr(item.title)}:</span>
-
+              <span>{ value}</span>
             </li>
           })}
       </ul>
       <ul className="flex flex-col gap-y-2.5 p-5 border-b border_color last:border-none">
         {
           height_list.columns.map(item => {
-            return <li key={item.dataIndex}>
+            const {dataIndex,render } = item
+            let value = data?.block_basic&&data?.block_basic[dataIndex];
+            if (render) {
+              value = render(value)
+            }
+            return <li key={item.dataIndex} className="flex items-center">
               <span className="text_des min-w-40">{tr(item.title)}:</span>
+              <span>{value}</span>
             </li>
           })}
       </ul>

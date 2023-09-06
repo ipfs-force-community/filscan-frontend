@@ -3,7 +3,7 @@ import fetchData from '../server';
 import { apiUrl } from '@/contents/apiUrl';
 import { get } from 'lodash';
 import { unitConversion } from '@/utils';
-import { MetaModel } from '@/models/MetaModel';
+import { MetaModel } from '@/models/2etaModel';
 import { DefiProtocol, EvmContractData, MinerPowerRankData } from '../homeData';
 import { data } from 'autoprefixer';
 

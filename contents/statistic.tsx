@@ -3,6 +3,25 @@
 import { formatFilNum, formatNumber } from '@/utils';
 import { Menu_Info } from './type';
 
+export const timeList = [
+  {
+    label: '24h',
+    value: '24h',
+  },
+  {
+    label: '7d',
+    value: '7d',
+  },
+  {
+    label: '30d',
+    value: '1m',
+  },
+  {
+    label: '1year',
+    value: '1year',
+  },
+];
+
 export const gas = {
   title: 'trend_24', //基础手续费
   list: [
@@ -118,8 +137,19 @@ export const power_trend = {
   ],
 };
 
-//charts
+//合约交易走势图
+export const contract_trend = {
 
+  list: [
+    {
+      title: 'contract_trend',
+      dataIndex: 'txs_count',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ],
+};
+//charts
 export const chartsNav:Array<Menu_Info> = [
   {
     key: 'BlockChain',

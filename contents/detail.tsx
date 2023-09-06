@@ -1021,20 +1021,26 @@ export const height_list = {
   headerList: [
     { dataIndex: "blcok_time",
       title: "blcok_time",
+      render: (text:string) => formatDateTime(text)
     },
-    { dataIndex: "message_count_deduplicate",
+    {
+      dataIndex: "message_count_deduplicate",
       title: "message_count_deduplicate",
+      render: (text: string|number) => formatNumber(text)
     },
   ],
   columns: [
     { dataIndex: "cid",
       title: "block_cid",
+      render: (text: string | number) => <Link href={`/message/${text}`}>{ text}</Link>
     },
     { dataIndex: "miner_id",
       title: "miner_id",
+      render: (text: string | number) => <Link href={`/miner/${text}`}>{ text}</Link>
     },
     { dataIndex: "messages_count",
       title: "messages_count",
+      render: (text: string|number) => formatNumber(text),
     },
     { dataIndex: "blocks_reward",
       title: "reward",
@@ -1115,7 +1121,7 @@ export const cid_list = {
         if (!text) return '--';
         return (
           <span className='flex items-center gap-x-1'>
-            {get_account_type(text)}
+            {get_account_type(text,0)}
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
@@ -1131,7 +1137,7 @@ export const cid_list = {
         if (!text) return '--';
         return (
           <div className='flex items-center gap-x-1'>
-            {get_account_type(text)}
+            {get_account_type(text,0)}
             {toList?.domains && toList?.domains[text] && (
               <Link
                 href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
@@ -1146,4 +1152,30 @@ export const cid_list = {
     { dataIndex: "exit_code", title: "status" },
     { dataIndex: "method_name", title: "method_name" },
   ],
+}
+
+//deal
+export const deal_list = {
+  list: [
+    { dataIndex: 'deal_id', title: 'deal_id' },
+    { dataIndex: 'service_start_time', title: 'service_start_time' ,render:(text:string) =>formatDateTime(text)},
+    { dataIndex: 'epoch', title: 'epoch', render: (text:number|string) => <Link className="link" href={`/tipset/chain?height=${text}`}>{ text}</Link> },
+    {dataIndex:'message_cid',title:'message_cid',render: (text:number|string) => <Link className="link" href={`/message/${text}`}>{ text}</Link> },
+    {dataIndex:'piece_cid',title:'piece_cid'},
+    {
+      dataIndex: 'verified_deal', title: 'verified_deal', render: (text: boolean) => {
+        const icon = typeof text ==='boolean' ? text ? 'successIcon':'errorIcon':'';
+        return <span className='flex gap-x-1 items-center'>
+          {icon&&getSvgIcon(icon)}
+          {String(text)}
+        </span>
+      } },
+  ],
+  content: {
+    left_title: 'deal_left_title',
+    right_title: 'deal_right_title',
+    value: 'deal_value',
+    cash: 'deal_cash',
+    time:'deal_time'
+  }
 }

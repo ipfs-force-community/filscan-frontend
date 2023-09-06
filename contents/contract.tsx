@@ -236,13 +236,13 @@ export const mobileHomeContractRank: string[] = [
 
 export const contract_list:any={
   columns: [
-    {
-      dataIndex: 'rank',
-      title: 'rank',
-      width:'10%',
-      render: (text: any, record: any) => {
-        return <span className='rank_icon'>{ text}</span>
-      } },
+    // {
+    //   dataIndex: 'rank',
+    //   title: 'rank',
+    //   width:'10%',
+    //   render: (text: any, record: any) => {
+    //     return <span className='rank_icon'>{ text}</span>
+    //   } },
     {
       dataIndex: 'contract_address', title: 'contract_address',
       width:'20%',

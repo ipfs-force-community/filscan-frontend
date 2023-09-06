@@ -15,11 +15,9 @@ import { proApi } from '@/contents/apiUrl';
 
 export default ({
   miner,
-  data,
   selectedKey
 }: {
   miner?: string | number | null;
-    data?: any;
   selectedKey:string
 }) => {
   const { tr } = Translation({ ns: 'account' });

@@ -216,6 +216,7 @@ font-display: auto;
 
 //custom_table_tooltip
   .ant-tooltip {
+   
      .ant-tooltip-arrow{
         &::after{
              background-color: var(--bgDesColor)!important;
@@ -225,6 +226,7 @@ font-display: auto;
         }
     }
     .ant-tooltip-inner{
+       width: max-content;
         background-color: var(--bgDesColor)!important;
         color: var(--font-color) !important;
     }

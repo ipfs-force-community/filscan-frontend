@@ -88,6 +88,7 @@ export default ({
         payload = {
           group_id: selectedGroup,
           group_name: groupDetail?.group_name,
+          is_default: groupDetail.is_default,
           miners_info: (groupDetail?.miners_info || []).concat(addMiners),
         };
       } else {

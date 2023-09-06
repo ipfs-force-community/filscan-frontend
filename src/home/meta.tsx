@@ -3,11 +3,12 @@
 import { EvmContractSummary, apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import { home_meta } from '@/contents/home';
-import fetchData from '@/store/server';
 import { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
+import Skeleton from '@/packages/skeleton';
+import Tooltip from '@/packages/tooltip';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -41,6 +42,7 @@ function Meta() {
       [key: string]: number | undefined;
     }
     >();
+  const [contractData,setContractData] = useState<Record<string,any>>()
 
   useEffect(() => {
     //loadInterval();
@@ -51,8 +53,8 @@ function Meta() {
   const load = async () => {
     const data: any = await axiosData(apiUrl.home_meta);
     setData(data?.total_indicators || {});
-    const contractData: any = await axiosData(EvmContractSummary);
-    console.log('----ff',contractData)
+    const result: any = await axiosData(EvmContractSummary);
+    setContractData(result || {})
     //setData(data?.total_indicators || {});
   };
 
@@ -74,18 +76,47 @@ function Meta() {
   return (
     <div
       //ref={ref}
-      className={classNames(styles.meta,`border card_shadow flex-1 h-[270px] inline-grid grid-cols-4 gap-2 px-6 py-10 rounded-xl border_color`)}>
-      {home_meta.map((item: Item, index: number) => {
+
+      className={classNames(styles.meta,`border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 pl-10 pr-6  py-10 rounded-xl border_color overflow-hidden`)} >
+      {home_meta.map((item: Item|any, index: number) => {
         const { render, dataIndex, title } = item;
-        const value = (data && data[dataIndex]) || '';
-        let renderDom;
+        const dataSource = {...data,...contractData}
+        const value = (dataSource && dataSource[dataIndex]) ||'';
+        let renderDom = value;
+        let tipContent;
+        if (item.tipContent && Array.isArray(item.tipContent)) {
+          tipContent = <ul className='px-2 pt-2 w-fit'>
+            {item.tipContent.map((tipItem: any) => {
+              let tipValue = dataSource[tipItem.dataIndex];
+              if (tipItem.render) {
+                tipValue =tipItem.render(tipValue,dataSource)
+              }
+              return <li key={tipItem.dataIndex} className='flex mb-2.5'>
+                <span className='min-w-[80px] w-fit'>{tr(tipItem.title)}:</span>
+                <div className='w-fit'>{tipValue}</div>
+              </li>
+            })}
+          </ul>
+        }
         if (data) {
-          renderDom = render && render(value, data);
+          renderDom = render && render(value, {...data,...contractData});
+        }
+        if (item.tipContent) {
+          return <Tooltip context={tipContent} key={item.dataIndex} icon={ false}>
+            <div className={`${styles['meta-item']} cursor-pointer`}>
+              <div className='text_clip DINPro-Bold font-bold	 text-xl'>
+                { !value && <Skeleton />}
+                {renderDom}
+              </div>
+              <div className='text-xs text_des mt-1 font-PingFang'>{tr(title)}</div>
+            </div>
+          </Tooltip>
         }
         return (
           <div className={styles['meta-item']} key={item.dataIndex}>
             <div className='text_clip DINPro-Bold font-bold	 text-xl'>
-              {renderDom || value}
+              { !value && <Skeleton />}
+              {renderDom}
             </div>
             <div className='text-xs text_des mt-1 font-PingFang'>{tr(title)}</div>
           </div>

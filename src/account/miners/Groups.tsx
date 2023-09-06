@@ -98,9 +98,9 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
     }
   };
 
-  const handleSaveMiners = async (group_id: any, minerInfo: any) => {
+  const handleSaveMiners = async (group: any, minerInfo: any) => {
     const saveResult = await axiosData(proApi.saveMiner, {
-      group_id: Number(group_id),
+      ...group,
       miners_info: [minerInfo],
     });
     if (saveResult) {
@@ -184,7 +184,10 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
                 text={value}
                 record={{ ...minerItem }}
                 onChange={(value) =>
-                  handleSaveMiners(groupItem.group_id, {
+                  handleSaveMiners({
+                    group_id: Number(groupItem.group_id),
+                    is_default:groupItem.is_default,
+                  }, {
                     ...minerItem,
                     miner_tag: value,
                   })

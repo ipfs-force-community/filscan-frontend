@@ -2,16 +2,14 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import Breadcrumb from '@/packages/breadcrumb';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { formatDateTime, getCalcTime } from '@/utils';
 import ExportExcel from '@/packages/exportExcel';
 import Table from '@/packages/Table';
 import DateTime from '@/src/account/DateTIme';
 import {
-  account_expired,
   account_power,
-  account_reward,
-} from '@/contents/account';
+}from '@/contents/account';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 import Tooltip from '@/packages/tooltip';
@@ -20,11 +18,9 @@ import Tooltip from '@/packages/tooltip';
 
 export default ({
   miner,
-  data,
   selectedKey
 }: {
   miner?: string | number | null;
-    data?: any;
   selectedKey:string
 }) => {
   const { tr } = Translation({ ns: 'account' });

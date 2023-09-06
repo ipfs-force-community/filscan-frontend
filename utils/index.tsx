@@ -2,14 +2,12 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import Copy from '@/components/copy';
-import { Item } from '@/contents/type';
 import fetchData from '@/store/server';
 import BigNumber from 'bignumber.js';
 import dayjs from 'dayjs';
 import router from 'next/router';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
-import copySvg from '@/assets/images/copy.svg';
 
 export const pageLimit = 15;
 export const pageHomeLimit = 7;
@@ -279,10 +277,12 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
         onClick={() => {
           account_link(value);
         }}>
-        {isIndent(value)}
+        <MobileView>{isIndent(value,6,6)}</MobileView>
+        <BrowserView>{isIndent(value,unit)}</BrowserView>
       </span>
       {value && <>
-        <Copy text={value} icon={isMobile()?copySvgMobile: copySvg} className='copy'/>
+        <MobileView><Copy text={value} icon={copySvgMobile} className='copy'/></MobileView>
+        <BrowserView><Copy text={value} /></BrowserView>
       </>}
     </>
   );

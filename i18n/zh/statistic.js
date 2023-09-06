@@ -5,7 +5,7 @@ const statistic = {
   '24h': '24时',
   '7d': '7天',
   '30d': '30天',
-  year:'1年',
+  '1year':'1年',
   // power
   "power": '算力走势',
   power_tips: '基线标准即是Filecoin网络要求的网络增长规模，主网上线时2.5EiB，每年100%增长率。',
@@ -53,7 +53,8 @@ const statistic = {
 
   //chartsnav
   cc_dc_power: 'CC/DC算力走势',
-  static_overview:'网络概览',
+  static_overview: '网络概览',
+  contract_trend:'合约交易',
 
   //charts
   pie_title: '图表统计',

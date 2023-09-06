@@ -24,7 +24,7 @@ const ContractRank =()=>{
   const {t} = useTranslation('contract')
 
   const columns = useMemo(()=>{
-    return contract_rank.mobileColumns.filter((value,index)=>{
+    return contract_rank?.mobileColumns.filter((value,index)=>{
       if (value.dataIndex === 'contract_name') {
         value.render = (text: string, record: any) => {
           if (text) {

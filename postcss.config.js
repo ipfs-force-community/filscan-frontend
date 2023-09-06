@@ -3,7 +3,7 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
     'postcss-px-to-viewport': {
-     unitToConvert: 'px',
+      unitToConvert: 'px',
       viewportWidth: 1440,
       unitPrecision: 5,
       propList: ['*'],

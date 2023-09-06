@@ -22,6 +22,7 @@ import MobileContractRank from '@/components/mobile/home/contractRank'
 import MobileRank from '@/components/mobile/home/rank'
 import Search from '@/components/mobile/search';
 import classNames from 'classnames';
+import ContractTrend from '@/src/statistics/ContractTrend';
 //import fetchData from '@/store/server';
 
 // type HomeProps = {
@@ -77,9 +78,7 @@ function Home(props: any) {
           </div>
           <div className='flex justify-between mt-12 gap-x-5 h-[400px] box-column'>
             <Trend origin='home' className={'flex-1 w-full !h-full'} />
-            <div className='flex-1'>
-              合约交易
-            </div>
+            <ContractTrend origin='home' className={'flex-1 w-full !h-full'}/>
           </div>
           <BrowserView>
             <div className='mt-32' ref={ref}>

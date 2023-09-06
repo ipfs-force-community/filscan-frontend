@@ -4,7 +4,6 @@ import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
 import { power_trend } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
-import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime, isMobile, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
@@ -248,31 +247,34 @@ export default (props: Props) => {
       className={classNames(styles.trend,`w-full h-[full]  ${className} mt-20`)}
       ref={origin === 'home' ? ref : ''}
     >
-      <div className='flex justify-between flex-wrap items-center mb-5'>
-        <div className='flex gap-x-10 items-center'>
-          <span className='font-PingFang font-semibold text-lg '>
+      <div className='flex justify-between flex-wrap items-center h-9 mb-2.5'>
+        <div className='flex-1 flex flex-row flex-wrap  items-center'>
+          <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
             {tr('power')}
-          </span>
-          <BrowserView>
-            <span className='flex gap-x-4'>
-              {options?.legendData?.map((v: any) => {
-                return (
-                  <span
-                    className='text-xs flex cursor-pointer items-center gap-x-1'
-                    key={v.name}
-                    onClick={() => {
-                      setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
-                    }}
-                    style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                    {getSvgIcon('legendIcon')}
-                    <span className='text-xs text_des font-normal'>
-                      {tr(v.name)}
+          </div>
+          <div className='w-fit'>
+            <BrowserView>
+              <span className='flex gap-x-4 '>
+                {options?.legendData?.map((v: any) => {
+                  return (
+                    <span
+                      className='text-xs flex cursor-pointer items-center gap-x-1'
+                      key={v.name}
+                      onClick={() => {
+                        setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                      }}
+                      style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                      {getSvgIcon('legendIcon')}
+                      <span className='text-xs text_des font-normal'>
+                        {tr(v.name)}
+                      </span>
                     </span>
-                  </span>
-                );
-              })}
-            </span>
-          </BrowserView>
+                  );
+                })}
+              </span>
+            </BrowserView>
+          </div>
+
         </div>
         {origin === 'home' && (
           <Link href={`/statistics/power/`}>
