@@ -5,6 +5,7 @@ import { getShowData } from '@/utils';
 import { HTMLAttributes, useMemo } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
+import useWindow from '@/components/hooks/useWindown';
 
 //ts-ignore
 interface ContentProps extends HTMLAttributes<HTMLElement>{
@@ -15,6 +16,7 @@ interface ContentProps extends HTMLAttributes<HTMLElement>{
 }
 
 export default (props:ContentProps) => {
+  const {isMobile} = useWindow()
 
   const {contents, data, columns = 1, ns} = props;
 
@@ -51,17 +53,17 @@ export default (props:ContentProps) => {
         return item['mobileHide']?<></>:(
           <li
             key={index}
-            className={`flex items-baseline gap-x-2.5 ${
-              borderTop ? 'pt-5 border-t border_color' : ''
-            }${columns !== 1 ? 'px-5 h-9 ' : ''}`}
+            className={
+              classNames(`flex items-baseline gap-x-2.5 
+            ${ borderTop ? 'pt-5 border-t border_color' : '' }
+            ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles.itemWrap)
+            }
             style={{ width: showWidth, ...style }}>
             <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
               {showTitle}:
             </span>
             <span
-              className={`flex-grow overflow-auto ${
-                columns !== 1 ? 'flex justify-end' : ''
-              }`}>
+              className={classNames(`flex-grow overflow-auto`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
               {renderValue}
             </span>
           </li>
