@@ -67,6 +67,7 @@ export default () => {
         })}
       </div>
       <List
+        className={classNames(styles['list-wrap'])}
         tabList={token_details.tabList}
         defaultActive={'transfer'}
         type='token'
