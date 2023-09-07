@@ -140,7 +140,7 @@ export default () => {
       </div>
 
       <div className='card_shadow border border_color p-7 rounded-xl h-[206px] flex items-center'>
-        <Content content={contentList} ns={'detail'} columns={2} data={data} />
+        <Content contents={contentList} ns={'detail'} columns={2} data={data} />
       </div>
       <AccountChange
         header={

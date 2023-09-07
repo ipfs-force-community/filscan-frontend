@@ -104,7 +104,7 @@ export default ({ cid }: { cid: string | string[] }) => {
           className='card_shadow border border_color rounded-xl p-5'>
           <Content
             ns='detail'
-            content={message_detail.trans}
+            contents={message_detail.trans}
             data={{
               ...data,
               message_ERC20Trans: TransferData,
@@ -146,7 +146,7 @@ export default ({ cid }: { cid: string | string[] }) => {
           className='card_shadow border border_color rounded-xl p-5'>
           <Content
             ns='detail'
-            content={message_detail.detail}
+            contents={message_detail.detail}
             data={{
               ...data,
               message_ERC20Trans: TransferData,

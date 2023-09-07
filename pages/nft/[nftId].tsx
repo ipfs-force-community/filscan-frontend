@@ -42,7 +42,7 @@ export default () => {
                 {tr(tokenItem.title)}
               </div>
               <Content
-                content={tokenItem.list}
+                contents={tokenItem.list}
                 ns={'contract'}
                 data={overviewData || {}}
               />

@@ -10,7 +10,10 @@ import Content from '@/packages/content';
 import Image from '@/packages/image';
 import { Translation } from '@/components/hooks/Translation';
 import List from '@/src/fevm/list';
-
+import styles from './[tokenId].module.scss'
+import useWindow from '@/components/hooks/useWindown';
+import { BrowserView, MobileView } from '@/components/device-detect';
+import classNames from 'classnames';
 export default () => {
   const router = useRouter();
   const { tokenId } = router.query;
@@ -19,7 +22,7 @@ export default () => {
 
   const [marketData, setMarket] = useState({});
   const [overviewData, setOverview] = useState<any>({});
-
+  const {isMobile} = useWindow()
   useEffect(() => {
     if (tokenId) {
       axiosData(apiUrl.contract_ERC20Summary, {
@@ -37,7 +40,7 @@ export default () => {
   }, [tokenId]);
   const load = () => {};
   return (
-    <div className='main_contain'>
+    <div className={classNames('main_contain',styles.wrap)}>
       <div className='flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4'>
         {overviewData?.token_name && (
           <Image width={40} height={40} src={overviewData.icon_url} alt='' />
@@ -49,12 +52,12 @@ export default () => {
           const showData =
             tokenItem.title === 'market' ? marketData : overviewData;
           return (
-            <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5' key={index}>
+            <div className={classNames('flex-1 border border_color card_shadow rounded-lg px-2.5 py-5',styles['card-wrap'])} key={index}>
               <div className='text-base font-medium px-2.5'>
                 {tr(tokenItem.title)}
               </div>
               <Content
-                content={tokenItem.list}
+                contents={tokenItem.list}
                 ns={'contract'}
                 data={showData || {}}
               />
