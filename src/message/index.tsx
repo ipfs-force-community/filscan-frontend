@@ -24,6 +24,8 @@ export default ({ cid }: { cid: string | string[] }) => {
   const [TransferData, setTransfer] = useState<any>(undefined);
   const [TransferNFTData, setTransferNft] = useState<any>(undefined);
   const [isF4, setIsF4] = useState(false);
+  const [swap, setSwap] = useState();
+
   const { data: result, loading } = useAxiosData(apiUrl.detail_message, {
     message_cid: cid,
   });
@@ -50,6 +52,13 @@ export default ({ cid }: { cid: string | string[] }) => {
       }
     );
 
+    //contract_swap
+
+    axiosData(apiUrl.contract_swap, { cid: id }).then(
+      (result: any) => {
+        setSwap(result?.swap_info);
+      }
+    );
     // fetchData(apiUrl.contract_swap, { cid: id }).then((result: any) => {
     //   setSwap(result?.swap_info);
     // });
@@ -87,6 +96,7 @@ export default ({ cid }: { cid: string | string[] }) => {
               ...data,
               message_ERC20Trans: TransferData,
               nftTrans: TransferNFTData,
+              swap_info:swap
             }}
           />
         </div>

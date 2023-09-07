@@ -63,7 +63,7 @@ export default (props:ContentProps) => {
               {showTitle}:
             </span>
             <span
-              className={classNames(`flex-grow overflow-auto`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
+              className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
               {renderValue}
             </span>
           </li>

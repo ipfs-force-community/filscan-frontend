@@ -16,7 +16,7 @@ import { space } from 'postcss/lib/list';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
-
+import Image from '@/packages/image'
 //储存池概览 账户余额 & 有效算力
 
 export const account_balance = {
@@ -385,6 +385,44 @@ export const message_detail = {
       title: 'method_name',
       type: ['message_basic'],
     },
+    // //Transaction
+    {
+      dataIndex: "swap_info",
+      elasticity: true,
+      borderTop: true,
+      title: (tr: any) => <span>
+        {getSvgIcon('transaction')}
+        {tr('Transaction')}
+      </span>,
+      render: (text: any) => {
+        if (text) {
+          return <span className='flex gap-x-1'>
+            <span className='flex gap-x-1'>
+              <span>Swap</span>
+              <span>{ text?.amount_out?.toLocaleString()}</span>
+              <span>{text?.amount_out_token_name.toLocaleUpperCase()}</span>
+            </span>
+            <span className="text_des">For</span>
+            <span className='flex gap-x-1' >
+              <span>{text?.amount_in}</span>
+              <span>{text?.amount_in_token_name}</span>
+            </span>
+            <span className="text_des">On</span>
+            <span className={`flex gap-x-1 ${text.dex_url ? 'cursor-pointer':''}`} onClick={() => {
+              if (text.dex_url) {
+                window.open(text.dex_url)
+              }
+            } }>
+              <Image src={''} alt='' width={20} height={20} />
+              {text?.dex}
+            </span>
+          </span>
+        }
+        return null
+
+      },
+
+    },
     {
       dataIndex: 'from',
       title: 'from',
@@ -408,6 +446,8 @@ export const message_detail = {
         );
       },
     },
+    //通证转移
+
     //转账信息
     {
       title: 'message_tranf',
