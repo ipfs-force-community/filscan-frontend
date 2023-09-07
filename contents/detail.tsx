@@ -326,7 +326,7 @@ export const message_detail = {
       render: (text: any) => {
         if (text?.startsWith('Ok')) {
           return (
-            <span className='flex px-2 py-1 gap-x-1 bg-success_bg rounded-sm items-center'>
+            <span className='flex px-2 py-1 gap-x-1  rounded-sm items-center'>
               {getSvgIcon('successIcon')}
               <span className='text-success text-cm'>Success</span>
             </span>
