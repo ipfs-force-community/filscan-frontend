@@ -70,7 +70,7 @@ export default () => {
         tabList={token_details.tabList}
         defaultActive={'transfer'}
         type='token'
-        id={tokenId}
+        ids={tokenId}
       />
     </div>
   );

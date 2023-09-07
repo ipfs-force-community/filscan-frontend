@@ -54,7 +54,7 @@ export default () => {
         tabList={nft_details.tabList}
         defaultActive={'transfer'}
         type='nfts'
-        id={nftId}
+        ids={nftId}
       />
     </div>
   );
