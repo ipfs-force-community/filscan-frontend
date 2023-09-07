@@ -1069,16 +1069,16 @@ export const account_gas = {
       },
       {
         title: 'sector_power_change',
-        dataIndex: 'sector_count_change',
+        dataIndex: 'sector_power_change',
         titleTip:'sector_power_change_tip',
         exports: ['sector_count_change'],
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
         render: (text: any, record: any) => {
-          const changeText = record.sector_power_change
-            ? Number(record.sector_power_change)
-            : record.sector_power_change;
+          const changeText = record.sector_count_change
+            ? Number(record.sector_count_change)
+            : record.sector_count_change;
           const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
           const className = changeText
             ? changeText > 0
