@@ -3,7 +3,7 @@
 import { Translation } from '@/components/hooks/Translation';
 import { logTabs, login_list } from '@/contents/account';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { useEffect, useState} from 'react';
+import { useEffect, useMemo, useState} from 'react';
 import SendCode from '@/src/account/sendCode';
 import Success from '@/src/account/success';
 import { proApi } from '@/contents/apiUrl';
@@ -70,6 +70,12 @@ export default () => {
   //监听mail 的变化
   const mail = Form.useWatch('email', form);
 
+  const type = useMemo(() => {
+    if (hashParams.type) {
+      return hashParams.type
+    }
+    return 'login'
+  },[hashParams.type])
   return (
     < >
       <Banner />
@@ -82,8 +88,8 @@ export default () => {
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
-                className={`text-lg   ${
-                  hashParams.type === log_item.dataIndex ? 'text-primary' : 'text_color'
+                className={`text-lg  ${
+                  type=== log_item.dataIndex ? 'text-primary' : 'text_color'
                 }`}>
                 {tr(log_item.title)}
               </Link>
