@@ -181,9 +181,9 @@ export default (props: Props) => {
       className={classNames(styles.trend,`w-full h-[full]  ${className} mt-20`)}
       ref={origin === 'home' ? ref : ''}
     >
-      <div className='flex justify-between flex-wrap h-9 items-center mb-2.5'>
-        <div className='flex-1 flex flex-row flex-wrap  items-center'>
-          <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
+      <div className='flex justify-between flex-wrap items-center min-h-[36px] mb-2.5'>
+        <div className='flex-1 flex flex-row flex-wrap items-center'>
+          <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg pl-2.5'>
             {tr('contract_trend')}
           </div>
         </div>
@@ -206,7 +206,7 @@ export default (props: Props) => {
                     onChange={(interval) => { setInterval(interval); load(interval) }} />
                   <Link href={`/statistics/charts#contract`}>
                     <Image
-                      className='cursor-pointer'
+                      className='cursor-pointer mr-2.5'
                       src={go}
                       width={18}
                       height={18}
