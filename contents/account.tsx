@@ -1113,9 +1113,9 @@ export const account_gas = {
         titleTip:'seal_gas_cost_tip',
         // width: 200,
         amountUnit: {
-          total_gas_cost: { unit: 'fil/T' },
+          total_gas_cost: { unit: 'fil' },
         },
-        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL/T'),
+        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL'),
       },
       {
         title: 'seal_gas_per_t',

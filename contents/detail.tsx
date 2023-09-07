@@ -274,6 +274,37 @@ export const message_detail = {
     {title:'trade',dataIndex:'trade'},
     {title:'event_log',dataIndex:'event_log'},
   ],
+  trade:[
+    {
+      dataIndex: 'from',
+      title: 'from_ath',
+      width:'30%',
+      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>
+        { get_account_type(text)}
+      </span>
+    },
+    {
+      dataIndex: 'to',
+      title: 'to_ath',
+      width:'30%',
+      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>
+        { get_account_type(text)}
+      </span>
+    },
+    {
+      dataIndex: 'value',
+      title: 'amount',
+      width:'20%',
+      render: (text: string) => {
+        return formatFilNum(text,false,false,4)
+      }
+    },
+    {
+      dataIndex: 'method',
+      width:'20%',
+      title: 'method'
+    },
+  ],
   trans:[
     {
       dataIndex: 'cid',
