@@ -3,8 +3,10 @@ import IconSearch from '@/assets/images/header/icon_search.svg'
 import styles from './index.module.scss'
 import classNames from "classnames"
 import { Input, InputRef } from "antd"
-import { useRef, useState } from "react"
-const Search = ()=>{
+import { HtmlHTMLAttributes, useRef, useState } from "react"
+interface SearchProps extends HtmlHTMLAttributes<HTMLDivElement>{
+}
+const Search = (props:SearchProps)=>{
   const [isSearch,setIsSearch] = useState<boolean>(false)
   const ref = useRef<any>()
   const onMaskClick = ()=>{
@@ -14,7 +16,7 @@ const Search = ()=>{
   const onCancelClick = ()=>{
     setIsSearch(false)
   }
-  return <div className={classNames(styles.wrap)}>
+  return <div className={classNames(styles.wrap,props.className)}>
     <div className={classNames(styles['search-wrap'],isSearch ? "" : styles.disabled)}>
       <div className={styles.search}>
         <Input ref={ref} prefix={<Image src={IconSearch} alt=""/>}/>

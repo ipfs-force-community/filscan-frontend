@@ -42,7 +42,7 @@ export default () => {
                 {tr(tokenItem.title)}
               </div>
               <Content
-                content={tokenItem.list}
+                contents={tokenItem.list}
                 ns={'contract'}
                 data={overviewData || {}}
               />
@@ -54,7 +54,7 @@ export default () => {
         tabList={nft_details.tabList}
         defaultActive={'transfer'}
         type='nfts'
-        id={nftId}
+        ids={nftId}
       />
     </div>
   );

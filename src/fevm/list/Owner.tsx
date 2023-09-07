@@ -7,12 +7,16 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
+import styles from './Owner.module.scss'
 import {
   nft_owner_columns,
   token_owner_columns,
   token_transfer_columns,
 } from '@/contents/contract';
-
+import useWindow from '@/components/hooks/useWindown';
+import Copy from '@/components/copy';
+import Link from 'next/link';
+import classNames from 'classnames';
 export default ({
   type,
   id,
@@ -31,6 +35,8 @@ export default ({
   const [current, setCurrent] = useState(1);
   const [ownerList, setOwner] = useState({});
   const [toList, setTo] = useState({});
+
+  const {isMobile} = useWindow()
 
   useEffect(() => {
     if (id) {
@@ -71,8 +77,32 @@ export default ({
   const columns = useMemo(() => {
     const newColumns = type === 'nfts' ? nft_owner_columns : token_owner_columns;
     return newColumns(ownerList).map((v) => {
+      const ol = ownerList as any
+      if (type !== 'nfts') {
+        if (v.dataIndex === 'rank' ) {
+          v.render= (value: string) => <span className={styles.rank}>{value}</span>
+        }
+        if (v.dataIndex === 'owner') {
+          v.render = (value:string) =>{
+            if (!value) return '--';
+            return (
+              <span className={classNames(styles.owner,'link_text')}>
+                <span> {value}</span>
+                {value && <Copy text={value} />}
+                {ol?.domains && ol?.domains[value] && (
+                  <Link
+                    href={`/domain/${ol.domains[value]}?provider=${ol.provider}`}>
+                ({ol.domains[value]})
+                  </Link>
+                )}
+              </span>
+            );
+          }
+        }
+      }
       return { ...v, title: tr(v.title) };
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, tr, ownerList, toList]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {

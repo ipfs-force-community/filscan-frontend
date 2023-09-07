@@ -1,26 +1,38 @@
-@media screen and (max-width: 1000px){
-    .detail-content{
-        padding: 0;
-        :global{
-            .text_des{
-                font-size: 15px;
-                font-family: PingFangSC-Regular, PingFang SC;
-                font-weight: 400;
-                color: #B3B3B3;
-                line-height: 14px;
-            }
-            .copy-row{
-                .text{
-                    word-break: break-all;
-                    color: #1D6BFC;
-                }
-                .copy{
-                    padding-left: 5px;
-                    img{
-                        display: inline-block;
-                    }
-                }
-            }
+@media screen and (max-width: 1000px) {
+  .detail-content {
+    padding: 0;
+
+    .itemWrap {
+      align-items: center;
+      .value {
+        line-height: normal;
+        a {
+          width: 100%;
+          word-wrap: break-word;
         }
+      }
     }
+
+    :global {
+      .text_des {
+        color: #b3b3b3;
+        font-weight: 400;
+        font-size: 15px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        line-height: 14px;
+      }
+      .copy-row {
+        .text {
+          color: #1d6bfc;
+          word-break: break-all;
+        }
+        .copy {
+          padding-left: 5px;
+          img {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
 }

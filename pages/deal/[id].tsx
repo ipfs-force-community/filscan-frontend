@@ -28,7 +28,7 @@ export default () => {
       {tr('deal_details')}
     </div>
     <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
-      <Content content={deal_list.list} ns={'detail'} data={data} />
+      <Content contents={deal_list.list} ns={'detail'} data={data} />
       <div className="flex border-t border_color text_des pt-5 mt-2.5">
         <div className="w-28 min-w-28 ">
           {tr('deal_hosting') }

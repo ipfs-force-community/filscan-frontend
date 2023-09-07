@@ -10,7 +10,10 @@ import Content from '@/packages/content';
 import Image from '@/packages/image';
 import { Translation } from '@/components/hooks/Translation';
 import List from '@/src/fevm/list';
-
+import styles from './[tokenId].module.scss'
+import useWindow from '@/components/hooks/useWindown';
+import { BrowserView, MobileView } from '@/components/device-detect';
+import classNames from 'classnames';
 export default () => {
   const router = useRouter();
   const { tokenId } = router.query;
@@ -19,7 +22,7 @@ export default () => {
 
   const [marketData, setMarket] = useState({});
   const [overviewData, setOverview] = useState<any>({});
-
+  const {isMobile} = useWindow()
   useEffect(() => {
     if (tokenId) {
       axiosData(apiUrl.contract_ERC20Summary, {
@@ -37,24 +40,25 @@ export default () => {
   }, [tokenId]);
   const load = () => {};
   return (
-    <div className='main_contain'>
-      <div className='flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4'>
+    <div className={classNames('main_contain',styles.wrap)}>
+      <div className={classNames('flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4',styles.token)}>
         {overviewData?.token_name && (
           <Image width={40} height={40} src={overviewData.icon_url} alt='' />
         )}
         {overviewData?.token_name?.toLocaleUpperCase()}
       </div>
-      <div className='flex gap-x-5'>
+      <div className={classNames('flex gap-x-5',styles['card-wrap'])}>
         {token_details.headerList.map((tokenItem,index) => {
           const showData =
             tokenItem.title === 'market' ? marketData : overviewData;
           return (
-            <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5' key={index}>
-              <div className='text-base font-medium px-2.5'>
+            <div className={classNames('flex-1 border border_color card_shadow rounded-lg px-2.5 py-5',styles['item'])} key={index}>
+              <div className={classNames('text-base font-medium px-2.5',styles.title)}>
                 {tr(tokenItem.title)}
               </div>
               <Content
-                content={tokenItem.list}
+                className={classNames(styles['content'])}
+                contents={tokenItem.list}
                 ns={'contract'}
                 data={showData || {}}
               />
@@ -63,10 +67,11 @@ export default () => {
         })}
       </div>
       <List
+        className={classNames(styles['list-wrap'])}
         tabList={token_details.tabList}
         defaultActive={'transfer'}
         type='token'
-        id={tokenId}
+        ids={tokenId}
       />
     </div>
   );

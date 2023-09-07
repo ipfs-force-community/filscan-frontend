@@ -1,0 +1,54 @@
+@media only screen and (max-width: 1000px) {
+  .wrap {
+    .token {
+      margin-bottom: 0%;
+      padding: 18px 12px;
+      font-size: 16px;
+      font-family: "PingFangSC-Medium";
+      line-height: normal;
+      img {
+        width: 22px;
+        border-radius: 3px;
+      }
+    }
+    .card-wrap {
+      display: block;
+      padding: 0px 12px;
+
+      .item {
+        .title {
+          padding: 0px;
+          padding-bottom: 10px;
+          font-size: 16px;
+          line-height: normal;
+        }
+        .content {
+          margin-bottom: 18px;
+          padding: 20px 12px;
+          border: 1px solid var(--mobile-divide-line);
+          border-radius: 6px;
+          background: var(--mobile-bgColor);
+        }
+
+        ul {
+          margin-block-end: 0%;
+        }
+      }
+    }
+
+    .list-wrap {
+      padding: 0px 12px;
+    }
+
+    :global {
+      .card_shadow {
+        flex: none;
+        padding: 0%;
+        border: none;
+        border-radius: 0%;
+        background: transparent;
+        box-shadow: none;
+      }
+    }
+  }
+}

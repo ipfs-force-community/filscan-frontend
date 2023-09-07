@@ -108,16 +108,18 @@ export default function App({ Component, pageProps }: AppProps) {
       <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
         <FilscanStoreProvider>
           <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
-            <div className={`container_body text-sm ${theme}`}>
+            <div className={classNames(`container_body text-sm ${theme}`)}>
               <HeaderMain />
               <MobileView>
                 {home && <div className={classNames(styles.title)}>
                   <span>Filecoin </span>
                   <span>{t('blockchain_browser')}</span>
                 </div>}
-                <Search/>
+                <Search className={home ? styles['search-home'] : styles['search']}/>
               </MobileView>
-              <Component {...pageProps} />
+              <div className={classNames(home ? styles.home : styles.other)}>
+                <Component {...pageProps} />
+              </div>
               <div className='w-screen h-[140px] bg-footerColor'>
                 <Footer />
               </div>
