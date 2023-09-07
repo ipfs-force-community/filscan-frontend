@@ -3,7 +3,7 @@
 import { Translation } from '@/components/hooks/Translation';
 import { logTabs, login_list } from '@/contents/account';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { useEffect} from 'react';
+import { useEffect, useState} from 'react';
 import SendCode from '@/src/account/sendCode';
 import Success from '@/src/account/success';
 import { proApi } from '@/contents/apiUrl';
@@ -24,6 +24,7 @@ export default () => {
   const userInfo = UserInfo();
   const { axiosData } = useAxiosData();
   const router = useRouter()
+  const [token,setToken]= useState('')
 
   const onFinish = async () => {
     //登录
@@ -31,6 +32,7 @@ export default () => {
     const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
+      token,
     });
     // if (result?.code === 1) {
     //   //未注册
@@ -61,6 +63,13 @@ export default () => {
     }
   }, [userInfo.mail]);
 
+  const handlePressEnter = (e: any) => {
+    e.preventDefault();
+  }
+
+  //监听mail 的变化
+  const mail = Form.useWatch('email', form);
+
   return (
     < >
       <Banner />
@@ -73,8 +82,8 @@ export default () => {
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
-                className={`text-lg text_color  ${
-                  hashParams.type === log_item.dataIndex ? 'highlight' : ''
+                className={`text-lg   ${
+                  hashParams.type === log_item.dataIndex ? 'text-primary' : 'text_color'
                 }`}>
                 {tr(log_item.title)}
               </Link>
@@ -114,9 +123,10 @@ export default () => {
                     prefix={item.prefix}
                     style={{background:'transparent'}}
                     placeholder={tr(item.placeholder)}
+                    onPressEnter={handlePressEnter}
                     suffix={
                       showButton && (
-                        <SendCode mail={form.getFieldValue('email')} />
+                        <SendCode mail={mail} onChange={(token) => setToken(token)} />
                       )
                     }
                   />
