@@ -71,7 +71,7 @@ export default (props: Props) => {
             </div>
           );
         })}
-        <Pagination
+        {total > showLimit ? <Pagination
           current={current}
           total={total}
           onChange={(cur: number) => {
@@ -79,7 +79,7 @@ export default (props: Props) => {
               onChange({ current: cur });
             }
           }}
-        />
+        /> : <></>}
       </div>
     </MobileView>
     <BrowserView>
