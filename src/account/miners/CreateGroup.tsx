@@ -5,7 +5,7 @@ import { proApi } from '@/contents/apiUrl';
 import useAxiosData from '@/store/useAxiosData';
 import { Modal, Input, Button } from 'antd';
 import { useState } from 'react';
-import { useGroupsStore } from './content';
+import { useGroupsStore } from '../content';
 
 export default ({
   show,

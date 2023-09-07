@@ -8,7 +8,7 @@ import Breadcrumb from '@/packages/breadcrumb';
 import { useEffect, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
-import { useGroupsStore } from './content';
+import { useGroupsStore } from '../content';
 import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
 
