@@ -412,7 +412,8 @@ export const message_detail = {
               if (text.dex_url) {
                 window.open(text.dex_url)
               }
-            } }>
+            }}>
+              {/* //todo 后端返回url */}
               <Image src={''} alt='' width={20} height={20} />
               {text?.dex}
             </span>
