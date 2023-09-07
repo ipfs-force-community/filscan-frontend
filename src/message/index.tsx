@@ -16,13 +16,14 @@ import copySvgMobile from '@/assets/images/icon-copy.svg';
 import { get } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
 import { getSvgIcon } from '@/svgsIcon';
+import Segmented from '@/packages/segmented';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData();
   const [TransferData, setTransfer] = useState<any>(undefined);
   const [TransferNFTData, setTransferNft] = useState<any>(undefined);
-
+  const [isF4, setIsF4] = useState(false);
   const { data: result, loading } = useAxiosData(apiUrl.detail_message, {
     message_cid: cid,
   });
@@ -67,36 +68,13 @@ export default ({ cid }: { cid: string | string[] }) => {
     return <NoData />;
   }
 
-  const renderExitCode = (code:string)=>{
-    if (code.startsWith('Ok')) {
-      return (
-        <span className='flex px-2 py-1 gap-x-1 bg-success_bg rounded-sm items-center'>
-          {getSvgIcon('successIcon')}
-          <span className='text-success text-cm'>Success</span>
-        </span>
-      );
-    }
-    if (code.startsWith('Err')) {
-      return (
-        <span className='flex px-2 py-1 gap-x-1 rounded-sm items-center'>
-          {getSvgIcon('errorIcon')}
-          <span className='text_red text-cm'>Error</span>
-        </span>
-      );
-    }
-
-    return (
-      <span className='flex px-2 py-1 gap-x-1  rounded-sm items-center'>
-        {getSvgIcon('pendingIcon')}
-        <span className='text-cm'>Pending</span>
-      </span>
-    );
-  }
-
   return (
     <div className={classNames(styles.message,'main_contain')}>
       <div className='my-2.5 font-DINPro-Bold font-semibold text-lg'>
         {tr(message_detail?.title || '')}
+      </div>
+      <div className='my-2'>
+        <Segmented data={message_detail.tabs} defaultValue={'detail'} ns={'detail'} isHash={false} />
       </div>
 
       <div className={classNames(styles.trans,'flex gap-y-5 flex-col')}>
@@ -115,7 +93,6 @@ export default ({ cid }: { cid: string | string[] }) => {
       </div>
       <MobileView>
         <div className={styles.title}>{tr('transfer_records')}</div>
-
         {
           get(data,'consume_list').map((n:any,index:number)=>{
             return <div className={styles.card} key={`card-${index}`}>

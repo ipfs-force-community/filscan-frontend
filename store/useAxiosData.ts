@@ -80,7 +80,8 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           return response.data;
         }
         if (response.data && response.data.code) {
-          messageManager.showMessage({
+          current = 0;
+          return messageManager.showMessage({
             type: 'error',
             content: response.data.message,
           });

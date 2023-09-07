@@ -36,9 +36,9 @@ const blackStyle = {
 export const seriesArea= {
   lineStyle: {
     color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-      { offset: 0, color: 'rgba(23 , 156 , 238,1)' },
-      { offset: 0.5, color: 'rgba(23 ,100  ,255,0.3)' },
-      { offset: 1, color: 'rgba(0 ,   61  ,  185 ,  0.1)' },
+      { offset: 0, color: '#179CEE' },
+      { offset: 0.5, color: '#1764FF' },
+      { offset: 1, color: '#003DB9' },
     ]),
   },
   areaStyle: {
@@ -66,9 +66,7 @@ export const get_xAxis=(theme:string)=>{
   return {
     type: 'category',
     axisLabel: {
-      textStyle: {
-        color: color.textStyle,
-      },
+      color: color.labelColor,
     },
     axisLine: {
       lineStyle: {
