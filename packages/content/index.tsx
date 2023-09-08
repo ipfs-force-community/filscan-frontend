@@ -59,7 +59,7 @@ export default (props:ContentProps) => {
             className={
               classNames(`flex items-baseline gap-x-2.5 
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
-            ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles.itemWrap)
+            ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles['item-wrap'])
             }
             style={{ width: showWidth, ...style }}>
             <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
