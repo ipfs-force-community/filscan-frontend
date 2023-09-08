@@ -1,11 +1,12 @@
 import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
 import { message_detail } from "@/contents/detail"
-import Table from "@/packages/Table"
-import Cid from "@/pages/cid/[cid]";
+import Content from "@/packages/content";
+import NoData from "@/packages/noData";
+import Skeleton from "@/packages/skeleton";
 import { useFilscanStore } from "@/store/FilscanStore";
 import useAxiosData from "@/store/useAxiosData";
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 
 export default ({ cid }: {cid?:string | string[]}) => {
   const { tr } = Translation({ ns: 'detail' });
@@ -17,24 +18,33 @@ export default ({ cid }: {cid?:string | string[]}) => {
   useEffect(() => {
     load()
   }, [cid])
+
   const load = async () => {
     setLoading(true)
-    const result = await axiosData(apiUrl.detail_message_trans, { cid })
+    const result = await axiosData(apiUrl.detail_message_event, { cid })
     setLoading(false)
-    setData(result?.internal_transfers || [])
+    setData(result?.logs || [])
   }
 
-  const columns = useMemo(() => {
-    return message_detail.trade.map(item => {
-      return {...item, title: tr(item.title)}
-    })
-  }, [lang])
+  if (loading) {
+    return (
+      <div className='main_contain'>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </div>
+    );
+  }
 
+  if (!loading &&data.length === 0) {
+    return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
+      <NoData />
+    </div>
+  }
   return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
-    <Table
-      data={data}
-      columns={columns}
-      loading={loading}
-    />
+    {data.map((item,index) => {
+      return <Content contents={message_detail.eventLog} ns={"detail"} data={item} key={index} />
+
+    })}
   </div>
 }
