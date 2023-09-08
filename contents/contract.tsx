@@ -492,7 +492,7 @@ export const token_owner_columns = (ownerList: any) => {
         if (!text) return '--';
         return (
           <span className='flex link_text items-center gap-x-1'>
-            <span> {text}</span>
+            <span> {isIndent(text)}  </span>
             {text && <Copy text={text} />}
             {ownerList?.domains && ownerList?.domains[text] && (
               <Link
