@@ -83,6 +83,13 @@ export default ({ minersNum }: { minersNum?: MinerNum | any }) => {
         />
       );
     }
+    if (group && groupDetail) {
+      return <GroupAdd
+        groupId={group}
+        groupDetail={groupDetail}
+        minersNum={minerNum}
+      />
+    }
     return <Groups groups={groups} />;
   };
 

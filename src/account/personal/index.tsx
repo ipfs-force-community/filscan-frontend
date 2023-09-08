@@ -107,7 +107,7 @@ export default () => {
             form={form}
             onFinish={handleSave}
             layout='vertical'
-            className='w-3/5 min-w-[300px]'
+            className='w-3/5 min-w-[300px] mt-5'
           >
             {personal_setting.map((item: any) => {
               const objShow: any = {};
