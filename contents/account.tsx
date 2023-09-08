@@ -256,7 +256,7 @@ export const overview = {
       {
         title: 'total_out_come_gas',
         icon: <Image src={gas} width={40} height={40} alt='' />,
-        dataIndex: 'sum_out_come',
+        dataIndex: 'sum_outlay',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_gas ? Number(record.sum_gas) : '';
           const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
@@ -424,10 +424,10 @@ export const overview = {
     },
     {
       title: 'total_out_come_gas',
-      dataIndex: 'total_out_come',
+      dataIndex: 'total_outlay',
       exports: ['total_gas'],
       amountUnit: {
-        total_out_come: { unit: 'fil', number: 2 },
+        total_outlay: { unit: 'fil', number: 2 },
         total_gas: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
