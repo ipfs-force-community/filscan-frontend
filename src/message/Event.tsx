@@ -4,7 +4,6 @@ import { message_detail } from "@/contents/detail"
 import Content from "@/packages/content";
 import NoData from "@/packages/noData";
 import Skeleton from "@/packages/skeleton";
-import { useFilscanStore } from "@/store/FilscanStore";
 import useAxiosData from "@/store/useAxiosData";
 import { useEffect, useState } from "react"
 
