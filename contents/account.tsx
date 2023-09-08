@@ -154,11 +154,11 @@ export const account_manager: Array<MenuItem> = [
 ];
 
 export const personal_setting = [
-  {
-    title: 'personal_name',
-    dataIndex: 'name',
-    placeholder: 'personal_name_holder',
-  },
+  // {
+  //   title: 'personal_name',
+  //   dataIndex: 'name',
+  //   placeholder: 'personal_name_holder',
+  // },
   {
     title: 'old_password',
     placeholder: 'old_placeholder',
@@ -576,7 +576,7 @@ export const account_balance = {
     {
       title: 'group_name',
       dataIndex: 'group_name',
-      width: 150,
+      width: 100,
       fixed: 'left',
       ellipsis: {
         showTitle: false,
@@ -595,7 +595,7 @@ export const account_balance = {
         miner_balance: { unit: 'fil', number: 0 },
       },
 
-      // width: 200,
+      //width: 170,
       render: (text: string, record: any) => {
         const changeText = record?.miner_balance_changed
           ? Number(record.miner_balance_changed)
@@ -621,7 +621,7 @@ export const account_balance = {
     {
       title: 'owner_balance',
       dataIndex: 'owner_balance',
-      // width: 200,
+      // width: 170,
       exports: ['Owner_balance_changed'],
       amountUnit: {
         owner_balance: { unit: 'fil', number: 0 },
@@ -645,7 +645,7 @@ export const account_balance = {
     {
       title: 'worker_balance',
       dataIndex: 'worker_balance',
-      // width: 200,
+      //width: 170,
       exports: ['Worker_balance_changed'],
 
       amountUnit: {
@@ -785,7 +785,7 @@ export const account_reward = {
       {
         title: 'tag',
         dataIndex: 'tag',
-        width: '20%',
+        width: '10%',
         fixed: 'left',
         ellipsis: {
           showTitle: false,
@@ -809,7 +809,7 @@ export const account_reward = {
         title: 'group_name',
         dataIndex: 'group_name',
         fixed: 'left',
-        width: '25%',
+        width: '15%',
         ellipsis: {
           showTitle: false,
         },
@@ -819,9 +819,9 @@ export const account_reward = {
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '20%' },
-      { title: 'win_count', dataIndex: 'win_count', width: '10%' },
+      { title: 'win_count', dataIndex: 'win_count', width: '20%' },
       {
-        title: 'block_reward', dataIndex: 'block_reward', width: '10%',
+        title: 'block_reward', dataIndex: 'block_reward', width: '20%',
         amountUnit: {
           block_reward: { unit: 'fil', number: 4 },
         },
@@ -1052,7 +1052,7 @@ export const account_gas = {
       {
         title: 'group_name',
         dataIndex: 'group_name',
-        width: 150,
+        width: 100,
         fixed: 'left',
         ellipsis: {
           showTitle: false,

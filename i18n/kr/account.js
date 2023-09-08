@@ -99,7 +99,7 @@ const account={
   fault_sectors: '오류',
 
   sector_power_change_tip: '섹터 수/로우바이트 체굴 파워  추가 및 종료의 합계',
-  pledge_changed_tip: ' 섹터 수  추가 및 종료에 대한 예치금 변동의 합계',
+  pledge_changed_tip: ' 섹터 수 추가 및 종료에 대한 예치금 변동의 합계',
   pledge_changed_per_t_tip:'예치금 변동을 섹터 변동으로 나눈 값.',
   penalty_tip: '처벌받은 FIL 수량',
   fault_sectors_tip: '신규 추가된 오류 섹터의 수/로우바이트 체굴 파워.',
