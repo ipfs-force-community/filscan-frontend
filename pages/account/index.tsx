@@ -92,6 +92,8 @@ const Account: React.FC = () => {
     );
   }
 
+  console.log('===44',minersNum)
+
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>

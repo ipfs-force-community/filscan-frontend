@@ -56,7 +56,6 @@ export default ({
         //404
         router.push(`/noResult/${showInput}`)
       }
-      console.log('----d',result)
     }
   }
 
