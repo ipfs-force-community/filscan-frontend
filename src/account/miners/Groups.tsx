@@ -197,9 +197,9 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
           } else if (dataIndex == 'edit') {
             showValue = (
               <span className='flex items-center gap-x-2'>
-                {/* <span className='cursor-pointer hover:text-primary'>
+                <span className='cursor-pointer hover:text-primary'>
                   {getSvgIcon('openAllIcon')}
-                </span> */}
+                </span>
                 <>
                   <span
                     className='cursor-pointer hover:text-primary'
