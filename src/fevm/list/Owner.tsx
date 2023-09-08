@@ -11,7 +11,6 @@ import styles from './Owner.module.scss'
 import {
   nft_owner_columns,
   token_owner_columns,
-  token_transfer_columns,
 } from '@/contents/contract';
 import useWindow from '@/components/hooks/useWindown';
 import Copy from '@/components/copy';
@@ -112,10 +111,10 @@ export default ({
   };
   return (
     <>
-      <span className='text_des text-sm'>
+      <span className='text_des text-sm ml-2.5'>
         {tr('owner_total', { value: data.total })}
       </span>
-      <div className='card_shadow p-5 mt-5 '>
+      <div className='card_shadow p-5 mt-2.5 rounded-xl border border_color'>
         <Table
           data={data.dataSource}
           total={data.total}

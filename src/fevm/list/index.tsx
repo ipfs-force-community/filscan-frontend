@@ -38,7 +38,7 @@ export default (props:ListProps) => {
   }, [defaultActive, hash]);
 
   return (
-    <div className={classNames(props.className)}>
+    <div className={`${classNames(props.className)} mt-5`}>
       <Segmented
         data={tabList || []}
         ns='contract'
@@ -46,7 +46,7 @@ export default (props:ListProps) => {
         defaultActive={defaultActive}
         isHash={true}
       />
-      <div className='min-h-[300px] mt-2.5'>
+      <div className='min-h-[300px] pt-2.5'>
         {activeTab === 'transfer' && <Transfer id={ids} type={ type} />}
         {activeTab === 'owner' && <Owner id={ids} type={ type} />}
         {activeTab === 'dex' && <Dex id={ids} />}

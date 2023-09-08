@@ -73,7 +73,7 @@ export default ({
   };
 
   return (
-    <ul className='list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex '>
+    <ul className='list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5'>
       {data.map((item) => {
         return (
           <li
