@@ -5,7 +5,7 @@ const account = {
   go_home: 'Back to Homepage',
   go_login: 'Login',
   back:'Back',
-  account_title:'Nodes Manager',
+  account_title:'Miner Metrics',
   overview: 'Overview',
   miners: 'Miners',
   personal: 'Personal',

@@ -1,6 +1,7 @@
 /** @format */
 
 import Copy from '@/components/copy';
+import TpWallet from '@/components/TPWallet'
 import Tooltip from '@/packages/tooltip';
 import {
   formatDateTime,
@@ -13,7 +14,6 @@ import {
 } from '@/utils';
 import Image from '@/packages/image';
 import Link from 'next/link';
-import TpWallet from '@/components/TPWallet'
 
 //合约验证
 export const verify_first = {
@@ -492,7 +492,7 @@ export const token_owner_columns = (ownerList: any) => {
         if (!text) return '--';
         return (
           <span className='flex link_text items-center gap-x-1'>
-            <span> {isIndent(text)}  </span>
+            <span> {text}  </span>
             {text && <Copy text={text} />}
             {ownerList?.domains && ownerList?.domains[text] && (
               <Link

@@ -26,6 +26,7 @@ const zh ={
   resources_tools: '자주 쓰는 도구',
   provider: '스토리지 공급자',
   fvm: 'FVM 생태계 개요',
-
+  account: 'Miner Metrics',
+  develop:'Developer',
 }
 export default zh

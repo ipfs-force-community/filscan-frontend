@@ -26,6 +26,8 @@ const en ={
   resources_tools: 'Tools',
   provider: 'Storage Provider',
   fvm:'Filecoin Ecosystem',
-
+  account: 'Miner Metrics',
+  network_overview: 'Network Overview',
+  develop:'Developer',
 }
 export default en
