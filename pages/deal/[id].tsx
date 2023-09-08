@@ -6,6 +6,10 @@ import useAxiosData from "@/store/useAxiosData";
 import { formatDateTime, formatFilNum, get_account_type, unitConversion } from "@/utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import dealMiner from '@/assets/images/dealMiner.svg'
+import dealClient from '@/assets/images/dealClient.svg'
+import cloud from '@/assets/images/cloud.svg'
+import Image from 'next/image'
 
 export default () => {
   const router = useRouter();
@@ -36,12 +40,14 @@ export default () => {
         <div className="flex gap-x-5 ml-4">
           <div className="flex items-center justify-center gap-y-2 flex-col py-2.5 w-[114px] h-[114px] rounded-[5px] border border-color ">
             <span>{tr(deal_list.content.left_title)}</span>
-            {data.client_id &&<span className="flex gap-x-1 items-center">{get_account_type(data.client_id)}</span> }
+            <Image src={dealClient} width={36} height={ 36} alt='' />
+            {data?.client_id &&<span className="flex gap-x-1 items-center">{get_account_type(data.client_id)}</span> }
 
           </div>
           <div className="flex items-center justify-center flex-col gap-y-4 py-2.5 w-[383px] h-[114px] rounded-[5px] border border-color ">
-            <span className="text_color font-DINPro-Medium">
-              {/* <Image src={cloud} className={style.hosting_icon_img } alt=''></Image> */}
+            <span className="flex items-center gap-x-1 text_color font-DINPro-Medium">
+              <Image src={cloud} width={14} height={14} alt='' />
+
               { data?.piece_size && unitConversion( data.piece_size)}
             </span>
             <span>
@@ -57,7 +63,8 @@ export default () => {
           </div>
           <div className="flex items-center justify-center gap-y-2 flex-col py-2.5 w-[114px] h-[114px] rounded-[5px] border border-color ">
             <span>{tr(deal_list.content.right_title)}</span>
-            {data.provider_id &&<span className="flex gap-x-1 items-center"> {get_account_type(data.provider_id)}</span> }
+            <Image src={dealMiner} width={36} height={ 36} alt='' />
+            {data?.provider_id &&<span className="flex gap-x-1 items-center"> {get_account_type(data.provider_id)}</span> }
 
           </div>
         </div>
