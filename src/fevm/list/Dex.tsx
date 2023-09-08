@@ -9,8 +9,6 @@ import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import {
   token_Dex_columns,
-  token_owner_columns,
-  token_transfer_columns,
 } from '@/contents/contract';
 
 export default ({ id }: { id?: string | string[] }) => {
@@ -58,10 +56,10 @@ export default ({ id }: { id?: string | string[] }) => {
   };
   return (
     <>
-      <span className='text_des text-sm'>
+      <span className='text_des text-sm ml-2.5'>
         {tr('dex_total', { value: data.total })}
       </span>
-      <div className='card_shadow p-5 my-2.5 '>
+      <div className='card_shadow p-5 mt-2.5 rounded-xl border border_color '>
         <Table
           data={data.dataSource}
           total={data.total}

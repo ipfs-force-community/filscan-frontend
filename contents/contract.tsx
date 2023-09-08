@@ -13,7 +13,7 @@ import {
 } from '@/utils';
 import Image from '@/packages/image';
 import Link from 'next/link';
-import { spawn } from 'child_process';
+import TpWallet from '@/components/TPWallet'
 
 //合约验证
 export const verify_first = {
@@ -371,6 +371,7 @@ export const token_details = {
                   {text}
                 </Link>
                 <Copy text={text} />
+                <TpWallet data={ record} />
               </span>
             );
           },
@@ -491,7 +492,7 @@ export const token_owner_columns = (ownerList: any) => {
         if (!text) return '--';
         return (
           <span className='flex link_text items-center gap-x-1'>
-            <span> {text}</span>
+            <span> {isIndent(text)}  </span>
             {text && <Copy text={text} />}
             {ownerList?.domains && ownerList?.domains[text] && (
               <Link

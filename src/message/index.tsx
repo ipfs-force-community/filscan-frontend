@@ -2,6 +2,7 @@
 
 import { BrowserView, MobileView } from '@/components/device-detect';
 import { Translation } from '@/components/hooks/Translation';
+import { useHash } from '@/components/hooks/useHash';
 import { apiUrl } from '@/contents/apiUrl';
 import { message_detail } from '@/contents/detail';
 import Content from '@/packages/content';
@@ -15,7 +16,7 @@ import { get, has } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
 import Trade from './Trade';
-import { useHash } from '@/components/hooks/useHash';
+import Event from './Event';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
@@ -83,6 +84,8 @@ export default ({ cid }: { cid: string | string[] }) => {
     switch (active) {
     case 'trade':
       return <Trade cid={cid} />
+    case 'event_log':
+      return <Event cid={cid} />
     default:
       return <>
         <div className={classNames(styles.detail,'flex gap-y-5 flex-col mb-5')}>

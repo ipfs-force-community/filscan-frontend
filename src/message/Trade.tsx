@@ -30,7 +30,7 @@ export default ({ cid }: {cid?:string | string[]}) => {
     })
   }, [lang])
 
-  return <div className="card_shadow border border_color rounded-xl p-5">
+  return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
     <Table
       data={data}
       columns={columns}
