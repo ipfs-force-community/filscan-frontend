@@ -116,14 +116,14 @@ export default ({ minersNum }: { minersNum?: MinerNum | any }) => {
           <Link
             href={`/account#miners?type=group_add`}
             scroll={false}
-            className='cancel_btn flex rounded-[5px] border border-color  items-center gap-x-2.5 text_color'>
+            className={ `flex rounded-[5px] border border-color  items-center gap-x-2.5 text_color ${type === 'group_add' ?'confirm_btn':'cancel_btn'}`}>
             {/* {getSvgIcon('addIcon')} */}
             {tr('group_add')}
           </Link>
           <Link
             href={`/account#miners?type=miner_add`}
             scroll={false}
-            className='confirm_btn flex rounded-[5px] items-center gap-x-2.5 text_color'>
+            className={ `cancel_btn  border border-color flex rounded-[5px] items-center gap-x-2.5 text_color ${type === 'miner_add' ?'confirm_btn':'cancel_btn'}`}>
             {/* {getSvgIcon('addIcon')} */}
             {tr('miners_add')}
           </Link>
