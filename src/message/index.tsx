@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import { get, has } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
-import Trade from './Trade';
+import Trade from './Trade'
 import Event from './Event';
 
 export default ({ cid }: { cid: string | string[] }) => {

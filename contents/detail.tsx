@@ -475,9 +475,38 @@ export const message_detail = {
           </span>
         }
         return null
-
       },
+    },
+    //nfts 转移
+    {
+      title: 'message_NftTrans',
+      elasticity: true,
+      dataIndex: 'nftTrans',
+      style: { borderBottom: '1px solid var(--border-color)', paddingBottom: '15px' },
 
+      render: (text: any, record: any, tr: any) => {
+        if (Array.isArray(text) ) {
+          return <div className=""> {text.map((item: any, index) => {
+            return <li key={index}
+              className=''>
+              <div className="">
+                <span className="">{tr('from_ath')}</span><span>{get_account_type(item.from_type, item.from)}</span>
+              </div>
+              <div className="">
+                <span className="">{tr('to_ath')}</span> <span>{get_account_type(item.to_type, item.to)}</span>
+              </div>
+              <div className="">
+                <span className="">For</span>
+                <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                <span>{ item?.token_name}</span>
+              </div>
+
+            </li>
+          })}
+          </div>
+        }
+        return '--'
+      }
     },
     {
       dataIndex: 'from',

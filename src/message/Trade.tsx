@@ -2,7 +2,6 @@ import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
 import { message_detail } from "@/contents/detail"
 import Table from "@/packages/Table"
-import Cid from "@/pages/cid/[cid]";
 import { useFilscanStore } from "@/store/FilscanStore";
 import useAxiosData from "@/store/useAxiosData";
 import { useEffect, useMemo, useState } from "react"
