@@ -79,10 +79,10 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
 
   return (
     <>
-      <span className='text_des text-sm'>
+      <span className='text_des text-sm ml-2.5'>
         {tr('transfer_total', { value: data.total })}
       </span>
-      <div className='card_shadow p-5 mt-5 rounded-xl border border_color min-h-[260px]'>
+      <div className='card_shadow p-5 mt-2.5 rounded-xl border border_color min-h-[260px] '>
         <Table
           data={data.dataSource}
           total={data.total}

@@ -3,7 +3,6 @@
 import useAxiosData from '@/store/useAxiosData';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import token from '../contract/token';
 import { apiUrl } from '@/contents/apiUrl';
 import { token_details } from '@/contents/contract';
 import Content from '@/packages/content';
@@ -14,6 +13,7 @@ import styles from './[tokenId].module.scss'
 import useWindow from '@/components/hooks/useWindown';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
+
 export default () => {
   const router = useRouter();
   const { tokenId } = router.query;
@@ -22,7 +22,8 @@ export default () => {
 
   const [marketData, setMarket] = useState({});
   const [overviewData, setOverview] = useState<any>({});
-  const {isMobile} = useWindow()
+  const { isMobile } = useWindow()
+
   useEffect(() => {
     if (tokenId) {
       axiosData(apiUrl.contract_ERC20Summary, {
