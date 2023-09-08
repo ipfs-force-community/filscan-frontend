@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { MinerNum, groupsItem } from "../type";
+import { MinerNum, groupsItem } from "./type";
 
 interface groupsStore {
   groups: Array<groupsItem>
@@ -17,4 +17,20 @@ export const useGroupsStore = (): groupsStore => {
     );
   }
   return context;
+};
+
+interface minersStore {
+  setAllNum:(value:MinerNum)=>void
+}
+
+export const MinerStoreContext = createContext<minersStore | null>(null);
+
+export const useMinerStore = (): minersStore => {
+  const minerContext = useContext(MinerStoreContext);
+  if (!minerContext) {
+    throw new Error(
+      'useFilscanStore must be used within a FilscanStoreProvider'
+    );
+  }
+  return minerContext;
 };

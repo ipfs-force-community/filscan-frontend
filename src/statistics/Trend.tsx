@@ -250,9 +250,9 @@ export default (props: Props) => {
       className={classNames(styles.trend, `w-full h-[full]  ${className} ${origin ==='home'?'mt-20':''}`)}
       {...propsRef}
     >
-      <div className='flex justify-between flex-wrap items-center h-9 mb-2.5'>
-        <div className='flex-1 flex flex-row flex-wrap  items-center'>
-          <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
+      <div className='flex justify-between flex-wrap items-center min-h-[36px] mb-2.5'>
+        <div className='flex-1 flex flex-row flex-wrap items-center'>
+          <div className='min-w-[100px] w-fit font-PingFang font-semibold text-lg pl-2.5'>
             {tr('power')}
           </div>
           <div className='w-fit'>
@@ -291,7 +291,7 @@ export default (props: Props) => {
             </MobileView>
             <BrowserView>
               <Image
-                className='cursor-pointer'
+                className='cursor-pointer mr-2.5'
                 src={go}
                 width={18}
                 height={18}

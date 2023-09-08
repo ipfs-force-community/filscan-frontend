@@ -68,7 +68,7 @@ export default () => {
     setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
-    const result: any = await axiosData(apiUrl.tipset_message, {
+    const result: any = await axiosData(apiUrl.tipset_pool, {
       filters: {
         index: showIndex - 1,
         limit: pageLimit,

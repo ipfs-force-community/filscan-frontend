@@ -595,7 +595,7 @@ export const account_balance = {
         miner_balance: { unit: 'fil', number: 0 },
       },
 
-      width: 200,
+      // width: 200,
       render: (text: string, record: any) => {
         const changeText = record?.miner_balance_changed
           ? Number(record.miner_balance_changed)
@@ -621,7 +621,7 @@ export const account_balance = {
     {
       title: 'owner_balance',
       dataIndex: 'owner_balance',
-      width: 200,
+      // width: 200,
       exports: ['Owner_balance_changed'],
       amountUnit: {
         owner_balance: { unit: 'fil', number: 0 },
@@ -645,7 +645,7 @@ export const account_balance = {
     {
       title: 'worker_balance',
       dataIndex: 'worker_balance',
-      width: 200,
+      // width: 200,
       exports: ['Worker_balance_changed'],
 
       amountUnit: {
@@ -668,7 +668,7 @@ export const account_balance = {
     {
       title: 'controller_0_balance',
       dataIndex: 'controller_0_balance',
-      width: 200,
+      // width: 200,
       exports: ['Controller_0_balance_changed'],
       amountUnit: {
         controller_0_balance: { unit: 'fil'},
@@ -690,7 +690,7 @@ export const account_balance = {
     {
       title: 'controller_1_balance',
       dataIndex: 'controller_1_balance',
-      width: 200,
+      // width: 200,
       exports: ['controller_1_balance_changed'],
 
       amountUnit: {
@@ -712,8 +712,8 @@ export const account_balance = {
     },
     {
       title: 'controller_2_balance',
-      dataIndex: 'controller_2_balance_changed',
-      width: 200,
+      dataIndex: 'controller_2_balance',
+      // width: 200,
       exports: ['controller_2_balance_changed'],
       amountUnit: {
         controller_2_balance: { unit: 'fil', },
@@ -735,7 +735,7 @@ export const account_balance = {
     {
       title: 'beneficiary_balance',
       dataIndex: 'beneficiary_balance',
-      width: 200,
+      // width: 200,
       exports: ['beneficiary_balance_changed'],
       amountUnit: {
         beneficiary_balance: { unit: 'fil', },
@@ -757,7 +757,7 @@ export const account_balance = {
     {
       title: 'market_balance',
       dataIndex: 'market_balance',
-      width: 200,
+      // width: 200,
       exports: ['market_balance_changed'],
       amountUnit: {
         market_balance: { unit: 'fil', },
@@ -899,13 +899,13 @@ export const account_power = {
         amountUnit: {
           quality_power: { unit: 'power', number: 2 },
         },
-        width: 200,
+        //width: 150,
         render: (text: string, record: any) => unitConversion(text, 2),
       },
       {
         title: 'raw_power',
         dataIndex: 'raw_power',
-        width: 200,
+        /// width: 100,
         amountUnit: {
           raw_power: { unit: 'power', number: 2 },
         },
@@ -914,7 +914,7 @@ export const account_power = {
       {
         title: 'dc_power',
         dataIndex: 'dc_power',
-        width: 200,
+        //  width: 100,
         amountUnit: {
           dc_power: { unit: 'power', number: 2 },
         },
@@ -923,7 +923,7 @@ export const account_power = {
       {
         title: 'cc_power',
         dataIndex: 'cc_power',
-        width: 200,
+        //// width: 200,
         amountUnit: {
           cc_power: { unit: 'power', number: 2 },
         },
@@ -932,7 +932,7 @@ export const account_power = {
       {
         title: 'sector_size',
         dataIndex: 'sector_size',
-        width: 200,
+        //// width: 200,
         render: (text: string, record: any) => unitConversion(text, 2),
       },
       {
@@ -943,7 +943,7 @@ export const account_power = {
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
-        width: 200,
+        //width: 200,
         render: (text: any, record: any) => {
           const changeText = record.sector_count_change
             ? Number(record.sector_count_change)
@@ -971,7 +971,7 @@ export const account_power = {
         dataIndex: 'pledge_changed',
         titleTip:'pledge_changed_tip',
 
-        width: 200,
+        //width: 200,
         amountUnit: {
           pledge_changed: { unit: 'fil' },
         },
@@ -983,7 +983,7 @@ export const account_power = {
         dataIndex: 'pledge_changed_per_t',
         titleTip:'pledge_changed_per_t_tip',
 
-        width: 200,
+        //width: 200,
         amountUnit: {
           pledge_changed_per_t: { unit: 'fil/T'},
         },
@@ -996,7 +996,7 @@ export const account_power = {
         dataIndex: 'penalty',
         titleTip:'penalty_tip',
 
-        width: 200,
+        //// width: 200,
         amountUnit: {
           penalty: { unit: 'fil', },
         },
@@ -1006,7 +1006,7 @@ export const account_power = {
         title: 'fault_sectors',
         dataIndex: 'fault_sectors',
         titleTip:'fault_sectors_tip',
-        width: 200,
+        //width: 200,
         render: (text: string, record: any) => formatNumber(text),
       },
     ]
@@ -1015,7 +1015,7 @@ export const account_power = {
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
-        width: 200,
+        // width: 200,
         render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
       },)
       arr[2].render = (text: string) => (
@@ -1069,13 +1069,12 @@ export const account_gas = {
       },
       {
         title: 'sector_power_change',
-        dataIndex: 'sector_count_change',
+        dataIndex: 'sector_power_change',
         titleTip:'sector_power_change_tip',
         exports: ['sector_count_change'],
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
-        width: 200,
         render: (text: any, record: any) => {
           const changeText = record.sector_count_change
             ? Number(record.sector_count_change)
@@ -1102,7 +1101,7 @@ export const account_gas = {
         dataIndex: 'total_gas_cost',
         titleTip:'total_gas_cost_tip',
 
-        width: 200,
+        // width: 200,
         amountUnit: {
           total_gas_cost: { unit: 'fil' },
         },
@@ -1112,17 +1111,17 @@ export const account_gas = {
         title: 'seal_gas_cost',
         dataIndex: 'seal_gas_cost',
         titleTip:'seal_gas_cost_tip',
-        width: 200,
+        // width: 200,
         amountUnit: {
-          total_gas_cost: { unit: 'fil/T' },
+          total_gas_cost: { unit: 'fil' },
         },
-        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL/T'),
+        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL'),
       },
       {
         title: 'seal_gas_per_t',
         dataIndex: 'seal_gas_per_t',
         titleTip:'seal_gas_per_t_tip',
-        width: 200,
+        // width: 200,
         amountUnit: {
           total_gas_cost: { unit: 'fil/T' },
         },
@@ -1133,7 +1132,7 @@ export const account_gas = {
         dataIndex: 'deal_gas_cost',
         titleTip:'deal_gas_cost_tip',
 
-        width: 200,
+        // width: 200,
         amountUnit: {
           deal_gas_cost: { unit: 'fil' },
         },
@@ -1143,7 +1142,7 @@ export const account_gas = {
         title: 'wd_post_gas_cost',
         titleTip:'wd_post_gas_cost_tip',
         dataIndex: 'wd_post_gas_cost',
-        width: 200,
+        // width: 200,
         amountUnit: {
           wd_post_gas_cost: { unit: 'fil' },
         },
@@ -1153,7 +1152,7 @@ export const account_gas = {
         title: 'wd_post_gas_per_t',
         dataIndex: 'wd_post_gas_per_t',
         titleTip:'wd_post_gas_per_t_tip',
-        width: 200,
+        // width: 200,
         amountUnit: {
           wd_post_gas_per_t: { unit: 'fil/T' },
         },
@@ -1165,7 +1164,7 @@ export const account_gas = {
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
-        width: 200,
+        // width: 200,
         render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
       },)
       arr[2].render = (text: string) => (

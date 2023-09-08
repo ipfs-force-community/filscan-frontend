@@ -16,7 +16,7 @@ import { space } from 'postcss/lib/list';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
-
+import Image from '@/packages/image'
 //储存池概览 账户余额 & 有效算力
 
 export const account_balance = {
@@ -269,6 +269,42 @@ export const owner_detail = {
 //message detail
 export const message_detail = {
   title: 'message_overview_detail',
+  tabs: [
+    {title: 'message_detail', dataIndex: 'detail' },
+    {title:'trade',dataIndex:'trade'},
+    {title:'event_log',dataIndex:'event_log'},
+  ],
+  trade:[
+    {
+      dataIndex: 'from',
+      title: 'from_ath',
+      width:'30%',
+      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>
+        { get_account_type(text)}
+      </span>
+    },
+    {
+      dataIndex: 'to',
+      title: 'to_ath',
+      width:'30%',
+      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>
+        { get_account_type(text)}
+      </span>
+    },
+    {
+      dataIndex: 'value',
+      title: 'amount',
+      width:'20%',
+      render: (text: string) => {
+        return formatFilNum(text,false,false,4)
+      }
+    },
+    {
+      dataIndex: 'method',
+      width:'20%',
+      title: 'method'
+    },
+  ],
   trans:[
     {
       dataIndex: 'cid',
@@ -326,7 +362,7 @@ export const message_detail = {
       render: (text: any) => {
         if (text?.startsWith('Ok')) {
           return (
-            <span className='flex px-2 py-1 gap-x-1 bg-success_bg rounded-sm items-center'>
+            <span className='flex px-2 py-1 gap-x-1  rounded-sm items-center'>
               {getSvgIcon('successIcon')}
               <span className='text-success text-cm'>Success</span>
             </span>
@@ -380,6 +416,45 @@ export const message_detail = {
       title: 'method_name',
       type: ['message_basic'],
     },
+    // //Transaction
+    {
+      dataIndex: "swap_info",
+      elasticity: true,
+      borderTop: true,
+      title: (tr: any) => <span>
+        {getSvgIcon('transaction')}
+        {tr('Transaction')}
+      </span>,
+      render: (text: any) => {
+        if (text) {
+          return <span className='flex gap-x-1'>
+            <span className='flex gap-x-1'>
+              <span>Swap</span>
+              <span>{ text?.amount_out?.toLocaleString()}</span>
+              <span>{text?.amount_out_token_name.toLocaleUpperCase()}</span>
+            </span>
+            <span className="text_des">For</span>
+            <span className='flex gap-x-1' >
+              <span>{text?.amount_in}</span>
+              <span>{text?.amount_in_token_name}</span>
+            </span>
+            <span className="text_des">On</span>
+            <span className={`flex gap-x-1 ${text.dex_url ? 'cursor-pointer':''}`} onClick={() => {
+              if (text.dex_url) {
+                window.open(text.dex_url)
+              }
+            }}>
+              {/* //todo 后端返回url */}
+              <Image src={''} alt='' width={20} height={20} />
+              {text?.dex}
+            </span>
+          </span>
+        }
+        return null
+
+      },
+
+    },
     {
       dataIndex: 'from',
       title: 'from',
@@ -403,6 +478,8 @@ export const message_detail = {
         );
       },
     },
+    //通证转移
+
     //转账信息
     {
       title: 'message_tranf',
@@ -551,8 +628,8 @@ export const message_detail = {
         if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
         return (
           <span className='code'>
-            {/* <pre>{JSON.stringify(showValue, undefined, 4)}</pre> */}
-            <JSONPretty id="json-pretty" data={showValue}></JSONPretty>
+            <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>
+            {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
           </span>
         );
       },
@@ -564,7 +641,7 @@ export const message_detail = {
         const showValue = text || record?.returns;
         if (!showValue) return null;
         if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
-        return <pre>{JSON.stringify(showValue, undefined, 4)}</pre>;
+        return <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
       },
     },
   ],

@@ -20,7 +20,7 @@ const tipset = {
   cid_height: 'Height',
   parent_weight: 'Parent Weight',
   parents_cid:'Parent CID',
-  parent_base_fee:'Parent BaseFee Rate',
+  parent_base_fee:'Parent BaseFee',
   ticket_value: 'Ticket',
   state_root:'State Root',
   //message

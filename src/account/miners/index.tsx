@@ -10,7 +10,7 @@ import Link from 'next/link';
 import GroupAdd from './GroupAdd';
 import { MinerNum, groupsItem } from '../type';
 import useAxiosData from '@/store/useAxiosData';
-import { GroupsStoreContext } from './content';
+import { GroupsStoreContext, useMinerStore } from '../content';
 import Groups from './Groups';
 
 export default ({ minersNum }: { minersNum: MinerNum | any }) => {
@@ -20,7 +20,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const [groups, setGroups] = useState<Array<groupsItem>>([]);
   const [defaultGroupsId, setDefaultGroupsId] = useState();
   const [minerNum, setMinerNum] = useState(minersNum);
-
+  const {setAllNum } = useMinerStore();
   const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
 
   useEffect(() => {
@@ -86,6 +86,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
         groups,
         setMinerNum: (mineNum) => {
           setMinerNum(mineNum);
+          setAllNum(mineNum)
         },
         setGroups: (groupsArr: Array<groupsItem>) => {
           calcGroups(groupsArr);

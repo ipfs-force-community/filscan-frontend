@@ -9,7 +9,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { account_miners } from '@/contents/account';
 import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
-import { useGroupsStore } from './content';
+import { useGroupsStore } from '../content';
 import Modal from '@/packages/modal';
 import TagInput from '@/packages/tagInput';
 import messageManager from '@/packages/message';

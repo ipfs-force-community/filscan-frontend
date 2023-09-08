@@ -15,7 +15,7 @@ import { Button } from 'antd';
 import SearchSelect from '@/packages/searchSelect';
 import { MinerNum } from '../type';
 import useAxiosData from '@/store/useAxiosData';
-import { useGroupsStore } from './content';
+import { useGroupsStore } from '../content';
 import { useRouter } from 'next/router';
 
 export default ({

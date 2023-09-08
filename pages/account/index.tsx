@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { Translation } from '@/components/hooks/Translation';
 import { account_manager } from '@/contents/account';
 import { useHash } from '@/components/hooks/useHash';
@@ -20,6 +20,7 @@ import { Skeleton } from 'antd';
 import { UserInfo } from '@/store/UserStore';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { MinerStoreContext } from '@/src/account/content';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -38,11 +39,11 @@ const Account: React.FC = () => {
   }, [hash]);
 
   useEffect(() => {
-    setMinerLoading(true)
     loadMinersNum()
-  },[selectedKey])
+  },[])
 
-  const loadMinersNum =async() => {
+  const loadMinersNum = async () => {
+    setMinerLoading(true)
     const result = await axiosData(proApi.account_miners, {}, { isCancel: false });
     setMinerLoading(false)
     setMinersNum(result)
@@ -129,7 +130,10 @@ const Account: React.FC = () => {
           selectedKey !== 'personal' && selectedKey !== 'miners' ? (
               <NoMiner selectedKey={selectedKey === 'overview'? 'overview':'overview_' + selectedKey} />
             ) : (
-              <>
+              <MinerStoreContext.Provider value={{
+                setAllNum: (value) => {
+                  setMinersNum(value)
+                } }}>
                 {selectedKey === 'overview' && (
                   <Overview selectedKey='overview' />
                 )}
@@ -169,7 +173,7 @@ const Account: React.FC = () => {
                 )}
 
                 {selectedKey === 'personal' && <Personal />}
-              </>
+              </MinerStoreContext.Provider>
             )}
         </div>
       </div>

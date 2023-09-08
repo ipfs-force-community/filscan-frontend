@@ -23,7 +23,7 @@ function VerifyCodeButton({
   }
 
   // 模拟发送验证码的函数
-  const sendCode = async () => {
+  const sendCode = async (e:any) => {
     // 假设验证码发送后，倒计时60秒
     if (mail && validateEmail(mail)) {
       resetCountdown(60); // 证码有效期为60秒
@@ -32,6 +32,8 @@ function VerifyCodeButton({
         if (onChange) onChange(result?.token);
       }
     }
+    e.preventDefault();
+
   };
 
   return (

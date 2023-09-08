@@ -31,7 +31,7 @@ export default () => {
         <span>{name?.length > 5? name?.slice(0, 5) + '...' : name}</span>
         <Image src={down} width={8} height={4} alt='down' />
       </div>
-      <ul className='hidden group-hover:block absolute z-50 inset-y-full max-h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow main_bg_color  border_color'>
+      <ul className='hidden group-hover:block absolute z-50 inset-y-full h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow main_bg_color  border_color'>
         {account_manager.map((item, index) => {
           if (item.key === 'logout') {
             return (

@@ -53,9 +53,7 @@ function Gas(props: Props) {
               .dividedBy(Math.pow(10, 9))
               .toFixed(2);
           },
-          textStyle: {
-            color: color.textStyle,
-          },
+
         },
         axisTick: {
           show: false,

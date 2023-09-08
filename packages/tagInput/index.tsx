@@ -22,6 +22,10 @@ const EditableText: React.FC<EditableTextProps> = ({
   const inputRef = useRef<InputRef>(null);
 
   useEffect(() => {
+    setCurrentText(text)
+  },[text])
+
+  useEffect(() => {
     if (isEditing) {
       inputRef.current?.focus();
     }
