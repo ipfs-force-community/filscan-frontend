@@ -49,7 +49,6 @@ const useUpdateQuery = () => {
           { scroll: false }
         )
         .catch((error) => {
-          console.log('===-345545', error);
         });
     }
   };

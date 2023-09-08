@@ -91,6 +91,7 @@ const account={
   cc_power: 'CC 파워',
   sector_size: '섹터 크기',
   sector_power_change: '팬섹터 변화',
+  sector_power_count: 'Sector Count',
   sector_count_change: '팬섹터 수량 변화',
   pledge_changed: '플레지 변경',
   pledge_changed_per_t: '플레지 변경/T',
