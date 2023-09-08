@@ -9,6 +9,8 @@ import useAxiosData from "@/store/useAxiosData";
 import { useEffect, useState } from "react"
 
 export default ({ cid }: {cid?:string | string[]}) => {
+  const { tr } = Translation({ ns: 'detail' });
+  const { theme, lang } = useFilscanStore();
   const { axiosData } = useAxiosData()
   const [loading, setLoading] = useState(false);
   const [data,setData]= useState([])
