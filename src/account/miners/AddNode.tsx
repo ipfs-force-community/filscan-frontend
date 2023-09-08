@@ -54,7 +54,7 @@ export default ({
     <>
       <Search
         ns={'account'}
-        className={`w-full mt-4 ${className}`}
+        className={`w-full mt-4 !h-12 ${className}`}
         placeholder='miner_add_placeholder'
         clear
         onClick={handleSearch}

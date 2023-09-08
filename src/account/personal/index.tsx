@@ -77,7 +77,7 @@ export default () => {
                     {name||userInfo.name}
                   </span>
                 }
-                <span className='cursor-pointer' onClick={ ()=>setEdit(true)}>{getSvgIcon('editIcon')}</span>
+                <span className='cursor-pointer' onClick={ ()=>setEdit(true)}>{getSvgIcon('edit')}</span>
               </div>
               <span className='text_des text-xs'>{userInfo.mail}</span>
             </div>
@@ -177,14 +177,14 @@ export default () => {
                 </Form.Item>
               );
             })}
-            <Form.Item className='mt-5 !w-full flex-1 flex gap-x-4 items-center justify-center'>
-              <Button className='cancel_btn border border_color' onClick={() => {
+            <Form.Item className='mt-5 !w-full flex-1 flex'>
+              {/* <Button className='cancel_btn border border_color' onClick={() => {
                 form.resetFields(['old_password','name','new_password','old_password'])
               }}
-              >{tr('cancel')}</Button>
+              >{tr('cancel')}</Button> */}
               <Button
                 htmlType='submit'
-                className='confirm_btn ml-5'
+                className='confirm_btn'
                 loading={loading}
               >
                 {tr('confirm')}
