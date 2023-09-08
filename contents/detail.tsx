@@ -12,7 +12,6 @@ import { Item } from './type';
 import Link from 'next/link';
 import Copy from '@/components/copy';
 import { getSvgIcon } from '@/svgsIcon';
-import { space } from 'postcss/lib/list';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
@@ -273,6 +272,31 @@ export const message_detail = {
     {title: 'message_detail', dataIndex: 'detail' },
     {title:'trade',dataIndex:'trade'},
     {title:'event_log',dataIndex:'event_log'},
+  ],
+  eventLog: [
+    { title: 'account_address', dataIndex: 'address' },
+    { title: 'Name', dataIndex: 'name' },
+    {
+      title: 'topic', dataIndex: 'topics', render: (text:any,record:any) => {
+        if (Array.isArray(text)) {
+          return text.map((item:string,index:number) => {
+            return <li key={item} className='array_item' >
+              <span className="array_item_icon">{ index}</span>
+              { item}
+            </li>
+          })
+        }
+        return text||'--'
+
+      }},
+    {
+      title: 'params', dataIndex: 'data', render: (text:string) => {
+        return <div className="bg-render">
+          { text}
+        </div>
+      } },
+    { title:'Log Index',dataIndex:'log_index' },
+    { title:'Removed',dataIndex:'removed',render:(text:boolean)=>String(text) },
   ],
   trade:[
     {
