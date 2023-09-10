@@ -234,7 +234,7 @@ export const mobileHomeContractRank: string[] = [
   "transfer_count"
 ];
 
-export const contract_list:any={
+export const contract_list={
   columns: [
     // {
     //   dataIndex: 'rank',

@@ -80,7 +80,7 @@ export default ({ origin }: { origin?: string }) => {
           if (col.dataIndex === 'rank') {
             //@ts-ignore
             col.title = (value:string,record:any,index)=>{
-              return <div>{`#${record.rank}`}</div>
+              return <div>{`#${record?.rank}`}</div>
             }
             col.render = (text: string, record: any) => {
               return (
