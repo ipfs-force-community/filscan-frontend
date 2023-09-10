@@ -49,7 +49,6 @@ export default (props: Props) => {
                     dataSource,
                     index
                   ) : title;
-                console.log("======title=======table=",title)
                 let showValue = dataSource[dataIndex];
                 if (render) {
                   showValue = render(
