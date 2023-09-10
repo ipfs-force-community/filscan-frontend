@@ -27,10 +27,10 @@ export default () => {
             return (
               <>
                 <Link
-                  href={`/token/${record.contract_id}`}
+                  href={`/token/${record?.contract_id}`}
                   className='flex items-center gap-x-1'>
                   <Image className={classNames(styles['token-icon'])} src={record?.icon_url} alt='' height={38} width={38} />
-                  <span className='margin-6 text_color'>{record.token_name}</span>
+                  <span className='margin-6 text_color'>{record?.token_name}</span>
                 </Link>
               </>
             );
