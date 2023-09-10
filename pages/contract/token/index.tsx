@@ -50,7 +50,7 @@ export default () => {
       <div className={classNames('flex flex-col text-xl font-medium gap-y-2.5 mb-4',styles.title)}>
         <span>{tr('token_list')}</span>
       </div>
-      <div className={classNames('border  rounded-xl p-5	card_shadow border_color flex items-center',styles.mobile)}>
+      <div className={classNames('border  rounded-xl p-5	card_shadow border_color flex items-center',styles.table)}>
         <Table
           limit={1000}
           data={TokenData?.items || []}
