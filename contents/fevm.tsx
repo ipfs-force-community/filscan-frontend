@@ -58,7 +58,6 @@ export const defi_market = [
       return <span className={Number(text) < 0 ? 'down-color':'ups-color' }>
         {get$Number(text)}
       </span>
-
     }
   },
   {
