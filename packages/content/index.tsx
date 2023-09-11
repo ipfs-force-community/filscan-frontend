@@ -20,18 +20,18 @@ export default (props:ContentProps) => {
   const {isMobile} = useWindow()
 
   const {contents, data, columns = 1, ns} = props;
-
   const { tr } = Translation({ ns: ns });
-  const showWidth = useMemo(() => {
-    if (columns !== 1) {
-      return Math.abs(100 / columns) + '%';
-    }
-    return '100%';
-  }, [columns]);
+
+  // const showWidth = useMemo(() => {
+  //   if (columns !== 1) {
+  //     return Math.abs(100 / columns) + '%';
+  //   }
+  //   return '100%';
+  // }, [columns]);
   return (
     <ul
-      className={classNames(styles['detail-content'],`flex w-full max-h-full flex-col p-2.5 ${
-        columns !== 1 ? 'flex-wrap' : 'gap-y-5'
+      className={classNames(styles['detail-content'],`w-full max-h-full ${
+        columns !== 1 ? `grid grid-cols-${columns} gap-x-10` : 'flex flex-col p-2.5 gap-y-5'
       }`,props.className)}>
       {contents.map((item, index) => {
         const {
@@ -62,7 +62,7 @@ export default (props:ContentProps) => {
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
             ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles['item-wrap'])
             }
-            style={{ width: showWidth, ...style }}>
+            style={{...style }}>
             <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
               {showTitle}:
             </span>
@@ -76,6 +76,25 @@ export default (props:ContentProps) => {
               </span></BrowserView>
           </li>
         );
+
+        // return isMobile&&item['mobileHide']?<></>:(
+        //   <li
+        //     key={index}
+        //     className={
+        //       classNames(`flex items-baseline gap-x-2.5
+        //     ${ borderTop ? 'pt-5 border-t border_color' : '' }
+        //     ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles.itemWrap)
+        //     }
+        //     style={{ width: showWidth, ...style }}>
+        //     <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
+        //       {showTitle}:
+        //     </span>
+        //     <span
+        //       className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
+        //       {renderValue}
+        //     </span>
+        //   </li>
+        // );
       })}
     </ul>
   );

@@ -1,5 +1,6 @@
 /** @format */
 
+import Copy from '@/components/copy';
 import { Translation } from '@/components/hooks/Translation';
 import { apiUrl } from '@/contents/apiUrl';
 import { address_detail, address_tabs } from '@/contents/detail';
@@ -129,17 +130,22 @@ export default () => {
     return defaultOpt;
   }, [methodOptions]);
 
+  console.log('----dd',data)
+
   return (
     <div className='main_contain'>
-      <div className='my-2.5 DINPro-Medium font-medium text-lg'>
+      <div className='flex items-center gap-x-2 my-2.5 DINPro-Medium font-medium text-lg'>
         <span>{tr('account')}:</span>
-        <span className='ml-4'>{address || ''}</span>
+        <span >
+          {address || ''}
+        </span>
+        { address&& typeof address ==='string' && <Copy text={address} />}
       </div>
       <div className='my-4 DINPro-Medium font-medium  text-lg'>
         {tr('general_overview_title')}
       </div>
 
-      <div className='card_shadow border border_color p-7 rounded-xl h-[206px] flex items-center'>
+      <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>
         <Content contents={contentList} ns={'detail'} columns={2} data={data} />
       </div>
       <AccountChange
@@ -147,8 +153,8 @@ export default () => {
           <div
             className='mt-5 mb-2.5 flex justify-between items-center'
             key='detail_account_change'>
-            <span className=' DINPro-Medium font-medium  text-lg'>
-              {tr('general_overview_title')}
+            <span className='DINPro-Medium font-medium  text-lg'>
+              {tr('account_change')}
             </span>
             <Segmented
               data={address_detail.account_change.tabsList || []}
