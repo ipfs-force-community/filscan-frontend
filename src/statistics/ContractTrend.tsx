@@ -60,7 +60,8 @@ export default (props: Props) => {
         axisLabel: {
           formatter: '{value}',
           textStyle: {
-            color: color.textStyle,
+            //  fontSize: this.fontSize,
+            color: color.labelColor,
           },
         },
         axisLine: {

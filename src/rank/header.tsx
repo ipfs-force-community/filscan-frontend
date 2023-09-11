@@ -27,7 +27,7 @@ export default ({
   }
 
   return (
-    <div className='flex justify-between items-center '>
+    <div className='flex justify-between items-center px-2.5'>
       <div
         className={`flex w-full gap-x-2.5 ${
           origin === 'rank' ? 'justify-between' : ''
