@@ -2,7 +2,6 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import { homeContractRank } from '@/contents/contract';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
@@ -126,7 +125,7 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className='mt-4 h-[480px] border rounded-xl  px-5 pt-5 pb-1	card_shadow border_color'>
+    <div className={classNames('mt-4 h-[480px] border rounded-xl p-5	card_shadow border_color',styles.wrap,styles.reset)}>
       <Table
         key='contract_rank'
         className='-mt-2.5 '
