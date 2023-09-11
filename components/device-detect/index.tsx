@@ -1,8 +1,10 @@
 import { HTMLAttributes } from "react"
 import classNames from 'classnames'
 import styles from './index.module.scss'
+import useWindow from "../hooks/useWindown"
 export const BrowserView = (props: HTMLAttributes<HTMLDivElement>) => {
-  return <div className={`${classNames(styles.browser)}`} style={props?.style || {}}>{props.children}</div>
+  const {isMobile} = useWindow()
+  return isMobile ? <></> : <>{props.children}</>
 }
 
 export const MobileView = (props: HTMLAttributes<HTMLDivElement>) => {
