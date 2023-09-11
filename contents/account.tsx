@@ -154,11 +154,11 @@ export const account_manager: Array<MenuItem> = [
 ];
 
 export const personal_setting = [
-  {
-    title: 'personal_name',
-    dataIndex: 'name',
-    placeholder: 'personal_name_holder',
-  },
+  // {
+  //   title: 'personal_name',
+  //   dataIndex: 'name',
+  //   placeholder: 'personal_name_holder',
+  // },
   {
     title: 'old_password',
     placeholder: 'old_placeholder',
@@ -256,7 +256,7 @@ export const overview = {
       {
         title: 'total_out_come_gas',
         icon: <Image src={gas} width={40} height={40} alt='' />,
-        dataIndex: 'sum_out_come',
+        dataIndex: 'sum_outlay',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_gas ? Number(record.sum_gas) : '';
           const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
@@ -424,10 +424,10 @@ export const overview = {
     },
     {
       title: 'total_out_come_gas',
-      dataIndex: 'total_out_come',
+      dataIndex: 'total_outlay',
       exports: ['total_gas'],
       amountUnit: {
-        total_out_come: { unit: 'fil', number: 2 },
+        total_outlay: { unit: 'fil', number: 2 },
         total_gas: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
@@ -576,7 +576,7 @@ export const account_balance = {
     {
       title: 'group_name',
       dataIndex: 'group_name',
-      width: 150,
+      width: 100,
       fixed: 'left',
       ellipsis: {
         showTitle: false,
@@ -595,7 +595,7 @@ export const account_balance = {
         miner_balance: { unit: 'fil', number: 0 },
       },
 
-      // width: 200,
+      //width: 170,
       render: (text: string, record: any) => {
         const changeText = record?.miner_balance_changed
           ? Number(record.miner_balance_changed)
@@ -621,7 +621,7 @@ export const account_balance = {
     {
       title: 'owner_balance',
       dataIndex: 'owner_balance',
-      // width: 200,
+      // width: 170,
       exports: ['Owner_balance_changed'],
       amountUnit: {
         owner_balance: { unit: 'fil', number: 0 },
@@ -645,7 +645,7 @@ export const account_balance = {
     {
       title: 'worker_balance',
       dataIndex: 'worker_balance',
-      // width: 200,
+      //width: 170,
       exports: ['Worker_balance_changed'],
 
       amountUnit: {
@@ -785,7 +785,7 @@ export const account_reward = {
       {
         title: 'tag',
         dataIndex: 'tag',
-        width: '20%',
+        width: '10%',
         fixed: 'left',
         ellipsis: {
           showTitle: false,
@@ -809,7 +809,7 @@ export const account_reward = {
         title: 'group_name',
         dataIndex: 'group_name',
         fixed: 'left',
-        width: '25%',
+        width: '15%',
         ellipsis: {
           showTitle: false,
         },
@@ -819,9 +819,9 @@ export const account_reward = {
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '20%' },
-      { title: 'win_count', dataIndex: 'win_count', width: '10%' },
+      { title: 'win_count', dataIndex: 'win_count', width: '20%' },
       {
-        title: 'block_reward', dataIndex: 'block_reward', width: '10%',
+        title: 'block_reward', dataIndex: 'block_reward', width: '20%',
         amountUnit: {
           block_reward: { unit: 'fil', number: 4 },
         },
@@ -856,7 +856,7 @@ export const account_reward = {
 };
 export const account_power = {
   columns: (tr: any,type?:string) => {
-    let arr:Array<any> = [
+    let arr: Array<any> = [
       {
         title: 'tag',
         dataIndex: 'tag',
@@ -889,7 +889,7 @@ export const account_power = {
         },
         fixed: 'left',
         render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group'):text
+          const showText = record.is_default ? tr('default_group') : text
           return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
         },
       },
@@ -937,20 +937,17 @@ export const account_power = {
       },
       {
         title: 'sector_power_change',
-        dataIndex: 'sector_power_change',
-        exports: ['sector_count_change'],
-        titleTip:'sector_power_change_tip',
+        dataIndex: 'sector_count_change',
+        exports: ['sector_power_change'],
+        titleTip: 'sector_power_change_tip',
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
         //width: 200,
         render: (text: any, record: any) => {
-          const changeText = record.sector_count_change
-            ? Number(record.sector_count_change)
-            : record.sector_count_change;
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
-          const className = changeText
-            ? changeText > 0
+          const flag = text ? ( Number(text) > 0 ? '+' : '-') : '';
+          const className = Number(text)
+            ? Number(text) > 0
               ? 'text_green'
               : 'text_red'
             : '';
@@ -958,9 +955,9 @@ export const account_power = {
             <span>
               <span className={className}>
                 {flag}
-                {changeText}
+                {formatNumber(Math.abs(text))}
               </span>
-              <span>/{unitConversion(text, 2)}</span>
+              <span>/{unitConversion(record?.sector_power_change, 2)}</span>
             </span>
           );
         },
@@ -969,8 +966,7 @@ export const account_power = {
       {
         title: 'pledge_changed',
         dataIndex: 'pledge_changed',
-        titleTip:'pledge_changed_tip',
-
+        titleTip: 'pledge_changed_tip',
         //width: 200,
         amountUnit: {
           pledge_changed: { unit: 'fil' },
@@ -981,33 +977,33 @@ export const account_power = {
       {
         title: 'pledge_changed_per_t',
         dataIndex: 'pledge_changed_per_t',
-        titleTip:'pledge_changed_per_t_tip',
+        titleTip: 'pledge_changed_per_t_tip',
 
         //width: 200,
         amountUnit: {
-          pledge_changed_per_t: { unit: 'fil/T'},
+          pledge_changed_per_t: { unit: 'fil/T' },
         },
         render: (text: string, record: any) => {
-          return renderFil(text,undefined,undefined,undefined,'FIL/T')
+          return renderFil(text, undefined, undefined, undefined, 'FIL/T')
         }
       },
       {
         title: 'penalty',
         dataIndex: 'penalty',
-        titleTip:'penalty_tip',
+        titleTip: 'penalty_tip',
 
         //// width: 200,
         amountUnit: {
           penalty: { unit: 'fil', },
         },
-        render: (text: string, record: any) =>renderFil(text)
+        render: (text: string, record: any) => renderFil(text)
       },
       {
         title: 'fault_sectors',
         dataIndex: 'fault_sectors',
-        titleTip:'fault_sectors_tip',
+        titleTip: 'fault_sectors_tip',
         //width: 200,
-        render: (text: string, record: any) => formatNumber(text),
+        render: (text: string, record: any) => <span className={Number(text) ?'':"text_des_unit"}>{formatNumber(text) }</span>
       },
     ]
     if (type&&type === 'detail') {
@@ -1015,7 +1011,6 @@ export const account_power = {
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
-        // width: 200,
         render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
       },)
       arr[2].render = (text: string) => (
@@ -1057,7 +1052,7 @@ export const account_gas = {
       {
         title: 'group_name',
         dataIndex: 'group_name',
-        width: 150,
+        width: 100,
         fixed: 'left',
         ellipsis: {
           showTitle: false,
@@ -1069,19 +1064,16 @@ export const account_gas = {
       },
       {
         title: 'sector_power_change',
-        dataIndex: 'sector_power_change',
+        dataIndex: 'sector_count_change',
         titleTip:'sector_power_change_tip',
-        exports: ['sector_count_change'],
+        exports: ['sector_power_change'],
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
         render: (text: any, record: any) => {
-          const changeText = record.sector_count_change
-            ? Number(record.sector_count_change)
-            : record.sector_count_change;
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
-          const className = changeText
-            ? changeText > 0
+          const flag = text ? ( Number(text) > 0 ? '+' : '-') : '';
+          const className = Number(text)
+            ? Number(text) > 0
               ? 'text_green'
               : 'text_red'
             : '';
@@ -1089,12 +1081,13 @@ export const account_gas = {
             <span>
               <span className={className}>
                 {flag}
-                {changeText}
+                {formatNumber(Math.abs(text))}
               </span>
-              <span>/{unitConversion(text, 2)}</span>
+              <span>/{unitConversion(record?.sector_power_change, 2)}</span>
             </span>
           );
         },
+
       },
       {
         title: 'total_gas_cost',
@@ -1217,6 +1210,7 @@ export const account_expired = {
       title: 'exp_pledge',
       dataIndex: 'total_exp_pledge',
       width: '15%',
+
       render: (text: string | number) => renderFil(text),
     },
   ],
@@ -1283,7 +1277,7 @@ export const account_expired = {
         title: 'exp_pledge',
         dataIndex: 'exp_pledge',
         amountUnit: {
-          exp_dc: { unit: 'fil', number: 4 }
+          exp_pledge: { unit: 'fil', number: 4 }
         },
         width: '15%',
         render: (text: string | number) => renderFil(text),

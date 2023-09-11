@@ -63,6 +63,7 @@ export default ({
   const columns = useMemo(() => {
     return account_gas.columns(tr,'detail').map((item) => {
       if (item.titleTip) {
+        item.excelTitle= item.dataIndex === 'sector_count_change'? `${tr('raw_power')}/${tr('sector_power_count')}`:tr(item.title),
         item.title = <span className='flex items-center gap-x-1'>
           {tr(item.title)}
           <Tooltip context={tr(item.titleTip)} />

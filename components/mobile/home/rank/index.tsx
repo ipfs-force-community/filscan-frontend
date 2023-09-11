@@ -63,7 +63,6 @@ const Rank = ()=>{
   },[])
 
   useEffect(()=>{
-    console.log("+===============",homeStore.minerPowerRankData?.items)
   },[homeStore.minerPowerRankData?.items])
 
   return <div className={styles.wrap}>

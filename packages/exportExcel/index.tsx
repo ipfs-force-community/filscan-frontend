@@ -18,12 +18,11 @@ interface ExportToExcelProps {
 function getUnitValue(
   value: any,
   amountUnit: { unit: string; number?: number },
-
 ) {
   if (amountUnit?.unit?.includes('fil')) {
     const otherUnit = amountUnit?.unit?.split('/')[1];
-    const filValue = formatFil(value, 'FIL',0);
-    return otherUnit ? filValue + `/${otherUnit}` : filValue+' FIL';
+    const filValue = formatFil(value, 'FIL',4);
+    return filValue;//otherUnit ? filValue + `/${otherUnit}` : filValue+' FIL';
   } else if (amountUnit?.unit === 'power') {
     const otherUnit = amountUnit?.unit?.split('/')[1];
     const powerValue = unitConversion(value, amountUnit.number || 2);
@@ -58,12 +57,24 @@ const ExportExcel: FC<ExportToExcelProps> = ({
   ) => {
     const headers: Array<string> = [];
     columns.forEach((col: any) => {
-      const {dataIndex ,amountUnit} = col
-      let title = col.title
-      if (amountUnit && amountUnit[dataIndex] && amountUnit[dataIndex]?.unit.includes('fil')) {
-        title = title + amountUnit[dataIndex]?.unit?.toUpperCase()
+      const { dataIndex, amountUnit } = col
+      let title = col.titleTip ? col.excelTitle : col.title;
+      if (title.includes('/') && col.exports && (col?.exports || []).length > 0) {
+        let newTitle = title;
+        let [title0, title1] = newTitle.split('/');
+        if (amountUnit && amountUnit[dataIndex] && amountUnit[dataIndex]?.unit.includes('fil') && title0) {
+          title0 = title0 + `(${amountUnit[dataIndex]?.unit?.toUpperCase()})`
+          title1 = title1 + `(${amountUnit[dataIndex]?.unit?.toUpperCase()})`
+        }
+        headers.push(title0);
+        headers.push(title1)
+      } else {
+        if (amountUnit && amountUnit[dataIndex] && amountUnit[dataIndex]?.unit.includes('fil')) {
+          title = title + `(${amountUnit[dataIndex]?.unit?.toUpperCase()})`
+        }
+        headers.push(title);
       }
-      headers.push(title);
+
       // if (col.exports && Array.isArray(col.exports)) {
       //   col.exports.forEach((v: string) => {
       //     if (v === col.dataIndex) {
@@ -76,11 +87,7 @@ const ExportExcel: FC<ExportToExcelProps> = ({
     const accessors: Array<string> = [];
     columns.forEach((col: any) => {
       accessors.push(col.dataIndex);
-      // if (col.exports && Array.isArray(col.exports)) {
-      //   col.exports.forEach((v: string) => {
-      //     accessors.push(tr(v));
-      //   });
-      // }
+
     });
     const dataRows: Array<any> = [];
     data.forEach((dataItem) => {
@@ -96,30 +103,32 @@ const ExportExcel: FC<ExportToExcelProps> = ({
         if (showUnit) {
           value = getUnitValue(value, col.amountUnit[dataIndex]);
         }
-        if (col.exports) {
-          if (col.exports && Array.isArray(col.exports)) {
-            col.exports.forEach((v: string) => {
-              otherValue = otherValue + '/' + String(getUnitValue(dataItem[v], col.amountUnit[v]));
-            });
-          }
-        }
-        row.push(String(value)+otherValue);
-        // if (col.exports && Array.isArray(col.exports)) {
-        //   col.exports.forEach((v: string) => {
-        //     const otherKey = v;
-        //     let otherValue = dataItem[otherKey];
-        //     const otherShow =
-        //       col?.amountUnit && col.amountUnit[v] && col?.amountUnit[v]?.unit;
-        //     if (otherShow) {
-        //       otherValue = getUnitValue(otherValue, col?.amountUnit[v]);
-        //     }
-        //     row.push(otherValue);
-        //   });
+        // if (col.exports) {
+        //   if (col.exports && Array.isArray(col.exports)) {
+        //     col.exports.forEach((v: string) => {
+        //       otherValue = otherValue + '/' + String(getUnitValue(dataItem[v], col.amountUnit[v]));
+        //     });
+        //   }
         // }
+        //   row.push(String(value)+otherValue);
+
+        if (col.exports && Array.isArray(col.exports)) {
+          col.exports.forEach((v: string) => {
+            const otherKey = v;
+            let otherValue = dataItem[otherKey];
+            const otherShow =
+              col?.amountUnit && col.amountUnit[v] && col?.amountUnit[v]?.unit;
+            if (otherShow) {
+              otherValue = getUnitValue(otherValue, col?.amountUnit[v]);
+            }
+            row.push(otherValue);
+          });
+        }
+        row.push(value)
+
       });
       dataRows.push(row);
     });
-
     const dataArray = [headers, ...dataRows];
     //const dataArray = data.map((row) => accessors.map((field) => row[field]));
     //dataArray.unshift(headers);

@@ -102,12 +102,11 @@ export default ({
                 collapsible='header'
                 className='card_shadow custom_Collapse  !rounded-xl mb-2.5'
                 expandIconPosition='end'
-                defaultActiveKey={[1]}
                 items={[
                   {
                     key: index,
                     label: (
-                      <ul className='flex text-base  font-semibold pl-7'>
+                      <ul className='flex font-semibold pl-7'>
                         {account_expired?.headerList.map((item: any) => {
                           const { dataIndex, width, title, render } = item;
                           const value = sector_item[dataIndex];

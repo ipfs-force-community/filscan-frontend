@@ -96,7 +96,7 @@ const Account: React.FC = () => {
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
         <div className='w-[210px] border-r border_color  py-10'>
-          <div className='w-full px-5 mb-10 font-semibold font-PingFang	'>
+          <div className='w-full px-5 mb-10 text-lg font-semibold font-PingFang	'>
             {tr('account_title')}
           </div>
           <ul className='list-none px-4'>

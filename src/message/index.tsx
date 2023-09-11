@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import { get, has } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
-import Trade from './Trade';
+import Trade from './Trade'
 import Event from './Event';
 
 export default ({ cid }: { cid: string | string[] }) => {
@@ -23,7 +23,7 @@ export default ({ cid }: { cid: string | string[] }) => {
   const { axiosData } = useAxiosData();
   const [TransferData, setTransfer] = useState<any>(undefined);
   const [TransferNFTData, setTransferNft] = useState<any>(undefined);
-  const [isF4, setIsF4] = useState(false);
+  // const [isF4, setIsF4] = useState(false);
   const [swap, setSwap] = useState();
   const { hash } = useHash()
   const { data: result, loading } = useAxiosData(apiUrl.detail_message, {

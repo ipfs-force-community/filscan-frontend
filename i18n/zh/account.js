@@ -93,13 +93,14 @@ const account = {
   cc_power: 'CC算力',
   sector_size: '扇区大小',
   sector_power_change: '扇区变化',
+  sector_power_count: 'Sector数量',
   sector_count_change: '扇区数量变化',
   pledge_changed: '质押变化',
   pledge_changed_per_t: '质押变化/T',
   penalty: '惩罚',
   fault_sectors: '错误扇区',
-  sector_power_change_tip: 'Sector数量/原值算力 新增及终止的总和',
-  pledge_changed_tip: 'Sector数量 新增及终止对应的质押变化总和',
+  sector_power_change_tip: 'Sector数量/原值算力的新增及终止的总和',
+  pledge_changed_tip: 'Sector数量的新增及终止对应的质押变化总和',
   pledge_changed_per_t_tip:'质押变化÷扇区变化(TiB)',
   penalty_tip: '被惩罚的FIL数量',
   fault_sectors_tip: '新增的错误扇区数量/原值算力',
@@ -137,7 +138,10 @@ const account = {
   confirm_password: '确认密码',
   confirm_placeholder: '重新输入新密码',
   personal_name_holder: '请输入账户名称',
-  name_length:'名称长度小于10'
+  name_length: '名称长度小于10',
+
+  //下载
+  out_come_gas:'支出',
 
 }
 

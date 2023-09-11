@@ -8,7 +8,7 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import enUS from 'antd/lib/locale/en_US';
 import { useEffect, useState } from 'react';
-import { FilscanStoreProvider } from '@/store/FilscanStore';
+import { FilscanStoreProvider, useFilscanStore } from '@/store/FilscanStore';
 
 import HeaderMain from '@/components/header';
 import ErrorBoundary from '@/components/Bounday';
@@ -29,6 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const [locale, setLocale] = useState('zh');
   const [theme, setTheme] = useState('light');
   const [home, setHome] = useState<boolean>(false);
+  // const { theme, lang, setTheme, setLang } = useFilscanStore();
+
   const {t} =useTranslation('home')
   const router = useRouter();
 

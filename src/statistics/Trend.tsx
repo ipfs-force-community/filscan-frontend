@@ -59,7 +59,8 @@ export default (props: Props) => {
           axisLabel: {
             formatter: '{value} EiB',
             textStyle: {
-              color: color.textStyle,
+              //  fontSize: this.fontSize,
+              color: color.labelColor,
             },
           },
           axisLine: {
@@ -87,7 +88,7 @@ export default (props: Props) => {
             formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.textStyle,
+              color: color.labelColor,
             },
           },
           axisTick: {

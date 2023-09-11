@@ -27,15 +27,18 @@ export default ({
   const handleChange = (value: string) => {
     onChange(value);
   };
+  /*
+  ${
+        border ? 'border_select' : 'no_border_select'
+        }
+  */
   return (
     <Select
       showSearch
       placeholder='Select a person'
       optionFilterProp='children'
       value={value}
-      className={`custom_select ${
-        border ? 'border_select' : 'no_border_select'
-      } ${className}`}
+      className={`custom_select ${className}`}
       popupClassName={'custom_select_wrapper'}
       filterOption={(input, option: any) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())

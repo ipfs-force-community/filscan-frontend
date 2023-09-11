@@ -103,14 +103,14 @@ export default ({ origin }: { origin?: string }) => {
   return (
     <>
       <div className={`flex justify-between items-center h-[30px]`}>
-        <div className='font-PingFang font-semibold text-lg	'>
+        <div className='font-PingFang font-semibold text-lg	pl-2.5'>
           {tr('contract_rank')}
           { origin !== 'home' && <span className='text_des text-xs font-normal ml-2'>{tr(contract_rank.title_des,{value:formatDateTime(dataSource.update_time,"YYYY-MM-DD HH:mm")})}</span>
           }
         </div>
-        { origin === 'home' && <Link href={`/contract/rank`}>
+        { origin === 'home' && <Link className='pr-2.5' href={`/contract/rank`}>
           <Image
-            className='cursor-pointer'
+            className='cursor-pointer '
             src={go}
             width={18}
             height={18}

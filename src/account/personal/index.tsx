@@ -12,8 +12,8 @@ import useAxiosData from '@/store/useAxiosData';
 import { proApi } from '@/contents/apiUrl';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import message from '@/src/message';
 import messageManager from '@/packages/message';
+import { getSvgIcon } from '@/svgsIcon';
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
@@ -22,6 +22,22 @@ export default () => {
   const router = useRouter();
   const userInfo = UserInfo();
   const [form] = Form.useForm();
+  const [edit, setEdit] = useState(false);
+  const [name,setName]= useState('')
+
+  const handleSaveName = async () => {
+    setEdit(false)
+    const result = await axiosData(proApi.updateInfo, {
+      name,
+    });
+    if (result) {
+      messageManager.showMessage({
+        type: 'success',
+        content: 'Update successful',
+      });
+    }
+
+  }
 
   const handleSave = async () => {
     setLoading(true);
@@ -33,14 +49,13 @@ export default () => {
       const newInfo:any = await axiosData(proApi.userInfo);
       messageManager.showMessage({
         type: 'success',
-        content: 'login successful',
+        content: 'Update successful',
       });
       localStorage.removeItem('token');
       userInfo.setUserInfo({ })
       router.push('/account/login')
     }
     setLoading(false);
-
   };
 
   return (
@@ -51,9 +66,19 @@ export default () => {
           <div className='flex gap-x-2 items-center'>
             <Image src={logo} alt={'author'} width={60} height={60} />
             <div className='flex flex-col justify-start '>
-              <span className='font-PingFang font-semibold text-xl '>
-                {userInfo.name}
-              </span>
+              <div className='flex items-center gap-x-2'>
+                {edit ? <Input defaultValue={userInfo.name}
+                  showCount={true}
+                  maxLength={10}
+                  onChange={(e:any)=>setName(e.target.value)}
+                  onPressEnter={handleSaveName}
+                  onBlur={handleSaveName} /> :
+                  <span className='font-PingFang font-semibold text-xl '>
+                    {name||userInfo.name}
+                  </span>
+                }
+                <span className='cursor-pointer' onClick={ ()=>setEdit(true)}>{getSvgIcon('edit')}</span>
+              </div>
               <span className='text_des text-xs'>{userInfo.mail}</span>
             </div>
           </div>
@@ -82,7 +107,8 @@ export default () => {
             form={form}
             onFinish={handleSave}
             layout='vertical'
-            className='!flex w-full flex-wrap 	 gap-x-4 mt-5'>
+            className='w-3/5 min-w-[300px] mt-5'
+          >
             {personal_setting.map((item: any) => {
               const objShow: any = {};
               if (item.dataIndex === 'name') {
@@ -139,7 +165,6 @@ export default () => {
               });
               return (
                 <Form.Item
-                  style={{width:'calc(50% - 10px)'}}
                   rules={item.rules}
                   name={item.dataIndex}
                   label={tr(item.title)}
@@ -152,14 +177,14 @@ export default () => {
                 </Form.Item>
               );
             })}
-            <Form.Item className='mt-5 !w-full flex-1 flex gap-x-4 items-center justify-center'>
-              <Button className='cancel_btn border border_color' onClick={() => {
+            <Form.Item className='mt-5 !w-full flex-1 flex'>
+              {/* <Button className='cancel_btn border border_color' onClick={() => {
                 form.resetFields(['old_password','name','new_password','old_password'])
               }}
-              >{tr('cancel')}</Button>
+              >{tr('cancel')}</Button> */}
               <Button
                 htmlType='submit'
-                className='confirm_btn ml-5'
+                className='confirm_btn'
                 loading={loading}
               >
                 {tr('confirm')}

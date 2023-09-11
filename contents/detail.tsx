@@ -475,9 +475,47 @@ export const message_detail = {
           </span>
         }
         return null
-
       },
-
+    },
+    //nfts 转移
+    {
+      title: 'message_NftTrans',
+      elasticity: true,
+      dataIndex: 'nftTrans',
+      borderTop: true,
+      render: (text: any, record: any, tr: any) => {
+        if (Array.isArray(text)) {
+          if (text.length === 0) return null;
+          return (
+            <div className='flex flex-col gap-y-4 align-baseline'>
+              {text.map((item: any, index) => {
+                return (
+                  <div key={index} className='flex gap-x-2.5'>
+                    <span className='flex items-center gap-x-1'>
+                      <span className='text_des'>{tr('from_ath')}</span>
+                      <span className='flex gap-x-1 items-center'>
+                        {get_account_type(item.from)}
+                      </span>
+                    </span>
+                    <span className='flex items-center gap-x-1 '>
+                      <span className='text_des'>{tr('to_ath')}</span>{' '}
+                      <span className='flex gap-x-1 items-center'>
+                        {get_account_type(item.to)}
+                      </span>
+                    </span>
+                    <span className='flex items-center font-DINPro-Medium gap-x-1 '>
+                      <span className='font_weight'>For</span>
+                      <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                      <span>{ item?.token_name}</span>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+        return null
+      },
     },
     {
       dataIndex: 'from',
@@ -503,7 +541,45 @@ export const message_detail = {
       },
     },
     //通证转移
-
+    {
+      title: 'message_ERC20Trans',
+      elasticity: true,
+      dataIndex: 'message_ERC20Trans',
+      borderTop: true,
+      render: (text: any, record: any, tr: any) => {
+        if (Array.isArray(text)) {
+          if(text.length === 0) return null
+          return (
+            <div className='flex flex-col gap-y-4 align-baseline'>
+              {text.map((item: any, index) => {
+                return (
+                  <div key={index} className='flex gap-x-2.5'>
+                    <span className='flex items-center gap-x-1'>
+                      <span className='text_des'>{tr('from_ath')}</span>
+                      <span className='flex gap-x-1 items-center'>
+                        {get_account_type(item.from)}
+                      </span>
+                    </span>
+                    <span className='flex items-center gap-x-1 '>
+                      <span className='text_des'>{tr('to_ath')}</span>{' '}
+                      <span className='flex gap-x-1 items-center'>
+                        {get_account_type(item.to)}
+                      </span>
+                    </span>
+                    <span className='flex items-center font-DINPro-Medium gap-x-1 '>
+                      <span className='font_weight'>For</span>
+                      <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                      <span>{ item?.token_name}</span>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+        return null
+      }
+    },
     //转账信息
     {
       title: 'message_tranf',

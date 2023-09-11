@@ -145,7 +145,7 @@ font-display: auto;
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 500;
                     color: var(--font_des);
-                    padding: 6px 10px;
+                        padding: 10px 15px;
                     &::before{
                         display: none;
                     }
@@ -164,6 +164,12 @@ font-display: auto;
             .ant-table-tbody{
                 .ant-table-cell-fix-left{
                     background-color: var(--bgColor);
+                     &:hover{
+                        .ant-table-cell{
+                            background-color:  var(--table-hove) !important;
+                        }
+                      
+                    }
                 }
                 .ant-table-placeholder{
                         background-color:  var(--bgColor) ;
@@ -175,7 +181,7 @@ font-display: auto;
                     }
                     &:hover{
                         .ant-table-cell{
-                            background-color:  var(--table-hove) ;
+                            background-color:  var(--table-hove) !important;
                         }
                       
                     }
@@ -199,7 +205,7 @@ font-display: auto;
                         font-family: DINPro-Medium, DINPro;
                         font-weight: 500;
                         color:var(--font-color);
-                        padding: 10px 10px;
+                        padding: 10px 15px;
                         border-bottom:1px solid var(--border-color);
                     }
                     &:last-child{
@@ -330,12 +336,15 @@ font-display: auto;
             
         }
     }
+    .ant-select-arrow{
+        color: var(--font-color) !important;
+    }
     .ant-select-selector{
           cursor: pointer;
         padding: 3px 16px !important;
         height:36px !important;
         border: 1px solid var(--border-color) !important;
-        background-color: var(--bgColor) !important;
+        background-color: var(--bgDesColor) !important;
         .ant-select-selection-item{
             &::after{
                 top: -8px;
@@ -461,11 +470,19 @@ font-display: auto;
         }
      }
 }
-// .custom_Collapse{
-  
-// }
+.custom_Collapse{
+  border: 1px solid var(--border-color) !important;
+  .ant-collapse-item{
+ border-color: transparent !important;
+  }
+}
+.ant-collapse {
+   
+}
   .ant-collapse-item{
         width: 100%;
+        border-radius: 11px !important;
+        border: 1px solid var(--border-color) !important;
         .ant-collapse-header{
             display: flex !important; 
             align-items: center !important;
@@ -491,11 +508,12 @@ font-display: auto;
 //date 
 .custom_picker{
     position: relative;
-        border-radius: 5px;
-         min-width: 120px;
-         width: fit-content;
-    height: 36px;
+    border-radius: 5px;
+    min-width: 120px;
+    border: 1px solid var(--border-color);
     background-color: var(--bgDesColor);
+    width: fit-content;
+    height: 36px;
     &_pre{
         position: absolute;
         left: 10px;
@@ -507,7 +525,7 @@ font-display: auto;
             padding-left: 20px;
              color: var(--font-color);
             input{
-                 color: var(--font-color);
+                color: var(--font-color);
             }
            
         }
@@ -527,10 +545,16 @@ font-display: auto;
   
 }
 .custom_date_picker_wrap{
+    thead{
+        th{
+            color: var(--font_des) !important;
+        }
+        
+    }
     .ant-picker-panel-container{
         background-color: var(--select-bgColor) ;
-  box-shadow: 0px 1px 7px -1px var(--select-shadow);
-  color: var(--font-color);
+        box-shadow: 0px 1px 7px -1px var(--select-shadow);
+        color: var(--font-color);
     }
     .ant-picker-date-panel{
         .ant-picker-header{
@@ -553,15 +577,11 @@ font-display: auto;
             .ant-picker-cell{
                    .ant-picker-cell-inner {
                         color: var(--font_des);
-                        border: 1px solid var(--border-color);
-                    background-color: var(--bgDesColor) !important;
                 } 
             }
-         
             .ant-picker-cell-in-view{
                 .ant-picker-cell-inner{
-                      color: var(--font-color);
-                border: 1px solid var(--border-color);
+                color: var(--font-color);
                 border-radius: 5px;
                 min-width: 30px;
                 height: 30px;
@@ -577,10 +597,11 @@ font-display: auto;
             }
            
             .ant-picker-cell-disabled{
+                &::before{
+                    display: none;
+                }
                 .ant-picker-cell-inner {
-                        color: var(--font_des);
-                        border: 1px solid var(--border-color);
-                    background-color: var(--bgDesColor) !important;
+                        color: var(--font_des_unit);
                 }
             }
         }

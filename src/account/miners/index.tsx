@@ -13,7 +13,7 @@ import useAxiosData from '@/store/useAxiosData';
 import { GroupsStoreContext, useMinerStore } from '../content';
 import Groups from './Groups';
 
-export default ({ minersNum }: { minersNum: MinerNum | any }) => {
+export default ({ minersNum }: { minersNum?: MinerNum | any }) => {
   const { hashParams } = useHash();
   const { type, group } = hashParams || {};
   const { tr } = Translation({ ns: 'account' });
@@ -22,10 +22,16 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
   const [minerNum, setMinerNum] = useState(minersNum);
   const {setAllNum } = useMinerStore();
   const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
+  const { axiosData } = useAxiosData();
 
   useEffect(() => {
-    setMinerNum(minersNum);
-  }, [minersNum]);
+    loadMinersNum()
+  }, []);
+
+  const loadMinersNum = async () => {
+    const result = await axiosData(proApi.account_miners, {}, { isCancel: false });
+    setMinerNum(result)
+  }
 
   useEffect(() => {
     calcGroups(groupsData?.group_info_list || []);
@@ -68,7 +74,7 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
       );
     }
 
-    if (group && groupDetail) {
+    if (type === 'group_add' ) {
       return (
         <GroupAdd
           groupId={group}
@@ -76,6 +82,13 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
           minersNum={minerNum}
         />
       );
+    }
+    if (group && groupDetail) {
+      return <GroupAdd
+        groupId={group}
+        groupDetail={groupDetail}
+        minersNum={minerNum}
+      />
     }
     return <Groups groups={groups} />;
   };
@@ -99,13 +112,23 @@ export default ({ minersNum }: { minersNum: MinerNum | any }) => {
             {minerNum?.miners_count}/{minerNum?.max_miners_count}
           </span>
         </span>
-        <Link
-          href={`/account#miners?type=miner_add`}
-          scroll={false}
-          className='confirm_btn flex rounded-[5px] items-center gap-x-2.5 text_color'>
-          {getSvgIcon('addIcon')}
-          {tr('miners_add')}
-        </Link>
+        <div className='flex gap-x-2.5 items-center'>
+          <Link
+            href={`/account#miners?type=group_add`}
+            scroll={false}
+            className={ `flex rounded-[5px] border border-color  items-center gap-x-2.5 text_color ${type === 'group_add' ?'confirm_btn':'cancel_btn'}`}>
+            {/* {getSvgIcon('addIcon')} */}
+            {tr('group_add')}
+          </Link>
+          <Link
+            href={`/account#miners?type=miner_add`}
+            scroll={false}
+            className={ `cancel_btn  border border-color flex rounded-[5px] items-center gap-x-2.5 text_color ${type === 'miner_add' ?'confirm_btn':'cancel_btn'}`}>
+            {/* {getSvgIcon('addIcon')} */}
+            {tr('miners_add')}
+          </Link>
+        </div>
+
       </p>
       {renderChildren()}
     </GroupsStoreContext.Provider>
