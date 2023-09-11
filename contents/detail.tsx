@@ -523,7 +523,7 @@ export const message_detail = {
       borderTop: true,
       type: ['message_basic'],
       render: (text: string, record: any) => (
-        <span className='flex items-center gap-x-2'>
+        <span className='flex items-center gap-x-2 link-row'>
           {get_account_type(text, 0)}
         </span>
       ),
@@ -534,7 +534,7 @@ export const message_detail = {
       type: ['message_basic'],
       render: (text: string, record: any) => {
         return (
-          <span className='flex items-center gap-x-2'>
+          <span className='flex items-center gap-x-2 link-row'>
             {get_account_type(text, 0)}
           </span>
         );

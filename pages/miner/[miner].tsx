@@ -12,6 +12,7 @@ import AccountChange from '@/src/detail/accountChange';
 import PowerChange from '@/src/detail/powerChange';
 import List from '@/src/detail/list';
 import { Translation } from '@/components/hooks/Translation';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 export default () => {
   const router = useRouter();

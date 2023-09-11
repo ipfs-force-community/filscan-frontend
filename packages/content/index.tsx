@@ -6,6 +6,7 @@ import { HTMLAttributes, useMemo } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import useWindow from '@/components/hooks/useWindown';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 //ts-ignore
 interface ContentProps extends HTMLAttributes<HTMLElement>{
@@ -65,10 +66,14 @@ export default (props:ContentProps) => {
             <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
               {showTitle}:
             </span>
-            <span
-              className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
-              {renderValue}
-            </span>
+            <MobileView>
+              <span className='des'>{renderValue}</span>
+            </MobileView>
+            <BrowserView>
+              <span
+                className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
+                {renderValue}
+              </span></BrowserView>
           </li>
         );
       })}

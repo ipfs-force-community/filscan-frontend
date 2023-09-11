@@ -15,7 +15,7 @@
 
     :global {
       .text_des {
-        color: #b3b3b3;
+        color: var(--mobile-des-color);
         font-weight: 400;
         font-size: 15px;
         font-family: PingFangSC-Regular, PingFang SC;
@@ -23,7 +23,7 @@
       }
       .copy-row {
         .text {
-          color: #1d6bfc;
+          color: var(--mobile-link-color);
           word-break: break-all;
         }
         .copy {

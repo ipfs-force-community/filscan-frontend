@@ -7,9 +7,9 @@
         gap:10px;
         .card{
             padding: 10px;
-            border: 1px solid #EEEFF1;
+            border: 1px solid var(--mobile-divide-line);
             border-radius: 6px;
-            background: #FFFFFF;
+            background: var(--mobile-bgColor);
             .card-top{
                 display: flex;
                 align-items: end;

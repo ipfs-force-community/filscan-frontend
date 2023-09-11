@@ -272,18 +272,29 @@ export function titleCase(str: string | number | boolean) {
 export const get_account_type = (value: string = '', unit: number = 6) => {
   return (
     <>
-      <span
-        className='link_text'
-        onClick={() => {
-          account_link(value);
-        }}>
-        <MobileView>{isIndent(value,6,6)}</MobileView>
-        <BrowserView>{isIndent(value,unit)}</BrowserView>
-      </span>
-      {value && <>
-        <MobileView><Copy text={value} icon={copySvgMobile} className='copy'/></MobileView>
-        <BrowserView style={{width:'fit-content'}}><Copy text={value} /></BrowserView>
-      </>}
+      <MobileView>
+        <span className='copy-row'>
+          <span
+            className='w-28 text'
+            onClick={() => {
+              account_link(value);
+            }}>
+            {value}
+          </span>
+          <Copy text={value} icon={copySvgMobile} className='copy'/>
+        </span>
+      </MobileView>
+      <BrowserView style={{width:'fit-content'}}>
+        <span
+          className='link_text'
+          onClick={() => {
+            account_link(value);
+          }}>
+          {isIndent(value,unit)}
+        </span>
+        {value && <Copy text={value} />}
+      </BrowserView>
+
     </>
   );
 };
