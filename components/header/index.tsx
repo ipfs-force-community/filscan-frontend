@@ -1,16 +1,11 @@
 /** @format */
 
 import { header_top, langOptions } from '@/contents/common';
-import { Layout } from 'antd';
 import { Translation } from '@/components/hooks/Translation';
 import Account from './Account';
 import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
-<<<<<<< HEAD
 import { useEffect, useMemo, useState } from 'react';
-=======
-import { useEffect, useMemo } from 'react';
->>>>>>> 9d0629e (feat: update  home style)
 import Select from '@/packages/select';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
