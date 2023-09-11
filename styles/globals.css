@@ -40,7 +40,8 @@
   --mobile-divide-line: #eeeff1;
   --mobile-footer-bg: #222121;
   --mobile-text-60: rgba(255, 255, 255, 0.6);
-  --mobile-text-placeholder:#CCCCCC
+  --mobile-text-placeholder:#CCCCCC;
+  --mobile-bg-5: rgba(29,107,252,0.05)
 
 }
 

@@ -1,0 +1,33 @@
+
+@media only screen and (max-width: 1000px) {
+  .title {
+    margin: unset;
+    padding: 18px 0px 0px 12px;
+    font-size: 16px;
+    line-height: unset;
+
+    row-gap: unset;
+  }
+  .title-description {
+    margin-top: unset;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    color: var(--mobile-des-color);
+    font-size: 12px;
+    line-height: unset;
+  }
+
+  .reset {
+    overflow: unset;
+    margin: unset;
+    padding: unset;
+    height: unset;
+    border: unset;
+    background-color: unset;
+    box-shadow: unset;
+  }
+  .table {
+    padding: 0px 12px;
+  }
+}

@@ -2,13 +2,13 @@
   .detail-content {
     padding: 0;
 
-    .itemWrap {
+    .item-wrap {
       align-items: center;
       .value {
         line-height: normal;
         a {
           width: 100%;
-          word-wrap: break-word;
+          word-break: break-all;
         }
       }
     }

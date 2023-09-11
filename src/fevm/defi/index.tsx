@@ -9,6 +9,11 @@ import fetchData from '@/store/server';
 import { useEffect, useMemo, useState } from 'react';
 import { homeDefiColumns, defi_list } from '@/contents/fevm';
 import { pageHomeLimit, pageLimit } from '@/utils';
+import styles from './index.module.scss'
+import classNames from 'classnames';
+import useWindow from '@/components/hooks/useWindown';
+import Image from 'next/image';
+import TextTip from '@/packages/textTooltip';
 
 const default_sort = {
   field: 'tvl',
@@ -20,6 +25,7 @@ export default ({ origin }: { origin?: string }) => {
   const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(1);
   const [sort, setSort] = useState<any>({ ...default_sort });
+  const {isMobile} = useWindow()
   const [progress,setProgress] = useState<number>(0)
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -57,7 +63,7 @@ export default ({ origin }: { origin?: string }) => {
   const columns = useMemo(() => {
     const newArr: any = [];
 
-    defi_list.columns(progress,origin).forEach((col: any) => {
+    defi_list.columns(progress,origin).forEach((col) => {
       if (origin === 'home') {
         if (homeDefiColumns.hasOwnProperty(col.dataIndex)) {
           newArr.push({
@@ -67,7 +73,37 @@ export default ({ origin }: { origin?: string }) => {
           });
         }
       } else {
-        newArr.push({ ...col, title: tr(col.title) });
+        if (isMobile) {
+          if (col.dataIndex === 'protocol') {
+            return
+          }
+          if (col.dataIndex === 'rank') {
+            //@ts-ignore
+            col.title = (value:string,record:any,index)=>{
+              return <div>{`#${record?.rank}`}</div>
+            }
+            col.render = (text: string, record: any) => {
+              return (
+                <span
+                  className={styles.rank}
+                  onClick={() => {
+                    if (record.main_site) {
+                      window.open(record.main_site);
+                    }
+                  }}>
+                  <Image
+                    src={record.icon_url || ''}
+                    width={25}
+                    height={25}
+                    alt='logo'
+                  />
+                  <TextTip text={record.protocol} />
+                </span>
+              );
+            }
+          }
+        }
+        newArr.push({ ...col, title: typeof col.title === 'string' ? tr(col.title) : col.title });
       }
     });
 
@@ -90,7 +126,7 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className='mt-4 h-[491px] border rounded-xl p-5	card_shadow border_color'>
+    <div className={classNames('mt-4 h-[491px] border rounded-xl p-5	card_shadow border_color',styles.wrap,styles.reset)}>
       <Table
         key='contract_rank'
         className='-mt-2.5 '

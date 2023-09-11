@@ -1,7 +1,9 @@
 @media screen and (max-width: 1000px){
     .mobile-table{
         display: flex;
+        overflow: hidden;
         flex-direction: column;
+        padding-bottom: 10px;
 
         row-gap: 10px;
         .mobile-table-card{
@@ -34,5 +36,6 @@
                 }
             }
         }
+  
     }
 }

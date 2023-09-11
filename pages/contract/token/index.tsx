@@ -27,10 +27,10 @@ export default () => {
             return (
               <>
                 <Link
-                  href={`/token/${record.contract_id}`}
+                  href={`/token/${record?.contract_id}`}
                   className='flex items-center gap-x-1'>
                   <Image className={classNames(styles['token-icon'])} src={record?.icon_url} alt='' height={38} width={38} />
-                  <span className='margin-6 text_color'>{record.token_name}</span>
+                  <span className='margin-6 text_color'>{record?.token_name}</span>
                 </Link>
               </>
             );
@@ -50,7 +50,7 @@ export default () => {
       <div className={classNames('flex flex-col text-xl font-medium gap-y-2.5 mb-4',styles.title)}>
         <span>{tr('token_list')}</span>
       </div>
-      <div className={classNames('border  rounded-xl p-5	card_shadow border_color flex items-center',styles.mobile)}>
+      <div className={classNames('border  rounded-xl p-5	card_shadow border_color flex items-center',styles.table)}>
         <Table
           limit={1000}
           data={TokenData?.items || []}
