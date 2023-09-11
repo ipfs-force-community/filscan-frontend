@@ -1,0 +1,12 @@
+@media screen and (max-width: 1000px){
+  .miner{
+    padding: 12px;
+    :global{
+      .flex{
+        &.card_shadow{
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
