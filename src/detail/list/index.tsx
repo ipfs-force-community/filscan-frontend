@@ -9,6 +9,7 @@ import BlockList from './blockList';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import TracesList from './tracesList';
+import EventLog from './EventLog';
 
 export default ({
   accountId,
@@ -76,6 +77,9 @@ export default ({
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
           <TracesList accountId={accountId} methodName={method} />
+        )}
+        {activeTab === 'event_log' && (
+          <EventLog actorId={actorId}/>
         )}
       </div>
     </div>
