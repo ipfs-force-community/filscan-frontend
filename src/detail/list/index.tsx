@@ -11,6 +11,7 @@ import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import TracesList from './tracesList';
 import classNames from 'classnames';
 import styles from './style.module.scss'
+import EventLog from './EventLog';
 
 export default ({
   accountId,
@@ -79,6 +80,9 @@ export default ({
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
           <TracesList accountId={accountId} methodName={method} />
+        )}
+        {activeTab === 'event_log' && (
+          <EventLog actorId={actorId}/>
         )}
       </div>
     </div>

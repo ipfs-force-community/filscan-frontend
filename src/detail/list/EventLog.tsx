@@ -5,22 +5,39 @@ import Content from "@/packages/content";
 import NoData from "@/packages/noData";
 import Skeleton from "@/packages/skeleton";
 import useAxiosData from "@/store/useAxiosData";
+import { Pagination } from "antd";
 import { useEffect, useState } from "react"
 
-export default ({ cid }: {cid?:string | string[]}) => {
+export default ({ actorId }: {actorId?:string | string[]}) => {
   const { axiosData } = useAxiosData()
   const [loading, setLoading] = useState(false);
-  const [data,setData]= useState([])
+  const [data, setData] = useState([])
+  const [current, setCurrent] = useState(1)
+  const [total,setTotal]= useState(0)
 
   useEffect(() => {
-    load()
-  }, [cid])
+    if (actorId) {
+      load()
 
-  const load = async () => {
-    setLoading(true)
-    const result = await axiosData(apiUrl.detail_message_event, { cid })
+    }
+  }, [actorId])
+
+  const load = async (cur?:number) => {
+    setLoading(true);
+    const showIndex= cur||current
+    const result = await axiosData(apiUrl.contract_verify_logs, {
+      actor_id: actorId,
+      page: showIndex -1,
+      limit:5
+    })
     setLoading(false)
-    setData(result?.logs || [])
+    setData(result?.event_list || [])
+    setTotal(result?.total_count)
+  }
+
+  const handleChange = (cur: number) => {
+    setCurrent(cur);
+    load(cur)
   }
 
   if (loading) {
@@ -42,5 +59,7 @@ export default ({ cid }: {cid?:string | string[]}) => {
     {data.map((item,index) => {
       return <Content contents={message_detail.eventLog} ns={"detail"} data={item} key={index} />
     })}
+    <Pagination showQuickJumper className={`custom_Pagination`} pageSize={5} current={current} total={total} onChange={handleChange} />
+
   </div>
 }
