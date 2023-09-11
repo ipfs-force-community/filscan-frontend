@@ -280,19 +280,21 @@ export const message_detail = {
     {
       title: 'topic', dataIndex: 'topics', render: (text:any,record:any) => {
         if (Array.isArray(text)) {
-          return text.map((item:string,index:number) => {
-            return <li key={item} className='array_item' >
-              <span className="array_item_icon">{ index}</span>
-              { item}
-            </li>
-          })
+          return <ul className='flex flex-col gap-y-2'>
+            { text.map((item:string,index:number) => {
+              return <li key={item} className='flex items-center gap-x-1'>
+                <span className='flex items-center justify-center w-5 h-5 bg-bg_hover rounded-[5px]'>{ index}</span>
+                { item}
+              </li>
+            })}
+          </ul>
         }
         return text||'--'
 
       }},
     {
       title: 'params', dataIndex: 'data', render: (text:string) => {
-        return <div className="bg-render">
+        return <div className="break-words">
           { text}
         </div>
       } },

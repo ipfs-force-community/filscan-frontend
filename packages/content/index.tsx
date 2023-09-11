@@ -60,22 +60,24 @@ export default (props:ContentProps) => {
           <li
             key={index}
             className={
-              classNames(`flex items-baseline gap-x-2.5 
+              classNames(`flex items-center gap-x-2.5 h-9
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
-            ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles['item-wrap'])
+            ${columns !== 1 ? 'grid grid-cols-2' : ''}`,styles['item-wrap'])
             }
             style={{...style }}>
-            <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
+            <div className={`w-28 min-w-28 flex-shrink-0 items-center text_des`}>
               {showTitle}:
-            </span>
+            </div>
             <MobileView>
-              <span className='des'>{renderValue}</span>
+              <span className='des '>{renderValue}</span>
             </MobileView>
             <BrowserView>
-              <span
-                className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
+              <div
+                style={{maxWidth:'calc(100% - 120px)'}}
+                className={classNames(`flex-grow overflow-auto items-center font-DINPro-Medium `,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
                 {renderValue}
-              </span></BrowserView>
+              </div>
+            </BrowserView>
           </li>
         );
 

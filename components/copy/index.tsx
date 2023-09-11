@@ -30,7 +30,7 @@ export default ({
   };
   return (
     <span
-      style={{ cursor: 'pointer', color: 'rgb(154,154,154)' }}
+      style={{ cursor: 'pointer', color: 'rgb(154,154,154)' ,width:'13px'}}
       className={classNames(`flex-center ${className}`,styles.wrap)}
       onClick={handleClick}>
       <Image src={icon??copySvg} width={13} height={14} alt='' />

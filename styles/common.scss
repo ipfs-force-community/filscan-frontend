@@ -246,6 +246,13 @@ cursor: pointer;
  color: #fff !important;
 }
 
+.break-words{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+
+}
+
 .animated-div {
   animation: myAnimation 6s linear infinite;
   /* animation-duration: 3s;
