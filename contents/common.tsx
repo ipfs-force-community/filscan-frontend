@@ -1,6 +1,6 @@
 /** @format */
 
-import { formatDateTime, formatNumber, get$Number, getClassName } from '@/utils';
+import { formatDateTime, formatFilNum, formatNumber, get$Number, getClassName } from '@/utils';
 import Image from 'next/image';
 import { Item, Option_Item } from './type';
 import TimerHtml from '@/components/TimerHtml';
@@ -32,7 +32,7 @@ export const header_top: TOP_DATA = {
     {
       title: 'base_fee',
       dataIndex: 'base_fee',
-      render: (text: number) => <span className='text_primary'>{text} </span>,
+      render: (text: number) => <span className='text_primary'>{formatFilNum(text)} </span>,
     },
     {
       title: 'last_height',

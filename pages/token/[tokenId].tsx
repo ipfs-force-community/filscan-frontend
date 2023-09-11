@@ -21,7 +21,6 @@ export default () => {
   const { tokenId } = router.query;
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
-
   const [marketData, setMarket] = useState({});
   const [overviewData, setOverview] = useState<any>({});
   const { isMobile } = useWindow()
@@ -31,6 +30,7 @@ export default () => {
       axiosData(apiUrl.contract_ERC20Summary, {
         contract_id: tokenId,
       }).then((res: any) => {
+        console.log('-==---e',res)
         setOverview(res || {});
       });
       axiosData(apiUrl.contract_ERC20Market, {

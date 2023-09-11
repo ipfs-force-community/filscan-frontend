@@ -69,7 +69,7 @@ export default ({ origin }: { origin?: string }) => {
           newArr.push({
             ...col,
             title: tr(col.title),
-            width: homeContractRank[col.dataIndex],
+            width: homeDefiColumns[col.dataIndex],
           });
         }
       } else {
@@ -126,7 +126,7 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className='mt-4 h-[470px] border rounded-xl  px-5 pt-5 pb-1	card_shadow border_color'>
+    <div className='mt-4 h-[480px] border rounded-xl  px-5 pt-5 pb-1	card_shadow border_color'>
       <Table
         key='contract_rank'
         className='-mt-2.5 '
