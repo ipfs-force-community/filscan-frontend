@@ -14,10 +14,12 @@ export default ({
   accountId,
   tabList,
   defaultActive,
+  actorId
 }: {
   accountId?: string | string[];
   tabList: Array<any>;
-  defaultActive: string;
+    defaultActive: string;
+  actorId:string
 }) => {
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
@@ -49,6 +51,7 @@ export default ({
           data={tabList || []}
           ns='detail'
           defaultValue={activeTab}
+          defaultActive={ defaultActive}
           isHash={true}
         />
         {activeItem?.headerOptions && (

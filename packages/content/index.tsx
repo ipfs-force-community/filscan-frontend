@@ -31,7 +31,7 @@ export default (props:ContentProps) => {
   return (
     <ul
       className={classNames(styles['detail-content'],`w-full max-h-full ${
-        columns !== 1 ? `grid grid-cols-${columns} gap-x-10` : 'flex flex-col p-2.5 gap-y-5'
+        columns !== 1 ? `grid !grid-cols-2 gap-x-12` : 'flex flex-col p-2.5 gap-y-5'
       }`,props.className)}>
       {contents.map((item, index) => {
         const {
@@ -43,7 +43,6 @@ export default (props:ContentProps) => {
           render,
         } = item;
         const itemData = getShowData(item, data);
-        console.log('---ee',itemData)
         const value = itemData && itemData[dataIndex];
         const renderValue = render ? render(value, data, tr) : value;
         const showTitle =
@@ -60,22 +59,24 @@ export default (props:ContentProps) => {
           <li
             key={index}
             className={
-              classNames(`flex items-baseline gap-x-2.5 
+              classNames(`flex items-center gap-x-2.5 h-9
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
-            ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles['item-wrap'])
+            ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
             style={{...style }}>
-            <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
+            <div className={`w-28 min-w-28 flex-shrink-0 items-center text_des`}>
               {showTitle}:
-            </span>
+            </div>
             <MobileView>
-              <span className='des'>{renderValue}</span>
+              <span className='des '>{renderValue}</span>
             </MobileView>
             <BrowserView>
-              <span
-                className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
+              <div
+                style={{maxWidth:'calc(100% - 120px)'}}
+                className={classNames(`flex-grow overflow-auto items-center font-DINPro-Medium `,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
                 {renderValue}
-              </span></BrowserView>
+              </div>
+            </BrowserView>
           </li>
         );
 
