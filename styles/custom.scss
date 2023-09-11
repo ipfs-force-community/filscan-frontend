@@ -248,17 +248,15 @@ font-display: auto;
     display: flex;
     align-items: center;
     .ant-pagination-prev,.ant-pagination-next{
-      
         width: 28px !important;
         min-width: 28px !important;
         height: 28px !important;
         border: 1px solid var(--border-color);
         .ant-pagination-item-link{
-                color: var(--font-color) !important;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            color: var(--font-color) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
     }
@@ -268,16 +266,17 @@ font-display: auto;
         min-width: 28px;
         min-height: 28px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--border-color);
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid var(--border-color) !important;
+
         a{
              color: var(--font-color);
              font-weight: 400;
         }
     }
     .ant-pagination-item-active{
-        background-color: var(--primary);
+        background-color: var(--primary) !important;
         a{
              color: #ffffff !important;
         }
@@ -335,11 +334,9 @@ font-display: auto;
 .custom_select{
     font-size: 14px !important;
     min-width: 150px;
-    width: fit-content;
     &:hover{
         .ant-select-selector{
-            border-color: var(--primary) !important;
-            
+            border-color: var(--primary) !important;  
         }
     }
     .ant-select-arrow{
@@ -364,6 +361,7 @@ font-display: auto;
             color: var(--font-color);
         }
         .ant-select-selection-search-input {
+            height: 100% !important;
             font-size: 12px;
             font-family: DINPro-Medium, DINPro;
             font-weight: 500;
@@ -377,12 +375,13 @@ font-display: auto;
     }
 
 }
-.custom_select_wrapper{
+    .custom_select_wrapper{
+    width: max-content !important;
     padding: 16px;
-  color: var(--font-color);
-  border: var(--border-color) !important;
+    color: var(--font-color);
+    border: var(--border-color) !important;
     background-color: var(--select-bgColor) !important ;
-  box-shadow: 0px 1px 7px -1px var(--select-shadow) !important;
+    box-shadow: 0px 1px 7px -1px var(--select-shadow) !important;
   .ant-select-item:not(.custom_options_item){
     color: var(--font-color) !important;
     margin-bottom: 4px;

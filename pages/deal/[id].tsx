@@ -51,9 +51,9 @@ export default () => {
               { data?.piece_size && unitConversion( data.piece_size)}
             </span>
             <span>
-              {formatDateTime(data.service_start_time)}
+              {formatDateTime(data?.service_start_time)}
               { tr(deal_list.content.time)}
-              { formatDateTime(data.end_time)}
+              { formatDateTime(data?.end_time)}
             </span>
             <span>
               {tr(deal_list.content?.cash)}:

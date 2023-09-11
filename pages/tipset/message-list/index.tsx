@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import styles from './index.module.scss'
 import classNames from 'classnames';
+import Select from '@/packages/select';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
@@ -113,6 +114,8 @@ export default () => {
         <Selects
           value={method}
           options={headerOptions}
+          className='!min-w-[200px]'
+          // className='custom-select'
           onChange={(value) => {
             if (value !== 'all') {
               updateQuery({ name: value, p: 'removed' });

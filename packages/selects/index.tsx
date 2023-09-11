@@ -9,10 +9,12 @@ export default ({
   onChange,
   value,
   className = '',
+  popupClassName='',
   border,
 }: {
   value: string;
   className?: string;
+  popupClassName?: string;
   border?: boolean;
   suffix?: JSX.Element;
   options: Array<Option_Item>;
@@ -39,7 +41,7 @@ export default ({
       optionFilterProp='children'
       value={value}
       className={`custom_select ${className}`}
-      popupClassName={'custom_select_wrapper'}
+      popupClassName={`custom_select_wrapper ${popupClassName}`}
       filterOption={(input, option: any) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }

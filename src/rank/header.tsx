@@ -29,7 +29,7 @@ export default ({
   return (
     <div className='flex justify-between items-center mx-2.5'>
       <div
-        className={`flex w-full gap-x-2.5`}>
+        className={`flex items-center w-full gap-x-2.5`}>
         <div className='font-PingFang font-semibold text-lg'>
           {tr('rank')}
         </div>
