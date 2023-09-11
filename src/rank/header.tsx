@@ -27,39 +27,38 @@ export default ({
   }
 
   return (
-    <div className='flex justify-between items-center px-2.5'>
+    <div className='flex justify-between items-center mx-2.5'>
       <div
-        className={`flex w-full gap-x-2.5 ${
-          origin === 'rank' ? 'justify-between' : ''
-        }`}>
-        {origin === 'home' && (
-          <div className='font-PingFang font-semibold text-lg	mr-2'>
-            {tr('rank')}
-          </div>
-        )}
-        <Segmented
-          data={rank_header.tabList}
-          ns='rank'
-          defaultValue='provider'
-          isHash={origin !== 'home'}
-          {...SegmentedProps}
-        />
-        {rank_header[active] && (
-          <div className='flex gap-x-2.5 items-center'>
-            {Object.keys(rank_header[active]).map((item) => {
-              return (
-                <Select
-                  key={`${active}_${item}`}
-                  options={rank_header[active][item]}
-                  ns='rank'
-                  onChange={(value: string) => {
-                    onChange(item, value);
-                  }}
-                />
-              );
-            })}
-          </div>
-        )}
+        className={`flex items-center w-full gap-x-2.5`}>
+        <div className='font-PingFang font-semibold text-lg'>
+          {tr('rank')}
+        </div>
+        <div className={ `flex items-center ${origin !== 'home'? 'flex-1 justify-between':'gap-x-4'}`}>
+          <Segmented
+            data={rank_header.tabList}
+            ns='rank'
+            defaultValue='provider'
+            isHash={origin !== 'home'}
+            {...SegmentedProps}
+          />
+          {rank_header[active] && (
+            <div className='flex gap-x-2.5 items-center'>
+              {Object.keys(rank_header[active]).map((item) => {
+                return (
+                  <Select
+                    key={`${active}_${item}`}
+                    options={rank_header[active][item]}
+                    ns='rank'
+                    onChange={(value: string) => {
+                      onChange(item, value);
+                    }}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
+
       </div>
       {origin === 'home' && (
         <Link href={`/rank#${active}`}>

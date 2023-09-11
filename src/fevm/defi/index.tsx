@@ -2,7 +2,6 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import { homeContractRank } from '@/contents/contract';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
@@ -69,7 +68,7 @@ export default ({ origin }: { origin?: string }) => {
           newArr.push({
             ...col,
             title: tr(col.title),
-            width: homeContractRank[col.dataIndex],
+            width: homeDefiColumns[col.dataIndex],
           });
         }
       } else {
@@ -126,7 +125,7 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className={classNames('mt-4 h-[491px] border rounded-xl p-5	card_shadow border_color',styles.wrap,styles.reset)}>
+    <div className={classNames('mt-4 h-[480px] border rounded-xl p-5	card_shadow border_color',styles.wrap,styles.reset)}>
       <Table
         key='contract_rank'
         className='-mt-2.5 '

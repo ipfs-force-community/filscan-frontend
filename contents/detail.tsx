@@ -16,6 +16,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
+import { Button } from 'antd';
 //储存池概览 账户余额 & 有效算力
 
 export const account_balance = {
@@ -386,7 +387,7 @@ export const message_detail = {
       render: (text: any) => {
         if (text?.startsWith('Ok')) {
           return (
-            <span className='flex px-2 py-1 gap-x-1  rounded-sm items-center'>
+            <span className='flex py-1 gap-x-1  rounded-sm items-center'>
               {getSvgIcon('successIcon')}
               <span className='text-success text-cm'>Success</span>
             </span>
@@ -795,34 +796,36 @@ const default_content = [
     render: (text: string, record: any, tr: any) => {
       const owned_miners = record?.account_basic?.owned_miners || [];
       if (!text) return '--';
-      // if (owned_miners.length > 0) {
-      //   return (
-      //     <div>
-      //       <span className='flex_align_center'>
-      //         {isMobile() || (text && text.length > 50)
-      //           ? isIndent(text, 10)
-      //           : text}
-      //         {text && <Copy text={text} />}
-      //       </span>
-
-      //       <Button
-      //         className='btn-link'
-      //         onClick={() => {
-      //           Router.push(`/owner/${record?.account_basic?.account_id}`);
-      //         }}>
-      //         {tr('account_detail')}
-      //       </Button>
-      //     </div>
-      //   );
-      // }
       return (
-        <span className='flex gap-x-2'>
-          {text}
+        <span className='flex items-center gap-x-1'>
+          <span>
+            { isIndent(text, 10,10)}
+          </span>
           {text && <Copy text={text} />}
+          { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+            {tr('account_detail')}
+          </Link>}
         </span>
       );
     },
   },
+  {
+    title: 'contract_name', dataIndex: 'contract_name', elasticity: true,
+    type: ['account_basic', 'evm_contract'],
+    render: (text: any, record: any, tr: any) => {
+      if (record?.account_basic?.account_type === 'evm') {
+        if (text) {
+          return <span className="flex items-center gap-x-1">
+            <span className="success_color">
+              {getSvgIcon('successIcon')}
+            </span>
+            {text}
+          </span>
+        }
+        return <Link className='primary_btn !h-8' href={`/contract/verify`}>{tr('go_verify')}</Link>
+      }
+      return text
+    }},
   {
     title: 'base_account_id',
     dataIndex: 'account_id',
@@ -844,28 +847,86 @@ const default_content = [
     render: (text: string, record: any, tr: any) => (text ? tr(text) : '--'),
   },
   {
+    title: 'eth_address', dataIndex: 'eth_address', elasticity: true, type: ['account_basic'],
+    render: (text: string, record: any) => text ? <span className="flex items-center gap-x-1">{text} <Copy text={text} /></span> : text
+  },
+
+  {
     title: 'balance',
     dataIndex: 'account_balance',
     type: ['account_basic'],
     render: (text: string) => (text ? formatFilNum(text) : '--'),
   },
   {
-    title: 'message_count',
-    dataIndex: 'message_count',
-    type: ['account_basic'],
-    render: (text: any) => text,
+    title: 'stable_address', dataIndex: 'stable_address', elasticity: true,
+    type: ['account_basic'], render: (text: string) => text ? <span className="flex items-center gap-x-1">{text} <Copy text={text} /></span> : text
   },
+  { title: 'Initial Balance', dataIndex: 'initial_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text, },
+  { title: 'Locking Balance', dataIndex: 'locked_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text },
+  {
+    title: 'Locking Period ', dataIndex: 'unlock_start_time', elasticity: true, render: (text: string, record: any) => {
+      if (!text) {
+        return text
+      }
+      const lastTime = record?.unlock_end_time;
+      return <span> {formatDateTime(text,"YYYY-MM-DD HH:mm")} to  { formatDateTime(lastTime,'YYYY-MM-DD HH:mm')}</span>
+    }
+  },
+  { title: 'Approvals Threshold',elasticity:true, dataIndex: 'approvals_threshold'},
+  {
+    title: 'tokenList', elasticity: true, dataIndex: 'tokenList', render: (text: any) => {
+      console.log('--d',text)
+      if (Array.isArray(text)) {
+        const value = text[0];
+        return value // <DropDown value={value} content={text.slice(1)}/>
+      }
+    }
+  },
+
+  { title: 'Available Balance', dataIndex: 'available_balance', elasticity:true,render: (text:string) =>text ? formatFilNum(text) : text },
+  {
+    title: 'Robust Address', dataIndex: 'account_address', elasticity: true, type: ['account_basic'], render: (text: string, record: any) => {
+      return text ? <span className="flex items-center gap-x-1">{text} <Copy text={text} /></span>: text
+    }
+  },
+  {
+    title: 'owned_miners', dataIndex: 'owned_miners', elasticity:true,type: ['account_basic'], render: (text:string) => {
+      return Array.isArray(text) ? <span className="array_item">
+        {Array.isArray(text) &&text?.map((item:any) => {
+          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
+        })}
+      </span>:text
+    }
+  },
+  { title: 'user_count', dataIndex: 'user_count', type: ['account_basic', 'evm_contract'], elasticity: true, render: (text: string) => text ? formatNumber(text) : text },
   {
     title: 'nonce',
     dataIndex: 'nonce',
     type: ['account_basic'],
     render: (text: any) => text,
   },
+  { title: 'transfer_count', dataIndex: 'transfer_count', type: ['account_basic','evm_contract'],elasticity:true,render:(text:string)=>text ?formatNumber(text):text},
+
+  {
+    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
+      return Array.isArray(text) ? <span className="array_item_column array_item_over">
+        {text?.map((item:any,index:number) => {
+          return <div key={ index}>{get_account_type(item)}</div>
+
+        })}
+      </span>:text
+    }},
   {
     title: 'create_time',
     dataIndex: 'create_time',
     type: ['account_basic'],
     render: (text: number | string) => formatDateTime(text),
+  },
+  {
+    title: 'message_count',
+    dataIndex: 'message_count',
+    type: ['account_basic'],
+    render: (text: any) => text,
   },
   {
     title: 'latest_transfer_time',

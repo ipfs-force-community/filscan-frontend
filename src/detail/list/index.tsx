@@ -8,6 +8,7 @@ import MessageList from './messageList';
 import BlockList from './blockList';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
+import TracesList from './tracesList';
 
 export default ({
   accountId,
@@ -65,13 +66,13 @@ export default ({
         )}
       </div>
 
-      <div className='card_shadow p-5 mt-5 min-h-[200px] '>
+      <div className='card_shadow p-5 mt-5 min-h-[300px] '>
         {activeTab === 'message_list' && (
           <MessageList accountId={accountId} methodName={method} />
         )}
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
-          <BlockList accountId={accountId} methodName={method} />
+          <TracesList accountId={accountId} methodName={method} />
         )}
       </div>
     </div>

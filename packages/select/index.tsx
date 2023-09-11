@@ -51,14 +51,14 @@ export default ({
       {header ? (
         header
       ) : (
-        <span className='flex justify-between items-center font-PingFang des_bg_color rounded-[5px] p-2 font-medium text-xs gap-x-2 w-full  min-w-[82px] h-[32px]'>
+        <span className='flex justify-between items-center font-PingFang des_bg_color rounded-[5px] font-medium text-xs gap-x-2 px-2 w-full border border_color  min-w-[82px] !h-8'>
           {tr(showLabel)}
           {getSvgIcon('downIcon')}
         </span>
       )}
 
       <ul
-        className={`invisible group-hover:visible absolute  z-10 inset-y-full max-h-fit w-max list-none p-4  border  rounded-[5px]  select_shadow  border_color ${className}`}>
+        className={`invisible group-hover:visible absolute z-10 inset-y-full max-h-fit w-max list-none p-4  border rounded-[5px]  select_shadow  border_color ${className}`}>
         {options?.map((item) => {
           return (
             <li

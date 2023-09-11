@@ -77,7 +77,13 @@ export default () => {
     });
     setLoading(false);
     setDataSource({
-      data: result?.message_list || [],
+      data: (result?.messages_pool_list || [])?.map((item: any) => {
+        return {
+          ...item?.message_basic,
+          gas_fee_cap: item?.gas_limit || "",
+          gas_premium: item?.gas_premium || "",
+        };
+      }),
       total: result?.total_count,
     });
   };
@@ -111,7 +117,7 @@ export default () => {
           </div>
         </div>
         <Selects
-          className='w-[240px]'
+          className='w-[200px]'
           value={method}
           options={headerOptions}
           onChange={(value) => {

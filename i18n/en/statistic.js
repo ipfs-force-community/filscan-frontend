@@ -12,6 +12,8 @@ const statistic = {
   trend_24: '24h Base Fee Variations',
   total_raw_byte_power: 'Network Raw Byte Power',
   base_line_power: 'BaseLine',
+  power_increase: '算力净增',
+  power_decrease:'算力损失',
   total_quality_adj_power: 'Quality Adjusted Power',
   change_quality_adj_power: 'Quality Adjusted Power Fluctuations',
   gas: 'Base Fee Variations',

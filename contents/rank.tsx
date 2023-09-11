@@ -256,12 +256,12 @@ const growthList = (progress: number | string) => {
       title: 'raw_power', //原值算力
       dataIndex: 'raw_power',
       sorter: true,
-      width: '15%',
+      width: '17%',
       render: (text: string) => unitConversion(text, 2),
     },
     {
       title: 'sector_size', //扇区大小
-      width: '15%',
+      width: '13%',
       dataIndex: 'sector_size',
     },
   ];

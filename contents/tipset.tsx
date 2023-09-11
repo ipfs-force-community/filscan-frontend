@@ -236,7 +236,7 @@ export const pool_list = {
       title: 'cid',
       width: '10%',
       render: (text: string) => (
-        <Link href={`/message/${text}`} className='table_link'>
+        <Link href={`/message/${text}`}>
           {isIndent(text)}
         </Link>
       ),
@@ -251,22 +251,22 @@ export const pool_list = {
     {
       dataIndex: 'from',
       title: 'from',
-      width: '10%',
+      width: '13%',
       render: (text: string) => {
         return (
-          <span className='flex items-center gap-x-1'>
+          <div className='flex items-center gap-x-1 flex-wrap'>
             {get_account_type(text)}
-          </span>
+          </div>
         );
       },
     },
     {
       dataIndex: 'to',
       title: 'to',
-      width: '10%',
+      width: '13%',
       render: (text: string) => {
         return (
-          <span className='flex items-center gap-x-1'>
+          <span className='flex items-center gap-x-1 flex-wrap w-full'>
             {get_account_type(text)}
           </span>
         );
@@ -283,13 +283,13 @@ export const pool_list = {
     {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',
-      width: '15%',
+      width: '12%',
       render: (text: string) => text || '--',
     },
     {
       dataIndex: 'gas_premium',
       title: 'gas_premium',
-      width: '15%',
+      width: '12%',
       render: (text: string) =>
         text ? formatFilNum(text, false, false, 2) : '--',
     },

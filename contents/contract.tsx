@@ -220,8 +220,8 @@ export const contract_rank = {
 };
 
 export const homeContractRank: any = {
-  rank: '10%',
-  contract_address: '25%',
+  rank: '15%',
+  contract_address: '20%',
   contract_name: '25%',
   transfer_count: '20%',
   user_count: '20%',
@@ -403,7 +403,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
     {
       dataIndex: 'cid',
       title: 'message_cid',
-      width: '15%',
+      width: '10%',
       render: (text: string) =>
         text ? (
           <Link href={`/message/${text}`} className='link'>
@@ -416,15 +416,15 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
     {
       dataIndex: 'method',
       title: 'method',
-      width: '15%',
+      width: '25%',
       render: (text: string) => (
-        <span className='bg-render'>{titleCase(text)}</span>
+        <span>{titleCase(text)}</span>
       ),
     },
     {
       dataIndex: 'time',
       title: 'time',
-      width: '15%',
+      width: '20%',
       render: (text: string | number) =>
         formatDateTime(text, 'YYYY-MM-DD HH:mm'),
     },
@@ -469,7 +469,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
     {
       dataIndex: 'amount',
       title: 'amount',
-      width: '15%',
+      width: '10%',
       render: (text: string, record: any) =>
         text ? formatNumber(text, 4) : text || '--',
     },

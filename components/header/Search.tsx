@@ -7,6 +7,7 @@ import useAxiosData from '@/store/useAxiosData';
 import { apiUrl } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { spawn } from 'child_process';
 
 export default ({
   origin,
@@ -70,6 +71,7 @@ export default ({
         placeholder={search.holder}
         onSearch={handleSearch}
         origin={origin}
+        onClick={handleSearch}
         suffix={
           <Image
             src={searchIcon}

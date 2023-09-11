@@ -8,6 +8,7 @@
   /*
   PC端
   */
+  --activeColor:'#ffffff';
 
   --bgColor: #ffffff;
   --main-bg-color: #f9f9f9;
@@ -48,7 +49,7 @@
 :root,
 :root[theme="dark"] {
   --border-color: #222222;
-
+  --activeColor:'#ffffff';
   --bgColor: #121212;
   --main-bg-color: #090a0a;
   --reverse-color: "#FFFFFF";
