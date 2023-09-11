@@ -30,7 +30,6 @@ export default () => {
       axiosData(apiUrl.contract_ERC20Summary, {
         contract_id: tokenId,
       }).then((res: any) => {
-        console.log('-==---e',res)
         setOverview(res || {});
       });
       axiosData(apiUrl.contract_ERC20Market, {

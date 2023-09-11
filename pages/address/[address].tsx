@@ -20,19 +20,25 @@ export default () => {
   const router = useRouter();
   const { address } = router.query;
   const { tr } = Translation({ ns: 'detail' });
+  const { axiosData } = useAxiosData();
   const [data, setData] = useState<any>({});
   const [accountType, setAccountType] = useState('');
   const [interval, setInterval] = useState('24h');
   const [methodOptions, setMethodOptions] = useState([]);
-  const { axiosData } = useAxiosData();
+  const [actorId,setActorId] = useState('')
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setActorId('');
+    setMethodOptions([]);
+    setInterval('24h');
+    setAccountType('')
     if (address) {
       loadMethod();
       load();
     }
   }, [address]);
+
   const loadMethod = async () => {
     const result: any = await axiosData(apiUrl.detail_list_method, {
       account_id: address,
@@ -58,6 +64,9 @@ export default () => {
     setLoading(false);
     setData(result?.account_info || {});
     setAccountType(result?.account_type || '');
+    if (result?.account_info?.account_basic?.account_id) {
+      setActorId(result.account_info.account_basic.account_id)
+    }
   };
 
   const contentList = useMemo(() => {
@@ -72,64 +81,6 @@ export default () => {
       }
       defaultOpt.push({ ...v });
     });
-    // if (erc20) {
-    //   defaultOpt = [
-    //     ...defaultOpt,
-    //     {
-    //       label: 'erc20_transfer',
-    //       show_active: 'erc20',
-    //       value: 'ERC20AddrTransfers',
-    //     },
-    //   ];
-    // }
-    // if (verifyData && Object.keys(verifyData).length > 0) {
-    //   if (
-    //     verifyData.source_file &&
-    //     Object.keys(verifyData.source_file).length > 0
-    //   ) {
-    //     // 已被验证合约
-    //     defaultOpt = [
-    //       ...defaultOpt,
-    //       {
-    //         label: () => (
-    //           <span className='flex-center'>
-    //             <span className='success_color'>
-    //               {' '}
-    //               {getSvgIcon('successIcon')}{' '}
-    //             </span>
-    //             {tr('contract_verify')}
-    //           </span>
-    //         ),
-    //         show_active: 'verify',
-    //         value: `verify_${data?.account_basic?.account_id}`,
-    //       },
-    //     ];
-    //   } else {
-    //     //未验证合约
-    //     defaultOpt = [
-    //       ...defaultOpt,
-    //       {
-    //         label: () => (
-    //           <span className='flex-center'>
-    //             {/* <span className="success_color"> {getSvgIcon('successIcon')} </span> */}
-    //             {tr('contract_verify')}
-    //           </span>
-    //         ),
-    //         show_active: 'verify',
-    //         value: `verify_${data?.account_basic?.account_id}`,
-    //       },
-    //     ];
-    //   }
-    //   defaultOpt = [
-    //     ...defaultOpt,
-    //     {
-    //       label: 'event_log',
-    //       value: 'event_log',
-    //       show_active: 'event_log',
-    //     },
-    //   ];
-    // }
-
     return defaultOpt;
   }, [methodOptions]);
 
@@ -185,6 +136,7 @@ export default () => {
         tabList={tabsList}
         defaultActive='message_list'
         accountId={address}
+        actorId={actorId}
       />
     </div>
   );

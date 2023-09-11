@@ -1073,6 +1073,14 @@ export const address_tabs = [
       { title: 'Receive', value: 'receive', isIndent: true },
     ],
   },
+  {
+    title: 'contract_verify',
+    dataIndex: 'contract_verify',
+  },
+  {
+    title: 'event_log',
+    dataIndex: 'event_log',
+  },
 ];
 export const minerTabs = [
   {
