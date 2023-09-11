@@ -1,0 +1,27 @@
+@media screen and (max-width: 1000px){
+    .cid{
+        padding: 12px;
+        :global{
+            .des{
+                font-size: 15px;
+                font-family: DINPro-Medium, DINPro;
+                font-weight: 500;
+                color: var(--mobile-title-color);
+                line-height: 14px;
+                word-break: break-all;
+            }
+            .copy-row {
+                .text {
+                color: var(--mobile-link-color);
+                word-break: break-all;
+                }
+                .copy {
+                padding-left: 5px;
+                img {
+                    display: inline-block;
+                }
+                }
+            }
+        }
+    }
+}

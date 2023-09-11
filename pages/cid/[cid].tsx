@@ -6,6 +6,8 @@ import useAxiosData from "@/store/useAxiosData";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import CidTable from '@/src/detail/cidDetail'
+import styles from './index.module.scss'
+import classNames from "classnames";
 
 export default () => {
   const router = useRouter()
@@ -33,7 +35,7 @@ export default () => {
     setData(result?.block_details || {})
     setLoading(false)
   }
-  return <div className="main_contain">
+  return <div className={classNames(styles.cid,"main_contain")}>
     <div className='font-PingFang font-semibold text-lg'>
       {tr('chain_cid_detail')}
     </div>
