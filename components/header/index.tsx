@@ -3,45 +3,38 @@
 import { header_top, langOptions } from '@/contents/common';
 import { Layout } from 'antd';
 import { Translation } from '@/components/hooks/Translation';
-import network from '@/assets/images/network.svg';
-import moon from '@/assets/images/moon.svg';
-import light from '@/assets/images/sun.svg';
 import Account from './Account';
-import Image from 'next/image';
 import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Select from '@/packages/select';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
 import i18n from '@/i18n';
-import Search from './Search';
 import { BrowserView, MobileView } from '../device-detect';
 import MHeader from '@/components/mobile/header/index'
 import useAxiosData from '@/store/useAxiosData';
-import { FilPrice } from '@/contents/apiUrl';
-
-const { Header } = Layout;
-const data: any = {
-  fil: '42.35',
-  last_time: '3分11秒',
-  base_fee: '0.089 FIL',
-  last_height: '234562',
-};
+import { FilPrice, FinalHeight } from '@/contents/apiUrl';
+import TimerHtml from '../TimerHtml';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
   const { theme, lang, setTheme, setLang } = useFilscanStore();
   const router = useRouter();
-  const {axiosData } = useAxiosData()
+  const { axiosData } = useAxiosData()
+  const [fil, setFilData] = useState<Record<string,string|number>>({})
+  const [finalHeight, setFinalHeight] = useState<Record<string,string|number>>({})
 
   useEffect(() => {
     loadFilPrice()
   }, [])
 
-  const loadFilPrice = async() => {
-    const result = await axiosData(FilPrice)
-    console.log('----ddd',result)
+  const loadFilPrice = async () => {
+    const result = await axiosData(FilPrice);
+    setFilData(result || {})
+    const finalHeight = await axiosData(FinalHeight);
+    setFinalHeight(finalHeight || {})
+
   }
 
   const handleLangChange = (value: string) => {
@@ -63,8 +56,12 @@ export default () => {
             <ul className='flex gap-x-5 list-none'>
               {header_top?.left.map((item) => {
                 const { title, dataIndex, render } = item;
-                const value = data[dataIndex];
-                const renderDom = render && render(value, data);
+                const data = {...fil,...finalHeight}
+                const value = data&&data[dataIndex];
+                let renderDom = render && render(value, data);
+                if (dataIndex === 'block_time') {
+                  renderDom = <TimerHtml tr={tr} text={ value} />
+                }
                 return (
                   <li key={dataIndex} className='flex gap-x-1'>
                     <span>{tr(title)}:</span>

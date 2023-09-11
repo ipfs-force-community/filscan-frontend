@@ -86,7 +86,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
             content: response.data.message,
           });
         }
-        data = response.data || {};
+        data = response.data || response ||{};
         setData(data?.result || data || {});
         setLoading(false);
         current = 0;

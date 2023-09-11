@@ -199,6 +199,36 @@ export function formatDateTime(
     : dayjs(time).format(str);
 }
 
+export function formatTime(from:number, to?:number, ago = true) {
+  let startTime = from; // 开始时间
+  let endTime = to || new Date().getTime(); // 结束时间
+  let usedTime = endTime - startTime; // 相差的毫秒数
+  //timeDifference(usedTime)
+  // let days = Math.floor(usedTime / (24 * 3600 * 1000)); // 计算出天数
+  // let leavel = usedTime % (24 * 3600 * 1000); // 计算天数后剩余的时间
+  // let hours = Math.floor(leavel / (3600 * 1000)); // 计算剩余的小时数
+  // let leavel2 = leavel % (3600 * 1000); // 计算剩余小时后剩余的毫秒数
+  //  let minutes = Math.floor(leavel2 / (60 * 1000)); // 计算剩余的分钟数
+  // let second = runTime % 60
+
+  //计算出相差天数
+  let days = Math.floor(usedTime / (24 * 3600 * 1000));
+  //计算出小时数
+  let leave1 = usedTime % (24 * 3600 * 1000);
+  //计算天数后剩余的毫秒数
+  let hours = Math.floor(leave1 / (3600 * 1000));
+  //计算相差分钟数
+  let leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+  let minutes = Math.floor(leave2 / (60 * 1000)); // 分
+  //计算相差秒数
+  let leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+  let seconds = Math.round(leave3 / 1000); // 秒
+  //let second = runTime % 60
+  return {
+    days,hours,minutes,seconds
+  };
+}
+
 export function isIndent(str: string, unit: number = 5, unitNum: number = 4) {
   const showUnit = unitNum ? unit + unitNum : unit * 2;
   const suffixNum = unitNum || unit;

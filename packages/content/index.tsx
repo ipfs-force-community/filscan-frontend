@@ -49,7 +49,7 @@ export default (props:ContentProps) => {
           typeof title === 'string' ? tr(title) : title(tr, index);
         //当没有值时，不显示此行的数据，包含title
         if (dataIndex === 'message_ERC20Trans') {
-          console.log('====ddd',renderValue)
+          // console.log('====ddd',renderValue)
         }
         if (elasticity && !renderValue) {
           return null;

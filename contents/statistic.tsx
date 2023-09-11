@@ -129,19 +129,20 @@ export const power_trend = {
       color: '#4ACAB4',
     }, //原值算力
     {
-      dataIndex: 'change_quality_adj_power',
-      title: 'change_quality_adj_power',
+      title: 'power_increase',
+      dataIndex: 'power_increase',
       yIndex: 1,
       color: '#1C6AFD',
       type: 'bar',
-    }, //算力增长，环比有效算力
+    }, //算力增长
     {
-      title: 'base_line_power',
-      dataIndex: 'base_line_power',
+      dataIndex: 'power_decrease',
+      title: 'power_decrease',
       yIndex: 1,
       color: '#D4D8DD',
       type: 'bar',
-    }, //基线算力
+    }, //算力损失
+
   ],
 };
 

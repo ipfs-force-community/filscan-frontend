@@ -44,7 +44,7 @@ export const heightDetail = mianUrl + '/TipsetDetail';
 export const EvmContractSummary = mianUrl + '/EvmContractSummary';
 export const EvmTxsHistory = mianUrl + '/EvmTxsHistory'
 export const FilPrice= mianUrl+'/FilPrice'
-
+export const FinalHeight= mianUrl + '/FinalHeight'
 export const apiUrl: API | any = {
   fvm_hot: mianUrl + '/GetFEvmHotItems',
   fvm_category: mianUrl + '/GetFEvmCategory',
@@ -64,7 +64,7 @@ export const apiUrl: API | any = {
   rank_growth: mianUrl + "/MinerPowerRank",
   rank_rewards: mianUrl + '/MinerRewardRank',
   tipset_chain: mianUrl + '/LatestBlocks',
-  tipset_chain_FinalHeight: mianUrl + '/FinalHeight',
+
   tipset_BlockDetails: mianUrl + '/BlockDetails',
   tipset_Block_messages: mianUrl + '/MessagesByBlock',
   tipset_message_opt: mianUrl + '/AllMethods',
