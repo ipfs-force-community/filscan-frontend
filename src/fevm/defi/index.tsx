@@ -126,7 +126,7 @@ export default ({ origin }: { origin?: string }) => {
   };
 
   return (
-    <div className={classNames('mt-4 h-[491px] border rounded-xl p-5	card_shadow border_color',styles.wrap,styles.reset)}>
+    <div className='mt-4 h-[470px] border rounded-xl  px-5 pt-5 pb-1	card_shadow border_color'>
       <Table
         key='contract_rank'
         className='-mt-2.5 '

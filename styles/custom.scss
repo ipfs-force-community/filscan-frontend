@@ -151,6 +151,12 @@ font-display: auto;
                     }
                     .ant-table-column-sorters{
                         .ant-table-column-sorter{
+                            .ant-table-column-sorter-inner{
+                                .ant-table-column-sorter-up,.ant-table-column-sorter-down{
+                                    font-size: 10px !important;
+                                }
+                                
+                            }
                              color: var(--font_des);
                         }
                         justify-content:flex-start;

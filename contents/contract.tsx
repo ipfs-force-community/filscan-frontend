@@ -220,8 +220,8 @@ export const contract_rank = {
 };
 
 export const homeContractRank: any = {
-  rank: '10%',
-  contract_address: '25%',
+  rank: '15%',
+  contract_address: '20%',
   contract_name: '25%',
   transfer_count: '20%',
   user_count: '20%',

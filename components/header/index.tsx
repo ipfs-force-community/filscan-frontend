@@ -10,7 +10,7 @@ import Account from './Account';
 import Image from 'next/image';
 import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import Select from '@/packages/select';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
@@ -18,6 +18,8 @@ import i18n from '@/i18n';
 import Search from './Search';
 import { BrowserView, MobileView } from '../device-detect';
 import MHeader from '@/components/mobile/header/index'
+import useAxiosData from '@/store/useAxiosData';
+import { FilPrice } from '@/contents/apiUrl';
 
 const { Header } = Layout;
 const data: any = {
@@ -31,6 +33,16 @@ export default () => {
   const { tr } = Translation({ ns: 'common' });
   const { theme, lang, setTheme, setLang } = useFilscanStore();
   const router = useRouter();
+  const {axiosData } = useAxiosData()
+
+  useEffect(() => {
+    loadFilPrice()
+  }, [])
+
+  const loadFilPrice = async() => {
+    const result = await axiosData(FilPrice)
+    console.log('----ddd',result)
+  }
 
   const handleLangChange = (value: string) => {
     localStorage.setItem('lang', value);

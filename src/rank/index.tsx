@@ -199,7 +199,7 @@ export default ({ origin }: { origin: string }) => {
       <div
         className={`mt-4 ${
           origin === 'home' ? 'h-[481px]' : 'h-full'
-        } border  rounded-xl p-5	card_shadow border_color flex items-center`}>
+        } border  rounded-xl px-5 pt-5 pb-1	card_shadow border_color flex items-center`}>
         <Table
           className='-mt-2.5 '
           key={active}

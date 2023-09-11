@@ -141,7 +141,6 @@ export default ({ origin }: { origin?: string }) => {
         </div>
       </MobileView>
       <BrowserView>
-
         <div className={`flex justify-between items-center h-[30px]`}>
           <div className='font-PingFang font-semibold text-lg	pl-2.5'>
             {tr('contract_rank')}
@@ -160,7 +159,7 @@ export default ({ origin }: { origin?: string }) => {
         </div>
         {origin !== 'home' && <div className='text-xs text_des'> {tr('contract_list_total', {value:dataSource.total})}</div>}
       </BrowserView>
-      <div className={classNames('mt-4 h-[491px] border  rounded-xl p-5	card_shadow border_color',styles.reset,styles.table)}>
+      <div className={classNames('mt-4 h-[470px] border  rounded-xl p-5	card_shadow border_color',styles.reset,styles.table)}>
         <Table
           key='contract_rank'
           className='-mt-2.5 '
