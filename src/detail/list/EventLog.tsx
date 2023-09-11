@@ -51,15 +51,13 @@ export default ({ actorId }: {actorId?:string | string[]}) => {
   }
 
   if (!loading &&data.length === 0) {
-    return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
-      <NoData />
-    </div>
+    return <NoData />
   }
-  return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
+  return <>
     {data.map((item,index) => {
       return <Content contents={message_detail.eventLog} ns={"detail"} data={item} key={index} />
     })}
     <Pagination showQuickJumper className={`custom_Pagination`} pageSize={5} current={current} total={total} onChange={handleChange} />
 
-  </div>
+  </>
 }

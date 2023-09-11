@@ -41,6 +41,7 @@ export default ({ cid }: {cid?:string | string[]}) => {
   return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
     {data.map((item,index) => {
       return <Content contents={message_detail.eventLog} ns={"detail"} data={item} key={index} />
+
     })}
   </div>
 }
