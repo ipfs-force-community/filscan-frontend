@@ -4,7 +4,8 @@ import { height_list } from "@/contents/detail";
 import useAxiosData from "@/store/useAxiosData";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import styles from './index.module.scss'
+import classNames from "classnames";
 export default () => {
   const router = useRouter()
   const { height } = router.query;
@@ -19,7 +20,7 @@ export default () => {
     const result:any = await axiosData(heightDetail, { height:Number(height) })
     setData(result?.tipset_detail)
   }
-  return <div className="main_contain">
+  return <div className={classNames(styles.height,"main_contain")}>
     <div className='font-PingFang font-semibold text-lg'>
       {tr('height')}
       { height&&<span className="ml-1"> #{height}</span> }
