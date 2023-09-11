@@ -43,6 +43,7 @@ export default (props:ContentProps) => {
           render,
         } = item;
         const itemData = getShowData(item, data);
+        console.log('---ee',itemData)
         const value = itemData && itemData[dataIndex];
         const renderValue = render ? render(value, data, tr) : value;
         const showTitle =
@@ -76,6 +77,25 @@ export default (props:ContentProps) => {
               </span></BrowserView>
           </li>
         );
+
+        // return isMobile&&item['mobileHide']?<></>:(
+        //   <li
+        //     key={index}
+        //     className={
+        //       classNames(`flex items-baseline gap-x-2.5
+        //     ${ borderTop ? 'pt-5 border-t border_color' : '' }
+        //     ${columns !== 1 ? 'px-5 h-9 ' : ''}`,styles.itemWrap)
+        //     }
+        //     style={{ width: showWidth, ...style }}>
+        //     <span className={`w-28 min-w-28 flex-shrink-0 text_des`}>
+        //       {showTitle}:
+        //     </span>
+        //     <span
+        //       className={classNames(`flex-grow overflow-auto font-DINPro-Medium`,columns !== 1 ? 'flex justify-end' : '',isMobile ? styles.value : '')}>
+        //       {renderValue}
+        //     </span>
+        //   </li>
+        // );
       })}
     </ul>
   );
