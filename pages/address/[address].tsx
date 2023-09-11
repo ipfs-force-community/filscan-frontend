@@ -11,7 +11,10 @@ import List from '@/src/detail/list';
 import useAxiosData from '@/store/useAxiosData';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
-
+import styles from './index.module.scss'
+import classNames from 'classnames';
+import { BrowserView, MobileView } from '@/components/device-detect';
+import copySvgMobile from '@/assets/images/icon-copy.svg';
 /** @format */
 export default () => {
   const router = useRouter();
@@ -130,16 +133,23 @@ export default () => {
     return defaultOpt;
   }, [methodOptions]);
 
-  console.log('----dd',data)
-
   return (
-    <div className='main_contain'>
-      <div className='flex items-center gap-x-2 my-2.5 DINPro-Medium font-medium text-lg'>
-        <span>{tr('account')}:</span>
-        <span >
-          {address || ''}
-        </span>
-        { address&& typeof address ==='string' && <Copy text={address} />}
+    <div className={classNames(styles.address,'main_contain')}>
+      <div className={classNames(styles['address-row'],'my-2.5 DINPro-Medium font-medium text-lg flex items-center')}>
+        <span className={styles.label}>{tr('account')}:</span>
+        <MobileView>
+          <span className='copy-row'>
+            <span className='text'>{address}</span>
+            { address&& typeof address ==='string' && <Copy text={address} icon={copySvgMobile} className='copy'/>}
+          </span>
+        </MobileView>
+        <BrowserView>
+          <span className={classNames(styles.text,'ml-4 flex items-center gap-x-1')}>
+            <span>{address || ''}</span>
+            { address&& typeof address ==='string' && <Copy text={address} />}
+          </span>
+        </BrowserView>
+
       </div>
       <div className='my-4 DINPro-Medium font-medium  text-lg'>
         {tr('general_overview_title')}

@@ -315,14 +315,16 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
         </span>
       </MobileView>
       <BrowserView >
-        <span
-          className='link_text'
-          onClick={() => {
-            account_link(value);
-          }}>
-          {isIndent(value,unit)}
-        </span>
-        {value && <Copy text={value} />}
+        <div className='flex items-center gap-x-1' style={{display:'fit-content'}}>
+          <span
+            className='link_text'
+            onClick={() => {
+              account_link(value);
+            }}>
+            {isIndent(value,unit)}
+          </span>
+          {value && <Copy text={value} />}
+        </div>
       </BrowserView>
 
     </>

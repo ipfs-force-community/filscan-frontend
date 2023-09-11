@@ -3,6 +3,7 @@
 import Copy from '@/components/copy';
 import TextTip from '@/packages/textTooltip';
 import {
+  account_link,
   formatDateTime,
   formatFilNum,
   get_account_type,
@@ -12,6 +13,7 @@ import {
 import Link from 'next/link';
 import { Item } from './type';
 import { BrowserView, MobileView } from '@/components/device-detect';
+import copySvgMobile from '@/assets/images/icon-copy.svg';
 
 //消息列表
 export const message_list = {
@@ -47,7 +49,7 @@ export const message_list = {
       title: 'block_time',
       width: '15%',
       render: (text: string | number) =>
-        formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+        formatDateTime(text, 'YYYY-MM-DD HH:mm')
     },
     {
       dataIndex: 'from',
@@ -55,7 +57,20 @@ export const message_list = {
       width: '15%',
       render: (text: string, record: any) => (
         <span className='flex items-center gap-x-1'>
-          {get_account_type(text)}
+          <MobileView>
+            <span className='copy-row'>
+              <span
+                className='w-28 text'
+                onClick={() => {
+                  account_link(text);
+                }}>
+                {isIndent(text,6,6)}
+              </span>
+              <Copy text={text} icon={copySvgMobile} className='copy'/>
+            </span>
+          </MobileView>
+          <BrowserView>{get_account_type(text)}</BrowserView>
+
         </span>
       ),
     },
@@ -65,7 +80,19 @@ export const message_list = {
       width: '15%',
       render: (text: string, record: any) => (
         <span className='flex items-center gap-x-1'>
-          {get_account_type(text)}
+          <MobileView>
+            <span className='copy-row'>
+              <span
+                className='w-28 text'
+                onClick={() => {
+                  account_link(text);
+                }}>
+                {isIndent(text,6,6)}
+              </span>
+              <Copy text={text} icon={copySvgMobile} className='copy'/>
+            </span>
+          </MobileView>
+          <BrowserView>{get_account_type(text)}</BrowserView>
         </span>
       ),
     },

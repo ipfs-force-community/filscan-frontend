@@ -11,15 +11,19 @@
                 word-break: break-all;
             }
             .copy-row {
+                display: flex;
+                align-items: center;
                 .text {
-                color: var(--mobile-link-color);
-                word-break: break-all;
+                    color: var(--mobile-link-color);
+                    word-break: break-all;
                 }
                 .copy {
-                padding-left: 5px;
-                img {
+                    display: flex;
+                    align-items: center;
+                    padding-left: 5px;
+                    img {
                     display: inline-block;
-                }
+                    }
                 }
             }
         }

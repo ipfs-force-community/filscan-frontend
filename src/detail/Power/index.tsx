@@ -10,6 +10,9 @@ import Image from 'next/image';
 import powerIcon from '@/assets/images/powerIcon.svg';
 import { spawn } from 'child_process';
 import { link } from 'fs';
+import { BrowserView } from '@/components/device-detect';
+import styles from './style.module.scss'
+import classNames from 'classnames';
 
 export default ({ data }: { data: any }) => {
   const { theme, lang } = useFilscanStore();
@@ -23,7 +26,7 @@ export default ({ data }: { data: any }) => {
   }, [data]);
 
   return (
-    <div className='w-1/2 border-l border_color p-7'>
+    <div className={classNames(styles.pow,'w-1/2 border-l border_color p-7')}>
       <div className='flex justify-between border-b border_color pb-7'>
         <ul className='flex gap-x-20 flex-1'>
           {power_list.header.map((headerItem) => {
@@ -43,7 +46,7 @@ export default ({ data }: { data: any }) => {
             );
           })}
         </ul>
-        <Image src={powerIcon} alt='' width={41} height={41} />
+        <BrowserView><Image src={powerIcon} alt='' width={41} height={41} /></BrowserView>
       </div>
       <ul className='mt-9 flex  flex-col flex-wrap gap-y-6 justify-between max-h-[120px]'>
         {power_list.list.map((item) => {

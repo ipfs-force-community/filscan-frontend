@@ -42,8 +42,10 @@
   --mobile-footer-bg: #222121;
   --mobile-text-60: rgba(255, 255, 255, 0.6);
   --mobile-text-placeholder:#CCCCCC;
-  --mobile-bg-5: rgba(29,107,252,0.05)
-
+  --mobile-bg-5: rgba(29,107,252,0.05);
+  --mobile-2473FA-0:rgba(36, 115, 250, 0.05);
+  --mobile-2473FA-5:rgba(36, 115, 250, 0.05);
+  --mobile-F9F9F9:#F9F9F9;
 }
 
 :root,
