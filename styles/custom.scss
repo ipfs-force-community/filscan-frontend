@@ -596,7 +596,7 @@ font-display: auto;
                .ant-picker-cell-selected{
                 .ant-picker-cell-inner{
                 background-color: var(--primary) !important;
-                color: #ffffff !important;
+                color: var(--activeColor) !important;
                 }
               
             }

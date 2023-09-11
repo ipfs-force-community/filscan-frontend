@@ -251,7 +251,7 @@ export const pool_list = {
     {
       dataIndex: 'from',
       title: 'from',
-      width: '12%',
+      width: '13%',
       render: (text: string) => {
         return (
           <div className='flex items-center gap-x-1 flex-wrap'>
@@ -263,10 +263,10 @@ export const pool_list = {
     {
       dataIndex: 'to',
       title: 'to',
-      width: '12%',
+      width: '13%',
       render: (text: string) => {
         return (
-          <span className='flex items-center gap-x-1 flex-wrap'>
+          <span className='flex items-center gap-x-1 flex-wrap w-full'>
             {get_account_type(text)}
           </span>
         );
@@ -283,13 +283,13 @@ export const pool_list = {
     {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',
-      width: '13%',
+      width: '12%',
       render: (text: string) => text || '--',
     },
     {
       dataIndex: 'gas_premium',
       title: 'gas_premium',
-      width: '13%',
+      width: '12%',
       render: (text: string) =>
         text ? formatFilNum(text, false, false, 2) : '--',
     },

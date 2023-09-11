@@ -314,7 +314,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
           <Copy text={value} icon={copySvgMobile} className='copy'/>
         </span>
       </MobileView>
-      <BrowserView style={{width:'fit-content'}}>
+      <BrowserView >
         <span
           className='link_text'
           onClick={() => {

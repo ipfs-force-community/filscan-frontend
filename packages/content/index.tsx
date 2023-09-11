@@ -55,6 +55,7 @@ export default (props:ContentProps) => {
         if (elasticity && !renderValue) {
           return null;
         }
+
         return isMobile&&item['mobileHide']?<></>:(
           <li
             key={index}
