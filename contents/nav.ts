@@ -112,12 +112,12 @@ const mobileNavMenu: Menu_Info[] = [
     key: 'tipset',
     children: [
       {
-        key: 'tipset_message',
-        link: '/tipset/message-list/'
+        key: 'tipset_chain',
+        link: '/tipset/chain/'
       },
       {
-        key: 'tipset_ranking',
-        link: '/tipset/address-list/'
+        key: 'tipset_message',
+        link: '/tipset/message-list/'
       },
       {
         key: 'tipset_dsn',
@@ -126,6 +126,10 @@ const mobileNavMenu: Menu_Info[] = [
       {
         key: 'tipset_pool-message',
         link: '/tipset/pool-message/'
+      },
+      {
+        key: 'tipset_transfer',
+        link: '/tipset/transfer/'
       },
     ]
   },
@@ -153,10 +157,6 @@ const mobileNavMenu: Menu_Info[] = [
       {
         key: 'contract_list',
         link: '/contract/list/'
-      },
-      {
-        key: 'contract_verify',
-        link: '/contract/verify/'
       },
 
     ]
