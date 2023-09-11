@@ -797,15 +797,27 @@ const default_content = [
       const owned_miners = record?.account_basic?.owned_miners || [];
       if (!text) return '--';
       return (
-        <span className='flex items-center gap-x-1'>
-          <span>
-            { isIndent(text, 10,10)}
-          </span>
-          {text && <Copy text={text} />}
-          { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
-            {tr('account_detail')}
-          </Link>}
-        </span>
+        <>
+          <BrowserView>
+            <span className='flex gap-x-2'>
+              {text}
+              {text && <Copy text={text} />}
+            </span>
+            { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+              {tr('account_detail')}
+            </Link>}
+          </BrowserView>
+          <MobileView>
+            <span className='copy-row'>
+              <span className='text'>{text}</span>
+              <Copy text={text} icon={copySvgMobile} className='copy'/>
+              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+                {tr('account_detail')}
+              </Link>}
+            </span>
+          </MobileView>
+        </>
+
       );
     },
   },
@@ -834,9 +846,19 @@ const default_content = [
     render: (text: string, record: any) => {
       if (!text) return text;
       return (
-        <span className='flex gap-x-2 items-center'>
-          {text} <Copy text={text} />
-        </span>
+        <>
+          <BrowserView>
+            <span className='flex gap-x-2 items-center'>
+              {text} <Copy text={text} />
+            </span>
+          </BrowserView>
+          <MobileView>
+            <span className='copy-row'>
+              <span className='text'>{text}</span>
+              <Copy text={text} icon={copySvgMobile} className='copy'/>
+            </span>
+          </MobileView>
+        </>
       );
     },
   },
@@ -885,8 +907,27 @@ const default_content = [
 
   { title: 'Available Balance', dataIndex: 'available_balance', elasticity:true,render: (text:string) =>text ? formatFilNum(text) : text },
   {
-    title: 'Robust Address', dataIndex: 'account_address', elasticity: true, type: ['account_basic'], render: (text: string, record: any) => {
-      return text ? <span className="flex items-center gap-x-1">{text} <Copy text={text} /></span>: text
+    title: 'Robust Address',
+    dataIndex: 'account_address',
+    elasticity: true,
+    type: ['account_basic'],
+    render: (text: string, record: any) => {
+      return text ?
+        <>
+          <BrowserView>
+            <span className="flex items-center gap-x-1">{text}
+              <Copy text={text} />
+            </span>
+          </BrowserView>
+          <MobileView>
+            <span className='copy-row'>
+              <span className='text'>{text}</span>
+              <Copy text={text} icon={copySvgMobile} className='copy'/>
+            </span>
+          </MobileView>
+        </>
+        :
+        text
     }
   },
   {

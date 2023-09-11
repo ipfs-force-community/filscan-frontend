@@ -90,15 +90,19 @@
         }
         :global{
             .copy-row {
+                display: inline-block;
+                align-items: center;
                 .text {
-                color: var(--mobile-link-color);
-                word-break: break-all;
+                    color: var(--mobile-link-color);
+                    word-break: break-all;
                 }
                 .copy {
-                padding-left: 5px;
-                img {
                     display: inline-block;
-                }
+                    align-items: center;
+                    padding-left: 5px;
+                    img {
+                        display: inline-block;
+                    }
                 }
             }
         }

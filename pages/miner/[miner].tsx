@@ -13,6 +13,8 @@ import PowerChange from '@/src/detail/powerChange';
 import List from '@/src/detail/list';
 import { Translation } from '@/components/hooks/Translation';
 import { BrowserView, MobileView } from '@/components/device-detect';
+import classNames from 'classnames';
+import styles from './style.module.scss'
 
 export default () => {
   const router = useRouter();
@@ -67,7 +69,7 @@ export default () => {
   }, [method]);
 
   return (
-    <div className='main_contain'>
+    <div className={classNames(styles.miner,'main_contain')}>
       <div className='flex w-full card_shadow rounded-xl'>
         <AccountBalance
           data={data?.account_indicator || {}}

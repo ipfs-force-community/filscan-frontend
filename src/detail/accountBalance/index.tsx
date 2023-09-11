@@ -1,5 +1,6 @@
 /** @format */
 
+import { BrowserView, MobileView } from '@/components/device-detect';
 import Echarts from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
 import { account_balance } from '@/contents/detail';
@@ -11,6 +12,7 @@ import { getColor } from '@/utils/echarts';
 import { theme } from 'antd';
 import Item from 'antd/es/list/Item';
 import { useEffect, useMemo, useState } from 'react';
+import styles from './style.module.scss'
 
 export default ({ data, loading }: { data: any; loading: boolean }) => {
   const { theme, lang } = useFilscanStore();
@@ -122,65 +124,91 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
     return newOpt;
   }, [options, defaultOptions, noShow]);
 
+  const renderTotal = ()=>{
+    return <div className='flex flex-col gap-x-1'>
+      <span className='text-sm text_des'>{tr(account_balance.title)}</span>
+      <span className='font-DINPro-Bold text-xl text_clip'>
+        {loading ? (
+          <SkeletonScreen />
+        ) : data?.balance ? (
+          formatFilNum(data?.balance, false, false, 4)
+        ) : (
+          '--'
+        )}
+      </span>
+    </div>
+  }
+
+  const renderBalance = ()=>{
+    return <ul className='mt-24 flex  flex-col flex-wrap gap-y-10 justify-between max-h-[140px]'>
+      {account_balance.list.map((balance_item: any) => {
+        const value = data[balance_item.dataIndex];
+        return (
+          <li
+            className='w-1/2 flex flex-col flex-0'
+            key={balance_item.dataIndex}>
+            <span
+              className='text-sm text_des flex gap-x-1 items-center cursor-pointer'
+              onClick={() => {
+                setNoShow({
+                  ...noShow,
+                  [balance_item.dataIndex]: !noShow[balance_item.dataIndex],
+                });
+              }}>
+              <span
+                className='flex w-[5px] h-[5px] rounded-full'
+                style={{
+                  backgroundColor: noShow[balance_item.dataIndex]
+                    ? '#d1d5db'
+                    : balance_item.color,
+                }}
+              />
+
+              {tr(balance_item.title)}
+            </span>
+            <span className='font-DINPro-Medium text-sm font-medium  ml-2'>
+              {loading ? (
+                <SkeletonScreen />
+              ) : value ? (
+                formatFilNum(value, false, false, 4)
+              ) : (
+                '--'
+              )}
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  }
+
   return (
-    <div className='flex h-[340px] w-1/2 p-7'>
-      <div className='flex-1'>
-        <div className='flex flex-col'>
-          <span className='text-sm text_des'>{tr(account_balance.title)}</span>
-          <span className='font-DINPro-Bold text-xl text_clip'>
-            {loading ? (
-              <SkeletonScreen />
-            ) : data?.balance ? (
-              formatFilNum(data?.balance, false, false, 4)
-            ) : (
-              '--'
-            )}
-          </span>
+    <>
+      <BrowserView>
+        <div className='flex h-[340px] w-1/2 p-7'>
+          <div className='flex-1'>
+            {renderTotal()}
+            {renderBalance()}
+          </div>
+          <div className='h-[310px] flex-1 '>
+            <Echarts options={newOptions} />
+          </div>
+        </div>
+      </BrowserView>
+
+      <MobileView>
+        <div className={styles['account-balance']}>
+          <div className={styles.title}>
+            { renderTotal() }
+          </div>
+          <div className={styles.chart}>
+            <Echarts options={newOptions} />
+          </div>
+          <div className={styles.info}>
+            {renderBalance()}
+          </div>
         </div>
 
-        <ul className='mt-24 flex  flex-col flex-wrap gap-y-10 justify-between max-h-[140px]'>
-          {account_balance.list.map((balance_item: any) => {
-            const value = data[balance_item.dataIndex];
-            return (
-              <li
-                className='w-1/2 flex flex-col flex-0'
-                key={balance_item.dataIndex}>
-                <span
-                  className='text-sm text_des flex gap-x-1 items-center cursor-pointer'
-                  onClick={() => {
-                    setNoShow({
-                      ...noShow,
-                      [balance_item.dataIndex]: !noShow[balance_item.dataIndex],
-                    });
-                  }}>
-                  <span
-                    className='flex w-[5px] h-[5px] rounded-full'
-                    style={{
-                      backgroundColor: noShow[balance_item.dataIndex]
-                        ? '#d1d5db'
-                        : balance_item.color,
-                    }}
-                  />
-
-                  {tr(balance_item.title)}
-                </span>
-                <span className='font-DINPro-Medium text-sm font-medium  ml-2'>
-                  {loading ? (
-                    <SkeletonScreen />
-                  ) : value ? (
-                    formatFilNum(value, false, false, 4)
-                  ) : (
-                    '--'
-                  )}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className='h-[310px] flex-1 '>
-        <Echarts options={newOptions} />
-      </div>
-    </div>
+      </MobileView>
+    </>
   );
 };
