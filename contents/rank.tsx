@@ -62,14 +62,12 @@ export const providerList = (progress: any): Array<any> => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '6%',
-      align: 'center',
       render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
     {
       title: 'provider_miner', //节点号
       dataIndex: 'miner_id',
       with: '9%',
-      align: 'center',
       render: (text: string) => {
         return (
           <Link href={`/miner/${text}`} prefetch className='link_text'>
@@ -142,14 +140,12 @@ export const poolList = (progress: number | string) => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '6%',
-      align: 'center',
       render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
     {
       title: 'pool_owner', //存储池号
       dataIndex: 'owner_id',
-      align: 'center',
-      with: '9%',
+      with: '24%',
       render: (text: string) => {
         return (
           <Link href={`/owner/${text}`} prefetch className='link_text'>
@@ -161,8 +157,7 @@ export const poolList = (progress: number | string) => {
     {
       title: 'pool_power', //有效算力
       dataIndex: 'quality_adj_power',
-      align: 'center',
-      with: '30%',
+      with: '35%',
       sorter: true,
       defaultSortOrder: 'descend',
       render: (text: string | number, record: any) => {
@@ -179,21 +174,21 @@ export const poolList = (progress: number | string) => {
       title: 'pool_efficiency_24h', //近24小时产出效率
       dataIndex: 'rewards_ratio_24h',
       sorter: true,
-      with: '20%',
+      with: '15%',
       render: (text: string) => formatFilNum(text, false, false, 2) + '/TiB',
     },
     {
       title: 'pool_increase_24h', //近24小时增长算力
       dataIndex: 'power_change_24h',
       sorter: true,
-      with: '20%',
+      with: '14%',
       render: (text: string) => unitConversion(text, 4),
     },
     {
       title: 'pool_block_count_24h', //出块总数
       dataIndex: 'block_count',
       sorter: true,
-      with: '10%',
+      with: '6%',
     },
   ];
 };
@@ -203,8 +198,7 @@ const growthList = (progress: number | string) => {
     {
       title: 'ranking', //排名
       dataIndex: 'rank',
-      width: '10%',
-      align: 'center',
+      width: '6%',
       render: (text: string) => <span className='rank_icon'>{text}</span>,
     },
     {

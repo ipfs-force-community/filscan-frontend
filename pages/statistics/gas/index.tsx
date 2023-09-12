@@ -19,8 +19,7 @@ export default () => {
 
   return (
     <div className='main_contain'>
-      <div className='flex flex-col text-lg font-medium gap-y-2.5 mb-4'>
-        {/* <span>{tr('gas_total')}</span> */}
+      <div className='flex flex-col text-lg font-medium gap-y-2.5 mb-4 mx-2.5'>
         <span>{tr('gas')}</span>
       </div>
       <div className='w-full h-[348px] card_shadow pr-5 pt-5 pb-2.5 !overflow-hidden border rounded-xl'>
