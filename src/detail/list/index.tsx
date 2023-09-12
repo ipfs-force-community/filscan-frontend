@@ -10,6 +10,7 @@ import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import TracesList from './tracesList';
 import EventLog from './EventLog';
+import Verify from './verify';
 
 export default ({
   accountId,
@@ -47,7 +48,7 @@ export default ({
 
   return (
     <div className='mt-5'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mr-2.5'>
         <Segmented
           data={tabList || []}
           ns='detail'
@@ -77,6 +78,9 @@ export default ({
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
           <TracesList accountId={accountId} methodName={method} />
+        )}
+        {activeTab === 'contract_verify' && (
+          <Verify actorId={actorId}/>
         )}
         {activeTab === 'event_log' && (
           <EventLog actorId={actorId}/>
