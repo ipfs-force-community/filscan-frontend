@@ -282,13 +282,13 @@ export default ({
         </div>
       )}
 
-      <div className='card_shadow w-full border rounded-xl p-5 border_color'>
+      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
         <MobileView>
           <div className="tips">
             {ledRender()}
           </div>
         </MobileView>
-        <div className='card_shadow w-full h-[348px] border rounded-xl py-5 border_color'><Echarts options={newOptions}/></div>
+        <div className='w-full h-[348px]'><Echarts options={newOptions}/></div>
       </div>
 
     </div>

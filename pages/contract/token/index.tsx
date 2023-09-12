@@ -15,6 +15,7 @@ export default () => {
   const { tr } = Translation({ ns: 'contract' });
   const {isMobile} = useWindow()
   const { data: TokenData, loading } = useAxiosData(apiUrl.contract_ERC20List);
+
   const columns = useMemo(() => {
     return contract_token.columns(tr).filter((v) => {
       if (isMobile) {
