@@ -28,7 +28,6 @@ export default (props:ContentProps) => {
   //   }
   //   return '100%';
   // }, [columns]);
-  console.log('===2',contents)
 
   return (
     <ul
