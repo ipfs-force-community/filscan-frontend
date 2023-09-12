@@ -12,7 +12,9 @@
   width: 100%;
   height: 140px;
 }
-
+.banner-contain{
+   margin: auto;
+}
 .main_contain{
   width: 100%;
   height: 100%;
@@ -25,13 +27,13 @@
 }
 
 @media screen and (min-width: 1440px){
-  .main_contain,.custom_footer,.custom_header{
+  .main_contain,.custom_footer,.custom_header,.banner-contain{
   padding: 20px 90px;
   }
 }
 
 @media screen and (min-width: 1000px){
-  .main_contain,.custom_footer{
+  .main_contain,.custom_footer,.banner-contain{
   max-width: 1440px;
   min-width: 1000px;
    padding: 20px 30px;
