@@ -12,6 +12,7 @@ import TracesList from './tracesList';
 import classNames from 'classnames';
 import styles from './style.module.scss'
 import EventLog from './EventLog';
+import Verify from './verify';
 
 export default ({
   accountId,
@@ -49,7 +50,7 @@ export default ({
 
   return (
     <div className={classNames(styles.list,'mt-5')}>
-      <div className={classNames(styles['list-header'],'flex justify-between items-center')}>
+      <div className={classNames(styles['list-header'],'flex justify-between items-center mr-2.5')}>
         <Segmented
           data={tabList || []}
           ns='detail'
@@ -80,6 +81,9 @@ export default ({
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
           <TracesList accountId={accountId} methodName={method} />
+        )}
+        {activeTab === 'contract_verify' && (
+          <Verify actorId={actorId}/>
         )}
         {activeTab === 'event_log' && (
           <EventLog actorId={actorId}/>

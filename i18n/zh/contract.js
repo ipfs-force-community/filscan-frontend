@@ -58,7 +58,9 @@ Hardhat 将编译输出存储在项目内的“artifacts/build-info/”目录中
   byte_code: '编译日志',
   contract_name:'合约名',
   local_byte_code: '合约字节码',
-  compiler:'编译器版本',
+  compiler: '编译器版本',
+  contract_abi:'合约ABI',
+
   //step1
   address_verify: '合约地址',
   step1_verify_des: '请选择单个或多个 *.SOL 文件',

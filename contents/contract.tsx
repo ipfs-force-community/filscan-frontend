@@ -760,3 +760,42 @@ export const nft_owner_columns = (ownerList: any) => {
     { dataIndex: 'percentage', width: '20%', title: 'percentage', render: (text: string,record:any) =>text? Number(Number(text)*100) .toFixed(4) +'%' :text ||'--'},
   ]
 }
+
+//合约详情
+//已验证合约 读写合约
+
+export const verify_tabs = [
+  {
+    title: 'Verify_code',
+    dataIndex:'Verify_code'
+  },
+  {
+    title: 'Verify_read',
+    dataIndex:'Verify_read'
+  },
+  {
+    title: 'Verify_write',
+    dataIndex:'Verify_write'
+  },
+
+]
+export const contract_detail = {
+  list: [
+    {
+      dataIndex: 'contract_name', title: 'contract_name',
+    },
+    {
+      dataIndex: 'optimize', title: 'optimize',
+      render: (text: boolean, record: any) => {
+        return text ? titleCase(text) +` with (${record.optimize_runs}) runs`: titleCase(text)
+      }
+    },
+    {
+      dataIndex: 'compiler', title: 'compiler',
+    },
+    {
+      dataIndex:'license',title:'license',
+    }
+
+  ]
+}

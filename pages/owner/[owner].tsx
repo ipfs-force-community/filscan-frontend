@@ -39,6 +39,9 @@ export default () => {
 
   return (
     <div className='main_contain'>
+      <div className={'mb-2.5 DINPro-Medium font-medium text-lg flex items-center'}>
+        <span>{ tr('owner_title')}</span>
+      </div>
       <div className='w-full card_shadow rounded-xl'>
         <div className='flex w-full border-b border_color'>
           <AccountBalance

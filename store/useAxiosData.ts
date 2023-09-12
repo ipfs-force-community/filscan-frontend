@@ -44,16 +44,22 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
 
     // 创建一个键，包含 URL 和方法
-    const key = isCancel &&flag? `${method}:${url}_${flag}`: `${method}:${url}` ;
+    console.log('====333',url,isCancel)
+    let key =''
+    if (isCancel) {
+      key= flag ? `${method}:${url}_${flag}`: `${method}:${url}`
+    }
 
     // 如果这个 URL 和方法已经有一个正在进行的请求，取消它
-    if (isCancel&&cancelTokenSources[key]) {
+    if (cancelTokenSources[key]) {
       cancelTokenSources[key].cancel('Cancelled because of new request');
     }
 
     // 创建一个新的取消令牌
     const cancelTokenSource = axios.CancelToken.source();
-    cancelTokenSources[key] = cancelTokenSource;
+    if (key) {
+      cancelTokenSources[key] = cancelTokenSource;
+    }
 
     while (current < maxRetries) {
       try {
@@ -134,12 +140,17 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     if (initialUrl) {
       axiosData(initialUrl, initialPayload, initialOptions);
     }
+
+  }, [initialUrl, initialPayload, initialOptions]);
+
+  useEffect(() => {
     // 组件卸载时取消所有请求
     return () => {
       current = 0;
+      console.log('====333',cancelTokenSources)
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
-  }, [initialUrl, initialPayload, initialOptions]);
+  },[])
 
   return { data, loading, error, axiosData };
 }

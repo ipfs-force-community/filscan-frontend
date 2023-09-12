@@ -1,7 +1,6 @@
 import { Translation } from "@/components/hooks/Translation";
 import { verify_output, verify_source } from "@/contents/contract"
 import { getSvgIcon } from "@/svgsIcon";
-import { Button } from "antd";
 import Link from "next/link";
 
 export default ({ data }: {data:any}) => {
@@ -27,28 +26,33 @@ export default ({ data }: {data:any}) => {
         {data.byte_code}
       </div>
     </div>
-    <ul className="p-5 border-t border-b border_color ">
-      {verify_output.headerList.map(item => {
-        const value = data[item.dataIndex];
-        return <li key={ item.dataIndex} className="flex items-center h-9 text-sm">
-          <span className="text_des w-28 ">{tr(item.title)}:</span>
-          <span className="font-DINPro-Medium">{String(value) }</span>
-        </li>
-      })}
-    </ul>
-    <div className="m-5 border border_color rounded-[5px] text-sm">
-      <div className="m-5">
-        <span>{tr('contract_name')}</span>
-        <div className="flex items-center h-9 mt-3 border border_color rounded-[5px] px-2.5 ">{ data?.contract_name||''}</div>
+    {data.is_verified && <>
+      <ul className="p-5 border-t border-b border_color ">
+        {verify_output.headerList.map(item => {
+          const value = data[item.dataIndex];
+          return <li key={ item.dataIndex} className="flex items-center h-9 text-sm">
+            <span className="text_des w-28 ">{tr(item.title)}:</span>
+            <span className="font-DINPro-Medium">{String(value) }</span>
+          </li>
+        })}
+      </ul>
+      <div className="m-5 border border_color rounded-[5px] text-sm">
+        <div className="m-5">
+          <span>{tr('contract_name')}</span>
+          <div className="flex items-center h-9 mt-3 border border_color rounded-[5px] px-2.5 ">{ data?.contract_name||''}</div>
+        </div>
+        <div className="m-5">
+          <span>{tr('contract_abi')}</span>
+          <div className="h-[166px]  text_des overflow-auto mt-3 border border_color rounded-[5px] break-words ">{ data?.ABI||''}</div>
+        </div>
       </div>
-      <div className="m-5">
-        <span>{tr('local_byte_code')}</span>
-        <div className="h-[166px] px-2.5 text_des overflow-auto mt-3 border border_color rounded-[5px] break-words ">{ data?.ABI||''}</div>
+      <div className="flex gap-x-4 m-8">
+        <Link href={`/address/${data.contract_address}`} className="primary_btn flex items-center gap-x-2 h-8"> {tr('look_adres')}</Link>
+        <Link href={`/contract/verify`} className="flex items-center justify-center cancel_btn border border_color rounded-md" > { tr('back')}</Link>
       </div>
-    </div>
-    <div className="flex gap-x-4 m-8">
-      <Link href={`/address/${data.contract_address}`} className="primary_btn flex items-center gap-x-2 h-8"> {tr('look_adres')}</Link>
+    </>}
+    { !data.is_verified && <div className="flex gap-x-4 m-8">
       <Link href={`/contract/verify`} className="flex items-center justify-center cancel_btn border border_color rounded-md" > { tr('back')}</Link>
-    </div>
+    </div>}
   </div>
 }
