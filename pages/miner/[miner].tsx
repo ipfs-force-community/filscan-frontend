@@ -15,6 +15,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
 import styles from './style.module.scss'
+import Copy from '@/components/copy';
 
 export default () => {
   const router = useRouter();
@@ -69,7 +70,13 @@ export default () => {
   }, [method]);
 
   return (
-    <div className={classNames(styles.miner,'main_contain')}>
+    <div className={classNames(styles.miner, 'main_contain')}>
+      <div className={'mb-2.5 DINPro-Medium font-medium text-lg flex items-center'}>
+        <span className={'ml-4 flex items-center gap-x-1'}>
+          <span>{ tr('account')}:</span>
+          <span>{miner || ''}</span>
+        </span>
+      </div>
       <div className='flex w-full card_shadow rounded-xl'>
         <AccountBalance
           data={data?.account_indicator || {}}

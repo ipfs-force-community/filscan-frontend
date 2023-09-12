@@ -28,6 +28,7 @@ export default (props:ContentProps) => {
   //   }
   //   return '100%';
   // }, [columns]);
+
   return (
     <ul
       className={classNames(styles['detail-content'],`w-full max-h-full ${
@@ -45,8 +46,7 @@ export default (props:ContentProps) => {
         const itemData = getShowData(item, data);
         const value = itemData && itemData[dataIndex];
         const renderValue = render ? render(value, data, tr) : value;
-        const showTitle =
-          typeof title === 'string' ? tr(title) : title(tr, index);
+        const showTitle = typeof title === 'function' ? title(tr, index) : tr(title);
         //当没有值时，不显示此行的数据，包含title
         if (dataIndex === 'message_ERC20Trans') {
           // console.log('====ddd',renderValue)

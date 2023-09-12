@@ -802,7 +802,7 @@ const default_content = [
         <>
           <BrowserView>
             <span className='flex gap-x-2'>
-              {text}
+              {text?.length > 30? isIndent(text,10,10):text}
               {text && <Copy text={text} />}
             </span>
             { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
@@ -883,7 +883,9 @@ const default_content = [
   },
   {
     title: 'stable_address', dataIndex: 'stable_address', elasticity: true,
-    type: ['account_basic'], render: (text: string) => text ? <span className="flex items-center gap-x-1">{text} <Copy text={text} /></span> : text
+    type: ['account_basic'], render: (text: string) => text ? <span className="flex items-center gap-x-1">
+      {text?.length > 30 ? isIndent(text, 10, 10) : text}
+      <Copy text={text} /></span> : text
   },
   { title: 'Initial Balance', dataIndex: 'initial_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text, },
   { title: 'Locking Balance', dataIndex: 'locked_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text },
@@ -917,7 +919,8 @@ const default_content = [
       return text ?
         <>
           <BrowserView>
-            <span className="flex items-center gap-x-1">{text}
+            <span className="flex items-center gap-x-1">
+              {text?.length > 30? isIndent(text,10,10):text}
               <Copy text={text} />
             </span>
           </BrowserView>
@@ -1285,8 +1288,7 @@ export const trance_list = (fromList: any, toList: any) => [
       if (!text) return '--';
       return (
         <div className='flex items-center gap-x-1'>
-          <div>{get_account_type(text)}</div>
-
+          {get_account_type(text)}
           {toList?.domains && toList?.domains[text] && (
             <Link
               href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
