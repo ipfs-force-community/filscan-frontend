@@ -44,7 +44,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
 
     // 创建一个键，包含 URL 和方法
-    console.log('====333',url,isCancel)
     let key =''
     if (isCancel) {
       key= flag ? `${method}:${url}_${flag}`: `${method}:${url}`
@@ -147,7 +146,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     // 组件卸载时取消所有请求
     return () => {
       current = 0;
-      console.log('====333',cancelTokenSources)
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
   },[])
