@@ -112,6 +112,14 @@ export const verify_source={
   ]
 }
 
+export const verify_output = {
+  headerList: [
+    {title:'compile_version',dataIndex:'compiler'},
+    {title:'optimize',dataIndex:'optimize'},
+    {title:'RUNS',dataIndex:'optimize_runs',},
+  ]
+}
+
 export const contract_rank = {
   title: 'contract_rank',
   title_des: 'contract_rank_des',
