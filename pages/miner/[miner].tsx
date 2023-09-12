@@ -77,9 +77,10 @@ export default () => {
         />
         <Power data={data?.account_indicator || {}} />
       </div>
+
       <OverView overView={miner_overview} accountId={miner} />
 
-      <div className='flex mt-6 gap-x-5'>
+      <div className={classNames(styles.column,'flex mt-6 gap-x-5')}>
         <AccountChange accountId={miner} interval={'30d'} />
         <PowerChange accountId={miner} />
       </div>

@@ -2,8 +2,65 @@
 @media screen and (max-width: 1000px){
   .pow{
     width: auto;
-    :global{
+    padding: 0;
+    .row{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      &.between{
+        padding-left: 12px;
+        padding-right: 12px;
+        justify-content: space-between;
+      }
+      :global{
+        .text_des{
+          flex-shrink: 0;
+        }
+      }
+      .value{
+        padding-left: 3px;
+        font-size: 15px;
+        font-family: DINPro-Medium, DINPro;
+        font-weight: 500;
+        color: var(--mobile-title-color);
+        line-height: 18px;
+      }
+    }
 
+    .column{
+      flex-direction: column;
+      flex-wrap: nowrap;
+      max-height:none;
+      padding: 0 12px;
+      .full{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+
+    .status{
+      padding: 15px 12px 15px;
+      border-top:1px solid var(--mobile-divide-line);
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 15px;
+      .status-row{
+        padding-top: 10px;
+      }
+    }
+
+    :global{
+      .pb-7{
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+      .mt-9{
+        margin-top: 0;
+      }
     }
   }
 }

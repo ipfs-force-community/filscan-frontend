@@ -1,0 +1,20 @@
+@media screen and (max-width: 1000px){
+  .overview{
+    :global{
+      .between{
+        justify-content: space-between;
+      }
+    }
+    .list{
+      flex-direction: column;
+      flex-wrap: nowrap;
+      height: auto;
+      .list-row{
+        width: 100% !important;
+        display: flex;
+        justify-content: space-between !important;
+        align-items: center;
+      }
+    }
+  }
+}
