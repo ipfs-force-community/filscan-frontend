@@ -1,0 +1,27 @@
+@media only screen and (max-width: 1000px) {
+  .reset {
+    //** 重置pc**/
+    overflow: unset;
+    margin-top: unset;
+    padding: unset;
+    height: unset;
+    border: unset;
+    border-radius: unset;
+    background: unset;
+    box-shadow: unset;
+    //** 重置pc**/
+  }
+  .wrap {
+    margin-top: 10px;
+
+    .rank {
+      display: flex;
+      
+      img {
+        margin-right: 5px;
+        width: 22px;
+        border-radius: 3px;
+      }
+    }
+  }
+}

@@ -2,6 +2,9 @@
     .message-list{
         padding: 12px;
         :global{
+            .block_time-hide,.height-hide{
+                display: none !important;
+            }
             .card_shadow{
                 padding: 0;
                 background-color:transparent;
@@ -18,6 +21,22 @@
             }
             .ant-pagination{
                 justify-content: flex-end;
+            }
+            .copy-row {
+                display: inline-block;
+                align-items: center;
+                .text {
+                    color: var(--mobile-link-color);
+                    word-break: break-all;
+                }
+                .copy {
+                    display: inline-block;
+                    align-items: center;
+                    padding-left: 5px;
+                    img {
+                        display: inline-block;
+                    }
+                }
             }
         }
     }

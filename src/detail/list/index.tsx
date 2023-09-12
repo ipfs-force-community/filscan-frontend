@@ -8,15 +8,19 @@ import MessageList from './messageList';
 import BlockList from './blockList';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
+import TracesList from './tracesList';
+import EventLog from './EventLog';
 
 export default ({
   accountId,
   tabList,
   defaultActive,
+  actorId
 }: {
   accountId?: string | string[];
   tabList: Array<any>;
-  defaultActive: string;
+    defaultActive: string;
+  actorId:string
 }) => {
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
@@ -48,6 +52,7 @@ export default ({
           data={tabList || []}
           ns='detail'
           defaultValue={activeTab}
+          defaultActive={ defaultActive}
           isHash={true}
         />
         {activeItem?.headerOptions && (
@@ -65,13 +70,16 @@ export default ({
         )}
       </div>
 
-      <div className='card_shadow p-5 mt-5 min-h-[200px] '>
+      <div className='card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl '>
         {activeTab === 'message_list' && (
           <MessageList accountId={accountId} methodName={method} />
         )}
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
-          <BlockList accountId={accountId} methodName={method} />
+          <TracesList accountId={accountId} methodName={method} />
+        )}
+        {activeTab === 'event_log' && (
+          <EventLog actorId={actorId}/>
         )}
       </div>
     </div>

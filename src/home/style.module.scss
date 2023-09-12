@@ -24,9 +24,9 @@
     padding: 0px;
     .meta-item{
       padding: 10px;
-      background: #FFFFFF;
+      background: var(--mobile-bg-color);
       border-radius: 6px;
-      border: 1px solid #EEEFF1;
+      border: 1px solid var(--mobile-divide-line);
     }
   }
 }

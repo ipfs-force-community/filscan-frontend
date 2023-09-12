@@ -43,7 +43,7 @@ function Home(props: any) {
 
   return (
     <div className={styles['home-page']}>
-      <div className={classNames('px-[12px]')}>
+      <div >
         <MobileView>
           <MobileBanner />
         </MobileView>
@@ -77,12 +77,12 @@ function Home(props: any) {
             <div className='mt-32' ref={ref}>
               <Rank origin={'home'} />
             </div>
-            <div className='flex gap-x-5 '>
+            <div className='flex gap-x-5 mt-12' ref={ref1}>
               <div className='w-1/2'>
                 <ContractRank origin='home'/>
               </div>
               <div className='w-1/2'>
-                <div className={`flex justify-between items-center h-[30px]`}>
+                <div className={`flex justify-between items-center h-[30px] px-2.5`}>
                   <div className='font-PingFang font-semibold text-lg'>
                     {tr('defi_list')}
                   </div>

@@ -39,7 +39,7 @@ export default (props: Props) => {
         top: 30,
         left: 20,
         right: 20,
-        bottom: '10%',
+        bottom: 20,
         containLabel: true,
       },
       yAxis: {
@@ -52,7 +52,8 @@ export default (props: Props) => {
         axisLabel: {
           formatter: '{value}',
           textStyle: {
-            color: color.textStyle,
+            //  fontSize: this.fontSize,
+            color: color.labelColor,
           },
         },
         axisLine: {

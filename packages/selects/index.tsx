@@ -9,10 +9,12 @@ export default ({
   onChange,
   value,
   className = '',
+  popupClassName='',
   border,
 }: {
   value: string;
   className?: string;
+  popupClassName?: string;
   border?: boolean;
   suffix?: JSX.Element;
   options: Array<Option_Item>;

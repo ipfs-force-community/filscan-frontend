@@ -58,7 +58,6 @@ export const defi_market = [
       return <span className={Number(text) < 0 ? 'down-color':'ups-color' }>
         {get$Number(text)}
       </span>
-
     }
   },
   {
@@ -208,10 +207,10 @@ export const defi_list = {
 
 export const homeDefiColumns: any = {
   rank: '10%',
-  protocol: '30%',
-  tvl: '40%',
-  tvl_change_rate_in_24h: '10%',
-  users: '10%',
+  protocol: '25%',
+  tvl: '25%',
+  tvl_change_rate_in_24h: '20%',
+  users: '20%',
 };
 
 export const mobileHomeDefiColumns: string[] = [

@@ -167,7 +167,6 @@
   justify-content: center;
   min-width: px-to-rem(20px);
   min-height: px-to-rem(20px);
-    padding: 2px 4px;
  // padding-top: 50%;
   background: var(--font-color);
   color: var(--bgColor);
@@ -175,6 +174,13 @@
   font-size: px-to-rem(11px);
   font-family: DINPro-Bold;
   font-weight: bold;
+  position: relative;
+  width: fit-content;
+  &::before{
+      content: "";
+  display: block;
+  padding-top: 100%;
+  }
 }
 
 .reverse_color{
@@ -238,6 +244,13 @@ cursor: pointer;
   background: linear-gradient(315deg, #1764FF 0%, #4093ED 100%) !important;
   border-radius: 5px  !important;
  color: #fff !important;
+}
+
+.break-words{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+
 }
 
 .animated-div {

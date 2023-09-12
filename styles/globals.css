@@ -8,6 +8,7 @@
   /*
   PC端
   */
+  --activeColor:'#ffffff';
 
   --bgColor: #ffffff;
   --main-bg-color: #f9f9f9;
@@ -27,7 +28,7 @@
   /*
   手机端
   */
-  --mobile-bgColor: #ffffff;
+  --mobile-bg-color: #ffffff;
   --mobile-bg-3: rgba(0, 0, 0, 0.03);
   --mobile-title-color: #333333;
   --mobile-des-color: #b3b3b3;
@@ -40,14 +41,17 @@
   --mobile-divide-line: #eeeff1;
   --mobile-footer-bg: #222121;
   --mobile-text-60: rgba(255, 255, 255, 0.6);
-  --mobile-text-placeholder:#CCCCCC
-
+  --mobile-text-placeholder:#CCCCCC;
+  --mobile-bg-5: rgba(29,107,252,0.05);
+  --mobile-2473FA-0:rgba(36, 115, 250, 0.05);
+  --mobile-2473FA-5:rgba(36, 115, 250, 0.05);
+  --mobile-F9F9F9:#F9F9F9;
 }
 
 :root,
 :root[theme="dark"] {
   --border-color: #222222;
-
+  --activeColor:'#ffffff';
   --bgColor: #121212;
   --main-bg-color: #090a0a;
   --reverse-color: "#FFFFFF";

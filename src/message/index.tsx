@@ -151,10 +151,10 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   return (
     <div className={classNames(styles.message,'main_contain')}>
-      <div className='my-2.5 font-DINPro-Bold font-semibold text-lg'>
-        {tr(message_detail?.title || '')}
-      </div>
-      <div className='my-2'>
+      <div className='flex items-center my-2.5'>
+        <span className='font-DINPro-Bold font-semibold text-lg'>
+          {tr(message_detail?.title || '')}
+        </span>
         <Segmented data={message_detail.tabs} defaultActive='detail' defaultValue={active} ns={'detail'} isHash={true} />
       </div>
       {renderItemChild()}

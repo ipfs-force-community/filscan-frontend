@@ -7,6 +7,7 @@ import IconB from '@/assets/images/searchIcon_b.svg';
 import IconW from '@/assets/images/searchIcon_w.svg';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import _ from 'lodash'
 
 export default ({
   className,
@@ -57,7 +58,7 @@ export default ({
             setValue(e.target.value.trim());
           }
         }}
-        onPressEnter={() => {
+        onPressEnter={_.debounce(() => {
           if (clear) {
             setValue('');
           }
@@ -65,18 +66,18 @@ export default ({
             onSearch(inputValue);
           }
 
-        }}
+        },300)}
         suffix={
           (
             <span
-              onClick={() => {
+              onClick={_.debounce(() => {
                 if (onClick && inputValue?.length > 0) {
                   if (clear) {
                     setValue('');
                   }
                   onSearch(inputValue);
                 }
-              }}>
+              },300)}>
               {suffix}
             </span>
           ) || (

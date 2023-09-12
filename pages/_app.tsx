@@ -119,13 +119,10 @@ export default function App({ Component, pageProps }: AppProps) {
                 </div>}
                 <Search className={home ? styles['search-home'] : styles['search']}/>
               </MobileView>
-              <div className={classNames(home ? styles.home : styles.other)}>
+              <div className={classNames(home ? styles.home : styles.other,styles.component)}>
                 <Component {...pageProps} />
               </div>
-              <div className='w-screen h-[140px] bg-footerColor'>
-                <Footer />
-              </div>
-            </div>
+              <Footer />           </div>
           </UserStoreContext.Provider>
         </FilscanStoreProvider>
       </ConfigProvider>

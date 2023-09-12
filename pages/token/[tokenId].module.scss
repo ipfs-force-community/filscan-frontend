@@ -1,11 +1,11 @@
 @media only screen and (max-width: 1000px) {
   .wrap {
     .token {
-      margin-bottom: 0%;
+      margin-bottom: unset;
       padding: 18px 12px;
       font-size: 16px;
       font-family: "PingFangSC-Medium";
-      line-height: normal;
+      line-height: unset;
       img {
         width: 22px;
         border-radius: 3px;
@@ -27,7 +27,7 @@
           padding: 20px 12px;
           border: 1px solid var(--mobile-divide-line);
           border-radius: 6px;
-          background: var(--mobile-bgColor);
+          background: var(--mobile-bg-color);
         }
 
         ul {
@@ -37,6 +37,7 @@
     }
 
     .list-wrap {
+      margin-top: 0px;
       padding: 0px 12px;
     }
 

@@ -4,6 +4,15 @@
         .trans,.detail{
             margin-bottom: 18px;
             :global{
+               .link-row{
+                    display: block;
+                    .copy{
+                        padding-left: 5px;
+                        img{
+                            display: inline-block;
+                        }
+                    }
+                }
                 .card_shadow{
                     padding: 12px;
                 }
@@ -15,7 +24,7 @@
                         font-size: 15px;
                         font-family: DINPro-Medium, DINPro;
                         font-weight: 500;
-                        color: #333333;
+                        color: var( --mobile-title-color);
                         line-height: 14px;
                         word-break: break-all;
                         overflow: unset;
@@ -36,14 +45,14 @@
             font-size: 16px;
             font-family: PingFangSC-Medium, PingFang SC;
             font-weight: 500;
-            color: #333333;
+            color: var( --mobile-title-color);
             line-height: 16px;
             margin-bottom: 10px;
         }
         .card{
-            background: #FFFFFF;
+            background: var(--mobile-bg-color);
             border-radius: 6px;
-            border: 1px solid #EEEFF1;
+            border: 1px solid var(--mobile-divide-line);
             padding: 8px 0;
             margin-bottom: 10px;
             .card-item{
@@ -54,19 +63,20 @@
                     font-size: 15px;
                     font-family: PingFangSC-Regular, PingFang SC;
                     font-weight: 400;
-                    color: #B3B3B3;
+                    color: var(--mobile-des-color);
                     line-height: 14px;
+                    flex-shrink: 0;
                 }
                 .card-item-value{
                     font-size: 15px;
                     font-family: DINPro-Medium, DINPro;
                     font-weight: 500;
-                    color: #333333;
+                    color: var( --mobile-title-color);
                     line-height: 14px;
                     :global{
                         .text{
                             word-break: break-all;
-                            color: #1D6BFC;
+                            color: var(--mobile-link-color);
                         }
                         .copy{
                             padding-left: 5px;
@@ -74,6 +84,24 @@
                                 display: inline-block;
                             }
                         }
+                    }
+                }
+            }
+        }
+        :global{
+            .copy-row {
+                display: inline-block;
+                align-items: center;
+                .text {
+                    color: var(--mobile-link-color);
+                    word-break: break-all;
+                }
+                .copy {
+                    display: inline-block;
+                    align-items: center;
+                    padding-left: 5px;
+                    img {
+                        display: inline-block;
                     }
                 }
             }

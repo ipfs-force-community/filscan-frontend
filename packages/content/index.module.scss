@@ -1,37 +1,41 @@
 @media screen and (max-width: 1000px) {
   .detail-content {
     padding: 0;
-
-    .itemWrap {
-      align-items: center;
+    .item-wrap {
+      align-items: flex-start;
+      padding: 8px 12px;
       .value {
         line-height: normal;
         a {
           width: 100%;
-          word-wrap: break-word;
+          word-break: break-all;
         }
       }
     }
 
     :global {
       .text_des {
-        color: #b3b3b3;
+        color: var(--mobile-des-color);
         font-weight: 400;
         font-size: 15px;
         font-family: PingFangSC-Regular, PingFang SC;
         line-height: 14px;
       }
       .copy-row {
-        .text {
-          color: #1d6bfc;
-          word-break: break-all;
-        }
-        .copy {
-          padding-left: 5px;
-          img {
-            display: inline-block;
+          display: inline-block;
+          align-items: center;
+          .text {
+              color: var(--mobile-link-color);
+              word-break: break-all;
           }
-        }
+          .copy {
+              display: inline-block;
+              align-items: center;
+              padding-left: 5px;
+              img {
+                  display: inline-block;
+              }
+          }
       }
     }
   }

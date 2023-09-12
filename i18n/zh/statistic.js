@@ -12,6 +12,8 @@ const statistic = {
   trend_24: '24h基础手续费走势',
   total_raw_byte_power: '原值算力',
   base_line_power: '基线走势',
+  power_increase: '算力净增',
+  power_decrease:'算力损失',
   change_quality_adj_power: '环比有效算力变化',
   total_quality_adj_power:'有效算力',
   gas: '基础手续费走势',

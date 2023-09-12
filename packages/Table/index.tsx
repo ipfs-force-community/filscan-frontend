@@ -7,6 +7,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { TableProps } from 'antd/lib';
 import { useMemo } from 'react';
 import styles from './index.module.scss'
+import classNames from 'classnames';
 
 interface Props extends TableProps<any> {
   data: Array<any>;
@@ -58,7 +59,7 @@ export default (props: Props) => {
                   );
                 }
                 return (
-                  <div className={styles['mobile-table-card-item']} key={index}>
+                  <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={index}>
                     <div className={styles['mobile-table-card-item-label']}>
                       {showTitle}：
                     </div>

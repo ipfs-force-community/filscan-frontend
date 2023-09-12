@@ -74,7 +74,8 @@ export default ({
 
   return (
     <ul className='list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5'>
-      {data.map((item) => {
+      {data.map((item:any) => {
+        const {title } = item;
         return (
           <li
             // href={hash ? `${pathValue}#${item.dataIndex}` : ''}
@@ -87,7 +88,7 @@ export default ({
             }`}
             //id={item.dataIndex}
           >
-            {tr(item.title)}
+            {typeof title ==='function' ? title():tr(item.title)}
           </li>
         );
       })}

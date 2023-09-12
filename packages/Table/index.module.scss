@@ -1,14 +1,16 @@
 @media screen and (max-width: 1000px){
     .mobile-table{
         display: flex;
+        overflow: hidden;
         flex-direction: column;
+        padding-bottom: 10px;
 
         row-gap: 10px;
         .mobile-table-card{
             padding: 8px 0;
             border: 1px solid var(--mobile-divide-line);
             border-radius: 12px;
-            background: var(--mobile-bgColor);
+            background: var(--mobile-bg-color);
             &:last-child{
                 margin-bottom: 0;
             }
@@ -24,6 +26,7 @@
                     color: var(--mobile-des-color);
                     font-weight: 400;
                     font-size: 15px;
+                    flex-shrink: 0;
                 }
                 .mobile-table-card-item-value{
                     flex: 3;
@@ -34,5 +37,6 @@
                 }
             }
         }
+  
     }
 }

@@ -45,7 +45,7 @@ export default (props: Props) => {
         top: 30,
         left: 20,
         right: 20,
-        bottom: '10%',
+        bottom: 20,
         containLabel: true,
       },
       yAxis: [
@@ -59,7 +59,8 @@ export default (props: Props) => {
           axisLabel: {
             formatter: '{value} EiB',
             textStyle: {
-              color: color.textStyle,
+              //  fontSize: this.fontSize,
+              color: color.labelColor,
             },
           },
           axisLine: {
@@ -87,7 +88,7 @@ export default (props: Props) => {
             formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.textStyle,
+              color: color.labelColor,
             },
           },
           axisTick: {
@@ -129,7 +130,7 @@ export default (props: Props) => {
               result +=
                 '<br/>' +
                 item.marker +
-                item.seriesName +
+                tr(item.seriesName) +
                 ': ' +
                 item.data.amount +
                 item.data.unit;
@@ -157,10 +158,10 @@ export default (props: Props) => {
     result?.list?.reverse()?.forEach((value: any) => {
       const {
         timestamp,
-        base_line_power, //基线算力
         total_raw_byte_power, //原值算力
         total_quality_adj_power, //有效算力
-        change_quality_adj_power, //环比有效算力
+        power_increase, //算力增长
+        power_decrease, //环比有效算力
       } = value;
 
       const showTime = formatDateTime(timestamp, 'MM-DD');
@@ -171,16 +172,16 @@ export default (props: Props) => {
         total_raw_byte_power &&
         unitConversion(total_raw_byte_power, 2)?.split(' ');
 
-      const [base_line_power_amount, base_line_power_unit] =
-        base_line_power && unitConversion(base_line_power, 2)?.split(' ');
+      const [power_increase_amount, power_increase_unit] =
+        power_increase && unitConversion(power_increase, 2)?.split(' ');
 
       const [total_quality_adj_power_amount, total_quality_adj_power_unit] =
         total_quality_adj_power &&
         unitConversion(total_quality_adj_power, 2)?.split(' ');
 
-      const [change_quality_adj_power_amount, change_quality_adj_power_unit] =
-        change_quality_adj_power &&
-        unitConversion(change_quality_adj_power, 2)?.split(' ');
+      const [power_decrease_amount, power_decrease_unit] =
+        power_decrease &&
+        unitConversion(power_decrease, 2)?.split(' ');
 
       seriesObj.total_raw_byte_power.push({
         amount: total_raw_byte_power_amount,
@@ -188,20 +189,20 @@ export default (props: Props) => {
         unit: total_raw_byte_power_unit,
       });
 
-      seriesObj.base_line_power.push({
-        amount: base_line_power_amount,
-        value: unitConversion(base_line_power, 2, 6).split(' ')[0],
-        unit: base_line_power_unit,
-      });
       seriesObj.total_quality_adj_power.push({
         amount: total_quality_adj_power_amount,
         value: unitConversion(total_quality_adj_power, 2, 6).split(' ')[0],
         unit: total_quality_adj_power_unit,
       });
-      seriesObj.change_quality_adj_power.push({
-        amount: change_quality_adj_power_amount,
-        value: unitConversion(change_quality_adj_power, 2, 5).split(' ')[0],
-        unit: change_quality_adj_power_unit,
+      seriesObj.power_increase.push({
+        amount: power_increase_amount,
+        value: unitConversion(power_increase, 2, 5).split(' ')[0],
+        unit: power_increase_unit,
+      });
+      seriesObj.power_decrease.push({
+        amount: power_decrease_amount,
+        value: unitConversion(power_decrease, 2, 5).split(' ')[0],
+        unit: power_decrease_unit,
       });
     });
     power_trend.list.forEach((item: any) => {
@@ -212,6 +213,7 @@ export default (props: Props) => {
       seriesData.push({
         type: item.type,
         data: seriesObj[item.dataIndex],
+        key: item.dataIndex,
         name: item.dataIndex,
         yAxisIndex: item.yIndex,
         symbol: 'circle',

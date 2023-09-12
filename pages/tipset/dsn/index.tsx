@@ -94,7 +94,7 @@ export default () => {
           </div>
         </div>
         <Search
-          className={classNames(styles.search,'!w-[400px]')}
+          className={classNames(styles.search,'!w-[400px] !h-10')}
           placeholder={dsn_list.placeholder}
           onSearch={handleSearch}
           ns='tipset'

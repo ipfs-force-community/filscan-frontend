@@ -13,13 +13,14 @@ import styles from './[tokenId].module.scss'
 import useWindow from '@/components/hooks/useWindown';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
+import Link from 'next/link';
+import Copy from '@/components/copy';
 
 export default () => {
   const router = useRouter();
   const { tokenId } = router.query;
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData();
-
   const [marketData, setMarket] = useState({});
   const [overviewData, setOverview] = useState<any>({});
   const { isMobile } = useWindow()
@@ -52,6 +53,27 @@ export default () => {
         {token_details.headerList.map((tokenItem,index) => {
           const showData =
             tokenItem.title === 'market' ? marketData : overviewData;
+
+          if (isMobile && tokenItem.title === 'market') {
+            tokenItem.list.forEach((value)=>{
+              if (value.dataIndex === "contract_id") {
+                value.render = (text: string, record: any) => {
+                  if (!text) {
+                    return '--';
+                  }
+                  return (
+                    <span className='flex items-center gap-x-2'>
+                      <Link href={`/address/${text}`} className='link'>
+                        {text}
+                      </Link>
+                      <Copy text={text} />
+                    </span>
+                  );
+                }
+              }
+            })
+          }
+
           return (
             <div className={classNames('flex-1 border border_color card_shadow rounded-lg px-2.5 py-5',styles['item'])} key={index}>
               <div className={classNames('text-base font-medium px-2.5',styles.title)}>
