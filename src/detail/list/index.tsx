@@ -20,7 +20,7 @@ export default ({
   accountId?: string | string[];
   tabList: Array<any>;
     defaultActive: string;
-  actorId:string
+  actorId?:string
 }) => {
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();

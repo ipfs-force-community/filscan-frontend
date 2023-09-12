@@ -6,23 +6,28 @@ import { useEffect, useState } from "react";
 import Upload from "./Upload";
 import { apiUrl } from "@/contents/apiUrl";
 import useAxiosData from "@/store/useAxiosData";
+import Link from "next/link";
 
 const { TextArea } = Input;
 
-export default () => {
+interface Props {
+  onChange: (files: Record<string, any>, url: string) => void
+  loading:boolean
+}
+
+export default (props: Props) => {
+  const {onChange,loading } = props;
   const { tr } = Translation({ ns: 'contract' });
-  const {axiosData } = useAxiosData()
   const { hashParams } = useHash();
-  const {type } = hashParams;
-  const [data,setData] = useState<any>({
+  const { type } = hashParams;
+  const [data, setData] = useState<any>({
     contract_address: '',
     compile_version: '',
     optimize: true,
     optimize_runs: 200,
-    arguments:'',
+    arguments: '',
   })
   const [files, setFiles] = useState<any>({})
-  const [loading,setLoading] = useState<boolean>(false)
   const [configFile, setConfigFile] = useState({})
 
   useEffect(() => {
@@ -58,35 +63,9 @@ export default () => {
     })
     obj.source_file = source_file;
     obj.optimize_runs = data.optimize_runs ? Number(data.optimize_runs) : undefined;
-
-    setLoading(true)
     const url = type === 'standard' ? apiUrl.contract_hard_verify : apiUrl.contract_verify;
+    onChange(obj,url)
 
-    // axiosData(url, { ...obj }).then((res: any) => {
-    //   setLoading(false)
-    //   if (res && res.result) {
-    //     setOutData({ ...res?.result?.compiled_file || {}, is_verified: res.result.is_verified });
-    //     setActive('compile_output')
-    //     setDisable(false);
-    //     if (res.result.is_verified) {
-    //       notification.success({
-    //         className: 'custom-notification',
-    //         message: 'success',
-    //         duration: 100,
-    //         description: 'Success'
-    //       })
-    //     } else {
-    //       notification.error({
-    //         className: 'custom-notification',
-    //         message: 'Error',
-    //         duration: 100,
-    //         description: 'Invalid Arguments'
-    //       })
-    //     }
-
-    //   }
-
-    // })
   }
 
   const renderChildren = (item: any) => {
@@ -138,9 +117,9 @@ export default () => {
         className="custom_input"
         onChange={(e: any) => { setData({ ...data, arguments: e.target.value }) }} />
       <div className="flex gap-x-2 mt-5">
-        <Button className="primary_btn flex items-center gap-x-2 h-8" onClick={ handleSave}> {tr('confirm')}</Button>
-        <Button className="cancel_btn"> { tr('reset')}</Button>
-        <Button className="cancel_btn"> { tr('back')}</Button>
+        <Button className="primary_btn flex items-center gap-x-2 h-8" onClick={handleSave} loading={loading }> {tr('confirm')}</Button>
+        <Link href={`/contract/verify`} className="flex items-center justify-center cancel_btn border border_color rounded-md"> { tr('reset')}</Link>
+        <Link href={`/home`} className="flex items-center justify-center cancel_btn border border_color rounded-md"> { tr('back')}</Link>
       </div>
     </div>
   </div>
