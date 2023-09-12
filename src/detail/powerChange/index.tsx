@@ -35,7 +35,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         top:  10,
         left: 20,
         right: '8%',
-        bottom: 20,
+        bottom: 10,
         containLabel: true,
       },
       yAxis: {
@@ -53,7 +53,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
             color: color.lineStyle,
           },
           textStyle: {
-            color: color.textStyle,
+            color: color.labelColor,
           },
           formatter(v: string) {
             return v + ' TiB';
@@ -250,7 +250,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
             {ledRender()}
           </div>
         </MobileView>
-        <div className='h-[328px]'><Echarts options={newOptions} /></div>
+        <div className='card_shadow w-full h-[348px] border rounded-xl py-5 border_color'><Echarts options={newOptions} /></div>
       </div>
     </div>
   );

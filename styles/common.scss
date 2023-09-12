@@ -171,9 +171,10 @@
 
 /*rank icon*/
 .rank_icon{
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 10px;
   min-width: px-to-rem(20px);
   min-height: px-to-rem(20px);
  // padding-top: 50%;
@@ -185,6 +186,7 @@
   font-weight: bold;
   position: relative;
   width: fit-content;
+
   &::before{
       content: "";
   display: block;
@@ -214,6 +216,9 @@ cursor: pointer;
 
 
 .cancel_btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 80px;
   width: fit-content;
   height: fit-content;
@@ -229,6 +234,9 @@ cursor: pointer;
 }
 
 .confirm_btn{
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   height: fit-content;
   min-width: 80px;
@@ -249,10 +257,13 @@ cursor: pointer;
   justify-content: center;
   width: fit-content;
    min-width: 80px;
-   padding: 6px 15px  !important;
+   padding: 6px 15px;
   background: linear-gradient(315deg, #1764FF 0%, #4093ED 100%) !important;
   border-radius: 5px  !important;
  color: #fff !important;
+}
+.primary_default{
+  padding: 4px 15px;
 }
 
 .break-words{

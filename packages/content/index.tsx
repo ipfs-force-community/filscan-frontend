@@ -32,7 +32,7 @@ export default (props:ContentProps) => {
   return (
     <ul
       className={classNames(styles['detail-content'],`w-full max-h-full ${
-        columns !== 1 ? `grid !grid-cols-2 gap-x-12` : 'flex flex-col p-2.5 gap-y-5'
+        columns !== 1 ? `grid !grid-cols-2 gap-x-12` : 'flex flex-col p-2.5 gap-y-2'
       }`,props.className)}>
       {contents.map((item, index) => {
         const {
@@ -59,7 +59,7 @@ export default (props:ContentProps) => {
           <li
             key={index}
             className={
-              classNames(`flex items-center gap-x-2.5 h-9
+              classNames(`flex items-center gap-x-2.5 min-h-[32px]
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }

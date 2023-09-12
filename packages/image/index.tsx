@@ -16,7 +16,7 @@ const ImageWithFallback = (props: any) => {
   return (
     <Image
       {...rest}
-      className='rounded-lg'
+      className='rounded-full	'
       src={imgSrc}
       onError={() => {
         setImgSrc(fallbackSrc);

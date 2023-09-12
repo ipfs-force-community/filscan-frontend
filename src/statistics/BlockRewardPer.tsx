@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { block_rewards_per, timeList } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { formatDateTime, formatFil, formatFilNum, isMobile } from '@/utils';
-import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
+import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './trend.module.scss'
 import classNames from 'classnames';
@@ -138,7 +138,7 @@ export default (props: Props) => {
     block_rewards_per.list.forEach((item: any) => {
       seriesData.push({
         type: item.type,
-        ...seriesArea,
+        ...seriesChangeArea,
         data: seriesObj[item.dataIndex],
         name: tr(item.title),
         symbol: 'circle',
@@ -171,7 +171,7 @@ export default (props: Props) => {
       id='block_reward_per'
       className={classNames(styles.trend,`w-full h-[full]  ${className}`)}
     >
-      <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4' >
+      <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5' >
         <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
           {tr('block_reward_per_TiB')}
         </div>
@@ -186,7 +186,7 @@ export default (props: Props) => {
           }}
         />
       </div>
-      <div className={`h-[350px] w-full card_shadow border border_color rounded-xl`}>
+      <div className={`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`}>
         <EChart options={newOptions} />
       </div>
     </div>

@@ -61,6 +61,27 @@ export const seriesArea= {
   },
 }
 
+export const seriesChangeArea= {
+  areaStyle: {
+    color: new echarts.graphic.LinearGradient(
+      0,
+      0,
+      0,
+      1, // 渐变方向
+      [
+        { offset: 0, color: 'rgba(28,106,253,0.2)' }, // 渐变起始颜色
+        { offset: 0.7, color: 'rgba(28,106 ,253,0.1)' }, // 渐变起始颜色
+        { offset: 1, color: 'rgba(28,106 ,253,0)' }, // 渐变结束颜色 rgba(23, 156, 238, 1)
+      ]
+    ),
+  },
+  markArea: {
+    itemStyle: {
+      color: 'trans',
+    },
+  },
+}
+
 export const get_xAxis=(theme:string)=>{
   const color = getColor(theme);
   return {

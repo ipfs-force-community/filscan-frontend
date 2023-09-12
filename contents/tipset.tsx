@@ -372,7 +372,7 @@ export const chain_list: {
     {
       dataIndex: "miner_id",
       title: "blocks_miner",
-      width:'15%',
+      width:'20%',
       render: (text: any, rowData:any) => {
         const record:any = rowData?.block_basic;
         return <div className="flex flex-col gap-y-2">
@@ -389,7 +389,7 @@ export const chain_list: {
     {
       dataIndex: "messages_count",
       title: "blocks_messages",
-      width:'10%',
+      width:'15%',
       render: (text: any, rowData: any) => {
         const record = rowData.block_basic;
         return <div className="flex flex-col gap-y-2">

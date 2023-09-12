@@ -97,7 +97,7 @@ font-display: auto;
      input{
         color: var(--font-color);   
         &::placeholder{
-            color: var(--font_des);   
+            color: var(--font_des_unit);   
         }
      }
      &:hover{
@@ -231,14 +231,14 @@ font-display: auto;
    
      .ant-tooltip-arrow{
         &::after{
-             background-color: var(--bgDesColor)!important;
+             background-color: var(--bgColor)!important;
         }
         &::before{
-            background-color: var(--bgDesColor)!important;
+            background-color: var(--bgColor)!important;
         }
     }
     .ant-tooltip-inner{
-        background-color: var(--bgDesColor)!important;
+        background-color: var(--bgColor)!important;
         color: var(--font-color) !important;
     }
   }
@@ -345,7 +345,7 @@ font-display: auto;
     .ant-select-selector{
           cursor: pointer;
         padding: 3px 16px !important;
-        height:36px !important;
+        height:32px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgDesColor) !important;
         .ant-select-selection-item{

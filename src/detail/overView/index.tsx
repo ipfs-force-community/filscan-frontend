@@ -54,7 +54,7 @@ export default ({
 
   return (
     <div className={classNames(styles.overview,'w-full')}>
-      <div className='w-full flex items-center mt-7 mb-5 between'>
+      <div className='w-full flex items-center mt-7 mb-5 ml-2.5'>
         <span className='text-lg font-semibold mr-5'>{tr(overView.title)}</span>
         <Segmented
           data={overView.tabList}
@@ -64,7 +64,7 @@ export default ({
           onChange={handleTabChange}
         />
       </div>
-      <ul className={classNames(styles.list,'card_shadow p-5 h-[170px] py-7 px-5 rounded-xl border border_color  gap-y-6 flex flex-wrap flex-col')}>
+      <ul className={classNames(styles.list,'card_shadow p-5 h-[150px] py-7 px-5 rounded-xl border border_color  gap-y-6 flex flex-wrap flex-col')}>
         {overView?.list.map((item: any) => {
           const { render, dataIndex, style = {}, width, title } = item;
           const showData = getShowData(item, data);

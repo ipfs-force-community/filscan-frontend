@@ -131,7 +131,7 @@ export const miner_overview = {
     {
       title: 'power_ratio',
       dataIndex: 'power_ratio',
-      width: '20%',
+      width: '25%',
       style: { alignSelf: 'flex-start' },
       render: (text: string | number) =>
         text ? unitConversion(text, 2) + '/D' : '--',
@@ -140,7 +140,7 @@ export const miner_overview = {
       title: 'precommit_deposits',
       dataIndex: 'sector_deposits',
 
-      style: { width: '20%', justifyContent: 'flex-start' },
+      style: { width: '25%', justifyContent: 'flex-start' },
 
       render: (text: string | number) =>
         text ? formatFilNum(text, false, false) : text,
@@ -148,7 +148,7 @@ export const miner_overview = {
     {
       title: 'gas_fee',
       dataIndex: 'gas_fee',
-      width: '20%',
+      width: '25%',
       style: { alignSelf: 'flex-start' },
 
       render: (text: string | number) =>
@@ -156,21 +156,21 @@ export const miner_overview = {
     },
     {
       title: 'win_count',
-      width: '32%',
+      width: '25%',
       dataIndex: 'win_count',
       title_tip: 'win_count_tip',
       render: (text: any) => String(text) || '--',
     },
     {
       title: 'block_count',
-      width: '32%',
+      width: '25%',
       dataIndex: 'block_count_increase',
       title_tip: 'block_count_tip',
       render: (text: any) => String(text) || '--',
     },
     {
       title: 'block_rewards',
-      width: '32%',
+      width: '25%',
       dataIndex: 'block_reward_increase',
       render: (text: string | number) =>
         text ? formatFilNum(text, false, false) : '--',
@@ -178,21 +178,21 @@ export const miner_overview = {
     {
       title: 'mining_efficiency',
       dataIndex: 'rewards_per_tb',
-      width: '32%',
+      width: '25%',
       title_tip: 'mining_efficiency_tip',
       render: (text: string | number) =>
         text ? formatFilNum(text, false, false) + '/TiB' : '--',
     },
     {
       title: 'lucky',
-      width: '32%',
+      width: '25%',
       dataIndex: 'lucky',
       render: (text: string | number) =>
         text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--',
     },
     {
       title: 'net_profit_per_tb',
-      width: '32%',
+      width: '25%',
       dataIndex: 'gas_fee_per_tb',
       title_tip: 'net_profit_per_tb_tip',
       render: (text: string | number) =>
@@ -201,7 +201,7 @@ export const miner_overview = {
 
     {
       title: 'power_increase_indicators',
-      style: { width: '16%', justifyContent: 'flex-end' },
+      style: { width: '20%', justifyContent: 'flex-end' },
       dataIndex: 'power_increase',
       render: (text: string | number) =>
         text ? unitConversion(text, 2) : '--',
@@ -397,7 +397,7 @@ export const message_detail = {
         }
         if (text?.startsWith('Err')) {
           return (
-            <span className='flex px-2 py-1 gap-x-1 rounded-sm items-center'>
+            <span className='flex py-1 gap-x-1 rounded-sm items-center'>
               {getSvgIcon('errorIcon')}
               <span className='text_red text-cm'>Error</span>
             </span>
@@ -405,7 +405,7 @@ export const message_detail = {
         }
 
         return (
-          <span className='flex px-2 py-1 gap-x-1  rounded-sm items-center'>
+          <span className='flex py-1 gap-x-1  rounded-sm items-center'>
             {getSvgIcon('pendingIcon')}
             <span className='text-cm'>Pending</span>
           </span>
@@ -801,11 +801,11 @@ const default_content = [
       return (
         <>
           <BrowserView>
-            <span className='flex gap-x-2'>
+            <span className='flex items-center gap-x-2'>
               {text?.length > 30? isIndent(text,10,10):text}
               {text && <Copy text={text} />}
             </span>
-            { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+            {owned_miners.length > 0 &&<Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn primary_default ml-2 !h-7'>
               {tr('account_detail')}
             </Link>}
           </BrowserView>

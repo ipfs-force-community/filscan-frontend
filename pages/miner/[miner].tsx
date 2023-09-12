@@ -77,7 +77,7 @@ export default () => {
           <span>{miner || ''}</span>
         </span>
       </div>
-      <div className='flex w-full card_shadow rounded-xl'>
+      <div className='flex w-full card_shadow rounded-xl !overflow-hidden'>
         <AccountBalance
           data={data?.account_indicator || {}}
           loading={loading}

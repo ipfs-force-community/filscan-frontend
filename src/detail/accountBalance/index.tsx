@@ -56,7 +56,8 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
       series: [
         {
           type: 'pie',
-          radius: ['26%', '48%'],
+          radius: ['40%', '68%'],
+          //  radius: ['40%', '48%'],
           avoidLabelOverlap: false,
           label: {
             show: false,
@@ -71,7 +72,7 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
             },
           },
           data: [],
-          center: ['55%', '50%'],
+          center: ['55%', '48%'],
         },
       ],
     };
@@ -184,12 +185,12 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
   return (
     <>
       <BrowserView>
-        <div className='flex h-[340px] w-1/2 p-7'>
+        <div className='flex h-[300px] w-1/2 p-7'>
           <div className='flex-1'>
             {renderTotal()}
             {renderBalance()}
           </div>
-          <div className='h-[310px] flex-1 '>
+          <div className='h-[280px] flex-1 '>
             <Echarts options={newOptions} />
           </div>
         </div>

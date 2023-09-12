@@ -289,7 +289,7 @@ export const contract_token = {
               <Link
                 href={`/token/${record.contract_id}`}
                 className='flex items-center gap-x-1'>
-                <Image src={record?.icon_url} alt='' height={38} width={38} />
+                <Image src={record?.icon_url} alt='' height={32} width={32} />
                 <span className='margin-6 text_color'>{text}</span>
               </Link>
               {}
