@@ -45,8 +45,7 @@ export default () => {
     });
     const newMethod: any = [
       {
-        title: tr('all_method'),
-        dataIndex: 'all',
+        label:tr('all'),
         value: 'all',
       },
     ];

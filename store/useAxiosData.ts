@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import { notification } from 'antd';
@@ -134,9 +134,9 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     if (initialUrl) {
       axiosData(initialUrl, initialPayload, initialOptions);
     }
-
     // 组件卸载时取消所有请求
     return () => {
+      current = 0;
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
   }, [initialUrl, initialPayload, initialOptions]);
