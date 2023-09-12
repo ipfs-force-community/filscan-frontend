@@ -8,6 +8,8 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getShowData } from '@/utils';
 import { useEffect, useState } from 'react';
+import styles from './style.module.scss'
+import classNames from 'classnames';
 
 //统计指标
 
@@ -51,8 +53,8 @@ export default ({
   };
 
   return (
-    <div className='w-full'>
-      <div className='w-full flex items-center mt-7 mb-5'>
+    <div className={classNames(styles.overview,'w-full')}>
+      <div className='w-full flex items-center mt-7 mb-5 between'>
         <span className='text-lg font-semibold mr-5'>{tr(overView.title)}</span>
         <Segmented
           data={overView.tabList}
@@ -62,7 +64,7 @@ export default ({
           onChange={handleTabChange}
         />
       </div>
-      <ul className='card_shadow p-5 h-[170px] py-7 px-5 rounded-xl border border_color  gap-y-6 flex flex-wrap flex-col'>
+      <ul className={classNames(styles.list,'card_shadow p-5 h-[170px] py-7 px-5 rounded-xl border border_color  gap-y-6 flex flex-wrap flex-col')}>
         {overView?.list.map((item: any) => {
           const { render, dataIndex, style = {}, width, title } = item;
           const showData = getShowData(item, data);
@@ -70,7 +72,7 @@ export default ({
             ? render(showData[dataIndex])
             : showData[dataIndex] || '--';
           return (
-            <li key={dataIndex} style={{ width, ...style }} className='flex'>
+            <li key={dataIndex} style={{ width, ...style }} className={classNames(styles['list-row'],'flex')}>
               <span className='text-sm text_des w-20'>{tr(title)}</span>
               <span className='font-DINPro-Medium text-sm font-medium'>
                 {loading ? <SkeletonScreen /> : value}

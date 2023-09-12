@@ -10,6 +10,7 @@ import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime, formatFil, formatFilNum } from '@/utils';
 import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 export default ({
   accountId,
@@ -240,43 +241,55 @@ export default ({
       series: newSeries,
     };
   }, [options, default_xAxis, noShow, defaultOptions]);
-
+  const ledRender = ()=>{
+    return <span className='flex gap-x-4'>
+      {options?.legendData?.map((v: any) => {
+        return (
+          <span
+            className='text-xs flex cursor-pointer items-center gap-x-1'
+            key={v.dataIndex}
+            onClick={() => {
+              setNoShow({
+                ...noShow,
+                [v.dataIndex]: !noShow[v.dataIndex],
+              });
+            }}
+            style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
+            {getSvgIcon('legendIcon')}
+            <span className='text-xs text_des font-normal'>
+              {tr(v.title)}
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  }
   return (
     <div className='flex-1'>
       {header ? (
         header
       ) : (
-        <div className='flex justify-between items-center mb-2'>
-          <span className='text-lg font-semibold mr-5'>
+        <div className='flex justify-between items-center mb-2 h-[32px]'>
+          <span className='text-lg font-semibold mr-5 name-height'>
             {tr(account_change.title)}
           </span>
-          <span className='flex gap-x-4'>
-            {options?.legendData?.map((v: any) => {
-              return (
-                <span
-                  className='text-xs flex cursor-pointer items-center gap-x-1'
-                  key={v.dataIndex}
-                  onClick={() => {
-                    setNoShow({
-                      ...noShow,
-                      [v.dataIndex]: !noShow[v.dataIndex],
-                    });
-                  }}
-                  style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
-                  {getSvgIcon('legendIcon')}
-                  <span className='text-xs text_des font-normal'>
-                    {tr(v.title)}
-                  </span>
-                </span>
-              );
-            })}
-          </span>
+          {
+            <BrowserView>
+              {ledRender()}
+            </BrowserView>
+          }
         </div>
       )}
 
-      <div className='card_shadow w-full h-[348px] border rounded-xl p-5 border_color'>
-        <Echarts options={newOptions} />
+      <div className='card_shadow w-full border rounded-xl p-5 border_color'>
+        <MobileView>
+          <div className="tips">
+            {ledRender()}
+          </div>
+        </MobileView>
+        <div className='h-[328px]'><Echarts options={newOptions}/></div>
       </div>
+
     </div>
   );
 };

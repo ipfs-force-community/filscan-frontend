@@ -3,10 +3,11 @@
 import { Translation } from '@/components/hooks/Translation';
 import { useHash } from '@/components/hooks/useHash';
 import { Item } from '@/contents/type';
+import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
-
+import styles from './index.module.scss'
 function extractPathParam(route: string) {
   const match = route.match(/\[([^\]]+)\]/);
   return match ? match[1] : null;
@@ -73,8 +74,8 @@ export default ({
   };
 
   return (
-    <ul className='list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5'>
-      {data.map((item:any) => {
+    <ul className={classNames(styles.segmented,'list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5')}>
+      {data.map((item) => {
         const {title } = item;
         return (
           <li
