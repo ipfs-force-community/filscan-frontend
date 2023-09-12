@@ -454,7 +454,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       render: (text: string, record: any) => {
         if (!text) return '--';
         return (
-          <div className='flex items-center gap-x-1'>
+          <span className='flex items-center gap-x-1'>
             {get_account_type(text)}
             {toList?.domains && toList?.domains[text] && (
               <Link
@@ -462,7 +462,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
                 ({toList.domains[text]})
               </Link>
             )}
-          </div>
+          </span>
         );
       },
     },
