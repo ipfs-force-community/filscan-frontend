@@ -812,7 +812,7 @@ const default_content = [
           </BrowserView>
           <MobileView>
             <span className='copy-row'>
-              <span className='text'>{text}</span>
+              <span className='normal-text'>{text}</span>
               <Copy text={text} icon={copySvgMobile} className='copy'/>
               { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
                 {tr('account_detail')}
@@ -857,7 +857,7 @@ const default_content = [
           </BrowserView>
           <MobileView>
             <span className='copy-row'>
-              <span className='text'>{text}</span>
+              <span className='normal-text'>{text}</span>
               <Copy text={text} icon={copySvgMobile} className='copy'/>
             </span>
           </MobileView>
@@ -873,7 +873,19 @@ const default_content = [
   },
   {
     title: 'eth_address', dataIndex: 'eth_address', elasticity: true, type: ['account_basic'],
-    render: (text: string, record: any) => text ? <span className="flex items-center gap-x-2">{text} <Copy text={text} /></span> : text
+    render: (text: string, record: any) => {
+      return (<>
+        <BrowserView>
+      text ? <span className="flex items-center gap-x-2">{text} <Copy text={text} /></span> : text
+        </BrowserView>
+        <MobileView>
+          <span className='copy-row'>
+            <span className='normal-text'>{text}</span>
+            <Copy text={text} icon={copySvgMobile} className='copy'/>
+          </span>
+        </MobileView>
+      </>)
+    }
   },
 
   {
@@ -929,7 +941,7 @@ const default_content = [
           </BrowserView>
           <MobileView>
             <span className='copy-row'>
-              <span className='text'>{text}</span>
+              <span className='normal-text'>{text}</span>
               <Copy text={text} icon={copySvgMobile} className='copy'/>
             </span>
           </MobileView>

@@ -1,42 +1,60 @@
-@media screen and (max-width: 1000px){
-    .mobile-table{
+@media screen and (max-width: 1000px) {
+  .mobile-table {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    padding-bottom: 10px;
+
+    row-gap: 10px;
+    .mobile-table-card {
+      padding: 8px 0;
+      border: 1px solid var(--mobile-divide-line);
+      border-radius: 12px;
+      background: var(--mobile-bg-color);
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .mobile-table-card-item {
         display: flex;
-        overflow: hidden;
-        flex-direction: column;
-        padding-bottom: 10px;
+        align-items: center;
+        padding: 12px;
 
-        row-gap: 10px;
-        .mobile-table-card{
-            padding: 8px 0;
-            border: 1px solid var(--mobile-divide-line);
-            border-radius: 12px;
-            background: var(--mobile-bg-color);
-            &:last-child{
-                margin-bottom: 0;
-            }
-            .mobile-table-card-item{
-                display: flex;
-                align-items: center;
-                padding: 12px;
-
-                .mobile-table-card-item-label{
-                    display: flex;
-                    flex: 2;
-                    max-width: 40%;
-                    color: var(--mobile-des-color);
-                    font-weight: 400;
-                    font-size: 15px;
-                    flex-shrink: 0;
-                }
-                .mobile-table-card-item-value{
-                    flex: 3;
-                    color: var(--mobile-title-color);
-                    font-weight: 500;
-                    font-size: 15px;
-                    font-family: "DINPro-Medium";
-                }
-            }
+        .mobile-table-card-item-label {
+          display: flex;
+          flex: 2;
+          flex-shrink: 0;
+          max-width: 40%;
+          color: var(--mobile-des-color);
+          font-weight: 400;
+          font-size: 15px;
         }
-  
+        .mobile-table-card-item-value {
+          flex: 3;
+          color: var(--mobile-title-color);
+          font-weight: 500;
+          font-size: 15px;
+          font-family: "DINPro-Medium";
+        }
+      }
     }
+
+    :global {
+      .copy-row {
+        display: inline-block;
+        align-items: center;
+        .text {
+          color: var(--mobile-link-color);
+          word-break: break-all;
+        }
+        .copy {
+          display: inline-block;
+          align-items: center;
+          padding-left: 5px;
+          img {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
 }

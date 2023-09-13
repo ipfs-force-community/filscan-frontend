@@ -8,9 +8,10 @@
             }
         }
         .text{
-            word-break: break-all;
             margin-left: 0;
+            word-break: break-all;
         }
+
         :global{
             .h-9{
                 height: auto;
@@ -24,9 +25,9 @@
                 flex-wrap: nowrap;
                 .flex{
                     &.items-baseline{
-                        width: auto !important;
                         align-items: flex-start;
                         padding: 12px 25px;
+                        width: auto !important;
                     }
                 }
                 .h-9{
@@ -38,6 +39,9 @@
                 align-items: center;
                 .text {
                     color: var(--mobile-link-color);
+                    word-break: break-all;
+                }
+                .normal-text {
                     word-break: break-all;
                 }
                 .copy {
