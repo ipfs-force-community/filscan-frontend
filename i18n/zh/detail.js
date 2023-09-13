@@ -42,7 +42,7 @@ const detail = {
   recover_sector_count: '恢复',
   eth_address: 'ETH Address',
   stable_address: '稳定地址',
-  tokenList: '持有Tokens',
+  tokenList: '名下资产',
   showContract:'合约: {{value}}',
   showAddress:'地址: {{value}}',
 

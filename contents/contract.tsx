@@ -84,6 +84,14 @@ export const verify = {
     { dataIndex: 'source_code', title: 'source_code' },
     { dataIndex: 'compile_output', title: 'compile_output' }
   ],
+  meta_list_des: [
+    { label: 'config_file_des1', },
+    { label: 'config_file_des1_1', },
+    { label: 'config_file_des1_2' },
+    { label: 'config_file_des2', },
+    { label: 'config_file_des2_1', },
+    { label: 'config_file_des2_2'},
+  ],
 
 }
 

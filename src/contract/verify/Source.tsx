@@ -110,7 +110,7 @@ export default (props: Props) => {
 
   return <div>
     <div className="border rounded-xl p-5 card_shadow border_color mt-2.5 text_des text-xs">
-      <ul className="border border_color rounded-[5px] p-4">
+      <ul className="border border_color rounded-[5px] p-4 leading-6">
         {verify_source.desList.map(item => {
           return <li key={ item.title}>{ tr(item.title)}</li>
         })}
@@ -125,7 +125,7 @@ export default (props: Props) => {
       </ul>
     </div>
     <div className="border border_color card_shadow rounded-[12px] p-5 mt-5">
-      <Upload fileData={files} onChange={(files: any, type: string) => {
+      <Upload fileData={type === 'standard' ? configFile : files} confiles={configFile } onChange={(files: any, type: string) => {
         if (type === 'config') {
           setConfigFile(files)
         } else {
