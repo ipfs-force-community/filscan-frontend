@@ -43,10 +43,11 @@ export default () => {
     let content;
     switch (item.type) {
     case 'Input':
-      content = <Input className="!h-10" placeholder={ tr(placeholder)} />
+      content = <Input className="custom_input !h-10" placeholder={ tr(placeholder)} />
       break;
     default:
       content = <Select className="custom_select"
+        popupClassName={'custom_select_wrapper'}
         options={item.options || options}
         placeholder={ tr(placeholder)}
       />

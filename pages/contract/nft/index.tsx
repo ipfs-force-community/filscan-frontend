@@ -62,7 +62,7 @@ export default () => {
 
   return (
     <div className='main_contain '>
-      <div className={classNames('flex flex-col text-xl font-medium gap-y-2.5 mb-4',styles.title)}>
+      <div className={classNames('flex flex-col text-xl font-medium gap-y-2.5 mb-4 mx-2.5',styles.title)}>
         <span>{tr('nfts_list')}</span>
       </div>
       <div className={classNames('border  rounded-xl p-5 card_shadow border_color flex items-center',styles.table)}>

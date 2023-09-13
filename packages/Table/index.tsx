@@ -2,7 +2,7 @@
 
 import { BrowserView, MobileView } from '@/components/device-detect';
 import { pageLimit } from '@/utils';
-import { Pagination, Table } from 'antd';
+import { Pagination, Skeleton, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { TableProps } from 'antd/lib';
 import { useMemo } from 'react';
@@ -95,6 +95,7 @@ export default (props: Props) => {
         onChange={onChange}
         loading={loading}
         scroll={{ x: 'max-content' }}
+        showSorterTooltip={false}
         // loading={{
         //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
         //   indicator: <Skeleton active />,

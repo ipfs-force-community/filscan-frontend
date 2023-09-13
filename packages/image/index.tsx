@@ -15,6 +15,7 @@ const ImageWithFallback = (props: any) => {
 
   return (
     <Image
+      alt=''
       {...rest}
       className='rounded-full	'
       src={imgSrc}

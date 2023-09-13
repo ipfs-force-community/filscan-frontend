@@ -10,7 +10,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 
 export const pageLimit = 15;
-export const pageHomeLimit = 7;
+export const pageHomeLimit = 10;
 export const max_name_length = 10;
 
 // 账户类型

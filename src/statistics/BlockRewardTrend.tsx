@@ -120,7 +120,7 @@ export default (props: Props) => {
     const seriesData: any = [];
     const inter = time || interval
     const result: any = await axiosData(apiUrl.static_block_trend, { interval:inter });
-    result?.items?.forEach((value: any) => {
+    result?.items?.reverse()?.forEach((value: any) => {
       const {
         block_time,
         acc_block_rewards, //合约交易

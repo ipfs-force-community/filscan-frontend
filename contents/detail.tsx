@@ -17,6 +17,7 @@ import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import { Button } from 'antd';
+import DropDown from '@/packages/dropDown';
 //储存池概览 账户余额 & 有效算力
 
 export const account_balance = {
@@ -216,7 +217,7 @@ export const owner_detail = {
       dataIndex: 'account_address',
       render: (text: string) => {
         return (
-          <div className='flex gap-x-1 items-center'>
+          <div className='flex gap-x-2 items-center'>
             <Link className='link' href={`/address/${text}`}>
               {text}
             </Link>
@@ -282,7 +283,7 @@ export const message_detail = {
         if (Array.isArray(text)) {
           return <ul className='flex flex-col gap-y-2'>
             { text.map((item:string,index:number) => {
-              return <li key={item} className='flex items-center gap-x-1'>
+              return <li key={item} className='flex items-center gap-x-2'>
                 <span className='flex items-center justify-center w-5 h-5 bg-bg_hover rounded-[5px]'>{ index}</span>
                 { item}
               </li>
@@ -306,7 +307,7 @@ export const message_detail = {
       dataIndex: 'from',
       title: 'from_ath',
       width:'30%',
-      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>
+      render: (text: string, record: any) => <span className='flex items-center gap-x-2'>
         { get_account_type(text)}
       </span>
     },
@@ -314,7 +315,7 @@ export const message_detail = {
       dataIndex: 'to',
       title: 'to_ath',
       width:'30%',
-      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>
+      render: (text: string, record: any) => <span className='flex items-center gap-x-2'>
         { get_account_type(text)}
       </span>
     },
@@ -389,7 +390,7 @@ export const message_detail = {
       render: (text: any) => {
         if (text?.startsWith('Ok')) {
           return (
-            <span className='flex py-1 gap-x-1  rounded-sm items-center'>
+            <span className='flex py-1 gap-x-2  rounded-sm items-center'>
               {getSvgIcon('successIcon')}
               <span className='text-success text-cm'>Success</span>
             </span>
@@ -397,7 +398,7 @@ export const message_detail = {
         }
         if (text?.startsWith('Err')) {
           return (
-            <span className='flex py-1 gap-x-1 rounded-sm items-center'>
+            <span className='flex py-1 gap-x-2 rounded-sm items-center'>
               {getSvgIcon('errorIcon')}
               <span className='text_red text-cm'>Error</span>
             </span>
@@ -405,7 +406,7 @@ export const message_detail = {
         }
 
         return (
-          <span className='flex py-1 gap-x-1  rounded-sm items-center'>
+          <span className='flex py-1 gap-x-2  rounded-sm items-center'>
             {getSvgIcon('pendingIcon')}
             <span className='text-cm'>Pending</span>
           </span>
@@ -454,19 +455,19 @@ export const message_detail = {
       </span>,
       render: (text: any) => {
         if (text) {
-          return <span className='flex gap-x-1'>
-            <span className='flex gap-x-1'>
+          return <span className='flex gap-x-2'>
+            <span className='flex gap-x-2'>
               <span>Swap</span>
               <span>{ text?.amount_out?.toLocaleString()}</span>
               <span>{text?.amount_out_token_name.toLocaleUpperCase()}</span>
             </span>
             <span className="text_des">For</span>
-            <span className='flex gap-x-1' >
+            <span className='flex gap-x-2' >
               <span>{text?.amount_in}</span>
               <span>{text?.amount_in_token_name}</span>
             </span>
             <span className="text_des">On</span>
-            <span className={`flex gap-x-1 ${text.dex_url ? 'cursor-pointer':''}`} onClick={() => {
+            <span className={`flex gap-x-2 ${text.dex_url ? 'cursor-pointer':''}`} onClick={() => {
               if (text.dex_url) {
                 window.open(text.dex_url)
               }
@@ -494,19 +495,19 @@ export const message_detail = {
               {text.map((item: any, index) => {
                 return (
                   <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-1'>
+                    <span className='flex items-center gap-x-2'>
                       <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-1 items-center'>
+                      <span className='flex gap-x-2 items-center'>
                         {get_account_type(item.from)}
                       </span>
                     </span>
-                    <span className='flex items-center gap-x-1 '>
+                    <span className='flex items-center gap-x-2 '>
                       <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-1 items-center'>
+                      <span className='flex gap-x-2 items-center'>
                         {get_account_type(item.to)}
                       </span>
                     </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-1 '>
+                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
                       <span className='font_weight'>For</span>
                       <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                       <span>{ item?.token_name}</span>
@@ -557,19 +558,19 @@ export const message_detail = {
               {text.map((item: any, index) => {
                 return (
                   <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-1'>
+                    <span className='flex items-center gap-x-2'>
                       <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-1 items-center'>
+                      <span className='flex gap-x-2 items-center'>
                         {get_account_type(item.from)}
                       </span>
                     </span>
-                    <span className='flex items-center gap-x-1 '>
+                    <span className='flex items-center gap-x-2 '>
                       <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-1 items-center'>
+                      <span className='flex gap-x-2 items-center'>
                         {get_account_type(item.to)}
                       </span>
                     </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-1 '>
+                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
                       <span className='font_weight'>For</span>
                       <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                       <span>{ item?.token_name}</span>
@@ -598,19 +599,19 @@ export const message_detail = {
               {text.map((item: any, index) => {
                 return (
                   <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-1'>
+                    <span className='flex items-center gap-x-2'>
                       <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-1 items-center'>
+                      <span className='flex gap-x-2 items-center'>
                         {get_account_type(item.from)}
                       </span>
                     </span>
-                    <span className='flex items-center gap-x-1 '>
+                    <span className='flex items-center gap-x-2 '>
                       <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-1 items-center'>
+                      <span className='flex gap-x-2 items-center'>
                         {get_account_type(item.to)}
                       </span>
                     </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-1 '>
+                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
                       <span className='font_weight'>For</span>
                       <span>
                         {formatFilNum(item.value, false, false, 4) || '--'}
@@ -829,7 +830,7 @@ const default_content = [
     render: (text: any, record: any, tr: any) => {
       if (record?.account_basic?.account_type === 'evm') {
         if (text) {
-          return <span className="flex items-center gap-x-1">
+          return <span className="flex items-center gap-x-2">
             <span className="success_color">
               {getSvgIcon('successIcon')}
             </span>
@@ -872,7 +873,7 @@ const default_content = [
   },
   {
     title: 'eth_address', dataIndex: 'eth_address', elasticity: true, type: ['account_basic'],
-    render: (text: string, record: any) => text ? <span className="flex items-center gap-x-1">{text} <Copy text={text} /></span> : text
+    render: (text: string, record: any) => text ? <span className="flex items-center gap-x-2">{text} <Copy text={text} /></span> : text
   },
 
   {
@@ -883,7 +884,8 @@ const default_content = [
   },
   {
     title: 'stable_address', dataIndex: 'stable_address', elasticity: true,
-    type: ['account_basic'], render: (text: string) => text ? <span className="flex items-center gap-x-1">
+    type: ['account_basic'],
+    render: (text: string) => text ? <span className="flex items-center gap-x-2">
       {text?.length > 30 ? isIndent(text, 10, 10) : text}
       <Copy text={text} /></span> : text
   },
@@ -901,10 +903,11 @@ const default_content = [
   { title: 'Approvals Threshold',elasticity:true, dataIndex: 'approvals_threshold'},
   {
     title: 'tokenList', elasticity: true, dataIndex: 'tokenList', render: (text: any) => {
-      console.log('--d',text)
+      if(!text) return null
       if (Array.isArray(text)) {
+        if(text.length === 0) return null
         const value = text[0];
-        return value // <DropDown value={value} content={text.slice(1)}/>
+        return <DropDown value={value} content={text.slice(1)}/>
       }
     }
   },
@@ -919,7 +922,7 @@ const default_content = [
       return text ?
         <>
           <BrowserView>
-            <span className="flex items-center gap-x-1">
+            <span className="flex items-center gap-x-2">
               {text?.length > 30? isIndent(text,10,10):text}
               <Copy text={text} />
             </span>
@@ -1077,13 +1080,10 @@ export const address_tabs = [
     ],
   },
   {
-    title: 'contract_verify',
-    dataIndex: 'contract_verify',
-  },
-  {
-    title: 'event_log',
-    dataIndex: 'event_log',
-  },
+    title: 'erc20_transfer',
+    dataIndex:'ercList',
+    value:'ERC20AddrTransfers'
+  }
 ];
 export const minerTabs = [
   {
@@ -1146,7 +1146,7 @@ export const message_list = (fromList: any, toList: any) => [
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
-        <span className='flex items-center gap-x-1'>
+        <span className='flex items-center gap-x-2'>
           {get_account_type(text)}
           {fromList?.domains && fromList?.domains[text] && (
             <Link
@@ -1165,7 +1165,7 @@ export const message_list = (fromList: any, toList: any) => [
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
-        <div className='flex items-center gap-x-1'>
+        <div className='flex items-center gap-x-2'>
           {get_account_type(text)}
           {toList?.domains && toList?.domains[text] && (
             <Link
@@ -1268,7 +1268,7 @@ export const trance_list = (fromList: any, toList: any) => [
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
-        <span className='flex items-center gap-x-1'>
+        <span className='flex items-center gap-x-2'>
           {get_account_type(text)}
           {fromList?.domains && fromList?.domains[text] && (
             <Link
@@ -1287,7 +1287,7 @@ export const trance_list = (fromList: any, toList: any) => [
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
-        <div className='flex items-center gap-x-1'>
+        <div className='flex items-center gap-x-2'>
           {get_account_type(text)}
           {toList?.domains && toList?.domains[text] && (
             <Link
@@ -1308,6 +1308,50 @@ export const trance_list = (fromList: any, toList: any) => [
   },
   { dataIndex: 'method_name', width: '20%', title: 'method_name' },
 ];
+
+export const ercToken_list = (fromList: any, toList: any) => {
+  return [
+    { dataIndex: "time", title: "time",width:'15%' ,render: (text: string | number) => formatDateTime(text) },
+    { dataIndex: "cid", title: "cid", width:'10%', render: (text: string) => text ? <Link className="link" href={`/message/${text}`} >{isIndent(text)}</Link> : '--' },
+    {
+      dataIndex: "from", title: "from",width:'15%' , render: (text: string, record: any) => {
+        if (!text) return '--';
+        return <span className="flex gap-x-2 items-center">
+          {get_account_type(text)}
+          {fromList?.domains&&fromList?.domains[text] && <Link href={ `/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>({ fromList.domains[text]})</Link>}
+
+        </span>
+      }},
+    { dataIndex: "to", title: "to" , width:'15%' ,render: (text: string, record: any) => {
+      if (!text) return '--';
+      return <div className="flex gap-x-2 items-center">
+        {get_account_type( text)}
+        {toList?.domains&&toList?.domains[text] && <Link href={ `/domain/${toList.domains[text]}?provider=${toList.provider}`}>({ toList.domains[text]})</Link>}
+
+      </div>
+    }},
+    { dataIndex: "method", title: "method" ,width:'15%' ,},
+    {
+      dataIndex: "amount", title: "amount",width:'20%' , render: (text: number,record:any) => {
+        return <div className='flex items-center gap-x-2'>
+          {formatNumber(text)}
+          <span>{record.token_name }</span>
+        </div>
+
+      } },
+    {
+      dataIndex: "icon_url",
+      width:'10%' ,
+      title: "platform", render: (text: string, record: any) => {
+        if (!text) {
+          return <Image src={text} width={25} height={25}/>
+        }
+        return <Link href={`/token/${record?.contract_id}`}>
+          <Image src={text} width={25} height={25} />
+        </Link>
+      } },
+  ];
+}
 
 //height
 export const height_list = {
@@ -1413,7 +1457,7 @@ export const cid_list = {
       render: (text: string, record: any) => {
         if (!text) return '--';
         return (
-          <span className='flex items-center gap-x-1'>
+          <span className='flex items-center gap-x-2'>
             {get_account_type(text,0)}
             {fromList?.domains && fromList?.domains[text] && (
               <Link
@@ -1429,7 +1473,7 @@ export const cid_list = {
       render: (text: string, record: any) => {
         if (!text) return '--';
         return (
-          <div className='flex items-center gap-x-1'>
+          <div className='flex items-center gap-x-2'>
             {get_account_type(text,0)}
             {toList?.domains && toList?.domains[text] && (
               <Link
@@ -1458,7 +1502,7 @@ export const deal_list = {
     {
       dataIndex: 'verified_deal', title: 'verified_deal', render: (text: boolean) => {
         const icon = typeof text ==='boolean' ? text ? 'successIcon':'errorIcon':'';
-        return <span className='flex gap-x-1 items-center'>
+        return <span className='flex gap-x-2 items-center'>
           {icon&&getSvgIcon(icon)}
           {String(text)}
         </span>

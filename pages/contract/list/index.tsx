@@ -61,10 +61,10 @@ export default () => {
   }, [listData?.compiled_file_list, current]);
 
   return <div className="main_contain">
-    <div className={classNames('font-PingFang font-semibold text-lg',styles.title)}>
+    <div className={classNames('font-PingFang font-semibold text-lg mx-2.5',styles.title)}>
       {tr('contract_list')}
     </div>
-    <div className={classNames("text_des text-xs font-normal mt-1",styles['title-description'])}>
+    <div className={classNames("text_des text-xs font-normal mt-1 mx-2.5",styles['title-description'])}>
       {tr('contract_list_total', {value: listData?.total ||0})}
     </div>
     <div className={classNames('mt-4 border rounded-xl p-5 card_shadow border_color',styles.reset,styles.table)}>

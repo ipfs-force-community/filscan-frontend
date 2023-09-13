@@ -59,7 +59,7 @@ export default (props:ContentProps) => {
           <li
             key={index}
             className={
-              classNames(`flex items-center gap-x-2.5 min-h-[32px]
+              classNames(`flex items-center gap-x-2.5 min-h-[32px] relative
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }

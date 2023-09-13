@@ -2,17 +2,15 @@
 import '@/styles/globals.css';
 import '@/styles/common.scss';
 import '@/styles/custom.scss';
-import { Layout } from 'antd';
 import type { AppProps } from 'next/app';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import enUS from 'antd/lib/locale/en_US';
 import { useEffect, useState } from 'react';
-import { FilscanStoreProvider, useFilscanStore } from '@/store/FilscanStore';
-
+import { FilscanStoreContext } from '@/store/FilscanStore';
 import HeaderMain from '@/components/header';
 import ErrorBoundary from '@/components/Bounday';
-import { UserInfo, UserStoreContext } from '@/store/UserStore';
+import { UserStoreContext } from '@/store/UserStore';
 import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
@@ -24,7 +22,8 @@ import styles from './_app.module.scss'
 import { useTranslation } from 'react-i18next';
 import { DeviceContext } from '@/store/DeviceContext';
 import MobileDetect from 'mobile-detect';
-const { Content, Header } = Layout;
+import WalletState from '@/store/wallet';
+import i18n from '@/i18n';
 import Ap from 'next/app'
 
 App.getInitialProps = async (context:any)=>{
@@ -45,13 +44,48 @@ App.getInitialProps = async (context:any)=>{
 }
 
 //@ts-ignore
-export default function App({ Component, pageProps,isMobile }: any) {
-  const [userInfo, setUserInfo] = useState<any>();
-  const [locale, setLocale] = useState('zh');
-  const [theme, setTheme] = useState('light');
-  const [home, setHome] = useState<boolean>(false);
+export default function App({ Component, pageProps, isMobile }: any) {
   const {t} =useTranslation('home')
   const router = useRouter();
+
+  const [userInfo, setUserInfo] = useState<any>();
+  const [loading,setLoading]= useState(true)
+  const [lang, setLang] = useState('zh');
+  const [theme, setTheme] = useState('light');
+  const [home, setHome] = useState<boolean>(false);
+  const [wallet, setWallet] = useState({
+    wallet: '',
+    account:''
+  })
+
+  useEffect(() => {
+    const theme_Local = localStorage.getItem('theme');
+    let lang_Local = localStorage.getItem('lang');
+    const wallet_local = localStorage.getItem('wallet');
+    const wallet_store = JSON.parse(wallet_local || '{}');
+    if (!wallet?.account) {
+      setWallet(wallet_store)
+    }
+    if (router.locale) {
+      lang_Local = router.locale;
+    }
+    if (!lang_Local) {
+      lang_Local = navigator.language.startsWith('zh') ? 'zh' : 'en';
+    }
+    loadTheme(theme_Local);
+    if (theme_Local) setTheme(theme_Local);
+    i18n.changeLanguage(lang_Local); // 更改i18n语言
+    if (lang_Local) setLang(lang_Local);
+    setLoading(false)
+  }, []);
+
+  const loadTheme = (theme_Local: any) => {
+    if (theme_Local === 'dark') {
+      document.documentElement.setAttribute('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('theme', 'light');
+    }
+  };
 
   useEffect(() => {
     if (localStorage?.getItem('userInfo')) {
@@ -75,31 +109,51 @@ export default function App({ Component, pageProps,isMobile }: any) {
   useEffect(()=>{
     const pathname = router.pathname
     setHome(pathname === '/' || pathname === '/home')
-  },[router.pathname])
+  }, [router.pathname])
+
+  if (loading) {
+    return null
+  }
 
   return (
     <ErrorBoundary>
-      <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
-        <DeviceContext.Provider value={{isMobile}}>
-          <FilscanStoreProvider>
-            <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
-              <div className={classNames(`container_body ${theme}`)}>
-                <HeaderMain />
-                <MobileView>
-                  {home && <div className={classNames(styles.title)}>
-                    <span>Filecoin </span>
-                    <span>{t('blockchain_browser')}</span>
-                  </div>}
-                  <Search className={home ? styles['search-home'] : styles['search']}/>
-                </MobileView>
-                <div className={classNames(home ? styles.home : styles.other,styles.component)}>
-                  <Component {...pageProps} />
+      <DeviceContext.Provider value={{isMobile}}>
+        <FilscanStoreContext.Provider value={{
+          theme,
+          setTheme: (value: any) => {
+            loadTheme(value);
+            setTheme(value);
+          },
+          lang,
+          setLang,
+        }}>
+          <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
+            <WalletState.Provider value={{
+              wallet, setWallet: (walletItem:any) => {
+                setWallet(walletItem)
+              }
+            }}>   <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                <div className={classNames(`container_body text-sm ${theme}`)}>
+                  <HeaderMain />
+                  <MobileView>
+                    {home && <div className={classNames(styles.title)}>
+                      <span>Filecoin </span>
+                      <span>{t('blockchain_browser')}</span>
+                    </div>}
+                    <Search className={home ? styles['search-home'] : styles['search']}/>
+                  </MobileView>
+                  <div className={classNames(home ? styles.home : styles.other,styles.component)}>
+                    <Component {...pageProps} />
+                  </div>
+                  <Footer />
                 </div>
-                <Footer />           </div>
-            </UserStoreContext.Provider>
-          </FilscanStoreProvider>
-        </DeviceContext.Provider>
-      </ConfigProvider>
+              </ConfigProvider>
+
+            </WalletState.Provider>
+
+          </UserStoreContext.Provider>
+        </FilscanStoreContext.Provider>
+      </DeviceContext.Provider>
     </ErrorBoundary>
   );
 }

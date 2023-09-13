@@ -84,3 +84,14 @@ export const langOptions: Array<Option_Item> = [
     label: '한국인',
   },
 ];
+
+export const networkOptions: Array<Option_Item> = [
+  {
+    value: "Mainnet",
+    label: "Mainnet",
+  },
+  {
+    value: "Calibration",
+    label: "Calibration",
+  },
+];

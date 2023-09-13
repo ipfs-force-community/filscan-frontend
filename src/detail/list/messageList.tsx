@@ -86,7 +86,7 @@ export default ({
   };
   return (
     <Table
-      key={'message_list'}
+      key={'list_message'}
       data={data.dataSource}
       total={data.total}
       columns={columns}

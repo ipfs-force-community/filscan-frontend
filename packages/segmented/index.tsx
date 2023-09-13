@@ -75,7 +75,7 @@ export default ({
 
   return (
     <ul className={classNames(styles.segmented,'list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5')}>
-      {data.map((item) => {
+      {data.map((item:any) => {
         const {title } = item;
         return (
           <li

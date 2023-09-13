@@ -1,6 +1,6 @@
 /** @format */
 
-import { header_top, langOptions } from '@/contents/common';
+import { header_top, langOptions, networkOptions } from '@/contents/common';
 import { Translation } from '@/components/hooks/Translation';
 import Account from './Account';
 import Nav from './Nav';
@@ -15,6 +15,8 @@ import MHeader from '@/components/mobile/header/index'
 import useAxiosData from '@/store/useAxiosData';
 import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
+import { Skeleton } from 'antd';
+// import Skeleton from '@/packages/skeleton';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
@@ -43,6 +45,15 @@ export default () => {
     router.push(router.asPath, router.asPath, { locale: value });
   };
 
+  const handleNetwork = (value:string) => {
+    if (value === 'Calibration') {
+      window.open('https://calibration.filscan.io/')
+    } else if (value === 'Mainnet') {
+      window.open('https://filscan.io/')
+    }
+  }
+
+  const apiFlag = process?.env?.NET_WORK;
   // px-24
   return (
     <>
@@ -53,13 +64,13 @@ export default () => {
         <div className='fixed top-0 z-50 w-full h-[110px] main_bg_color'>
           <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
             <ul className='flex gap-x-5 list-none'>
-              {header_top?.left.map((item) => {
+              {header_top.left.map((item) => {
                 const { title, dataIndex, render } = item;
                 const data = {...fil,...finalHeight}
                 const value = data&&data[dataIndex];
                 let renderDom = render && render(value, data);
                 if (dataIndex === 'block_time') {
-                  renderDom = <TimerHtml tr={tr} text={ value} />
+                  renderDom = <TimerHtml ns='home' text={ value} />
                 }
                 return (
                   <li key={dataIndex} className='flex gap-x-1'>
@@ -70,9 +81,20 @@ export default () => {
               })}
             </ul>
             <div className='flex gap-x-2.5 items-center'>
-              <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] main_bg_color border_color '>
-                {getSvgIcon('network')}
-              </span>
+              <Select
+                ns=''
+                wrapClassName='!bg-bgColor'
+                className='!-inset-x-1/2	'
+                value={apiFlag || 'Mainnet'}
+                header={
+                  <span className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] main_bg_color border_color '>
+                    {getSvgIcon('network')}
+                  </span>
+                }
+                onChange={handleNetwork}
+                options={networkOptions}
+              />
+
               <Select
                 ns=''
                 wrapClassName='!bg-bgColor'

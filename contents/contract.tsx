@@ -796,6 +796,12 @@ export const contract_detail = {
     {
       dataIndex:'license',title:'license',
     }
-
-  ]
+  ],
+  abiOptions: {
+    placeholder: 'source_abi_default',
+    list: [
+      { label: 'Json_Format', value: 'json' },
+      {label:'Text_Format',value:'text'}
+    ],
+  },
 }

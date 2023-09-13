@@ -1,34 +1,29 @@
 /** @format */
-
-import Tooltip from '@/packages/tooltip';
 import {
   formatFilNum,
   formatNumber,
-  getClassName,
   unitConversion,
 } from '@/utils';
-import { spawn } from 'child_process';
 
 export const home_meta = [
   {
     title: 'quality_power/increase_24h',
     dataIndex: 'total_quality_power', //近24h增长算力
-    // tipContent: [
-    //   { title: '', dataIndex: '' },
-    //   {title:'',dataIndex:''},
-    // ],
+    tipContent: [
+      { title: 'quality_power_Cc', dataIndex: 'Cc' ,render: (text:string|number) => unitConversion(text, 2)},
+      {title:'quality_power_Dc',dataIndex:'Dc',render: (text:string|number) => unitConversion(text, 2)},
+    ],
     render: (v: any, record: Record<string, any>) => {
-      const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
+      const changeText =record?.power_increase_24h&& Number(record.power_increase_24h);
       const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       const [textValue, unit] = unitConversion(v, 2).split(' ');
-
       return (
         <>
           <span>{textValue}</span>
           <span className='inline text-xs ml-1'>{unit}</span>
           <span className={`${className} font-DINPro-Medium text-xs ml-1`}>
-            {`${flag}${changeText}`}
+            {`${flag}${unitConversion(Math.abs(changeText), 2)}`}
           </span>
         </>
 
@@ -41,8 +36,8 @@ export const home_meta = [
     dataIndex: 'add_power_in_32g',
     tipContent: [
       {
-        title: 'gas_in_32g', dataIndex: 'gas_in_32g', render: (text:string|number) => formatFilNum(text, false, false, 4)+'/TIB' },
-      {title:'gas_in_64g',dataIndex:'gas_in_64g',render: (text:string|number) => formatFilNum(text, false, false, 4)+'/TIB'},
+        title: 'gas_in_32g', dataIndex: 'gas_in_32g', render: (text:string|number) => formatFilNum(text, false, false, 2)+'/TIB' },
+      {title:'gas_in_64g',dataIndex:'gas_in_64g',render: (text:string|number) => formatFilNum(text, false, false, 2)+'/TIB'},
     ],
     render: (v: any) => {
       const [show, unit] = formatFilNum(v, false, false, 4).split(' ');
@@ -128,7 +123,7 @@ export const home_meta = [
     title: 'gas_24',
     dataIndex: 'sum',
     tipContent: [
-      { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 4) },
+      { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 2) },
     ],
     render: (v: any) => {
       const [show, unit] = formatFilNum(v, false, false, 4).split(' ');

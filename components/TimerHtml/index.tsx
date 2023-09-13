@@ -1,8 +1,11 @@
 import { formatTime } from '@/utils'
 import { useEffect, useState } from "react"
+import { Translation } from '../hooks/Translation';
 
 export default (props:any)=> {
-  const { text, tr } = props
+  const { text ,ns} = props;
+  const { tr } = Translation({ ns });
+
   const [show,setShow]= useState('')
   const showTime = (number: number) => {
     let showText =''

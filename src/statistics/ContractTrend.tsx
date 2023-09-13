@@ -133,7 +133,7 @@ export default (props: Props) => {
         timestamp,
         txs_count, //合约交易
       } = value;
-      const showTime = formatDateTime(timestamp, 'MM-DD');
+      const showTime = inter === '24h'?formatDateTime(timestamp, 'HH:mm'):formatDateTime(timestamp, 'MM-DD');
       dateList.push(showTime);
       //amount
 

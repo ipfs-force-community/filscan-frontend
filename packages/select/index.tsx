@@ -14,6 +14,7 @@ export default ({
   className,
   value,
   suffix,
+
 }: {
   ns: string;
   options: Array<Option_Item>;

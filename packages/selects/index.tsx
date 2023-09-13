@@ -11,13 +11,15 @@ export default ({
   className = '',
   popupClassName='',
   border,
+  placeholder
 }: {
-  value: string;
+  value?: string;
   className?: string;
   popupClassName?: string;
   border?: boolean;
   suffix?: JSX.Element;
-  options: Array<Option_Item>;
+    options: Array<Option_Item>;
+    placeholder?: string;
   onChange: (value: string) => void;
 }) => {
   const [new_options, setOptions] = useState<Array<Option_Item>>([]);
@@ -37,7 +39,7 @@ export default ({
   return (
     <Select
       showSearch
-      placeholder='Select a person'
+      placeholder={ placeholder || 'Select a person'}
       optionFilterProp='children'
       value={value}
       className={`custom_select ${className}`}

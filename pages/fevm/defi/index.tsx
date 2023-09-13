@@ -54,8 +54,8 @@ export default () => {
         })}
       </ul>
       <div className="mt-5">
-        <span>
-          <span className="text-lg font-DINPro-Bold"> {tr('defi_overview')}</span>
+        <span className="mx-2.5">
+          <span className="text-lg font-DINPro-Bold "> {tr('defi_overview')}</span>
           { defiData?.updated_at &&<span className="text_des text-xs ml-2">{tr('defi_list_time', {value:formatDateTime(defiData?.updated_at)}) }</span>}
         </span>
         <DefiList />
