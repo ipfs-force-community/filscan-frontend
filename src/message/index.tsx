@@ -106,7 +106,7 @@ export default ({ cid }: { cid: string | string[] }) => {
         <MobileView>
           <div className={styles.title}>{tr('transfer_records')}</div>
           {
-            get(data,'consume_list').map((n:any,index:number)=>{
+            get(data,'consume_list')?.map((n:any,index:number)=>{
               return <div className={styles.card} key={`card-${index}`}>
                 <div className={styles['card-item']}>
                   <div className={classNames(styles['card-item-label'],'w-28')}>{tr('from_ath')}：</div>

@@ -70,6 +70,7 @@ export default ({
         suffix={
           (
             <span
+              className='cursor-pointer'
               onClick={_.debounce(() => {
                 if (onClick && inputValue?.length > 0) {
                   if (clear) {

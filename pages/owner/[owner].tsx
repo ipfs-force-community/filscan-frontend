@@ -58,7 +58,7 @@ export default () => {
             const renderDom = render ? render(value, data) : value;
             return (
               <li key={dataIndex} className='flex w-full items-baseline'>
-                <div className='text_des text-sm w-32'>{tr(title)}</div>
+                <div className='text_des text-sm w-28'>{tr(title)}</div>
                 <span className='flex-1'>{renderDom}</span>
               </li>
             );

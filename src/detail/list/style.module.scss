@@ -1,0 +1,38 @@
+@media screen and (max-width: 1000px){
+  .list{
+    .list-header{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .select-wrap{
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+
+    :global{
+      .table{
+        .ant-pagination{
+          justify-content: flex-end;
+        }
+      }
+      .copy-row {
+          display: inline-block;
+          align-items: center;
+          .text {
+              color: var(--mobile-link-color);
+              word-break: break-all;
+          }
+          .copy {
+              display: inline-block;
+              align-items: center;
+              padding-left: 5px;
+              img {
+                  display: inline-block;
+              }
+          }
+      }
+    }
+  }
+}

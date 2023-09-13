@@ -136,7 +136,7 @@ export default ({ origin }: { origin?: string }) => {
         <div className={classNames('font-PingFang font-semibold text-lg',styles.title)}>
           {tr('contract_rank')}
         </div>
-        <div className={classNames('text-xs text_des',styles['title-description'])}>
+        <div className={classNames('text-xs text_des ',styles['title-description'])}>
           {tr('contract_list_total', {value:dataSource.total})}
         </div>
       </MobileView>
@@ -157,7 +157,7 @@ export default ({ origin }: { origin?: string }) => {
             />
           </Link>}
         </div>
-        {origin !== 'home' && <div className='text-xs text_des'> {tr('contract_list_total', {value:dataSource.total})}</div>}
+        {origin !== 'home' && <div className='text-xs text_des mx-2.5'> {tr('contract_list_total', {value:dataSource.total})}</div>}
       </BrowserView>
       <div className={classNames('mt-4 h-[480px] border  rounded-xl p-5	card_shadow border_color',styles.reset,styles.table)}>
         <Table

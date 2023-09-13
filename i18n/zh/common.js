@@ -52,8 +52,8 @@ const common = {
   email_exists:'邮箱已存在',
   Export: '下载Excel',
   //footer
-  'footer_des1':'Filecoin区块浏览器及数据服务平台，提供基于 Filecoin',
-  'footer_des2':'的各类收节点收益排行榜、区块链数据查询、可视化图表等一站式数据服务。',
+  'footer_des1':'Filscan 是 Filecoin 区块链浏览器及其数据服务平台',
+  'footer_des2':'提供基于 Filecoin 的各类数据查询、可视化图表以及FVM生态数据统计分析的一站式数据服务',
 
 }
 export default common

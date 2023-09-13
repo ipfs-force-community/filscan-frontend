@@ -62,7 +62,14 @@ export default () => {
       account_id: address,
     }, {isCancel:false});
     setLoading(false);
-    setData(result?.account_info || {});
+    let baseResult: any = {};
+    const mainType = result?.account_type || '';
+    if (result?.account_info[`account_${mainType}`]) {
+      baseResult= result?.account_info[`account_${mainType}`]
+    } else {
+      baseResult= result?.account_info
+    }
+    setData(baseResult);
     setAccountType(result?.account_type || '');
     if (result?.account_info?.account_basic?.account_id) {
       setActorId(result.account_info.account_basic.account_id)

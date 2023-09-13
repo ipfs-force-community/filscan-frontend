@@ -64,11 +64,11 @@ export default () => {
       <span className="text_des text-xs">{ tr('verify_des')}</span>
     </div>
     <div className='border rounded-xl p-5 card_shadow border_color mt-2.5 flex flex-col items-center'>
-      <div className="text_des text-xs">{tr('verify_content')}</div>
+      <div className="text_des text-xs leading-6">{tr('verify_content')}</div>
       <div className="mt-12 w-[500px]">
         <Form className="!w-full custom_form"
           form={form}
-          size='large'
+          size='small'
           onFinish={handleFinish}
 
           layout="vertical">

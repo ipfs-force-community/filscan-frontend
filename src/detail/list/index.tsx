@@ -9,6 +9,8 @@ import BlockList from './blockList';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import TracesList from './tracesList';
+import classNames from 'classnames';
+import styles from './style.module.scss'
 import EventLog from './EventLog';
 import Verify from './verify';
 
@@ -47,8 +49,8 @@ export default ({
   }, [activeTab, tabList]);
 
   return (
-    <div className='mt-5'>
-      <div className='flex justify-between items-center mr-2.5'>
+    <div className={classNames(styles.list,'mt-5')}>
+      <div className={classNames(styles['list-header'],'flex justify-between items-center mr-2.5')}>
         <Segmented
           data={tabList || []}
           ns='detail'
@@ -58,6 +60,7 @@ export default ({
         />
         {activeItem?.headerOptions && (
           <Selects
+            className={styles['select-wrap']}
             value={method}
             options={activeItem?.headerOptions || []}
             onChange={(value) => {
@@ -71,7 +74,7 @@ export default ({
         )}
       </div>
 
-      <div className='card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl '>
+      <div className='card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl table '>
         {activeTab === 'message_list' && (
           <MessageList accountId={accountId} methodName={method} />
         )}

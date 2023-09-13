@@ -48,10 +48,14 @@ function Gas(props: Props) {
           fontFamily: 'DINPro',
           fontSize: 14,
           color: color.labelColor,
+          // formatter(v: any) {
+          //   return v+'attoFil'
+          // },
+
           formatter(v: any) {
             return new BigNumber(Number(v))
               .dividedBy(Math.pow(10, 9))
-              .toFixed(2);
+              .toFixed(2) +' nanoFIL';
           },
 
         },

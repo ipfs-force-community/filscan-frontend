@@ -98,6 +98,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
+        // console.log('----34325',url)
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
@@ -146,6 +147,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     // 组件卸载时取消所有请求
     return () => {
       current = 0;
+      // console.log('----dd',cancelTokenSources)
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
   },[])

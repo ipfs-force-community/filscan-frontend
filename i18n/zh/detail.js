@@ -163,6 +163,7 @@ const detail = {
   traces_list: '转账列表',
   event_log:'事件日志',
 
+  blk_cids_message:'区块消息',
   message_list_total:'共 {{value}} 条消息',
   block_list_total: '总计 {{value}} 区块',
   traces_list_total: "总计 {{value}} 条消息",

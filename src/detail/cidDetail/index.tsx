@@ -105,8 +105,13 @@ export default ({
   };
   return (
     <>
-      <div className='flex justify-between items-center mt-5'>
-        <div>{tr('message_list_total', { value: data.total })}</div>
+      <div className='flex justify-between items-center mt-5 mx-2.5'>
+        <div>
+          <div className='font-PingFang font-semibold text-lg'>
+            {tr('blk_cids_message')}
+          </div>
+          <div className='text_des'>{tr('message_list_total', { value: data.total })}</div>
+        </div>
         <Selects
           value={method}
           options={options}
