@@ -77,7 +77,7 @@ export default ({
     const newColumns = type === 'nfts' ? nft_owner_columns : token_owner_columns;
     return newColumns(ownerList).map((v) => {
       const ol = ownerList as any
-      if (type !== 'nfts') {
+      if (type !== 'nfts' && isMobile) {
         if (v.dataIndex === 'rank' ) {
           v.render= (value: string) => <span className={styles.rank}>{value}</span>
         }

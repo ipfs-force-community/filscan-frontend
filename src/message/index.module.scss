@@ -1,116 +1,121 @@
-@media screen and (max-width: 1000px){
-    .message{
-        padding: 12px;
-        .trans,.detail{
-            margin-bottom: 18px;
-            :global{
-               .link-row{
-                    display: block;
-                    .copy{
-                        padding-left: 5px;
-                        img{
-                            display: inline-block;
-                        }
-                    }
-                }
-                .card_shadow{
-                    padding: 12px;
-                }
-                .items-baseline{
-                    column-gap: 10px;
-                }
-                .flex-grow{
-                    &.overflow-auto{
-                        font-size: 15px;
-                        font-family: DINPro-Medium, DINPro;
-                        font-weight: 500;
-                        color: var( --mobile-title-color);
-                        line-height: 14px;
-                        word-break: break-all;
-                        overflow: unset;
+@media screen and (max-width: 1000px) {
+  .message {
+    padding: 12px;
 
-                        .code{
-                            pre{
-                                white-space: pre-wrap;
-                                &::first-line {
-                                    text-indent: -20px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        .title{
-            font-size: 16px;
-            font-family: PingFangSC-Medium, PingFang SC;
-            font-weight: 500;
-            color: var( --mobile-title-color);
-            line-height: 16px;
-            margin-bottom: 10px;
-        }
-        .card{
-            background: var(--mobile-bg-color);
-            border-radius: 6px;
-            border: 1px solid var(--mobile-divide-line);
-            padding: 8px 0;
-            margin-bottom: 10px;
-            .card-item{
-                display: flex;
-                padding: 12px;
-                column-gap: 10px;
-                .card-item-label{
-                    font-size: 15px;
-                    font-family: PingFangSC-Regular, PingFang SC;
-                    font-weight: 400;
-                    color: var(--mobile-des-color);
-                    line-height: 14px;
-                    flex-shrink: 0;
-                }
-                .card-item-value{
-                    font-size: 15px;
-                    font-family: DINPro-Medium, DINPro;
-                    font-weight: 500;
-                    color: var( --mobile-title-color);
-                    line-height: 14px;
-                    :global{
-                        .text{
-                            word-break: break-all;
-                            color: var(--mobile-link-color);
-                        }
-                        .copy{
-                            padding-left: 5px;
-                            img{
-                                display: inline-block;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        :global{
-            .copy-row {
-                display: inline-block;
-                align-items: center;
-                .text {
-                    color: var(--mobile-link-color);
-                    word-break: break-all;
-                }
-                .copy {
-                    display: inline-block;
-                    align-items: center;
-                    padding-left: 5px;
-                    img {
-                        display: inline-block;
-                    }
-                }
-            }
-        }
+    .top-title {
+        margin-right: 10px;
     }
+    .trans,
+    .detail {
+      margin-bottom: 18px;
+      :global {
+        .link-row {
+          display: block;
+          .copy {
+            padding-left: 5px;
+            img {
+              display: inline-block;
+            }
+          }
+        }
+        .card_shadow {
+          padding: 12px;
+        }
+        .items-baseline {
+          column-gap: 10px;
+        }
+        .flex-grow {
+          &.overflow-auto {
+            overflow: unset;
+            color: var(--mobile-title-color);
+            word-break: break-all;
+            font-weight: 500;
+            font-size: 15px;
+            font-family: DINPro-Medium, DINPro;
+            line-height: 14px;
+
+            .code {
+              pre {
+                white-space: pre-wrap;
+                &::first-line {
+                  text-indent: -20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .title {
+      margin-bottom: 10px;
+      color: var(--mobile-title-color);
+      font-weight: 500;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      line-height: 16px;
+    }
+    .card {
+      margin-bottom: 10px;
+      padding: 8px 0;
+      border: 1px solid var(--mobile-divide-line);
+      border-radius: 6px;
+      background: var(--mobile-bg-color);
+      .card-item {
+        display: flex;
+        padding: 12px;
+        column-gap: 10px;
+        .card-item-label {
+          flex-shrink: 0;
+          color: var(--mobile-des-color);
+          font-weight: 400;
+          font-size: 15px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          line-height: 14px;
+        }
+        .card-item-value {
+          color: var(--mobile-title-color);
+          font-weight: 500;
+          font-size: 15px;
+          font-family: DINPro-Medium, DINPro;
+          line-height: 14px;
+          :global {
+            .text {
+              color: var(--mobile-link-color);
+              word-break: break-all;
+            }
+            .copy {
+              padding-left: 5px;
+              img {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+    :global {
+      .copy-row {
+        display: inline-block;
+        align-items: center;
+        .text {
+          color: var(--mobile-link-color);
+          word-break: break-all;
+        }
+        .copy {
+          display: inline-block;
+          align-items: center;
+          padding-left: 5px;
+          img {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
 }
 
 .message {
-    .trans{
-        margin-bottom: 18px;
-    }
+  .trans {
+    margin-bottom: 18px;
+  }
 }
