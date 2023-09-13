@@ -61,7 +61,7 @@ export default ({
   }
 
   const handleClick = (item:any) => {
-    router.push(`/domain/${item.name}?provider=${item.value}`)
+    router.push(`/domain/${item.name}?provider=${item.provider}`)
   }
   return (
     <div className='relative w-auto group'>

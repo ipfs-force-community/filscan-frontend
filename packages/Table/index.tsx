@@ -93,14 +93,14 @@ export default (props: Props) => {
         rowClassName={'custom_table_row'}
         rowKey={new Date().getTime()}
         onChange={onChange}
-        //loading={loading}
+        loading={loading}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
-        loading={{
-          spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
-          indicator: <Skeleton active />,
-          wrapperClassName: 'custom_table_loading',
-        }}
+        // loading={{
+        //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
+        //   indicator: <Skeleton active />,
+        //   wrapperClassName: 'custom_table_loading',
+        // }}
         pagination={
           total > showLimit
             ? {
