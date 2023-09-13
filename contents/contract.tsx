@@ -756,7 +756,7 @@ export const nft_transfer_columns = (fromList: any, toList: any) => {
 
 export const nft_owner_columns = (ownerList: any) => {
   return [
-    { dataIndex: 'rank', title: 'rank', width: '10%', },
+    { dataIndex: 'rank', title: 'rank', width: '10%', render: (text: string) => <span className='rank_icon'>{text}</span>},
     {dataIndex:'owner',title:'owner', width: '50%', render: (text: string, record: any) => {
       if (!text) return '--';
       return <span className="flex gap-x-1 items-center">
