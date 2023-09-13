@@ -50,7 +50,7 @@ export default () => {
     },{isCancel:false});
     const newMethod: any = [
       {
-        label:tr('all'),
+        label:'all',
         value: 'all',
       },
     ];
@@ -91,7 +91,7 @@ export default () => {
       } else if (baseResult?.account_basic?.eth_address?.startsWith('0x')) {
         showErc20 = baseResult?.account_basic?.eth_address
       } else {
-        showErc20 = baseResult.account_basic?.account_id
+        showErc20 = baseResult?.account_basic?.account_id
       }
       loadERC20TokenList(showErc20);
     }

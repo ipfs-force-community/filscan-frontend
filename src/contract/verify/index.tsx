@@ -42,7 +42,7 @@ export default () => {
     })
   }
   return <div>
-    <div className="mb-10">
+    <div className="mb-5">
       <span className='flex flex-col text-xl font-medium gap-y-2.5'>{tr('verify_title')}</span>
       <span className="text_des text-xs">{ tr('step1_verify_des')}</span>
     </div>

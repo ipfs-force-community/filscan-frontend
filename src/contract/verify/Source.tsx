@@ -28,7 +28,7 @@ export default (props: Props) => {
     arguments: '',
   })
   const [files, setFiles] = useState<any>({})
-  const [configFile, setConfigFile] = useState({})
+  const [configFile, setConfigFile] = useState<any>({})
 
   useEffect(() => {
     if (hashParams) {
@@ -43,6 +43,8 @@ export default (props: Props) => {
   const handleSave = () => {
     const obj = { ...data };
     const filesList = Object.keys(files) || [];
+    const configFiles = Object.keys(configFile) ||[]
+
     if (filesList.length === 0) {
       return notification.warning({
         className: 'custom-notification',
@@ -51,18 +53,40 @@ export default (props: Props) => {
         description: 'please select file'
       })
     }
-    const source_file: any = [];
-    filesList.forEach((v) => {
-      const show_file = files[v];
-      const item = {
-        file_name: show_file.name,
-        source_code: show_file.value
-      };
-      source_file.push(item)
+    if (type === 'multi' && configFiles.length === 0) {
+      return notification.warning({
+        className: 'custom-notification',
+        message: 'Warning',
+        duration: 100,
+        description: 'Please select Metadata File'
+      })
+    }
+    let source_file: any = [];
+    if (type === 'multi') {
+      configFiles.forEach((v) => {
+        const show_file = configFile[v];
+        const item = {
+          file_name: show_file.name,
+          source_code: show_file.value
+        };
+        source_file.push(item)
 
-    })
+      })
+    } else {
+      filesList.forEach((v) => {
+        const show_file = files[v];
+        const item = {
+          file_name: show_file.name,
+          source_code: show_file.value
+        };
+        source_file.push(item)
+      })
+    }
+
     obj.source_file = source_file;
     obj.optimize_runs = data.optimize_runs ? Number(data.optimize_runs) : undefined;
+    obj.optimize = data.optimize === 'true';
+    obj.mate_data_file = source_file[0];
     const url = type === 'standard' ? apiUrl.contract_hard_verify : apiUrl.contract_verify;
     onChange(obj,url)
 
@@ -86,7 +110,7 @@ export default (props: Props) => {
 
   return <div>
     <div className="border rounded-xl p-5 card_shadow border_color mt-2.5 text_des text-xs">
-      <ul className="border border_color rounded-[5px] p-4">
+      <ul className="border border_color rounded-[5px] p-4 leading-6">
         {verify_source.desList.map(item => {
           return <li key={ item.title}>{ tr(item.title)}</li>
         })}
@@ -101,7 +125,7 @@ export default (props: Props) => {
       </ul>
     </div>
     <div className="border border_color card_shadow rounded-[12px] p-5 mt-5">
-      <Upload fileData={files} onChange={(files: any, type: string) => {
+      <Upload fileData={type === 'standard' ? configFile : files} confiles={configFile } onChange={(files: any, type: string) => {
         if (type === 'config') {
           setConfigFile(files)
         } else {

@@ -32,7 +32,7 @@ export default ({
   };
   return (
     <span
-      style={{ cursor: 'pointer' ,width:'13px'}}
+      style={{ cursor: 'pointer' ,width:'13px' ,color:'rgba(51, 106, 250, 0.5)'}}
       className={classNames(`flex-center text-primary ${className}`,styles.wrap)}
       onClick={handleClick}>
       { getSvgIcon('copyIcon')}

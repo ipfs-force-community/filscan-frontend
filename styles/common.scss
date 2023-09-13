@@ -28,15 +28,20 @@
 
 @media screen and (min-width: 1440px){
   .main_contain,.custom_footer,.custom_header,.banner-contain{
-  padding: 20px 90px;
+  padding: 20px 90px 40px 90px;
   }
 }
 
 @media screen and (min-width: 1000px){
-  .main_contain,.custom_footer,.banner-contain{
+  .main_contain,.banner-contain{
   max-width: 1440px;
   min-width: 1000px;
-   padding: 20px 30px;
+   padding: 20px 30px 40px 30px;
+  }
+  .custom_footer{
+     max-width: 1440px;
+    min-width: 1000px;
+    padding: 35px 30px;
   }
   .custom_header{
     max-width: 1440px;
