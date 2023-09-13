@@ -12,6 +12,7 @@ import styles from './index.module.scss'
 import useWindow from '@/components/hooks/useWindown';
 import Link from 'next/link';
 import Image from 'next/image';
+import _ from 'lodash'
 export default () => {
   const { tr } = Translation({ ns: 'contract' });
   const [current, setCurrent] = useState(1);
@@ -30,7 +31,8 @@ export default () => {
   );
 
   const columns = useMemo(() => {
-    return contract_nfts.columns.filter((v: any) => {
+    const columns = _.cloneDeep(contract_nfts.columns)
+    return columns.filter((v: any) => {
       if (isMobile) {
         if (v.dataIndex === 'rank') {
           // @ts-ignore
