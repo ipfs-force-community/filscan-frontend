@@ -4,10 +4,10 @@ import { Translation } from '@/components/hooks/Translation';
 import { useHash } from '@/components/hooks/useHash';
 import { Item } from '@/contents/type';
 import classNames from 'classnames';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss'
+import { BrowserView, MobileView } from '@/components/device-detect';
 function extractPathParam(route: string) {
   const match = route.match(/\[([^\]]+)\]/);
   return match ? match[1] : null;
@@ -74,25 +74,28 @@ export default ({
   };
 
   return (
-    <ul className={classNames(styles.segmented,'list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5')}>
-      {data.map((item:any) => {
-        const {title } = item;
-        return (
-          <li
-            // href={hash ? `${pathValue}#${item.dataIndex}` : ''}
-            key={item.dataIndex}
-            onClick={(e) => handleClick(e, item.dataIndex)}
-            className={`px-4  text-xs font-medium py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des_hover  ${
-              active === item.dataIndex
-                ? 'tab_shadow highlight  rounded-[5px] main_bg_color'
-                : ''
-            }`}
-            //id={item.dataIndex}
-          >
-            {typeof title ==='function' ? title():tr(item.title)}
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <ul className={classNames(styles.segmented,'list-none w-fit h-fit des_bg_color p-0.5 rounded-[5px] flex ml-2.5')}>
+        {data.map((item:any) => {
+          const {title } = item;
+          return (
+            <li
+              // href={hash ? `${pathValue}#${item.dataIndex}` : ''}
+              key={item.dataIndex}
+              onClick={(e) => handleClick(e, item.dataIndex)}
+              className={classNames(`px-4  text-xs font-medium py-[5px] h-7 w-fit cursor-pointer flex items-center justify-center text_des_hover  ${
+                active === item.dataIndex
+                  ? 'tab_shadow highlight  rounded-[5px] main_bg_color'
+                  : ''
+              }`,styles.item)}
+              //id={item.dataIndex}
+            >
+              {typeof title ==='function' ? title():tr(item.title)}
+            </li>
+          );
+        })}
+      </ul>
+
+    </>
   );
 };
