@@ -34,6 +34,11 @@ export const rank_header:
   | any = {
     tabList: [
       {
+        title: 'growth',
+        dataIndex: 'growth',
+        options: ['sectorOptions', 'timeList'],
+      },
+      {
         title: 'provider',
         dataIndex: 'provider',
       },
@@ -41,11 +46,7 @@ export const rank_header:
         title: 'pool',
         dataIndex: 'pool',
       },
-      {
-        title: 'growth',
-        dataIndex: 'growth',
-        options: ['sectorOptions', 'timeList'],
-      },
+
       {
         title: 'rewards',
         dataIndex: 'rewards',

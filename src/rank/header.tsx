@@ -37,7 +37,8 @@ export default ({
           <Segmented
             data={rank_header.tabList}
             ns='rank'
-            defaultValue='provider'
+            defaultValue={active}
+            defaultActive='growth'
             isHash={origin !== 'home'}
             {...SegmentedProps}
           />

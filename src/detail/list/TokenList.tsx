@@ -2,7 +2,7 @@
 
 import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
-import { trance_list } from '@/contents/detail';
+import { ercToken_list, message_list } from '@/contents/detail';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { pageLimit } from '@/utils';
@@ -10,17 +10,14 @@ import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 
 export default ({
-  methodName,
   accountId,
 }: {
-  methodName?: string;
   accountId?: string | string[];
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const [loading, setLoading] = useState(false);
   const { axiosData } = useAxiosData();
-
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
@@ -30,7 +27,7 @@ export default ({
   const [toList, setTo] = useState({});
 
   const columns = useMemo(() => {
-    return trance_list(fromList, toList).map((v) => {
+    return ercToken_list(fromList, toList).map((v) => {
       return { ...v, title: tr(v.title) };
     });
   }, [theme, lang, fromList, toList]);
@@ -41,20 +38,18 @@ export default ({
     }
   }, [accountId]);
 
-  const load = async (cur?: number, method?: string) => {
+  const load = async (cur?: number,) => {
     setLoading(true);
     const showIndex = cur || current;
-    const showMethod = method || methodName;
-    const result: any = await axiosData(apiUrl.detail_trance_list, {
-      account_id: accountId,
+    const result: any = await axiosData(apiUrl.contract_ERC20Transfers, {
+      address: accountId,
       filters: {
-        index: showIndex - 1,
+        page: showIndex - 1,
         limit: pageLimit,
-        method_name: showMethod === 'all' ? '' : showMethod,
       },
     });
     setLoading(false);
-    const showList = result?.traces_by_account_id_list || [];
+    const showList = result?.items || [];
     setData({
       dataSource: showList,
       total: result?.total_count,
@@ -87,7 +82,7 @@ export default ({
   };
   return (
     <Table
-      key='list_traces'
+      key='list_token'
       data={data.dataSource}
       total={data.total}
       columns={columns}

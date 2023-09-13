@@ -11,7 +11,7 @@ import verifySvg from '@/assets/images/verify.svg';
 import go from '@/assets/images/black_go.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatDateTime, isIndent } from '@/utils';
+import { formatDateTime, isIndent, pageHomeLimit, pageLimit } from '@/utils';
 import useWindow from '@/components/hooks/useWindown';
 import Copy from '@/components/copy';
 import { BrowserView, MobileView } from '@/components/device-detect';
@@ -45,7 +45,7 @@ export default ({ origin }: { origin?: string }) => {
     setLoading(true);
     const data: any = await fetchData(apiUrl.contract_rank, {
       page: index - 1,
-      limit: 7,
+      limit: origin === 'home'?pageHomeLimit:pageLimit,
       sort: sortFile.order === 'ascend' ? 'asc' : 'desc',
       field: sortFile?.field,
     });
@@ -159,7 +159,7 @@ export default ({ origin }: { origin?: string }) => {
         </div>
         {origin !== 'home' && <div className='text-xs text_des mx-2.5'> {tr('contract_list_total', {value:dataSource.total})}</div>}
       </BrowserView>
-      <div className={classNames('mt-4 h-[480px] border  rounded-xl p-5	card_shadow border_color',styles.reset,styles.table)}>
+      <div className={classNames(`mt-4 border  rounded-xl p-5	card_shadow border_color ${origin === 'home'?'h-[650px] ':'h-full'}`,styles.reset,styles.table)}>
         <Table
           key='contract_rank'
           className='-mt-2.5 '

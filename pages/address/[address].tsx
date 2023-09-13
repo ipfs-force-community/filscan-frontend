@@ -16,6 +16,8 @@ import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import { useHash } from '@/components/hooks/useHash';
+import { formatNumber, get$Number } from '@/utils';
+import Image from '@/packages/image'
 /** @format */
 export default () => {
   const router = useRouter();
@@ -23,6 +25,8 @@ export default () => {
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData();
   const [data, setData] = useState<any>({});
+  const [tokenList, setTokenList] = useState<Array<any>>([]);
+  const [verifyData, setVerifyData] = useState<any>({})
   const [accountType, setAccountType] = useState('');
   const [interval, setInterval] = useState('24h');
   const [methodOptions, setMethodOptions] = useState([]);
@@ -74,7 +78,67 @@ export default () => {
     if (result?.account_info?.account_basic?.account_id) {
       setActorId(result.account_info.account_basic.account_id)
     }
+    if (baseResult?.account_basic?.account_id ) {
+      // 已被验证合约
+      loadVerify(baseResult?.account_basic?.account_id)
+
+    }
+    if (typeof address === 'string') {
+      // 增加代币列表
+      let showErc20 =''
+      if (address.startsWith('0x')) {
+        showErc20 = address
+      } else if (baseResult?.account_basic?.eth_address?.startsWith('0x')) {
+        showErc20 = baseResult?.account_basic?.eth_address
+      } else {
+        showErc20 = baseResult.account_basic?.account_id
+      }
+      loadERC20TokenList(showErc20);
+    }
   };
+
+  //合约
+  const loadVerify = async(id: string) => {
+    const result= await axiosData(apiUrl.contract_verify_des, {
+      input_address:id
+    })
+    setVerifyData({ ...result});
+
+  }
+
+  const loadERC20TokenList = async (id:string) => {
+    const tokenList = await axiosData(apiUrl.contract_ERC20TokenList, { address: id });
+    const items: any = [];
+    if (tokenList && Object.keys(tokenList).length > 0) {
+      const objTotal:any = {
+        title: `$${formatNumber(tokenList?.total_value,4)} (${tokenList?.total} Tokens)`,
+        value: `$${tokenList?.total_value} (${tokenList?.total})`
+      }
+      tokenList?.items?.forEach((t: any) => {
+        if (t.amount) {
+          const obj = {
+            ...t,
+            key:t.contract_id,
+            value:t.contract_id,
+            title: <div className='flex justify-between gap-x-2'>
+              <div className='flex items-center gap-x-2'>
+                <Image src={t.token_icon} alt='' width={36} height={36} />
+                <span className='flex items-start flex-col'>
+                  <span>{t.token_name}</span>
+                  <span> {formatNumber(t.amount, 4)} </span>
+                </span>
+              </div>
+              <span>{get$Number(t.value,4)}</span>
+
+            </div>
+          }
+          items.push(obj)
+        }
+      })
+      setTokenList([objTotal,...items])
+    }
+
+  }
 
   const contentList = useMemo(() => {
     return address_detail.content(accountType);
@@ -88,8 +152,20 @@ export default () => {
       }
       defaultOpt.push({ ...v });
     });
-    return defaultOpt;
-  }, [methodOptions]);
+    let evmList :Array<any>= [];
+    if (verifyData && verifyData.source_file) {
+      evmList = [{
+        title: 'contract_verify',
+        dataIndex: 'contract_verify',
+      },
+      {
+        title: 'event_log',
+        dataIndex: 'event_log',
+      },]
+    }
+
+    return [...defaultOpt, ...evmList];
+  }, [methodOptions,verifyData]);
 
   return (
     <div className={classNames(styles.address,'main_contain')}>
@@ -114,7 +190,7 @@ export default () => {
       </div> */}
 
       <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>
-        <Content contents={contentList} ns={'detail'} columns={2} data={data} />
+        <Content contents={contentList} ns={'detail'} columns={2} data={{...data,tokenList}} />
       </div>
       <AccountChange
         header={
@@ -144,6 +220,7 @@ export default () => {
         defaultActive='message_list'
         accountId={address}
         actorId={actorId}
+        verifyData={verifyData }
       />
     </div>
   );

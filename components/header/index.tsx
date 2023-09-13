@@ -15,6 +15,8 @@ import MHeader from '@/components/mobile/header/index'
 import useAxiosData from '@/store/useAxiosData';
 import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
+import { Skeleton } from 'antd';
+// import Skeleton from '@/packages/skeleton';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
@@ -53,13 +55,13 @@ export default () => {
         <div className='fixed top-0 z-50 w-full h-[110px] main_bg_color'>
           <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
             <ul className='flex gap-x-5 list-none'>
-              {header_top?.left.map((item) => {
+              {header_top.left.map((item) => {
                 const { title, dataIndex, render } = item;
                 const data = {...fil,...finalHeight}
                 const value = data&&data[dataIndex];
                 let renderDom = render && render(value, data);
                 if (dataIndex === 'block_time') {
-                  renderDom = <TimerHtml tr={tr} text={ value} />
+                  renderDom = <TimerHtml ns='home' text={ value} />
                 }
                 return (
                   <li key={dataIndex} className='flex gap-x-1'>

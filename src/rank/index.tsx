@@ -9,7 +9,7 @@ import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
 import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageLimit } from '@/utils';
+import { pageHomeLimit, pageLimit } from '@/utils';
 import { useTranslation } from 'react-i18next';
 import useAxiosData from '@/store/useAxiosData';
 
@@ -32,7 +32,7 @@ export default ({ origin }: { origin: string }) => {
   };
   const { theme, lang } = useFilscanStore();
 
-  const [active, setActive] = useState('provider');
+  const [active, setActive] = useState('growth');
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<any>({});
   const [data, setData] = useState({ ...defaultData });
@@ -45,7 +45,8 @@ export default ({ origin }: { origin: string }) => {
   const { axiosData } = useAxiosData();
 
   useEffect(() => {
-    const showHash = hash || 'provider';
+    const showHash = hash || 'growth';
+
     if (showHash === 'growth' || showHash === 'rewards') {
       setHeaderFilter({ ...defaultFilter });
     }
@@ -92,7 +93,7 @@ export default ({ origin }: { origin: string }) => {
         : {};
       const data: any = await axiosData(apiUrl[linkUrl], {
         index: index - 1,
-        limit: origin === 'home' ? 7 : pageLimit,
+        limit: origin === 'home' ? pageHomeLimit : pageLimit,
         order: {
           field: showOrder.field,
           sort: showOrder.order === 'ascend' ? 'asc' : 'desc',
@@ -172,10 +173,18 @@ export default ({ origin }: { origin: string }) => {
     let cur: number = pagination.current || current;
     let order = { ...sort };
     if (sorter.field) {
-      order = {
-        field: sorter.field,
-        order: sorter.order,
-      };
+      if (sorter.order) {
+        order = {
+          field: sorter.field,
+          order: sorter.order,
+        };
+      } else {
+        order = {
+          field: getDefaultSort[active],
+          order: 'descend',
+        }
+      }
+
     }
     setCurrent(cur);
     setSort(order);
@@ -202,7 +211,7 @@ export default ({ origin }: { origin: string }) => {
 
       <div
         className={`mt-4 ${
-          origin === 'home' ? 'h-[480px]' : 'h-full'
+          origin === 'home' ? 'h-[650px]' : 'h-full'
         } border rounded-xl px-5 pt-5 card_shadow border_color flex items-center`}>
         <Table
           key={active}

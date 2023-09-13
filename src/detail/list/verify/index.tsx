@@ -5,26 +5,30 @@ import useAxiosData from "@/store/useAxiosData"
 import { useEffect, useState } from "react"
 import Code from "./Code"
 
-export default ({ actorId }: { actorId?: string }) => {
+export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => {
   const { tr } = Translation({ ns: 'contract' });
   const { axiosData } = useAxiosData()
   const [active,setActive] = useState('Verify_code')
   const [data, setData] = useState<any>()
 
   useEffect(() => {
-    if (actorId) {
-      load()
-    }
-  },[actorId])
+    setData(verifyData)
+  },[verifyData])
 
-  const load = async () => {
-    const result= await axiosData(apiUrl.contract_verify_des, {
-      input_address:actorId
-    })
-    console.log('---33result',result)
-    setData({ ...result});
+  // useEffect(() => {
+  //   if (actorId && !verifyData) {
+  //     load()
+  //   }
+  // },[actorId,verifyData])
 
-  }
+  // const load = async () => {
+  //   const result= await axiosData(apiUrl.contract_verify_des, {
+  //     input_address:actorId
+  //   })
+  //   console.log('---33result',result)
+  //   setData({ ...result});
+
+  // }
   return <div >
     <ul className="flex items-center gap-x-2 des_bg_color rounded-md  w-fit">
       {verify_tabs.map(item => {

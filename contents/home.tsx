@@ -14,17 +14,16 @@ export const home_meta = [
       {title:'quality_power_Dc',dataIndex:'Dc',render: (text:string|number) => unitConversion(text, 2)},
     ],
     render: (v: any, record: Record<string, any>) => {
-      const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
+      const changeText =record?.power_increase_24h&& Number(record.power_increase_24h);
       const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       const [textValue, unit] = unitConversion(v, 2).split(' ');
-
       return (
         <>
           <span>{textValue}</span>
           <span className='inline text-xs ml-1'>{unit}</span>
           <span className={`${className} font-DINPro-Medium text-xs ml-1`}>
-            {`${flag}${changeText}`}
+            {`${flag}${unitConversion(Math.abs(changeText), 2)}`}
           </span>
         </>
 
