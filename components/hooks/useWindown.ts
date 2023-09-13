@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { DeviceContext } from '@/store/DeviceContext'
+import { useContext, useEffect, useState } from 'react'
 
 const useWindow = ()=>{
-  const [isMobile,setIsMobile] = useState(false)
+  const context = useContext(DeviceContext)
+  const [isMobile,setIsMobile] = useState<boolean>()
   const onResize = ()=>{
     setIsMobile(window.innerWidth <= 1000)
   }
@@ -13,7 +15,7 @@ const useWindow = ()=>{
     }
   },[])
   return {
-    isMobile,
+    isMobile:isMobile ?? context.isMobile,
   }
 }
 export default useWindow
