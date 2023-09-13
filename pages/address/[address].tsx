@@ -122,7 +122,7 @@ export default () => {
             value:t.contract_id,
             title: <div className='flex justify-between gap-x-2'>
               <div className='flex items-center gap-x-2'>
-                <Image src={t.token_icon} alt='' width={36} height={36} />
+                <Image src={t.icon_url} alt='' width={36} height={36} />
                 <span className='flex items-start flex-col'>
                   <span>{t.token_name}</span>
                   <span> {formatNumber(t.amount, 4)} </span>
