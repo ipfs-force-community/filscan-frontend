@@ -50,7 +50,7 @@ export default () => {
     },{isCancel:false});
     const newMethod: any = [
       {
-        label:tr('all'),
+        label:'all',
         value: 'all',
       },
     ];

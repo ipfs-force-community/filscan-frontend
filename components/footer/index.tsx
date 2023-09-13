@@ -36,7 +36,7 @@ export default () => {
         <div className='w-screen h-[140px] bg-footerColor'>
           <div className='custom_footer flex justify-between flex-col bg-footerColor'>
             <div className='!text-white flex items-center'>
-              <Image src={logo} width={45} height={45} alt='logo' />
+              <Image src={logo} width={30} height={30} alt='logo' />
               <span className='font-Barlow font-medium text-xl ml-2'>Filscan.io </span>
             </div>
             <div className='flex justify-between text-border_des'>

@@ -14,6 +14,8 @@ import styles from './index.module.scss'
 import EventLog from './EventLog';
 import Verify from './verify';
 import TokenList from './TokenList';
+import { Translation } from '@/components/hooks/Translation';
+import { useFilscanStore } from '@/store/FilscanStore';
 
 export default ({
   accountId,
@@ -27,7 +29,9 @@ export default ({
   defaultActive: string;
   actorId?: string;
   verifyData?:Record<string,any>
-}) => {
+  }) => {
+  const { tr } = Translation({ ns: 'detail' });
+  const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
   const { hash, hashParams } = useHash();
@@ -57,6 +61,15 @@ export default ({
     return tabList.find((v) => v.dataIndex === activeTab);
   }, [activeTab, tabList]);
 
+  const headerOptions = useMemo(() => {
+    if (activeItem?.headerOptions) {
+      return activeItem?.headerOptions?.map((v: any) => {
+        return { ...v, label: tr(v.label || v.title) }
+      })
+    }
+    return []
+  }, [activeItem,lang]);
+
   return (
     <div className={classNames(styles.list,'mt-5')}>
       <div className={classNames(styles['list-header'],'flex justify-between items-center mr-2.5')}>
@@ -71,7 +84,7 @@ export default ({
           <Selects
             className={styles['select-wrap']}
             value={method}
-            options={activeItem?.headerOptions || []}
+            options={headerOptions || []}
             onChange={(value) => {
               if (value !== 'all') {
                 updateQuery({ name: value });

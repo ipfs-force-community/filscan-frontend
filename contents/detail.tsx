@@ -1276,7 +1276,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'from',
     title: 'from',
-    width: '15%',
+    width: '20%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1295,7 +1295,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'to',
     title: 'to',
-    width: '15%',
+    width: '20%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1315,10 +1315,26 @@ export const trance_list = (fromList: any, toList: any) => [
     dataIndex: 'value',
     width: '15%',
     title: 'value',
-    render: (text: number) =>
-      text ? formatFilNum(text, false, false) : text || '--',
+    render: (text: number,record:any) => {
+      if (!text) return '--';
+      const method_name = record?.method_name?.toLocaleLowerCase();
+      let className = ''
+      let flag =''
+      if (method_name) {
+        if (method_name === 'burn' || method_name === 'send') {
+          className = 'text_red'
+          flag='+'
+        } else if (method_name === 'blockreward' || method_name === 'receive') {
+          className = 'text_red'
+          flag='-'
+
+        }
+      }
+      return <span className={className}>{ flag}{formatFilNum(text)}</span>
+    }
+
   },
-  { dataIndex: 'method_name', width: '20%', title: 'method_name' },
+  { dataIndex: 'method_name', width: '10%', title: 'method_name' },
 ];
 
 export const ercToken_list = (fromList: any, toList: any) => {

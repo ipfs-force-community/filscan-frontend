@@ -495,7 +495,7 @@ export const token_owner_columns = (ownerList: any) => {
     {
       dataIndex: 'owner',
       title: 'owner',
-      width: '35%',
+      width: '40%',
       render: (text: string, record: any) => {
         if (!text) return '--';
         return (
@@ -529,7 +529,7 @@ export const token_owner_columns = (ownerList: any) => {
     {
       dataIndex: 'value',
       title: 'Value',
-      width: '20%',
+      width: '15%',
       render: (text: any) => (text ? get$Number(text) : ''),
     },
   ];
