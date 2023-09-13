@@ -75,7 +75,6 @@ export default (props:ContentProps) => {
             </BrowserView>
           </li>
         );
-
       })}
     </ul>
   );

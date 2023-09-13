@@ -173,24 +173,23 @@ export default () => {
         <span className={styles.label}>{tr('account')}:</span>
         <MobileView>
           <span className='copy-row'>
-            <span className='text'>{address}</span>
+            <span className='normal-text'>{address}</span>
             { address&& typeof address ==='string' && <Copy text={address} icon={copySvgMobile} className='copy'/>}
           </span>
         </MobileView>
         <BrowserView>
           <span className={classNames(styles.text,'ml-4 flex items-center gap-x-1')}>
             <span>{address || ''}</span>
-            {/* { address&& typeof address ==='string' && <Copy text={address} />} */}
           </span>
         </BrowserView>
-
       </div>
-      {/* <div className='my-4 DINPro-Medium font-medium  text-lg'>
-        {tr('general_overview_title')}
-      </div> */}
-
       <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>
-        <Content contents={contentList} ns={'detail'} columns={2} data={{...data,tokenList}} />
+        <BrowserView>
+          <Content contents={contentList} ns={'detail'} columns={2} data={{...data,tokenList}} />
+        </BrowserView>
+        <MobileView>
+          <Content contents={contentList} ns={'detail'} columns={1} data={{...data,tokenList}} />
+        </MobileView>
       </div>
       <AccountChange
         header={
