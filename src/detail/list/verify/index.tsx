@@ -39,6 +39,6 @@ export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => 
         </li>
       }) }
     </ul>
-    {active === 'Verify_code' && <Code data={data} />}
+    {active === 'Verify_code' && <Code data={data} actorId={ actorId} />}
   </div>
 }
