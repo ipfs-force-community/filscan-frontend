@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
 import Skeleton from '@/packages/skeleton';
 import Tooltip from '@/packages/tooltip';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -108,7 +109,10 @@ function Meta() {
                 { !value && <Skeleton />}
                 {renderDom}
               </div>
-              <div className='text-xs text_des mt-1 font-PingFang'>{tr(title)}</div>
+              <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
+                {tr(title)}
+                <ExclamationCircleOutlined />
+              </div>
             </div>
           </Tooltip>
         }

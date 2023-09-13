@@ -59,6 +59,16 @@ font-display: auto;
 }
 
 .custom_form{
+    .ant-form-item{
+        &-label{
+            color: var(--font-color);
+            label{
+            color: var(--font-color);
+
+            }
+        }
+    }
+   
     .ant-form-item-row{
        height: 100%;
        .ant-form-item-control{
@@ -373,6 +383,7 @@ font-display: auto;
     .ant-select-selection-placeholder{
         display: flex;
         align-items: center;
+        color: var(--font_des) !important;
     }
 
 }
