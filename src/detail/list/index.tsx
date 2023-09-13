@@ -74,7 +74,7 @@ export default ({
         )}
       </div>
 
-      <div className='card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl table '>
+      <div className='card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl  '>
         {activeTab === 'message_list' && (
           <MessageList accountId={accountId} methodName={method} />
         )}
@@ -92,3 +92,5 @@ export default ({
     </div>
   );
 };
+
+//table

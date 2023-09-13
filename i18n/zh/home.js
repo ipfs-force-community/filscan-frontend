@@ -56,7 +56,8 @@ const home = {
   warn_text: 'Oops! 您输入的搜索字符:',
   warn_details: '对不起！这是一个无效的字符串',
   go_home: '返回首页',
-
+  quality_power_Cc:'等效算力(CC数据)',
+  quality_power_Dc:'真实数据(DC数据)',
   base_gas: '24h基础手续费走势',
   rank: '排行榜',
   contract_rank: '合约排行',

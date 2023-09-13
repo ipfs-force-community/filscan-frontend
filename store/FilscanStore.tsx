@@ -11,57 +11,53 @@ interface FilscanStore {
 
 export const FilscanStoreContext = createContext<FilscanStore | null>(null);
 
-export const FilscanStoreProvider = ({
-  children,
-}: {
-  children: JSX.Element;
-}) => {
-  const [theme, setTheme] = useState<string>('light');
-  const [lang, setLang] = useState<string>('zh');
+// export const FilscanStoreProvider = ({
+//   children,
+// }: {
+//   //children: JSX.Element;
+// }) => {
+//   const [theme, setTheme] = useState<string>('light');
+//   const [lang, setLang] = useState<string>('zh');
 
-  useEffect(() => {
-    const theme_Local = localStorage.getItem('theme');
-    const lang_Local = localStorage.getItem('lang');
-    if (theme_Local) setTheme(theme_Local);
-    if (lang_Local) setLang(lang_Local);
+//   // useEffect(() => {
+//   //   const theme_Local = localStorage.getItem('theme');
+//   //   const lang_Local = localStorage.getItem('lang');
+//   //   if (theme_Local) setTheme(theme_Local);
+//   //   if (lang_Local) setLang(lang_Local);
 
-    loadTheme(theme_Local);
-  }, []);
+//   //   loadTheme(theme_Local);
+//   // }, []);
 
-  const loadTheme = (theme_Local: any) => {
-    if (theme_Local === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.setAttribute('theme', 'dark');
-      document.documentElement.setAttribute('class', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.setAttribute('theme', 'light');
-      document.documentElement.setAttribute('class', 'light');
-    }
-  };
+//   // const loadTheme = (theme_Local: any) => {
+//   //   if (theme_Local === 'dark') {
+//   //     document.documentElement.setAttribute('theme', 'dark');
+//   //   } else {
+//   //     document.documentElement.setAttribute('theme', 'light');
+//   //   }
+//   // };
 
-  const value = {
-    theme,
-    setTheme,
-    lang,
-    setLang,
-  };
+//   const value = {
+//     theme,
+//     setTheme,
+//     lang,
+//     setLang,
+//   };
 
-  return (
-    <FilscanStoreContext.Provider
-      value={{
-        theme,
-        setTheme: (value: any) => {
-          loadTheme(value);
-          setTheme(value);
-        },
-        lang,
-        setLang,
-      }}>
-      {children}
-    </FilscanStoreContext.Provider>
-  );
-};
+//   return (
+//     <FilscanStoreContext.Provider
+//       value={{
+//         theme,
+//         setTheme: (value: any) => {
+//           //loadTheme(value);
+//           setTheme(value);
+//         },
+//         lang,
+//         setLang,
+//       }}>
+//       {children}
+//     </FilscanStoreContext.Provider>
+//   );
+// };
 
 export const useFilscanStore = (): FilscanStore => {
   const context = useContext(FilscanStoreContext);
