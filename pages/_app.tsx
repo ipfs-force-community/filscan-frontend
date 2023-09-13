@@ -22,64 +22,36 @@ import classNames from 'classnames';
 import Search from '@/components/mobile/search';
 import styles from './_app.module.scss'
 import { useTranslation } from 'react-i18next';
+import { DeviceContext } from '@/store/DeviceContext';
+import MobileDetect from 'mobile-detect';
 const { Content, Header } = Layout;
+import Ap from 'next/app'
 
-export default function App({ Component, pageProps }: AppProps) {
+App.getInitialProps = async (context:any)=>{
+  const initialProps = await Ap.getInitialProps(context)
+
+  const regex = RegExp("Android|iPhone")
+
+  if (context.ctx.req) {
+    return {
+      ...initialProps,
+      isMobile: regex.test(context.ctx.req.headers['user-agent'])
+    };
+  }
+  return {
+    isMobile:window.innerWidth < 1000,
+    ...initialProps
+  }
+}
+
+//@ts-ignore
+export default function App({ Component, pageProps,isMobile }: any) {
   const [userInfo, setUserInfo] = useState<any>();
   const [locale, setLocale] = useState('zh');
   const [theme, setTheme] = useState('light');
   const [home, setHome] = useState<boolean>(false);
-  // const { theme, lang, setTheme, setLang } = useFilscanStore();
-
   const {t} =useTranslation('home')
   const router = useRouter();
-
-  useEffect(() => {
-    // (function setRem() {
-    //   try {
-    //     const dom = document.documentElement;
-    //     const resize =
-    //       'orientationchange' in window ? 'orientationchange' : 'resize';
-    //     // 设计稿宽度 1440px
-    //     const DESIGN = 1440,
-    //       MAX = 1920,
-    //       MIN = 1024;
-    //     const calculate = function () {
-    //       const clientWidth = dom.clientWidth;
-    //       const designWidth = clientWidth > MIN ? DESIGN : MIN;
-    //       const screenWidth = clientWidth > MAX ? MAX : clientWidth;
-    //       const size = (screenWidth / designWidth) * 10;
-    //       dom.style.setProperty('font-size', size + 'px', 'important');
-    //     };
-    //     calculate();
-    //     window.addEventListener(resize, calculate);
-    //   } catch (error) {
-    //     console.error('setRem error');
-    //   }
-    // })();
-  }, []);
-  // useEffect(() => {
-  //   // 在路由改变开始时禁用滚动到顶部
-  //   function handleChangeStart(url: string) {
-  //     console.log('----3', url);
-
-  //     window.history.scrollRestoration = 'manual';
-  //   }
-  //   function handleChangeComplete(url: string) {
-  //     console.log('----3', url);
-  //     if (!url.includes('#')) {
-  //       window.history.scrollRestoration = 'auto';
-  //     }
-  //   }
-  //   router.events.on('routeChangeStart', handleChangeStart);
-  //   // 在路由改变完成后恢复滚动到顶部
-  //   router.events.on('routeChangeComplete', handleChangeComplete);
-  //   // 在组件卸载时移除事件监听器
-  //   return () => {
-  //     router.events.off('routeChangeStart', handleChangeStart);
-  //     router.events.off('routeChangeComplete', handleChangeComplete);
-  //   };
-  // }, [router]);
 
   useEffect(() => {
     if (localStorage?.getItem('userInfo')) {
@@ -108,23 +80,25 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <ConfigProvider locale={locale === 'zh' ? zhCN : enUS}>
-        <FilscanStoreProvider>
-          <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
-            <div className={classNames(`container_body text-sm ${theme}`)}>
-              <HeaderMain />
-              <MobileView>
-                {home && <div className={classNames(styles.title)}>
-                  <span>Filecoin </span>
-                  <span>{t('blockchain_browser')}</span>
-                </div>}
-                <Search className={home ? styles['search-home'] : styles['search']}/>
-              </MobileView>
-              <div className={classNames(home ? styles.home : styles.other,styles.component)}>
-                <Component {...pageProps} />
-              </div>
-              <Footer />           </div>
-          </UserStoreContext.Provider>
-        </FilscanStoreProvider>
+        <DeviceContext.Provider value={{isMobile}}>
+          <FilscanStoreProvider>
+            <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
+              <div className={classNames(`container_body ${theme}`)}>
+                <HeaderMain />
+                <MobileView>
+                  {home && <div className={classNames(styles.title)}>
+                    <span>Filecoin </span>
+                    <span>{t('blockchain_browser')}</span>
+                  </div>}
+                  <Search className={home ? styles['search-home'] : styles['search']}/>
+                </MobileView>
+                <div className={classNames(home ? styles.home : styles.other,styles.component)}>
+                  <Component {...pageProps} />
+                </div>
+                <Footer />           </div>
+            </UserStoreContext.Provider>
+          </FilscanStoreProvider>
+        </DeviceContext.Provider>
       </ConfigProvider>
     </ErrorBoundary>
   );
