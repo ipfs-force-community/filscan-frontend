@@ -35,7 +35,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         top:  10,
         left: 20,
         right: '8%',
-        bottom: 20,
+        bottom: 10,
         containLabel: true,
       },
       yAxis: {
@@ -53,7 +53,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
             color: color.lineStyle,
           },
           textStyle: {
-            color: color.textStyle,
+            color: color.labelColor,
           },
           formatter(v: string) {
             return v + ' TiB';
@@ -244,13 +244,13 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         </div>
         <BrowserView>{ledRender()}</BrowserView>
       </div>
-      <div className='card_shadow w-full border rounded-xl p-5 border_color'>
+      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
         <MobileView>
           <div className="tips">
             {ledRender()}
           </div>
         </MobileView>
-        <div className='h-[328px]'><Echarts options={newOptions} /></div>
+        <div className=' w-full h-[348px]'><Echarts options={newOptions} /></div>
       </div>
     </div>
   );

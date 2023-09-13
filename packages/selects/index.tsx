@@ -41,7 +41,7 @@ export default ({
       optionFilterProp='children'
       value={value}
       className={`custom_select ${className}`}
-      popupClassName={`custom_select_wrapper ${popupClassName}`}
+      popupClassName={'custom_select_wrapper'}
       filterOption={(input, option: any) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }

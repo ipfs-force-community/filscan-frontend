@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import { notification } from 'antd';
@@ -44,16 +44,21 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
 
     // 创建一个键，包含 URL 和方法
-    const key = isCancel &&flag? `${method}:${url}_${flag}`: `${method}:${url}` ;
+    let key =''
+    if (isCancel) {
+      key= flag ? `${method}:${url}_${flag}`: `${method}:${url}`
+    }
 
     // 如果这个 URL 和方法已经有一个正在进行的请求，取消它
-    if (isCancel&&cancelTokenSources[key]) {
+    if (cancelTokenSources[key]) {
       cancelTokenSources[key].cancel('Cancelled because of new request');
     }
 
     // 创建一个新的取消令牌
     const cancelTokenSource = axios.CancelToken.source();
-    cancelTokenSources[key] = cancelTokenSource;
+    if (key) {
+      cancelTokenSources[key] = cancelTokenSource;
+    }
 
     while (current < maxRetries) {
       try {
@@ -93,6 +98,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
+        // console.log('----34325',url)
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
@@ -135,11 +141,16 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
       axiosData(initialUrl, initialPayload, initialOptions);
     }
 
+  }, [initialUrl, initialPayload, initialOptions]);
+
+  useEffect(() => {
     // 组件卸载时取消所有请求
     return () => {
+      current = 0;
+      // console.log('----dd',cancelTokenSources)
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
-  }, [initialUrl, initialPayload, initialOptions]);
+  },[])
 
   return { data, loading, error, axiosData };
 }

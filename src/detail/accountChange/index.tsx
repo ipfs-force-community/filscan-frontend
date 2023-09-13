@@ -8,7 +8,7 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime, formatFil, formatFilNum } from '@/utils';
-import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
+import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
 
@@ -42,7 +42,7 @@ export default ({
         top: 10,
         left: 20,
         right: list ? 10 : '8%',
-        bottom: 20,
+        bottom: 10,
         containLabel: true,
       },
       yAxis: {
@@ -66,7 +66,7 @@ export default ({
             color: color.lineStyle,
           },
           textStyle: {
-            color: color.textStyle,
+            color: color.labelColor,
           },
           formatter(v: string) {
             return v + ' FIL';
@@ -197,8 +197,8 @@ export default ({
     (list || account_change.list).forEach((item: any) => {
       const dataIndex = item?.dataIndex;
       let otherObj = {};
-      if (item.seriesArea) {
-        otherObj = { ...seriesArea };
+      if (item.seriesChangeArea) {
+        otherObj = { ...seriesChangeArea };
       }
       legendData.push({
         dataIndex,
@@ -241,6 +241,7 @@ export default ({
       series: newSeries,
     };
   }, [options, default_xAxis, noShow, defaultOptions]);
+
   const ledRender = ()=>{
     return <span className='flex gap-x-4'>
       {options?.legendData?.map((v: any) => {
@@ -281,13 +282,13 @@ export default ({
         </div>
       )}
 
-      <div className='card_shadow w-full border rounded-xl p-5 border_color'>
+      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
         <MobileView>
           <div className="tips">
             {ledRender()}
           </div>
         </MobileView>
-        <div className='h-[328px]'><Echarts options={newOptions}/></div>
+        <div className='w-full h-[348px]'><Echarts options={newOptions}/></div>
       </div>
 
     </div>

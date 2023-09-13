@@ -11,6 +11,8 @@ import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import TracesList from './tracesList';
 import classNames from 'classnames';
 import styles from './style.module.scss'
+import EventLog from './EventLog';
+import Verify from './verify';
 
 export default ({
   accountId,
@@ -21,7 +23,7 @@ export default ({
   accountId?: string | string[];
   tabList: Array<any>;
     defaultActive: string;
-  actorId:string
+  actorId?:string
 }) => {
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
@@ -48,7 +50,7 @@ export default ({
 
   return (
     <div className={classNames(styles.list,'mt-5')}>
-      <div className={classNames(styles['list-header'],'flex justify-between items-center')}>
+      <div className={classNames(styles['list-header'],'flex justify-between items-center mr-2.5')}>
         <Segmented
           data={tabList || []}
           ns='detail'
@@ -72,13 +74,19 @@ export default ({
         )}
       </div>
 
-      <div className='card_shadow p-5 mt-5 min-h-[300px] table'>
+      <div className='card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl table '>
         {activeTab === 'message_list' && (
           <MessageList accountId={accountId} methodName={method} />
         )}
         {activeTab === 'block_list' && <BlockList accountId={accountId} />}
         {activeTab === 'traces_list' && (
           <TracesList accountId={accountId} methodName={method} />
+        )}
+        {activeTab === 'contract_verify' && (
+          <Verify actorId={actorId}/>
+        )}
+        {activeTab === 'event_log' && (
+          <EventLog actorId={actorId}/>
         )}
       </div>
     </div>

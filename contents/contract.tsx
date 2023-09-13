@@ -112,6 +112,14 @@ export const verify_source={
   ]
 }
 
+export const verify_output = {
+  headerList: [
+    {title:'compile_version',dataIndex:'compiler'},
+    {title:'optimize',dataIndex:'optimize'},
+    {title:'RUNS',dataIndex:'optimize_runs',},
+  ]
+}
+
 export const contract_rank = {
   title: 'contract_rank',
   title_des: 'contract_rank_des',
@@ -281,7 +289,7 @@ export const contract_token = {
               <Link
                 href={`/token/${record.contract_id}`}
                 className='flex items-center gap-x-1'>
-                <Image src={record?.icon_url} alt='' height={38} width={38} />
+                <Image src={record?.icon_url} alt='' height={32} width={32} />
                 <span className='margin-6 text_color'>{text}</span>
               </Link>
               {}
@@ -454,7 +462,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       render: (text: string, record: any) => {
         if (!text) return '--';
         return (
-          <div className='flex items-center gap-x-1'>
+          <span className='flex items-center gap-x-1'>
             {get_account_type(text)}
             {toList?.domains && toList?.domains[text] && (
               <Link
@@ -462,7 +470,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
                 ({toList.domains[text]})
               </Link>
             )}
-          </div>
+          </span>
         );
       },
     },
@@ -750,5 +758,44 @@ export const nft_owner_columns = (ownerList: any) => {
     }},
     {dataIndex:'amount',title:'amount', width: '20%', render: (text: string,record:any) =>text? formatNumber(text,4) :text ||'--'},
     { dataIndex: 'percentage', width: '20%', title: 'percentage', render: (text: string,record:any) =>text? Number(Number(text)*100) .toFixed(4) +'%' :text ||'--'},
+  ]
+}
+
+//合约详情
+//已验证合约 读写合约
+
+export const verify_tabs = [
+  {
+    title: 'Verify_code',
+    dataIndex:'Verify_code'
+  },
+  {
+    title: 'Verify_read',
+    dataIndex:'Verify_read'
+  },
+  {
+    title: 'Verify_write',
+    dataIndex:'Verify_write'
+  },
+
+]
+export const contract_detail = {
+  list: [
+    {
+      dataIndex: 'contract_name', title: 'contract_name',
+    },
+    {
+      dataIndex: 'optimize', title: 'optimize',
+      render: (text: boolean, record: any) => {
+        return text ? titleCase(text) +` with (${record.optimize_runs}) runs`: titleCase(text)
+      }
+    },
+    {
+      dataIndex: 'compiler', title: 'compiler',
+    },
+    {
+      dataIndex:'license',title:'license',
+    }
+
   ]
 }

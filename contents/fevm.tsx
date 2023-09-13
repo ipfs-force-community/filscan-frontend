@@ -113,8 +113,8 @@ export const defi_list = {
             }}>
             <Image
               src={record.icon_url || ''}
-              width={25}
-              height={25}
+              width={32}
+              height={32}
               alt='logo'
             />
             <TextTip text={text} />

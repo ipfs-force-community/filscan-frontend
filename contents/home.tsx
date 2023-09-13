@@ -92,7 +92,7 @@ export const home_meta = [
       const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
       const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
-      return <span className='flex gap-x-1 items-end'>
+      return <span className='flex gap-x-1 items-baseline'>
         {formatNumber(v, 2)}
         {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>}
       </span>

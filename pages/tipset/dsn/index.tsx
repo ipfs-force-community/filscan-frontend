@@ -94,9 +94,10 @@ export default () => {
           </div>
         </div>
         <Search
-          className={classNames(styles.search,'!w-[400px] !h-10')}
+          className={classNames(styles.search,'!w-[400px] !h-9')}
           placeholder={dsn_list.placeholder}
           onSearch={handleSearch}
+          onClick={handleSearch}
           ns='tipset'
           suffix={<SearchOutlined />}
         />

@@ -36,7 +36,7 @@ export default () => {
     setLoading(false)
   }
   return <div className={classNames(styles.cid,"main_contain")}>
-    <div className='font-PingFang font-semibold text-lg'>
+    <div className='mx-2.5 font-PingFang font-semibold text-lg '>
       {tr('chain_cid_detail')}
     </div>
     <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">

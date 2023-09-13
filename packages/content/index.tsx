@@ -28,10 +28,11 @@ export default (props:ContentProps) => {
   //   }
   //   return '100%';
   // }, [columns]);
+
   return (
     <ul
       className={classNames(styles['detail-content'],`w-full max-h-full ${
-        columns !== 1 ? `grid !grid-cols-2 gap-x-12` : 'flex flex-col p-2.5 gap-y-5'
+        columns !== 1 ? `grid !grid-cols-2 gap-x-12` : 'flex flex-col p-2.5 gap-y-2'
       }`,props.className)}>
       {contents.map((item, index) => {
         const {
@@ -45,8 +46,7 @@ export default (props:ContentProps) => {
         const itemData = getShowData(item, data);
         const value = itemData && itemData[dataIndex];
         const renderValue = render ? render(value, data, tr) : value;
-        const showTitle =
-          typeof title === 'string' ? tr(title) : title(tr, index);
+        const showTitle = typeof title === 'function' ? title(tr, index) : tr(title);
         //当没有值时，不显示此行的数据，包含title
         if (dataIndex === 'message_ERC20Trans') {
           // console.log('====ddd',renderValue)
@@ -59,7 +59,7 @@ export default (props:ContentProps) => {
           <li
             key={index}
             className={
-              classNames(`flex items-center gap-x-2.5 h-9
+              classNames(`flex items-center gap-x-2.5 min-h-[32px]
             ${ borderTop ? 'pt-5 border-t border_color' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
