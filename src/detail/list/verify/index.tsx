@@ -4,6 +4,9 @@ import { verify_tabs } from "@/contents/contract"
 import useAxiosData from "@/store/useAxiosData"
 import { useEffect, useState } from "react"
 import Code from "./Code"
+import dynamic from "next/dynamic"
+
+const Read = dynamic(() => import('./Read'), { ssr: false });
 
 export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => {
   const { tr } = Translation({ ns: 'contract' });
@@ -39,6 +42,9 @@ export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => 
         </li>
       }) }
     </ul>
-    {active === 'Verify_code' && <Code data={data} actorId={ actorId} />}
+    {active === 'Verify_code' && <Code data={data} actorId={actorId} />}
+    {active === 'Verify_read' && <Read verifyData={data?.compiled_file || {}} type={'view'} actorId={ actorId}/>}
+    {active === 'Verify_write' && <Read verifyData={data?.compiled_file || {}} type={'write'} actorId={ actorId}/>}
+
   </div>
 }
