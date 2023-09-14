@@ -210,13 +210,13 @@ export const cc_dc_trend= {
       title: 'dc_trend',
       dataIndex: 'dc',
       type: 'line',
-      color: '#1C6AFD',
+      color: '#4ACAB4',
     },
     {
       title: 'cc_trend',
       dataIndex: 'cc',
       type: 'line',
-      color: '#1C6AFD',
+      color: '#F8CD4D',
     },
   ]
 }
