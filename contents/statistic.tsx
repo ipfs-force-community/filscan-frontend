@@ -219,5 +219,11 @@ export const chartsNav:Array<Menu_Info> = [
         title:'active_nodes',
       }
     ]
+  },
+  {
+    key: 'fil_overview',
+    preIcon: 'fil_overview',
+    title:'fil_overview',
+
   }
 ]

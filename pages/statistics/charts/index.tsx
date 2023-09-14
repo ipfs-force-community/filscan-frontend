@@ -26,20 +26,28 @@ export default () => {
     </ul>
   }
   return <div className="main_contain !overflow-auto">
-
     <div className="flex gap-x-5">
       <div className="w-[209px]">
         <div className='flex justify-center h-10 flex-col text-lg font-medium gap-y-2.5 mb-2.5 mx-2.5'>
           <span>{tr('static_overview')}</span>
         </div>
-        <ul className="flex py-4 h-fit card_shadow border border_color rounded-xl cursor-pointer" >
+        <ul className="flex flex-col py-4 h-fit card_shadow border border_color rounded-xl cursor-pointer" >
           {chartsNav.map(item => {
             const { preIcon,title,key } = item;
             return <div key={item.key} id={key} className="relative flex flex-col w-full px-4 items-center font-DINPro-Medium" >
+              <Link key={item.key}
+                href={`/statistics/charts#${item.key}`}
+                scroll={true}
+                id={item.key}
+                className={`flex items-center gap-x-2 w-full h-10 px-2.5 text_color hover:bg-bg_hover rounded-[5px] ${hash === item.key ? 'text-primary bg-bg_hover' : ''}`}>
+                {preIcon && getSvgIcon(preIcon)}
+                {tr(title||key)}
+              </Link>
+              {/*
               <li className={ `flex items-center gap-x-2 p-2 w-full h-10`} >
                 {preIcon && getSvgIcon(preIcon)}
                 {tr(title||key)}
-              </li>
+              </li> */}
               {item.children && renderNavChildren(item.children)}
             </div>
           })}

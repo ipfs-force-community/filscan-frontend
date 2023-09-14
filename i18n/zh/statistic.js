@@ -60,6 +60,7 @@ const statistic = {
 
   //charts
   pie_title: '图表统计',
+  fil_overview: 'FIL概览',
   block_trend: '区块奖励',
   block_reward_per_TiB: '产出效率',
   acc_block_rewards: '累计区块奖励',
