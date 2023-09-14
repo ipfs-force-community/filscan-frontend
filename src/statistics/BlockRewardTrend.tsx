@@ -168,7 +168,7 @@ export default (props: Props) => {
   }, [options, defaultOptions]);
   return (
     <div
-      id='block_trend'
+      // id='block_trend'
       className={classNames(styles.trend,`w-full h-[full]  ${className}`)}
     >
       <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5' >

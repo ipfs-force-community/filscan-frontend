@@ -40,7 +40,7 @@ export default () => {
       <Content contents={deal_list.list} ns={'detail'} data={data} />
       <BrowserView>
         <div className="flex border-t border_color text_des pt-5 mt-2.5">
-          <div className="w-28 min-w-28 ">
+          <div className="min-w-[120px] ">
             {tr('deal_hosting') }
           </div>
           <div className="flex gap-x-5 ml-4">

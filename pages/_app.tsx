@@ -21,7 +21,7 @@ import Search from '@/components/mobile/search';
 import styles from './_app.module.scss'
 import { useTranslation } from 'react-i18next';
 import { DeviceContext } from '@/store/DeviceContext';
-import MobileDetect from 'mobile-detect';
+// import MobileDetect from 'mobile-detect';
 import WalletState from '@/store/wallet';
 import i18n from '@/i18n';
 import Ap from 'next/app'

@@ -57,7 +57,7 @@ export default (props:ContentProps) => {
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
             style={{...style }}>
-            <div className={`w-28 min-w-28 flex-shrink-0 items-center text_des`}>
+            <div className={`min-w-[120px] flex-shrink-0 items-center text_des`}>
               {showTitle}:
             </div>
             <MobileView>

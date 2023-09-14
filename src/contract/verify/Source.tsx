@@ -5,7 +5,6 @@ import { Button, Input, Select, notification } from "antd";
 import { useEffect, useState } from "react";
 import Upload from "./Upload";
 import { apiUrl } from "@/contents/apiUrl";
-import useAxiosData from "@/store/useAxiosData";
 import Link from "next/link";
 
 const { TextArea } = Input;
@@ -62,6 +61,7 @@ export default (props: Props) => {
       })
     }
     let source_file: any = [];
+    const config_files:any =[]
     if (type === 'multi') {
       configFiles.forEach((v) => {
         const show_file = configFile[v];
@@ -69,24 +69,25 @@ export default (props: Props) => {
           file_name: show_file.name,
           source_code: show_file.value
         };
-        source_file.push(item)
-
-      })
-    } else {
-      filesList.forEach((v) => {
-        const show_file = files[v];
-        const item = {
-          file_name: show_file.name,
-          source_code: show_file.value
-        };
-        source_file.push(item)
+        config_files.push(item)
       })
     }
+    filesList.forEach((v) => {
+      const show_file = files[v];
+      const item = {
+        file_name: show_file.name,
+        source_code: show_file.value
+      };
+      source_file.push(item)
+    })
 
     obj.source_file = source_file;
     obj.optimize_runs = data.optimize_runs ? Number(data.optimize_runs) : undefined;
     obj.optimize = data.optimize === 'true';
-    obj.mate_data_file = source_file[0];
+    obj.mate_data_file = config_files[0];
+    if (type === 'standard') {
+      obj.hardhat_build_info_file = source_file[0]
+    }
     const url = type === 'standard' ? apiUrl.contract_hard_verify : apiUrl.contract_verify;
     onChange(obj,url)
 
@@ -125,7 +126,7 @@ export default (props: Props) => {
       </ul>
     </div>
     <div className="border border_color card_shadow rounded-[12px] p-5 mt-5">
-      <Upload fileData={type === 'standard' ? configFile : files} confiles={configFile } onChange={(files: any, type: string) => {
+      <Upload fileData={files } confiles={configFile } onChange={(files: any, type: string) => {
         if (type === 'config') {
           setConfigFile(files)
         } else {

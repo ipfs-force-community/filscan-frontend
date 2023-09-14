@@ -55,11 +55,12 @@ const statistic = {
 
   //chartsnav
   cc_dc_power: 'CC/DC算力走势',
-  static_overview: '网络概览',
+  static_overview: '图表统计',
   contract_trend: '合约交易',
 
   //charts
   pie_title: '图表统计',
+  fil_overview: 'FIL概览',
   block_trend: '区块奖励',
   block_reward_per_TiB: '产出效率',
   acc_block_rewards: '累计区块奖励',
@@ -70,7 +71,7 @@ const statistic = {
   all_message_count: '总消息走势',
   pie_title_a: '当前Fil的基础发放用途统计',
   pie_title_a_tip:'已提供存储者奖励的Fil + 已释放锁仓奖励的Fil + 已分配保留部分的Fil = 当前已释放的Fil',
-  pie_title_b: '当前已释放的Fil用途统计',
+  pie_title_b: '当前已提供存储者奖励的Fil已释放的Fil用途统计',
   mined: '已提供存储者奖励的Fil',
   remaining_mined: '剩余存储者奖励的Fil',
   vested: '已释放锁仓奖励的Fil	',
@@ -79,7 +80,10 @@ const statistic = {
   remaining_reserved: '剩余保留部分的Fil',
   locked: '扇区抵押的Fil',
   burnt: '已销毁的Fil',
-  circulating:'可交易流通的Fil'
+  circulating: '可交易流通的Fil',
+  dc_cc_trend:'CC/DC算力走势',
+  dc_trend: 'DC',
+  cc_trend:'CC'
 }
 
 export default statistic

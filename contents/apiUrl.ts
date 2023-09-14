@@ -44,7 +44,9 @@ export const heightDetail = mianUrl + '/TipsetDetail';
 export const EvmContractSummary = mianUrl + '/EvmContractSummary';
 export const EvmTxsHistory = mianUrl + '/EvmTxsHistory'
 export const FilPrice= mianUrl+'/FilPrice'
-export const FinalHeight= mianUrl + '/FinalHeight'
+export const FinalHeight = mianUrl + '/FinalHeight'
+export const DCTrend = mianUrl + '/DCTrend'
+
 export const apiUrl: API | any = {
   fvm_hot: mianUrl + '/GetFEvmHotItems',
   fvm_category: mianUrl + '/GetFEvmCategory',

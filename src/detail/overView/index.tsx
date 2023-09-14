@@ -10,6 +10,8 @@ import { getShowData } from '@/utils';
 import { useEffect, useState } from 'react';
 import styles from './style.module.scss'
 import classNames from 'classnames';
+import Tooltip from '@/packages/tooltip';
+import { getSvgIcon } from '@/svgsIcon';
 
 //统计指标
 
@@ -66,15 +68,20 @@ export default ({
       </div>
       <ul className={classNames(styles.list,'card_shadow p-5 h-[150px] py-7 px-5 rounded-xl border border_color  gap-y-6 flex flex-wrap flex-col')}>
         {overView?.list.map((item: any) => {
-          const { render, dataIndex, style = {}, width, title } = item;
+          const { render, dataIndex, style = {}, width, title,title_tip } = item;
           const showData = getShowData(item, data);
           const value = render
             ? render(showData[dataIndex])
             : showData[dataIndex] || '--';
           return (
-            <li key={dataIndex} style={{ width, ...style }} className={classNames(styles['list-row'],'flex')}>
-              <span className='text-sm text_des w-20'>{tr(title)}</span>
-              <span className='font-DINPro-Medium text-sm font-medium'>
+            <li key={dataIndex} style={{ width, ...style }} className={classNames(styles['list-row'], 'flex')}>
+
+              <span className='text-sm text_des min-w-20 flex flex-wrap'>
+                {title_tip ? <Tooltip context={tr(title_tip)} icon={false} >
+                  <span className='flex items-center gap-x-1 cursor-pointer'>{tr(title)} {getSvgIcon('tip')}:</span>
+                </Tooltip> : `${tr(title)}:`}
+              </span>
+              <span className='font-DINPro-Medium text-sm font-medium ml-1'>
                 {loading ? <SkeletonScreen /> : value}
               </span>
             </li>

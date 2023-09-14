@@ -270,8 +270,8 @@ export default ({
       {header ? (
         header
       ) : (
-        <div className='flex justify-between items-center mb-2 h-[32px]'>
-          <span className='text-lg font-semibold mr-5 name-height'>
+        <div className='flex justify-between  items-center mb-2 h-[32px]'>
+          <span className='text-lg font-semibold mr-5 name-height mx-2.5'>
             {tr(account_change.title)}
           </span>
           {

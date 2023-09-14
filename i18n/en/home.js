@@ -18,11 +18,11 @@ const home = {
   rewards_increase_24h: 'Block Rewards Last 24h',
   fil_per_tera_24h: 'Output Efficiency last 24h',
   fil_per_tera_24h_tip:'The average reward output for each terabyte of storage capacity over the last 24 hours',
-  gas_in_32g: 'Gas Used of a 32GiB Sector',
+  gas_in_32g: 'Gas Cost of a 32GiB Sector',
   gas_in_32g_tip:'Gas used of Sealing a 32GiB Sector in the last 24 hours',
-  add_power_in_32g: 'EST. Cost of a 32GiB Sector',
+  add_power_in_32g: 'Est. Cost of a 32GiB Sector',
   add_power_in_32g_tip:'The cost of sealing a 32GiB sector in the past 24 hours, including the sector’s initial pledge and message fee',
-  gas_in_64g: 'Gas Used of a 64GiB Sector',
+  gas_in_64g: 'Gas Cost of a 64GiB Secto',
   gas_in_64g_tip: 'Gas used of Sealing a 64GiB Sector in the last 24 hours',
   add_power_in_64g: 'EST. Cost of a 64GiB Sector',
   add_power_in_64g_tip:'The cost of sealing a 64GiB sector in the past 24 hours, including the sector’s initial pledge and message fee',
@@ -48,7 +48,11 @@ const home = {
 
   base_gas: '24h BaseFee',
   rank:'Rank',
-  blockchain_browser:'blockchain browser'
+  blockchain_browser: 'blockchain browser',
+  'quality_power/increase_24h': 'Network Quality Adjusted Power',
+  'total_contract/24h_contract': 'Unique Contracts Deployed/ in 24h',
+  verified_contracts: 'Verified Contracts',
+  'contract_transaction/24h_change':'계약 검증 거래 수/24시간',
 
 }
 export default home

@@ -44,7 +44,7 @@ export default ({ onChange ,fileData,confiles}: {fileData:any,confiles:any,onCha
           value
         }
         if (onChange) {
-          onChange(ace, type === 'standard'? 'config':'files')
+          onChange(ace, 'files')
         }
       };
       //4.2 //读取中断事件
@@ -110,7 +110,7 @@ export default ({ onChange ,fileData,confiles}: {fileData:any,confiles:any,onCha
             { getSvgIcon('uploadIcon')}
             {tr(type === 'standard' ? 'file_name_json' : 'file_name')}
           </Button>
-          <span className="text_des text-xs">{ tr('file_name')}</span>
+          <span className="text_des text-xs">{type === 'standard'? tr('file_name_json'):tr('file_name') }</span>
         </span>
       </Upload>
 
@@ -122,7 +122,7 @@ export default ({ onChange ,fileData,confiles}: {fileData:any,confiles:any,onCha
               { getSvgIcon('fileIcon')}
               {aceItem.name}
             </span>
-            <span className="cursor-pointer" onClick={()=>handleRemove(acekey,type === 'standard'? 'config':'files')}>
+            <span className="cursor-pointer" onClick={()=>handleRemove(acekey,'files')}>
               { getSvgIcon('deleteIcon')}
             </span>
           </div>
@@ -136,38 +136,35 @@ export default ({ onChange ,fileData,confiles}: {fileData:any,confiles:any,onCha
         }
       </ul>}
     </div>
-    <div className="mt-2.5">
-      {type === 'multi' && <div>
-        <Upload
-          accept=".json"
-          maxCount={1}
-          fileList={ []}
-          beforeUpload={handleConfigFile}
-          multiple={false}
-        >
-          <Button className="primary_btn flex items-center gap-x-2 h-8 mt-2.5" >
-            <span>+</span>
-            {tr('config_file_name')}
-          </Button>
+    {type === 'multi' && <div className="mt-2.5">
+      <Upload
+        accept=".json"
+        maxCount={1}
+        fileList={ []}
+        beforeUpload={handleConfigFile}
+        multiple={false}
+      >
+        <Button className="primary_btn flex items-center gap-x-2 h-8 mt-2.5" >
+          <span>+</span>
+          {tr('config_file_name')}
+        </Button>
 
-        </Upload>
-        {confiles&&Object.keys(confiles)?.map((acekey: string,index:number) => {
-          const aceItem = confiles[acekey]
-          return <div key={index} className="my-2.5" >
-            <div className="flex justify-between items-center mb-2.5">
-              <span className="flex gap-x-2 text_des items-center" >
-                { getSvgIcon('fileIcon')}
-                {aceItem.name}
-              </span>
-              <span className="cursor-pointer" onClick={()=>handleRemove(acekey, 'config')}>
-                { getSvgIcon('deleteIcon')}
-              </span>
-            </div>
-            <Editor key={ acekey} value={ aceItem.value}/>
+      </Upload>
+      {confiles&&Object.keys(confiles)?.map((acekey: string,index:number) => {
+        const aceItem = confiles[acekey]
+        return <div key={index} className="my-2.5" >
+          <div className="flex justify-between items-center mb-2.5">
+            <span className="flex gap-x-2 text_des items-center" >
+              { getSvgIcon('fileIcon')}
+              {aceItem.name}
+            </span>
+            <span className="cursor-pointer" onClick={()=>handleRemove(acekey, 'config')}>
+              { getSvgIcon('deleteIcon')}
+            </span>
           </div>
-        })}
-      </div> }
-    </div>
-
+          <Editor key={ acekey} value={ aceItem.value}/>
+        </div>
+      })}
+    </div> }
   </>
 }
