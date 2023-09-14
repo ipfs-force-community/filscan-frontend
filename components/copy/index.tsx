@@ -7,6 +7,7 @@ import Image from 'next/image';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import { getSvgIcon } from '@/svgsIcon';
+import { BrowserView, MobileView } from '../device-detect';
 export default ({
   text,
   icon,
@@ -35,8 +36,8 @@ export default ({
       style={{ cursor: 'pointer' ,width:'13px' ,color:'rgba(51, 106, 250, 0.5)'}}
       className={classNames(`flex-center text-primary ${className}`,styles.wrap)}
       onClick={handleClick}>
-      { getSvgIcon('copyIcon')}
-      {/* <Image src={icon??copySvg} width={13} height={14} alt='' /> */}
+      <BrowserView>{ getSvgIcon('copyIcon')} </BrowserView>
+      <MobileView><Image src={icon??copySvg} width={13} height={14} alt='' /></MobileView>
     </span>
   );
 };

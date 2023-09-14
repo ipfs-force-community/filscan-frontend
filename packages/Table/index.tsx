@@ -8,6 +8,7 @@ import { TableProps } from 'antd/lib';
 import { useMemo } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
+import NoData from '../noData';
 
 interface Props extends TableProps<any> {
   data: Array<any>;
@@ -39,39 +40,42 @@ export default (props: Props) => {
   return <>
     <MobileView>
       <div className={styles['mobile-table']}>
-        {data.map((dataSource, index) => {
-          return (
-            <div className={styles['mobile-table-card']} key={index}>
-              {columns.map((item: any, index: number) => {
-                const { title, dataIndex, render } = item;
-                const showTitle =
-                  typeof title === 'function' ? title(
-                    dataSource[dataIndex],
-                    dataSource,
-                    index
-                  ) : title;
-                let showValue = dataSource[dataIndex];
-                if (render) {
-                  showValue = render(
-                    dataSource[dataIndex],
-                    dataSource,
-                    index
+        {
+          data.length ? data.map((dataSource, index) => {
+            return (
+              <div className={styles['mobile-table-card']} key={index}>
+                {columns.map((item: any, index: number) => {
+                  const { title, dataIndex, render } = item;
+                  const showTitle =
+                    typeof title === 'function' ? title(
+                      dataSource[dataIndex],
+                      dataSource,
+                      index
+                    ) : title;
+                  let showValue = dataSource[dataIndex];
+                  if (render) {
+                    showValue = render(
+                      dataSource[dataIndex],
+                      dataSource,
+                      index
+                    );
+                  }
+                  return (
+                    <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={index}>
+                      <div className={styles['mobile-table-card-item-label']}>
+                        {showTitle}：
+                      </div>
+                      <div className={styles['mobile-table-card-item-value']}>
+                        {showValue}
+                      </div>
+                    </div>
                   );
-                }
-                return (
-                  <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={index}>
-                    <div className={styles['mobile-table-card-item-label']}>
-                      {showTitle}：
-                    </div>
-                    <div className={styles['mobile-table-card-item-value']}>
-                      {showValue}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+                })}
+              </div>
+            );
+          }):<NoData/>
+        }
+
         {total > showLimit ? <Pagination
           current={current}
           total={total}

@@ -1,0 +1,17 @@
+@media screen and (max-width: 1000px){
+    .statistics-charts{
+        padding: 0 12px;
+        :global{
+            .gas-title{
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .gas-table{
+                padding: 0;
+                background-color: unset;
+                box-shadow: unset;
+                border: unset;
+            }
+        }
+    }
+}

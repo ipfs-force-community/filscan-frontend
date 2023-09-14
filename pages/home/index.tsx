@@ -11,6 +11,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Translation } from '@/components/hooks/Translation';
 import go from '@/assets/images/black_go.svg';
+import goMobile from '@/assets/images/icon-right-white.svg';
 import ContractRank from '@/src/contract/rank';
 import DefiList from '@/src/fevm/defi';
 import Trend from '@/src/statistics/Trend';
@@ -54,18 +55,35 @@ function Home(props: any) {
           <div className='flex justify-between h-[270px] gap-x-5 meta-gas'>
             <Meta />
             <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
-              <div className={`flex justify-between text-xs font-PingFang p-5`}>
-                {tr('base_gas')}
-                <Link href={`/statistics/gas/`}>
-                  <Image
-                    className='cursor-pointer'
-                    src={go}
-                    width={18}
-                    height={18}
-                    alt='go'
-                  />
-                </Link>
-              </div>
+              <BrowserView>
+                <div className={`flex justify-between text-xs font-PingFang p-5`}>
+                  {tr('base_gas')}
+                  <Link href={`/statistics/gas/`}>
+                    <Image
+                      className='cursor-pointer'
+                      src={go}
+                      width={18}
+                      height={18}
+                      alt='go'
+                    />
+                  </Link>
+                </div>
+              </BrowserView>
+
+              <MobileView>
+                <div className={styles['chart-title']}>
+                  <div className={styles.label}>{tr('base_gas')}</div>
+                  <Link href={`/statistics/gas/`}>
+                    <Image
+                      className='cursor-pointer'
+                      src={goMobile}
+                      width={28}
+                      height={28}
+                      alt='go'
+                    />
+                  </Link>
+                </div>
+              </MobileView>
               <Gas className={'w-full !h-[210px]'} />
             </div>
           </div>

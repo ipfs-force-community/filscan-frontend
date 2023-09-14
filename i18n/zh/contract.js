@@ -77,6 +77,8 @@ Hardhat 将编译输出存储在项目内的“artifacts/build-info/”目录中
   Verify_code: 'Code',
   Verify_read: 'Read Contract',
   Verify_write:'Write Contract',
+  contract_verify:'合约验证',
+  contract_verify_tips:'合约验证请前往PC端查看',
 
   //token list
   token_list:'全部通证',

@@ -59,6 +59,8 @@ Hardhat은 컴파일 출력을 프로젝트 내의 "artifacts/build-info/" 디�
   Verify_code: 'Code',
   Verify_read: 'Read Contract',
   Verify_write:'Write Contract',
+  contract_verify:'계약 검증',
+  contract_verify_tips:'계약 확인은 PC에서 확인하십시오.',
 
   //token list
   token_list:'전체 토큰',

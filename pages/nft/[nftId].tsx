@@ -9,7 +9,9 @@ import Content from '@/packages/content';
 import Image from '@/packages/image';
 import { Translation } from '@/components/hooks/Translation';
 import List from '@/src/fevm/list';
-
+import styles from './index.module.scss'
+import classNames from 'classnames';
+import { BrowserView, MobileView } from '@/components/device-detect';
 export default () => {
   const router = useRouter();
   const { nftId } = router.query;
@@ -27,26 +29,35 @@ export default () => {
     }
   }, [nftId]);
   return (
-    <div className='main_contain'>
+    <div className={classNames(styles.nft,'main_contain')}>
       <div className='flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4'>
         {overviewData?.token_name && (
           <Image width={40} height={40} src={overviewData.icon_url} alt='' />
         )}
         {overviewData?.token_name?.toLocaleUpperCase()}
       </div>
-      <div className='flex gap-x-5'>
+      <div className={classNames(styles['mobile-column'],'flex gap-x-5')}>
         {nft_details.headerList.map((tokenItem,index) => {
           return (
-            <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5' key={index}>
-              <div className='text-base font-medium px-2.5'>
-                {tr(tokenItem.title)}
+            <>
+              <MobileView>
+                <div className='text-base font-medium px-2.5 nft-title'>
+                  {tr(tokenItem.title)}
+                </div>
+              </MobileView>
+              <div className='flex-1 border border_color card_shadow rounded-lg px-2.5 py-5 nft-card' key={index}>
+                <BrowserView>
+                  <div className='text-base font-medium px-2.5'>
+                    {tr(tokenItem.title)}
+                  </div>
+                </BrowserView>
+                <Content
+                  contents={tokenItem.list}
+                  ns={'contract'}
+                  data={overviewData || {}}
+                />
               </div>
-              <Content
-                contents={tokenItem.list}
-                ns={'contract'}
-                data={overviewData || {}}
-              />
-            </div>
+            </>
           );
         })}
       </div>

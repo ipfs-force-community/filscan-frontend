@@ -736,7 +736,7 @@ export const message_detail = {
         if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
         return (
           <span className='code'>
-            <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>
             {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
           </span>
         );
@@ -749,7 +749,7 @@ export const message_detail = {
         const showValue = text || record?.returns;
         if (!showValue) return null;
         if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
-        return <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
+        return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
       },
     },
   ],
@@ -1424,6 +1424,17 @@ export const cid_list = {
   headerList:[
     {
       title: 'blocks_cid', dataIndex: 'cid', type: ['block_basic'],
+      render: (text: any)=>{
+        return <>
+          <BrowserView>{text}</BrowserView>
+          <MobileView>
+            <span className='copy-row'>
+              <span className='text'>{text}</span>
+              <Copy text={text} icon={copySvgMobile} className='copy'/>
+            </span>
+          </MobileView>
+        </>
+      }
     },
     {
       title: 'cid_height', dataIndex: 'height', type: ['block_basic'],
