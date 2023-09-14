@@ -1,10 +1,10 @@
 /** @format */
-import { apiUrl } from '@/contents/apiUrl';
+import { DCTrend, apiUrl } from '@/contents/apiUrl';
 import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
-import { active_miner_count, timeList } from '@/contents/statistic';
+import { cc_dc_trend, timeList } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { formatDateTime, formatFil, formatFilNum, isMobile } from '@/utils';
+import { formatDateTime, isMobile, unitConversion } from '@/utils';
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './trend.module.scss'
@@ -50,7 +50,7 @@ export default (props: Props) => {
           color: color.textStyle,
         },
         axisLabel: {
-          formatter: '{value}',
+          formatter: '{value} PiB',
           textStyle: {
             //  fontSize: this.fontSize,
             color: color.labelColor,
@@ -113,29 +113,41 @@ export default (props: Props) => {
 
   const load = async (time?: string) => {
     const seriesObj: any = {};
-    active_miner_count.list.forEach((v) => {
+    cc_dc_trend.list.forEach((v) => {
       seriesObj[v.dataIndex] = [];
     });
     const dateList:any = [];
     const seriesData: any = [];
     const inter = time || interval
-    const result: any = await axiosData(apiUrl.static_active_miner, { interval: inter });
+    const result: any = await axiosData(DCTrend, { interval: inter });
     result?.items?.forEach((value: any) => {
       const {
         block_time,
-        active_miner_count, //合约交易
+        cc,
+        dc
       } = value;
       const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD');
       dateList.push(showTime);
+
+      const [cc_amount, cc_unit] =cc && unitConversion(cc, 2)?.split(' ');
+
+      const [dc_amount, dc_unit] =dc &&unitConversion(dc, 2)?.split(' ');
       //amount
-      seriesObj.active_miner_count.push({
-        value: active_miner_count,
-        amount:active_miner_count,
-        unit:''
-      })
+      seriesObj.cc.push({
+        amount: cc_amount,
+        value: unitConversion(cc, 2, 6).split(' ')[0],
+        unit: cc_unit,
+
+      });
+      seriesObj.dc.push({
+        amount: dc_amount,
+        value: Number(unitConversion(dc, 2, 6).split(' ')[0]),
+        unit: dc_unit,
+
+      });
     });
 
-    active_miner_count.list.forEach((item: any) => {
+    cc_dc_trend.list.forEach((item: any) => {
       seriesData.push({
         type: item.type,
         ...seriesChangeArea,
@@ -168,12 +180,12 @@ export default (props: Props) => {
   }, [options, defaultOptions]);
   return (
     <div
-      //id='active_nodes'
+      // id='block_reward_per'
       className={classNames(styles.trend,`w-full h-[full]  ${className}`)}
     >
       <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5' >
         <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
-          {tr('active_nodes')}
+          {tr('dc_cc_trend')}
         </div>
         <Segmented
           defaultValue={interval}
@@ -186,7 +198,7 @@ export default (props: Props) => {
           }}
         />
       </div>
-      <div className={`h-[350px] w-full card_shadow border pb-2 border_color rounded-xl`}>
+      <div className={`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`}>
         <EChart options={newOptions} />
       </div>
     </div>

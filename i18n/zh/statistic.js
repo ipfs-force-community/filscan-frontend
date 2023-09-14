@@ -80,7 +80,10 @@ const statistic = {
   remaining_reserved: '剩余保留部分的Fil',
   locked: '扇区抵押的Fil',
   burnt: '已销毁的Fil',
-  circulating:'可交易流通的Fil'
+  circulating: '可交易流通的Fil',
+  dc_cc_trend:'CC/DC算力走势',
+  dc_trend: 'DC',
+  cc_trend:'CC'
 }
 
 export default statistic

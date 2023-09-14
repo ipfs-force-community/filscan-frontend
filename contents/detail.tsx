@@ -26,21 +26,26 @@ export const account_balance = {
     {
       title: 'available_balance',
       dataIndex: 'available_balance',
+      title_tip:'available_balance_tip',
       color: '#256DF3',
     },
     {
       title: 'init_pledge',
       dataIndex: 'init_pledge',
+      title_tip:'init_pledge_tip',
+
       color: '#D5E3F4',
     },
     {
       title: 'pre_deposits',
       dataIndex: 'pre_deposits',
+      title_tip:'pre_deposits_tip',
       color: '#4ACAB4',
     },
     {
       title: 'locked_balance',
       dataIndex: 'locked_balance',
+      title_tip:'locked_balance_tip',
       color: '#7F79EB',
     },
   ],
@@ -140,7 +145,6 @@ export const miner_overview = {
     {
       title: 'precommit_deposits',
       dataIndex: 'sector_deposits',
-
       style: { width: '25%', justifyContent: 'flex-start' },
 
       render: (text: string | number) =>

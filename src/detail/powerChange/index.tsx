@@ -229,7 +229,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
 
   return (
     <div className={classNames(styles['power-change'],'flex-1')}>
-      <div className='flex justify-between items-center mb-2 h-[32px]'>
+      <div className='flex justify-between items-center mb-2 mx-2.5 h-[32px]'>
         <div className={classNames(styles.between,'flex gpa-x-5 items-center')}>
           <span className='text-lg font-semibold mr-5'>
             {tr(power_change.title)}

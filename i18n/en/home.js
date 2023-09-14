@@ -20,7 +20,7 @@ const home = {
   fil_per_tera_24h_tip:'The average reward output for each terabyte of storage capacity over the last 24 hours',
   gas_in_32g: 'Gas Used of a 32GiB Sector',
   gas_in_32g_tip:'Gas used of Sealing a 32GiB Sector in the last 24 hours',
-  add_power_in_32g: 'EST. Cost of a 32GiB Sector',
+  add_power_in_32g: ' Est. Cost of a 32GiB Sector',
   add_power_in_32g_tip:'The cost of sealing a 32GiB sector in the past 24 hours, including the sector’s initial pledge and message fee',
   gas_in_64g: 'Gas Used of a 64GiB Sector',
   gas_in_64g_tip: 'Gas used of Sealing a 64GiB Sector in the last 24 hours',
@@ -48,7 +48,8 @@ const home = {
 
   base_gas: '24h BaseFee',
   rank:'Rank',
-  blockchain_browser:'blockchain browser'
+  blockchain_browser: 'blockchain browser',
+  'quality_power/increase_24h':'Network Quality Adjusted Power'
 
 }
 export default home

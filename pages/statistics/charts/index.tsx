@@ -8,10 +8,9 @@ import BlockRewardTrend from "@/src/statistics/BlockRewardTrend";
 import BlockRewardPer from "@/src/statistics/BlockRewardPer";
 import ActiveNodeTrend from "@/src/statistics/ActiveNodeTrend";
 import Link from "next/link";
-import { useState } from "react";
-import { has } from "lodash";
 import FilChart from "@/src/statistics/FilChart";
 import Charts from "@/src/statistics/Charts";
+import DCCTrend from "@/src/statistics/DCCTrend";
 
 export default () => {
   const { tr } = Translation({ ns: 'static' });
@@ -56,6 +55,7 @@ export default () => {
           <Charts />
         </> : <>
           <PowerTrend />
+          <DCCTrend />
           <BlockRewardTrend />
           <BlockRewardPer />
           <ActiveNodeTrend />

@@ -22,12 +22,12 @@ export const timeList = [
     value: '1m',
     dataIndex:'1m',
   },
-  {
-    label:'1year',
-    title: '1year',
-    value: '1year',
-    dataIndex:'1year',
-  },
+  // {
+  //   label:'1year',
+  //   title: '1year',
+  //   value: '1year',
+  //   dataIndex:'1year',
+  // },
 ];
 
 export const gas = {
@@ -139,7 +139,7 @@ export const power_trend = {
       dataIndex: 'power_decrease',
       title: 'power_decrease',
       yIndex: 1,
-      color: '#D4D8DD',
+      color: '#B0CBFE',
       type: 'bar',
     }, //算力损失
 
@@ -181,11 +181,40 @@ export const block_rewards_per = {
     },
   ]
 }
-export const active_node= {
+
+export const active_node = {
+  list: [
+    {
+      title: 'block_reward_per_tib',
+      dataIndex: 'block_reward_per_tib',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ]
+}
+
+export const active_miner_count = {
   list: [
     {
       title: 'active_miner_count',
       dataIndex: 'active_miner_count',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ]
+}
+//DC CC 走势
+export const cc_dc_trend= {
+  list: [
+    {
+      title: 'dc_trend',
+      dataIndex: 'dc',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+    {
+      title: 'cc_trend',
+      dataIndex: 'cc',
       type: 'line',
       color: '#1C6AFD',
     },

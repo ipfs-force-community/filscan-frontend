@@ -13,6 +13,8 @@ import { theme } from 'antd';
 import Item from 'antd/es/list/Item';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './style.module.scss'
+import { getSvgIcon } from '@/svgsIcon';
+import Tooltip from '@/packages/tooltip';
 
 export default ({ data, loading }: { data: any; loading: boolean }) => {
   const { theme, lang } = useFilscanStore();
@@ -141,15 +143,15 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
   }
 
   const renderBalance = ()=>{
-    return <ul className='mt-24 flex  flex-col flex-wrap gap-y-10 justify-between max-h-[140px]'>
+    return <ul className='mt-10 flex flex-wrap gap-y-2.5 justify-between max-h-[140px]'>
       {account_balance.list.map((balance_item: any) => {
         const value = data[balance_item.dataIndex];
         return (
           <li
-            className='w-1/2 flex flex-col flex-0'
+            className='w-full flex items-center flex-0 min-h-[36px]'
             key={balance_item.dataIndex}>
             <span
-              className='text-sm text_des flex gap-x-1 items-center cursor-pointer'
+              className='text-sm text_des flex gap-x-1 items-center cursor-pointer min-w-[100px]'
               onClick={() => {
                 setNoShow({
                   ...noShow,
@@ -165,9 +167,12 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
                 }}
               />
 
-              {tr(balance_item.title)}
+              <Tooltip context={tr(balance_item.title_tip)} icon={ false}>
+                <span className='flex gap-x-1 items-center'>{ tr(balance_item.title)}{ getSvgIcon('tip')}</span>
+              </Tooltip>
+
             </span>
-            <span className='font-DINPro-Medium text-sm font-medium  ml-2'>
+            <span className='font-DINPro-Medium text-sm font-medium  ml-5'>
               {loading ? (
                 <SkeletonScreen />
               ) : value ? (
