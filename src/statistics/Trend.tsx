@@ -248,7 +248,7 @@ export default (props: Props) => {
 
   return (
     <div
-      id='power'
+      //id='power'
       className={classNames(styles.trend, `w-full h-[full]  ${className} ${origin ==='home'?'mt-20':''}`)}
       {...propsRef}
     >
