@@ -39,7 +39,7 @@ export default ({
     if (accountId) {
       load();
     }
-  }, [accountId]);
+  }, [accountId,methodName]);
 
   const load = async (cur?: number, method?: string) => {
     setLoading(true);

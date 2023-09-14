@@ -1327,10 +1327,10 @@ export const trance_list = (fromList: any, toList: any) => [
       if (method_name) {
         if (method_name === 'burn' || method_name === 'send') {
           className = 'text_red'
-          flag='+'
-        } else if (method_name === 'blockreward' || method_name === 'receive') {
-          className = 'text_red'
           flag='-'
+        } else if (method_name === 'blockreward' || method_name === 'receive') {
+          className = 'text_green'
+          flag='+'
 
         }
       }

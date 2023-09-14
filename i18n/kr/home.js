@@ -19,7 +19,7 @@ const home = {
   rewards_increase_24h: '최근 24시간 동안 생성된 블록 보상',
   fil_per_tera_24h: '최근 24시간 동안 생성 효율',
   fil_per_tera_24h_tip: '최근 24시간 동안 전체 블록 보상과 유효 체굴 파워의 비율',
-  gas_in_32g: '32GiB 섹터의 가스 소비량',
+  gas_in_32g: '332GiB 섹터의 가스 소비량',
   gas_in_32g_tip: '최근 24시간 동안 밀봉된 32G 섹터당 소비된 가스량(TB당)',
   add_power_in_32g: '예상 32GiB 섹터 새로 추가한 파워 비용',
   add_power_in_32g_tip: '최근 24시간 동안 32G 섹터 새로 추가한 파워를 위해 필요한 비용(섹토 저당 및 밀봉 수수료 포함)',
@@ -46,7 +46,10 @@ const home = {
   warn_text: 'Oops! 입력한 검색어:',
   warn_details: '죄송합니다. 유효하지 않은 문자열입니다.',
   go_home: '홈으로 돌아가기',
-  blockchain_browser:'블록 탐색기'
+  blockchain_browser: '블록 탐색기',
+  'total_contract/24h_contract': '독특한 계약이 배포되었습니다/24시간',
+  verified_contracts: '검증된 스마트 계약 리스트',
+  'contract_transaction/24h_change':'계약 검증 거래 수/24시간',
 
 }
 export default home
