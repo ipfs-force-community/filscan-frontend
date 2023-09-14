@@ -876,7 +876,7 @@ const default_content = [
     render: (text: string, record: any) => {
       return (<>
         <BrowserView>
-      text ? <span className="flex items-center gap-x-2">{text} <Copy text={text} /></span> : text
+          {text ? <><span className="flex items-center gap-x-2">{text} <Copy text={text} /></span></> : text}
         </BrowserView>
         <MobileView>
           <span className='copy-row'>
