@@ -208,12 +208,12 @@ const detail = {
   messages_count: 'Message',
   reward: 'Reward',
   //cid detail
-  block_list:'区块列表',
+  block_list:'Block List',
   blocks_cid: 'Cid',
   blocks_miner: 'Miner',
   blocks_messages: 'Message',
   blocks_reward: 'Reward',
-  win_count: '赢票',
+  win_count: 'WinCount',
   blk_cids_message:'Block Message',
   //cid_details
   message_list_total:'Total of {{value}} messages',
@@ -224,6 +224,7 @@ const detail = {
   parent_base_fee:'Parent Basefee',
   ticket_value: 'Ticket',
   state_root: 'State Root',
+  message_count:'Message Count',
 
 }
 export default detail

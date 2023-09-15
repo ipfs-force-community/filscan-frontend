@@ -33,8 +33,7 @@ export const account_balance = {
       title: 'init_pledge',
       dataIndex: 'init_pledge',
       title_tip:'init_pledge_tip',
-
-      color: '#D5E3F4',
+      color: '#F8CD4D',
     },
     {
       title: 'pre_deposits',

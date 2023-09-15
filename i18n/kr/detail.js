@@ -197,7 +197,31 @@ const detail = {
   erc20_transfer_total: '총 {{value}}개 송금',
 
   power_change: 'Power Change',
-  owned_active_miners:'实际工作节点',
+  owned_active_miners: 'Active Miners',
+
+  //height
+  blcok_time: '블록 시간',
+  message_count_deduplicate: '블록 메시지(중복 제거)',
+  miner_id: 'Miner',
+  messages_count: '메시지',
+  reward: '보상',
+  //cid detail
+  block_list:'Block List',
+  blocks_cid: 'Cid',
+  blocks_miner: 'Miner',
+  blocks_messages: ' 메시지',
+  blocks_reward: '보상',
+  win_count:'윈 카운트',
+  //cid_details
+  message_list_total:'Total of {{value}} Messages',
+  chain_cid_detail: '区块详情',
+  cid_height: '높이',
+  parent_weight: 'Parent Block 무게',
+  parents_cid:'Parent CID',
+  parent_base_fee:'Parent Block 기본 수수료',
+  ticket_value: '티켓 값',
+  state_root: '스테이트 루트',
+  message_count:'메시지 개수',
 
 }
 export default detail
