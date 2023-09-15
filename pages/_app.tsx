@@ -28,7 +28,6 @@ import Ap from 'next/app'
 
 App.getInitialProps = async (context:any)=>{
   const initialProps = await Ap.getInitialProps(context)
-
   const regex = RegExp("Android|iPhone")
 
   if (context.ctx.req) {
@@ -132,7 +131,8 @@ export default function App({ Component, pageProps, isMobile }: any) {
             wallet, setWallet: (walletItem:any) => {
               setWallet(walletItem)
             }
-          }}>   <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+          }}>
+            <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
               <div className={classNames(`container_body text-sm ${theme}`)}>
                 <HeaderMain />
                 <MobileView>
@@ -148,9 +148,7 @@ export default function App({ Component, pageProps, isMobile }: any) {
                 <Footer />
               </div>
             </ConfigProvider>
-
           </WalletState.Provider>
-
           {/* </UserStoreContext.Provider> */}
         </FilscanStoreContext.Provider>
       </DeviceContext.Provider>

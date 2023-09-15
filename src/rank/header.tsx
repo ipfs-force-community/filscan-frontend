@@ -17,7 +17,7 @@ export default ({
   active: string;
   onChange: (type: string, value: string) => void;
 }) => {
-  const { tr } = Translation({ ns: 'home' });
+  const { tr } = Translation({ ns: 'rank' });
 
   let SegmentedProps: any = {};
   if (origin === 'home') {

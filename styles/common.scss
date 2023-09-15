@@ -56,6 +56,7 @@
 .des_bg_color{
   background-color: var(--bgDesColor);
 }
+
 .text_color{
    color: var(--font-color);
   
@@ -328,4 +329,15 @@ cursor: pointer;
 .animated-div1{
     animation: myAnimation1 6s linear infinite;
 
+}
+
+//闪烁
+@keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.blink {
+  animation: blink 1s infinite;
 }

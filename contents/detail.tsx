@@ -17,7 +17,7 @@ import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import { Button } from 'antd';
-import DropDown from '@/packages/dropDown';
+import DropDown from '@/packages/customDrop';
 //储存池概览 账户余额 & 有效算力
 
 export const account_balance = {
@@ -1401,7 +1401,10 @@ export const height_list = {
   columns: [
     { dataIndex: "cid",
       title: "block_cid",
-      render: (text: string | number) => <Link href={`/message/${text}`}>{ text}</Link>
+      render: (text: string | number) => {
+        console.log('---3',text)
+        return <Link href={`/message/${text}`}>{ text}</Link>
+      }
     },
     { dataIndex: "miner_id",
       title: "miner_id",
@@ -1411,8 +1414,9 @@ export const height_list = {
       title: "messages_count",
       render: (text: string|number) => formatNumber(text),
     },
-    { dataIndex: "blocks_reward",
+    { dataIndex: "reward",
       title: "reward",
+      render: (text: any, data:any) => text ? formatFilNum(text, false, false) : text || '--',
     },
 
   ]

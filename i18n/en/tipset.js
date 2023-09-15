@@ -8,6 +8,7 @@ const tipset = {
   to: 'To',
   value: 'Value',
   method_name: 'Method',
+  'all':'All Methods',
   //chain
   blocks_cid: 'Cid',
   blocks_miner: 'Storage Provider',

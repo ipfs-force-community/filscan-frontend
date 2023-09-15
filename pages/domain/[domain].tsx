@@ -34,7 +34,7 @@ export default () => {
     }
 
   }, [domain, provider])
-  console.log('====33',data)
+
   return <div className="main_contain">
     <div className="flex items-center gap-x-2 text-lg font-DINPro-Bold">
       <span>{tr('Result_for')}:</span>

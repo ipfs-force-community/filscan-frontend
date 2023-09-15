@@ -60,7 +60,7 @@ export default () => {
         title: typeof v.title === 'string' ? tr(v.title) : v.title(),
       };
     });
-  }, [tr,isMobile]);
+  }, [tr, isMobile]);
 
   return (
     <div className='main_contain '>

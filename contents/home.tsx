@@ -9,6 +9,7 @@ export const home_meta = [
   {
     title: 'quality_power/increase_24h',
     dataIndex: 'total_quality_power', //近24h增长算力
+    tip:'total_quality_power_tip',
     tipContent: [
       { title: 'quality_power_Cc', dataIndex: 'Cc' ,render: (text:string|number) => unitConversion(text, 2)},
       {title:'quality_power_Dc',dataIndex:'Dc',render: (text:string|number) => unitConversion(text, 2)},
@@ -33,6 +34,7 @@ export const home_meta = [
   {
     title: 'add_power_in_32g',
     title_tip: 'add_power_in_32g_tip',
+    tip:'add_power_in_32g_tip',
     dataIndex: 'add_power_in_32g',
     tipContent: [
       {
@@ -64,7 +66,7 @@ export const home_meta = [
   }, //当前扇区质押量
   {
     title: 'fil_per_tera_24h',
-    title_tip: 'fil_per_tera_24h_tip',
+    tip:'fil_per_tera_24h_tip',
     dataIndex: 'fil_per_tera_24h',
     render: (v: any) => {
       const [show, unit] = formatFilNum(v, false, false, 4).split(' ');

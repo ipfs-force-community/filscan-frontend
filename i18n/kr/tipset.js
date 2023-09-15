@@ -8,6 +8,7 @@ const tipset = {
   to: '받는 주소',
   value: '액수',
   method_name: '매소드',
+  all:'모든 메소드',
   //chain
   blocks_cid: 'CID',
   blocks_miner: 'Miner',

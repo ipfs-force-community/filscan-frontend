@@ -52,6 +52,7 @@ const config: Config = {
         icon_border: 'rgba(0,0,0,0.2)',
         secondary: '#00FF00',
         success: '#059b02',
+        tipColor:'#1c1c1c',
         success_bg: 'rgba(64, 162, 145, 0.10)',
         // // 暗色模式颜色配置
         // dark: {

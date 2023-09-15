@@ -4,6 +4,7 @@ import style from './index.module.scss';
 import BannerIcon from '@/assets/images/banner_icon.png';
 import Image from 'next/image';
 import Search from '../header/Search';
+import Banner from '@/src/home/Banner';
 
 export default () => {
   return (
@@ -24,7 +25,9 @@ export default () => {
             </span> */}
           </div>
 
-          <div className={`${style.banner_content}`}></div>
+          <div className={`${style.banner_content}`}>
+            <Banner />
+          </div>
         </div>
       </div>
 
