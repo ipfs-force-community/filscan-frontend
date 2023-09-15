@@ -25,7 +25,7 @@ export default () => {
       {tr('height')}
       { height&&<span className="ml-1"> #{height}</span> }
     </div>
-    <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
+    <div className="mt-4 border rounded-xl p-5 card_shadow border_color text_xs">
       <ul className="flex  flex-col gap-y-2.5 p-5 border-b border_color">
         {
           height_list.headerList.map(item => {

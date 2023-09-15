@@ -1,6 +1,6 @@
 // 适配全局包裹组件
 .component{
-    min-height: calc(100% - 140px);
+    flex: 1;
     width: 100%;
 }
 
@@ -12,6 +12,7 @@
     .other {
         padding-top: 88px;
     }
+
     .title {
         position: fixed;
         z-index: 11;

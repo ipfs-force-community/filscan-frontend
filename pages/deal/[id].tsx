@@ -36,7 +36,7 @@ export default () => {
     <div className='font-PingFang font-semibold text-lg'>
       {tr('deal_details')}
     </div>
-    <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
+    <div className="mt-4 border rounded-xl p-5 card_shadow border_color text_xs">
       <Content contents={deal_list.list} ns={'detail'} data={data} />
       <BrowserView>
         <div className="flex border-t border_color text_des pt-5 mt-2.5">

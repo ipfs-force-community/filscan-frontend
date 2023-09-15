@@ -8,8 +8,8 @@
   /*
   PC端
   */
-  --activeColor:'#ffffff';
 
+  --activeColor:'#ffffff';
   --bgColor: #ffffff;
   --main-bg-color: #f9f9f9;
   --reverse-color: "#000000";
@@ -52,6 +52,7 @@
 :root,
 :root[theme="dark"] {
   --border-color: #222222;
+
   --activeColor:'#ffffff';
   --bgColor: #121212;
   --main-bg-color: #090a0a;
@@ -81,7 +82,9 @@ body {
 }
 
 .container_body{
+  display: flex;
   overflow: auto;
+  flex-direction: column;
   padding-top: 115px;
   width: 100%;
   height: 100%;

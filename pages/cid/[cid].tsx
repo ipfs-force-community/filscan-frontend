@@ -39,7 +39,7 @@ export default () => {
     <div className='mx-2.5 font-PingFang font-semibold text-lg '>
       {tr('chain_cid_detail')}
     </div>
-    <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
+    <div className="mt-4 border rounded-xl p-5 card_shadow border_color text_xs">
       <Content contents={cid_list.headerList} ns={"detail"} data={data} />
     </div>
     <CidTable options={options} cid={ cid} />
