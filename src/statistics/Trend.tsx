@@ -254,12 +254,12 @@ export default (props: Props) => {
     >
       <div className='flex justify-between flex-wrap items-center min-h-[36px] mb-2.5'>
         <div className='flex-1 flex flex-row flex-wrap items-center'>
-          <div className='min-w-[100px] w-fit font-PingFang font-semibold text-lg pl-2.5'>
+          <div className='w-fit font-PingFang font-semibold text-lg pl-2.5'>
             {tr('power')}
           </div>
           <div className='w-fit'>
             <BrowserView>
-              <span className='flex gap-x-4 '>
+              <span className='flex gap-x-4 ml-5'>
                 {options?.legendData?.map((v: any) => {
                   return (
                     <span

@@ -83,7 +83,7 @@ export default () => {
             <div className='flex gap-x-2.5 items-center'>
               <Select
                 ns=''
-                wrapClassName='!bg-bgColor'
+                wrapClassName='main_bg_color'
                 className='!-inset-x-1/2	'
                 value={apiFlag || 'Mainnet'}
                 header={
@@ -97,7 +97,7 @@ export default () => {
 
               <Select
                 ns=''
-                wrapClassName='!bg-bgColor'
+                wrapClassName='main_bg_color'
                 className='!-inset-x-1/2	'
                 header={
                   <span className='flex items-center justify-center w-7 h-7 border main_bg_color  border_color cursor-pointer rounded-[5px]'>
@@ -136,7 +136,7 @@ export default () => {
               {/* <Link href='/account/login' as='/account/login' scroll={ false}>
                      <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
                 </Link> */}
-              <Account />
+              {/* <Account /> */}
             </div>
           </div>
           <hr className='border_color'/>

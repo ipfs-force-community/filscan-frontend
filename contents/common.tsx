@@ -20,7 +20,7 @@ export const header_top: TOP_DATA = {
         const flag = changeText ? changeText > 0 ? '+' : '-':'';
         return <span className='flex gap-x-1 items-end'>
           <span className='text_primary'>{get$Number(text)} </span>
-          {changeText && <span className={`${className} ml-1`}>{flag}{ changeText}%</span>}
+          {changeText && <span className={`${className} ml-1`}>{flag}{Math.abs(changeText)}%</span>}
         </span>
       },
 
@@ -32,13 +32,13 @@ export const header_top: TOP_DATA = {
     {
       title: 'base_fee',
       dataIndex: 'base_fee',
-      render: (text: number) => <span className='text_primary'>{formatFilNum(text)} </span>,
+      render: (text: number) => <span className='text_primary'>{formatFilNum(text,false,false,2)} </span>,
     },
     {
       title: 'last_height',
       dataIndex: 'height',
       render: (text: number) => (
-        <span className='text_primary'>{formatNumber(text)} </span>
+        <span className='text_primary'>{formatNumber(text,2)} </span>
       ),
     },
   ],

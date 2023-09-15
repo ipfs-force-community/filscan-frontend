@@ -1,6 +1,6 @@
 const rankZh = {
   rank:'Rank',
-
+  rank_title:'Ranking',
   pool: 'Storage Pool',
   provider: 'Storage Provider',
   growth:'Power Growth',
@@ -20,7 +20,7 @@ const rankZh = {
   //存储池排行
   ranking: 'Rank',
   pool_owner: 'Owner ID',
-  pool_power:'Quality Adjusted Power',
+  pool_power:'QualityAdjPower',
   pool_efficiency_24h: 'Latest 24h Output Efficiency',
   pool_increase_24h:'Power Growth',
   pool_block_count: 'Blocks Mined',
@@ -28,7 +28,7 @@ const rankZh = {
   pool_block_count_24h: '24h Total Block Rewards',
   // 节点排行
   provider_miner: 'Storage Provider',
-  provider_power_ratio:'Quality Adjusted Power / Rate',
+  provider_power_ratio:'QualityAdjPower / Rate',
   provider_block_ratio: '24H Blocks / Rate ',
   provider_rewards_ratio: '24H Wincount Rate',
   balance: 'Balance',
@@ -37,8 +37,8 @@ const rankZh = {
   power_ratio_tip:'Daily total adj. power of the sealed sectors within selected period.',
   quality_power_increase: 'Daily Power Growth',
   quality_power_increase_tip: "Node's adjusted storage power increment in the selected period.",
-  quality_adj_power: 'Quality Adjusted Power',
-  raw_power: 'Raw Byte Power',
+  quality_adj_power: 'QualityAdjPower',
+  raw_power: 'RawBytePower',
   sector_size: 'Sector Size',
   //节点收益
   "rewards/ratio": 'Rewards/Ratio',

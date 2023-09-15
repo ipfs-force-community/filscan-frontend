@@ -174,7 +174,7 @@ export const block_rewards = {
 export const block_rewards_per = {
   list: [
     {
-      title: 'block_reward_per_tib',
+      title: 'block_reward_per_TiB',
       dataIndex: 'block_reward_per_tib',
       type: 'line',
       color: '#1C6AFD',

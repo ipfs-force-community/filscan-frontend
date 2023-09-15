@@ -23,7 +23,7 @@ const statistic = {
   method_name: '메시지 유형',
   avg_gas_premium:'Gas 프리미엄',
   avg_gas_limit: '평균 Gas 한도',
-  avg_gas_used: '평균 Gas 사용',
+  avg_gas_used: '평균 가스 소비',
   avg_gas_fee: '평균 수수료',
   'sum_gas_fee/ratio': '수수료 합계/비율',
   'message_count/ratio': '메시지 수 합계/비율',
@@ -46,6 +46,7 @@ const statistic = {
   filBase_des: '네트워크에서 FIL 생선 상한',
   ReservedTokens_des: '미래 Filecoin 경제 성장을 위해 예비 토큰 저장, 구체적인 사용 방안은 Filecoin 커뮤니티에서 결정됩니다.',
   TokenAllocation_des: '블록 보상, 네트워크 초기화 등을 통해 스토리자 제공자에게 발급한 토큰 보상',
+  FilecoinFoundation_des:'장기적인 커뮤니티 발전과 네트워크 관리를 위해 할당되었습니다',
   Fundraising_des: '2017년 판매된 토큰',
   Funds_des: '생태계 발전 및 후속 자금 용자로 쓰인다',
   protocolLab_des: '프로토콜 실험실 관련 작업용',
@@ -72,7 +73,15 @@ const statistic = {
   remaining_reserved: '잔여 보류 부분 FIL',
   locked: '섹터 담보 FIL',
   burnt: '폐기된 FIL',
-  circulating:'거래 가능한 유통 FIL'
+  circulating: '거래 가능한 유통 FIL',
+
+  power_increase: '순 전력 증가',
+  power_decrease: '순 전력 감소',
+  //chartsnav
+
+  cc_dc_power: 'CC/DC 전력 추세',
+  static_overview: '图表统计',
+  contract_trend: '계약 거래',
 }
 
 export default statistic

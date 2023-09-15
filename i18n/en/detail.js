@@ -10,6 +10,8 @@ const detail = {
   'owner_title': 'Pool Detail',
   'owner_title_tip': 'The data of mine pool is collected from the data of nodes.',
   account: 'Account',
+  account_title:'Account',
+
   owner_address: 'Owner Address',
   owned_miners: 'Nodes',
   account_id:'Account Address',
@@ -53,7 +55,7 @@ const detail = {
   power_increase_indicators: 'Power Increase',
   power_ratio: 'Power Rate',
   sector_increase: 'Sector Increase',
-  precommit_deposits: 'Storage Provider Precommit Deposits',
+  precommit_deposits: 'PreCommitDeposits Increase',
   gas_fee: 'Gas Fee',
   block_rewards: 'Block Rewards',
   block_count: 'Block',
@@ -71,7 +73,7 @@ const detail = {
   account_change:'Account Changes',
   power:'Pool Overview',
   power_increase: 'Power Increase',
-  quality_adjust_power: 'Quality Adjusted Power',
+  quality_adjust_power: 'QualityAdjPower',
   quality_power_rank: 'Ranking',
   raw_power_percentage:'Power Rate',
   raw_power: 'RawBytePower',
@@ -190,7 +192,9 @@ const detail = {
 
   //erc20 transfer
   erc20_transfer: 'Token Transactions',
-  platform:'Platform'
+  platform: 'Platform',
+  power_change: 'Power Change',
+  owned_active_miners:'实际工作节点',
 
 }
 export default detail

@@ -8,7 +8,6 @@
   /*
   PC端
   */
-
   --activeColor:'#ffffff';
   --bgColor: #ffffff;
   --main-bg-color: #f9f9f9;
@@ -25,6 +24,7 @@
   --text_clip: #131254;
   --bgDesColor: #f6f6f6;
   --table-hover: #f8f8f8;
+  --tips-bgColor:#ffffff;
   /*
   手机端
   */
@@ -47,6 +47,7 @@
   --mobile-2473FA-5:rgba(36, 115, 250, 0.05);
   --mobile-F9F9F9:#F9F9F9;
   --mobile-F2F2F2:#F2F2F2;
+  
 }
 
 :root,
@@ -69,6 +70,8 @@
   --card-shadow: rgba(0, 0, 0, 0.4);
   --tab-shadow: rgba(0, 0, 0, 0.1);
   --table-hover: #1b1b1b;
+  --tips-bgColor:#1c1c1c;
+
 }
 
 html {

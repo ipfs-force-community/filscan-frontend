@@ -11,6 +11,7 @@ const detail = {
   'owner_title_tip': '스토리지 풀 정보: 노드 데이터를 모아 총합한 데이터 정보',
   all:'모든 메소드',
   account: '계정',
+  account_title:'계정',
   owner_address: 'Owner 주소',
   owned_miners: '소유한 노드',
   owned_active_miners: "액티브한 노드",
@@ -188,7 +189,10 @@ const detail = {
   amount: '금액',
   platform: '거래 플랫폼',
   erc20_transfer: '토큰 거래',
-  erc20_transfer_total:'총 {{value}}개 송금',
+  erc20_transfer_total: '총 {{value}}개 송금',
+
+  power_change: 'Power Change',
+  owned_active_miners:'实际工作节点',
 
 }
 export default detail

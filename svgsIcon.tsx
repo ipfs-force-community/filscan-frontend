@@ -732,7 +732,6 @@ const svgTypes: Record<string, JSX.Element> = {
   copyIcon,
   search,
   fil_overview
-
 };
 
 export const getSvgIcon = (type: string) => {

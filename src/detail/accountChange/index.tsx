@@ -243,7 +243,7 @@ export default ({
   }, [options, default_xAxis, noShow, defaultOptions]);
 
   const ledRender = ()=>{
-    return <span className='flex gap-x-4'>
+    return <span className='flex gap-x-4 mr-2.5'>
       {options?.legendData?.map((v: any) => {
         return (
           <span

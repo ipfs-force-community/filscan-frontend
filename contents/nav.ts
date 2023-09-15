@@ -30,10 +30,10 @@ const navMenu: Array<Menu_Info> = [
         key: 'tipset_pool-message',
         link: '/tipset/pool-message/'
       },
-      {
-        key: 'tipset_transfer',
-        link: '/tipset/transfer/'
-      },
+      // {
+      //   key: 'tipset_transfer',
+      //   link: '/tipset/transfer/'
+      // },
     ]
   },
   {
@@ -76,9 +76,6 @@ const navMenu: Array<Menu_Info> = [
       },
       { key: 'statistics_gas', link: '/statistics/gas' },
       { key: 'statistics_charts', link: '/statistics/charts' },
-      // { key: 'statistics_base', link: '/statistics/power' },
-      // { key: 'statistics_fil', link: '/statistics/fil' },
-      // { key: 'statistics_charts', link: '/statistics/charts' },
     ]
   },
   {
@@ -90,11 +87,11 @@ const navMenu: Array<Menu_Info> = [
       }
     ]
   },
-  {
-    out_key: 'account',
-    key: 'account',
-    link: '/account'
-  },
+  // {
+  //   out_key: 'account',
+  //   key: 'account',
+  //   link: '/account'
+  // },
 ]
 
 const mobileNavMenu: Menu_Info[] = [

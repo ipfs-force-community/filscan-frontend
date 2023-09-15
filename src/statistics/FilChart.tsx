@@ -19,6 +19,9 @@ function Overview({ className }: { className?: string }) {
   const [optionsB, setOptionB] = useState<any>({});
   const [legendB, setLegendB] = useState<any>({});
 
+  const color = useMemo(() => {
+    return getColor(theme);
+  }, [theme]);
   const defaultOtions: any = useMemo(() => {
     return {
       tooltip: {
@@ -28,6 +31,14 @@ function Overview({ className }: { className?: string }) {
         {
           type: "pie",
           radius: '50%',
+          label: {
+            show: true,
+            color:color.labelColor,
+          },
+          textStyle: {
+            //  fontSize: this.fontSize,
+            color:color.textStyle,
+          },
         },
       ],
     };
@@ -65,7 +76,7 @@ function Overview({ className }: { className?: string }) {
 
   useEffect(() => {
     loadOptions()
-  }, [newData,lang])
+  }, [newData,lang,theme])
 
   const loadOptions = () => {
     let options_a:any = _.cloneDeep({ ...defaultOtions });

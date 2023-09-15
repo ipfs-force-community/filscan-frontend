@@ -94,17 +94,17 @@ export default function App({ Component, pageProps, isMobile }: any) {
         setUserInfo(lastUser);
       }
     }
-    loadUser();
+    // loadUser();
   }, []);
 
-  const loadUser = async () => {
-    const userData: any = await fetchData(proApi.userInfo);
-    setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
-    localStorage.setItem(
-      'userInfo',
-      JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
-    );
-  };
+  // const loadUser = async () => {
+  //   const userData: any = await fetchData(proApi.userInfo);
+  //   setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
+  //   localStorage.setItem(
+  //     'userInfo',
+  //     JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
+  //   );
+  // };
 
   useEffect(()=>{
     const pathname = router.pathname
@@ -127,31 +127,31 @@ export default function App({ Component, pageProps, isMobile }: any) {
           lang,
           setLang,
         }}>
-          <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
-            <WalletState.Provider value={{
-              wallet, setWallet: (walletItem:any) => {
-                setWallet(walletItem)
-              }
-            }}>   <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-                <div className={classNames(`container_body text-sm ${theme}`)}>
-                  <HeaderMain />
-                  <MobileView>
-                    {home && <div className={classNames(styles.title)}>
-                      <span>Filecoin </span>
-                      <span>{t('blockchain_browser')}</span>
-                    </div>}
-                    <Search className={home ? styles['search-home'] : styles['search']}/>
-                  </MobileView>
-                  <div className={classNames(home ? styles.home : styles.other,styles.component)}>
-                    <Component {...pageProps} />
-                  </div>
-                  <Footer />
+          {/* <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}> */}
+          <WalletState.Provider value={{
+            wallet, setWallet: (walletItem:any) => {
+              setWallet(walletItem)
+            }
+          }}>   <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+              <div className={classNames(`container_body text-sm ${theme}`)}>
+                <HeaderMain />
+                <MobileView>
+                  {home && <div className={classNames(styles.title)}>
+                    <span>Filecoin </span>
+                    <span>{t('blockchain_browser')}</span>
+                  </div>}
+                  <Search className={home ? styles['search-home'] : styles['search']}/>
+                </MobileView>
+                <div className={classNames(home ? styles.home : styles.other,styles.component)}>
+                  <Component {...pageProps} />
                 </div>
-              </ConfigProvider>
+                <Footer />
+              </div>
+            </ConfigProvider>
 
-            </WalletState.Provider>
+          </WalletState.Provider>
 
-          </UserStoreContext.Provider>
+          {/* </UserStoreContext.Provider> */}
         </FilscanStoreContext.Provider>
       </DeviceContext.Provider>
     </ErrorBoundary>

@@ -63,7 +63,7 @@ function Overview() {
     newOpt.series[0].data = seriesData;
     setData(newOpt)
     setLegendData(legendData)
-  }, [lang])
+  }, [lang,theme])
 
   const options = useMemo(() => {
     const newData :any= { ...data };
