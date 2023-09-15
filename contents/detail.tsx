@@ -986,12 +986,12 @@ const default_content = [
     type: ['account_basic'],
     render: (text: number | string) => formatDateTime(text),
   },
-  {
-    title: 'message_count',
-    dataIndex: 'message_count',
-    type: ['account_basic'],
-    render: (text: any) => text,
-  },
+  // {
+  //   title: 'message_count',
+  //   dataIndex: 'message_count',
+  //   type: ['account_basic'],
+  //   render: (text: any) => text,
+  // },
   {
     title: 'latest_transfer_time',
     dataIndex: 'latest_transfer_time',
