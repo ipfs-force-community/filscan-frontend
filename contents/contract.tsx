@@ -651,10 +651,10 @@ export const contract_nfts = {
       },
     },
     // { dataIndex: 'trading_volume', title: 'Volume' },
-    { dataIndex: 'holders', title: 'owners' },
+    { dataIndex: 'holders', title: 'owner' },
     {
-      dataIndex: 'transfers',
-      title: 'transfers',
+      dataIndex: 'transfer',
+      title: 'transfer',
       render: (text: string) => (text ? formatNumber(text, 4) : '--'),
     },
   ],

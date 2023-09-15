@@ -1402,8 +1402,7 @@ export const height_list = {
     { dataIndex: "cid",
       title: "block_cid",
       render: (text: string | number) => {
-        console.log('---3',text)
-        return <Link href={`/message/${text}`}>{ text}</Link>
+        return <Link href={`/cid/${text}`}>{ text}</Link>
       }
     },
     { dataIndex: "miner_id",

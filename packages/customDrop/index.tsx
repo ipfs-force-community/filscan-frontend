@@ -28,7 +28,7 @@ export default (props: Props) => {
       </ul>}
     </div>
   }
-  return <Dropdown dropdownRender={renderChildren} trigger={ ['hover']}>
+  return <Dropdown dropdownRender={renderChildren} trigger={['hover']}>
     <div className={classNames('flex items-center justify-between  min-w-[230px] w-fit h-[32px] px-2.5 rounded-[5px] cursor-pointer border border_color',styles.select)}>
       {showValue?.title}
       {getSvgIcon('downIcon')}

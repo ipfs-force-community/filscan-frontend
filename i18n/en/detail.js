@@ -199,7 +199,31 @@ const detail = {
   erc20_transfer: 'Token Transactions',
   platform: 'Platform',
   power_change: 'Power Change',
-  owned_active_miners:'实际工作节点',
+  owned_active_miners: '实际工作节点',
+
+  //height
+  blcok_time: 'Block Time',
+  message_count_deduplicate: 'Block Message (Deduplication) ',
+  miner_id: 'Miner',
+  messages_count: 'Message',
+  reward: 'Reward',
+  //cid detail
+  block_list:'区块列表',
+  blocks_cid: 'Cid',
+  blocks_miner: 'Miner',
+  blocks_messages: 'Message',
+  blocks_reward: 'Reward',
+  win_count: '赢票',
+  blk_cids_message:'Block Message',
+  //cid_details
+  message_list_total:'Total of {{value}} messages',
+  chain_cid_detail: 'Block Details',
+  cid_height: 'Height',
+  parent_weight: 'Parent Weight',
+  parents_cid:'Parent CID',
+  parent_base_fee:'Parent Basefee',
+  ticket_value: 'Ticket',
+  state_root: 'State Root',
 
 }
 export default detail

@@ -18,8 +18,11 @@ const nextConfig = {
     defaultLocale: 'zh',
   },
   images: {
-    domains: ['filscan-v2.oss-cn-hongkong.aliyuncs.com','filscan-v2.oss-accelerate.aliyuncs.com'],
+    unoptimized: true,
   },
+  // images: {
+  //   domains: ['filscan-v2.oss-cn-hongkong.aliyuncs.com','filscan-v2.oss-accelerate.aliyuncs.com'],
+  // },
 }
 
 module.exports = nextConfig
