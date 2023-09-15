@@ -1,5 +1,6 @@
 // 适配全局包裹组件
 .component{
+    min-height: calc(100% - 140px);
     width: 100%;
 }
 
