@@ -11,7 +11,7 @@ import { pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
-import styles from '../index.module.scss'
+import styles from './index.module.scss'
 import classNames from 'classnames';
 
 export default () => {
@@ -72,7 +72,7 @@ export default () => {
     }
   };
   return (
-    <div className={classNames(styles['message-list'],'main_contain')}>
+    <div className={classNames(styles['transfer-list'],'main_contain')}>
       <div className='flex justify-between items-center'>
         <div>
           <div className='font-PingFang font-semibold text-lg'>

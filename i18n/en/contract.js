@@ -70,6 +70,8 @@ Hardhat stores the compilation outputs in the "artifacts/build-info/" directory 
   Verify_write: 'Write Contract',
   byte_code_no_verify: 'The contract is not verified go to',
   go_to_verify:'verify the contract',
+  contract_verify:"Contract verification",
+  contract_verify_tips:"Please go to the PC for contract verification",
 
   //nft list
   nfts_list:'All NFTs',

@@ -3,5 +3,10 @@
         margin-top: 0;
         transform: translateY(0);
         animation:none;
+        :global{
+            .chart-legend{
+                padding: 15px;
+            }
+        }
     }
 }

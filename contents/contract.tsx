@@ -3,6 +3,7 @@
 import Copy from '@/components/copy';
 import TpWallet from '@/components/TPWallet'
 import Tooltip from '@/packages/tooltip';
+import copySvgMobile from '@/assets/images/icon-copy.svg';
 import {
   formatDateTime,
   formatFilNum,
@@ -14,6 +15,7 @@ import {
 } from '@/utils';
 import Image from '@/packages/image';
 import Link from 'next/link';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 //合约验证
 export const verify_first = {
@@ -689,12 +691,23 @@ export const nft_details = {
           render: (text: string) => {
             if (text) {
               return (
-                <span className='flex gap-x-1 '>
-                  <Link href={`/address/${text}`} className='link'>
-                    {text}
-                  </Link>
-                  <Copy text={text} />
-                </span>
+                <>
+                  <BrowserView>
+                    <span className='flex gap-x-1 '>
+                      <Link href={`/address/${text}`} className='link'>
+                        {text}
+                      </Link>
+                      <Copy text={text} />
+                    </span>
+                  </BrowserView>
+                  <MobileView>
+                    <span className='copy-row'>
+                      <Link href={`/address/${text}`} className='link'>
+                        {text}
+                      </Link>
+                      <Copy text={text} icon={copySvgMobile} className='copy'/>
+                    </span>
+                  </MobileView></>
               );
             }
             return '--';

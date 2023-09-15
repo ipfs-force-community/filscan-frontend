@@ -62,7 +62,7 @@ export default (props:ContentProps) => {
             </div>
             <MobileView>
               <div
-                className={classNames(styles.value)}>
+                className={classNames(styles['message-content-value'])}>
                 {renderValue}
               </div>
             </MobileView>

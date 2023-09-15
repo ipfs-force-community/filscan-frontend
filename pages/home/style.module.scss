@@ -1,9 +1,24 @@
 @media screen and (max-width: 1000px){
     .home-page{
         width: 100%;
+        .chart-title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 12px 12px 20px;
+            .label{
+                flex-shrink: 0;
+                font-size: 14px;
+                font-family: DINPro-Medium, DINPro;
+                font-weight: 500;
+                color: var(--mobile-title-color);
+                line-height: 12px;
+            }
+        }
         :global{
             .main_contain{
                 .meta-gas{
+                    padding: 0 12px;
                     display: flex;
                     flex-direction: column;
                     margin-bottom: 18px;
@@ -15,6 +30,7 @@
                     }
                 }
                 .box-column{
+                    padding: 0 12px;
                     display: flex;
                     flex-direction: column;
                     margin-top: 0;

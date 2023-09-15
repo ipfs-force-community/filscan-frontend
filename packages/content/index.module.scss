@@ -2,7 +2,7 @@
   .detail-content {
     padding: 0;
     .item-wrap {
-      align-items: center;
+      align-items: baseline;
       padding: 8px 12px;
       .value {
         a {
@@ -10,6 +10,15 @@
         }
         img {
           display: inline-block;
+        }
+      }
+    }
+    .message-content-value{
+      width: 100%;
+      word-break: break-all;
+      :global{
+        .pre{
+          word-break: break-all;
         }
       }
     }
@@ -21,25 +30,6 @@
         font-size: 15px;
         font-family: PingFangSC-Regular, PingFang SC;
         line-height: 14px;
-      }
-      .copy-row {
-        display: inline-block;
-        align-items: center;
-        .text {
-          color: var(--mobile-link-color);
-          word-break: break-all;
-        }
-        .normal-text {
-          word-break: break-all;
-        }
-        .copy {
-          display: inline-block;
-          align-items: center;
-          padding-left: 5px;
-          img {
-            display: inline-block;
-          }
-        }
       }
     }
   }

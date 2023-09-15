@@ -286,8 +286,8 @@ export default (props: Props) => {
             <MobileView>
               <Image
                 src={goMobile}
-                width={18}
-                height={18}
+                width={28}
+                height={28}
                 alt='go'
               />
             </MobileView>
@@ -305,9 +305,37 @@ export default (props: Props) => {
         )}
       </div>
 
-      <div className={`h-[350px] w-full pb-2 card_shadow border border_color rounded-xl`}>
-        <EChart options={newOptions} />
-      </div>
+      <BrowserView>
+        <div className={`h-[350px] w-full pb-2 card_shadow border border_color rounded-xl`}>
+          <EChart options={newOptions} />
+        </div>
+      </BrowserView>
+      <MobileView>
+        <div className={`w-full pb-2 card_shadow border border_color rounded-xl`}>
+          <span className='flex gap-x-4 chart-legend'>
+            {options?.legendData?.map((v: any) => {
+              return (
+                <span
+                  className='text-xs flex cursor-pointer items-center gap-x-1'
+                  key={v.name}
+                  onClick={() => {
+                    setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                  }}
+                  style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                  {getSvgIcon('legendIcon')}
+                  <span className='text-xs text_des font-normal'>
+                    {tr(v.name)}
+                  </span>
+                </span>
+              );
+            })}
+          </span>
+          <div className='h-[350px]'>
+            <EChart options={newOptions} />
+          </div>
+        </div>
+      </MobileView>
+
     </div>
   );
 };

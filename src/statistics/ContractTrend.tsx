@@ -195,8 +195,8 @@ export default (props: Props) => {
                 <Link href={`/statistics/charts#contract`}>
                   <Image
                     src={goMobile}
-                    width={18}
-                    height={18}
+                    width={28}
+                    height={28}
                     alt='go'
                   /></Link>
               </MobileView>
