@@ -211,7 +211,7 @@ export default ({ origin }: { origin: string }) => {
 
       <div
         className={`mt-4 ${
-          origin === 'home' ? 'h-[650px]' : 'h-full'
+          origin === 'home' ? 'h-[650px]' : ''
         } border rounded-xl px-5 pt-5 card_shadow border_color flex items-center`}>
         <Table
           key={active}

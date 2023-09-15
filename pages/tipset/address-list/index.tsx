@@ -119,7 +119,7 @@ export default () => {
         />
       </div>
 
-      <div className='mt-4 h-full border  rounded-xl p-5	card_shadow border_color'>
+      <div className='mt-4 border  rounded-xl p-5	card_shadow border_color'>
         <Table
           className='-mt-2.5 '
           data={dataSource.data}

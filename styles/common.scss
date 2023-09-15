@@ -15,16 +15,15 @@
 .banner-contain{
    margin: auto;
 }
-.main_contain{
+.main_contain{ 
+  overflow: hidden;
+  margin:  auto;
+  min-height: 100%;
   width: 100%;
   height: 100%;
-  min-height: 100%;
-  margin:  auto;
+  background-color:transparent;  color: var(--font-color);
   font-size: px-to-rem(14px);
-  color: var(--font-color);
-  background-color:transparent; 
-  overflow: hidden;
-}
+  }
 
 @media screen and (min-width: 1440px){
   .main_contain,.custom_footer,.custom_header,.banner-contain{
@@ -34,19 +33,19 @@
 
 @media screen and (min-width: 1000px){
   .main_contain,.banner-contain{
-  max-width: 1440px;
-  min-width: 1000px;
    padding: 20px 30px 40px 30px;
+  min-width: 1000px;
+  max-width: 1440px;
   }
   .custom_footer{
-     max-width: 1440px;
-    min-width: 1000px;
     padding: 35px 30px;
+    min-width: 1000px;
+     max-width: 1440px;
   }
   .custom_header{
-    max-width: 1440px;
-    min-width: 1000px;
     padding: 0px 30px;
+    min-width: 1000px;
+    max-width: 1440px;
   }
 }
 
@@ -110,6 +109,7 @@
 .clip_text{
     background: linear-gradient(279deg, #0052F8 0%, #0A96E9 100%);
     -webkit-background-clip: text;
+
     -webkit-text-fill-color: transparent;
 }
 
@@ -123,8 +123,9 @@
 .text_clip{
   background: linear-gradient(131deg, var(--text_clip) 0%, var(--font-color) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-family: DINPro-Bold, DINPro;
+
+  -webkit-text-fill-color: transparent;
 }
 /*子元素不渐变*/
 .solid_text {
@@ -135,19 +136,21 @@
 
 .text_green{
     color:#4ACAB4;
+
     -webkit-text-fill-color: #4ACAB4; 
 
 }
 
 .text_red{
     color: #E15252;
+
     -webkit-text-fill-color: #E15252; 
 }
 
 
 .fade-in {
-  animation: fadeInUp 1s forwards;
   transform: translateY(px-to-rem(-80px));
+  animation: fadeInUp 1s forwards;
 }
 /* 向上滑动*/
 @keyframes fadeInUp {
@@ -176,25 +179,25 @@
 
 /*rank icon*/
 .rank_icon{
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: px-to-rem(20px);
   min-height: px-to-rem(20px);
+  width: fit-content;
+  border-radius: px-to-rem(6px);
  // padding-top: 50%;
   background: var(--font-color);
   color: var(--bgColor);
-  border-radius: px-to-rem(6px);
+  font-weight: bold;
   font-size: px-to-rem(11px);
   font-family: DINPro-Bold;
-  font-weight: bold;
-  position: relative;
-  width: fit-content;
 
   &::before{
-      content: "";
   display: block;
   padding-top: 100%;
+      content: "";
   }
 }
 
@@ -205,9 +208,9 @@
 
     
 .link_text{
- font-family: DINPro-Medium, DINPro;
-font-weight: 500;
 color: #1C6AFD;
+font-weight: 500;
+ font-family: DINPro-Medium, DINPro;
 cursor: pointer;
   &:hover{
     color: #1C6AFD;
@@ -223,15 +226,15 @@ cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 6px 15px;
   min-width: 80px;
   width: fit-content;
   height: fit-content;
-  padding: 6px 15px;
-  background-color: var(--bgColor) !important;
-  color: var(--font-color) !important;
-  border-color: var(--border-color) !important;
   outline:none !important;
+  border-color: var(--border-color) !important;
+  background-color: var(--bgColor) !important;
   box-shadow: none !important;
+  color: var(--font-color) !important;
     .ant_wave{
       display: none !important;
     }
@@ -241,30 +244,30 @@ cursor: pointer;
     display: inline-flex;
   align-items: center;
   justify-content: center;
+   padding: 6px 15px;
+  min-width: 80px;
   width: fit-content;
   height: fit-content;
-  min-width: 80px;
-   padding: 6px 15px;
-   background: var(--font-color) !important;
-  color: var(--bgColor) !important;
-  border-color: transparent !important;
   outline:none !important;
+  border-color: transparent !important;
+   background: var(--font-color) !important;
     box-shadow: none !important;
+  color: var(--bgColor) !important;
     .ant_wave{
       display: none !important;
     }
 
 }
 .primary_btn{
-  display: flex  !important;;
+  display: flex  !important;
   align-items: center  !important;
   justify-content: center;
-  width: fit-content;
-   min-width: 80px;
    padding: 6px 15px;
-  background: linear-gradient(315deg, #1764FF 0%, #4093ED 100%) !important;
+   min-width: 80px;
+  width: fit-content;
   border-radius: 5px  !important;
- color: #fff !important;
+  background: linear-gradient(315deg, #1764FF 0%, #4093ED 100%) !important;
+ color: #fff !important;;
 }
 .primary_default{
   padding: 4px 15px;
@@ -272,6 +275,7 @@ cursor: pointer;
 
 .break-words{
     word-wrap: break-word;
+
     overflow-wrap: break-word;
 
 
