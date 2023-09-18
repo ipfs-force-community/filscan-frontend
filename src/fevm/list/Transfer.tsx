@@ -12,12 +12,12 @@ import { nft_transfer_columns, token_transfer_columns } from '@/contents/contrac
 export default ({ id ,type}: { id?: string | string[],type:string }) => {
   const { theme } = useFilscanStore();
   const { tr } = Translation({ ns: 'contract' });
-  const { axiosData ,loading} = useAxiosData();
+  const { axiosData } = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
   });
-  //const [loading, setLoading] = useState<boolean>(false);
+  const [loadingTable, setTableLoading] = useState<boolean>(false);
   const [current, setCurrent] = useState(1);
   const [fromList, setFrom] = useState({});
   const [toList, setTo] = useState({});
@@ -29,7 +29,7 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
   }, [id,type]);
 
   const load = async (cur?: number) => {
-    // setLoading(true);
+    setTableLoading(true);
     const index = cur || current;
     const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTTransfers : apiUrl.contract_ERC20Transfer;
     const result = await axiosData(axiosUrl, {
@@ -38,7 +38,7 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
       page: index - 1,
       limit: pageLimit,
     });
-    //setLoading(false);
+    setTableLoading(false);
     setData({
       dataSource: result?.items || [],
       total: result?.total || 0,
@@ -87,7 +87,7 @@ export default ({ id ,type}: { id?: string | string[],type:string }) => {
           data={data.dataSource}
           total={data.total}
           columns={columns}
-          loading={loading}
+          loading={loadingTable}
           onChange={handleChange}
         />
       </div>

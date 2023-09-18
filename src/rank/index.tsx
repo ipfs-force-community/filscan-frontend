@@ -36,7 +36,6 @@ export default ({ origin }: { origin: string }) => {
   const { theme, lang } = useFilscanStore();
 
   const [active, setActive] = useState('growth');
-  const [loadingTable, setTableLoading] = useState(true);
   const [progress, setProgress] = useState<any>({});
   const [data, setData] = useState({ ...defaultData });
   const [poolData, setPoolData] = useState({ ...defaultData });
@@ -45,7 +44,7 @@ export default ({ origin }: { origin: string }) => {
   const [current, setCurrent] = useState(1);
   const [headerFilter, setHeaderFilter] = useState<any>();
   const [sort, setSort] = useState<any>({});
-  const { axiosData} = useAxiosData();
+  const { axiosData,loading} = useAxiosData();
 
   useEffect(() => {
     const showHash = hash || 'growth';
@@ -74,7 +73,6 @@ export default ({ origin }: { origin: string }) => {
   ) => {
     const showActive = tab || active;
     if (showActive) {
-      setTableLoading(true);
       const index = cur || current;
       const showOrder = orders ||
         (sort.field && sort) || {
@@ -102,7 +100,6 @@ export default ({ origin }: { origin: string }) => {
         },
         ...filters,
       });
-      setTableLoading(false);
       if (data) {
         const showData = data?.items || [];
         if (
@@ -291,7 +288,7 @@ export default ({ origin }: { origin: string }) => {
             data={showData.dataSource}
             total={origin === 'home' ? 0 : showData.total}
             columns={columns}
-            loading={loadingTable}
+            loading={loading}
             onChange={handleChange}
           />
         </BrowserView>
