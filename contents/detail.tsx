@@ -1090,16 +1090,16 @@ const default_content = [
     render: (text: number | string) => formatDateTime(text),
   },
   {
-    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
-      return Array.isArray(text) ? <span className="flex flex-col items-center gap-y-2">
+    title: 'Signers', dataIndex: 'signers', width:'100%', elasticity: true, render: (text: string) => {
+      return Array.isArray(text) ? <div className="flex items-baseline flex-wrap justify-end gap-2">
         {text?.map((item:any,index:number) => {
           return <div className='flex items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
 
         })}
-      </span>:text
+      </div>:text
     }},
   {
-    title: 'owned_miners', dataIndex: 'owned_miners', elasticity:true,type: ['account_basic'], render: (text:string) => {
+    title: 'owned_miners', dataIndex: 'owned_miners', width:'100%', elasticity:true,type: ['account_basic'], render: (text:string) => {
       return Array.isArray(text) ? <span className="flex items-center gap-2 flex-wrap">
         {Array.isArray(text) &&text?.map((item:any) => {
           return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
