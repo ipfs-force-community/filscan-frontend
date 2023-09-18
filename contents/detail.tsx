@@ -1066,12 +1066,13 @@ export const power_change = {
     { title: '30d', dataIndex: '1m' },
   ],
   list: [
-    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' },
+    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' ,yIndex:0},
     {
       title: 'power_increase',
       dataIndex: 'power_increase',
       type: 'bar',
       color: '#1C6AFD',
+      yIndex: 1,
     },
   ],
 };

@@ -165,9 +165,7 @@ export default (props: Props) => {
       } = value;
 
       const showTime = formatDateTime(timestamp, 'MM-DD');
-      console.log('----3',timestamp,showTime)
       dateList.push(showTime);
-
       //amount
       const [total_raw_byte_power_amount, total_raw_byte_power_unit] =
         total_raw_byte_power &&

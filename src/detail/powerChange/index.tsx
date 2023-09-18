@@ -38,40 +38,64 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         bottom: 10,
         containLabel: true,
       },
-      yAxis: {
-        type: 'value',
-        scale: true,
-        axisLine: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLabel: {
-          show: true,
-          lineStyle: {
-            color: color.lineStyle,
+      yAxis: [
+        {
+          type: 'value',
+          position: 'left',
+          scale: true,
+          nameTextStyle: {
+            color: color.textStyle,
           },
-          textStyle: {
-            color: color.labelColor,
+          axisLabel: {
+            formatter: '{value} TiB',
+            textStyle: {
+              //  fontSize: this.fontSize,
+              color: color.labelColor,
+            },
           },
-          formatter(v: string) {
-            return v + ' TiB';
+          axisLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          splitLine: {
+            show: false,
+            lineStyle: {
+              type: 'dashed',
+              color: color.splitLine,
+            },
           },
         },
-        splitLine: {
-          lineStyle: {
-            type: 'dashed',
-            color: color.splitLine,
+        {
+          type: 'value',
+          position: 'right',
+          scale: true,
+          nameTextStyle: {
+            color: color.textStyle,
+          },
+          axisLabel: {
+            formatter: '{value} PiB',
+            textStyle: {
+              //  fontSize: this.fontSize,
+              color: color.labelColor,
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed',
+              color: color.splitLine,
+            },
           },
         },
-        // name: vm.tr("chart.title"),
-        nameTextStyle: {
-          color: color.textStyle,
-          align: 'left',
-        },
-        //nameGap: 22 * rate
-      },
+      ],
+
       tooltip: {
         trigger: 'axis',
         position: 'right',
@@ -130,15 +154,15 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         timeData.push(showTime);
         //y轴
         const [powerValue, powerUnit] = power
-          ? unitConversion(power, 4, 4).split(' ')
+          ? unitConversion(power, 4, 5).split(' ')
           : [];
         const [increaseValue, increaseUnit] = power_increase
-          ? unitConversion(power_increase, 4, 4)?.split(' ')
+          ? unitConversion(power_increase, 4, 5)?.split(' ')
           : [];
 
         //amount
         const [powerValue_amount, powerValue_unit] = power
-          ? unitConversion(power, 4)?.split(' ')
+          ? unitConversion(power, 5)?.split(' ')
           : [];
         const [power_increase_amount, power_increase_unit] = power_increase
           ? unitConversion(power_increase, 4)?.split(' ')
@@ -166,9 +190,11 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         type: item.type,
         smooth: true,
         data: seriesObj[dataIndex],
+        dataIndex,
         name: title,
         symbol: 'circle',
         barMaxWidth: '30',
+        yAxisIndex:item.yIndex,
         backgroundStyle: {
           color: item?.color || '',
         },
@@ -191,6 +217,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
 
   const newOptions = useMemo(() => {
     const newSeries: any = [];
+    console.log('====3', noShow, options?.series);
     (options?.series || []).forEach((seriesItem: any) => {
       if (!noShow[seriesItem?.dataIndex]) {
         newSeries.push(seriesItem);
