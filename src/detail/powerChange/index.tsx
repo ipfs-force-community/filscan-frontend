@@ -122,7 +122,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         interval: showInter,
       },
     });
-    (result?.power_trend_by_account_id_list?.reverse() || []).forEach(
+    (result?.power_trend_by_account_id_list || []).forEach(
       (value: any) => {
         const { block_time, power, power_increase } = value;
         let showTime: string = '';

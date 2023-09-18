@@ -40,8 +40,8 @@ export default ({
 
   const handleClick = (event: any, tabId: string) => {
     // 在当前路由上添加锚点 '#section1'
-    const scrollPosition =
-      window.pageYOffset || document.documentElement.scrollTop;
+    // const scrollPosition =
+    //   window.pageYOffset || document.documentElement.scrollTop;
     event.preventDefault();
     setActive(tabId);
     if (onChange) onChange(tabId);
@@ -70,7 +70,7 @@ export default ({
       );
     }
     // 恢复滚动条位置
-    window.scrollTo(0, scrollPosition);
+    // window.scrollTo(0, scrollPosition);
   };
 
   return (

@@ -121,7 +121,7 @@ function Gas(props: Props) {
     };
     const newOpt: any = {};
     axiosData(apiUrl.static_gas, { interval }).then((res: any) => {
-      res?.list?.reverse().forEach((dataItem: any) => {
+      res?.list?.forEach((dataItem: any) => {
         const { timestamp, base_fee, gas_in_32g, gas_in_64g } = dataItem;
         let showTime: string = '';
         if (value === '24h') {

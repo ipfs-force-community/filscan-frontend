@@ -155,7 +155,7 @@ export default (props: Props) => {
     const legendList: any = [];
     const seriesData: any = [];
     const result: any = await axiosData(apiUrl.line_trend, { interval: '1m' });
-    result?.list?.reverse()?.forEach((value: any) => {
+    result?.list?.forEach((value: any) => {
       const {
         timestamp,
         total_raw_byte_power, //原值算力

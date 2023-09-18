@@ -12,6 +12,9 @@ const config: Config = {
     extend: {
       visibility: ['group-hover'],
       content: ['before', 'after'],
+      gridTemplateColumns: {
+        'custom': '25% 30% 30% 15%',
+      }
     },
   },
   theme: {
