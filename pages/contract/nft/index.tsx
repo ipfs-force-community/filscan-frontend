@@ -32,7 +32,12 @@ export default () => {
 
   const columns = useMemo(() => {
     const columns = _.cloneDeep(contract_nfts.columns)
-    return columns.map((v: any) => {
+    return columns.filter((v)=>{
+      if (isMobile) {
+        return v.dataIndex !== 'collection'
+      }
+      return true
+    }).map((v: any) => {
       if (isMobile) {
         if (v.dataIndex === 'rank') {
           // @ts-ignore
@@ -52,12 +57,10 @@ export default () => {
             );
           }
         }
-        v.title = typeof v.title === 'string' ? tr(v.title) : v.title
-        return v.dataIndex !== 'collection'
       }
       return {
         ...v,
-        title: typeof v.title === 'string' ? tr(v.title) : v.title(),
+        title: typeof v.title === 'string' ? tr(v.title) : v.title,
       };
     });
   }, [tr, isMobile]);
