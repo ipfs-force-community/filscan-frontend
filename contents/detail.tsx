@@ -130,7 +130,7 @@ export const miner_overview = {
     { title: '24h', dataIndex: '24h' },
     { title: '7d', dataIndex: '7d' },
     { title: '30d', dataIndex: '1m' },
-    { title: '1year', dataIndex: '1year' },
+    // { title: '1year', dataIndex: '1year' },
   ],
   list: [
     {
@@ -953,15 +953,6 @@ const default_content = [
         text
     }
   },
-  {
-    title: 'owned_miners', dataIndex: 'owned_miners', elasticity:true,type: ['account_basic'], render: (text:string) => {
-      return Array.isArray(text) ? <span className="array_item">
-        {Array.isArray(text) &&text?.map((item:any) => {
-          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
-        })}
-      </span>:text
-    }
-  },
   { title: 'user_count', dataIndex: 'user_count', type: ['account_basic', 'evm_contract'], elasticity: true, render: (text: string) => text ? formatNumber(text) : text },
   {
     title: 'nonce',
@@ -971,15 +962,6 @@ const default_content = [
   },
   { title: 'transfer_count', dataIndex: 'transfer_count', type: ['account_basic','evm_contract'],elasticity:true,render:(text:string)=>text ?formatNumber(text):text},
 
-  {
-    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
-      return Array.isArray(text) ? <span className="array_item_column array_item_over">
-        {text?.map((item:any,index:number) => {
-          return <div key={ index}>{get_account_type(item)}</div>
-
-        })}
-      </span>:text
-    }},
   {
     title: 'create_time',
     dataIndex: 'create_time',
@@ -997,6 +979,24 @@ const default_content = [
     dataIndex: 'latest_transfer_time',
     type: ['account_basic'],
     render: (text: number | string) => formatDateTime(text),
+  },
+  {
+    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
+      return Array.isArray(text) ? <span className="flex flex-col items-center gap-y-2">
+        {text?.map((item:any,index:number) => {
+          return <div className='flex items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
+
+        })}
+      </span>:text
+    }},
+  {
+    title: 'owned_miners', dataIndex: 'owned_miners', elasticity:true,type: ['account_basic'], render: (text:string) => {
+      return Array.isArray(text) ? <span className="flex items-center gap-2 flex-wrap">
+        {Array.isArray(text) &&text?.map((item:any) => {
+          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
+        })}
+      </span>:text
+    }
   },
 ];
 
@@ -1062,7 +1062,7 @@ export const account_change = {
 export const power_change = {
   title: 'power_change',
   tabList: [
-    { title: '7d', dataIndex: '7d' },
+    // { title: '7d', dataIndex: '7d' },
     { title: '30d', dataIndex: '1m' },
   ],
   list: [

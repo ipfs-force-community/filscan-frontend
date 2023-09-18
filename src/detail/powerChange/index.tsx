@@ -144,6 +144,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
       account_id: accountId,
       filters: {
         interval: showInter,
+        account_type:'owner'
       },
     });
     (result?.power_trend_by_account_id_list || []).forEach(

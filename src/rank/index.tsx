@@ -36,7 +36,7 @@ export default ({ origin }: { origin: string }) => {
   const { theme, lang } = useFilscanStore();
 
   const [active, setActive] = useState('growth');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState<any>({});
   const [data, setData] = useState({ ...defaultData });
   const [poolData, setPoolData] = useState({ ...defaultData });
@@ -75,6 +75,7 @@ export default ({ origin }: { origin: string }) => {
   ) => {
     const showActive = tab || active;
     if (showActive) {
+      setLoading(true);
       const index = cur || current;
       const showOrder = orders ||
         (sort.field && sort) || {
@@ -83,7 +84,6 @@ export default ({ origin }: { origin: string }) => {
       };
 
       const showFilter = filter || headerFilter;
-      setLoading(true);
       const linkUrl: any = `rank_${showActive}`;
       const filters = showFilter
         ? {
@@ -267,6 +267,8 @@ export default ({ origin }: { origin: string }) => {
     if (active === 'rewards') return rewardsData;
     return data;
   }, [active, data, poolData, growthData, rewardsData]);
+
+  console.log('====233',loading)
 
   return (
     <>

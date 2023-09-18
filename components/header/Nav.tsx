@@ -58,7 +58,7 @@ export default () => {
                   <span>{getSvgIcon('downIcon')}</span>
 
                   {/* <Image src={down} width={8} height={4} alt='down' /> */}
-                  {nav.sufIcon && <span className='absolute -top-2 -right-7'>{getSvgIcon(nav.sufIcon)}</span>}
+                  {nav.sufIcon && <span className='absolute -top-2 -right-[12px]'>{getSvgIcon(nav.sufIcon)}</span>}
                 </span>
                 {renderChild(nav.children, index)}
               </div>
@@ -71,7 +71,7 @@ export default () => {
                 className='cursor-pointer text_color  hover:text-primary'>
                 {tr(nav.key)}
               </Link>
-              {nav.sufIcon && <span className='absolute -top-2'>{getSvgIcon(nav.sufIcon)}</span>}</div>
+              {nav.sufIcon && <span className='absolute -top-2 -right-6'>{getSvgIcon(nav.sufIcon)}</span>}</div>
           );
         })}
       </div>
