@@ -25,10 +25,15 @@
   font-size: px-to-rem(14px);
   }
 
-@media screen and (min-width: 1200px){
-  .main_contain,.custom_footer,.custom_header,.banner-contain{
-    padding: 20px 50px 40px 50px;
-    min-width: 1200px;
+@media screen and (min-width: 1024px){
+  .main_contain,.custom_footer,.banner-contain{
+    padding: 20px 70px 40px 70px;
+    min-width: 1024px;
+    max-width: 1440px;
+  }
+  .custom_header{
+    padding: 0px 70px;
+    min-width: 1000px;
     max-width: 1440px;
   }
 }
