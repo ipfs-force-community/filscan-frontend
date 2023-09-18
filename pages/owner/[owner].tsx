@@ -14,6 +14,7 @@ import PowerChange from '@/src/detail/powerChange';
 import List from '@/src/detail/list';
 import { Translation } from '@/components/hooks/Translation';
 import { getShowData } from '@/utils';
+import AccountDetail from '@/src/detail/accountDetail';
 
 export default () => {
   const router = useRouter();
@@ -70,8 +71,10 @@ export default () => {
 
       <div className='flex mt-6 gap-x-5'>
         <AccountChange accountId={owner} interval={'30d'} />
-        <PowerChange accountId={owner} />
+        <PowerChange accountId={owner} type='owner'/>
       </div>
+      <AccountDetail data={data} type={'owner'} />
+
     </div>
   );
 };

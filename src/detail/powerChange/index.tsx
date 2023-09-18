@@ -195,7 +195,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         name: title,
         symbol: 'circle',
         barMaxWidth: '30',
-        barMinWidth: '20',
+        barMinWidth: '12',
         yAxisIndex:item.yIndex,
         backgroundStyle: {
           color: item?.color || '',

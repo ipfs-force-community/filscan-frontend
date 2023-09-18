@@ -17,6 +17,7 @@ import classNames from 'classnames';
 import styles from './style.module.scss'
 import Copy from '@/components/copy';
 import useAxiosData from '@/store/useAxiosData';
+import AccountDetail from '@/src/detail/accountDetail';
 
 export default () => {
   const router = useRouter();
@@ -90,12 +91,12 @@ export default () => {
         />
         <Power data={data?.account_indicator || {}} />
       </div>
-
       <OverView overView={miner_overview} accountId={miner} />
       <div className={classNames(styles.column,'flex mt-6 gap-x-5')}>
         <AccountChange accountId={miner} interval={'30d'} />
-        <PowerChange accountId={miner} type={ 'owner'} />
+        <PowerChange accountId={miner} type={ 'miner'} />
       </div>
+      <AccountDetail data={data} type={ 'miner'} />
       <div>
         <List
           tabList={newTabList}

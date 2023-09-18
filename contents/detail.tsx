@@ -213,6 +213,115 @@ export const miner_overview = {
   ],
 };
 
+export const account_detail = {
+  list:(tr:any)=> [
+    {
+      title: 'account_type',
+      dataIndex: 'account_type',
+      type: ["account_basic"],
+      render:(text:any,record:any,tr:any)=>text?tr(text):'--'
+    },
+    {
+      title: 'account_address',
+      dataIndex: 'account_address',
+      type: ["account_basic"],
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link' >{isIndent(text)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+
+    },
+
+    {
+      title: 'owner_address',
+      dataIndex: 'owner_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link' >{isIndent(text)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
+    {
+      title: 'worker_address',
+      dataIndex: 'worker_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link_text' >{isIndent(text)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
+    {
+      title: 'beneficiary_address',
+      dataIndex: 'beneficiary_address',
+      render: (text: any, record: any) => {
+        if(!text) return '--'
+        return <div className="flex flex-wrap items-baseline justify-end gap-x-2">
+          {text&&Array.isArray(text)? text?.map((linkItem:string,index:number) => {
+            return <span className="flex items-baseline gap-x-2" key={linkItem}>
+              <Link href={`/address/${linkItem}`} className='link_text' >{isIndent(linkItem,6)}</Link>
+              <Copy text={linkItem} />
+            </span>
+          }): <span className="flex items-baseline gap-x-2">
+            <Link href={`/address/${text}`} className='link_text' >{isIndent(text,6)}</Link>
+            <Copy text={text} />
+          </span>}
+        </div>
+      }
+    },
+    {
+      title: 'controllers_address',
+      dataIndex: 'controllers_address',
+      render: (text: any, record: any) => {
+        if(!text) return '--'
+        return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
+          {text&& Array.isArray(text)?[...text,...text,...text,...text]?.map((linkItem:string,index:number) => {
+            return <span className="flex items-baseline gap-x-2" key={linkItem}>
+              <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,6)}</Link>
+              <Copy text={linkItem} />
+            </span>
+          }):'--'}
+        </div>
+      }
+    },
+
+  ],
+}
+
+export const owner_detail_overview= {
+  title:'owner_title',
+  list: [
+    {
+      title: "account_name",
+      dataIndex: "account_id",
+    },
+    {
+      title: "owner_address",
+      dataIndex: "account_address",
+      render: (text:string) => {
+        return <Link className='link' href={`/address/${text}`}>{text}</Link>
+      }
+    },
+    {
+      title: "owned_miners",
+      dataIndex: "owned_miners",
+      render: (text: Array<any>, record:any) => {
+        return <span className="flex items-baseline gap-x-2 flex-wrap">
+          {text&& Array.isArray(text)&&text?.map((item:any,index:number) => {
+            return <Link className='link' key={ index} href={`/miner/${item}`}>{item}</Link>
+          })}
+        </span>
+      }
+    },
+  ],
+}
+
 export const owner_detail = {
   list: [
     {
@@ -250,7 +359,7 @@ export const owner_detail = {
     },
     {
       title: 'owned_active_miners',
-      dataIndex: 'owned_active_miners',
+      dataIndex: 'owned_miners',
       render: (text: Array<any>, record: any) => {
         return (
           <span className='flex flex-wrap gap-2.5 items-baseline'>
