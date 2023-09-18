@@ -22,7 +22,7 @@ const rankZh = {
   pool_owner: 'Owner ID',
   pool_power:'QualityAdjPower',
   pool_efficiency_24h: 'Latest 24h Output Efficiency',
-  pool_increase_24h:'Power Growth',
+  pool_increase_24h:'24H Power Growth',
   pool_block_count: 'Blocks Mined',
   miner: "Miner",
   pool_block_count_24h: '24h Total Block Rewards',
@@ -35,7 +35,7 @@ const rankZh = {
   //算力增速
   power_ratio: 'Power Growth',
   power_ratio_tip:'Daily total adj. power of the sealed sectors within selected period.',
-  quality_power_increase: 'Daily Power Growth',
+  quality_power_increase: 'Power Growth',
   quality_power_increase_tip: "Node's adjusted storage power increment in the selected period.",
   quality_adj_power: 'QualityAdjPower',
   raw_power: 'RawBytePower',

@@ -16,6 +16,9 @@ pm2 start npm --watch --name filscan_ha -- run start:ha
 //test 
 pm2 start npm --watch --name filscan_main -- run start
 
+//pro 
+pm2 start npm --watch --name filscan_pro -- run start:pro
+
 
 //main
 //pm2 start npm --watch --name filscab_cail -- run calibration

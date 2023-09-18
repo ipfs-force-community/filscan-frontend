@@ -613,7 +613,7 @@ export const token_Dex_columns = [
               window.open(record.dex_url);
             }
           }}>
-          <Image className='fvm_img_url' alt='' width={25} height={25} />
+          <Image className='fvm_img_url' src={record.icon_url} alt='' width={25} height={25} />
         </span>
       );
     },

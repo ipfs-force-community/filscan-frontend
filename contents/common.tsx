@@ -20,7 +20,7 @@ export const header_top: TOP_DATA = {
         const flag = changeText ? changeText > 0 ? '+' : '-':'';
         return <span className='flex gap-x-1 items-end'>
           <span className='text_primary'>{get$Number(text)} </span>
-          {changeText && <span className={`${className} ml-1`}>{flag}{Math.abs(changeText)}%</span>}
+          {changeText && <span className={`${className} ml-1`}>{flag}{Math.abs(changeText).toFixed(2)}%</span>}
         </span>
       },
 

@@ -165,6 +165,7 @@ export default (props: Props) => {
       } = value;
 
       const showTime = formatDateTime(timestamp, 'MM-DD');
+      console.log('----3',timestamp,showTime)
       dateList.push(showTime);
 
       //amount

@@ -1,11 +1,10 @@
 import { Menu_Info } from "./type"
 import Hot from '@/assets/images/hot.svg'
-import Image from 'next/image'
 
-const navMenu: Array<Menu_Info> = [
+const navMenu: Array<Menu_Info|any> = [
   {
     key: 'fvm',
-    sufIcon: 'hot',
+    sufIcon:'hot',
     color: '#F44C30',
     link: '/fvm'
   },
@@ -40,7 +39,7 @@ const navMenu: Array<Menu_Info> = [
   },
   {
     key: 'contract',
-    preIcon: 'newIcon',
+    sufIcon: 'newIcon',
     color: '#F44C30',
     children: [
       {

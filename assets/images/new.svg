@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="30px" height="14px" viewBox="0 0 30 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>切片</title>
     <defs>
         <linearGradient x1="0%" y1="47.9785058%" x2="97.0502513%" y2="53.4693392%" id="linearGradient-1">
             <stop stop-color="#F55520" offset="0%"></stop>

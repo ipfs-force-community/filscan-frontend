@@ -23,7 +23,7 @@ export default () => {
     if (nftId) {
       axiosData(apiUrl.contract_FnsSummary, {
         contract: nftId,
-      }).then((res: any) => {
+      }, {isCancel:false}).then((res: any) => {
         setOverview(res || {});
       });
     }

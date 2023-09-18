@@ -18,8 +18,8 @@ import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import { Button } from 'antd';
 import DropDown from '@/packages/customDrop';
-//储存池概览 账户余额 & 有效算力
 
+//储存池概览 账户余额 & 有效算力
 export const account_balance = {
   title: 'balance',
   list: [
@@ -27,13 +27,13 @@ export const account_balance = {
       title: 'available_balance',
       dataIndex: 'available_balance',
       title_tip:'available_balance_tip',
-      color: '#256DF3',
+      color: '#F8CD4D',
     },
     {
       title: 'init_pledge',
       dataIndex: 'init_pledge',
       title_tip:'init_pledge_tip',
-      color: '#F8CD4D',
+      color: '#256DF3',
     },
     {
       title: 'pre_deposits',
@@ -1503,7 +1503,7 @@ export const cid_list = {
         if (!text) return '--';
         return (
           <span className='flex items-center gap-x-2'>
-            {get_account_type(text,0)}
+            {get_account_type(text)}
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
