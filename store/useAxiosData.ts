@@ -32,11 +32,11 @@ const cancelTokenSources: Record<string, CancelTokenSource> = {};
 function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialOptions?: any) {
   const [data, setData] = useState<FetchDataResult<T> | null>();
   const [error, setError] = useState(null);
-  // const [loading, //setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   let current = 0;
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
-    //setLoading(true);
+    setLoading(true);
     const { method='post', maxRetries=3, timeout=0,flag,isCancel=true } = {...DefaultOptions,...options};
     const body = payload || {};
     let error: any = null;
@@ -81,7 +81,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
             result: null,
             error: 'Invalid credentials',
           });
-          //setLoading(false)
+          setLoading(false)
           current = 0;
           return response.data;
         }
@@ -94,11 +94,12 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         }
         data = response.data || response ||{};
         setData(data?.result || data || {});
-        //setLoading(false);
+        setLoading(false);
         current = 0;
         return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
+        // console.log('----34325',url)
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
@@ -107,7 +108,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
             return axiosData(url, payload, options);
           } else {
             setError(thrown);
-            //setLoading(false);
+            setLoading(false);
             setData({
               result: null,
               error: 'Error',
@@ -119,7 +120,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
                   result: null,
                   error: 'Invalid credentials',
                 });
-                //setLoading(false)
                 return null
               }
               return notification.error({
@@ -153,7 +153,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     };
   },[])
 
-  return { data, error, axiosData };
+  return { data, loading, error, axiosData };
 }
 
 export default useAxiosData;
