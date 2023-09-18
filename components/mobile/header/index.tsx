@@ -60,6 +60,7 @@ const Header = () => {
       type,
     } as MenuItem;
   }
+
   useEffect(()=>{
     let _items: MenuItem[] = []
     mobileNavMenu.forEach((value,index)=>{
@@ -82,6 +83,10 @@ const Header = () => {
     router.push('/')
   }
 
+  const onMaskClick=()=>{
+    setOpen(false)
+  }
+
   return <div className={styles['header-wrap']}>
     <div className={styles['header']}>
       <div onClick={onClick}>
@@ -90,15 +95,19 @@ const Header = () => {
       </div>
       <Image onClick={onOpen} src={open ? IconClose :IconOpen} alt=''/>
     </div>
-    <div id='mask' className={classNames(styles.body,open?styles.active:'')}>
-      <Menu
-        mode="inline"
-        selectedKeys={selectKeys}
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
-        onSelect={onSelect}
-        items={items}
-      />
+    <div id='mask' onClick={onMaskClick} className={classNames(styles.body,open?styles.active:'')}>
+      <div onClick={(e)=>{
+        e.stopPropagation()
+      }} className={styles.menuWrap}>
+        <Menu
+          mode="inline"
+          selectedKeys={selectKeys}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          onSelect={onSelect}
+          items={items}
+        />
+      </div>
     </div>
   </div>
 }
