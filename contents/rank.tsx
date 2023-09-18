@@ -157,7 +157,7 @@ export const poolList = (progress: number | string) => {
     },
     {
       title: 'pool_power', //有效算力
-      dataIndex: 'quality_adj_power',
+      dataIndex: 'pool_power',
       with: '35%',
       sorter: true,
       defaultSortOrder: 'descend',
@@ -166,7 +166,7 @@ export const poolList = (progress: number | string) => {
         return (
           <span className='flex items-center gap-x-2'>
             <Progress left={left + '%'} />
-            <span>{unitConversion(text, 2)}</span>
+            <span>{unitConversion(record.quality_adj_power, 2)}</span>
           </span>
         );
       },
@@ -262,7 +262,7 @@ const growthList = (progress: number | string) => {
   ];
 };
 
-export const homeGrowthList = [
+export const mobileRankList = [
   'rank',
   'miner_id',
   'power_ratio'
@@ -344,6 +344,21 @@ export const getColumn = (type: string, progress: number | string) => {
     return providerList(progress);
   }
 };
+
+export const getMobileColumn = (type:string)=>{
+  switch (type) {
+  case 'provider':
+    return ['rank','miner_id','quality_adj_power']
+  case 'pool':
+    return ['rank','owner_id','pool_power']
+  case 'growth':
+    return ['rank','miner_id','power_ratio']
+  case 'rewards':
+    return ['rank','miner_id','rewards']
+  default:
+    break;
+  }
+}
 
 export const getDefaultSort: any = {
   provider: 'quality_adj_power',

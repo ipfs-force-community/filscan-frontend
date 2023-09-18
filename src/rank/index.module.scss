@@ -1,17 +1,35 @@
 @media only screen and (max-width: 1000px) {
+  .reset {
+    overflow: unset;
+    align-items: unset;
+    margin: unset;
+    padding: unset;
+    border: unset;
+    border-radius: unset;
+    background: unset;
+    box-shadow: unset;
+  }
+  .table {
+    margin-top: 10px;
 
-    .reset {
-        overflow: unset;
-        align-items: unset;
-        margin: unset;
-        padding: unset;
-        border: unset;
-        border-radius: unset;
-        background: unset;
-        box-shadow: unset;
+    .item-right-quality,.item-right-pool {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      span {
+        margin-left: 5px;
+        color: var(--mobile-title-color);
+        white-space: nowrap;
+        font-weight: 500;
+        font-size: clamp(10px, 14px, 16px);
+      }
     }
-    .table {
-        margin-top: 10px;
-        
+    .item-right-rewards {
+      margin-left: 5px;
+      color: var(--mobile-title-color);
+      white-space: nowrap;
+      font-weight: 500;
+      font-size: clamp(10px, 14px, 16px);
     }
+  }
 }

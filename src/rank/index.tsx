@@ -3,19 +3,22 @@
 import { useHash } from '@/components/hooks/useHash';
 import { Translation } from '@/components/hooks/Translation';
 import { useEffect, useMemo, useState } from 'react';
-import { getColumn, getDefaultSort } from '@/contents/rank';
+import { getColumn, getDefaultSort, getMobileColumn, mobileRankList } from '@/contents/rank';
 import Table from '@/packages/Table';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
 import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageHomeLimit, pageLimit } from '@/utils';
+import { formatFilNum, pageHomeLimit, pageLimit, unitConversion } from '@/utils';
 import { useTranslation } from 'react-i18next';
 import useAxiosData from '@/store/useAxiosData';
 import classNames from 'classnames';
 import styles from './index.module.scss';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import Tb from '@/packages/mobile/table'
+import useWindow from '@/components/hooks/useWindown';
+import { MinerPowerRank } from '@/store/homeData';
+import Progress from '@/packages/progress';
 const defaultFilter = {
   sector_size: 'all',
   interval: '24h',
@@ -28,7 +31,7 @@ const defaultData = {
 export default ({ origin }: { origin: string }) => {
   const { hash } = useHash();
   // const { tr } = Translation({ ns: 'rank' });
-
+  const {isMobile} = useWindow()
   const { t } = useTranslation();
   const tr = (label: string) => {
     return t(label, { ns: 'rank' });
@@ -146,7 +149,73 @@ export default ({ origin }: { origin: string }) => {
 
   const columns = useMemo(() => {
     const content: any = [];
-    getColumn(active, progress[active]).forEach((item) => {
+    getColumn(active, progress[active]).filter((item)=>{
+      if (isMobile) {
+        return getMobileColumn(active)?.includes(item.dataIndex)
+      }
+      return true
+    }).forEach((item) => {
+      if (isMobile) {
+        if (item.dataIndex === 'rank') {
+          item.width = '15%'
+          item.align = "left"
+        }
+        if (item.dataIndex === 'miner_id') {
+          item.width = '30%'
+        }
+        if (item.title === 'power_ratio') {
+          item.align = "right"
+          item.width = '0'
+          item.render = (value:any,render:MinerPowerRank)=>{
+            const left = 100 - (Number(value) / Number(render.power_ratio)) * 100;
+            return (
+              <span className='flex justify-end gap-x-2'>
+                <Progress left={left + '%'} />
+                <span>{unitConversion(value, 2) + '/D'}</span>
+              </span>
+            );
+          }
+        }
+
+        if (item.dataIndex === 'quality_adj_power') {
+          item.align = "right"
+          item.render = (text: string | number, record: any) => {
+            const text1 = record.quality_power_ratio;
+            const left = 100 - (Number(text) / Number(progress)) * 100;
+            return (
+              <span className={classNames(styles['item-right-quality'])}>
+                <Progress left={left + '%'} />
+                <span>{`${unitConversion(text, 2)} / ${(
+                  Number(text1) * 100
+                ).toFixed(2)}%`}</span>
+              </span>
+            );
+          }
+        }
+
+        if (item.dataIndex === 'rewards') {
+          item.align = "right";
+          item.render = (text: string, record: any) => {
+            const showNum = formatFilNum(text, false, false, 2);
+            const ratio = Number(record.rewards_ratio * 100).toFixed(2) + '%';
+            return <span className={classNames(styles['item-right-rewards'])}>
+              {`${showNum}/${ratio}`}</span>;
+          }
+        }
+
+        if (item.dataIndex === 'pool_power') {
+          item.align = "right";
+          item.render = (text:any,record:any)=>{
+            const left = 100 - (Number(record.quality_adj_power) / Number(progress)) * 100;
+            return (
+              <span className={styles['item-right-pool']}>
+                <Progress left={left + '%'} />
+                <span>{unitConversion(record.quality_adj_power, 2)}</span>
+              </span>
+            );
+          }
+        }
+      }
       content.push({ ...item, title: tr(item.title) });
     });
     return content;
@@ -211,7 +280,11 @@ export default ({ origin }: { origin: string }) => {
         } border rounded-xl px-5 pt-5 card_shadow border_color flex items-center`,styles.table,styles.reset)}>
 
         <MobileView>
-          <Tb/>
+          <Tb
+            columns={columns}
+            dataSource={showData.dataSource}
+            pagination={false}
+          />
         </MobileView>
         <BrowserView>
           <Table
