@@ -25,12 +25,12 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'contract' });
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
   });
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
   const [current, setCurrent] = useState(1);
   const [ownerList, setOwner] = useState({});
   const [toList, setTo] = useState({});
@@ -44,7 +44,7 @@ export default ({
   }, [id,type]);
 
   const load = async (cur?: number) => {
-    setLoading(true);
+    // setLoading(true);
     const index = cur || current;
     const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTOwners : apiUrl.contract_ERC20Owner;
     const result = await axiosData(axiosUrl, {
@@ -53,7 +53,7 @@ export default ({
       page: index - 1,
       limit: pageLimit,
     });
-    setLoading(false);
+    // setLoading(false);
     setData({
       dataSource: result?.items || [],
       total: result?.total || 0,

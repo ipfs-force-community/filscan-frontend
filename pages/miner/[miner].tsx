@@ -16,14 +16,20 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
 import styles from './style.module.scss'
 import Copy from '@/components/copy';
+import useAxiosData from '@/store/useAxiosData';
 
 export default () => {
   const router = useRouter();
   const { miner } = router.query;
   const [data, setData] = useState<any>({});
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingBalance, setBalanceLoading] = useState<boolean>(false);
   const [method, setMethod] = useState<any>([]);
   const { tr } = Translation({ ns: 'detail' });
+  const {axiosData } = useAxiosData()
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [router.asPath]);
 
   useEffect(() => {
     if (miner) {
@@ -33,7 +39,7 @@ export default () => {
   }, [miner]);
 
   const loadMethod = async () => {
-    const result: any = await fetchData(apiUrl.detail_list_method, {
+    const result: any = await axiosData(apiUrl.detail_list_method, {
       account_id: miner,
     });
     const newMethod: any = [
@@ -50,11 +56,11 @@ export default () => {
   };
 
   const loadMinerData = async () => {
-    setLoading(true);
-    const result: any = await fetchData(apiUrl.detail_account, {
+    setBalanceLoading(true);
+    const result: any = await axiosData(apiUrl.detail_account, {
       account_id: miner,
     });
-    setLoading(false);
+    setBalanceLoading(false);
     setData(result?.account_info?.account_miner || {});
   };
 
@@ -80,16 +86,15 @@ export default () => {
       <div className='flex w-full card_shadow rounded-xl !overflow-hidden'>
         <AccountBalance
           data={data?.account_indicator || {}}
-          loading={loading}
+          loading={loadingBalance}
         />
         <Power data={data?.account_indicator || {}} />
       </div>
 
       <OverView overView={miner_overview} accountId={miner} />
-
       <div className={classNames(styles.column,'flex mt-6 gap-x-5')}>
         <AccountChange accountId={miner} interval={'30d'} />
-        <PowerChange accountId={miner} />
+        <PowerChange accountId={miner} type={ 'owner'} />
       </div>
       <div>
         <List

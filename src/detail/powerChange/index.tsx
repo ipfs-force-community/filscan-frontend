@@ -14,10 +14,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss'
 import classNames from 'classnames';
-export default ({ accountId }: { accountId?: string | string[] }) => {
+export default ({ accountId,type }: { accountId?: string | string[],type:string}) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const [interval, setInterval] = useState('7d');
+  const [interval, setInterval] = useState('1m');
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
 
@@ -144,7 +144,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
       account_id: accountId,
       filters: {
         interval: showInter,
-        account_type:'owner'
+        account_type:type,
       },
     });
     (result?.power_trend_by_account_id_list || []).forEach(
@@ -195,6 +195,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         name: title,
         symbol: 'circle',
         barMaxWidth: '30',
+        barMinWidth: '20',
         yAxisIndex:item.yIndex,
         backgroundStyle: {
           color: item?.color || '',

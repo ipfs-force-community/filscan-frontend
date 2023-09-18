@@ -18,7 +18,7 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const [loading, setLoading] = useState(false);
+  const [loadingTable, setTableLoading] = useState(false);
   const { axiosData } = useAxiosData();
 
   const [data, setData] = useState({
@@ -42,7 +42,7 @@ export default ({
   }, [accountId,methodName]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
+    setTableLoading(true);
     const showIndex = cur || current;
     const showMethod = method || methodName;
     const result: any = await axiosData(apiUrl.detail_trance_list, {
@@ -53,7 +53,7 @@ export default ({
         method_name: showMethod === 'all' ? '' : showMethod,
       },
     });
-    setLoading(false);
+    setTableLoading(false);
     const showList = result?.traces_by_account_id_list || [];
     setData({
       dataSource: showList,
@@ -91,7 +91,7 @@ export default ({
       data={data.dataSource}
       total={data.total}
       columns={columns}
-      loading={loading}
+      loading={loadingTable}
       onChange={handleChange}
     />
   );

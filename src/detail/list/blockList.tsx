@@ -19,7 +19,7 @@ export default ({
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData();
-  const [loading, setLoading] = useState(false);
+  const [loadingTable, setTableLoading] = useState(false);
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
@@ -41,7 +41,7 @@ export default ({
   }, [accountId]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
+    setTableLoading(true);
     const showIndex = cur || current;
     const showMethod = method || methodName;
     const result: any = await axiosData(apiUrl.detail_block_list, {
@@ -52,32 +52,32 @@ export default ({
         method_name: showMethod === 'all' ? '' : showMethod,
       },
     });
-    setLoading(false);
+    setTableLoading(false);
     const showList = result?.blocks_by_account_id_list || [];
     setData({
       dataSource: showList,
       total: result?.total_count,
     });
-    // if (showList.length > 0) {
-    //   const formItems = showList.map((v: any) => v.from);
-    //   const toItems = showList.map((v: any) => v.to);
-    //   loadFnsUrl(formItems, 'form');
-    //   loadFnsUrl(toItems, 'to');
-    // }
+    if (showList.length > 0) {
+      const formItems = showList.map((v: any) => v.from);
+      const toItems = showList.map((v: any) => v.to);
+      loadFnsUrl(formItems, 'form');
+      loadFnsUrl(toItems, 'to');
+    }
   };
 
-  //   const loadFnsUrl = async (items: Array<any>, type: string) => {
-  //     if (items.length > 0) {
-  //       const fnsData = await fetchData(`${apiUrl.contract_fnsUrl}`, {
-  //         addresses: items,
-  //       });
-  //       if (type === 'form') {
-  //         setFrom(fnsData);
-  //       } else {
-  //         setTo(fnsData);
-  //       }
-  //     }
-  //   };
+  const loadFnsUrl = async (items: Array<any>, type: string) => {
+    if (items.length > 0) {
+      const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
+        addresses: items,
+      });
+      if (type === 'form') {
+        setFrom(fnsData);
+      } else {
+        setTo(fnsData);
+      }
+    }
+  };
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     let cur: number = pagination.current || current;
@@ -90,7 +90,7 @@ export default ({
       data={data.dataSource}
       total={data.total}
       columns={columns}
-      loading={loading}
+      loading={loadingTable}
       onChange={handleChange}
     />
   );

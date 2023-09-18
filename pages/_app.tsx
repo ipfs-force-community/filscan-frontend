@@ -2,7 +2,6 @@
 import '@/styles/globals.css';
 import '@/styles/common.scss';
 import '@/styles/custom.scss';
-import type { AppProps } from 'next/app';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import enUS from 'antd/lib/locale/en_US';
@@ -11,9 +10,7 @@ import { FilscanStoreContext } from '@/store/FilscanStore';
 import HeaderMain from '@/components/header';
 import ErrorBoundary from '@/components/Bounday';
 import { UserStoreContext } from '@/store/UserStore';
-import fetchData from '@/store/server';
-import { proApi } from '@/contents/apiUrl';
-import { useRouter } from 'next/router';
+import { useRouter,withRouter } from 'next/router';
 import Footer from '@/components/footer';
 import { MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
@@ -43,7 +40,7 @@ App.getInitialProps = async (context:any)=>{
 }
 
 //@ts-ignore
-export default function App({ Component, pageProps, isMobile }: any) {
+function App({ Component, pageProps, isMobile }: any) {
   const {t} =useTranslation('home')
   const router = useRouter();
 
@@ -155,3 +152,5 @@ export default function App({ Component, pageProps, isMobile }: any) {
     </ErrorBoundary>
   );
 }
+
+export default withRouter(App)

@@ -37,8 +37,6 @@ export default (props: Props) => {
     return limit || pageLimit;
   }, [limit]);
 
-  console.log('===33',loading)
-
   return <>
     <MobileView>
       <div className={styles['mobile-table']}>

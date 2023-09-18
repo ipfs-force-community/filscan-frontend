@@ -16,7 +16,7 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const [loading, setLoading] = useState(false);
+  const [loadingTable, setTableLoading] = useState(false);
   const { axiosData } = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
@@ -39,7 +39,7 @@ export default ({
   }, [accountId]);
 
   const load = async (cur?: number,) => {
-    setLoading(true);
+    setTableLoading(true);
     const showIndex = cur || current;
     const result: any = await axiosData(apiUrl.contract_ERC20Transfers, {
       address: accountId,
@@ -48,7 +48,7 @@ export default ({
         limit: pageLimit,
       },
     });
-    setLoading(false);
+    setTableLoading(false);
     const showList = result?.items || [];
     setData({
       dataSource: showList,
@@ -86,7 +86,7 @@ export default ({
       data={data.dataSource}
       total={data.total}
       columns={columns}
-      loading={loading}
+      loading={loadingTable}
       onChange={handleChange}
     />
   );

@@ -55,7 +55,7 @@ export default ({ data }: { data: any }) => {
             );
           })}
         </ul>
-        <BrowserView><Image src={powerIcon} alt='' width={41} height={41} /></BrowserView>
+        {/* <BrowserView><Image src={powerIcon} alt='' width={41} height={41} /></BrowserView> */}
       </div>
       <ul className={classNames(styles.column,'mt-9 flex  flex-col flex-wrap gap-y-6 justify-between max-h-[120px]')}>
         {power_list.list.map((item) => {
