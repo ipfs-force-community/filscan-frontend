@@ -47,7 +47,7 @@ const Rank = ()=>{
       return homeGrowthList.includes(item.dataIndex)
 
     }) as ColumnType<MinerPowerRank>[];
-  },[])
+  },[t])
 
   useEffect(()=>{
     homeStore.fetchMinerPowerRank({

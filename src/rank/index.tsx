@@ -12,7 +12,10 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { pageHomeLimit, pageLimit } from '@/utils';
 import { useTranslation } from 'react-i18next';
 import useAxiosData from '@/store/useAxiosData';
-
+import classNames from 'classnames';
+import styles from './index.module.scss';
+import { BrowserView, MobileView } from '@/components/device-detect';
+import Tb from '@/packages/mobile/table'
 const defaultFilter = {
   sector_size: 'all',
   interval: '24h',
@@ -172,7 +175,7 @@ export default ({ origin }: { origin: string }) => {
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     let cur: number = pagination.current || current;
     let order = { ...sort };
-    if (sorter.field) {
+    if (sorter?.field) {
       if (sorter.order) {
         order = {
           field: sorter.field,
@@ -201,26 +204,25 @@ export default ({ origin }: { origin: string }) => {
 
   return (
     <>
-      {/* <div className={ `${origin !== 'home'?'flex items-center mb-2.5 ml-2.5':''}`}>
-        {origin !== 'home' && (
-          <div className='font-xl font-semibold text-lg '>{tr('rank')}</div>
-        )}
-        <Header origin={origin} active={active} onChange={handleHeaderChange} />
-      </div> */}
       <Header origin={origin} active={active} onChange={handleHeaderChange} />
-
       <div
-        className={`mt-4 ${
+        className={classNames(`mt-4 ${
           origin === 'home' ? 'h-[650px]' : ''
-        } border rounded-xl px-5 pt-5 card_shadow border_color flex items-center`}>
-        <Table
-          key={active}
-          data={showData.dataSource}
-          total={origin === 'home' ? 0 : showData.total}
-          columns={columns}
-          loading={loading}
-          onChange={handleChange}
-        />
+        } border rounded-xl px-5 pt-5 card_shadow border_color flex items-center`,styles.table,styles.reset)}>
+
+        <MobileView>
+          <Tb/>
+        </MobileView>
+        <BrowserView>
+          <Table
+            key={active}
+            data={showData.dataSource}
+            total={origin === 'home' ? 0 : showData.total}
+            columns={columns}
+            loading={loading}
+            onChange={handleChange}
+          />
+        </BrowserView>
       </div>
     </>
   );
