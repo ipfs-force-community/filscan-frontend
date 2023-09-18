@@ -36,7 +36,7 @@ export default ({ origin }: { origin: string }) => {
   const { theme, lang } = useFilscanStore();
 
   const [active, setActive] = useState('growth');
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState<any>({});
   const [data, setData] = useState({ ...defaultData });
   const [poolData, setPoolData] = useState({ ...defaultData });
@@ -45,7 +45,7 @@ export default ({ origin }: { origin: string }) => {
   const [current, setCurrent] = useState(1);
   const [headerFilter, setHeaderFilter] = useState<any>();
   const [sort, setSort] = useState<any>({});
-  const { axiosData } = useAxiosData();
+  const { axiosData ,loading} = useAxiosData();
 
   useEffect(() => {
     const showHash = hash || 'growth';
@@ -75,7 +75,7 @@ export default ({ origin }: { origin: string }) => {
   ) => {
     const showActive = tab || active;
     if (showActive) {
-      setLoading(true);
+      // setLoading(true);
       const index = cur || current;
       const showOrder = orders ||
         (sort.field && sort) || {
@@ -103,7 +103,8 @@ export default ({ origin }: { origin: string }) => {
         },
         ...filters,
       });
-      setLoading(false);
+      console.log('----333',data)
+      //  setLoading(false);
       if (data) {
         const showData = data?.items || [];
         if (
@@ -267,8 +268,6 @@ export default ({ origin }: { origin: string }) => {
     if (active === 'rewards') return rewardsData;
     return data;
   }, [active, data, poolData, growthData, rewardsData]);
-
-  console.log('====233',loading)
 
   return (
     <>

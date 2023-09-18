@@ -218,7 +218,6 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
 
   const newOptions = useMemo(() => {
     const newSeries: any = [];
-    console.log('====3', noShow, options?.series);
     (options?.series || []).forEach((seriesItem: any) => {
       if (!noShow[seriesItem?.dataIndex]) {
         newSeries.push(seriesItem);

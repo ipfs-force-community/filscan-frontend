@@ -6,7 +6,7 @@ export interface Item {
   type?: string | Array<string>,
   fixed?: string,
   width?: string | number
-  render?: (text: any, record?: Record<string, any>, index?: number) => number | string | JSX.Element
+  render?: (text: any, record?: Record<string, any>, index?: number) => number | string | JSX.Element|null
 }
 
 export interface Option_Item {

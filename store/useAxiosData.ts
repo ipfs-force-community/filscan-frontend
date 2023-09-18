@@ -81,6 +81,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
             result: null,
             error: 'Invalid credentials',
           });
+          setLoading(false)
           current = 0;
           return response.data;
         }
@@ -98,7 +99,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
-        // console.log('----34325',url)
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
@@ -119,6 +119,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
                   result: null,
                   error: 'Invalid credentials',
                 });
+                setLoading(false)
                 return null
               }
               return notification.error({
