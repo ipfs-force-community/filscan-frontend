@@ -18,6 +18,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import _ from 'lodash'
+import { getSvgIcon } from '@/svgsIcon';
 const default_sort = {
   field: 'transfer_count',
   order: 'descend',
@@ -113,7 +114,7 @@ export default ({ origin }: { origin?: string }) => {
       };
     });
     return content;
-  }, [theme, lang,isMobile]);
+  }, [theme, tr,isMobile]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     let cur: number = pagination.current || current;
@@ -147,7 +148,7 @@ export default ({ origin }: { origin?: string }) => {
             { origin !== 'home' && <span className='text_des text-xs font-normal ml-2'>{tr(contract_rank.title_des,{value:formatDateTime(dataSource.update_time,"YYYY-MM-DD HH:mm")})}</span>
             }
           </div>
-          { origin === 'home' && <Link className='pr-2.5' href={`/contract/rank`}>
+          {origin === 'home' && <Link className='pr-2.5' href={`/contract/rank`}>
             <Image
               className='cursor-pointer '
               src={go}

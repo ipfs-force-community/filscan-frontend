@@ -17,7 +17,7 @@ export default ({
   active: string;
   onChange: (type: string, value: string) => void;
 }) => {
-  const { tr } = Translation({ ns: 'home' });
+  const { tr } = Translation({ ns: 'rank' });
 
   let SegmentedProps: any = {};
   if (origin === 'home') {
@@ -31,7 +31,7 @@ export default ({
       <div
         className={`flex items-center w-full gap-x-2.5`}>
         <div className='font-PingFang font-semibold text-lg'>
-          {tr('rank')}
+          {tr('rank_title')}
         </div>
         <div className={ `flex items-center ${origin !== 'home'? 'flex-1 justify-between':'gap-x-4'}`}>
           <Segmented

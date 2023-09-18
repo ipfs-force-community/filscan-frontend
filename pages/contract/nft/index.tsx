@@ -32,7 +32,7 @@ export default () => {
 
   const columns = useMemo(() => {
     const columns = _.cloneDeep(contract_nfts.columns)
-    return columns.filter((v: any) => {
+    return columns.map((v: any) => {
       if (isMobile) {
         if (v.dataIndex === 'rank') {
           // @ts-ignore
@@ -60,7 +60,7 @@ export default () => {
         title: typeof v.title === 'string' ? tr(v.title) : v.title(),
       };
     });
-  }, [tr,isMobile]);
+  }, [tr, isMobile]);
 
   return (
     <div className='main_contain '>

@@ -1,9 +1,10 @@
 import { Menu_Info } from "./type"
+import Hot from '@/assets/images/hot.svg'
 
-const navMenu: Array<Menu_Info> = [
+const navMenu: Array<Menu_Info|any> = [
   {
     key: 'fvm',
-    sufIcon: 'hotIcon',
+    sufIcon:'hot',
     color: '#F44C30',
     link: '/fvm'
   },
@@ -30,15 +31,15 @@ const navMenu: Array<Menu_Info> = [
         key: 'tipset_pool-message',
         link: '/tipset/pool-message/'
       },
-      {
-        key: 'tipset_transfer',
-        link: '/tipset/transfer/'
-      },
+      // {
+      //   key: 'tipset_transfer',
+      //   link: '/tipset/transfer/'
+      // },
     ]
   },
   {
     key: 'contract',
-    preIcon: 'newIcon',
+    sufIcon: 'newIcon',
     color: '#F44C30',
     children: [
       {
@@ -76,9 +77,6 @@ const navMenu: Array<Menu_Info> = [
       },
       { key: 'statistics_gas', link: '/statistics/gas' },
       { key: 'statistics_charts', link: '/statistics/charts' },
-      // { key: 'statistics_base', link: '/statistics/power' },
-      // { key: 'statistics_fil', link: '/statistics/fil' },
-      // { key: 'statistics_charts', link: '/statistics/charts' },
     ]
   },
   {
@@ -90,11 +88,11 @@ const navMenu: Array<Menu_Info> = [
       }
     ]
   },
-  {
-    out_key: 'account',
-    key: 'account',
-    link: '/account'
-  },
+  // {
+  //   out_key: 'account',
+  //   key: 'account',
+  //   link: '/account'
+  // },
 ]
 
 const mobileNavMenu: Menu_Info[] = [

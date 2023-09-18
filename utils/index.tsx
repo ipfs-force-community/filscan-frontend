@@ -332,8 +332,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
 export const account_link = async (value: string) => {
   let show_type;
   const result: any = await fetchData(apiUrl.searchInfo, { input: value });
-  show_type = result?.result?.result_type;
-
+  show_type = result?.result_type;
   switch (show_type) {
   case 'miner':
     return router.push(`/miner/${value}`);

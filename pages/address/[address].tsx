@@ -18,6 +18,7 @@ import copySvgMobile from '@/assets/images/icon-copy.svg';
 import { useHash } from '@/components/hooks/useHash';
 import { formatNumber, get$Number } from '@/utils';
 import Image from '@/packages/image'
+import Link from 'next/link';
 /** @format */
 export default () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ export default () => {
   const [methodOptions, setMethodOptions] = useState([]);
   const [actorId,setActorId] = useState('')
   const [loading, setLoading] = useState(false);
+  const [domain, setDomain] = useState<any>({})
 
   useEffect(() => {
     setActorId('');
@@ -41,6 +43,7 @@ export default () => {
     if (address) {
       loadMethod();
       load();
+      loadFnsDomain()
     }
   }, [address]);
 
@@ -120,7 +123,7 @@ export default () => {
             ...t,
             key:t.contract_id,
             value:t.contract_id,
-            title: <div className='flex justify-between gap-x-2'>
+            title: <div className='flex justify-between gap-x-2 mt-2.5 w-full cursor-pointer'>
               <div className='flex items-center gap-x-2'>
                 <Image src={t.icon_url} alt='' width={36} height={36} />
                 <span className='flex items-start flex-col'>
@@ -138,6 +141,11 @@ export default () => {
       setTokenList([objTotal,...items])
     }
 
+  }
+
+  const loadFnsDomain = async () => {
+    const result = await axiosData(`${apiUrl.contract_fnsUrl}`, { addresses: [address] })
+    setDomain(result)
   }
 
   const contentList = useMemo(() => {
@@ -166,21 +174,23 @@ export default () => {
 
     return [...defaultOpt, ...evmList];
   }, [methodOptions,verifyData]);
-
   return (
     <div className={classNames(styles.address,'main_contain')}>
       <div className={classNames(styles['address-row'],'mb-2.5 ml-2.5 DINPro-Medium font-medium text-lg flex items-center')}>
-        <span className={styles.label}>{tr('account')}:</span>
+        <span className={styles.label}>{tr('account_title')}:</span>
+
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{address}</span>
             { address&& typeof address ==='string' && <Copy text={address} icon={copySvgMobile} className='copy'/>}
           </span>
         </MobileView>
+
         <BrowserView>
           <span className={classNames(styles.text,'ml-4 flex items-center gap-x-1')}>
             <span>{address || ''}</span>
           </span>
+          {typeof address === 'string' && domain?.domains && domain?.domains[address] && <Link className='ml-2' href={`/domain/${domain?.domains[address]}?provider=${domain.provider}`}>({ domain?.domains[address]})</Link> }
         </BrowserView>
       </div>
       <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>

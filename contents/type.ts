@@ -21,7 +21,7 @@ export interface Menu_Info {
   out_key?: string;
   children?: Array<Menu_Info>;
   preIcon?: string;
-  sufIcon?: string;
+  sufIcon?: string|JSX.Element;
   link?: string;
   outLink?: string;
   color?: string

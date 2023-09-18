@@ -613,7 +613,7 @@ export const token_Dex_columns = [
               window.open(record.dex_url);
             }
           }}>
-          <Image className='fvm_img_url' alt='' width={25} height={25} />
+          <Image className='fvm_img_url' src={record.icon_url} alt='' width={25} height={25} />
         </span>
       );
     },
@@ -651,10 +651,10 @@ export const contract_nfts = {
       },
     },
     // { dataIndex: 'trading_volume', title: 'Volume' },
-    { dataIndex: 'holders', title: 'owners' },
+    { dataIndex: 'holders', title: 'owner' },
     {
-      dataIndex: 'transfers',
-      title: 'transfers',
+      dataIndex: 'transfer',
+      title: 'transfer',
       render: (text: string) => (text ? formatNumber(text, 4) : '--'),
     },
   ],

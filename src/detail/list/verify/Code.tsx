@@ -14,7 +14,6 @@ export default ({ data = {},actorId }: {data:Record<string,any>,actorId?:string}
   const { compiled_file = {}, source_file = [] } = data;
 
   const handleAbiChange = (value:string) => {
-    console.log('----d', value)
     if (actorId) {
       window.open(`${window.location.origin}/contract/abi/${actorId}?format=${value}`)
     }

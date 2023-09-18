@@ -71,7 +71,7 @@ export const providerList = (progress: any): Array<any> => {
       with: '9%',
       render: (text: string) => {
         return (
-          <Link href={`/miner/${text}`} prefetch className='link_text'>
+          <Link href={`/miner/${text}`} scroll={true} prefetch className='link_text'>
             {text}
           </Link>
         );
@@ -149,7 +149,7 @@ export const poolList = (progress: number | string) => {
       with: '24%',
       render: (text: string) => {
         return (
-          <Link href={`/owner/${text}`} prefetch className='link_text'>
+          <Link href={`/owner/${text}`} scroll={true} prefetch className='link_text'>
             {text}
           </Link>
         );
@@ -208,7 +208,7 @@ const growthList = (progress: number | string) => {
       width: '12%',
       render: (text: string) => {
         return (
-          <Link href={`/miner/${text}`} className='link_text'>
+          <Link href={`/miner/${text}`} scroll={true} className='link_text'>
             {text}
           </Link>
         );
@@ -282,7 +282,7 @@ const rewardsList = () => {
       width: '15%',
       render: (text: string) => {
         return (
-          <Link href={`/miner/${text}`} className='table_link'>
+          <Link href={`/miner/${text}`} scroll={true} className='table_link'>
             {text}
           </Link>
         );

@@ -19,7 +19,7 @@ interface Props {
 
 export default (props: Props) => {
   const { className } = props;
-  const { theme } = useFilscanStore();
+  const { theme,lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
   const { axiosData } = useAxiosData()
   const [options, setOptions] = useState<any>({});
@@ -185,7 +185,7 @@ export default (props: Props) => {
     >
       <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5' >
         <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
-          {tr('dc_cc_trend')}
+          {tr('cc_dc_power')}
         </div>
         <Segmented
           defaultValue={interval}

@@ -19,7 +19,7 @@ interface Props {
 
 export default (props: Props) => {
   const { className } = props;
-  const { theme } = useFilscanStore();
+  const { theme ,lang} = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
   const { axiosData } = useAxiosData()
   const [options, setOptions] = useState<any>({});
@@ -95,7 +95,7 @@ export default (props: Props) => {
               result +=
                 '<br/>' +
                 item.marker +
-                item.seriesName +
+                tr(item.seriesName) +
                 ': ' +
                 item.data.amount +
                 item.data.unit;
@@ -105,7 +105,7 @@ export default (props: Props) => {
         },
       },
     };
-  }, [theme]);
+  }, [theme,lang]);
 
   useEffect(() => {
     load();
@@ -120,7 +120,7 @@ export default (props: Props) => {
     const seriesData: any = [];
     const inter = time || interval
     const result: any = await axiosData(apiUrl.static_block_trend, { interval:inter });
-    result?.items?.reverse()?.forEach((value: any) => {
+    result?.items?.forEach((value: any) => {
       const {
         block_time,
         acc_block_rewards, //合约交易
@@ -140,7 +140,7 @@ export default (props: Props) => {
         type: item.type,
         ...seriesChangeArea,
         data: seriesObj[item.dataIndex],
-        name: tr(item.title),
+        name: item.title,
         symbol: 'circle',
         smooth: true,
         itemStyle: {

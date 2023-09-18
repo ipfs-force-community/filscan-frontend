@@ -47,9 +47,15 @@ const home = {
   warn_details: '죄송합니다. 유효하지 않은 문자열입니다.',
   go_home: '홈으로 돌아가기',
   blockchain_browser: '블록 탐색기',
-  'total_contract/24h_contract': '독특한 계약이 배포되었습니다/24시간',
+  'quality_power/increase_24h': '전체 유효 체굴파워',
+  'total_contract/24h_contract': '활성 계약 수/24시간',
   verified_contracts: '검증된 스마트 계약 리스트',
-  'contract_transaction/24h_change':'계약 검증 거래 수/24시간',
+  'contract_transaction/24h_change': '계약 검증 거래 수/24시간',
+  "contract_address/24h_change": '계약 거래 주소 /24시간 ',
+  gas_24: '24시간 Gas 사용',
+  contract_gas: '계약 가스 비용',
+  quality_power_Cc:'Commited Capacity (CC)',
+  quality_power_Dc:'DataCap (DC)',
 
 }
 export default home

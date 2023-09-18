@@ -19,6 +19,7 @@ const contract = {
   config_file_des2_2: '2. Download it using Remix IDE: There is a download button for metadata.json after deployed on the Remix website.',
   verify_title: 'Verify & Publish Contract Source Code',
   verify_des: 'COMPILER TYPE AND VERSION SELECTION',
+  verify_content: `Source code verification provides transparency for users interacting with smart contracts. By uploading the source code, Filscan will match the compiled code with that on the blockchain. Just like contracts, a "smart contract" should provide end users with more information on what they are "digitally signing" for and give users an opportunity to audit the code to independently verify that it actually does what it is supposed to do.`,
   content_des:`Source code verification provides transparency for users interacting with smart contracts. By uploading the source code, Filscan will match the compiled code with that on the blockchain. Just like contracts, a "smart contract" should provide end users with more information on what they are "digitally signing" for and give users an opportunity to audit the code to independently verify that it actually does what it is supposed to do. Contract verification can be performed quickly by uploading the JSON file in the "artifacts/build-info/" directory.
 Hardhat stores the compilation outputs in the "artifacts/build-info/" directory within the project. The directory includes a .json file that contains the Standard JSON Input-Output for all contracts, which is the recommended approach for interacting with the Solidity compiler, especially in advanced and automated configurations. This JSON-input-output interface is uniformly supported across all compiler distributions.`,
   address: 'Please Enter Contract Address to Verify',
@@ -134,8 +135,8 @@ Hardhat stores the compilation outputs in the "artifacts/build-info/" directory 
   contract_rank:'Contract Rank',
   actor_id: 'actorID',
   actor_address: 'actorAddress',
-  transaction_count: 'Transaction Count',
-  user_count: 'Transaction Address',
+  transaction_count: 'TransCount',
+  user_count: 'TransAddress',
   actor_balance: 'Balance',
   gas_cost: 'Gas Cost',
   ver_address: 'Pending Verification',

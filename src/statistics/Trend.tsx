@@ -155,7 +155,7 @@ export default (props: Props) => {
     const legendList: any = [];
     const seriesData: any = [];
     const result: any = await axiosData(apiUrl.line_trend, { interval: '1m' });
-    result?.list?.reverse()?.forEach((value: any) => {
+    result?.list?.forEach((value: any) => {
       const {
         timestamp,
         total_raw_byte_power, //原值算力
@@ -166,7 +166,6 @@ export default (props: Props) => {
 
       const showTime = formatDateTime(timestamp, 'MM-DD');
       dateList.push(showTime);
-
       //amount
       const [total_raw_byte_power_amount, total_raw_byte_power_unit] =
         total_raw_byte_power &&
@@ -254,12 +253,12 @@ export default (props: Props) => {
     >
       <div className='flex justify-between flex-wrap items-center min-h-[36px] mb-2.5'>
         <div className='flex-1 flex flex-row flex-wrap items-center'>
-          <div className='min-w-[100px] w-fit font-PingFang font-semibold text-lg pl-2.5'>
+          <div className='w-fit font-PingFang font-semibold text-lg pl-2.5'>
             {tr('power')}
           </div>
           <div className='w-fit'>
             <BrowserView>
-              <span className='flex gap-x-4 '>
+              <span className='flex gap-x-4 ml-5'>
                 {options?.legendData?.map((v: any) => {
                   return (
                     <span

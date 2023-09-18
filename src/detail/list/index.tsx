@@ -64,11 +64,11 @@ export default ({
   const headerOptions = useMemo(() => {
     if (activeItem?.headerOptions) {
       return activeItem?.headerOptions?.map((v: any) => {
-        return { ...v, label: tr(v.label || v.title) }
+        return { ...v, label: tr(v.dataIndex ||v.value) }
       })
     }
     return []
-  }, [activeItem,lang]);
+  }, [activeItem, tr]);
 
   return (
     <div className={classNames(styles.list,'mt-5')}>
@@ -82,7 +82,7 @@ export default ({
         />
         {activeItem?.headerOptions && (
           <Selects
-            className={styles['select-wrap']}
+            className={`${styles['select-wrap']} !min-w-[210px]`}
             value={method}
             options={headerOptions || []}
             onChange={(value) => {

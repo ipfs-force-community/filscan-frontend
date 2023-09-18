@@ -29,12 +29,12 @@ export default () => {
     if (tokenId) {
       axiosData(apiUrl.contract_ERC20Summary, {
         contract_id: tokenId,
-      }).then((res: any) => {
+      }, {isCancel:false}).then((res: any) => {
         setOverview(res || {});
       });
       axiosData(apiUrl.contract_ERC20Market, {
         contract_id: tokenId,
-      }).then((res: any) => {
+      }, {isCancel:false}).then((res: any) => {
         setMarket({ ...res, tokenName: res?.token_name } || {});
       });
     }

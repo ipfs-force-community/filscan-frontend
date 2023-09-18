@@ -108,7 +108,7 @@ const account={
   seal_gas_per_t_tip: '신규 봉인된 섹터당 가스 소비량 (TiB)',
   deal_gas_cost_tip: 'DC PublishStorageDeals 의 소비량',
   wd_post_gas_cost_tip:"SubmitWindowedPoSt의 소비량",
-  wd_post_gas_per_t_tip:'SubmitWindowedPoSt 비용을 Raw Byte Power(TiB)로 나눈 값',
+  wd_post_gas_per_t_tip:'SubmitWindowedPoSt 비용을 RawBytePower(TiB)로 나눈 값',
   //gas
 
   total_gas_cost: '가스 총 소비량',

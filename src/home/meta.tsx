@@ -10,6 +10,8 @@ import useAxiosData from '@/store/useAxiosData';
 import Skeleton from '@/packages/skeleton';
 import Tooltip from '@/packages/tooltip';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import meta_des from '@/assets/images/meta_des.svg'
+import Image from 'next/image'
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -87,6 +89,7 @@ function Meta() {
         let tipContent;
         if (item.tipContent && Array.isArray(item.tipContent)) {
           tipContent = <ul className='px-2 pt-2 w-fit'>
+
             {item.tipContent.map((tipItem: any) => {
               let tipValue = dataSource[tipItem.dataIndex];
               if (tipItem.render) {
@@ -103,18 +106,20 @@ function Meta() {
           renderDom = render && render(value, {...data,...contractData});
         }
         if (item.tipContent) {
-          return <Tooltip context={tipContent} key={item.dataIndex} icon={ false}>
-            <div className={`${styles['meta-item']} cursor-pointer`}>
+          return <div className={`${styles['meta-item']} cursor-pointer relative`} key={item.dataIndex}>
+            <Tooltip context={tipContent} icon={false}>
               <div className='text_clip DINPro-Bold font-bold	 text-xl'>
-                { !value && <Skeleton />}
+                {!value && <Skeleton />}
                 {renderDom}
               </div>
-              <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
-                {tr(title)}
-                <ExclamationCircleOutlined />
-              </div>
+            </Tooltip>
+
+            {/* <Image className='absolute top-2 right-8 blink' src={meta_des} width={12} height={ 12} alt=''/> */}
+            <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
+              {tr(title)}
+              { item.tip && <Tooltip context={tr(item.tip)} icon={true}/>}
             </div>
-          </Tooltip>
+          </div>
         }
         return (
           <div className={styles['meta-item']} key={item.dataIndex}>
@@ -122,7 +127,9 @@ function Meta() {
               { !value && <Skeleton />}
               {renderDom}
             </div>
-            <div className='text-xs text_des mt-1 font-PingFang'>{tr(title)}</div>
+            <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
+              {tr(title)}
+              { item.tip && <Tooltip context={tr(item.tip)} icon={true}/>}</div>
           </div>
         );
       })}

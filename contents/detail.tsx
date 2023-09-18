@@ -17,9 +17,9 @@ import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import { Button } from 'antd';
-import DropDown from '@/packages/dropDown';
-//储存池概览 账户余额 & 有效算力
+import DropDown from '@/packages/customDrop';
 
+//储存池概览 账户余额 & 有效算力
 export const account_balance = {
   title: 'balance',
   list: [
@@ -27,14 +27,13 @@ export const account_balance = {
       title: 'available_balance',
       dataIndex: 'available_balance',
       title_tip:'available_balance_tip',
-      color: '#256DF3',
+      color: '#F8CD4D',
     },
     {
       title: 'init_pledge',
       dataIndex: 'init_pledge',
       title_tip:'init_pledge_tip',
-
-      color: '#D5E3F4',
+      color: '#256DF3',
     },
     {
       title: 'pre_deposits',
@@ -987,12 +986,12 @@ const default_content = [
     type: ['account_basic'],
     render: (text: number | string) => formatDateTime(text),
   },
-  {
-    title: 'message_count',
-    dataIndex: 'message_count',
-    type: ['account_basic'],
-    render: (text: any) => text,
-  },
+  // {
+  //   title: 'message_count',
+  //   dataIndex: 'message_count',
+  //   type: ['account_basic'],
+  //   render: (text: any) => text,
+  // },
   {
     title: 'latest_transfer_time',
     dataIndex: 'latest_transfer_time',
@@ -1067,12 +1066,13 @@ export const power_change = {
     { title: '30d', dataIndex: '1m' },
   ],
   list: [
-    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' },
+    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' ,yIndex:0},
     {
       title: 'power_increase',
       dataIndex: 'power_increase',
       type: 'bar',
       color: '#1C6AFD',
+      yIndex: 1,
     },
   ],
 };
@@ -1401,7 +1401,9 @@ export const height_list = {
   columns: [
     { dataIndex: "cid",
       title: "block_cid",
-      render: (text: string | number) => <Link href={`/message/${text}`}>{ text}</Link>
+      render: (text: string | number) => {
+        return <Link href={`/cid/${text}`}>{ text}</Link>
+      }
     },
     { dataIndex: "miner_id",
       title: "miner_id",
@@ -1411,8 +1413,9 @@ export const height_list = {
       title: "messages_count",
       render: (text: string|number) => formatNumber(text),
     },
-    { dataIndex: "blocks_reward",
+    { dataIndex: "reward",
       title: "reward",
+      render: (text: any, data:any) => text ? formatFilNum(text, false, false) : text || '--',
     },
 
   ]
@@ -1501,7 +1504,7 @@ export const cid_list = {
         if (!text) return '--';
         return (
           <span className='flex items-center gap-x-2'>
-            {get_account_type(text,0)}
+            {get_account_type(text)}
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>

@@ -51,9 +51,9 @@ export default () => {
             <span>{ item.num}</span>
           </li>
         })}
-        <li className="primary_btn !w-full mt-[200px]">
+        {/* <li className="primary_btn !w-full mt-[200px]">
           { tr('share')}
-        </li>
+        </li> */}
       </ul>
       <div className="flex-1">
         {active === 'all'&&<div className="text-lg font-DINPro-Medium mb-5"> Hot Product</div>}

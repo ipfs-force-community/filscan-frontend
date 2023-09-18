@@ -8,6 +8,7 @@ const tipset = {
   to: '받는 주소',
   value: '액수',
   method_name: '매소드',
+  all:'모든 메소드',
   //chain
   blocks_cid: 'CID',
   blocks_miner: 'Miner',
@@ -63,6 +64,8 @@ const tipset = {
   // pool-message
   pool_list:'메시지 풀 목록',
   gas_fee_cap: 'Gas 한도',
-  gas_premium:'Gas 프리미엄'
+  gas_premium: 'Gas 프리미엄',
+  block_list:'Block List',
+
 }
 export default tipset

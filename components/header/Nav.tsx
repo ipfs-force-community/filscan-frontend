@@ -46,29 +46,32 @@ export default () => {
         {!isHome && <Search className='!h-10 !max-w-lg	' />}
       </div>
 
-      <div className='flex gap-x-8 h-full justify-between items-center'>
+      <div className='flex gap-x-9 h-full justify-between items-center'>
         {navMenu.map((nav, index) => {
           if (nav?.children) {
             return (
               <div
                 key={index}
-                className='group h-full flex cursor-pointer items-center relative hover:text-primary'>
-                <span className='flex gap-x-1 items-center'>
+                className=' group h-full flex cursor-pointer items-center relative hover:text-primary'>
+                <span className='relative flex gap-x-1 items-center'>
                   {tr(nav.key)}
-                  <span>{getSvgIcon('downIcon') }</span>
+                  <span>{getSvgIcon('downIcon')}</span>
+
                   {/* <Image src={down} width={8} height={4} alt='down' /> */}
+                  {nav.sufIcon && <span className='absolute -top-2 -right-7'>{getSvgIcon(nav.sufIcon)}</span>}
                 </span>
                 {renderChild(nav.children, index)}
               </div>
             );
           }
           return (
-            <Link
-              href={`${nav.link}`}
-              key={nav.key}
-              className='cursor-pointer text_color  hover:text-primary'>
-              {tr(nav.key)}
-            </Link>
+            <div key={nav.key} className='relative'>
+              <Link
+                href={`${nav.link}`}
+                className='cursor-pointer text_color  hover:text-primary'>
+                {tr(nav.key)}
+              </Link>
+              {nav.sufIcon && <span className='absolute -top-2'>{getSvgIcon(nav.sufIcon)}</span>}</div>
           );
         })}
       </div>

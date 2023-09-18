@@ -55,7 +55,7 @@ export default () => {
       return { value: v, label: tr(v) };
     });
     options.unshift({
-      label: `${tr('all')}`,
+      label: `all`,
       value: 'all',
     });
     setHeaderOptions(options);
@@ -100,6 +100,13 @@ export default () => {
       }
     }
   };
+
+  const newOptions = useMemo(() => {
+    return headerOptions?.map(v => {
+      return {...v,label:tr(v.value)}
+    })
+  }, [lang, headerOptions])
+
   return (
     <div className={classNames(styles['message-list'],'main_contain')}>
       <div className='flex justify-between items-center'>
@@ -113,8 +120,8 @@ export default () => {
         </div>
         <Selects
           value={method}
-          options={headerOptions}
-          className='!min-w-[200px]'
+          options={newOptions}
+          className='!min-w-[240px]'
           // className='custom-select'
           onChange={(value) => {
             if (value !== 'all') {

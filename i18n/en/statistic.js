@@ -10,12 +10,12 @@ const statistic = {
   "power": 'Storage Power Trend',
   power_tips: 'The network baseline is the scale of network growth required by the Filecoin Network, which was 2.5 EiB when the Mainnet launched, with a growth rate of 100% per year',
   trend_24: '24h Base Fee Variations',
-  total_raw_byte_power: 'Network Raw Byte Power',
+  total_raw_byte_power: 'Net RawBytePower',
   base_line_power: 'BaseLine',
-  power_increase: '算力净增',
-  power_decrease:'算力损失',
-  total_quality_adj_power: 'Quality Adjusted Power',
-  change_quality_adj_power: 'Quality Adjusted Power Fluctuations',
+  power_increase: 'Net Power Increase',
+  power_decrease:'Net Power Decrease',
+  total_quality_adj_power: 'QualityAdjPower',
+  change_quality_adj_power: 'QualityAdjPower Fluctuations',
   gas: 'Base Fee Variations',
   base_fee: 'Base Fee',
   gas_in_32g: 'Gas Cost of Sealing a 32GiB Sector',
@@ -25,7 +25,7 @@ const statistic = {
   method_name: 'Message Type',
   avg_gas_premium:'Gas Premium',
   avg_gas_limit: 'Avg. Gas Limit',
-  avg_gas_used: 'Avg. Gas Used',
+  avg_gas_used: 'Avg.Gas Cost',
   avg_gas_fee: 'Avg. Gas Fee',
   'sum_gas_fee/ratio': 'Total Fees/Percentage',
   'message_count/ratio': 'Total Messages/Percentage',
@@ -49,8 +49,9 @@ const statistic = {
   ReservedTokens_des: 'Tokens reserved for funding mining to support growth of the Filecoin Economy, whose future usage will bedecided by the Filecoin community.',
   TokenAllocation_des: 'The amount of FIL allocated tostorage nodes through block rewards, network initialization, etc.',
   Fundraising_des: '2017 TOKEN SALE',
-  Funds_des: 'allocated for ecosystem development, future fundraising',
-  protocolLab_des: 'allocated for Protocol Labs',
+  FilecoinFoundation_des:'Allocated towards long-term community development and the management of the network.',
+  Funds_des: 'Allocated for ecosystem development, future fundraising',
+  protocolLab_des: 'Allocated for Protocol Labs',
   Contributors_des: '4.5% for the PL team & contributors',
 
   //charts
@@ -75,7 +76,12 @@ const statistic = {
   remaining_reserved: 'Reserved FIL to Allocate',
   locked: 'Total Sector Pledge',
   burnt: 'Total FIL Burned',
-  circulating:'Circulating Supply'
+  circulating: 'Circulating Supply',
+  //chartsnav
+  cc_dc_power: 'CC/DC PowerTrend',
+  static_overview: 'Charts',
+  contract_trend: 'Contract Transaction',
+  fil_overview: 'FIL Overview',
 }
 
 export default statistic

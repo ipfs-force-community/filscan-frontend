@@ -66,15 +66,17 @@ export default ({
           onChange={handleTabChange}
         />
       </div>
-      <ul className={classNames(styles.list,'card_shadow p-5 h-[150px] py-7 px-5 rounded-xl border border_color  gap-y-6 flex flex-wrap flex-col')}>
+      <ul
+        className={classNames(styles.list, 'card_shadow p-5 h-[150px] py-7 px-5 grid rounded-xl border border_color gap-y-6')} >
         {overView?.list.map((item: any) => {
           const { render, dataIndex, style = {}, width, title,title_tip } = item;
           const showData = getShowData(item, data);
           const value = render
             ? render(showData[dataIndex])
             : showData[dataIndex] || '--';
+          //style={{ ...style }}
           return (
-            <li key={dataIndex} style={{ width, ...style }} className={classNames(styles['list-row'], 'flex')}>
+            <li key={dataIndex} className={classNames(styles['list-row'], 'flex')}>
 
               <span className='text-sm text_des min-w-20 flex flex-wrap'>
                 {title_tip ? <Tooltip context={tr(title_tip)} icon={false} >

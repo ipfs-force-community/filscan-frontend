@@ -48,6 +48,7 @@ const statistic = {
   filBase_des: '网络FIL铸造上限',
   ReservedTokens_des: '为未来Filecoin经济增长而预留的通证储备，具体未来使用方案由Filecoin社区决定',
   TokenAllocation_des: '通过区块奖励、网络初始化等方式分给存储提供者的通证奖励',
+  FilecoinFoundation_des:'作为长期社区建设，网络管理费用等',
   Fundraising_des: '2017年出售的通证',
   Funds_des: '用作生态发展和后续融资',
   protocolLab_des: '用作协议实验室的相关工作',
@@ -71,7 +72,8 @@ const statistic = {
   all_message_count: '总消息走势',
   pie_title_a: '当前Fil的基础发放用途统计',
   pie_title_a_tip:'已提供存储者奖励的Fil + 已释放锁仓奖励的Fil + 已分配保留部分的Fil = 当前已释放的Fil',
-  pie_title_b: '当前已提供存储者奖励的Fil已释放的Fil用途统计',
+  pie_title_b: '当前已释放的Fil用途统计',
+  charts_title:'Fil分配细则',
   mined: '已提供存储者奖励的Fil',
   remaining_mined: '剩余存储者奖励的Fil',
   vested: '已释放锁仓奖励的Fil	',
@@ -81,7 +83,6 @@ const statistic = {
   locked: '扇区抵押的Fil',
   burnt: '已销毁的Fil',
   circulating: '可交易流通的Fil',
-  dc_cc_trend:'CC/DC算力走势',
   dc_trend: 'DC',
   cc_trend:'CC'
 }

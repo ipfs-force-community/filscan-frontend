@@ -226,8 +226,7 @@ font-display: auto;
                         border-bottom:1px solid var(--border-color);
                     }
                     &:last-child{
-                     .ant-table-cell{
-                       
+                     .ant-table-cell{          
                         border-bottom:none;
                     } 
                     }
@@ -242,14 +241,14 @@ font-display: auto;
    
      .ant-tooltip-arrow{
         &::after{
-             background-color: var(--bgColor)!important;
+             background-color: var(--tips-bgColor)!important;
         }
         &::before{
-            background-color: var(--bgColor)!important;
+            background-color: var(--tips-bgColor)!important;
         }
     }
     .ant-tooltip-inner{
-        background-color: var(--bgColor)!important;
+        background-color: var(--tips-bgColor)!important;
         color: var(--font-color) !important;
     }
   }
