@@ -281,7 +281,7 @@ export const account_detail = {
       render: (text: any, record: any) => {
         if(!text) return '--'
         return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
-          {text&& Array.isArray(text)?[...text,...text,...text,...text]?.map((linkItem:string,index:number) => {
+          {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
             return <span className="flex items-baseline gap-x-2" key={linkItem}>
               <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,6)}</Link>
               <Copy text={linkItem} />
@@ -359,7 +359,7 @@ export const owner_detail = {
     },
     {
       title: 'owned_active_miners',
-      dataIndex: 'owned_miners',
+      dataIndex: 'active_miners',
       render: (text: Array<any>, record: any) => {
         return (
           <span className='flex flex-wrap gap-2.5 items-baseline'>

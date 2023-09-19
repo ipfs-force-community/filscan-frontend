@@ -33,8 +33,8 @@ export default ({
   };
   return (
     <span
-      style={{ cursor: 'pointer' ,width:'13px' ,color:'rgba(51, 106, 250, 0.5)'}}
-      className={classNames(`flex-center text-primary ${className}`,styles.wrap)}
+      style={{ cursor: 'pointer' ,width:'13px'}}
+      className={classNames(`flex-center text-bgCopy ${className}`,styles.wrap)}
       onClick={handleClick}>
       <BrowserView>{ getSvgIcon('copyIcon')} </BrowserView>
       <MobileView><Image src={icon??copySvg} width={13} height={14} alt='' /></MobileView>

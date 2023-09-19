@@ -112,7 +112,7 @@ export default () => {
   const loadERC20TokenList = async (id:string) => {
     const tokenList = await axiosData(apiUrl.contract_ERC20TokenList, { address: id });
     const items: any = [];
-    if (tokenList && Object.keys(tokenList).length > 0) {
+    if (tokenList && Object.keys(tokenList).length > 0 && tokenList?.items?.length >0) {
       const objTotal:any = {
         title: `$${formatNumber(tokenList?.total_value,4)} (${tokenList?.total} Tokens)`,
         value: `$${tokenList?.total_value} (${tokenList?.total})`

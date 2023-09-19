@@ -21,7 +21,7 @@ const footerLinks = [
   {
     label: "outlook",
     type:'_self',
-    link:'mailto:filscan@ipfsforce.com'
+    link:'mailto:filscanteam@outlook.com'
   }
 ]
 
@@ -48,15 +48,20 @@ export default () => {
                   { tr('footer_des2')}
                 </span>
               </div>
-              <ul className='flex text-white gap-x-5'>
-                {footerLinks.map(linkItem => {
-                  return <a key={linkItem.label}
-                    className='w-5 h-5 bg-white rounded'
-                    target={linkItem.type}
-                    style={{ color: '#fff' }} href={linkItem.link}>{
-                      getSvgIcon(linkItem.label)}</a>
-                })}
-              </ul>
+              <div>
+                <ul className='flex text-white gap-x-5'>
+                  {footerLinks.map(linkItem => {
+                    return <a key={linkItem.label}
+                      className='w-5 h-5 bg-white rounded'
+                      target={linkItem.type}
+                      style={{ color: '#fff' }} href={linkItem.link}>{
+                        getSvgIcon(linkItem.label)}</a>
+                  })}
+                </ul>
+                <div className='mt-5'>
+                  filscanteam@outlook.com
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
 import { navMenu } from '@/contents/nav';
-import down from '@/assets/images/down.svg';
 import { Translation } from '@/components/hooks/Translation';
 import Link from 'next/link';
 import Search from './Search';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
+import logoText from '@/assets/images/logoText.svg'
 export default () => {
   const { tr } = Translation({ ns: 'nav' });
   const router = useRouter();
@@ -39,8 +39,9 @@ export default () => {
       <Link
         href={'/'}
         className='flex gap-x-2 items-center text_color cursor-pointer'>
-        <Image src={logo} width={32} height={32} alt='logo' />
-        <span className='font-Barlow font-bold text-xl '>Filscan</span>
+        <Image src={logo} width={40} height={40} alt='logo' />
+        <Image src={logoText} alt='logo' width={95} height={16}></Image>
+        {/* <span className='font-Barlow font-bold text-xl '>Filscan</span> */}
       </Link>
       <div className='flex-1 ml-5 mr-10'>
         {!isHome && <Search className='!h-10 !max-w-lg	' />}

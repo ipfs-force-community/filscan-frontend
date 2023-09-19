@@ -139,3 +139,10 @@ export const home_meta = [
   }, //近24h产出效率，单位FIL/TiB
 ] as const;
 
+export const no_result = {
+  title: 'search_notFound',
+  warn_text: 'warn_text',
+  warn_details: 'warn_details',
+  go_home:'go_home'
+
+}

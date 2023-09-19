@@ -15,6 +15,7 @@ import List from '@/src/detail/list';
 import { Translation } from '@/components/hooks/Translation';
 import { getShowData } from '@/utils';
 import AccountDetail from '@/src/detail/accountDetail';
+import Copy from '@/components/copy';
 
 export default () => {
   const router = useRouter();
@@ -40,8 +41,9 @@ export default () => {
 
   return (
     <div className='main_contain'>
-      <div className={'mb-2.5 DINPro-Medium font-medium text-lg flex items-center'}>
-        <span>{ tr('owner_title')}</span>
+      <div className={'flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg'}>
+        <span>{owner}</span>
+        { owner&& typeof owner === 'string'&& <Copy text={owner} />}
       </div>
       <div className='w-full card_shadow rounded-xl'>
         <div className='flex w-full border-b border_color'>
