@@ -11,6 +11,7 @@ interface OPTIONS {
   timeout?: number; // 0 means no timeout
   flag?: string | boolean
   isCancel?: boolean;
+  loading?:boolean
 }
 
 interface FetchDataResult<T> {
@@ -36,12 +37,15 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
   let current = 0;
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
-    setLoading(true);
-    const { method='post', maxRetries=3, timeout=0,flag,isCancel=true } = {...DefaultOptions,...options};
+    const { method='post', maxRetries=3, timeout=0,flag,isCancel=true,loading=true } = {...DefaultOptions,...options};
     const body = payload || {};
     let error: any = null;
     let data: T | null | any = null;
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
+
+    if (loading) {
+      setLoading(true)
+    }
 
     // 创建一个键，包含 URL 和方法
     let key =''

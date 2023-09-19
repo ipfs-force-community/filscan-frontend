@@ -70,7 +70,7 @@ export default ({
     if (items.length > 0) {
       const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
         addresses: items,
-      });
+      },{loading:false});
       if (type === 'form') {
         setFrom(fnsData);
       } else {
@@ -93,7 +93,7 @@ export default ({
         data={data.dataSource}
         total={data.total}
         columns={columns}
-        loading={loadingTable}
+        loading={loading}
         onChange={handleChange}
       /></>
   );

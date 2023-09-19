@@ -18,7 +18,7 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const { axiosData } = useAxiosData();
+  const { axiosData ,loading} = useAxiosData();
   const [loadingTable, setTableLoading] = useState(false);
   const [data, setData] = useState({
     dataSource: [],
@@ -70,7 +70,7 @@ export default ({
     if (items.length > 0) {
       const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
         addresses: items,
-      });
+      }, {loading:false});
       if (type === 'form') {
         setFrom(fnsData);
       } else {
@@ -92,7 +92,7 @@ export default ({
         data={data.dataSource}
         total={data.total}
         columns={columns}
-        loading={loadingTable}
+        loading={loading}
         onChange={handleChange}
       /></>
   );
