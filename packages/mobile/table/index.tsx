@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import { useMemo } from "react";
 import { pageLimit } from "@/utils";
 interface TProps extends TableProps<any> {
-  loading: boolean;
+  loading?: boolean;
   limit?: number;
   current?: number;
   total?: number;
@@ -26,6 +26,7 @@ const Table = (props:TProps)=>{
 
   return <div className={classNames(styles.wrap)}>
     <T
+      loading={loading}
       columns={props.columns}
       dataSource={props.dataSource}
       onChange={onChange}
