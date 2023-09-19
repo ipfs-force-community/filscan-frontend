@@ -4,17 +4,14 @@
 import { apiUrl } from '@/contents/apiUrl';
 import fetchData from '@/store/server';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AccountBalance from '@/src/detail/accountBalance';
 import Power from '@/src/detail/Power';
 import OverView from '@/src/detail/overView';
-import { minerTabs, miner_overview, owner_detail } from '@/contents/detail';
+import { miner_overview, owner_detail } from '@/contents/detail';
 import AccountChange from '@/src/detail/accountChange';
 import PowerChange from '@/src/detail/powerChange';
-import List from '@/src/detail/list';
 import { Translation } from '@/components/hooks/Translation';
-import { getShowData } from '@/utils';
-import AccountDetail from '@/src/detail/accountDetail';
 import Copy from '@/components/copy';
 
 export default () => {
@@ -43,7 +40,7 @@ export default () => {
     <div className='main_contain'>
       <div className={'flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg'}>
         <span>{owner}</span>
-        { owner&& typeof owner === 'string'&& <Copy text={owner} className='text_des_unit'/>}
+        { owner&& typeof owner === 'string'&& <Copy text={owner} />}
       </div>
       <div className='w-full card_shadow rounded-xl'>
         <div className='flex w-full border-b border_color'>
@@ -75,8 +72,6 @@ export default () => {
         <AccountChange accountId={owner} interval={'30d'} />
         <PowerChange accountId={owner} type='owner'/>
       </div>
-      <AccountDetail data={data} type={'owner'} />
-
     </div>
   );
 };

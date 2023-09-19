@@ -99,9 +99,7 @@ export const defi_list = {
       title: 'Protocol',
       width: '15%',
       dataIndex: 'protocol',
-      ellipsis: {
-        showTitle: false,
-      },
+
       render: (text: string, record: any) => {
         return (
           <span
@@ -128,9 +126,7 @@ export const defi_list = {
       width: '20%',
       defaultSortOrder: 'descend',
       sorter: true,
-      ellipsis: {
-        showTitle: false,
-      },
+
       render: (text: string, record: any) => {
         if (origin === 'home') {
           return <TextTip text={get$Number(text)} />
@@ -207,10 +203,10 @@ export const defi_list = {
 
 export const homeDefiColumns: any = {
   rank: '10%',
-  protocol: '10%',
-  tvl: '25%',
-  tvl_change_rate_in_24h: '35%',
-  users: '15%',
+  protocol: '25%',
+  tvl: '30%',
+  tvl_change_rate_in_24h: '20%',
+  users: '',
 };
 
 export const mobileHomeDefiColumns: string[] = [

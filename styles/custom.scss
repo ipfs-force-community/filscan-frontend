@@ -155,7 +155,7 @@ font-display: auto;
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 500;
                     color: var(--font_des);
-                        padding: 10px 15px;
+                        padding: 10px ;
                     &::before{
                         display: none;
                     }
@@ -222,7 +222,7 @@ font-display: auto;
                         font-family: DINPro-Medium, DINPro;
                         font-weight: 500;
                         color:var(--font-color);
-                        padding: 10px 15px;
+                        padding: 10px;
                         border-bottom:1px solid var(--border-color);
                     }
                     &:last-child{

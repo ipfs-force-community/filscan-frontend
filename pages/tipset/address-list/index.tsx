@@ -68,7 +68,7 @@ export default () => {
     // setLoading(false);
     const showData =
       result?.get_rich_account_list?.map((item: any, index: number) => {
-        return { ...item, rank: index * showIndex + 1 };
+        return { ...item, rank: pageLimit * (showIndex-1) + index + 1 };
       }) || [];
     setDataSource({
       data: showData,

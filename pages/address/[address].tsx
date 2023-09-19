@@ -33,7 +33,7 @@ export default () => {
   const [methodOptions, setMethodOptions] = useState([]);
   const [actorId,setActorId] = useState('')
   const [loading, setLoading] = useState(false);
-  const [domain, setDomain] = useState<any>({})
+  const [domains, setDomains] = useState<any>({})
 
   useEffect(() => {
     setActorId('');
@@ -43,7 +43,7 @@ export default () => {
     if (address) {
       loadMethod();
       load();
-      loadFnsDomain()
+      loadFnsDomain(address)
     }
   }, [address]);
 
@@ -143,9 +143,9 @@ export default () => {
 
   }
 
-  const loadFnsDomain = async () => {
-    const result = await axiosData(`${apiUrl.contract_fnsUrl}`, { addresses: [address] })
-    setDomain(result)
+  const loadFnsDomain = async (addr:string|string[]) => {
+    const result = await axiosData(`${apiUrl.contract_fnsUrl}`, { addresses: [addr] }, {isCancel:false})
+    setDomains(result)
   }
 
   const contentList = useMemo(() => {
@@ -189,9 +189,9 @@ export default () => {
         <BrowserView>
           <span className={classNames(styles.text,'ml-4 flex items-center gap-x-1')}>
             <span>{address || ''}</span>
-            { address&& typeof address ==='string' && <Copy text={address} className='text_des_unit'/>}
+            { address&& typeof address ==='string' && <Copy text={address} />}
           </span>
-          {typeof address === 'string' && domain?.domains && domain?.domains[address] && <Link className='ml-2' href={`/domain/${domain?.domains[address]}?provider=${domain.provider}`}>({ domain?.domains[address]})</Link> }
+          {typeof address === 'string' && domains?.domains && domains?.domains[address] && <Link className='ml-2' href={`/domain/${domains?.domains[address]}?provider=${domains.provider}`}>({ domains?.domains[address]})</Link> }
         </BrowserView>
       </div>
       <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>

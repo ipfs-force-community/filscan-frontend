@@ -84,7 +84,7 @@ export default () => {
   };
   return (
     <div className={classNames(styles['dsn-list'],'main_contain')}>
-      <div className={classNames(styles['list-header'],'flex justify-between items-center')}>
+      <div className={classNames(styles['list-header'],'flex justify-between items-center mx-2.5')}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('dsn_list')}

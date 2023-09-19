@@ -280,15 +280,16 @@ export const account_detail = {
       title: 'controllers_address',
       dataIndex: 'controllers_address',
       render: (text: any, record: any) => {
-        if(!text) return '--'
-        return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
-          {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
-            return <span className="flex items-baseline gap-x-2" key={linkItem}>
-              <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
-              <Copy text={linkItem} />
-            </span>
-          }):'--'}
-        </div>
+        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
+        return '--'
+        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
+        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
+        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
+        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
+        //       <Copy text={linkItem} />
+        //     </span>
+        //   }):'--'}
+        // </div>
       }
     },
 
@@ -409,7 +410,7 @@ export const message_detail = {
     {
       title: 'params', dataIndex: 'data', render: (text:string) => {
         return <div className="break-words">
-          { text}
+          {text}
         </div>
       } },
     { title:'Log Index',dataIndex:'log_index' },
@@ -509,21 +510,22 @@ export const message_detail = {
             </span>
           );
         }
-        if (text?.startsWith('Err')) {
+        if (text?.startsWith('Pend')) {
           return (
-            <span className='flex py-1 gap-x-2 rounded-sm items-center'>
-              {getSvgIcon('errorIcon')}
-              <span className='text_red text-cm'>Error</span>
+            <span className='flex py-1 gap-x-2  rounded-sm items-center'>
+              {getSvgIcon('pendingIcon')}
+              <span className='text-cm'>Pending</span>
             </span>
           );
         }
 
         return (
-          <span className='flex py-1 gap-x-2  rounded-sm items-center'>
-            {getSvgIcon('pendingIcon')}
-            <span className='text-cm'>Pending</span>
+          <span className='flex py-1 gap-x-2 rounded-sm items-center'>
+            {getSvgIcon('errorIcon')}
+            <span className='text_red text-cm'>{text}</span>
           </span>
         );
+
       },
     },
     {
@@ -842,12 +844,12 @@ export const message_detail = {
       render: (text: string, record?: any) => {
         const showValue = text || record?.params;
         if (!showValue) return null;
-        if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
+        if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 6);}
         return (
-          <span className='code'>
-            <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>
+          <div className='code'>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 6)}</pre>
             {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
-          </span>
+          </div>
         );
       },
     },
@@ -1265,7 +1267,7 @@ export const message_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'block_time',
     title: 'time',
-    width: '15%',
+    width: '13%',
     render: (text: string | number) => formatDateTime(text, 'YYYY-MM-DD HH:mm'),
   },
   {
@@ -1290,7 +1292,7 @@ export const message_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'to',
     title: 'to',
-    width: '15%',
+    width: '12%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1309,7 +1311,7 @@ export const message_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'value',
     title: 'value',
-    width: '10%',
+    width: '15%',
     render: (text: number) =>
       text ? formatFilNum(text, false, false) : text || '--',
   },
@@ -1321,7 +1323,7 @@ export const block_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'cid',
     title: 'block_cid',
-    width: '15%',
+    width: '20%',
     render: (text: string) =>
       text ? (
         <Link href={`/tipset/chain?cid=${text}`} className='link_text'>
@@ -1334,7 +1336,7 @@ export const block_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'height',
     title: 'block_height',
-    width: '15%',
+    width: '20%',
     render: (text: string) => (
       <Link href={`/tipset/chain?height=${text}`} className='link_text'>
         {text}
@@ -1349,23 +1351,23 @@ export const block_list = (fromList: any, toList: any) => [
   },
   {
     dataIndex: 'messages_count',
-    width: '10%',
+    width: '20%',
     title: 'block_messages_count',
   },
-  {
-    dataIndex: 'miner_id',
-    width: '15%',
-    title: 'block_miner_id',
-    render: (text: string) => (
-      <Link href={`/miner/${text}`} className='link'>
-        {text}
-      </Link>
-    ),
-  },
+  // {
+  //   dataIndex: 'miner_id',
+  //   width: '15%',
+  //   title: 'block_miner_id',
+  //   render: (text: string) => (
+  //     <Link href={`/miner/${text}`} className='link'>
+  //       {text}
+  //     </Link>
+  //   ),
+  // },
   {
     dataIndex: 'reward',
     title: 'block_mined_reward',
-    width: '15%',
+    width: '20%',
     render: (text: number) =>
       text ? formatFilNum(text, false, false) : text || '--',
   },
@@ -1393,7 +1395,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'from',
     title: 'from',
-    width: '20%',
+    width: '15%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1412,7 +1414,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'to',
     title: 'to',
-    width: '20%',
+    width: '15%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1430,7 +1432,7 @@ export const trance_list = (fromList: any, toList: any) => [
   },
   {
     dataIndex: 'value',
-    width: '10%',
+    width: '20%',
     title: 'value',
     render: (text: number,record:any) => {
       if (!text) return '--';

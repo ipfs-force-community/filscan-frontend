@@ -124,6 +124,7 @@ export default ({ origin }: { origin?: string }) => {
     load(cur, order);
   };
 
+  console.log('====30324',columns)
   return (
     <div className={classNames(`mt-4 border rounded-xl p-5	card_shadow border_color ${origin === 'home' ?'h-[650px]':'h-full'}`,styles.wrap,styles.reset)}>
       <Table
