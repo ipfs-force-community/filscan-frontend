@@ -382,28 +382,28 @@ export const chartsNav:Array<Menu_Info> = [
     key: 'BlockChain',
     preIcon: 'block_chain',
     title:'BlockChain',
-    children: [
-      {
-        key: 'power',
-        title: 'power',
-      },
-      {
-        key: 'cc_dc_power',
-        title:'cc_dc_power',
-      },
-      {
-        key: 'block_trend',
-        title:'block_trend',
-      },
-      {
-        key: 'block_reward_per',
-        title:'block_reward_per_TiB',
-      },
-      {
-        key: 'active_nodes',
-        title:'active_nodes',
-      }
-    ]
+    // children: [
+    //   {
+    //     key: 'power',
+    //     title: 'power',
+    //   },
+    //   {
+    //     key: 'cc_dc_power',
+    //     title:'cc_dc_power',
+    //   },
+    //   {
+    //     key: 'block_trend',
+    //     title:'block_trend',
+    //   },
+    //   {
+    //     key: 'block_reward_per',
+    //     title:'block_reward_per_TiB',
+    //   },
+    //   {
+    //     key: 'active_nodes',
+    //     title:'active_nodes',
+    //   }
+    // ]
   },
   {
     key: 'fil_overview',
