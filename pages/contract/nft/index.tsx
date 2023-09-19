@@ -36,28 +36,18 @@ export default () => {
       if (isMobile) {
         if (v.dataIndex === 'rank') {
           // @ts-ignore
-          v.title = (value:string,record:any,index)=>{
-            return <div>{`#${index + 1}`}</div>
-          }
-          v.render = (value:string,record:any)=>{
+          v.render = (value:string,record:any,index)=>{
             return (
               <>
-                <Link
-                  href={`/token/${record.contract_id}`}
-                  className='flex items-center gap-x-1'>
-                  <Image className={classNames(styles['token-icon'])} src={record?.icon} alt='' height={38} width={38} />
-                  <span className='margin-6 text_color'>{record.collection}</span>
-                </Link>
+                {`No.${index + 1}`}
               </>
             );
           }
         }
-        v.title = typeof v.title === 'string' ? tr(v.title) : v.title
-        return v.dataIndex !== 'collection'
       }
       return {
         ...v,
-        title: typeof v.title === 'string' ? tr(v.title) : v.title(),
+        title: typeof v.title === 'string' ? tr(v.title) : v.title,
       };
     });
   }, [tr, isMobile]);

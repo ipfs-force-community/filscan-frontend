@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import styles from './index.module.scss'
 import classNames from 'classnames';
+import useWindow from '@/components/hooks/useWindown';
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
@@ -21,6 +22,7 @@ export default () => {
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
   const { axiosData } = useAxiosData();
+  const {isMobile} = useWindow()
   const { name, p } = useRouter().query;
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState({
@@ -76,6 +78,17 @@ export default () => {
 
   const columns = useMemo(() => {
     const content = address_list.columns.map((v: any) => {
+      if (isMobile) {
+        if (v.dataIndex === 'rank') {
+          v.render = (value:string,record:any,index:any)=>{
+            return (
+              <>
+                {`No.${record.rank}`}
+              </>
+            );
+          }
+        }
+      }
       if (v.dataIndex === 'account_type') {
         return { ...v, title: tr(v.title), render: (text: string) => tr(text) };
       }

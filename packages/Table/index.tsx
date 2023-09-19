@@ -41,41 +41,8 @@ export default (props: Props) => {
     <MobileView>
       <div className={styles['mobile-table']}>
         {
-          data.length ? data.map((dataSource, index) => {
-            return (
-              <div className={styles['mobile-table-card']} key={index}>
-                {columns.map((item: any, index: number) => {
-                  const { title, dataIndex, render } = item;
-                  const showTitle =
-                    typeof title === 'function' ? title(
-                      dataSource[dataIndex],
-                      dataSource,
-                      index
-                    ) : title;
-                  let showValue = dataSource[dataIndex];
-                  if (render) {
-                    showValue = render(
-                      dataSource[dataIndex],
-                      dataSource,
-                      index
-                    );
-                  }
-                  return (
-                    <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={index}>
-                      <div className={styles['mobile-table-card-item-label']}>
-                        {showTitle}：
-                      </div>
-                      <div className={styles['mobile-table-card-item-value']}>
-                        {showValue}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          }):<NoData/>
+          [...mobileContent].filter(([key,value])=>key.loading === loading).map(([key,value])=> value.call(this,data,columns))
         }
-
         {total > showLimit ? <Pagination
           current={current}
           total={total}
@@ -121,3 +88,50 @@ export default (props: Props) => {
     </BrowserView>
   </>
 };
+
+const mobileContent = new Map(
+  [
+    [
+      {loading:true},()=>{
+        return <Skeleton active paragraph={{rows:10}}/>
+      }
+    ],
+    [
+      {loading:false},(data:any[],columns:any[])=>{
+        return data.length ? data.map((dataSource, index) => {
+          return (
+            <div className={styles['mobile-table-card']} key={index}>
+              {columns.map((item: any, idx: number) => {
+                const { title, dataIndex, render } = item;
+                const showTitle =
+                  typeof title === 'function' ? title(
+                    dataSource[dataIndex],
+                    dataSource,
+                    index
+                  ) : title;
+                let showValue = dataSource[dataIndex];
+                if (render) {
+                  showValue = render(
+                    dataSource[dataIndex],
+                    dataSource,
+                    index
+                  );
+                }
+                return (
+                  <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={index}>
+                    <div className={styles['mobile-table-card-item-label']}>
+                      {showTitle}：
+                    </div>
+                    <div className={styles['mobile-table-card-item-value']}>
+                      {showValue}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }):<NoData/>
+      }
+    ]
+  ]
+);

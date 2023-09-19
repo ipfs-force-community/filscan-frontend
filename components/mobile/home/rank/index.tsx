@@ -1,7 +1,7 @@
 import Table from "@/packages/mobile/table"
 import styles from './index.module.scss'
 import { useEffect, useMemo, useState } from "react"
-import { getColumn, homeGrowthList, rank_header } from "@/contents/rank"
+import { getColumn, mobileRankList, rank_header } from "@/contents/rank"
 import { ColumnType } from "antd/es/table"
 import { DefiProtocol, MinerPowerRank, MinerPowerRankData } from "@/store/homeData"
 import homeStore from "@/store/modules/home"
@@ -44,10 +44,10 @@ const Rank = ()=>{
         }
       }
       item.title = t(item.title)
-      return homeGrowthList.includes(item.dataIndex)
+      return mobileRankList.includes(item.dataIndex)
 
     }) as ColumnType<MinerPowerRank>[];
-  },[])
+  },[t])
 
   useEffect(()=>{
     homeStore.fetchMinerPowerRank({
