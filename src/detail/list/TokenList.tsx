@@ -81,13 +81,15 @@ export default ({
     load(cur);
   };
   return (
-    <Table
-      key='list_token'
-      data={data.dataSource}
-      total={data.total}
-      columns={columns}
-      loading={loadingTable}
-      onChange={handleChange}
-    />
+    <>
+      <span className='absolute -top-5 text_des text-xs'>{tr('contract_token_list_total', {value:data.total})}</span>
+      <Table
+        key='list_token'
+        data={data.dataSource}
+        total={data.total}
+        columns={columns}
+        loading={loadingTable}
+        onChange={handleChange}
+      /></>
   );
 };

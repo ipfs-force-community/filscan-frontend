@@ -173,7 +173,7 @@ function Overview({ className }: { className?: string }) {
               const legend = legendData[legendKey];
               return <li key={legendKey} className='flex gap-x-2 items-center text-xs text_des w-1/3 cursor-pointer'
                 onClick={() => { handleLegend(dataItem.title, legendKey) }}>
-                <span className='block w-4 h-4 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
+                <span className='block w-2 h-2 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
                 <span>{ legend?.name||""}</span>
               </li>
             })}

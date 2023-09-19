@@ -82,6 +82,7 @@ export const home_meta = [
   {
     title: 'total_contract/24h_contract',
     dataIndex: 'total_contract',
+    tip:'total_contract/24h_contract_tip',
     tipContent: [
       { title: 'verified_contracts', dataIndex: 'verified_contracts' },
     ],

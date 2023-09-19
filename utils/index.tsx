@@ -229,7 +229,7 @@ export function formatTime(from:number, to?:number, ago = true) {
   };
 }
 
-export function isIndent(str: string, unit: number = 5, unitNum: number = 4) {
+export function isIndent(str: string, unit: number = 6, unitNum?: number ) {
   const showUnit = unitNum ? unit + unitNum : unit * 2;
   const suffixNum = unitNum || unit;
   return str && unit && str.length > showUnit

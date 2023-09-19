@@ -26,11 +26,7 @@ export default () => {
   const [loadingBalance, setBalanceLoading] = useState<boolean>(false);
   const [method, setMethod] = useState<any>([]);
   const { tr } = Translation({ ns: 'detail' });
-  const {axiosData } = useAxiosData()
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [router.asPath]);
+  const { axiosData } = useAxiosData()
 
   useEffect(() => {
     if (miner) {

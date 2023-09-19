@@ -21,10 +21,10 @@ export default () => {
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const {isMobile} = useWindow()
   const { name, p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState({
     data: [],
     total: undefined,
@@ -55,7 +55,7 @@ export default () => {
   }, [method, current]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
+    // setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
     const result: any = await axiosData(apiUrl.tipset_address, {
@@ -65,7 +65,7 @@ export default () => {
         field: method_name,
       },
     });
-    setLoading(false);
+    // setLoading(false);
     const showData =
       result?.get_rich_account_list?.map((item: any, index: number) => {
         return { ...item, rank: index * showIndex + 1 };

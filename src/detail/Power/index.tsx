@@ -28,7 +28,7 @@ export default ({ data }: { data: any }) => {
   return (
     <div className={classNames(styles.pow,'w-1/2 h-[300px]  border-l border_color p-7')}>
       <div className='flex justify-between border-b border_color pb-7'>
-        <ul className={classNames(styles.row,styles.between,'flex gap-x-20 flex-1')}>
+        <ul className={classNames(styles.row,styles.between,'flex flex-1')}>
           {power_list.header.map((headerItem) => {
             const { render, dataIndex, title } = headerItem;
             const showData = getShowData(headerItem, data);
@@ -37,7 +37,7 @@ export default ({ data }: { data: any }) => {
               : showData[dataIndex] || '--';
 
             return (
-              <li className={classNames(styles.row,'flex flex-col')} key={dataIndex}>
+              <li className={classNames(styles.row,'flex flex-col w-1/2')} key={dataIndex}>
                 <span className='text-sm text_des'>{tr(title)}</span>
                 <>
                   <BrowserView>

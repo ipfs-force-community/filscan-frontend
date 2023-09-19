@@ -19,7 +19,7 @@ export default ({
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const [loadingTable, setTableLoading] = useState(false);
-  const { axiosData } = useAxiosData();
+  const { axiosData ,loading} = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
@@ -36,12 +36,12 @@ export default ({
 
   useEffect(() => {
     if (accountId) {
+      setTableLoading(true);
       load();
     }
   }, [accountId, methodName]);
 
   const load = async (cur?: number, method?: string) => {
-    setTableLoading(true);
     const showIndex = cur || current;
     const showMethod = method || methodName;
     const result: any = await axiosData(apiUrl.detail_message_list, {
@@ -84,14 +84,17 @@ export default ({
     setCurrent(cur);
     load(cur);
   };
+
   return (
-    <Table
-      key={'list_message'}
-      data={data.dataSource}
-      total={data.total}
-      columns={columns}
-      loading={loadingTable}
-      onChange={handleChange}
-    />
+    <>
+      <span className='absolute -top-5 text_des text-xs'>{tr('message_list_total', {value:data.total})}</span>
+      <Table
+        key={'list_message'}
+        data={data.dataSource}
+        total={data.total}
+        columns={columns}
+        loading={loadingTable}
+        onChange={handleChange}
+      /></>
   );
 };

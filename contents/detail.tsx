@@ -18,6 +18,7 @@ import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import { Button } from 'antd';
 import DropDown from '@/packages/customDrop';
+import ShowText from '@/packages/showText';
 
 //储存池概览 账户余额 & 有效算力
 export const account_balance = {
@@ -191,6 +192,7 @@ export const miner_overview = {
       title: 'lucky',
       width: '25%',
       dataIndex: 'lucky',
+      title_tip: 'lucky_tip',
       render: (text: string | number) =>
         text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--',
     },
@@ -228,7 +230,7 @@ export const account_detail = {
       render: (text: string) => {
         if(!text) return '--'
         return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link' >{isIndent(text)}</Link>
+          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
           <Copy text={text} />
         </span>
       }
@@ -241,7 +243,7 @@ export const account_detail = {
       render: (text: string) => {
         if(!text) return '--'
         return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link' >{isIndent(text)}</Link>
+          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
           <Copy text={text} />
         </span>
       }
@@ -252,7 +254,7 @@ export const account_detail = {
       render: (text: string) => {
         if(!text) return '--'
         return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link_text' >{isIndent(text)}</Link>
+          <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
           <Copy text={text} />
         </span>
       }
@@ -265,11 +267,11 @@ export const account_detail = {
         return <div className="flex flex-wrap items-baseline justify-end gap-x-2">
           {text&&Array.isArray(text)? text?.map((linkItem:string,index:number) => {
             return <span className="flex items-baseline gap-x-2" key={linkItem}>
-              <Link href={`/address/${linkItem}`} className='link_text' >{isIndent(linkItem,6)}</Link>
+              <Link href={`/address/${linkItem}`} className='link_text' >{isIndent(linkItem,10)}</Link>
               <Copy text={linkItem} />
             </span>
           }): <span className="flex items-baseline gap-x-2">
-            <Link href={`/address/${text}`} className='link_text' >{isIndent(text,6)}</Link>
+            <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
             <Copy text={text} />
           </span>}
         </div>
@@ -283,7 +285,7 @@ export const account_detail = {
         return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
           {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
             return <span className="flex items-baseline gap-x-2" key={linkItem}>
-              <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,6)}</Link>
+              <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
               <Copy text={linkItem} />
             </span>
           }):'--'}
@@ -1091,12 +1093,15 @@ const default_content = [
   },
   {
     title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
-      return Array.isArray(text) ? <div className="flex items-baseline flex-col  flex-wrap justify-end gap-2">
-        {text?.map((item:any,index:number) => {
-          return <div className='flex w-full items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
-
-        })}
-      </div>:text
+      if(Array.isArray(text) && text.length > 0) return <ShowText content={text} />
+      return null
+      // console.log('signers',text)
+      // return Array.isArray(text) ? <div className="flex items-baseline flex-col  flex-wrap justify-end gap-2">
+      //   {text?.map((item:any,index:number) => {
+      //     return <div className='flex w-full items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
+      //   })}
+      //   {text.length > 2 && <span>All</span> }
+      // </div>:text
     }},
   {
     title: 'owned_miners', dataIndex: 'owned_miners', width:'100%', elasticity:true,type: ['account_basic'], render: (text:string) => {

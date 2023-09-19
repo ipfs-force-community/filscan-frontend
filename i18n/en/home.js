@@ -54,6 +54,7 @@ const home = {
   verified_contracts: 'Verified Contracts',
   'contract_transaction/24h_change':'ContTransCount/in 24h',
   "contract_address/24h_change": 'ContTransAddr/in 24h',
+  'total_contract/24h_contract_tip':'Total number of contracts that have had transactions in the network',
   gas_24: '24h Gas Cost',
   verified_contracts: 'Verified Contracts',
   contract_gas: 'Contract Gas Cost',

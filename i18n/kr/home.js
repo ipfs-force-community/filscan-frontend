@@ -52,6 +52,8 @@ const home = {
   verified_contracts: '검증된 스마트 계약 리스트',
   'contract_transaction/24h_change': '계약 검증 거래 수/24시간',
   "contract_address/24h_change": '계약 거래 주소 /24시간 ',
+  'total_contract/24h_contract_tip':'네트워크에서 거래가 이루어진 계약의 총 수',
+
   gas_24: '24시간 Gas 사용',
   contract_gas: '계약 가스 비용',
   quality_power_Cc:'Commited Capacity (CC)',

@@ -39,18 +39,17 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
         containLabel: true,
       },
       tooltip: {
-        show: false,
-        trigger: 'item',
+        trigger: "item",
         backgroundColor: color.toolbox,
-        borderColor: 'transparent',
+        borderColor: "transparent",
         textStyle: {
-          color: '#ffffff',
+          color: "#ffffff",
         },
         formatter(v: any) {
           const { name, value } = v;
-          return `${v.marker} ${name}`;
+          return `${v.marker} ${tr(name)}: ${formatFilNum(value)}`;
         },
-        position: 'right',
+        position: "right",
       },
       legend: {
         show: false,
@@ -129,7 +128,10 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
 
   const renderTotal = ()=>{
     return <div className='flex flex-col gap-x-1'>
-      <span className='text-sm text_des'>{tr(account_balance.title)}</span>
+      <span className='flex items-center gap-x-2 text-sm text_des'>
+        {tr(account_balance.title)}
+        <Tooltip context={tr('total_balance_tip')} />
+      </span>
       <span className='font-DINPro-Bold text-xl text_clip'>
         {loading ? (
           <SkeletonScreen />
@@ -190,7 +192,7 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
   return (
     <>
       <BrowserView>
-        <div className='flex h-[300px] w-1/2 p-7'>
+        <div className='flex h-[300px] w-1/2 p-5'>
           <div className='flex-1'>
             {renderTotal()}
             {renderBalance()}
