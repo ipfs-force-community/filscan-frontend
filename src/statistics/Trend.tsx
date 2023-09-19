@@ -208,6 +208,7 @@ export default (props: Props) => {
       legendList.push({
         name: item.dataIndex,
         color: item.color,
+        type: item.type,
       });
       seriesData.push({
         type: item.type,
@@ -243,7 +244,9 @@ export default (props: Props) => {
     };
   }, [options, defaultOptions, noShow]);
 
-  const propsRef = origin === 'home' ? {ref}:{}
+  const propsRef = origin === 'home' ? { ref } : {}
+
+  console.log('---3',options?.legendData)
 
   return (
     <div
@@ -268,7 +271,7 @@ export default (props: Props) => {
                         setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
                       }}
                       style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                      {getSvgIcon('legendIcon')}
+                      {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
                       <span className='text-xs text_des font-normal'>
                         {tr(v.name)}
                       </span>
@@ -321,7 +324,7 @@ export default (props: Props) => {
                     setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
                   }}
                   style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                  {getSvgIcon('legendIcon')}
+                  {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
                   <span className='text-xs text_des font-normal'>
                     {tr(v.name)}
                   </span>

@@ -2,7 +2,7 @@
 
 import Copy from '@/components/copy';
 import { Translation } from '@/components/hooks/Translation';
-import { apiUrl } from '@/contents/apiUrl';
+import { TransMethod, apiUrl } from '@/contents/apiUrl';
 import { address_detail, address_tabs } from '@/contents/detail';
 import Content from '@/packages/content';
 import Segmented from '@/packages/segmented';
@@ -31,6 +31,7 @@ export default () => {
   const [accountType, setAccountType] = useState('');
   const [interval, setInterval] = useState('24h');
   const [methodOptions, setMethodOptions] = useState([]);
+  const [transOptions,setTransOptions] = useState([])
   const [actorId,setActorId] = useState('')
   const [loading, setLoading] = useState(false);
   const [domains, setDomains] = useState<any>({})
@@ -61,6 +62,20 @@ export default () => {
       newMethod.push({ label: li, dataIndex: li, value: li });
     });
     setMethodOptions(newMethod);
+
+    // const result1: any = await axiosData(TransMethod, {
+    //   account_id: address,
+    // },{isCancel:false});
+    // const newTransMethod: any = [
+    //   {
+    //     label:'all',
+    //     value: 'all',
+    //   },
+    // ];
+    // Object.keys(result?.method_name_list || {}).forEach((li: string) => {
+    //   newMethod.push({ label: li, dataIndex: li, value: li });
+    // });
+    // setMethodOptions(newMethod);
   };
 
   const load = async () => {

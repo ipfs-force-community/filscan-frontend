@@ -46,6 +46,7 @@ export const EvmTxsHistory = mianUrl + '/EvmTxsHistory'
 export const FilPrice= mianUrl+'/FilPrice'
 export const FinalHeight = mianUrl + '/FinalHeight'
 export const DCTrend = mianUrl + '/DCTrend'
+export const TransMethod = mianUrl +'/TransferMethodByAccountID'
 
 export const apiUrl: API | any = {
   fvm_hot: mianUrl + '/GetFEvmHotItems',

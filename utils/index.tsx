@@ -237,13 +237,26 @@ export function isIndent(str: string, unit: number = 6, unitNum?: number ) {
     : str;
 }
 
+function formatNumberUnit(num:number,len=2) {
+  if (num >= 1e9) {
+    return Number(num / 1e9).toLocaleString('en', { maximumFractionDigits: len }) +'B'
+  }
+  if (num >= 1e6) {
+    return Number(num / 1e6).toLocaleString('en', { maximumFractionDigits: len }) +'M'
+  }
+  // if (num >= 1e3) {
+  //   return Number(num / 1e3).toLocaleString('en', { maximumFractionDigits: len }) +'K'
+  // }
+  return Number(num / 1e6).toLocaleString('en', { maximumFractionDigits: len })
+}
+
 // $ + number
 export function get$Number(str: string | number, len?: number) {
   const showNum = Number(str);
   const newNum =
     showNum < 0
-      ? '-$' + formatNumber(Math.abs(showNum), len)
-      : '$' + formatNumber(showNum, len);
+      ? '-$' + formatNumberUnit(Math.abs(showNum), len)
+      : '$' + formatNumberUnit(showNum, len);
   return newNum;
 }
 //%

@@ -185,6 +185,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         dataIndex,
         color: color,
         title: title,
+        type:item.type
       });
       seriesData.push({
         type: item.type,
@@ -244,7 +245,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
               setNoShow({ ...noShow, [v.dataIndex]: !noShow[v.dataIndex] });
             }}
             style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
-            {getSvgIcon('legendIcon')}
+            {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
             <span className='text-xs text_des font-normal'>
               {tr(v.title)}
             </span>

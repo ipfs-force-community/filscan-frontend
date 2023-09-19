@@ -39,7 +39,7 @@ export default () => {
               <Image src={logo} width={30} height={30} alt='logo' />
               <span className='font-Barlow font-medium text-xl ml-2'>Filscan.io </span>
             </div>
-            <div className='flex justify-between text-border_des'>
+            <div className='flex justify-between items-end	 text-border_des'>
               <div className='flex flex-col gap-y-1 text-xs'>
                 <span>
                   { tr('footer_des1')}
