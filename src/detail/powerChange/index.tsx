@@ -262,13 +262,13 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
           <span className='text-lg font-semibold mr-5'>
             {tr(power_change.title)}
           </span>
-          <Segmented
+          {/* <Segmented
             data={power_change.tabList}
             ns='detail'
             defaultValue={interval}
             isHash={false}
             onChange={handleTabChange}
-          />
+          /> */}
         </div>
         <BrowserView>{ledRender()}</BrowserView>
       </div>

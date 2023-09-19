@@ -1381,7 +1381,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'cid',
     title: 'cid',
-    width: '10%',
+    width: '15%',
     render: (text: string) =>
       text ? (
         <Link href={`/message/${text}`} className='link'>
@@ -1452,7 +1452,7 @@ export const trance_list = (fromList: any, toList: any) => [
     }
 
   },
-  { dataIndex: 'method_name', width: '20%', title: 'method_name' },
+  { dataIndex: 'method_name', width: '15%', title: 'method_name' },
 ];
 
 export const ercToken_list = (fromList: any, toList: any) => {
