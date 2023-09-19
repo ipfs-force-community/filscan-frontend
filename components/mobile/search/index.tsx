@@ -2,8 +2,11 @@ import Image from "next/image"
 import IconSearch from '@/assets/images/header/icon_search.svg'
 import styles from './index.module.scss'
 import classNames from "classnames"
-import { Input, InputRef } from "antd"
+import { Input } from "antd"
 import { HtmlHTMLAttributes, useRef, useState } from "react"
+import useAxiosData from "@/store/useAxiosData"
+import { apiUrl } from "@/contents/apiUrl"
+import { useRouter } from "next/router"
 interface SearchProps extends HtmlHTMLAttributes<HTMLDivElement>{
 }
 const Search = (props:SearchProps)=>{
@@ -16,10 +19,55 @@ const Search = (props:SearchProps)=>{
   const onCancelClick = ()=>{
     setIsSearch(false)
   }
+  const { axiosData } = useAxiosData()
+  const router = useRouter()
+
+  const onSearch = async(value:string) => {
+    const showInput = value.trim();
+    if (showInput) {
+      const result=await axiosData(apiUrl.searchInfo, {
+        input:showInput,
+      })
+      const type = result?.result_type;
+      if (type) {
+        if (type === 'owner') {
+          //owner
+          router.push(`/owner/${showInput}`);
+        } else if (type === 'address') {
+          router.push(`/address/${showInput}`)
+        } else if (type === 'height') {
+          router.push(`/tipset/chain?height=${showInput}`)
+        } else if (type === 'message_details') {
+          router.push(`/message/${showInput}`)
+        } else if (type === 'miner') {
+          router.push(`/miner/${showInput}`)
+        } else if (type === 'block_details') {
+          router.push(`/tipset/chain?cid=${showInput}`)
+        } else if (type === 'fns') {
+          router.push(`/domain/${showInput}`)
+        } else {
+          router.push(`/address/${showInput}`)
+        }
+      } else {
+        //404
+        router.push(`/noResult/${showInput}`)
+      }
+    }
+  }
+
   return <div className={classNames(styles.wrap,props.className)}>
     <div className={classNames(styles['search-wrap'],isSearch ? "" : styles.disabled)}>
       <div className={styles.search}>
-        <Input ref={ref} prefix={<Image src={IconSearch} alt=""/>}/>
+        <form action="" id="search-form" onSubmit={(e)=>{
+          onSearch(ref.current.input.value)
+          e.preventDefault()}}>
+          <Input
+            type="search"
+            allowClear
+            ref={ref}
+            prefix={<Image src={IconSearch} alt=""/>
+            }/>
+        </form>
       </div>
       <div onClick={onCancelClick}>取消</div>
     </div>
