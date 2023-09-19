@@ -12,6 +12,7 @@ import Tooltip from '@/packages/tooltip';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import meta_des from '@/assets/images/meta_des.svg'
 import Image from 'next/image'
+import useInterval from '@/components/hooks/useInterval';
 
 //type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
@@ -45,13 +46,11 @@ function Meta() {
       [key: string]: number | undefined;
     }
     >();
-  const [contractData,setContractData] = useState<Record<string,any>>()
+  const [contractData, setContractData] = useState<Record<string, any>>()
 
-  useEffect(() => {
-    //loadInterval();
+  useInterval(() => {
     load();
-
-  }, []);
+  }, 5*60*1000);
 
   const load = async () => {
     const data: any = await axiosData(apiUrl.home_meta);

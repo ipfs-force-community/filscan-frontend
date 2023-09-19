@@ -40,7 +40,8 @@ export default () => {
         href={'/'}
         className='flex gap-x-2 items-center text_color cursor-pointer'>
         <Image src={logo} width={40} height={40} alt='logo' />
-        <Image src={logoText} alt='logo' width={95} height={16}></Image>
+        {getSvgIcon('logoText')}
+        {/* <Image src={logoText} alt='logo' width={95} height={16}></Image> */}
         {/* <span className='font-Barlow font-bold text-xl '>Filscan</span> */}
       </Link>
       <div className='flex-1 ml-5 mr-10'>

@@ -33,7 +33,6 @@ export default ({
         input:showInput,
       })
       setSearchLoading(false)
-
       const type = result?.result_type;
       if (type) {
         if (type === 'owner') {
@@ -42,13 +41,13 @@ export default ({
         } else if (type === 'address') {
           router.push(`/address/${showInput}`)
         } else if (type === 'height') {
-          router.push(`/tipset/chain?height=${showInput}`)
+          router.push(`/height/${showInput}`)
         } else if (type === 'message_details') {
           router.push(`/message/${showInput}`)
         } else if (type === 'miner') {
           router.push(`/miner/${showInput}`)
         } else if (type === 'block_details') {
-          router.push(`/tipset/chain?cid=${showInput}`)
+          router.push(`/cid/${showInput}`)
         } else if (type === 'fns') {
           if (result?.fns_tokens.length > 0) {
             setOptions(result?.fns_tokens||[])
@@ -79,7 +78,9 @@ export default ({
         origin={origin}
         onClick={handleSearch}
         suffix={
-          searchLoading ? <span className='flex items-center justify-center bg-primary text-white' style={{width:origin === 'banner' ? 40 : 21,height:origin === 'banner' ? 40 : 21}}><LoadingOutlined /></span>:
+          searchLoading ? <span className='flex items-center justify-center bg-primary rounded-[5px]'
+            style={{ width: origin === 'banner' ? 40 : 21, height: origin === 'banner' ? 40 : 21 }}>
+            <LoadingOutlined className='custom-icon text-xs'/></span> :
             <Image
               src={searchIcon}
               width={origin === 'banner' ? 40 : 21}
