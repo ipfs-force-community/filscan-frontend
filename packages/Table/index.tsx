@@ -111,7 +111,6 @@ const mobileContent = new Map(
                   ) : title;
                 let showValue = dataSource[dataIndex];
                 if (render) {
-                  console.log("=================",dataIndex[dataIndex],dataSource,index)
                   showValue = render(
                     dataSource[dataIndex],
                     dataSource,
