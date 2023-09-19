@@ -1,11 +1,9 @@
 /** @format */
 
 import { useHash } from '@/components/hooks/useHash';
-import { Translation } from '@/components/hooks/Translation';
 import { useEffect, useMemo, useState } from 'react';
 import { getColumn, getDefaultSort, getMobileColumn, mobileRankList } from '@/contents/rank';
 import Table from '@/packages/Table';
-import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
 import Header from './header';
 import { useFilscanStore } from '@/store/FilscanStore';
@@ -30,7 +28,6 @@ const defaultData = {
 
 export default ({ origin }: { origin: string }) => {
   const { hash } = useHash();
-  // const { tr } = Translation({ ns: 'rank' });
   const {isMobile} = useWindow()
   const { t } = useTranslation();
   const tr = (label: string) => {
@@ -281,9 +278,12 @@ export default ({ origin }: { origin: string }) => {
 
         <MobileView>
           <Tb
+            key={active}
             columns={columns}
+            loading={loading}
             dataSource={showData.dataSource}
-            pagination={false}
+            total={showData.total}
+            onChange={handleChange}
           />
         </MobileView>
         <BrowserView>
