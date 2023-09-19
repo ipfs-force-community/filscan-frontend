@@ -3,7 +3,7 @@ import { getSvgIcon } from "@/svgsIcon";
 import { get_account_type } from "@/utils"
 import { useMemo, useState } from "react";
 
-export default ({ content, unit=0 }: { content: Array<any>, unit:number}) => {
+export default ({ content, unit=0 }: { content: Array<any>, unit?:number}) => {
   const { tr } = Translation({ ns: 'common' });
   const [open,setOpen]= useState(false)
 
