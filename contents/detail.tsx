@@ -1447,7 +1447,7 @@ export const trance_list = (fromList: any, toList: any) => [
     title: 'value',
     render: (text: number,record:any) => {
       if (!text) return '--';
-      const method_name = record?.method_name?.toLocaleLowerCase();
+      //const method_name = record?.method_name?.toLocaleLowerCase();
       let className = Number(text) < 0 ?'text_red':'text_green'
       let flag = Number(text) < 0 ? '-':'+'
       // if (method_name) {

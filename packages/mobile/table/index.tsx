@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import { useMemo } from "react";
 import { pageLimit } from "@/utils";
 interface TProps extends TableProps<any> {
-  loading: boolean;
+  loading?: boolean;
   limit?: number;
   current?: number;
   total?: number;
