@@ -47,7 +47,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
             color: color.textStyle,
           },
           axisLabel: {
-            formatter: '{value} TiB',
+            formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
               color: color.labelColor,
@@ -75,7 +75,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
             color: color.textStyle,
           },
           axisLabel: {
-            formatter: '{value} PiB',
+            formatter: '{value} TiB',
             textStyle: {
               //  fontSize: this.fontSize,
               color: color.labelColor,
@@ -158,9 +158,8 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
           ? unitConversion(power, 4, 5).split(' ')
           : [];
         const [increaseValue, increaseUnit] = power_increase
-          ? unitConversion(power_increase, 4, 5)?.split(' ')
+          ? unitConversion(power_increase, 4, 4)?.split(' ')
           : [];
-
         //amount
         const [powerValue_amount, powerValue_unit] = power
           ? unitConversion(power, 5)?.split(' ')

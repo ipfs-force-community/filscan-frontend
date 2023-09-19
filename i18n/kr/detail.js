@@ -15,7 +15,7 @@ const detail = {
   owner_address: 'Owner 주소',
   owned_miners: '소유한 노드',
   owned_active_miners: "액티브한 노드",
-  miner: 'Minner',
+  miner: 'Miner',
   evm: 'EVM',
   ethaddress: 'ETH 주소',
   ethaccount:'ETH 계정',

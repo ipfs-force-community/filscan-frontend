@@ -16,7 +16,6 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
-import { Button } from 'antd';
 import DropDown from '@/packages/customDrop';
 import ShowText from '@/packages/showText';
 
