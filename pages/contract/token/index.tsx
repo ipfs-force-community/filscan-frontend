@@ -30,6 +30,7 @@ export default () => {
         }
       }
       v.title = typeof v.title === 'string' ? tr(v.title) : v.title
+      return v
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tr,isMobile]);
