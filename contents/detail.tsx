@@ -28,7 +28,7 @@ export const account_balance = {
       title: 'available_balance',
       dataIndex: 'available_balance',
       title_tip:'available_balance_tip',
-      color: '#F8CD4D',
+      color: '#4ACAB4',
     },
     {
       title: 'init_pledge',
@@ -40,7 +40,7 @@ export const account_balance = {
       title: 'pre_deposits',
       dataIndex: 'pre_deposits',
       title_tip:'pre_deposits_tip',
-      color: '#4ACAB4',
+      color: '#F8CD4D',
     },
     {
       title: 'locked_balance',
