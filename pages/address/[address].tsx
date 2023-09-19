@@ -63,19 +63,19 @@ export default () => {
     });
     setMethodOptions(newMethod);
 
-    // const result1: any = await axiosData(TransMethod, {
-    //   account_id: address,
-    // },{isCancel:false});
-    // const newTransMethod: any = [
-    //   {
-    //     label:'all',
-    //     value: 'all',
-    //   },
-    // ];
-    // Object.keys(result?.method_name_list || {}).forEach((li: string) => {
-    //   newMethod.push({ label: li, dataIndex: li, value: li });
-    // });
-    // setMethodOptions(newMethod);
+    const result1: any = await axiosData(TransMethod, {
+      account_id: address,
+    },{isCancel:false});
+    const newTransMethod: any = [
+      {
+        label:'all',
+        value: 'all',
+      },
+    ];
+    (result1?.method_name_list || [])?.forEach((li: string) => {
+      newTransMethod.push({ label: li, dataIndex: li, value: li });
+    });
+    setTransOptions(newTransMethod);
   };
 
   const load = async () => {
@@ -173,8 +173,12 @@ export default () => {
       if (v?.optionsUrl === 'AllMethodByAccountID') {
         v.headerOptions = methodOptions;
       }
+      if (v?.optionsUrl === 'TransferMethodByAccountID') {
+        v.headerOptions = transOptions;
+      }
       defaultOpt.push({ ...v });
     });
+
     let evmList :Array<any>= [];
     if (verifyData && verifyData.source_file) {
       evmList = [{
@@ -188,7 +192,7 @@ export default () => {
     }
 
     return [...defaultOpt, ...evmList];
-  }, [methodOptions,verifyData]);
+  }, [methodOptions,transOptions,verifyData]);
   return (
     <div className={classNames(styles.address,'main_contain')}>
       <div className={classNames(styles['address-row'],'mb-2.5 ml-2.5 DINPro-Medium font-medium text-lg flex items-center')}>

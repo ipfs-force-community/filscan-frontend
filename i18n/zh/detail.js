@@ -145,8 +145,8 @@ const detail = {
   consume_type:'类型',
   MinerTip: '节点手续费',
   BaseFeeBurn: '销毁手续费',
-  Transfer: '转账',
-  Burn: '销毁聚合费用',
+  // Transfer: '转账',
+  // Burn: '销毁聚合费用',
   exit_code: '状态',
 
   //内部交易

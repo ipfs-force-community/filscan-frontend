@@ -32,7 +32,7 @@ export default () => {
     <div className={classNames(styles.nft,'main_contain')}>
       <div className='flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4'>
         {overviewData?.token_name && (
-          <Image width={40} height={40} src={overviewData.icon_url} alt='' />
+          <Image width={40} height={40} src={overviewData.logo} alt='' />
         )}
         {overviewData?.token_name?.toLocaleUpperCase()}
       </div>
