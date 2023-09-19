@@ -78,6 +78,7 @@ export default () => {
         <span className={'ml-4 flex items-center gap-x-1'}>
           <span>{ tr('account_title')}:</span>
           <span>{miner || ''}</span>
+          { miner&& typeof miner ==='string' && <Copy text={miner} className='text_des_unit'/>}
         </span>
       </div>
       <div className='flex w-full card_shadow rounded-xl !overflow-hidden'>

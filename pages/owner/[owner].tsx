@@ -43,7 +43,7 @@ export default () => {
     <div className='main_contain'>
       <div className={'flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg'}>
         <span>{owner}</span>
-        { owner&& typeof owner === 'string'&& <Copy text={owner} />}
+        { owner&& typeof owner === 'string'&& <Copy text={owner} className='text_des_unit'/>}
       </div>
       <div className='w-full card_shadow rounded-xl'>
         <div className='flex w-full border-b border_color'>

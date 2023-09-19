@@ -189,6 +189,7 @@ export default () => {
         <BrowserView>
           <span className={classNames(styles.text,'ml-4 flex items-center gap-x-1')}>
             <span>{address || ''}</span>
+            { address&& typeof address ==='string' && <Copy text={address} className='text_des_unit'/>}
           </span>
           {typeof address === 'string' && domain?.domains && domain?.domains[address] && <Link className='ml-2' href={`/domain/${domain?.domains[address]}?provider=${domain.provider}`}>({ domain?.domains[address]})</Link> }
         </BrowserView>

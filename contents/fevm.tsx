@@ -210,7 +210,7 @@ export const homeDefiColumns: any = {
   protocol: '10%',
   tvl: '25%',
   tvl_change_rate_in_24h: '35%',
-  users: '20%',
+  users: '15%',
 };
 
 export const mobileHomeDefiColumns: string[] = [
