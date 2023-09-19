@@ -109,7 +109,7 @@ export default () => {
 
   return (
     <div className={classNames(styles['message-list'],'main_contain')}>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mx-2.5'>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('message_list')}

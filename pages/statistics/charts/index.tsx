@@ -39,7 +39,7 @@ export default () => {
           <ul className="flex flex-col py-4 h-fit card_shadow border border_color rounded-xl cursor-pointer" >
             {chartsNav.map(item => {
               const { preIcon,title,key } = item;
-              return <div key={item.key} id={key} className="relative flex flex-col w-full px-4 items-center font-DINPro-Medium" >
+              return <div key={item.key} className="relative flex flex-col w-full px-4 items-center font-DINPro-Medium" >
                 <Link key={item.key}
                   href={`/statistics/charts#${item.key}`}
                   scroll={false}

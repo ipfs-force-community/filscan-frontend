@@ -65,6 +65,7 @@ const detail = {
   mining_efficiency: '效率',
   mining_efficiency_tip:'选定周期内，节点累计出块奖励与有效算 力的比值',
   lucky: '幸运值',
+  lucky_tip:'实际爆块数量和理论爆块数量的比值。若有效算力低于1PiB，则该值存在较大随机性， 仅供参考',
   sector_ratio: '扇区增速',
   sector_ratio_tip:'',
   win_count: '赢票数量',
@@ -229,6 +230,7 @@ const detail = {
   parent_base_fee:'父基础费率',
   ticket_value: '票值',
   state_root: '根',
+  total_balance_tip:'可用余额 + 扇区质押 + 预质押 + 锁仓奖励'
 
 }
 export default detail

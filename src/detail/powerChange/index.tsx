@@ -14,10 +14,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss'
 import classNames from 'classnames';
-export default ({ accountId }: { accountId?: string | string[] }) => {
+export default ({ accountId,type }: { accountId?: string | string[],type:string}) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const [interval, setInterval] = useState('7d');
+  const [interval, setInterval] = useState('1m');
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
 
@@ -47,7 +47,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
             color: color.textStyle,
           },
           axisLabel: {
-            formatter: '{value} TiB',
+            formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
               color: color.labelColor,
@@ -75,7 +75,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
             color: color.textStyle,
           },
           axisLabel: {
-            formatter: '{value} PiB',
+            formatter: '{value} TiB',
             textStyle: {
               //  fontSize: this.fontSize,
               color: color.labelColor,
@@ -144,6 +144,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
       account_id: accountId,
       filters: {
         interval: showInter,
+        account_type:type,
       },
     });
     (result?.power_trend_by_account_id_list || []).forEach(
@@ -157,9 +158,8 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
           ? unitConversion(power, 4, 5).split(' ')
           : [];
         const [increaseValue, increaseUnit] = power_increase
-          ? unitConversion(power_increase, 4, 5)?.split(' ')
+          ? unitConversion(power_increase, 4, 4)?.split(' ')
           : [];
-
         //amount
         const [powerValue_amount, powerValue_unit] = power
           ? unitConversion(power, 5)?.split(' ')
@@ -185,6 +185,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         dataIndex,
         color: color,
         title: title,
+        type:item.type
       });
       seriesData.push({
         type: item.type,
@@ -194,6 +195,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
         name: title,
         symbol: 'circle',
         barMaxWidth: '30',
+        barMinWidth: '12',
         yAxisIndex:item.yIndex,
         backgroundStyle: {
           color: item?.color || '',
@@ -217,7 +219,6 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
 
   const newOptions = useMemo(() => {
     const newSeries: any = [];
-    console.log('====3', noShow, options?.series);
     (options?.series || []).forEach((seriesItem: any) => {
       if (!noShow[seriesItem?.dataIndex]) {
         newSeries.push(seriesItem);
@@ -244,7 +245,7 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
               setNoShow({ ...noShow, [v.dataIndex]: !noShow[v.dataIndex] });
             }}
             style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
-            {getSvgIcon('legendIcon')}
+            {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
             <span className='text-xs text_des font-normal'>
               {tr(v.title)}
             </span>
@@ -261,13 +262,13 @@ export default ({ accountId }: { accountId?: string | string[] }) => {
           <span className='text-lg font-semibold mr-5'>
             {tr(power_change.title)}
           </span>
-          <Segmented
+          {/* <Segmented
             data={power_change.tabList}
             ns='detail'
             defaultValue={interval}
             isHash={false}
             onChange={handleTabChange}
-          />
+          /> */}
         </div>
         <BrowserView>{ledRender()}</BrowserView>
       </div>

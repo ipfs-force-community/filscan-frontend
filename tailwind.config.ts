@@ -26,7 +26,8 @@ const config: Config = {
         sm: '480px',
         md: '768px',
         lg: '976px',
-        xl: '1440px',
+        xl: '1280px',
+        '2xl': '1440px',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -40,6 +41,7 @@ const config: Config = {
         "DINPro-Bold": ['DINPro-Bold'],
         "DINPro-Medium": ['DINPro-Medium']
       },
+      //
       colors: {
         // 亮色模式颜色配置
         bgColor: '#FFFFFF',
@@ -53,6 +55,7 @@ const config: Config = {
         bg_hover: 'rgba(28, 106, 253, 0.1)',
         select_bg: 'rgba(28, 106, 253, 0.6)',
         icon_border: 'rgba(0,0,0,0.2)',
+        bgCopy:'rgba(51, 106, 250, 0.5)',
         secondary: '#00FF00',
         success: '#059b02',
         tipColor:'#1c1c1c',

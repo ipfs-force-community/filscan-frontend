@@ -14,12 +14,12 @@ import {
 export default ({ id }: { id?: string | string[] }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'contract' });
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
   });
-  const [loading, setLoading] = useState<boolean>(false);
+  //const [loading, setLoading] = useState<boolean>(false);
   const [current, setCurrent] = useState(1);
 
   useEffect(() => {
@@ -29,14 +29,14 @@ export default ({ id }: { id?: string | string[] }) => {
   }, [id]);
 
   const load = async (cur?: number) => {
-    setLoading(true);
+    // setLoading(true);
     const index = cur || current;
     const result = await axiosData(apiUrl.contract_ERC20Dex, {
       contract_id: id,
       page: index - 1,
       limit: pageLimit,
     });
-    setLoading(false);
+    // setLoading(false);
     setData({
       dataSource: result?.items || [],
       total: result?.total || 0,

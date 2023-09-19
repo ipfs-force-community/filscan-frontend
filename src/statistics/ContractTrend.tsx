@@ -201,11 +201,11 @@ export default (props: Props) => {
                   /></Link>
               </MobileView>
               <BrowserView>
-                <div className='flex gap-x-4 items-center'>
+                <div className='flex gap-x-4 items-center mx-2.5'>
                   <Select ns={'static'} key={`static_${origin}_contract`}
                     options={timeList} value={interval}
                     onChange={(interval) => { setInterval(interval); load(interval) }} />
-                  <Link href={`/statistics/charts#contract`}>
+                  {/* <Link href={`/statistics/charts#contract`}>
                     <Image
                       className='cursor-pointer mr-2.5'
                       src={go}
@@ -213,7 +213,7 @@ export default (props: Props) => {
                       height={18}
                       alt='go'
                     />
-                  </Link>
+                  </Link> */}
                 </div>
               </BrowserView></>
           )}

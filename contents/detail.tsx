@@ -16,8 +16,8 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import copySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
-import { Button } from 'antd';
 import DropDown from '@/packages/customDrop';
+import ShowText from '@/packages/showText';
 
 //储存池概览 账户余额 & 有效算力
 export const account_balance = {
@@ -27,7 +27,7 @@ export const account_balance = {
       title: 'available_balance',
       dataIndex: 'available_balance',
       title_tip:'available_balance_tip',
-      color: '#F8CD4D',
+      color: '#4ACAB4',
     },
     {
       title: 'init_pledge',
@@ -39,7 +39,7 @@ export const account_balance = {
       title: 'pre_deposits',
       dataIndex: 'pre_deposits',
       title_tip:'pre_deposits_tip',
-      color: '#4ACAB4',
+      color: '#F8CD4D',
     },
     {
       title: 'locked_balance',
@@ -130,7 +130,7 @@ export const miner_overview = {
     { title: '24h', dataIndex: '24h' },
     { title: '7d', dataIndex: '7d' },
     { title: '30d', dataIndex: '1m' },
-    { title: '1year', dataIndex: '1year' },
+    // { title: '1year', dataIndex: '1year' },
   ],
   list: [
     {
@@ -191,6 +191,7 @@ export const miner_overview = {
       title: 'lucky',
       width: '25%',
       dataIndex: 'lucky',
+      title_tip: 'lucky_tip',
       render: (text: string | number) =>
         text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--',
     },
@@ -212,6 +213,116 @@ export const miner_overview = {
     },
   ],
 };
+
+export const account_detail = {
+  list:(tr:any)=> [
+    {
+      title: 'account_type',
+      dataIndex: 'account_type',
+      type: ["account_basic"],
+      render:(text:any,record:any,tr:any)=>text?tr(text):'--'
+    },
+    {
+      title: 'account_address',
+      dataIndex: 'account_address',
+      type: ["account_basic"],
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+
+    },
+
+    {
+      title: 'owner_address',
+      dataIndex: 'owner_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
+    {
+      title: 'worker_address',
+      dataIndex: 'worker_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
+    {
+      title: 'beneficiary_address',
+      dataIndex: 'beneficiary_address',
+      render: (text: any, record: any) => {
+        if(!text) return '--'
+        return <div className="flex flex-wrap items-baseline justify-end gap-x-2">
+          {text&&Array.isArray(text)? text?.map((linkItem:string,index:number) => {
+            return <span className="flex items-baseline gap-x-2" key={linkItem}>
+              <Link href={`/address/${linkItem}`} className='link_text' >{isIndent(linkItem,10)}</Link>
+              <Copy text={linkItem} />
+            </span>
+          }): <span className="flex items-baseline gap-x-2">
+            <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
+            <Copy text={text} />
+          </span>}
+        </div>
+      }
+    },
+    {
+      title: 'controllers_address',
+      dataIndex: 'controllers_address',
+      render: (text: any, record: any) => {
+        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
+        return '--'
+        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
+        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
+        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
+        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
+        //       <Copy text={linkItem} />
+        //     </span>
+        //   }):'--'}
+        // </div>
+      }
+    },
+
+  ],
+}
+
+export const owner_detail_overview= {
+  title:'owner_title',
+  list: [
+    {
+      title: "account_name",
+      dataIndex: "account_id",
+    },
+    {
+      title: "owner_address",
+      dataIndex: "account_address",
+      render: (text:string) => {
+        return <Link className='link' href={`/address/${text}`}>{text}</Link>
+      }
+    },
+    {
+      title: "owned_miners",
+      dataIndex: "owned_miners",
+      render: (text: Array<any>, record:any) => {
+        return <span className="flex items-baseline gap-x-2 flex-wrap">
+          {text&& Array.isArray(text)&&text?.map((item:any,index:number) => {
+            return <Link className='link' key={ index} href={`/miner/${item}`}>{item}</Link>
+          })}
+        </span>
+      }
+    },
+  ],
+}
 
 export const owner_detail = {
   list: [
@@ -250,7 +361,7 @@ export const owner_detail = {
     },
     {
       title: 'owned_active_miners',
-      dataIndex: 'owned_active_miners',
+      dataIndex: 'active_miners',
       render: (text: Array<any>, record: any) => {
         return (
           <span className='flex flex-wrap gap-2.5 items-baseline'>
@@ -299,7 +410,7 @@ export const message_detail = {
     {
       title: 'params', dataIndex: 'data', render: (text:string) => {
         return <div className="break-words">
-          { text}
+          {text}
         </div>
       } },
     { title:'Log Index',dataIndex:'log_index' },
@@ -399,21 +510,22 @@ export const message_detail = {
             </span>
           );
         }
-        if (text?.startsWith('Err')) {
+        if (text?.startsWith('Pend')) {
           return (
-            <span className='flex py-1 gap-x-2 rounded-sm items-center'>
-              {getSvgIcon('errorIcon')}
-              <span className='text_red text-cm'>Error</span>
+            <span className='flex py-1 gap-x-2  rounded-sm items-center'>
+              {getSvgIcon('pendingIcon')}
+              <span className='text-cm'>Pending</span>
             </span>
           );
         }
 
         return (
-          <span className='flex py-1 gap-x-2  rounded-sm items-center'>
-            {getSvgIcon('pendingIcon')}
-            <span className='text-cm'>Pending</span>
+          <span className='flex py-1 gap-x-2 rounded-sm items-center'>
+            {getSvgIcon('errorIcon')}
+            <span className='text_red text-cm'>{text}</span>
           </span>
         );
+
       },
     },
     {
@@ -732,12 +844,12 @@ export const message_detail = {
       render: (text: string, record?: any) => {
         const showValue = text || record?.params;
         if (!showValue) return null;
-        if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
+        if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 6);}
         return (
-          <span className='code'>
-            <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>
+          <div className='code'>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 6)}</pre>
             {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
-          </span>
+          </div>
         );
       },
     },
@@ -953,15 +1065,6 @@ const default_content = [
         text
     }
   },
-  {
-    title: 'owned_miners', dataIndex: 'owned_miners', elasticity:true,type: ['account_basic'], render: (text:string) => {
-      return Array.isArray(text) ? <span className="array_item">
-        {Array.isArray(text) &&text?.map((item:any) => {
-          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
-        })}
-      </span>:text
-    }
-  },
   { title: 'user_count', dataIndex: 'user_count', type: ['account_basic', 'evm_contract'], elasticity: true, render: (text: string) => text ? formatNumber(text) : text },
   {
     title: 'nonce',
@@ -971,15 +1074,6 @@ const default_content = [
   },
   { title: 'transfer_count', dataIndex: 'transfer_count', type: ['account_basic','evm_contract'],elasticity:true,render:(text:string)=>text ?formatNumber(text):text},
 
-  {
-    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
-      return Array.isArray(text) ? <span className="array_item_column array_item_over">
-        {text?.map((item:any,index:number) => {
-          return <div key={ index}>{get_account_type(item)}</div>
-
-        })}
-      </span>:text
-    }},
   {
     title: 'create_time',
     dataIndex: 'create_time',
@@ -997,6 +1091,27 @@ const default_content = [
     dataIndex: 'latest_transfer_time',
     type: ['account_basic'],
     render: (text: number | string) => formatDateTime(text),
+  },
+  {
+    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
+      if(Array.isArray(text) && text.length > 0) return <ShowText content={text} />
+      return null
+      // console.log('signers',text)
+      // return Array.isArray(text) ? <div className="flex items-baseline flex-col  flex-wrap justify-end gap-2">
+      //   {text?.map((item:any,index:number) => {
+      //     return <div className='flex w-full items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
+      //   })}
+      //   {text.length > 2 && <span>All</span> }
+      // </div>:text
+    }},
+  {
+    title: 'owned_miners', dataIndex: 'owned_miners', width:'100%', elasticity:true,type: ['account_basic'], render: (text:string) => {
+      return Array.isArray(text) ? <span className="flex items-center gap-2 flex-wrap">
+        {Array.isArray(text) &&text?.map((item:any) => {
+          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
+        })}
+      </span>:text
+    }
   },
 ];
 
@@ -1062,7 +1177,7 @@ export const account_change = {
 export const power_change = {
   title: 'power_change',
   tabList: [
-    { title: '7d', dataIndex: '7d' },
+    // { title: '7d', dataIndex: '7d' },
     { title: '30d', dataIndex: '1m' },
   ],
   list: [
@@ -1152,7 +1267,7 @@ export const message_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'block_time',
     title: 'time',
-    width: '15%',
+    width: '13%',
     render: (text: string | number) => formatDateTime(text, 'YYYY-MM-DD HH:mm'),
   },
   {
@@ -1177,7 +1292,7 @@ export const message_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'to',
     title: 'to',
-    width: '15%',
+    width: '12%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1196,7 +1311,7 @@ export const message_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'value',
     title: 'value',
-    width: '10%',
+    width: '15%',
     render: (text: number) =>
       text ? formatFilNum(text, false, false) : text || '--',
   },
@@ -1208,7 +1323,7 @@ export const block_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'cid',
     title: 'block_cid',
-    width: '15%',
+    width: '20%',
     render: (text: string) =>
       text ? (
         <Link href={`/tipset/chain?cid=${text}`} className='link_text'>
@@ -1221,7 +1336,7 @@ export const block_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'height',
     title: 'block_height',
-    width: '15%',
+    width: '20%',
     render: (text: string) => (
       <Link href={`/tipset/chain?height=${text}`} className='link_text'>
         {text}
@@ -1236,23 +1351,23 @@ export const block_list = (fromList: any, toList: any) => [
   },
   {
     dataIndex: 'messages_count',
-    width: '10%',
+    width: '20%',
     title: 'block_messages_count',
   },
-  {
-    dataIndex: 'miner_id',
-    width: '15%',
-    title: 'block_miner_id',
-    render: (text: string) => (
-      <Link href={`/miner/${text}`} className='link'>
-        {text}
-      </Link>
-    ),
-  },
+  // {
+  //   dataIndex: 'miner_id',
+  //   width: '15%',
+  //   title: 'block_miner_id',
+  //   render: (text: string) => (
+  //     <Link href={`/miner/${text}`} className='link'>
+  //       {text}
+  //     </Link>
+  //   ),
+  // },
   {
     dataIndex: 'reward',
     title: 'block_mined_reward',
-    width: '15%',
+    width: '20%',
     render: (text: number) =>
       text ? formatFilNum(text, false, false) : text || '--',
   },
@@ -1280,7 +1395,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'from',
     title: 'from',
-    width: '20%',
+    width: '15%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1299,7 +1414,7 @@ export const trance_list = (fromList: any, toList: any) => [
   {
     dataIndex: 'to',
     title: 'to',
-    width: '20%',
+    width: '15%',
     render: (text: string, record: any) => {
       if (!text) return '--';
       return (
@@ -1317,7 +1432,7 @@ export const trance_list = (fromList: any, toList: any) => [
   },
   {
     dataIndex: 'value',
-    width: '15%',
+    width: '20%',
     title: 'value',
     render: (text: number,record:any) => {
       if (!text) return '--';
@@ -1338,7 +1453,7 @@ export const trance_list = (fromList: any, toList: any) => [
     }
 
   },
-  { dataIndex: 'method_name', width: '10%', title: 'method_name' },
+  { dataIndex: 'method_name', width: '15%', title: 'method_name' },
 ];
 
 export const ercToken_list = (fromList: any, toList: any) => {

@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
 import { navMenu } from '@/contents/nav';
-import down from '@/assets/images/down.svg';
 import { Translation } from '@/components/hooks/Translation';
 import Link from 'next/link';
 import Search from './Search';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
+import logoText from '@/assets/images/logoText.svg'
 export default () => {
   const { tr } = Translation({ ns: 'nav' });
   const router = useRouter();
@@ -39,39 +39,39 @@ export default () => {
       <Link
         href={'/'}
         className='flex gap-x-2 items-center text_color cursor-pointer'>
-        <Image src={logo} width={32} height={32} alt='logo' />
-        <span className='font-Barlow font-bold text-xl '>Filscan</span>
+        <Image src={logo} width={40} height={40} alt='logo' />
+        {getSvgIcon('logoText')}
+        {/* <Image src={logoText} alt='logo' width={95} height={16}></Image> */}
+        {/* <span className='font-Barlow font-bold text-xl '>Filscan</span> */}
       </Link>
       <div className='flex-1 ml-5 mr-10'>
         {!isHome && <Search className='!h-10 !max-w-lg	' />}
       </div>
 
-      <div className='flex gap-x-9 h-full justify-between items-center'>
+      <div className='flex relative gap-x-9 h-full justify-between items-center'>
         {navMenu.map((nav, index) => {
           if (nav?.children) {
             return (
               <div
                 key={index}
-                className=' group h-full flex cursor-pointer items-center relative hover:text-primary'>
-                <span className='relative flex gap-x-1 items-center'>
-                  {tr(nav.key)}
-                  <span>{getSvgIcon('downIcon')}</span>
+                className='group h-full relative  gap-x-1 flex cursor-pointer items-center hover:text-primary'>
 
-                  {/* <Image src={down} width={8} height={4} alt='down' /> */}
-                  {nav.sufIcon && <span className='absolute -top-2 -right-7'>{getSvgIcon(nav.sufIcon)}</span>}
-                </span>
+                {tr(nav.key)}
+                <span>{getSvgIcon('downIcon')}</span>
+                {nav.sufIcon && <span className='absolute top-4 -right-[12px]'>{getSvgIcon(nav.sufIcon)}</span>}
                 {renderChild(nav.children, index)}
               </div>
             );
           }
           return (
-            <div key={nav.key} className='relative'>
+            <div className='relative' key={ nav.key}>
               <Link
                 href={`${nav.link}`}
                 className='cursor-pointer text_color  hover:text-primary'>
                 {tr(nav.key)}
               </Link>
-              {nav.sufIcon && <span className='absolute -top-2'>{getSvgIcon(nav.sufIcon)}</span>}</div>
+              {nav.sufIcon && <span className='absolute -top-2 -right-6'>{getSvgIcon(nav.sufIcon)}</span>}
+            </div>
           );
         })}
       </div>

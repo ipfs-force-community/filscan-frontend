@@ -50,7 +50,7 @@ const tipset = {
   //dsn
   dsn_list: '订单列表',
   dsn_total_list:'共 {{value}} 条交易',
-  dsn_placeholder:'搜素 客户/托管者/交易ID',
+  dsn_placeholder:'搜索 客户/托管者/交易ID',
   deal_id: '交易ID',
   piece_cid: '文件ID',
   piece_size: '文件大小',

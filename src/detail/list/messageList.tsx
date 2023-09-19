@@ -18,8 +18,8 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const [loading, setLoading] = useState(false);
-  const { axiosData } = useAxiosData();
+  const [loadingTable, setTableLoading] = useState(false);
+  const { axiosData ,loading} = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
@@ -36,12 +36,12 @@ export default ({
 
   useEffect(() => {
     if (accountId) {
+      setTableLoading(true);
       load();
     }
   }, [accountId, methodName]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
     const showIndex = cur || current;
     const showMethod = method || methodName;
     const result: any = await axiosData(apiUrl.detail_message_list, {
@@ -52,7 +52,7 @@ export default ({
         method_name: showMethod === 'all' ? '' : showMethod,
       },
     });
-    setLoading(false);
+    setTableLoading(false);
     const showList = result?.messages_by_account_id_list || [];
     setData({
       dataSource: showList,
@@ -70,7 +70,7 @@ export default ({
     if (items.length > 0) {
       const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
         addresses: items,
-      });
+      },{loading:false});
       if (type === 'form') {
         setFrom(fnsData);
       } else {
@@ -84,14 +84,17 @@ export default ({
     setCurrent(cur);
     load(cur);
   };
+
   return (
-    <Table
-      key={'list_message'}
-      data={data.dataSource}
-      total={data.total}
-      columns={columns}
-      loading={loading}
-      onChange={handleChange}
-    />
+    <>
+      <span className='absolute -top-5 text_des text-xs'>{tr('message_list_total', {value:data.total})}</span>
+      <Table
+        key={'list_message'}
+        data={data.dataSource}
+        total={data.total}
+        columns={columns}
+        loading={loading}
+        onChange={handleChange}
+      /></>
   );
 };

@@ -16,6 +16,7 @@ import useAxiosData from '@/store/useAxiosData';
 import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
 import { Skeleton } from 'antd';
+import useInterval from '../hooks/useInterval';
 // import Skeleton from '@/packages/skeleton';
 
 export default () => {
@@ -26,16 +27,18 @@ export default () => {
   const [fil, setFilData] = useState<Record<string,string|number>>({})
   const [finalHeight, setFinalHeight] = useState<Record<string,string|number>>({})
 
-  useEffect(() => {
-    loadFilPrice()
-  }, [])
+  // useEffect(() => {
+  //   loadFilPrice()
+  // }, [])
 
+  useInterval(() => {
+    loadFilPrice();
+  }, 15000);
   const loadFilPrice = async () => {
     const result = await axiosData(FilPrice);
     setFilData(result || {})
     const finalHeight = await axiosData(FinalHeight);
     setFinalHeight(finalHeight || {})
-
   }
 
   const handleLangChange = (value: string) => {

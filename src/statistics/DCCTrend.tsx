@@ -150,7 +150,7 @@ export default (props: Props) => {
     cc_dc_trend.list.forEach((item: any) => {
       seriesData.push({
         type: item.type,
-        ...seriesChangeArea,
+        // ...seriesChangeArea,
         data: seriesObj[item.dataIndex],
         name: tr(item.title),
         symbol: 'circle',

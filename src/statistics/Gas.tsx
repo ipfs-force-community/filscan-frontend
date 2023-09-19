@@ -172,7 +172,7 @@ function Gas(props: Props) {
   }, [options, defaultOptions]);
 
   return (
-    <div className={`w-full h-full  ${className}`}>
+    <div className={`w-full h-full ${className}`}>
       <EChart options={newOptions} />
     </div>
   );

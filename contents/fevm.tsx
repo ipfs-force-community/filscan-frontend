@@ -55,7 +55,7 @@ export const defi_market = [
     title: 'staked_change_in_24h',
     dataIndex: 'staked_change_in_24h',
     render: (text:string,record:any) => {
-      return <span className={Number(text) < 0 ? 'down-color':'ups-color' }>
+      return <span className={Number(text) < 0 ? 'text_red':'text_green' }>
         {get$Number(text)}
       </span>
     }
@@ -71,7 +71,7 @@ export const defi_market = [
     title: 'user_change_in_24h',
     dataIndex: 'user_change_in_24h',
     render: (text:string,record:any) => {
-      return <span className={Number(text) < 0 ? 'down-color':'ups-color' }>
+      return <span className={Number(text) < 0 ? 'text_red':'text_green' }>
         {formatNumber(text, 2)}
       </span>
     }
@@ -99,9 +99,7 @@ export const defi_list = {
       title: 'Protocol',
       width: '15%',
       dataIndex: 'protocol',
-      ellipsis: {
-        showTitle: false,
-      },
+
       render: (text: string, record: any) => {
         return (
           <span
@@ -128,9 +126,7 @@ export const defi_list = {
       width: '20%',
       defaultSortOrder: 'descend',
       sorter: true,
-      ellipsis: {
-        showTitle: false,
-      },
+
       render: (text: string, record: any) => {
         if (origin === 'home') {
           return <TextTip text={get$Number(text)} />
@@ -148,7 +144,7 @@ export const defi_list = {
       sorter: true,
       width: '20%',
       render: (text: string) => (
-        <span className={Number(text) < 0 ? 'down-color' : 'ups-color'}>
+        <span className={Number(text) < 0 ? 'text_red':'text_green'}>
           {Number(text).toFixed(2) + '%'}
         </span>
       ),
@@ -160,7 +156,7 @@ export const defi_list = {
       width: '15%',
       render: (text: string) => {
         return (
-          <span className={Number(text) < 0 ? 'down-color' : 'ups-color'}>
+          <span className={Number(text) < 0 ? 'text_red':'text_green'}>
             {get$Number(text)}
           </span>
         );
@@ -207,10 +203,10 @@ export const defi_list = {
 
 export const homeDefiColumns: any = {
   rank: '10%',
-  protocol: '10%',
-  tvl: '25%',
-  tvl_change_rate_in_24h: '35%',
-  users: '20%',
+  protocol: '25%',
+  tvl: '30%',
+  tvl_change_rate_in_24h: '20%',
+  users: '',
 };
 
 export const mobileHomeDefiColumns: string[] = [

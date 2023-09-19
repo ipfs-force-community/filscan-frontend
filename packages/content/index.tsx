@@ -22,15 +22,26 @@ export default (props:ContentProps) => {
   const {contents, data, columns = 1, ns} = props;
   const { tr } = Translation({ ns: ns });
 
+  const showWidth = useMemo(() => {
+    if (columns === 2) {
+      return 'calc(50% - 20px)'
+    }
+    return '100%'
+  },[columns])
+
+  /*
+  ${
+        columns !== 1 ? `grid !grid-cols-2 gap-x-12 gap-y-2.5` : 'flex flex-col p-2.5 gap-y-2'
+      }
+  */
   return (
     <ul
-      className={classNames(styles['detail-content'],`w-full max-h-full ${
-        columns !== 1 ? `grid !grid-cols-2 gap-x-12` : 'flex flex-col p-2.5 gap-y-2'
-      }`,props.className)}>
+      className={classNames(styles['detail-content'],`w-full max-h-full flex flex-wrap p-2.5 gap-y-2 gap-x-10`,props.className)}>
       {contents.map((item, index) => {
         const {
           title,
           dataIndex,
+          width,
           style = {},
           borderTop,
           elasticity,
@@ -52,12 +63,12 @@ export default (props:ContentProps) => {
           <li
             key={index}
             className={
-              classNames(`flex items-center gap-x-2.5 min-h-[32px]
+              classNames(`flex items-baseline gap-2.5 min-h-[32px]
             ${ borderTop ? 'pt-5 border-t border_color relative' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
-            style={{...style }}>
-            <div className={`min-w-[120px] flex-shrink-0 items-center text_des`}>
+            style={{...style,width:width||showWidth }}>
+            <div className={`min-w-[120px] flex-shrink-0 items-baseline text_des self-start`}>
               {showTitle}:
             </div>
             <MobileView>
@@ -69,7 +80,7 @@ export default (props:ContentProps) => {
             <BrowserView>
               <div
                 style={{maxWidth:'calc(100% - 120px)'}}
-                className={classNames(`flex-grow overflow-auto items-center font-DINPro-Medium `,columns !== 1 ? 'flex justify-end' : '')}>
+                className={classNames(`flex-grow overflow-auto items-baseline font-DINPro-Medium `,columns !== 1 ? 'flex justify-end' : '')}>
                 {renderValue}
               </div>
             </BrowserView>

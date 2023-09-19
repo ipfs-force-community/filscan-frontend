@@ -229,7 +229,7 @@ export function formatTime(from:number, to?:number, ago = true) {
   };
 }
 
-export function isIndent(str: string, unit: number = 5, unitNum: number = 4) {
+export function isIndent(str: string, unit: number = 6, unitNum?: number ) {
   const showUnit = unitNum ? unit + unitNum : unit * 2;
   const suffixNum = unitNum || unit;
   return str && unit && str.length > showUnit
@@ -237,13 +237,26 @@ export function isIndent(str: string, unit: number = 5, unitNum: number = 4) {
     : str;
 }
 
+function formatNumberUnit(num:number,len=2) {
+  if (num >= 1e9) {
+    return Number(num / 1e9).toLocaleString('en', { maximumFractionDigits: len }) +'B'
+  }
+  if (num >= 1e6) {
+    return Number(num / 1e6).toLocaleString('en', { maximumFractionDigits: len }) +'M'
+  }
+  // if (num >= 1e3) {
+  //   return Number(num / 1e3).toLocaleString('en', { maximumFractionDigits: len }) +'K'
+  // }
+  return Number(num / 1e6).toLocaleString('en', { maximumFractionDigits: len })
+}
+
 // $ + number
 export function get$Number(str: string | number, len?: number) {
   const showNum = Number(str);
   const newNum =
     showNum < 0
-      ? '-$' + formatNumber(Math.abs(showNum), len)
-      : '$' + formatNumber(showNum, len);
+      ? '-$' + formatNumberUnit(Math.abs(showNum), len)
+      : '$' + formatNumberUnit(showNum, len);
   return newNum;
 }
 //%
@@ -335,11 +348,11 @@ export const account_link = async (value: string) => {
   show_type = result?.result_type;
   switch (show_type) {
   case 'miner':
-    return router.push(`/miner/${value}`);
+    return router.push(`/miner/${value}`, `/miner/${value}`, {scroll:true});
   case 'storageminer':
-    return router.push(`/miner/${value}`);
+    return router.push(`/miner/${value}`, `/miner/${value}`, {scroll:true});
   default:
-    return router.push(`/address/${value}`);
+    return router.push(`/address/${value}`, `/address/${value}`, {scroll:true});
   }
 };
 

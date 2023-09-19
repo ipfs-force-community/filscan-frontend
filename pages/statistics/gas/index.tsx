@@ -20,11 +20,11 @@ export default () => {
   }, [tr]);
 
   return (
-    <div className={classNames(styles['statistics-gas'],'main_contain')}>
+    <div className={classNames(styles['statistics-gas'],'main_contain ')}>
       <div className='flex flex-col text-lg font-medium gap-y-2.5 mb-4 mx-2.5 gas-title'>
         <span>{tr('gas')}</span>
       </div>
-      <div className='w-full h-[348px] card_shadow pr-5 pt-5 pb-2.5 !overflow-hidden border rounded-xl'>
+      <div className='w-full h-[348px] card_shadow pr-5 pt-5 pb-2.5 !overflow-hidden border  border_color rounded-xl'>
         <Gas />
       </div>
       <>

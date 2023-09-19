@@ -15,7 +15,6 @@ import EventLog from './EventLog';
 import Verify from './verify';
 import TokenList from './TokenList';
 import { Translation } from '@/components/hooks/Translation';
-import { useFilscanStore } from '@/store/FilscanStore';
 
 export default ({
   accountId,
@@ -31,12 +30,12 @@ export default ({
   verifyData?:Record<string,any>
   }) => {
   const { tr } = Translation({ ns: 'detail' });
-  const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
   const { hash, hashParams } = useHash();
   const [activeTab,setActiveTab] = useState(defaultActive);
   const { name, p } = hashParams || {};
+  const [total,setTotal] = useState(0)
 
   useEffect(() => {
     if (hash) {
@@ -95,25 +94,29 @@ export default ({
           />
         )}
       </div>
+      <div className='relative'>
 
-      <div className={classNames('card_shadow p-5 mt-5 min-h-[300px] border border_color rounded-xl',styles.table,styles.reset)}>
-        {activeTab === 'message_list' && (
-          <MessageList accountId={accountId} methodName={method} />
-        )}
-        {activeTab === 'block_list' && <BlockList accountId={accountId} />}
-        {activeTab === 'traces_list' && (
-          <TracesList accountId={accountId} methodName={method} />
-        )}
-        {activeTab === 'ercList' && (
-          <TokenList accountId={accountId} />
-        )}
-        {activeTab === 'contract_verify' && (
-          <Verify actorId={actorId} verifyData={verifyData } />
-        )}
-        {activeTab === 'event_log' && (
-          <EventLog actorId={actorId}/>
-        )}
+        <div className={classNames('card_shadow p-5 mt-7 min-h-[300px] border border_color rounded-xl', styles.table, styles.reset)}>
+          {activeTab === 'message_list' && (
+            <MessageList accountId={accountId} methodName={method} />
+          )}
+          {activeTab === 'block_list' && <BlockList accountId={accountId} />}
+          {activeTab === 'traces_list' && (
+            <TracesList accountId={accountId} methodName={method} />
+          )}
+          {activeTab === 'ercList' && (
+            <TokenList accountId={accountId} />
+          )}
+          {activeTab === 'contract_verify' && (
+            <Verify actorId={actorId} verifyData={verifyData } />
+          )}
+          {activeTab === 'event_log' && (
+            <EventLog actorId={actorId}/>
+          )}
+        </div>
+
       </div>
+
     </div>
   );
 };

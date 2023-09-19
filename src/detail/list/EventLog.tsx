@@ -9,8 +9,8 @@ import { Pagination } from "antd";
 import { useEffect, useState } from "react"
 
 export default ({ actorId }: {actorId?:string | string[]}) => {
-  const { axiosData } = useAxiosData()
-  const [loading, setLoading] = useState(false);
+  const { axiosData,loading } = useAxiosData()
+  //const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
   const [current, setCurrent] = useState(1)
   const [total,setTotal]= useState(0)
@@ -23,14 +23,14 @@ export default ({ actorId }: {actorId?:string | string[]}) => {
   }, [actorId])
 
   const load = async (cur?:number) => {
-    setLoading(true);
+    // setLoading(true);
     const showIndex= cur||current
     const result = await axiosData(apiUrl.contract_verify_logs, {
       actor_id: actorId,
       page: showIndex -1,
       limit:5
     })
-    setLoading(false)
+    // setLoading(false)
     setData(result?.event_list || [])
     setTotal(result?.total_count)
   }

@@ -1,0 +1,13 @@
+.wrap_404{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 200px;
+    background-color: var(--main-bg-color);
+    padding: 10px 0px;
+    &_img{
+        width: 800px;
+        margin: auto auto 50px auto;
+    }
+}

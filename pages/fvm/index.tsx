@@ -56,14 +56,14 @@ export default () => {
         </li> */}
       </ul>
       <div className="flex-1">
-        {active === 'all'&&<div className="text-lg font-DINPro-Medium mb-5"> Hot Product</div>}
+        {/* {active === 'all'&&<div className="text-lg font-DINPro-Medium mb-5"> Hot Product</div>} */}
         <ul className="flex flex-wrap gap-4">
           {content.map((item:any,index:number) => {
-            return <li key={index } className="flex justify-between items-center w-[240px] h-[78px] px-4 py-5 border border_color card_shadow rounded-[12px] ">
+            return <li key={index } className="flex justify-between items-center w-[220px] m-h-[68px] p-4 border border_color card_shadow rounded-[12px] !overflow-hidden	">
               <div className="flex items-center gap-x-1">
                 <Image src={item.logo} alt='' width='36' height='36' />
                 <span className="flex flex-col ">
-                  <span className="text-lg font-DINPro-Bold">{item?.name||''}</span>
+                  <span className="font-medium">{item?.name||''}</span>
                   <span className="text-xs text_des">{item?.detail||''}</span>
                 </span>
               </div>

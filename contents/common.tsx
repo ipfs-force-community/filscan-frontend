@@ -4,6 +4,7 @@ import { formatDateTime, formatFilNum, formatNumber, get$Number, getClassName } 
 import Image from 'next/image';
 import { Item, Option_Item } from './type';
 import TimerHtml from '@/components/TimerHtml';
+import Skeleton from '@/packages/skeleton';
 
 interface TOP_DATA {
   left: Item[];
@@ -14,7 +15,8 @@ export const header_top: TOP_DATA = {
     {
       title: 'fil',
       dataIndex: 'price',
-      render: (text: number,record) =>{
+      render: (text: number, record) => {
+        if (!text) return null
         const changeText =record?.percent_change_24h&& Number(record.percent_change_24h);
         const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
         const flag = changeText ? changeText > 0 ? '+' : '-':'';
@@ -32,13 +34,13 @@ export const header_top: TOP_DATA = {
     {
       title: 'base_fee',
       dataIndex: 'base_fee',
-      render: (text: number) => <span className='text_primary'>{formatFilNum(text,false,false,2)} </span>,
+      render: (text: number) => <span className='text_primary'>{text?formatFilNum(text,false,false,2):text} </span>,
     },
     {
       title: 'last_height',
       dataIndex: 'height',
       render: (text: number) => (
-        <span className='text_primary'>{formatNumber(text,2)} </span>
+        <span className='text_primary'>{text?formatNumber(text,2):text} </span>
       ),
     },
   ],

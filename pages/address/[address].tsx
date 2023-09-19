@@ -2,7 +2,7 @@
 
 import Copy from '@/components/copy';
 import { Translation } from '@/components/hooks/Translation';
-import { apiUrl } from '@/contents/apiUrl';
+import { TransMethod, apiUrl } from '@/contents/apiUrl';
 import { address_detail, address_tabs } from '@/contents/detail';
 import Content from '@/packages/content';
 import Segmented from '@/packages/segmented';
@@ -31,9 +31,10 @@ export default () => {
   const [accountType, setAccountType] = useState('');
   const [interval, setInterval] = useState('24h');
   const [methodOptions, setMethodOptions] = useState([]);
+  const [transOptions,setTransOptions] = useState([])
   const [actorId,setActorId] = useState('')
   const [loading, setLoading] = useState(false);
-  const [domain, setDomain] = useState<any>({})
+  const [domains, setDomains] = useState<any>({})
 
   useEffect(() => {
     setActorId('');
@@ -43,7 +44,7 @@ export default () => {
     if (address) {
       loadMethod();
       load();
-      loadFnsDomain()
+      loadFnsDomain(address)
     }
   }, [address]);
 
@@ -61,6 +62,20 @@ export default () => {
       newMethod.push({ label: li, dataIndex: li, value: li });
     });
     setMethodOptions(newMethod);
+
+    // const result1: any = await axiosData(TransMethod, {
+    //   account_id: address,
+    // },{isCancel:false});
+    // const newTransMethod: any = [
+    //   {
+    //     label:'all',
+    //     value: 'all',
+    //   },
+    // ];
+    // Object.keys(result?.method_name_list || {}).forEach((li: string) => {
+    //   newMethod.push({ label: li, dataIndex: li, value: li });
+    // });
+    // setMethodOptions(newMethod);
   };
 
   const load = async () => {
@@ -112,7 +127,7 @@ export default () => {
   const loadERC20TokenList = async (id:string) => {
     const tokenList = await axiosData(apiUrl.contract_ERC20TokenList, { address: id });
     const items: any = [];
-    if (tokenList && Object.keys(tokenList).length > 0) {
+    if (tokenList && Object.keys(tokenList).length > 0 && tokenList?.items?.length >0) {
       const objTotal:any = {
         title: `$${formatNumber(tokenList?.total_value,4)} (${tokenList?.total} Tokens)`,
         value: `$${tokenList?.total_value} (${tokenList?.total})`
@@ -143,9 +158,9 @@ export default () => {
 
   }
 
-  const loadFnsDomain = async () => {
-    const result = await axiosData(`${apiUrl.contract_fnsUrl}`, { addresses: [address] })
-    setDomain(result)
+  const loadFnsDomain = async (addr:string|string[]) => {
+    const result = await axiosData(`${apiUrl.contract_fnsUrl}`, { addresses: [addr] }, {isCancel:false})
+    setDomains(result)
   }
 
   const contentList = useMemo(() => {
@@ -189,8 +204,9 @@ export default () => {
         <BrowserView>
           <span className={classNames(styles.text,'ml-4 flex items-center gap-x-1')}>
             <span>{address || ''}</span>
+            { address&& typeof address ==='string' && <Copy text={address} />}
           </span>
-          {typeof address === 'string' && domain?.domains && domain?.domains[address] && <Link className='ml-2' href={`/domain/${domain?.domains[address]}?provider=${domain.provider}`}>({ domain?.domains[address]})</Link> }
+          {typeof address === 'string' && domains?.domains && domains?.domains[address] && <Link className='ml-2' href={`/domain/${domains?.domains[address]}?provider=${domains.provider}`}>({ domains?.domains[address]})</Link> }
         </BrowserView>
       </div>
       <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>

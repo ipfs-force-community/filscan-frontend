@@ -36,7 +36,6 @@ export default ({ origin }: { origin: string }) => {
   const { theme, lang } = useFilscanStore();
 
   const [active, setActive] = useState('growth');
-  const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<any>({});
   const [data, setData] = useState({ ...defaultData });
   const [poolData, setPoolData] = useState({ ...defaultData });
@@ -45,11 +44,10 @@ export default ({ origin }: { origin: string }) => {
   const [current, setCurrent] = useState(1);
   const [headerFilter, setHeaderFilter] = useState<any>();
   const [sort, setSort] = useState<any>({});
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading} = useAxiosData();
 
   useEffect(() => {
     const showHash = hash || 'growth';
-
     if (showHash === 'growth' || showHash === 'rewards') {
       setHeaderFilter({ ...defaultFilter });
     }
@@ -83,7 +81,6 @@ export default ({ origin }: { origin: string }) => {
       };
 
       const showFilter = filter || headerFilter;
-      setLoading(true);
       const linkUrl: any = `rank_${showActive}`;
       const filters = showFilter
         ? {
@@ -103,7 +100,6 @@ export default ({ origin }: { origin: string }) => {
         },
         ...filters,
       });
-      setLoading(false);
       if (data) {
         const showData = data?.items || [];
         if (

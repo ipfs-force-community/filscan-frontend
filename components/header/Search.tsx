@@ -8,6 +8,8 @@ import { apiUrl } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { spawn } from 'child_process';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export default ({
   origin,
@@ -17,17 +19,20 @@ export default ({
   className?: string;
   }) => {
 
-  const { axiosData } = useAxiosData()
+  const { axiosData, } = useAxiosData()
   const router = useRouter();
   const [options, setOptions] = useState([])
-  const [active,setActive] = useState('')
+  const [active, setActive] = useState('')
+  const [searchLoading, setSearchLoading] = useState(false)
 
   const handleSearch = async(value:string) => {
     const showInput = value.trim();
     if (showInput) {
+      setSearchLoading(true)
       const result=await axiosData(apiUrl.searchInfo, {
         input:showInput,
       })
+      setSearchLoading(false)
       const type = result?.result_type;
       if (type) {
         if (type === 'owner') {
@@ -36,13 +41,13 @@ export default ({
         } else if (type === 'address') {
           router.push(`/address/${showInput}`)
         } else if (type === 'height') {
-          router.push(`/tipset/chain?height=${showInput}`)
+          router.push(`/height/${showInput}`)
         } else if (type === 'message_details') {
           router.push(`/message/${showInput}`)
         } else if (type === 'miner') {
           router.push(`/miner/${showInput}`)
         } else if (type === 'block_details') {
-          router.push(`/tipset/chain?cid=${showInput}`)
+          router.push(`/cid/${showInput}`)
         } else if (type === 'fns') {
           if (result?.fns_tokens.length > 0) {
             setOptions(result?.fns_tokens||[])
@@ -73,12 +78,15 @@ export default ({
         origin={origin}
         onClick={handleSearch}
         suffix={
-          <Image
-            src={searchIcon}
-            width={origin === 'banner' ? 40 : 21}
-            height={origin === 'banner' ? 40 : 21}
-            alt=''
-          />
+          searchLoading ? <span className='flex items-center justify-center bg-primary rounded-[5px]'
+            style={{ width: origin === 'banner' ? 40 : 21, height: origin === 'banner' ? 40 : 21 }}>
+            <LoadingOutlined className='custom-icon text-xs'/></span> :
+            <Image
+              src={searchIcon}
+              width={origin === 'banner' ? 40 : 21}
+              height={origin === 'banner' ? 40 : 21}
+              alt=''
+            />
         }
       />
       { active==='fns' && options && options.length > 0 &&

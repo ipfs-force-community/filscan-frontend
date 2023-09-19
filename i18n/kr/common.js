@@ -5,6 +5,8 @@ const common = {
   login: '로그인',
   cancel: '취소',
   confirm: '확인',
+  open: '펼치기',
+  no_open:'접기',
   lang: '한국어',
   fil: 'FIL',
   last_time: '최신 블록 시간',

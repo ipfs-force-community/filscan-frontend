@@ -16,8 +16,8 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-  const [loading, setLoading] = useState(false);
-  const { axiosData } = useAxiosData();
+  const [loadingTable, setTableLoading] = useState(false);
+  const { axiosData,loading } = useAxiosData();
   const [data, setData] = useState({
     dataSource: [],
     total: 0,
@@ -39,7 +39,7 @@ export default ({
   }, [accountId]);
 
   const load = async (cur?: number,) => {
-    setLoading(true);
+    setTableLoading(true);
     const showIndex = cur || current;
     const result: any = await axiosData(apiUrl.contract_ERC20Transfers, {
       address: accountId,
@@ -48,7 +48,7 @@ export default ({
         limit: pageLimit,
       },
     });
-    setLoading(false);
+    setTableLoading(false);
     const showList = result?.items || [];
     setData({
       dataSource: showList,
@@ -66,7 +66,7 @@ export default ({
     if (items.length > 0) {
       const fnsData = await axiosData(`${apiUrl.contract_fnsUrl}`, {
         addresses: items,
-      });
+      }, {loading: false});
       if (type === 'form') {
         setFrom(fnsData);
       } else {
@@ -81,13 +81,15 @@ export default ({
     load(cur);
   };
   return (
-    <Table
-      key='list_token'
-      data={data.dataSource}
-      total={data.total}
-      columns={columns}
-      loading={loading}
-      onChange={handleChange}
-    />
+    <>
+      <span className='absolute -top-5 text_des text-xs'>{tr('contract_token_list_total', {value:data.total})}</span>
+      <Table
+        key='list_token'
+        data={data.dataSource}
+        total={data.total}
+        columns={columns}
+        loading={loading}
+        onChange={handleChange}
+      /></>
   );
 };
