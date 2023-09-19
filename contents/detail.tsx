@@ -1090,10 +1090,10 @@ const default_content = [
     render: (text: number | string) => formatDateTime(text),
   },
   {
-    title: 'Signers', dataIndex: 'signers', width:'100%', elasticity: true, render: (text: string) => {
-      return Array.isArray(text) ? <div className="flex items-baseline flex-wrap justify-end gap-2">
+    title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
+      return Array.isArray(text) ? <div className="flex items-baseline flex-col  flex-wrap justify-end gap-2">
         {text?.map((item:any,index:number) => {
-          return <div className='flex items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
+          return <div className='flex w-full items-center gap-x-1 justify-end' key={ index}>{get_account_type(item,0)}</div>
 
         })}
       </div>:text
