@@ -101,7 +101,7 @@ const mobileContent = new Map(
         return data.length ? data.map((dataSource, index) => {
           return (
             <div className={styles['mobile-table-card']} key={index}>
-              {columns.map((item: any, index: number) => {
+              {columns.map((item: any, idx: number) => {
                 const { title, dataIndex, render } = item;
                 const showTitle =
                   typeof title === 'function' ? title(
@@ -111,6 +111,7 @@ const mobileContent = new Map(
                   ) : title;
                 let showValue = dataSource[dataIndex];
                 if (render) {
+                  console.log("=================",dataIndex[dataIndex],dataSource,index)
                   showValue = render(
                     dataSource[dataIndex],
                     dataSource,
