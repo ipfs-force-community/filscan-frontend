@@ -20,9 +20,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // images: {
-  //   domains: ['filscan-v2.oss-cn-hongkong.aliyuncs.com','filscan-v2.oss-accelerate.aliyuncs.com'],
-  // },
+  webpack(config){
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            typescript: true,
+            icon: true,
+          },
+        },
+      ],
+    })
+    return config
+  }
 }
 
 module.exports = nextConfig

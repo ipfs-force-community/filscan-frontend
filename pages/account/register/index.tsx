@@ -9,8 +9,7 @@ import { Button, Form, Input } from 'antd';
 import { useState } from 'react';
 import messageManager from '@/packages/message';
 import Link from 'next/link';
-import Image from 'next/image';
-import errorIcon from '@/assets/images/error.svg';
+import ErrorIcon from '@/assets/images/error.svg';
 import Success from '@/src/account/success';
 import useAxiosData from '@/store/useAxiosData';
 import Banner from '@/src/account/Banner';
@@ -43,7 +42,7 @@ export default () => {
       messageManager.showMessage({
         type: 'error',
         content: tr('no_account'),
-        icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
+        icon: <ErrorIcon width={14} height={14} />,
       });
     }
   };

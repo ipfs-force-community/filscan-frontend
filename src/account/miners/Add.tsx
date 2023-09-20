@@ -3,10 +3,9 @@
 import { Translation } from '@/components/hooks/Translation';
 import Search from '@/components/search';
 import Breadcrumb from '@/packages/breadcrumb';
-import del_light from '@/assets/images/del_light.svg';
+import DelLight from '@/assets/images/del_light.svg';
 import { useState } from 'react';
-import Image from 'next/image';
-import errorIcon from '@/assets/images/error.svg';
+import ErrorIcon from '@/assets/images/error.svg';
 import messageManager from '@/packages/message';
 import CreateGroup from './CreateGroup';
 import { getSvgIcon } from '@/svgsIcon';
@@ -46,7 +45,7 @@ export default ({
       return messageManager.showMessage({
         type: 'error',
         content: 'please add minerId',
-        icon: <Image src={errorIcon} width={18} height={18} alt='' />,
+        icon: <ErrorIcon width={18} height={18} />,
         suffix: (
           <span
             className='cursor-pointer'
@@ -62,7 +61,7 @@ export default ({
       return messageManager.showMessage({
         type: 'error',
         content: '添加节点已达上限，请删除部分节点后添加新',
-        icon: <Image src={errorIcon} width={18} height={18} alt='' />,
+        icon: <ErrorIcon width={18} height={18} />,
         suffix: (
           <span
             className='cursor-pointer'
@@ -155,7 +154,7 @@ export default ({
                     className='bg-bg_hover px-2 py-1 w-fit rounded-[5px] flex items-center justify-between gap-x-6'
                     key={miner.miner_id + index}>
                     {miner.miner_id}
-                    <Image
+                    <DelLight
                       className='cursor-pointer'
                       width={12}
                       height={12}
@@ -163,8 +162,6 @@ export default ({
                         const newArr = [...addMiners];
                         newArr.splice(index, 1), setAddMiner(newArr);
                       }}
-                      alt='del'
-                      src={del_light}
                     />
                   </li>
                 );

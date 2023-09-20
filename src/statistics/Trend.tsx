@@ -7,10 +7,9 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime, isMobile, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
-import go from '@/assets/images/black_go.svg';
-import goMobile from '@/assets/images/icon-right-white.svg';
+import GoIcon from '@/assets/images/black_go.svg';
+import GoMobileIcon from '@/assets/images/icon-right-white.svg';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import useObserver from '@/components/hooks/useObserver';
 import styles from './trend.module.scss'
@@ -289,20 +288,16 @@ export default (props: Props) => {
         {origin === 'home' && (
           <Link href={`/statistics/power/`}>
             <MobileView>
-              <Image
-                src={goMobile}
+              <GoMobileIcon
                 width={28}
                 height={28}
-                alt='go'
               />
             </MobileView>
             <BrowserView>
-              <Image
+              <GoIcon
                 className='cursor-pointer mr-2.5'
-                src={go}
                 width={18}
                 height={18}
-                alt='go'
               />
             </BrowserView>
 

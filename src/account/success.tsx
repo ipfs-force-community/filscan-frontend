@@ -1,8 +1,7 @@
 /** @format */
 
-import success from '@/assets/images/success.svg';
+import Success from '@/assets/images/success.svg';
 import { Translation } from '@/components/hooks/Translation';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 export default ({ type = '',text ,btnText}: { type?: string,btnText:string,text:string }) => {
@@ -15,7 +14,7 @@ export default ({ type = '',text ,btnText}: { type?: string,btnText:string,text:
 
   return (
     <div className='m-auto flex items-center flex-col pt-12 mt-5 pb-5 px-5 main_bg_color rounded-[5px]'>
-      <Image src={success} width={80} height={80} alt='' />
+      <Success width={80} height={80} />
       <span className='font-PingFang font-semibold text-lg mt-5'>
         {tr('welcome')}
       </span>

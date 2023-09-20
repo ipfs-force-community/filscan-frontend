@@ -6,15 +6,14 @@ import useAxiosData from "@/store/useAxiosData";
 import { formatDateTime, formatFilNum, get_account_type, unitConversion } from "@/utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import dealMiner from '@/assets/images/dealMiner.svg'
-import dealClient from '@/assets/images/dealClient.svg'
-import cloud from '@/assets/images/cloud.svg'
-import Image from 'next/image'
+import DealMiner from '@/assets/images/dealMiner.svg'
+import DealClient from '@/assets/images/dealClient.svg'
+import Cloud from '@/assets/images/cloud.svg'
 import { BrowserView, MobileView } from "@/components/device-detect";
 import styles from './index.module.scss'
 import classNames from "classnames";
 import Copy from "@/components/copy";
-import copySvgMobile from '@/assets/images/icon-copy.svg';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 
 export default () => {
   const router = useRouter();
@@ -46,13 +45,12 @@ export default () => {
           <div className="flex gap-x-5 ml-4">
             <div className="flex items-center justify-center gap-y-2 flex-col py-2.5 w-[114px] h-[114px] rounded-[5px] border border-color ">
               <span>{tr(deal_list.content.left_title)}</span>
-              <Image src={dealClient} width={36} height={ 36} alt='' />
+              <DealClient width={36} height={ 36} />
               {data?.client_id &&<span className="flex gap-x-1 items-center">{get_account_type(data.client_id)}</span> }
             </div>
             <div className="flex items-center justify-center flex-col gap-y-4 py-2.5 w-[383px] h-[114px] rounded-[5px] border border-color ">
               <span className="flex items-center gap-x-1 text_color font-DINPro-Medium">
-                <Image src={cloud} width={14} height={14} alt='' />
-
+                <Cloud width={14} height={14} />
                 { data?.piece_size && unitConversion( data.piece_size)}
               </span>
               <span>
@@ -68,7 +66,7 @@ export default () => {
             </div>
             <div className="flex items-center justify-center gap-y-2 flex-col py-2.5 w-[114px] h-[114px] rounded-[5px] border border-color ">
               <span>{tr(deal_list.content.right_title)}</span>
-              <Image src={dealMiner} width={36} height={ 36} alt='' />
+              <DealMiner width={36} height={ 36} />
               {data?.provider_id &&<span className="flex gap-x-1 items-center"> {get_account_type(data.provider_id)}</span> }
 
             </div>
@@ -82,7 +80,7 @@ export default () => {
         </div>
         <div className={styles.card}>
           <div className={styles.left}>
-            <Image src={dealClient} width={45} height={45} alt='' />
+            <DealClient width={45} height={45} />
           </div>
           <div className={styles.right}>
             <div className={styles.name}>{tr(deal_list.content.left_title)}</div>
@@ -90,14 +88,14 @@ export default () => {
             {data?.client_id &&
              <span className='copy-row'>
                <span className='text'>{data?.client_id}</span>
-               <Copy text={data.client_id} icon={copySvgMobile} className='copy'/>
+               <Copy text={data.client_id} icon={<CopySvgMobile/>} className='copy'/>
              </span> }
           </div>
         </div>
 
         <div className={classNames(styles.space,`flex items-center justify-center flex-col gap-y-4 py-2.5 h-[114px] rounded-[5px] border border-color`)}>
           <span className="flex items-center gap-x-1 text_color font-DINPro-Medium">
-            <Image src={cloud} width={14} height={14} alt='' />
+            <Cloud width={14} height={14} />
             { data?.piece_size && unitConversion( data.piece_size)}
           </span>
           <span>
@@ -115,14 +113,14 @@ export default () => {
 
         <div className={styles.card}>
           <div className={styles.left}>
-            <Image src={dealClient} width={45} height={45} alt='' />
+            <DealClient width={45} height={45} />
           </div>
           <div className={styles.right}>
             <div className={styles.name}>{tr(deal_list.content.right_title)}</div>
             {data?.provider_id &&
              <span className='copy-row'>
                <span className='text'>{data.provider_id}</span>
-               <Copy text={data.provider_id} icon={copySvgMobile} className='copy'/>
+               <Copy text={data.provider_id} icon={<CopySvgMobile/>} className='copy'/>
              </span>
             }
           </div>

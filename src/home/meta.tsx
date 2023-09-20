@@ -9,12 +9,7 @@ import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
 import Skeleton from '@/packages/skeleton';
 import Tooltip from '@/packages/tooltip';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import meta_des from '@/assets/images/meta_des.svg'
-import Image from 'next/image'
 import useInterval from '@/components/hooks/useInterval';
-
-//type A = (typeof home_meta)[number]['dataIndex'] --> Record<A,number|undefined>
 
 type ElementType<T extends readonly any[]> =
   T extends readonly (infer ElementType)[] ? ElementType : never;
@@ -22,24 +17,9 @@ type DataIndex = ElementType<typeof home_meta>['dataIndex'];
 
 type Item = ElementType<typeof home_meta>;
 
-// const mockData: Record<DataIndex, number | undefined> & {
-//   [key: string]: number | undefined;
-// } = {
-//   power_increase_24h: 3740899077455872,
-//   increase_24h: -46.23,
-//   add_power_in_32g: 6732636259164418311,
-//   miner_initial_pledge: 6732636359164418311,
-//   fil_per_tera_24h: 374089907741648311,
-//   total_contract: 5678.9012,
-//   contract_24h: 123,
-//   contract_transaction: 6789.0123,
-//   contract_address: 7890.1234,
-//   gas_24: 8901.2345,
-// };
 function Meta() {
   const { tr } = Translation({ ns: 'home' });
   const { axiosData} = useAxiosData()
-  // const ref = useObserver();
 
   const [data, setData] = useState<
     Record<DataIndex, number | undefined> & {
@@ -57,7 +37,6 @@ function Meta() {
     setData(data?.total_indicators || {});
     const result: any = await axiosData(EvmContractSummary);
     setContractData(result || {})
-    //setData(data?.total_indicators || {});
   };
 
   // useInterval(() => {
@@ -112,7 +91,6 @@ function Meta() {
               </div>
             </Tooltip>
 
-            {/* <Image className='absolute top-2 right-8 blink' src={meta_des} width={12} height={ 12} alt=''/> */}
             <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
               {tr(title)}
               { item.tip && <Tooltip context={tr(item.tip)} icon={true}/>}

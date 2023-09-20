@@ -1,14 +1,12 @@
 /** @format */
 import Search from '@/components/search';
 import { search } from '@/contents/common';
-import searchIcon from '@/assets/images/searchIcon_w.svg';
+import SearchIcon from '@/assets/images/searchIcon_w.svg';
 import Image from 'next/image';
 import useAxiosData from '@/store/useAxiosData';
 import { apiUrl } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { spawn } from 'child_process';
-import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 export default ({
@@ -81,11 +79,9 @@ export default ({
           searchLoading ? <span className='flex items-center justify-center bg-primary rounded-[5px]'
             style={{ width: origin === 'banner' ? 40 : 21, height: origin === 'banner' ? 40 : 21 }}>
             <LoadingOutlined className='custom-icon text-xs'/></span> :
-            <Image
-              src={searchIcon}
+            <SearchIcon
               width={origin === 'banner' ? 40 : 21}
               height={origin === 'banner' ? 40 : 21}
-              alt=''
             />
         }
       />

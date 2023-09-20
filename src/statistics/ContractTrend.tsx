@@ -1,16 +1,13 @@
 /** @format */
-import { EvmTxsHistory, apiUrl } from '@/contents/apiUrl';
+import { EvmTxsHistory } from '@/contents/apiUrl';
 import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
-import { contract_trend, power_trend, timeList } from '@/contents/statistic';
+import { contract_trend, timeList } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, isMobile, unitConversion } from '@/utils';
+import { formatDateTime, isMobile } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
-import go from '@/assets/images/black_go.svg';
-import goMobile from '@/assets/images/icon-right-white.svg';
+import GoMobileIcon from '@/assets/images/icon-right-white.svg';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import useObserver from '@/components/hooks/useObserver';
 import styles from './trend.module.scss'
@@ -194,11 +191,9 @@ export default (props: Props) => {
             <>
               <MobileView>
                 <Link href={`/statistics/charts#contract`}>
-                  <Image
-                    src={goMobile}
+                  <GoMobileIcon
                     width={28}
                     height={28}
-                    alt='go'
                   /></Link>
               </MobileView>
               <BrowserView>
@@ -206,15 +201,6 @@ export default (props: Props) => {
                   <Select ns={'static'} key={`static_${origin}_contract`}
                     options={timeList} value={interval}
                     onChange={(interval) => { setInterval(interval); load(interval) }} />
-                  {/* <Link href={`/statistics/charts#contract`}>
-                    <Image
-                      className='cursor-pointer mr-2.5'
-                      src={go}
-                      width={18}
-                      height={18}
-                      alt='go'
-                    />
-                  </Link> */}
                 </div>
               </BrowserView></>
           )}

@@ -2,9 +2,8 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { UserInfo } from '@/store/UserStore';
-import Image from 'next/image';
-import logo from '@/assets/images/logo.svg';
-import user from '@/assets/images/user.svg';
+import Logo from '@/assets/images/logo.svg';
+import UserIcon from '@/assets/images/user.svg';
 import { formatDateTime, max_name_length, validatePassword } from '@/utils';
 import { personal_setting } from '@/contents/account';
 import { Button, Form, Input } from 'antd';
@@ -64,7 +63,7 @@ export default () => {
       <div className='card_shadow mt-8 p-5 border border_color rounded-xl'>
         <div className='flex justify-between'>
           <div className='flex gap-x-2 items-center'>
-            <Image src={logo} alt={'author'} width={60} height={60} />
+            <Logo width={60} height={60} />
             <div className='flex flex-col justify-start '>
               <div className='flex items-center gap-x-2'>
                 {edit ? <Input defaultValue={userInfo.name}
@@ -84,7 +83,7 @@ export default () => {
           </div>
           <div className='flex flex-col items-end'>
             <span className='des_bg_color flex gap-x-2 px-[6px] w-fit py-1 rounded-[5px]'>
-              <Image src={user} width={20} height={20} alt='' />
+              <UserIcon width={20} height={20} />
               <span>{tr('default_user')}</span>
             </span>
             <span className='mt-2 text_des text-xs '>

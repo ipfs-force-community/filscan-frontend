@@ -1,3 +1,23 @@
+.wrap {
+  .twitter,
+  .network {
+    
+    svg {
+      width: 10px;
+      height:10px;
+
+      fill:var(--font-color);
+    }
+  }
+
+  .twitter:hover,.network:hover {
+    background: var(--primary);
+    svg {
+      fill: var(--activeColor);
+    }
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .wrap {
     padding-inline: 12px;
@@ -13,8 +33,6 @@
           border-radius: 6px;
           background-color: var(--mobile-bg-color-unimportant);
         }
-
-   
       }
       
     }
@@ -50,6 +68,12 @@
           height: 20px;
           border: 1px solid var(--mobile-divide-line);
           border-radius: 4px;
+
+          svg {
+            width: 10px;
+            height:10px;
+      
+          }
         }
       }
     }

@@ -1,6 +1,4 @@
 import IconLogo from '@/assets/images/logo.svg'
-import IconClose from '@/assets/images/header/icon_close.svg'
-import IconOpen from '@/assets/images/header/icon_open.svg'
 import Image from 'next/image'
 import styles from './index.module.scss'
 import classNames from 'classnames'
@@ -30,7 +28,7 @@ const Header = () => {
 
   return <div className={styles['footer-wrap']}>
     <div className={styles.top}>
-      <Image src={IconLogo} alt='' />
+      <IconLogo />
       <div>Filscan.io</div>
     </div>
     <div className={classNames(styles['text'])}>        <span>

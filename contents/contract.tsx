@@ -3,7 +3,7 @@
 import Copy from '@/components/copy';
 import TpWallet from '@/components/TPWallet'
 import Tooltip from '@/packages/tooltip';
-import copySvgMobile from '@/assets/images/icon-copy.svg';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 import {
   formatDateTime,
   formatFilNum,
@@ -705,7 +705,7 @@ export const nft_details = {
                       <Link href={`/address/${text}`} className='link'>
                         {text}
                       </Link>
-                      <Copy text={text} icon={copySvgMobile} className='copy'/>
+                      <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
                     </span>
                   </MobileView></>
               );

@@ -13,7 +13,7 @@ import Link from 'next/link';
 import Copy from '@/components/copy';
 import { getSvgIcon } from '@/svgsIcon';
 import { BrowserView, MobileView } from '@/components/device-detect';
-import copySvgMobile from '@/assets/images/icon-copy.svg';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import DropDown from '@/packages/customDrop';
@@ -465,7 +465,7 @@ export const message_detail = {
             <MobileView>
               <span className='copy-row'>
                 <span className='text'>{text}</span>
-                <Copy text={text} icon={copySvgMobile} className='copy'/>
+                <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               </span>
             </MobileView>
           </>
@@ -490,7 +490,7 @@ export const message_detail = {
             <MobileView>
               <span className='copy-row'>
                 <span className='text'>{text}</span>
-                <Copy text={text} icon={copySvgMobile} className='copy'/>
+                <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               </span>
             </MobileView>
           </>
@@ -822,7 +822,7 @@ export const message_detail = {
                           {item}
                         </Link>
                       </span>
-                      <Copy text={item} icon={copySvgMobile} className='copy'/>
+                      <Copy text={item} icon={<CopySvgMobile/>} className='copy'/>
                     </span>
                   </MobileView>
                 </>
@@ -928,7 +928,7 @@ const default_content = [
           <MobileView>
             <span className='copy-row'>
               <span className='normal-text'>{text}</span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
                 {tr('account_detail')}
               </Link>}
@@ -973,7 +973,7 @@ const default_content = [
           <MobileView>
             <span className='copy-row'>
               <span className='normal-text'>{text}</span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
             </span>
           </MobileView>
         </>
@@ -996,7 +996,7 @@ const default_content = [
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{text}</span>
-            <Copy text={text} icon={copySvgMobile} className='copy'/>
+            <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
           </span>
         </MobileView>
       </>)
@@ -1058,7 +1058,7 @@ const default_content = [
             <MobileView>
               <span className='copy-row'>
                 <span className='normal-text'>{text}</span>
-                <Copy text={text} icon={copySvgMobile} className='copy'/>
+                <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               </span>
             </MobileView>
           </>
@@ -1562,7 +1562,7 @@ export const cid_list = {
           <MobileView>
             <span className='copy-row'>
               <span className='text'>{text}</span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
             </span>
           </MobileView>
         </>
