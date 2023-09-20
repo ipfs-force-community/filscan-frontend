@@ -65,7 +65,7 @@ const statistic = {
   all_message_count: 'Messages Variation per Block',
   all_message_count_tip:'Messages Included per Block',
   acc_block_rewards: 'Cumulative Block Rewards',
-  pie_title_a: 'Released FIL Usage Statistics',
+  pie_title_a: 'Current statistics on the distribution of FIL usage',
   pie_title_a_tip:'Total FIL Rewarded + Locked Rewards Released + Reserved FIL Allocated = Currently Released Fil',
   pie_title_b: 'Released FIL Usage Statistics',
   mined: 'Total FIL Rewarded',
@@ -77,11 +77,14 @@ const statistic = {
   locked: 'Total Sector Pledge',
   burnt: 'Total FIL Burned',
   circulating: 'Circulating Supply',
+
   //chartsnav
   cc_dc_power: 'CC/DC PowerTrend',
   static_overview: 'Charts',
   contract_trend: 'Contract Transaction',
   fil_overview: 'FIL Overview',
+  charts_title:'FIL Allocation Guidelines',
+
 }
 
 export default statistic

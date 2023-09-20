@@ -88,15 +88,14 @@ function Meta() {
         let tipContent;
         if (item.tipContent && Array.isArray(item.tipContent)) {
           tipContent = <ul className='px-2 pt-2 w-fit'>
-
             {item.tipContent.map((tipItem: any) => {
               let tipValue = dataSource[tipItem.dataIndex];
               if (tipItem.render) {
                 tipValue =tipItem.render(tipValue,dataSource)
               }
-              return <li key={tipItem.dataIndex} className='flex mb-2.5'>
+              return <li key={tipItem.dataIndex} className='mb-2.5'>
                 <span className='min-w-[80px] w-fit'>{tr(tipItem.title)}:</span>
-                <div className='w-fit'>{tipValue}</div>
+                <span className='w-fit ml-1'>{tipValue}</span>
               </li>
             })}
           </ul>

@@ -19,6 +19,9 @@ const MyDocument = () => (
         name='keywords'
         content='Filecoin官方区块浏览器,Filecoin官方浏览器, Filecoin Explorer,fvm,Filscan,Filecoin, blockchain, crypto, currency,最新区块,FIL,IPFS，FIL,Filecoin区块链查询浏览器,FIL浏览器,Filecoin浏览器,Filecoin区块查询,区块链搜索引擎,区块高度,区块链交易'
       />
+      <link rel="alternate" href="https://filscan.io/kr" hrefLang="kr-US" />
+      <link rel="alternate" href="https://filscan.io/en" hrefLang="en-US" />
+      <link rel="alternate" href="https://filscan.io" hrefLang="zh-CN" />
       <link rel='icon' href='https://filscan-v2.oss-accelerate.aliyuncs.com/client/logo.ico' />
       <Script src='https://hm.baidu.com/hm.js?db68ddd1d28effdabb6dfc9f07258667' strategy="lazyOnload"></Script>
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-VZ0MMF5MLC" ></script>
