@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
-import copySvgMobile from '@/assets/images/icon-copy.svg';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 import { useHash } from '@/components/hooks/useHash';
 import { formatNumber, get$Number } from '@/utils';
 import Image from '@/packages/image'
@@ -201,7 +201,7 @@ export default () => {
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{address}</span>
-            { address&& typeof address ==='string' && <Copy text={address} icon={copySvgMobile} className='copy'/>}
+            { address&& typeof address ==='string' && <Copy text={address} icon={<CopySvgMobile/>} className='copy'/>}
           </span>
         </MobileView>
 

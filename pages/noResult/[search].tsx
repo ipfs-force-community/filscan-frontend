@@ -12,7 +12,7 @@ export default () => {
   const tr = (label: string): string => {
     return t(label, { ns: "home" });
   };
-  return <div className={`main_contain ${style.noResult_main} !text-xl`} >
+  return <div className={`main_contain ${style.wrap} !text-xl`} >
     <div className='!text-3xl font-medium'>{tr(no_result.title)}</div>
     <div className='text_des mt-4'>
       {tr(no_result.warn_text)}

@@ -1,7 +1,5 @@
-import IconLogo from '@/assets/images/logo.svg'
 import IconClose from '@/assets/images/header/icon_close.svg'
 import IconOpen from '@/assets/images/header/icon_open.svg'
-import Image from 'next/image'
 import styles from './index.module.scss'
 import { useEffect, useState } from 'react'
 import classNames from 'classnames'
@@ -12,6 +10,10 @@ import { mobileNavMenu } from '@/contents/nav'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
 const rootSubmenuKeys = ['1', '2', '3','4','5'];
+import Logo from '@/assets/images/logo.png';
+import LogoText from '@/assets/images/logoText.png'
+
+import Image from 'next/image'
 
 const Header = () => {
   const {t} = useTranslation("nav")
@@ -90,10 +92,10 @@ const Header = () => {
   return <div className={styles['header-wrap']}>
     <div className={styles['header']}>
       <div onClick={onClick}>
-        <Image src={IconLogo} alt='' />
-        <div>Filscan</div>
+        <Image src={Logo} alt='logo' width={95} height={16}></Image>
+        <Image src={LogoText} alt='logo' width={95} height={16}></Image>
       </div>
-      <Image onClick={onOpen} src={open ? IconClose :IconOpen} alt=''/>
+      { open ? <IconClose onClick={onOpen}/> :<IconOpen onClick={onOpen}/>}
     </div>
     <div id='mask' onClick={onMaskClick} className={classNames(styles.body,open?styles.active:'')}>
       <div onClick={(e)=>{

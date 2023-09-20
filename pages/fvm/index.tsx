@@ -6,16 +6,21 @@ import Image from "@/packages/image";
 import { BrowserView, MobileView } from "@/components/device-detect";
 import classNames from "classnames";
 import styles from "./index.module.scss";
-import { Input, Select } from "antd";
+import { Select } from "antd";
 import useWindow from "@/components/hooks/useWindown";
+import TwitterIcon from '@/assets/images/twitter.svg'
+import NetworkIcon from '@/assets/images/network.svg'
+import { useFilscanStore } from "@/store/FilscanStore";
+
 export default () => {
-  //  const [fvmListOpt, setFvmList] = useState<any>([])
+  const {theme} = useFilscanStore()
   const {isMobile} = useWindow()
   const { tr } = Translation({ ns: "fvm" });
   const { data, loading } = useAxiosData(apiUrl.fvm_category);
   const { axiosData } = useAxiosData();
   const [active, setActive] = useState("all");
   const [content, setContent] = useState([]);
+
   const fvmListOpt = useMemo(() => {
     let num = 0;
     let newData: Array<any> = [];
@@ -126,14 +131,9 @@ export default () => {
                               window.open(item.twitter);
                             }
                           }}
-                          className={classNames('border border_color rounded-[5px] p-[7px] box-border',styles.twitter)}
+                          className={classNames('border border_color rounded-[5px] p-[7px] box-border cursor-pointer  hover:bg-primary',styles.twitter)}
                         >
-                          <Image
-                            src={`https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage/images/twitter.svg`}
-                            alt=""
-                            width="14"
-                            height="14"
-                          />
+                          <TwitterIcon/>
                         </span>
                       )}
                       {item.main_site && (
@@ -143,14 +143,9 @@ export default () => {
                               window.open(item.main_site);
                             }
                           }}
-                          className={classNames('border border_color rounded-[5px] p-[7px]',styles.network)}
+                          className={classNames('border border_color rounded-[5px] p-[7px] cursor-pointer hover:bg-primary',styles.network)}
                         >
-                          <Image
-                            src={`https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage/images/network.svg`}
-                            alt=""
-                            width="14"
-                            height="14"
-                          />
+                          <NetworkIcon/>
                         </span>
                       )}
                     </div>

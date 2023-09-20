@@ -3,15 +3,13 @@
 //import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import Banner from '@/components/banner';
 import MobileBanner from '@/components/mobile/home/banner';
-import MobileMeta from '@/components/mobile/home/meta';
 import Meta from '@/src/home/meta';
 import Gas from '@/src/statistics/Gas';
 import Rank from '@/src/rank';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Translation } from '@/components/hooks/Translation';
-import go from '@/assets/images/black_go.svg';
-import goMobile from '@/assets/images/icon-right-white.svg';
+import GoIcon from '@/assets/images/black_go.svg';
+import GoMobileIcon from '@/assets/images/icon-right-white.svg';
 import ContractRank from '@/src/contract/rank';
 import DefiList from '@/src/fevm/defi';
 import Trend from '@/src/statistics/Trend';
@@ -59,12 +57,10 @@ function Home(props: any) {
                 <div className={`flex justify-between text-xs font-PingFang p-5`}>
                   {tr('base_gas')}
                   <Link href={`/statistics/gas/`}>
-                    <Image
+                    <GoIcon
                       className='cursor-pointer'
-                      src={go}
                       width={18}
                       height={18}
-                      alt='go'
                     />
                   </Link>
                 </div>
@@ -74,12 +70,10 @@ function Home(props: any) {
                 <div className={styles['chart-title']}>
                   <div className={styles.label}>{tr('base_gas')}</div>
                   <Link href={`/statistics/gas/`}>
-                    <Image
+                    <GoMobileIcon
                       className='cursor-pointer'
-                      src={goMobile}
                       width={28}
                       height={28}
-                      alt='go'
                     />
                   </Link>
                 </div>
@@ -105,12 +99,10 @@ function Home(props: any) {
                     {tr('defi_list')}
                   </div>
                   <Link href={`/contract/rank`}>
-                    <Image
+                    <GoIcon
                       className='cursor-pointer'
-                      src={go}
                       width={18}
                       height={18}
-                      alt='go'
                     />
                   </Link>
                 </div>

@@ -5,7 +5,6 @@ import style from './index.module.scss';
 import { Translation } from '../hooks/Translation';
 import IconB from '@/assets/images/searchIcon_b.svg';
 import IconW from '@/assets/images/searchIcon_w.svg';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import _ from 'lodash'
 
@@ -82,12 +81,7 @@ export default ({
               {suffix}
             </span>
           ) || (
-            <Image
-              src={origin === 'banner' ? IconB : IconW}
-              width={34}
-              height={34}
-              alt='search'
-            />
+            <>{origin === 'banner' ? <IconB/> : <IconW/>}</>
           )
         }
       />

@@ -5,12 +5,10 @@ import { apiUrl } from '@/contents/apiUrl';
 import { contract_token } from '@/contents/contract';
 import Table from '@/packages/Table';
 import useAxiosData from '@/store/useAxiosData';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import useWindow from '@/components/hooks/useWindown';
-import Link from 'next/link';
-import Image from 'next/image'
 export default () => {
   const { tr } = Translation({ ns: 'contract' });
   const {isMobile} = useWindow()

@@ -2,7 +2,7 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { apiUrl } from '@/contents/apiUrl';
-import { contract_nfts, contract_token } from '@/contents/contract';
+import { contract_nfts } from '@/contents/contract';
 import Table from '@/packages/Table';
 import useAxiosData from '@/store/useAxiosData';
 import { pageLimit } from '@/utils';
@@ -10,8 +10,6 @@ import classNames from 'classnames';
 import { useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import useWindow from '@/components/hooks/useWindown';
-import Link from 'next/link';
-import Image from 'next/image';
 import _ from 'lodash'
 export default () => {
   const { tr } = Translation({ ns: 'contract' });

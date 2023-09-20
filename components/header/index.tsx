@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import Account from './Account';
 import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from '@/packages/select';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
@@ -15,7 +15,6 @@ import MHeader from '@/components/mobile/header/index'
 import useAxiosData from '@/store/useAxiosData';
 import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
-import { Skeleton } from 'antd';
 import useInterval from '../hooks/useInterval';
 // import Skeleton from '@/packages/skeleton';
 
@@ -74,7 +73,6 @@ export default () => {
   // px-24
   return (
     <>
-
       <MobileView>
         <MHeader/>
       </MobileView>
@@ -154,7 +152,7 @@ export default () => {
               {/* <Link href='/account/login' as='/account/login' scroll={ false}>
                      <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
                 </Link> */}
-              {/* <Account /> */}
+              <Account />
             </div>
           </div>
           <hr className='border_color'/>

@@ -7,9 +7,8 @@ import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { useEffect, useMemo, useState } from 'react';
-import verifySvg from '@/assets/images/verify.svg';
-import go from '@/assets/images/black_go.svg';
-import Image from 'next/image';
+import VerifySvg from '@/assets/images/verify.svg';
+import GoIcon from '@/assets/images/black_go.svg';
 import Link from 'next/link';
 import { formatDateTime, isIndent, pageHomeLimit, pageLimit } from '@/utils';
 import useWindow from '@/components/hooks/useWindown';
@@ -18,7 +17,6 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import _ from 'lodash'
-import { getSvgIcon } from '@/svgsIcon';
 const default_sort = {
   field: 'transfer_count',
   order: 'descend',
@@ -94,7 +92,7 @@ export default ({ origin }: { origin?: string }) => {
             return (
               <span className='flex flex-wrap gap-x-2 items-center'>
                 <Link href={`/address/${record.contract_address}`}>{text}</Link>
-                <Image src={verifySvg} width={13} height={14} alt='' />
+                <VerifySvg width={13} height={14} />
               </span>
             );
           }
@@ -148,12 +146,10 @@ export default ({ origin }: { origin?: string }) => {
             }
           </div>
           {origin === 'home' && <Link className='pr-2.5' href={`/contract/rank`}>
-            <Image
+            <GoIcon
               className='cursor-pointer '
-              src={go}
               width={18}
               height={18}
-              alt='go'
             />
           </Link>}
         </div>

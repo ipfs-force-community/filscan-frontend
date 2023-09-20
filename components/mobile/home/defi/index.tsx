@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next"
 import styles from './index.module.scss'
 import Image from "next/image"
 import Table from "@/packages/mobile/table"
-import TextTip from '@/packages/textTooltip';
 import { get$Number } from "@/utils"
 
 interface Sort {

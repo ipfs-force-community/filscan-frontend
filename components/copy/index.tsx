@@ -2,8 +2,7 @@
 
 import { message } from 'antd';
 import copy from 'copy-to-clipboard';
-import copySvg from '@/assets/images/copy.svg';
-import Image from 'next/image';
+import CopySvg from '@/assets/images/copy.svg';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import { getSvgIcon } from '@/svgsIcon';
@@ -14,7 +13,7 @@ export default ({
   className,
 }: {
   text: string;
-  icon?: string;
+  icon?: React.ReactNode;
     className?: string;
 
 }) => {
@@ -37,7 +36,9 @@ export default ({
       className={classNames(`flex-center text-bgCopy ${className}`,styles.wrap)}
       onClick={handleClick}>
       <BrowserView>{ getSvgIcon('copyIcon')} </BrowserView>
-      <MobileView><Image src={icon??copySvg} width={13} height={14} alt='' /></MobileView>
+      <MobileView>
+        {icon ?? <CopySvg width={13} height={14} />}
+      </MobileView>
     </span>
   );
 };

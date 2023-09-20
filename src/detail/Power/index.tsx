@@ -6,10 +6,6 @@ import SkeletonScreen from '@/packages/skeleton';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { formatNumber, getShowData } from '@/utils';
 import { useMemo } from 'react';
-import Image from 'next/image';
-import powerIcon from '@/assets/images/powerIcon.svg';
-import { spawn } from 'child_process';
-import { link } from 'fs';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss'
 import classNames from 'classnames';

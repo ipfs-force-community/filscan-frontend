@@ -5,7 +5,7 @@ import Segmented from '@/packages/segmented';
 import Select from '@/packages/select';
 import Link from 'next/link';
 import Image from 'next/image';
-import go from '@/assets/images/black_go.svg';
+import GoIcon from '@/assets/images/black_go.svg';
 import { Translation } from '@/components/hooks/Translation';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './header.module.scss'
@@ -96,12 +96,10 @@ export default ({
           </div>
           {origin === 'home' && (
             <Link href={`/rank#${active}`}>
-              <Image
+              <GoIcon
                 className='cursor-pointer'
-                src={go}
                 width={18}
                 height={18}
-                alt='go'
               />
             </Link>
           )}

@@ -1,10 +1,9 @@
 /** @format */
 
-import errorIcon from '@/assets/images/error.svg';
-import del_light from '@/assets/images/del_light.svg';
+import ErrorIcon from '@/assets/images/error.svg';
+import DelLight from '@/assets/images/del_light.svg';
 import Search from '@/components/search';
 import messageManager from '@/packages/message';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getSvgIcon } from '@/svgsIcon';
 import { MinerNum } from '../type';
@@ -33,7 +32,7 @@ export default ({
       return messageManager.showMessage({
         type: 'error',
         content: '添加节点已达上限，请删除部分节点后添加新',
-        icon: <Image src={errorIcon} width={18} height={18} alt='' />,
+        icon: <ErrorIcon width={18} height={18} />,
         suffix: (
           <span
             className='cursor-pointer'
@@ -73,7 +72,7 @@ export default ({
                 className='bg-bg_hover px-2 py-1 w-fit rounded-[5px] flex items-center justify-between gap-x-6'
                 key={miner + index}>
                 {miner.miner_id}
-                <Image
+                <DelLight
                   className='cursor-pointer'
                   width={12}
                   height={12}
@@ -83,8 +82,6 @@ export default ({
                     setAddMiner(newArr);
                     if (onChange) onChange(newArr);
                   }}
-                  alt='del'
-                  src={del_light}
                 />
               </li>
             );

@@ -1,10 +1,7 @@
 /** @format */
 
-import { formatDateTime, formatFilNum, formatNumber, get$Number, getClassName } from '@/utils';
-import Image from 'next/image';
+import { formatFilNum, formatNumber, get$Number, getClassName } from '@/utils';
 import { Item, Option_Item } from './type';
-import TimerHtml from '@/components/TimerHtml';
-import Skeleton from '@/packages/skeleton';
 
 interface TOP_DATA {
   left: Item[];

@@ -1,15 +1,14 @@
 import Table from "@/packages/mobile/table"
 import styles from './index.module.scss'
 import { useEffect, useMemo, useState } from "react"
-import { contract_list, contract_rank, mobileHomeContractRank } from "@/contents/contract"
+import { contract_rank, mobileHomeContractRank } from "@/contents/contract"
 import { ColumnType } from "antd/es/table"
 import homeStore from "@/store/modules/home"
 import { DefiProtocol } from "@/store/homeData"
 import { useTranslation } from "react-i18next"
 import { observer } from "mobx-react"
 import Link from "next/link"
-import verifySvg from '@/assets/images/verify.svg';
-import Image from "next/image"
+import VerifySvg from '@/assets/images/verify.svg';
 
 interface Sort {
   field:string,
@@ -31,7 +30,7 @@ const ContractRank =()=>{
             return (
               <span className='flex gap-x-2 items-center'>
                 <Link href={`/address/${record.contract_address}`}>{text}</Link>
-                <Image src={verifySvg} width={13} height={14} alt='' />
+                <VerifySvg width={13} height={14} />
               </span>
             );
           }

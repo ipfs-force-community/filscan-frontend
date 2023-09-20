@@ -7,7 +7,7 @@ import BigNumber from 'bignumber.js';
 import dayjs from 'dayjs';
 import router from 'next/router';
 import { BrowserView, MobileView } from '@/components/device-detect';
-import copySvgMobile from '@/assets/images/icon-copy.svg';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 
 export const pageLimit = 15;
 export const pageHomeLimit = 10;
@@ -325,7 +325,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
             }}>
             {value}
           </span>
-          <Copy text={value} icon={copySvgMobile} className='copy'/>
+          <Copy text={value} icon={<CopySvgMobile/>} className='copy'/>
         </span>
       </MobileView>
       <BrowserView>

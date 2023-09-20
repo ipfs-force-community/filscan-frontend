@@ -1,4 +1,3 @@
-import Image from "next/image"
 import IconSearch from '@/assets/images/header/icon_search.svg'
 import styles from './index.module.scss'
 import classNames from "classnames"
@@ -36,13 +35,13 @@ const Search = (props:SearchProps)=>{
         } else if (type === 'address') {
           router.push(`/address/${showInput}`)
         } else if (type === 'height') {
-          router.push(`/tipset/chain?height=${showInput}`)
+          router.push(`/height/${showInput}`)
         } else if (type === 'message_details') {
           router.push(`/message/${showInput}`)
         } else if (type === 'miner') {
           router.push(`/miner/${showInput}`)
         } else if (type === 'block_details') {
-          router.push(`/tipset/chain?cid=${showInput}`)
+          router.push(`/cid/${showInput}`)
         } else if (type === 'fns') {
           router.push(`/domain/${showInput}`)
         } else {
@@ -65,15 +64,18 @@ const Search = (props:SearchProps)=>{
             type="search"
             allowClear
             ref={ref}
-            prefix={<Image src={IconSearch} alt=""/>
-            }/>
+            prefix={<IconSearch /> }
+            onBlur={(e)=>{
+              setIsSearch(false)
+            }}
+          />
         </form>
       </div>
       <div onClick={onCancelClick}>取消</div>
     </div>
     <div onClick={onMaskClick} className={classNames(styles['mask-wrap'],isSearch ? styles.disabled:"")}>
       <div className={classNames(styles['mask'])}>
-        <Image src={IconSearch} alt=""/>
+        <IconSearch/>
         <div>搜索区块/高度/账户/地址/消息/FNS</div>
       </div>
     </div>
