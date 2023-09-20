@@ -105,7 +105,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
           color: '#ffffff',
         },
         formatter(p: Array<any>) {
-          let result = p[0].name;
+          let result = p[0].data.showTime;
           p.forEach((item: any, index: number) => {
             if (item.data) {
               result +=
@@ -171,11 +171,13 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
           value: powerValue,
           unit: powerValue_unit,
           amount: powerValue_amount,
+          showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm')
         });
         seriesObj.power_increase.push({
           value: increaseValue,
           unit: power_increase_unit,
           amount: power_increase_amount,
+          showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm')
         });
       }
     );
