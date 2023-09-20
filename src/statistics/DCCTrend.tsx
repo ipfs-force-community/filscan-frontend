@@ -89,7 +89,7 @@ export default (props: Props) => {
           color: '#ffffff',
         },
         formatter(v: any) {
-          var result = v[0].name;
+          var result = v[0]?.data?.showTime||'';
           v.forEach((item: any) => {
             if (item.data) {
               result +=
@@ -126,7 +126,7 @@ export default (props: Props) => {
         cc,
         dc
       } = value;
-      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD');
+      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD HH:mm');
       dateList.push(showTime);
 
       const [cc_amount, cc_unit] =cc && unitConversion(cc, 2)?.split(' ');
@@ -136,11 +136,13 @@ export default (props: Props) => {
       seriesObj.cc.push({
         amount: cc_amount,
         value: unitConversion(cc, 2, 6).split(' ')[0],
+        showTime:formatDateTime(block_time, 'YY-MM-DD HH:mm'),
         unit: cc_unit,
 
       });
       seriesObj.dc.push({
         amount: dc_amount,
+        showTime:formatDateTime(block_time, 'YY-MM-DD HH:mm'),
         value: Number(unitConversion(dc, 2, 6).split(' ')[0]),
         unit: dc_unit,
 

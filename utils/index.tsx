@@ -247,7 +247,7 @@ function formatNumberUnit(num:number,len=2) {
   // if (num >= 1e3) {
   //   return Number(num / 1e3).toLocaleString('en', { maximumFractionDigits: len }) +'K'
   // }
-  return Number(num / 1e6).toLocaleString('en', { maximumFractionDigits: len })
+  return Number(num).toLocaleString('en', { maximumFractionDigits: len })
 }
 
 // $ + number

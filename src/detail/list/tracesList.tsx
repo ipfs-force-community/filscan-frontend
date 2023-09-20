@@ -33,7 +33,7 @@ export default ({
     return trance_list(fromList, toList).map((v) => {
       return { ...v, title: tr(v.title) };
     });
-  }, [theme, lang, fromList, toList]);
+  }, [theme, tr, fromList, toList]);
 
   useEffect(() => {
     if (accountId) {

@@ -89,7 +89,7 @@ export default (props: Props) => {
           color: '#ffffff',
         },
         formatter(v: any) {
-          var result = v[0].name;
+          var result = v[0]?.data?.showTime;
           v.forEach((item: any) => {
             if (item.data) {
               result +=
@@ -125,12 +125,13 @@ export default (props: Props) => {
         block_time,
         active_miner_count, //合约交易
       } = value;
-      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD');
+      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD HH:mm');
       dateList.push(showTime);
       //amount
       seriesObj.active_miner_count.push({
         value: active_miner_count,
-        amount:active_miner_count,
+        amount: active_miner_count,
+        showTime:formatDateTime(block_time, 'YY-MM-DD HH:mm'),
         unit:''
       })
     });

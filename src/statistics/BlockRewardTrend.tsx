@@ -89,13 +89,13 @@ export default (props: Props) => {
           color: '#ffffff',
         },
         formatter(v: any) {
-          var result = v[0].name;
+          var result = v[0].data.showTime
           v.forEach((item: any) => {
             if (item.data) {
               result +=
                 '<br/>' +
                 item.marker +
-                tr(item.seriesName) +
+                tr(item.seriesName)+
                 ': ' +
                 item.data.amount +
                 item.data.unit;
@@ -125,11 +125,12 @@ export default (props: Props) => {
         block_time,
         acc_block_rewards, //合约交易
       } = value;
-      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD');
+      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD HH:mm');
       dateList.push(showTime);
       //amount
       seriesObj.acc_block_rewards.push({
-        value: formatFil(acc_block_rewards, 'FIL',2),
+        value: formatFil(acc_block_rewards, 'FIL', 2),
+        showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         amount:formatFilNum(acc_block_rewards, false,false,4,false).split(' ')[0],
         unit:'FIL'
       });

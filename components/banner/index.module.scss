@@ -2,26 +2,29 @@
     position: relative;
     width: 100%;
     height: 350px;
-    background: linear-gradient(126deg, #181A1B 0%, #010101 100%);
+    //background: linear-gradient(126deg, #181A1B 0%, #010101 100%);
+    background-image:url(../../assets/images/bannerBg.png) ;
+    background-size: cover;
+background-repeat: no-repeat;
     &_bg{
-        &_bl{
-        position: absolute;
-        z-index: 0;
-        bottom: 0px;
-        width: 553px;
-        height: 224px;
-        background: linear-gradient(105deg, #8FD8F6 0%, #4E6EAC 56%, #001857 100%);
-        opacity: 0.2;
-        filter: blur(50px);
-        }
+        // &_bl{
+        // position: absolute;
+        // z-index: 0;
+        // bottom: 0px;
+        // width: 553px;
+        // height: 224px;
+        // background: linear-gradient(105deg, #8FD8F6 0%, #4E6EAC 56%, #001857 100%);
+        // opacity: 0.2;
+        // filter: blur(50px);
+        // }
         &_circle1{
         box-sizing: content-box;
         position: absolute;
-        z-index: 0;
+        z-index: 1;
         top: 50px;
         right: 410px;
-        width: 85px;
-        height: 85px;
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
         background: linear-gradient(355deg, #1764FF 0%, #16E5D8 100%);
         opacity: 0.58;
@@ -30,13 +33,15 @@
         &_circle2{
             box-sizing: content-box;
             position: absolute;
-            z-index: 0;
-            top: 185px;
+            z-index: 1;
+            top: 200px;
             right: 10px;
-            width: 130px;
-            height: 130px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background: linear-gradient(295deg, #1764FF 0%, #16E5D8 100%);
+                    background: linear-gradient(355deg, #1764FF 0%, #16E5D8 100%);
+
+            //background: linear-gradient(295deg, #055FCA 0%, #0291AD 100%);
             opacity: 0.58;
             filter: blur(6px);
         }

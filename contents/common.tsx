@@ -19,7 +19,8 @@ export const header_top: TOP_DATA = {
         if (!text) return null
         const changeText =record?.percent_change_24h&& Number(record.percent_change_24h);
         const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
-        const flag = changeText ? changeText > 0 ? '+' : '-':'';
+        const flag = changeText ? changeText > 0 ? '+' : '-' : '';
+        console.log('---3',text)
         return <span className='flex gap-x-1 items-end'>
           <span className='text_primary'>{get$Number(text)} </span>
           {changeText && <span className={`${className} ml-1`}>{flag}{Math.abs(changeText).toFixed(2)}%</span>}

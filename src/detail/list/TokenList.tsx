@@ -30,7 +30,7 @@ export default ({
     return ercToken_list(fromList, toList).map((v) => {
       return { ...v, title: tr(v.title) };
     });
-  }, [theme, lang, fromList, toList]);
+  }, [theme, tr, fromList, toList]);
 
   useEffect(() => {
     if (accountId) {
@@ -82,7 +82,7 @@ export default ({
   };
   return (
     <>
-      <span className='absolute -top-5 text_des text-xs'>{tr('contract_token_list_total', {value:data.total})}</span>
+      <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:data.total})}</span>
       <Table
         key='list_token'
         data={data.dataSource}

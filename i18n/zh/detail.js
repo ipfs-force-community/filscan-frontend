@@ -175,7 +175,7 @@ const detail = {
   block_list_total: '总计 {{value}} 区块',
   traces_list_total: "总计 {{value}} 条消息",
   contract_token_list_total: '总计 {{value}} 条Token',
-  erc20_transfer_total:'总计 {{value}} 条转账',
+  erc20_transfer_total:'总计 {{value}} 条交易',
   //general
   general_overview_title:'账户概览',
   base_account_id: '账户ID',
