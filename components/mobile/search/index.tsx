@@ -36,13 +36,13 @@ const Search = (props:SearchProps)=>{
         } else if (type === 'address') {
           router.push(`/address/${showInput}`)
         } else if (type === 'height') {
-          router.push(`/tipset/chain?height=${showInput}`)
+          router.push(`/height/${showInput}`)
         } else if (type === 'message_details') {
           router.push(`/message/${showInput}`)
         } else if (type === 'miner') {
           router.push(`/miner/${showInput}`)
         } else if (type === 'block_details') {
-          router.push(`/tipset/chain?cid=${showInput}`)
+          router.push(`/cid/${showInput}`)
         } else if (type === 'fns') {
           router.push(`/domain/${showInput}`)
         } else {
@@ -65,8 +65,11 @@ const Search = (props:SearchProps)=>{
             type="search"
             allowClear
             ref={ref}
-            prefix={<Image src={IconSearch} alt=""/>
-            }/>
+            prefix={<Image src={IconSearch} alt="" /> }
+            onBlur={(e)=>{
+              setIsSearch(false)
+            }}
+          />
         </form>
       </div>
       <div onClick={onCancelClick}>取消</div>
