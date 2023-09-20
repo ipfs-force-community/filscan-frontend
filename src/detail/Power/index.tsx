@@ -26,7 +26,7 @@ export default ({ data }: { data: any }) => {
   }, [data]);
 
   return (
-    <div className={classNames(styles.pow,'w-1/2 h-[300px]  border-l border_color p-7')}>
+    <div className={classNames(styles.pow,'w-1/2 h-[300px]  border-l border_color p-5')}>
       <div className='flex justify-between border-b border_color pb-7'>
         <ul className={classNames(styles.row,styles.between,'flex flex-1')}>
           {power_list.header.map((headerItem) => {
@@ -57,7 +57,7 @@ export default ({ data }: { data: any }) => {
         </ul>
         {/* <BrowserView><Image src={powerIcon} alt='' width={41} height={41} /></BrowserView> */}
       </div>
-      <ul className={classNames(styles.column,'mt-9 flex  flex-col flex-wrap gap-y-6 justify-between max-h-[120px]')}>
+      <ul className={classNames(styles.column,'mt-5 flex  flex-col flex-wrap gap-y-6 justify-between max-h-[120px]')}>
         {power_list.list.map((item) => {
           const { render, dataIndex, title } = item;
           const showData = getShowData(item, data);

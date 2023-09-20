@@ -249,9 +249,7 @@ export default ({ origin }: { origin: string }) => {
           order: 'descend',
         }
       }
-
     }
-    console.log('---33',sorter)
     setCurrent(cur);
     setSort(order);
     load(active, cur, order);

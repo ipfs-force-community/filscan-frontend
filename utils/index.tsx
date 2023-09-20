@@ -237,7 +237,8 @@ export function isIndent(str: string, unit: number = 6, unitNum?: number ) {
     : str;
 }
 
-function formatNumberUnit(num:number,len=2) {
+export function formatNumberUnit(number: number | string, len = 2) {
+  const num = Number(number);
   if (num >= 1e9) {
     return Number(num / 1e9).toLocaleString('en', { maximumFractionDigits: len }) +'B'
   }

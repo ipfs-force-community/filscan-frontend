@@ -1042,27 +1042,30 @@ const default_content = [
   { title: 'Available Balance', dataIndex: 'available_balance', elasticity:true,render: (text:string) =>text ? formatFilNum(text) : text },
   {
     title: 'Robust Address',
-    dataIndex: 'account_address',
+    dataIndex: 'robust_address',
     elasticity: true,
     type: ['account_basic'],
     render: (text: string, record: any) => {
-      return text ?
-        <>
-          <BrowserView>
-            <span className="flex items-center gap-x-2">
-              {text?.length > 30? isIndent(text,10,10):text}
-              <Copy text={text} />
-            </span>
-          </BrowserView>
-          <MobileView>
-            <span className='copy-row'>
-              <span className='normal-text'>{text}</span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
-            </span>
-          </MobileView>
-        </>
-        :
-        text
+      if (record.account_type === 'multisig') {
+        return text ?
+          <>
+            <BrowserView>
+              <span className="flex items-center gap-x-2">
+                {text?.length > 30? isIndent(text,10,10):text}
+                <Copy text={text} />
+              </span>
+            </BrowserView>
+            <MobileView>
+              <span className='copy-row'>
+                <span className='normal-text'>{text}</span>
+                <Copy text={text} icon={copySvgMobile} className='copy'/>
+              </span>
+            </MobileView>
+          </>
+          :
+          text
+      }
+      return null
     }
   },
   { title: 'user_count', dataIndex: 'user_count', type: ['account_basic', 'evm_contract'], elasticity: true, render: (text: string) => text ? formatNumber(text) : text },

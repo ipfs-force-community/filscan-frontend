@@ -35,7 +35,7 @@ export default () => {
   const isHome = router.asPath === '/home' || router.asPath === '/';
 
   return (
-    <div className='flex items-center m-auto h-[60px] justify-between text-sm  font-medium custom_header'>
+    <div className='flex items-center m-auto h-[55px] justify-between text-sm  font-medium custom_header'>
       <Link
         href={'/'}
         className='flex gap-x-2 items-center text_color cursor-pointer'>

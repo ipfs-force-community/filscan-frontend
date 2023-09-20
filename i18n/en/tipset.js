@@ -48,7 +48,7 @@ const tipset = {
   //dsn
   dsn_list: 'Order List',
   dsn_total_list:'Total of {{value}} Deals',
-  dsn_placeholder:'Search Client/Provider/DealID',
+  dsn_placeholder:'Search Client/Provider/Deal ID',
   deal_id: 'Deal ID',
   piece_cid: 'Piece CID',
   piece_size: 'PieceSize',
