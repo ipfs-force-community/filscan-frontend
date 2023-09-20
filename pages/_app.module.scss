@@ -4,6 +4,14 @@
     width: 100%;
 }
 
+@media only screen and (min-width: 1000px){
+    .component{
+     margin-top: -10px;
+}
+
+
+}
+
 @media only screen and (max-width: 1000px) {
     .home {
         padding-top: 120px;

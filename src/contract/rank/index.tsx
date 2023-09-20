@@ -124,9 +124,8 @@ export default ({ origin }: { origin?: string }) => {
         field: sorter.field,
         order: sorter.order,
       };
-      cur = 1;
     }
-    setCurrent(1);
+    setCurrent(cur);
     setSort(order);
     load(cur, order);
   };
@@ -164,6 +163,7 @@ export default ({ origin }: { origin?: string }) => {
         <Table
           key='contract_rank'
           className='-mt-2.5 '
+          total={origin !== 'home' ? dataSource.total:0}
           data={dataSource?.data || []}
           columns={columns || []}
           loading={loading}

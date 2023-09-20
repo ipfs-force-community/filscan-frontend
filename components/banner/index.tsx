@@ -5,6 +5,7 @@ import Search from '../header/Search';
 import Banner from '@/src/home/Banner';
 
 export default () => {
+
   return (
     <div className={style.banner}>
       <div className={style.banner_bg}>
@@ -14,7 +15,7 @@ export default () => {
           <div className={`${style.banner_bg_circle2} animated-div1`} />
           <div className={style.banner_search}>
             <h3 className='clip_text text-[28px] py-2 font-Barlow font-bold'>
-          Filecoin Blockchain Explorer
+            Filecoin Blockchain Explorer
             </h3>
             <Search origin='banner' />
             {/* <span className='text-white flex items-center gap-x-2'>

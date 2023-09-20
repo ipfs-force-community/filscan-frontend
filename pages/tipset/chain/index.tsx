@@ -50,7 +50,7 @@ export default () => {
     return chain_list.columns.map(item => {
       return {...item,title:tr(item.title)}
     })
-  }, [lang])
+  }, [tr])
 
   function renderLoading(){
     return <div className="h-[500px] flex flex-col gap-y-5">

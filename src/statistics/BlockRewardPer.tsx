@@ -89,7 +89,7 @@ export default (props: Props) => {
           color: '#ffffff',
         },
         formatter(v: any) {
-          var result = v[0].name;
+          var result = v[0].data.showTime;
           v.forEach((item: any) => {
             if (item.data) {
               result +=
@@ -125,11 +125,13 @@ export default (props: Props) => {
         block_time,
         block_reward_per_tib, //合约交易
       } = value;
-      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD');
+      const showTime = inter === '24h'?formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD HH:mm');
       dateList.push(showTime);
       //amount
       seriesObj.block_reward_per_tib.push({
-        value: formatFil(block_reward_per_tib, 'FIL',2),
+        value: formatFil(block_reward_per_tib, 'FIL', 2),
+        showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
+
         amount:formatFilNum(block_reward_per_tib, false,false,4,false).split(' ')[0],
         unit:'FIL'
       });

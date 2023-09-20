@@ -1,7 +1,6 @@
 /** @format */
 
 import { apiUrl } from '@/contents/apiUrl';
-import fetchData from '@/store/server';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import AccountBalance from '@/src/detail/accountBalance';

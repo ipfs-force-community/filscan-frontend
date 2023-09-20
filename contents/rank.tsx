@@ -157,7 +157,7 @@ export const poolList = (progress: number | string) => {
     },
     {
       title: 'pool_power', //有效算力
-      dataIndex: 'pool_power',
+      dataIndex: 'quality_adj_power',
       with: '35%',
       sorter: true,
       defaultSortOrder: 'descend',

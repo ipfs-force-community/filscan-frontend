@@ -7,7 +7,7 @@ import { getColor } from "@/utils/echarts";
 import useAxiosData from '@/store/useAxiosData';
 import { apiUrl } from '@/contents/apiUrl';
 import { fil_overviewList } from '@/contents/statistic';
-import { formatFil } from '@/utils';
+import { formatFil, formatNumberUnit } from '@/utils';
 import _ from 'lodash'
 
 function Overview({ className }: { className?: string }) {
@@ -25,8 +25,20 @@ function Overview({ className }: { className?: string }) {
   const defaultOtions: any = useMemo(() => {
     return {
       tooltip: {
-        show: false,
+        trigger: "item",
+        backgroundColor: color.toolbox,
+        borderColor: "transparent",
+        textStyle: {
+          color: "#ffffff",
+        },
+        formatter(v: any) {
+          const { name, value ,data} = v;
+          console.log('====333',v)
+          return `${v.marker} ${data.showName}`;
+        },
+        position: "right",
       },
+
       series: [
         {
           type: "pie",
@@ -90,11 +102,13 @@ function Overview({ className }: { className?: string }) {
       const legend: any = {}
       item.list.forEach((seriesItem: any, index: number) => {
         const baseData = showData[index];
-        const name = `${tr(seriesItem.key)}: (${baseData?.value?.toLocaleString()} FIL)`;
+        const showValue = formatNumberUnit(baseData?.value)
+        const name = `${tr(seriesItem.key)}: (${showValue} FIL)`;
         legend[seriesItem.key]={name,color:seriesItem.color,isShow:true, key:seriesItem.key}
         seriesData.push({
           ...baseData,
           name,
+          showName:`${tr(seriesItem.key)}: ${baseData?.value} FIL`,
           key:seriesItem.key,
           itemStyle: {
             color:seriesItem.color,
@@ -187,3 +201,4 @@ function Overview({ className }: { className?: string }) {
 
 }
 export default Overview;
+

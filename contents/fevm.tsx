@@ -97,9 +97,8 @@ export const defi_list = {
     },
     {
       title: 'Protocol',
-      width: '15%',
+      width: '25%',
       dataIndex: 'protocol',
-
       render: (text: string, record: any) => {
         return (
           <span
@@ -142,7 +141,7 @@ export const defi_list = {
       dataIndex: 'tvl_change_rate_in_24h',
       title: 'tvl_change_rate_in_24h',
       sorter: true,
-      width: '20%',
+      width: '15%',
       render: (text: string) => (
         <span className={Number(text) < 0 ? 'text_red':'text_green'}>
           {Number(text).toFixed(2) + '%'}

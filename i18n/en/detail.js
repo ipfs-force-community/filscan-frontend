@@ -25,7 +25,7 @@ const detail = {
   ethaccount: 'ETHAccount',
 
   account_name: 'Account',
-  latest_transfer_time: 'Lastest Timestamp',
+  latest_transfer_time: 'Latest Transaction',
   multisig: 'MultiSign Account',
   from_ath: 'From',
   to_ath:'To',
@@ -168,6 +168,7 @@ const detail = {
   block_list_total: 'Total of  {{value}} Blocks',
   traces_list_total: "Total of {{value}} Messages",
   erc20_transfer_total:'Total of {{value}} Transactions',
+  // contract_token_list_total: 'Total of {{value}} Token',
 
   //general
   general_overview_title:'Account',

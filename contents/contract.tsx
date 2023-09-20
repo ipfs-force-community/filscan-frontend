@@ -329,12 +329,12 @@ export const contract_token = {
       {
         dataIndex: 'latest_price',
         title: 'latest_price',
-        render: (text: string) => (text ? '$' + text : text),
+        render: (text: string) => (text ? get$Number(text): text),
       },
       {
         dataIndex: 'market_cap',
         title: 'market_value',
-        render: (text: string) => (text ? '$' + formatNumber(text, 4) : '--'),
+        render: (text: string) => (text ? get$Number(text): '--'),
       },
       { dataIndex: 'owners', title: 'owners' },
     ];

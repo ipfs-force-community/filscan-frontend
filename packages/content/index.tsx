@@ -46,19 +46,22 @@ export default (props:ContentProps) => {
           borderTop,
           elasticity,
           render,
+          isSplit,
         } = item;
         const itemData = getShowData(item, data);
-        const value = itemData && itemData[dataIndex];
+        let value = itemData && itemData[dataIndex];
         const renderValue = render ? render(value, data, tr) : value;
         const showTitle = typeof title === 'function' ? title(tr, index) : tr(title);
         //当没有值时，不显示此行的数据，包含title
-        if (dataIndex === 'message_ERC20Trans') {
-          // console.log('====ddd',renderValue)
-        }
         if (elasticity && !renderValue) {
           return null;
         }
-
+        let isSplitWidth = width
+        if (isSplit && width) {
+          if (value.length < isSplit) {
+            isSplitWidth =showWidth
+          }
+        }
         return isMobile&&item['mobileHide']?<></>:(
           <li
             key={index}
@@ -67,7 +70,7 @@ export default (props:ContentProps) => {
             ${ borderTop ? 'pt-5 border-t border_color relative' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
-            style={{...style,width:width||showWidth }}>
+            style={{...style,width:isSplitWidth||showWidth }}>
             <div className={`min-w-[120px] flex-shrink-0 items-baseline text_des self-start`}>
               {showTitle}:
             </div>

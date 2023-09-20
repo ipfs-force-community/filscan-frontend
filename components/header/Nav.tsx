@@ -38,10 +38,10 @@ export default () => {
     <div className='flex items-center m-auto h-[60px] justify-between text-sm  font-medium custom_header'>
       <Link
         href={'/'}
-        className='flex gap-x-2 items-center text_color cursor-pointer'>
+        className='flex gap-x-2 items-center text_color cursor-pointer mt-1' >
         <Image src={logo} width={40} height={40} alt='logo' />
-        {getSvgIcon('logoText')}
-        {/* <Image src={logoText} alt='logo' width={95} height={16}></Image> */}
+        {/* {getSvgIcon('logoText')} */}
+        <Image src={logoText} alt='logo' width={95} height={16}></Image>
         {/* <span className='font-Barlow font-bold text-xl '>Filscan</span> */}
       </Link>
       <div className='flex-1 ml-5 mr-10'>
@@ -58,7 +58,7 @@ export default () => {
 
                 {tr(nav.key)}
                 <span>{getSvgIcon('downIcon')}</span>
-                {nav.sufIcon && <span className='absolute top-4 -right-[12px]'>{getSvgIcon(nav.sufIcon)}</span>}
+                {nav.sufIcon && <span className='absolute top-[10px] -right-[12px]'>{getSvgIcon(nav.sufIcon)}</span>}
                 {renderChild(nav.children, index)}
               </div>
             );
@@ -70,7 +70,7 @@ export default () => {
                 className='cursor-pointer text_color  hover:text-primary'>
                 {tr(nav.key)}
               </Link>
-              {nav.sufIcon && <span className='absolute -top-2 -right-6'>{getSvgIcon(nav.sufIcon)}</span>}
+              {nav.sufIcon && <span className='absolute -top-[8px] -right-6'>{getSvgIcon(nav.sufIcon)}</span>}
             </div>
           );
         })}

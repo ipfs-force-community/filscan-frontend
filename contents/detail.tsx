@@ -1042,27 +1042,30 @@ const default_content = [
   { title: 'Available Balance', dataIndex: 'available_balance', elasticity:true,render: (text:string) =>text ? formatFilNum(text) : text },
   {
     title: 'Robust Address',
-    dataIndex: 'account_address',
+    dataIndex: 'robust_address',
     elasticity: true,
     type: ['account_basic'],
     render: (text: string, record: any) => {
-      return text ?
-        <>
-          <BrowserView>
-            <span className="flex items-center gap-x-2">
-              {text?.length > 30? isIndent(text,10,10):text}
-              <Copy text={text} />
-            </span>
-          </BrowserView>
-          <MobileView>
-            <span className='copy-row'>
-              <span className='normal-text'>{text}</span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
-            </span>
-          </MobileView>
-        </>
-        :
-        text
+      if (record.account_type === 'multisig') {
+        return text ?
+          <>
+            <BrowserView>
+              <span className="flex items-center gap-x-2">
+                {text?.length > 30? isIndent(text,10,10):text}
+                <Copy text={text} />
+              </span>
+            </BrowserView>
+            <MobileView>
+              <span className='copy-row'>
+                <span className='normal-text'>{text}</span>
+                <Copy text={text} icon={copySvgMobile} className='copy'/>
+              </span>
+            </MobileView>
+          </>
+          :
+          text
+      }
+      return null
     }
   },
   { title: 'user_count', dataIndex: 'user_count', type: ['account_basic', 'evm_contract'], elasticity: true, render: (text: string) => text ? formatNumber(text) : text },
@@ -1092,6 +1095,25 @@ const default_content = [
     type: ['account_basic'],
     render: (text: number | string) => formatDateTime(text),
   },
+
+  {
+    title: 'owned_miners', dataIndex: 'owned_miners', elasticity: true,isSplit:5, width:'100%', type: ['account_basic'], render: (text: string) => {
+      return Array.isArray(text) ? <span className="flex items-center gap-2 flex-wrap">
+        {Array.isArray(text) &&text?.map((item:any) => {
+          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
+        })}
+      </span>:text
+    }
+  },
+  {
+    title: 'owned_active_miners', dataIndex: 'active_miners', width:'100%', isSplit:5, elasticity: true, type: ['account_basic'], render: (text: string) => {
+      return Array.isArray(text) ? <span className="flex items-center gap-2 flex-wrap">
+        {Array.isArray(text) &&text?.map((item:any) => {
+          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
+        })}
+      </span>:text
+    }
+  },
   {
     title: 'Signers', dataIndex: 'signers', elasticity: true, render: (text: string) => {
       if(Array.isArray(text) && text.length > 0) return <ShowText content={text} />
@@ -1104,15 +1126,6 @@ const default_content = [
       //   {text.length > 2 && <span>All</span> }
       // </div>:text
     }},
-  {
-    title: 'owned_miners', dataIndex: 'owned_miners', width:'100%', elasticity:true,type: ['account_basic'], render: (text:string) => {
-      return Array.isArray(text) ? <span className="flex items-center gap-2 flex-wrap">
-        {Array.isArray(text) &&text?.map((item:any) => {
-          return <Link className='link' key={item } href={`/miner/${item}`}>{item}</Link>
-        })}
-      </span>:text
-    }
-  },
 ];
 
 export const address_detail = {
@@ -1201,14 +1214,15 @@ export const address_tabs = [
   {
     title: 'traces_list',
     dataIndex: 'traces_list',
-    headerOptions: [
-      { title: 'all', value: 'all' },
-      { title: 'Blockreward', value: 'blockreward' },
-      { title: 'Burn', value: 'burn' },
-      { title: 'Transfer', value: 'transfer' },
-      { title: 'Send', value: 'send', isIndent: true },
-      { title: 'Receive', value: 'receive', isIndent: true },
-    ],
+    optionsUrl: 'TransferMethodByAccountID',
+    // headerOptions: [
+    //   { title: 'all', value: 'all' },
+    //   { title: 'Blockreward', value: 'blockreward' },
+    //   { title: 'Burn', value: 'burn' },
+    //   { title: 'Transfer', value: 'transfer' },
+    //   { title: 'Send', value: 'send', isIndent: true },
+    //   { title: 'Receive', value: 'receive', isIndent: true },
+    // ],
   },
   {
     title: 'erc20_transfer',
@@ -1436,20 +1450,20 @@ export const trance_list = (fromList: any, toList: any) => [
     title: 'value',
     render: (text: number,record:any) => {
       if (!text) return '--';
-      const method_name = record?.method_name?.toLocaleLowerCase();
-      let className = ''
-      let flag =''
-      if (method_name) {
-        if (method_name === 'burn' || method_name === 'send') {
-          className = 'text_red'
-          flag='-'
-        } else if (method_name === 'blockreward' || method_name === 'receive') {
-          className = 'text_green'
-          flag='+'
+      //const method_name = record?.method_name?.toLocaleLowerCase();
+      let className = Number(text) < 0 ?'text_red':'text_green'
+      let flag = Number(text) < 0 ? '-':'+'
+      // if (method_name) {
+      //   if (method_name === 'burn' || method_name === 'send') {
+      //     className = 'text_red'
+      //     flag='-'
+      //   } else if (method_name === 'blockreward' || method_name === 'receive') {
+      //     className = 'text_green'
+      //     flag='+'
 
-        }
-      }
-      return <span className={className}>{ flag}{formatFilNum(text)}</span>
+      //   }
+      // }
+      return <span className={className}>{flag}{formatFilNum(Math.abs(text))}</span>
     }
 
   },

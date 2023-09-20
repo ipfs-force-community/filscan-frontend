@@ -35,7 +35,6 @@ export default ({
   const { hash, hashParams } = useHash();
   const [activeTab,setActiveTab] = useState(defaultActive);
   const { name, p } = hashParams || {};
-  const [total,setTotal] = useState(0)
 
   useEffect(() => {
     if (hash) {

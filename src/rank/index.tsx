@@ -105,7 +105,7 @@ export default ({ origin }: { origin: string }) => {
         if (
           showOrder.field === getDefaultSort[showActive] &&
           showOrder.order === 'descend' &&
-          showActive !== 'rewards'
+          showActive !== 'rewards'&& index === 1
         ) {
           setProgress({
             ...progress,
@@ -249,7 +249,6 @@ export default ({ origin }: { origin: string }) => {
           order: 'descend',
         }
       }
-
     }
     setCurrent(cur);
     setSort(order);
