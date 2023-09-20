@@ -84,7 +84,8 @@ const statistic = {
   burnt: '已销毁的Fil',
   circulating: '可交易流通的Fil',
   dc_trend: 'DC',
-  cc_trend:'CC'
+  cc_trend: 'CC',
+  networks_overview:'全网指标'
 }
 
 export default statistic

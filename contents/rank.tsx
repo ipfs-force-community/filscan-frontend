@@ -86,9 +86,10 @@ export const providerList = (progress: any): Array<any> => {
       render: (text: string | number, record: any) => {
         const text1 = record.quality_power_ratio;
         const left = 100 - (Number(text) / Number(progress)) * 100;
+        const showLeft = left > 100 ? 100 : left;
         return (
           <span className='flex items-center gap-x-2'>
-            <Progress left={left + '%'} />
+            <Progress left={showLeft + '%'} />
             <span>{`${unitConversion(text, 2)} / ${(
               Number(text1) * 100
             ).toFixed(2)}%`}</span>
@@ -163,9 +164,10 @@ export const poolList = (progress: number | string) => {
       defaultSortOrder: 'descend',
       render: (text: string | number, record: any) => {
         const left = 100 - (Number(text) / Number(progress)) * 100;
+        const showLeft = left > 100 ? 100 : left;
         return (
           <span className='flex items-center gap-x-2'>
-            <Progress left={left + '%'} />
+            <Progress left={showLeft + '%'} />
             <span>{unitConversion(record.quality_adj_power, 2)}</span>
           </span>
         );
@@ -223,9 +225,10 @@ const growthList = (progress: number | string) => {
       defaultSortOrder: 'descend',
       render: (text: string | number, record: any) => {
         const left = 100 - (Number(text) / Number(progress)) * 100;
+        const showLeft = left > 100 ? 100 : left;
         return (
           <span className='flex items-center gap-x-2'>
-            <Progress left={left + '%'} />
+            <Progress left={showLeft+ '%'} />
             <span>{unitConversion(text, 2) + '/D'}</span>
           </span>
         );

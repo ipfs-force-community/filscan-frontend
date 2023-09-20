@@ -1581,7 +1581,7 @@ export const cid_list = {
       render: (text: any, data:any) => formatDateTime(text,'YYYY-MM-DD')
     },
     {
-      title: 'blocks_messages', dataIndex: 'messages_count', type: ['block_basic'],
+      title: 'blocks_messages', dataIndex: 'messages_count', type: ['block_basic'],render:(text:number|string)=>String(text) || '--',
 
     },
     {
@@ -1591,7 +1591,7 @@ export const cid_list = {
       }
     },
     {
-      title:'win_count',dataIndex:'win_count',
+      title:'win_count',dataIndex:'win_count',render:(text:number|string)=>String(text) || '--',
     },
     {
       title: 'blocks_reward', dataIndex: 'mined_reward', type: ['block_basic'],

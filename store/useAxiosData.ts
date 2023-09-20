@@ -126,12 +126,12 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
                 });
                 return null
               }
-              return notification.error({
-                className: 'custom-notification',
-                message: 'Error',
-                duration: 100,
-                description: thrown?.message || 'Network Error'
-              })
+              // return notification.error({
+              //   className: 'custom-notification',
+              //   message: 'Error',
+              //   duration: 100,
+              //   description: thrown?.message || 'Network Error'
+              // })
             }
 
           }
@@ -152,7 +152,6 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
     // 组件卸载时取消所有请求
     return () => {
       current = 0;
-      // console.log('----dd',cancelTokenSources)
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };
   },[])
