@@ -18,8 +18,13 @@
         font-size: 12px;
         font-family: "DINPro-Medium";
         column-gap: 4px;
-        svg {
-          width: 22px;
+        &>:first-child {
+         width: fit-content;
+         height: 18px;
+        }
+        &>:last-child {
+          width: fit-content;
+          height: 12px;
         }
       }
       & > svg {

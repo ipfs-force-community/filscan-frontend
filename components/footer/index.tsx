@@ -1,6 +1,6 @@
 /** @format */
 
-import Logo from '@/assets/images/logo.svg'
+import IconLogo from '@/assets/images/logo.svg'
 import { Translation } from '../hooks/Translation';
 import { getSvgIcon } from '@/svgsIcon';
 import { BrowserView, MobileView } from '../device-detect';
@@ -35,7 +35,7 @@ export default () => {
         <div className='w-screen h-[140px] bg-footerColor'>
           <div className='custom_footer flex justify-between flex-col bg-footerColor'>
             <div className='!text-white flex items-center mt-4'>
-              <Logo width={30} height={30} />
+              <IconLogo width={30} height={30} />
               <span className='font-Barlow font-medium text-xl ml-2'>Filscan.io </span>
             </div>
             <div className='flex justify-between items-end	 text-border_des'>

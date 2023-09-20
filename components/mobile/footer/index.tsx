@@ -1,5 +1,4 @@
-import IconLogo from '@/assets/images/logo.svg'
-import Image from 'next/image'
+import IconLogo from '@/assets/images/logo-mobile.svg'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
