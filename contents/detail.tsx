@@ -1200,7 +1200,7 @@ export const power_change = {
       dataIndex: 'power_increase',
       type: 'bar',
       color: '#1C6AFD',
-      yIndex: 1,
+      yIndex: 0,
     },
   ],
 };

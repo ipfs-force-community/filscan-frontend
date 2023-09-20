@@ -39,37 +39,37 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         containLabel: true,
       },
       yAxis: [
+        // {
+        //   type: 'value',
+        //   position: 'left',
+        //   scale: true,
+        //   nameTextStyle: {
+        //     color: color.textStyle,
+        //   },
+        //   axisLabel: {
+        //     formatter: '{value} TiB',
+        //     textStyle: {
+        //       //  fontSize: this.fontSize,
+        //       color: color.labelColor,
+        //     },
+        //   },
+        //   axisLine: {
+        //     show: ,
+        //   },
+        //   axisTick: {
+        //     show: false,
+        //   },
+        //   splitLine: {
+        //     show: false,
+        //     lineStyle: {
+        //       type: 'dashed',
+        //       color: color.splitLine,
+        //     },
+        //   },
+        // },
         {
           type: 'value',
           position: 'left',
-          scale: true,
-          nameTextStyle: {
-            color: color.textStyle,
-          },
-          axisLabel: {
-            formatter: '{value} PiB',
-            textStyle: {
-              //  fontSize: this.fontSize,
-              color: color.labelColor,
-            },
-          },
-          axisLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          splitLine: {
-            show: false,
-            lineStyle: {
-              type: 'dashed',
-              color: color.splitLine,
-            },
-          },
-        },
-        {
-          type: 'value',
-          position: 'right',
           scale: true,
           nameTextStyle: {
             color: color.textStyle,
@@ -155,7 +155,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         timeData.push(showTime);
         //y轴
         const [powerValue, powerUnit] = power
-          ? unitConversion(power, 4, 5).split(' ')
+          ? unitConversion(power, 4, 4).split(' ')
           : [];
         const [increaseValue, increaseUnit] = power_increase
           ? unitConversion(power_increase, 4, 4)?.split(' ')
