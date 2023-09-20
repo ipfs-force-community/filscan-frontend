@@ -74,11 +74,12 @@ export default () => {
   // px-24
   return (
     <>
+
       <MobileView>
         <MHeader/>
       </MobileView>
       <BrowserView>
-        <div className={`${show ? 'visible fixed top-0':'absolute top-0'} header-fade-in z-50 w-full h-[110px] main_bg_color` }>
+        <div className={`${show ? ' header-fade-in visible fixed top-0 ':'absolute top-0'} z-50 w-full h-[110px] main_bg_color` }>
           <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
             <ul className='flex gap-x-5 list-none'>
               {header_top.left.map((item) => {
