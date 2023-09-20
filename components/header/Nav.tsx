@@ -59,7 +59,7 @@ export default () => {
 
                 {tr(nav.key)}
                 <span>{getSvgIcon('downIcon')}</span>
-                {nav.sufIcon && <span className='absolute top-[10px] -right-[12px]'>{getSvgIcon(nav.sufIcon)}</span>}
+                {nav.sufIcon && <span className='absolute top-[13px] -right-[12px]'>{getSvgIcon(nav.sufIcon)}</span>}
                 {renderChild(nav.children, index)}
               </div>
             );
