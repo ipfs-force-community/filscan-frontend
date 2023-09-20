@@ -10,6 +10,7 @@ import { FilscanStoreContext } from '@/store/FilscanStore';
 import HeaderMain from '@/components/header';
 import ErrorBoundary from '@/components/Bounday';
 import { UserStoreContext } from '@/store/UserStore';
+import { NextSeo } from 'next-seo'
 import { useRouter,withRouter } from 'next/router';
 import Footer from '@/components/footer';
 import { MobileView } from '@/components/device-detect';
@@ -22,6 +23,7 @@ import { DeviceContext } from '@/store/DeviceContext';
 import WalletState from '@/store/wallet';
 import i18n from '@/i18n';
 import Ap from 'next/app'
+import { SEO } from '@/contents/common';
 
 App.getInitialProps = async (context:any)=>{
   const initialProps = await Ap.getInitialProps(context)
@@ -110,46 +112,64 @@ function App({ Component, pageProps, isMobile }: any) {
   if (loading) {
     return null
   }
-
+  const { locale } = router;
+  const seo = SEO[lang];
   return (
-    <ErrorBoundary>
-      <DeviceContext.Provider value={{isMobile}}>
-        <FilscanStoreContext.Provider value={{
-          theme,
-          setTheme: (value: any) => {
-            loadTheme(value);
-            setTheme(value);
+    <>
+      <NextSeo
+        title={seo.title}
+        description={seo.description}
+        canonical={seo.url}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: seo.keywords,
           },
-          lang,
-          setLang,
-        }}>
-          {/* <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}> */}
-          <WalletState.Provider value={{
-            wallet, setWallet: (walletItem:any) => {
-              setWallet(walletItem)
-            }
+        ]}
+        languageAlternates={[
+          { hrefLang: 'en', href: 'https://www.example.com/en-US' },
+          { hrefLang: 'zh', href: 'https://www.example.com/zh-CN' },
+          // 添加更多语言...
+        ]} />
+      <ErrorBoundary>
+        <DeviceContext.Provider value={{isMobile}}>
+          <FilscanStoreContext.Provider value={{
+            theme,
+            setTheme: (value: any) => {
+              loadTheme(value);
+              setTheme(value);
+            },
+            lang,
+            setLang,
           }}>
-            <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-              <div className={classNames(`container_body text-sm ${theme}`)}>
-                <HeaderMain />
-                <MobileView>
-                  {home && <div className={classNames(styles.title)}>
-                    <span>Filecoin </span>
-                    <span>{t('blockchain_browser')}</span>
-                  </div>}
-                  <Search className={home ? styles['search-home'] : styles['search']}/>
-                </MobileView>
-                <div className={classNames(home ? styles.home : styles.other,styles.component)}>
-                  <Component {...pageProps} />
+            {/* <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}> */}
+            <WalletState.Provider value={{
+              wallet, setWallet: (walletItem:any) => {
+                setWallet(walletItem)
+              }
+            }}>
+              <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                <div className={classNames(`container_body text-sm ${theme}`)}>
+                  <HeaderMain />
+                  <MobileView>
+                    {home && <div className={classNames(styles.title)}>
+                      <span>Filecoin </span>
+                      <span>{t('blockchain_browser')}</span>
+                    </div>}
+                    <Search className={home ? styles['search-home'] : styles['search']}/>
+                  </MobileView>
+                  <div className={classNames(home ? styles.home : styles.other,styles.component)}>
+                    <Component {...pageProps} />
+                  </div>
+                  <Footer />
                 </div>
-                <Footer />
-              </div>
-            </ConfigProvider>
-          </WalletState.Provider>
-          {/* </UserStoreContext.Provider> */}
-        </FilscanStoreContext.Provider>
-      </DeviceContext.Provider>
-    </ErrorBoundary>
+              </ConfigProvider>
+            </WalletState.Provider>
+            {/* </UserStoreContext.Provider> */}
+          </FilscanStoreContext.Provider>
+        </DeviceContext.Provider>
+      </ErrorBoundary>
+    </>
   );
 }
 

@@ -62,7 +62,7 @@ const statistic = {
   messages_trend: '메시지 수 추이 그래프',
   message_count:'블록 평균 메시지 추세',
   all_message_count: '총 메시지 추세',
-  pie_title_a: '현재 FIL 기본 방출 용도 통계',
+  pie_title_a: '현재 FIL의 용도 분포 통계',
   pie_title_a_tip:'제공된 스토리지 제공자 보상 FIL + 해제된 잠긴 블록 보상 FIL + 배치된 보류 부분 FIL = 현재 이미 방출된 FIL',
   pie_title_b: '현재 이미 방출된 FIL 용도 통계',
   mined: '제공된 스토리지 제공자 보상 FIL',
@@ -82,6 +82,8 @@ const statistic = {
   cc_dc_power: 'CC/DC 전력 추세',
   static_overview: '图表统计',
   contract_trend: '계약 거래',
+  charts_title:'FIL 할당 지침',
+
 }
 
 export default statistic

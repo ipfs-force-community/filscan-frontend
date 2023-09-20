@@ -1,14 +1,15 @@
 /** @format */
 
 import Image from 'next/image';
-import logo from '@/assets/images/logo.svg';
+import logo from '@/assets/images/logo.png';
 import { navMenu } from '@/contents/nav';
 import { Translation } from '@/components/hooks/Translation';
 import Link from 'next/link';
 import Search from './Search';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
-import logoText from '@/assets/images/logoText.svg'
+import logoText from '@/assets/images/logoText.png'
+
 export default () => {
   const { tr } = Translation({ ns: 'nav' });
   const router = useRouter();

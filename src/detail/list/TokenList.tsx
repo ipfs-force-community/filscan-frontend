@@ -52,7 +52,7 @@ export default ({
     const showList = result?.items || [];
     setData({
       dataSource: showList,
-      total: result?.total_count,
+      total: result?.total,
     });
     if (showList.length > 0) {
       const formItems = showList.map((v: any) => v.from);

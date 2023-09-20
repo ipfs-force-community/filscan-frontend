@@ -124,7 +124,7 @@ export default (props: Props) => {
           color: '#ffffff',
         },
         formatter(v: any) {
-          var result = v[0].name;
+          var result = v[0].data.showTime;
           v.forEach((item: any) => {
             if (item.data) {
               result +=
@@ -186,21 +186,26 @@ export default (props: Props) => {
         amount: total_raw_byte_power_amount,
         value: unitConversion(total_raw_byte_power, 2, 6).split(' ')[0],
         unit: total_raw_byte_power_unit,
+        showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
+
       });
 
       seriesObj.total_quality_adj_power.push({
         amount: total_quality_adj_power_amount,
+        showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
         value: unitConversion(total_quality_adj_power, 2, 6).split(' ')[0],
         unit: total_quality_adj_power_unit,
       });
       seriesObj.power_increase.push({
         amount: power_increase_amount,
+        showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
         value: unitConversion(power_increase, 2, 5).split(' ')[0],
         unit: power_increase_unit,
       });
       seriesObj.power_decrease.push({
         amount: power_decrease_amount,
         value: unitConversion(power_decrease, 2, 5).split(' ')[0],
+        showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
         unit: power_decrease_unit,
       });
     });
@@ -245,8 +250,6 @@ export default (props: Props) => {
   }, [options, defaultOptions, noShow]);
 
   const propsRef = origin === 'home' ? { ref } : {}
-
-  console.log('---3',options?.legendData)
 
   return (
     <div

@@ -27,9 +27,23 @@ export default () => {
   const [fil, setFilData] = useState<Record<string,string|number>>({})
   const [finalHeight, setFinalHeight] = useState<Record<string,string|number>>({})
 
-  // useEffect(() => {
-  //   loadFilPrice()
-  // }, [])
+  const [show, setShow] = useState(false);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop){
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+      setLastScrollTop(st <= 0 ? 0 : st);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollTop]);
 
   useInterval(() => {
     loadFilPrice();
@@ -60,11 +74,12 @@ export default () => {
   // px-24
   return (
     <>
+
       <MobileView>
         <MHeader/>
       </MobileView>
       <BrowserView>
-        <div className='fixed top-0 z-50 w-full h-[110px] main_bg_color'>
+        <div className={`${show ? ' header-fade-in visible fixed top-0 ':'absolute top-0'} z-50 w-full h-[110px] main_bg_color` }>
           <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
             <ul className='flex gap-x-5 list-none'>
               {header_top.left.map((item) => {

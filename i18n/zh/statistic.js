@@ -70,7 +70,7 @@ const statistic = {
   messages_trend: '消息数走势图',
   message_count:'区块平均消息走势',
   all_message_count: '总消息走势',
-  pie_title_a: '当前Fil的基础发放用途统计',
+  pie_title_a: '当前FIL的用途分布统计',
   pie_title_a_tip:'已提供存储者奖励的Fil + 已释放锁仓奖励的Fil + 已分配保留部分的Fil = 当前已释放的Fil',
   pie_title_b: '当前已释放的Fil用途统计',
   charts_title:'Fil分配细则',

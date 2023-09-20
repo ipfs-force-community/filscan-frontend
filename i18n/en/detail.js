@@ -58,7 +58,7 @@ const detail = {
   //统计指标
   indicators:'Statistical Indicator',
   power_increase_indicators: 'Power Increase',
-  power_ratio: 'Power Rate',
+  power_ratio: 'Power Growth Rate',
   sector_increase: 'Sector Increase',
   precommit_deposits: 'PreCommitDeposits Increase',
   gas_fee: 'Gas Fee',

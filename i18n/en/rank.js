@@ -3,7 +3,7 @@ const rankZh = {
   rank_title:'Ranking',
   pool: 'Storage Pool',
   provider: 'Storage Provider',
-  growth:'Power Growth',
+  growth:'Power Growth Rate',
   rewards: 'Rewards',
   '24h': '24H',
   week_days: '7D',

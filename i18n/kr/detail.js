@@ -53,7 +53,7 @@ const detail = {
   //统计指标
   indicators:'통계 지표',
   power_increase_indicators: '채굴파워 증가량',
-  power_ratio: '채굴파워 증가 속도',
+  power_ratio: '전력 성장률',
   sector_increase: '섹터 증가량',
   precommit_deposits: '섹터 담보',
   gas_fee: 'Gas 소비',

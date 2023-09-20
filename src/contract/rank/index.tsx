@@ -92,7 +92,7 @@ export default ({ origin }: { origin?: string }) => {
         item.render = (text: string, record: any) => {
           if (text) {
             return (
-              <span className='flex gap-x-2 items-center'>
+              <span className='flex flex-wrap gap-x-2 items-center'>
                 <Link href={`/address/${record.contract_address}`}>{text}</Link>
                 <Image src={verifySvg} width={13} height={14} alt='' />
               </span>

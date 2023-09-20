@@ -98,3 +98,27 @@ export const networkOptions: Array<Option_Item> = [
     label: "Calibration",
   },
 ];
+
+export const SEO:any = {
+  'zh': {
+    title: 'Filscan--Filecoin 浏览器',
+    description:'Filecoin官方区块浏览器,Filecoin官方浏览器, Filscan,Filecoin,最新区块,Filecoin Explorer,FIL,IPFS，FIL,Filecoin区块链查询浏览器,FIL浏览器,Filecoin浏览器,Filecoin区块查询,区块链搜索引擎,区块高度,区块链交易',
+    keywords: 'Filecoin官方区块浏览器,Filecoin官方浏览器,',
+    url: 'https://filscan.io/',
+  },
+  'en': {
+    title: 'Filscan--Filecoin Explorer',
+    description:`Filscan is a blockchain explorer that serves as a fundamental tool for the Filecoin ecosystem, providing real-time on-chain data. It enables users to query information about Filecoin's blockchain, transactions, FIL tokens, wallets, etc., and synchronizes real-time information from all nodes.`,
+    keywords: 'Filecoin官方区块浏览器,Filecoin官方浏览器, Filecoin Explorer,fvm,Filscan,Filecoin, blockchain, crypto, currency,最新区块,FIL,IPFS，FIL,Filecoin区块链查询浏览器,FIL浏览器,Filecoin浏览器,Filecoin区块查询,区块链搜索引擎,区块高度,区块链交易',
+    url: 'https://filscan.io/en',
+  },
+
+  'kr': {
+    title: '파일코인 익스플로러',
+    description: 'Filecoin 공식 브라우저 ,Filecoin 공식 블록 탐색기 ,Filecoin 블록 쿼리 ,FIL 브라우저 ,FVM ,IPFS, 블록 높이,블록체인 트랜잭션,블록체인 검색 엔진,최신 블록',
+    keywords: 'Filecoin官方区块浏览器,Filecoin官方浏览器, Filecoin Explorer,fvm,Filscan,Filecoin, blockchain, crypto, currency,最新区块,FIL,IPFS，FIL,Filecoin区块链查询浏览器,FIL浏览器,Filecoin浏览器,Filecoin区块查询,区块链搜索引擎,区块高度,区块链交易',
+
+    url: 'https://filscan.io/kr',
+  }
+  // 添加更多语言...
+}

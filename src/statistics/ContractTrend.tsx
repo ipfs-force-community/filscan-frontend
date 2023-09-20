@@ -97,7 +97,7 @@ export default (props: Props) => {
           color: '#ffffff',
         },
         formatter(v: any) {
-          var result = v[0].name;
+          var result = v[0].data.showTime;
           v.forEach((item: any) => {
             if (item.data) {
               result +=
@@ -133,13 +133,14 @@ export default (props: Props) => {
         timestamp,
         txs_count, //合约交易
       } = value;
-      const showTime = inter === '24h'?formatDateTime(timestamp, 'HH:mm'):formatDateTime(timestamp, 'MM-DD');
+      const showTime = inter === '24h'?formatDateTime(timestamp, 'HH:mm'):formatDateTime(timestamp, 'MM-DD HH:mm');
       dateList.push(showTime);
       //amount
 
       seriesObj.txs_count.push({
         amount: txs_count,
         value: txs_count,
+        showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
         unit:'',
       });
     });
