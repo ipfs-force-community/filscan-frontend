@@ -1,95 +1,166 @@
 import { Translation } from "@/components/hooks/Translation";
-import { apiUrl } from "@/contents/apiUrl"
-import useAxiosData from "@/store/useAxiosData"
+import { apiUrl } from "@/contents/apiUrl";
+import useAxiosData from "@/store/useAxiosData";
 import { useEffect, useMemo, useState } from "react";
-import Image from '@/packages/image'
-
+import Image from "@/packages/image";
+import { BrowserView, MobileView } from "@/components/device-detect";
+import classNames from "classnames";
+import styles from "./index.module.scss";
+import { Input, Select } from "antd";
+import useWindow from "@/components/hooks/useWindown";
 export default () => {
-//  const [fvmListOpt, setFvmList] = useState<any>([])
-  const { tr } = Translation({ ns: 'fvm' });
+  //  const [fvmListOpt, setFvmList] = useState<any>([])
+  const {isMobile} = useWindow()
+  const { tr } = Translation({ ns: "fvm" });
   const { data, loading } = useAxiosData(apiUrl.fvm_category);
-  const {axiosData } = useAxiosData();
-  const [active, setActive] = useState('all')
-  const [content,setContent]= useState([])
+  const { axiosData } = useAxiosData();
+  const [active, setActive] = useState("all");
+  const [content, setContent] = useState([]);
   const fvmListOpt = useMemo(() => {
     let num = 0;
-    let newData:Array<any>=[]
-    data?.forEach((v:any) => {
-      num = num + v.num
-      newData.push({...v,value:v.label})
-    })
-    return [{ label: 'All',value:'all', num },...newData]
-  }, [data])
+    let newData: Array<any> = [];
+    data?.forEach((v: any) => {
+      num = num + v.num;
+      newData.push({...v, label: isMobile ? `${v.label}(${v.num})` : v.label , value: v.label });
+    });
+    return [{ label: isMobile ? `All(${num})` : 'All', value: "all", num }, ...newData];
+  }, [data]);
   useEffect(() => {
-    load()
-  },[])
+    load();
+  }, []);
 
   const load = (act?: string) => {
-    const category = act||active
+    const category = act || active;
     axiosData(apiUrl.fvm_items, {
-      category
+      category,
     }).then((result: any) => {
       setContent(result || []);
     });
-  }
+  };
   const handleClick = (item: any) => {
-    setActive(item.value)
-    load(item.value)
-  }
+    setActive(item.value);
+    load(item.value);
+  };
 
-  return <div className="main_contain">
-    <h3 className="text-lg font-DINPro-Medium mb-4">Explore FVM on FIlscan</h3>
-    <div className="flex gap-x-5">
-      <ul className="w-[210px] border border_color rounded-lg card_shadow px-4 py-5">
-        {fvmListOpt.map(item => {
-          return <li
-            className={`flex items-center justify-between px-5 h-10 text-sm cursor-pointer rounded-md ${active === item.value ? 'bg-bg_hover text-primary' : 'text_des'}`}
-            key={item.label} onClick={() => {handleClick(item)}}>
-            <span>
-              { tr(item.label)}
-            </span>
-            <span>{ item.num}</span>
-          </li>
-        })}
-        {/* <li className="primary_btn !w-full mt-[200px]">
-          { tr('share')}
-        </li> */}
-      </ul>
-      <div className="flex-1">
-        {/* {active === 'all'&&<div className="text-lg font-DINPro-Medium mb-5"> Hot Product</div>} */}
-        <ul className="flex flex-wrap gap-4">
-          {content.map((item:any,index:number) => {
-            return <li key={index } className="flex justify-between items-center w-[220px] m-h-[68px] p-4 border border_color card_shadow rounded-[12px] !overflow-hidden	">
-              <div className="flex items-center gap-x-1">
-                <Image src={item.logo} alt='' width='36' height='36' />
-                <span className="flex flex-col ">
-                  <span className="font-medium">{item?.name||''}</span>
-                  <span className="text-xs text_des">{item?.detail||''}</span>
-                </span>
-              </div>
-              <div className="flex gap-x-2">
-                { item.twitter && <span onClick={() => {
-                  if (item.twitter) {
-                    window.open(item.twitter);
-                  }
-                }}>
-                  <Image src={`https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage/images/twitter.svg`} alt="" width='20' height='20' />
-                </span>
-                }
-                { item.main_site && <span onClick={() => {
-                  if (item.main_site) {
-                    window.open(item.main_site);
-                  }
-                }}>
-                  <Image src={`https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage/images/network.svg`} alt="" width='20' height='20' />
-                </span>
-                }
-              </div>
-            </li>
-          })}
-
-        </ul>
+  return (
+    <>
+      <div className={classNames("main_contain",styles.wrap)}>
+        {isMobile ? <Select
+          popupClassName={styles.popupWrap}
+          className={styles.select}
+          onChange={(e)=>{
+            setActive(e);
+            load(e)
+          }}
+          defaultValue={active}
+          options={fvmListOpt}
+        ></Select> : <></>}
+        <BrowserView>
+          <h3 className="text-lg font-DINPro-Medium mb-4">
+            Explore FVM on FIlscan
+          </h3>
+        </BrowserView>
+        <div className="flex gap-x-5">
+          <BrowserView>
+            <ul className="w-[210px] border border_color rounded-lg card_shadow px-4 py-5">
+              {fvmListOpt.map((item) => {
+                return (
+                  <li
+                    className={`flex items-center justify-between px-5 h-10 text-sm cursor-pointer rounded-md ${
+                      active === item.value
+                        ? "bg-bg_hover text-primary"
+                        : "text_des"
+                    }`}
+                    key={item.label}
+                    onClick={() => {
+                      handleClick(item);
+                    }}
+                  >
+                    <span>{tr(item.label)}</span>
+                    <span>{item.num}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </BrowserView>
+          <div className="flex-1">
+            <BrowserView>
+              {active === "all" && (
+                <div className="text-lg font-DINPro-Medium mb-5">
+                  {" "}
+                  Hot Product
+                </div>
+              )}
+            </BrowserView>
+            <ul
+              className={classNames(
+                "flex flex-wrap gap-4",
+                styles["content-wrap"]
+              )}
+            >
+              {content?.map((item: any, index: number) => {
+                return (
+                  <li
+                    key={index}
+                    className={classNames(
+                      "flex justify-between items-center w-[220px] m-h-[68px] p-4 border border_color card_shadow rounded-[12px] !overflow-hidden",
+                      styles["item-wrap"]
+                    )}
+                  >
+                    <div className={classNames("flex items-center gap-x-1",styles.right)}>
+                      <Image src={item.logo} alt="" width="36" height="36" />
+                      <span
+                        className={classNames("flex flex-col ", styles.text)}
+                      >
+                        <span className="font-medium">{item?.name||''}</span>
+                        <span className="text-xs text_des">
+                          {item?.detail || ""}
+                        </span>
+                      </span>
+                    </div>
+                    <div className="flex gap-x-2">
+                      {item.twitter && (
+                        <span
+                          onClick={() => {
+                            if (item.twitter) {
+                              window.open(item.twitter);
+                            }
+                          }}
+                          className={classNames('border border_color rounded-[5px] p-[7px] box-border',styles.twitter)}
+                        >
+                          <Image
+                            src={`https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage/images/twitter.svg`}
+                            alt=""
+                            width="14"
+                            height="14"
+                          />
+                        </span>
+                      )}
+                      {item.main_site && (
+                        <span
+                          onClick={() => {
+                            if (item.main_site) {
+                              window.open(item.main_site);
+                            }
+                          }}
+                          className={classNames('border border_color rounded-[5px] p-[7px]',styles.network)}
+                        >
+                          <Image
+                            src={`https://filscan-v2.oss-accelerate.aliyuncs.com/fvm_manage/images/network.svg`}
+                            alt=""
+                            width="14"
+                            height="14"
+                          />
+                        </span>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-}
+    </>
+  );
+};
