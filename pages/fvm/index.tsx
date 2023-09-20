@@ -57,7 +57,7 @@ export default () => {
         ></Select> : <></>}
         <BrowserView>
           <h3 className="text-lg font-DINPro-Medium mb-4">
-            Explore FVM on FIlscan
+            Explore FVM on Filscan
           </h3>
         </BrowserView>
         <div className="flex gap-x-5">
@@ -84,14 +84,6 @@ export default () => {
             </ul>
           </BrowserView>
           <div className="flex-1">
-            <BrowserView>
-              {active === "all" && (
-                <div className="text-lg font-DINPro-Medium mb-5">
-                  {" "}
-                  Hot Product
-                </div>
-              )}
-            </BrowserView>
             <ul
               className={classNames(
                 "flex flex-wrap gap-4",

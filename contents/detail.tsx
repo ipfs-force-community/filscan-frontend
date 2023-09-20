@@ -1194,7 +1194,7 @@ export const power_change = {
     { title: '30d', dataIndex: '1m' },
   ],
   list: [
-    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' ,yIndex:0},
+    { title: 'quality_adjust_power', dataIndex: 'power', type: 'line', color: '#FFC53D' ,yIndex:0},
     {
       title: 'power_increase',
       dataIndex: 'power_increase',
