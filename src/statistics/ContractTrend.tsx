@@ -182,7 +182,7 @@ export default (props: Props) => {
       className={classNames(styles.trend,`w-full h-[full]  ${className} mt-20`)}
       ref={origin === 'home' ? ref : ''}
     >
-      <div className='flex justify-between flex-wrap items-center min-h-[36px] mb-2.5'>
+      <div className={ `flex justify-between flex-wrap items-center min-h-[36px] mb-2.5 ${lang === 'en' ? 'h-[60px]':''}`}>
         <div className='flex-1 flex flex-row flex-wrap items-center'>
           <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg pl-2.5'>
             {tr('contract_trend')}

@@ -163,7 +163,7 @@ export default ({ origin }: { origin?: string }) => {
         <Table
           key='contract_rank'
           className='-mt-2.5 '
-          total={dataSource.total}
+          total={origin !== 'home' ? dataSource.total:0}
           data={dataSource?.data || []}
           columns={columns || []}
           loading={loading}
