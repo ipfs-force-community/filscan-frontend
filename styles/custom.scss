@@ -460,6 +460,11 @@ font-display: auto;
             }
             
         }
+        .ant-modal-close-x{
+            .ant-modal-close-icon{
+                color: var(--font-color);
+            }
+        }
     }
 }
 

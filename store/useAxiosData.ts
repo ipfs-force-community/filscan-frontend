@@ -34,7 +34,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
   const [data, setData] = useState<FetchDataResult<T> | null>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const current = useRef(0);  // 使用 useRef 保存 current 的值
+  let current = 0;
 
   const axiosData = async (url: string, payload?: any, options = DefaultOptions): Promise<any> => {
     const { method='post', maxRetries=3, timeout=0,flag,isCancel=true,loading=true } = {...DefaultOptions,...options};
@@ -64,7 +64,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
       cancelTokenSources[key] = cancelTokenSource;
     }
 
-    while (current.current < maxRetries) {
+    while (current < maxRetries) {
       try {
         const response = await axios.request({
           url,
@@ -80,16 +80,17 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
 
         if (response.status === 401) {
           Router.push('/account/login');
+          current = 100;
           setData({
             result: null,
             error: 'Invalid credentials',
           });
           setLoading(false)
-          current.current = 0;   // 使用 current.current 设置 current 的值
+          current = 0;
           return response.data;
         }
         if (response.data && response.data.code) {
-          current.current = 0;   // 使用 current.current 设置 current 的值
+          current = 0;
           return messageManager.showMessage({
             type: 'error',
             content: response.data.message,
@@ -98,7 +99,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
         data = response.data || response ||{};
         setData(data?.result || data || {});
         setLoading(false);
-        current.current += 1;  // 使用 current.current 设置 current 的值
+        current = 0;
         return data?.result || data // 请求成功，跳出循环
       } catch (thrown: any) {
         if (axios.isCancel(thrown)) {
@@ -106,8 +107,8 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           console.log('Request canceled', thrown.message);
           break;  //取消请求，跳出循环
         } else {
-          current.current += 1;  // 使用 current.current 设置 current 的值
-          if (current.current < maxRetries) {
+          current += 1;
+          if (current < maxRetries) {
             return axiosData(url, payload, options);
           } else {
             setError(thrown);
@@ -116,8 +117,8 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
               result: null,
               error: 'Error',
             });
-            if (current.current === maxRetries) {
-              current.current += 0;
+            if (current === maxRetries) {
+              current=0
               if (thrown?.response?.status === 401) {
                 setData({
                   result: null,
@@ -150,7 +151,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
   useEffect(() => {
     // 组件卸载时取消所有请求
     return () => {
-      current.current = 0;
+      current = 0;
       // console.log('----dd',cancelTokenSources)
       Object.values(cancelTokenSources).forEach(source => source.cancel('Component unmounted'));
     };

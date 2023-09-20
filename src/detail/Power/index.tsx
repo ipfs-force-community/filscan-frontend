@@ -26,7 +26,7 @@ export default ({ data }: { data: any }) => {
   }, [data]);
 
   return (
-    <div className={classNames(styles.pow,'w-1/2 h-[300px]  border-l border_color p-5')}>
+    <div className={classNames(styles.pow,'w-1/2 h-[280px]  border-l border_color p-5')}>
       <div className='flex justify-between border-b border_color pb-7'>
         <ul className={classNames(styles.row,styles.between,'flex flex-1')}>
           {power_list.header.map((headerItem) => {

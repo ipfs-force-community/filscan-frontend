@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "env-cmd -f .env.test next dev --port 3003",
     "pre": "env-cmd -f .env.pre next dev --port 9090 ",
+    "pro": "env-cmd -f .env.proMian next dev --port 9098",
     "cai": "env-cmd -f  .env.calibration NODE_ENV=devlopment next dev --port 9092 ",
     "start": "env-cmd -f .env.test next start --port 9092",
     "start:pre": "env-cmd -f .env.pre next start --port 9090",

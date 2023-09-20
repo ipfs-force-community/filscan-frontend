@@ -19,6 +19,7 @@ import { useHash } from '@/components/hooks/useHash';
 import { formatNumber, get$Number } from '@/utils';
 import Image from '@/packages/image'
 import Link from 'next/link';
+import { getSvgIcon } from '@/svgsIcon';
 /** @format */
 export default () => {
   const router = useRouter();
@@ -116,7 +117,7 @@ export default () => {
   };
 
   //合约
-  const loadVerify = async(id: string) => {
+  const loadVerify = async (id: string) => {
     const result= await axiosData(apiUrl.contract_verify_des, {
       input_address:id
     })
@@ -182,7 +183,12 @@ export default () => {
     let evmList :Array<any>= [];
     if (verifyData && verifyData.source_file) {
       evmList = [{
-        title: 'contract_verify',
+        title: () => {
+          return <span className='flex items-center gap-x-2'>
+            { getSvgIcon('successIcon')}
+            { tr('contract_verify')}
+          </span>
+        },
         dataIndex: 'contract_verify',
       },
       {
@@ -190,7 +196,6 @@ export default () => {
         dataIndex: 'event_log',
       },]
     }
-
     return [...defaultOpt, ...evmList];
   }, [methodOptions,transOptions,verifyData]);
   return (

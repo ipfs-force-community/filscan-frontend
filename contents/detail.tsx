@@ -71,9 +71,8 @@ export const power_list = {
         text ? Number(text * 100).toFixed(4) + '%' : '--',
     },
     {
-      title: 'raw_power',
-      dataIndex: 'raw_power',
-      render: (text: number) => (text ? unitConversion(text, 2) : '--'),
+      title: 'total_win_count',
+      dataIndex: 'total_win_count',
     },
     {
       title: 'total_block_count',
@@ -81,9 +80,11 @@ export const power_list = {
     },
 
     {
-      title: 'total_win_count',
-      dataIndex: 'total_win_count',
+      title: 'raw_power',
+      dataIndex: 'raw_power',
+      render: (text: number) => (text ? unitConversion(text, 2) : '--'),
     },
+
     {
       title: 'total_reward',
       dataIndex: 'total_reward',
