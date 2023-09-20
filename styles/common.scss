@@ -176,6 +176,15 @@
   }
 }
 
+.header-fade-in {
+  transform: translateY(-100px);
+  transition: transform 0.4s ease-out;
+}
+
+.header-fade-in.visible {
+  transform: translateY(0);
+}
+
 /* progress mark*/
 .mark{
   background-color: var(--bgColor);
