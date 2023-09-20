@@ -136,13 +136,13 @@ export default (props: Props) => {
       seriesObj.cc.push({
         amount: cc_amount,
         value: unitConversion(cc, 2, 6).split(' ')[0],
-        showTime:formatDateTime(block_time, 'YY-MM-DD HH:mm'),
+        showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         unit: cc_unit,
 
       });
       seriesObj.dc.push({
         amount: dc_amount,
-        showTime:formatDateTime(block_time, 'YY-MM-DD HH:mm'),
+        showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         value: Number(unitConversion(dc, 2, 6).split(' ')[0]),
         unit: dc_unit,
 

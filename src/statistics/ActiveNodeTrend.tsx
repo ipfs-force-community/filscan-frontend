@@ -131,7 +131,7 @@ export default (props: Props) => {
       seriesObj.active_miner_count.push({
         value: active_miner_count,
         amount: active_miner_count,
-        showTime:formatDateTime(block_time, 'YY-MM-DD HH:mm'),
+        showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         unit:''
       })
     });
