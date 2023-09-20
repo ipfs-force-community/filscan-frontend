@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router"
-import style from './index.module.scss'
 import Image from 'next/image'
 import noImg from '@/assets/images/404.png'
-import { Button } from "antd";
 import useAxiosData from "@/store/useAxiosData";
 import { apiUrl } from "@/contents/apiUrl";
 import Link from "next/link";
 import Loading from "@/components/loading";
-
+import classNames from "classnames";
+import styles from './index.module.scss'
 export default () => {
   const router = useRouter();
   let searchValue = router.asPath?.split('=')[1]
@@ -72,7 +71,7 @@ export default () => {
     return <Loading />
   }
 
-  return <div className={`main_contain`}>
+  return <div className={classNames(`main_contain`,styles.wrap)}>
     <Image src={noImg} className="m-auto" width={600} alt='' />
     <Link className='primary_btn mx-auto mt-10 !px-5 !py-2.5 !text-base' href='/home'>
       Back Home

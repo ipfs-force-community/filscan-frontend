@@ -1,13 +1,13 @@
-.wrap_404{
+@media only screen and (max-width: 1000px) {
+  .wrap {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    min-height: 200px;
-    background-color: var(--main-bg-color);
-    padding: 10px 0px;
-    &_img{
-        width: 800px;
-        margin: auto auto 50px auto;
+    justify-content: center;
+    height: 100%;
+    img {
+      margin-top: 100px;
+      width: 200px;
     }
+  }
 }
