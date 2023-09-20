@@ -145,6 +145,7 @@ font-display: auto;
 .custom_table{
     width: 100%;
     .ant-table{
+        background-color: transparent !important;
         .ant-table-content{
              background-color: var(--bgColor);
             .ant-table-thead{
