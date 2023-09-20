@@ -32,6 +32,8 @@ export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => 
   //   setData({ ...result});
 
   // }
+
+  console.log('====33',verifyData,active)
   return <div >
     <ul className="flex items-center gap-x-2 des_bg_color rounded-md  w-fit">
       {verify_tabs.map(item => {

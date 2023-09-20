@@ -96,21 +96,24 @@ function Wallet() {
   }
 
   return <>
-    {wallet.account ? <div className={style.connect_wallet_main}>
-      <div className={style.connect_wallet}>
-        <span className={style.connect_wallet_connect} onClick={() => {
+    {wallet.account ? <div >
+      <div className="flex items-center gap-x-2 mt-4 ">
+        <span className="w-fit cursor-pointer px-4 py-2 border border_color rounded-[5px]" onClick={() => {
           window.open(`${window.location.host}/address/${wallet.account}/`);
         }}>
-          <span className={style.connect_wallet_icon} />
           {`Connected - Web3 [${isIndent(wallet?.account, 4)}]`}
         </span>
+        <span className="flex items-center justify-center w-9 h-9 border border_color rounded-[5px]" onClick={handleClickOut} >
+          <LogoutOutlined rev={undefined} />
+        </span>
       </div>
-      <span className={style.connect_wallet_out} onClick={handleClickOut} >
-        <LogoutOutlined rev={undefined} />
-      </span>
+
     </div>
-      : <Button className="custom_border_btn mt-10" onClick={() => setIsModalOpen(true)}>Connect Wallet</Button>}
-    <Modal title="Connect a Wallet"
+      : <Button className="flex items-center justify-center px-4 py-2.5 mt-4 cursor-pointer !text-primary" onClick={() => setIsModalOpen(true)}>Connect Wallet</Button>}
+    <Modal
+      title="Connect a Wallet"
+      className='custom_modal'
+      width={600}
       open={isModalOpen}
       footer={ null}
       onCancel={() => setIsModalOpen(false)}>

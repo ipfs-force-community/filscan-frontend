@@ -71,9 +71,8 @@ export const power_list = {
         text ? Number(text * 100).toFixed(4) + '%' : '--',
     },
     {
-      title: 'raw_power',
-      dataIndex: 'raw_power',
-      render: (text: number) => (text ? unitConversion(text, 2) : '--'),
+      title: 'total_win_count',
+      dataIndex: 'total_win_count',
     },
     {
       title: 'total_block_count',
@@ -81,9 +80,11 @@ export const power_list = {
     },
 
     {
-      title: 'total_win_count',
-      dataIndex: 'total_win_count',
+      title: 'raw_power',
+      dataIndex: 'raw_power',
+      render: (text: number) => (text ? unitConversion(text, 2) : '--'),
     },
+
     {
       title: 'total_reward',
       dataIndex: 'total_reward',
@@ -222,19 +223,19 @@ export const account_detail = {
       type: ["account_basic"],
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
-    {
-      title: 'account_address',
-      dataIndex: 'account_address',
-      type: ["account_basic"],
-      render: (text: string) => {
-        if(!text) return '--'
-        return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
-          <Copy text={text} />
-        </span>
-      }
+    // {
+    //   title: 'account_address',
+    //   dataIndex: 'account_address',
+    //   type: ["account_basic"],
+    //   render: (text: string) => {
+    //     if(!text) return '--'
+    //     return <span className="flex items-baseline gap-x-2">
+    //       <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+    //       <Copy text={text} />
+    //     </span>
+    //   }
 
-    },
+    // },
 
     {
       title: 'owner_address',
@@ -1194,7 +1195,7 @@ export const power_change = {
     { title: '30d', dataIndex: '1m' },
   ],
   list: [
-    { title: 'power', dataIndex: 'power', type: 'line', color: '#FFC53D' ,yIndex:0},
+    { title: 'quality_adjust_power', dataIndex: 'power', type: 'line', color: '#FFC53D' ,yIndex:0},
     {
       title: 'power_increase',
       dataIndex: 'power_increase',
@@ -1580,7 +1581,7 @@ export const cid_list = {
       render: (text: any, data:any) => formatDateTime(text,'YYYY-MM-DD')
     },
     {
-      title: 'blocks_messages', dataIndex: 'messages_count', type: ['block_basic'],
+      title: 'blocks_messages', dataIndex: 'messages_count', type: ['block_basic'],render:(text:number|string)=>String(text) || '--',
 
     },
     {
@@ -1590,7 +1591,7 @@ export const cid_list = {
       }
     },
     {
-      title:'win_count',dataIndex:'win_count',
+      title:'win_count',dataIndex:'win_count',render:(text:number|string)=>String(text) || '--',
     },
     {
       title: 'blocks_reward', dataIndex: 'mined_reward', type: ['block_basic'],

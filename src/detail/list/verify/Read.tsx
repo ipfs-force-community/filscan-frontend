@@ -21,9 +21,11 @@ export default ({ verifyData, actorId, type }: { verifyData: any, type: string, 
     if (verifyData) {
       return verifyData.ABI&&JSON.parse(verifyData.ABI).filter((v: any) => {
         if (type === 'view') {
-          return v?.stateMutability === 'view' && v.name && v.type !== 'event'
+          //只读
+          return v?.stateMutability === 'view' || v.stateMutability ==='pure'
         }
-        return v?.stateMutability !== 'view' && v.name && v.type !== 'event'
+        //读写
+        return v?.stateMutability !== 'view' && v?.stateMutability !== 'pure'&&v.type !=='constructor'
       })
     }
 
@@ -79,9 +81,7 @@ export default ({ verifyData, actorId, type }: { verifyData: any, type: string, 
       }})
   }
   return <div>
-    <div className="mt-5">
-      <Wallet />
-    </div>
+    <Wallet />
     <ul className="flex flex-col gap-y-2.5 mt-5">
       {abiData.map((abi: any, index: number) => {
         const payloadKey: {name:string,type:string}[]=[]

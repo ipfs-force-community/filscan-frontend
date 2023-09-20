@@ -13,6 +13,8 @@ import Charts from "@/src/statistics/Charts";
 import DCCTrend from "@/src/statistics/DCCTrend";
 import classNames from "classnames";
 import { BrowserView } from "@/components/device-detect";
+import Meta from '@/src/statistics/Meta';
+
 import styles from './index.module.scss'
 export default () => {
   const { tr } = Translation({ ns: 'static' });
@@ -55,16 +57,22 @@ export default () => {
       </BrowserView>
 
       <div className="flex flex-1 flex-col gap-y-6 ">
-        {hash === 'fil_overview' ? <>
-          <FilChart />
-          <Charts />
-        </> : <>
+        { hash ==='BlockChain' ||!hash && <>
           <PowerTrend />
           <DCCTrend />
           <BlockRewardTrend />
           <BlockRewardPer />
           <ActiveNodeTrend />
         </>}
+        { hash === 'fil_overview' && <>
+          <FilChart />
+          <Charts />
+        </>}
+
+        { hash === 'networks' && <>
+          <Meta />
+        </>}
+
       </div>
     </div>
   </div>

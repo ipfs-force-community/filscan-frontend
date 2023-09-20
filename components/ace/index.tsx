@@ -22,8 +22,7 @@ export default (props: any) => {
   return <AceEditor
     mode="java"
     style={{ width: '100%' }}
-
-    theme={theme}
+    theme={showTheme}
     name="blah2"
     fontSize={14}
     showPrintMargin={true}

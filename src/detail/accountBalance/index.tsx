@@ -145,12 +145,12 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
   }
 
   const renderBalance = ()=>{
-    return <ul className='mt-10 flex flex-wrap gap-y-2.5 justify-between max-h-[140px] account-balance'>
+    return <ul className='mt-12 flex flex-wrap gap-y-6 justify-between account-balance'>
       {account_balance.list.map((balance_item: any) => {
         const value = data[balance_item.dataIndex];
         return (
           <li
-            className='w-full flex items-center flex-0 min-h-[36px] account-balance-item'
+            className='w-full flex items-center flex-0 account-balance-item'
             key={balance_item.dataIndex}>
             <span
               className='text-sm text_des flex gap-x-1 items-center cursor-pointer min-w-[100px]'
@@ -192,7 +192,7 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
   return (
     <>
       <BrowserView>
-        <div className='flex h-[300px] w-1/2 p-5'>
+        <div className='flex h-[280px] w-1/2 p-5'>
           <div className='flex-1'>
             {renderTotal()}
             {renderBalance()}

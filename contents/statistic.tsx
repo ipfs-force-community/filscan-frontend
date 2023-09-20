@@ -410,5 +410,11 @@ export const chartsNav:Array<Menu_Info> = [
     preIcon: 'fil_overview',
     title:'fil_overview',
 
+  },
+  {
+    key: 'networks',
+    preIcon: 'fil_overview',
+    title:'networks_overview',
+
   }
 ]

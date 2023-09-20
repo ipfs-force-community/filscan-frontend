@@ -12,6 +12,7 @@ import styles from './style.module.scss'
 import classNames from 'classnames';
 import Tooltip from '@/packages/tooltip';
 import { getSvgIcon } from '@/svgsIcon';
+import useAxiosData from '@/store/useAxiosData';
 
 //统计指标
 
@@ -24,7 +25,7 @@ export default ({
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
-
+  const {axiosData } = useAxiosData();
   const [interval, setInterval] = useState('24h');
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -39,14 +40,14 @@ export default ({
   const load = async (inter?: string) => {
     setLoading(true);
     const show_inter = inter || interval;
-    const result: any = await fetchData(apiUrl.detail_Indicators, {
+    const result: any = await axiosData(apiUrl.detail_Indicators, {
       account_id: accountId,
       filters: {
         interval: show_inter,
       },
     });
     setLoading(false);
-    setData(result.miner_indicators || {});
+    setData(result?.miner_indicators || {});
   };
 
   const handleTabChange = (value: string) => {
