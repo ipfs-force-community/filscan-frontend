@@ -846,8 +846,8 @@ export const contract_log = [
     render: (text:any,record:any) => {
       if (Array.isArray(text)) {
         return text.map((item:string,index:number) => {
-          return <li key={item} className='array_item' >
-            <span className="array_item_icon">{ index}</span>
+          return <li key={item} className='flex items-center gap-x-1 mb-1' >
+            <span className="flex item-center justify-center bg-bg_hover border rounded-[5px] w-5 h-5">{ index}</span>
             { item}
           </li>
         })
@@ -859,8 +859,11 @@ export const contract_log = [
     dataIndex: 'data',
     title: 'coompoent_data',
     render: (text:string) => {
-      return <div className="bg-render">
-        { text}
+      return <div className="bg-bg_hover px-2.5 py-2 rounded-md">
+        <div className='code'>
+          <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(text, undefined, 6)}</pre>
+          {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
+        </div>
       </div>
     }
   }, {
