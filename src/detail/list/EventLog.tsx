@@ -1,5 +1,6 @@
 import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
+import { contract_log } from "@/contents/contract";
 import { message_detail } from "@/contents/detail"
 import Content from "@/packages/content";
 import NoData from "@/packages/noData";
@@ -55,9 +56,9 @@ export default ({ actorId }: {actorId?:string | string[]}) => {
   }
   return <>
     {data.map((item,index) => {
-      return <Content contents={message_detail.eventLog} ns={"detail"} data={item} key={index} />
+      return <Content contents={contract_log} ns={"contract"} data={item} key={index} />
     })}
-    <Pagination showQuickJumper className={`custom_Pagination`} pageSize={5} current={current} total={total} onChange={handleChange} />
+    <Pagination showQuickJumper className={`custom_Pagination`} style={{float:'right'}} pageSize={5} current={current} total={total} onChange={handleChange} />
 
   </>
 }

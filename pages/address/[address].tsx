@@ -183,12 +183,12 @@ export default () => {
     let evmList :Array<any>= [];
     if (verifyData && verifyData.source_file) {
       evmList = [{
-        title: () => {
+        title: verifyData?.compiled_file && Object.keys(verifyData?.compiled_file || {}).length >0 ? () => {
           return <span className='flex items-center gap-x-2'>
             { getSvgIcon('successIcon')}
             { tr('contract_verify')}
           </span>
-        },
+        }:tr('contract_verify'),
         dataIndex: 'contract_verify',
       },
       {

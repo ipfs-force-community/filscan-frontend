@@ -50,15 +50,15 @@ export const verify_first = {
       // rules: [{ required: true, message: '${verify_model} is required' }],
       options: [
         {
-          label: 'Solidity File',
+          title: 'Solidity File',
           value: 'single'
         },
         {
-          label: 'Solidity File with Metadata',
+          title: 'Solidity File with Metadata',
           value: 'multi'
         },
         {
-          label: 'Hardhat Support (Quickly)',
+          title: 'Hardhat Support (Quickly)',
           value: 'standard'
         },
       ]
@@ -70,11 +70,11 @@ export const verify_first = {
       placeholder: 'verify_select_placeholder',
       options: [
         {
-          label: 'No License(None)',
+          title: 'No License(None)',
           value: 'No license(None)'
         },
         {
-          label: 'MIT License(MIT)',
+          title: 'MIT License(MIT)',
           value: 'MIT license(MIT)'
         }
       ]
@@ -87,12 +87,12 @@ export const verify = {
     { dataIndex: 'compile_output', title: 'compile_output' }
   ],
   meta_list_des: [
-    { label: 'config_file_des1', },
-    { label: 'config_file_des1_1', },
-    { label: 'config_file_des1_2' },
-    { label: 'config_file_des2', },
-    { label: 'config_file_des2_1', },
-    { label: 'config_file_des2_2'},
+    { title: 'config_file_des1', },
+    { title: 'config_file_des1_1', },
+    { title: 'config_file_des1_2' },
+    { title: 'config_file_des2', },
+    { title: 'config_file_des2_1', },
+    { title: 'config_file_des2_2'},
   ],
 
 }
@@ -108,11 +108,11 @@ export const verify_source={
     {title:'compile_version',dataIndex:'compile_version'},
     {title:'optimize',dataIndex:'optimize', type: 'Select', options: [
       {
-        label: 'Yes',
+        title: 'Yes',
         value: true
       },
       {
-        label: 'No',
+        title: 'No',
         value: false
       }
     ],
@@ -134,10 +134,10 @@ export const contract_rank = {
   title: 'contract_rank',
   title_des: 'contract_rank_des',
   options: [
-    { label: 'transaction_count', value: 'transfer_count' },
-    { label: 'actor_balance', value: 'actor_balance' },
-    { label: 'gas_cost', value: 'gas_cost' },
-    { label: 'user_count', value: 'user_count' },
+    { title: 'transaction_count', value: 'transfer_count' },
+    { title: 'actor_balance', value: 'actor_balance' },
+    { title: 'gas_cost', value: 'gas_cost' },
+    { title: 'user_count', value: 'user_count' },
   ],
   total_msg: 'contract_rank_total',
   columns: [
@@ -821,8 +821,57 @@ export const contract_detail = {
   abiOptions: {
     placeholder: 'source_abi_default',
     list: [
-      { label: 'Json_Format', value: 'json' },
-      {label:'Text_Format',value:'text'}
+      { title: 'Json_Format', value: 'json' },
+      {title:'Text_Format',value:'text'}
     ],
   },
 }
+export const contract_log = [
+  {
+    dataIndex: 'epoch',
+    title:'epoch'
+  },
+  {
+    dataIndex: 'cid',
+    title: 'cid',
+    render: (text: string) => <Link href={`/message/${text}`} className='link'>{ text}</Link>
+  },
+  {
+    dataIndex: 'event_name',
+    title:'event_name'
+  },
+  {
+    dataIndex: 'topics',
+    title: 'topics',
+    render: (text:any,record:any) => {
+      if (Array.isArray(text)) {
+        return text.map((item:string,index:number) => {
+          return <li key={item} className='array_item' >
+            <span className="array_item_icon">{ index}</span>
+            { item}
+          </li>
+        })
+      }
+      return text||'--'
+
+    }
+  }, {
+    dataIndex: 'data',
+    title: 'coompoent_data',
+    render: (text:string) => {
+      return <div className="bg-render">
+        { text}
+      </div>
+    }
+  }, {
+    dataIndex: 'log_index',
+    title:'log_index',
+    render:(text:number)=> text
+  },
+  {
+    dataIndex: 'removed',
+    title: 'removed',
+    render:(text:boolean)=> String(text)
+  },
+
+]
