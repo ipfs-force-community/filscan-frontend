@@ -8,11 +8,15 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { formatNumber, pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
+import { BrowserView } from '@/components/device-detect';
 
 export default ({
   accountId,
+  total,
 }: {
   accountId?: string | string[];
+  total:(num:number)=>void
+
 }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
@@ -37,6 +41,10 @@ export default ({
       load();
     }
   }, [accountId]);
+
+  useEffect(()=>{
+    total(data.total)
+  },[data])
 
   const load = async (cur?: number,) => {
     setTableLoading(true);
@@ -83,6 +91,9 @@ export default ({
   return (
     <>
       <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:formatNumber(data.total)})}</span>
+      <BrowserView>
+        <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:data.total})}</span>
+      </BrowserView>
       <Table
         key='list_token'
         data={data.dataSource}

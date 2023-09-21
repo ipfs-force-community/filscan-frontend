@@ -15,6 +15,7 @@ import EventLog from './EventLog';
 import Verify from './verify';
 import TokenList from './TokenList';
 import { Translation } from '@/components/hooks/Translation';
+import { MobileView } from '@/components/device-detect';
 
 export default ({
   accountId,
@@ -35,7 +36,7 @@ export default ({
   const { hash, hashParams } = useHash();
   const [activeTab,setActiveTab] = useState(defaultActive);
   const { name, p } = hashParams || {};
-
+  const [num,setNum] = useState(0)
   useEffect(() => {
     if (hash) {
       if (tabList.find((v) => v.dataIndex === hash)) {
@@ -78,6 +79,9 @@ export default ({
           defaultActive={ defaultActive}
           isHash={true}
         />
+        <MobileView>
+          <span className='text_des text-xs pt-[8px]'>{tr('message_list_total', {value:num})}</span>
+        </MobileView>
         {activeItem?.headerOptions && (
           <Selects
             className={`${styles['select-wrap']} !min-w-[210px]`}
@@ -97,14 +101,22 @@ export default ({
 
         <div className={classNames('card_shadow p-5 mt-7 min-h-[300px] border border_color rounded-xl', styles.table, styles.reset)}>
           {activeTab === 'message_list' && (
-            <MessageList accountId={accountId} methodName={method} />
+            <MessageList total={(num)=>{
+              setNum(num)
+            }} accountId={accountId} methodName={method} />
           )}
-          {activeTab === 'block_list' && <BlockList accountId={accountId} />}
+          {activeTab === 'block_list' && <BlockList total={(num)=>{
+            setNum(num)
+          }} accountId={accountId} />}
           {activeTab === 'traces_list' && (
-            <TracesList accountId={accountId} methodName={method} />
+            <TracesList total={(num)=>{
+              setNum(num)
+            }} accountId={accountId} methodName={method} />
           )}
           {activeTab === 'ercList' && (
-            <TokenList accountId={accountId} />
+            <TokenList total={(num)=>{
+              setNum(num)
+            }} accountId={accountId} />
           )}
           {activeTab === 'contract_verify' && (
             <Verify actorId={actorId} verifyData={verifyData } />
