@@ -118,7 +118,7 @@ const mobileContent = new Map(
                   );
                 }
                 return (
-                  <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={index}>
+                  <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={idx}>
                     <div className={styles['mobile-table-card-item-label']}>
                       {showTitle}：
                     </div>
