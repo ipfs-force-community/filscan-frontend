@@ -152,12 +152,12 @@ export const meta_list = [
   }, //近24h增长算力
 
   //最新区块时间
-  {
-    title: 'total_blocks',
-    dataIndex:'total_blocks',
+  // {
+  //   title: 'total_blocks',
+  //   dataIndex:'total_blocks',
 
-    render: (v: number | string) => formatNumber(v, 2)
-  }, //全网出块数量
+  //   render: (v: number | string) => formatNumber(v, 2)
+  // }, //全网出块数量
 
   {
     title: 'total_quality_power',
@@ -181,14 +181,14 @@ export const meta_list = [
 
     render: (v: string | number) => formatNumber(formatFil(v,'FIL',4)) + ' FIL/TiB'
   }, //当前扇区质押量
-  {
-    title: 'base_fee',
-    dataIndex:'base_fee',
+  // {
+  //   title: 'base_fee',
+  //   dataIndex:'base_fee',
 
-    render: (v: string | number) => {
-      return formatFilNum(Number(v),false,false) //  Number(formatFil(v,'attoFIL'))+' attoFIL'
-    }
-  }, //当前基础费率
+  //   render: (v: string | number) => {
+  //     return formatFilNum(Number(v),false,false) //  Number(formatFil(v,'attoFIL'))+' attoFIL'
+  //   }
+  // }, //当前基础费率
   {
     title: 'gas_in_32g_meta',
     tip: 'gas_in_32g_tip',

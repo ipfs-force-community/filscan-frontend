@@ -64,10 +64,21 @@ export default () => {
               </div>
             );
           }
+          if (nav.outLink) {
+            return <div className='relative' key={nav.key} onClick={() => {
+              window?.open(nav.outLink)
+            } }>
+              <li
+                className='cursor-pointer text_color list-none  hover:text-primary'>
+                {tr(nav.key)}
+              </li>
+              {nav.sufIcon && <span className='absolute -top-[8px] -right-6'>{getSvgIcon(nav.sufIcon)}</span>}
+            </div>
+          }
           return (
             <div className='relative' key={ nav.key}>
               <Link
-                href={`${nav.link}`}
+                href={`${nav.link|| nav.outLink}`}
                 className='cursor-pointer text_color  hover:text-primary'>
                 {tr(nav.key)}
               </Link>
