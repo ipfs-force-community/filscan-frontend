@@ -589,7 +589,7 @@ export const message_detail = {
               }
             }}>
               {/* //todo 后端返回url */}
-              <Image src={''} alt='' width={20} height={20} />
+              <Image src={text.icon_url} alt='' width={20} height={20} />
               {text?.dex}
             </span>
           </span>
@@ -845,7 +845,10 @@ export const message_detail = {
       render: (text: string, record?: any) => {
         const showValue = text || record?.params;
         if (!showValue) return null;
-        if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 6);}
+        if (typeof showValue === 'string') {
+          return <span className="break-words">
+            { JSON.stringify(showValue, undefined, 6)}
+          </span>}
         return (
           <div className='code'>
             <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 6)}</pre>
@@ -860,8 +863,10 @@ export const message_detail = {
       render: (text: string, record?: any) => {
         const showValue = text || record?.returns;
         if (!showValue) return null;
-        if (typeof showValue === 'string') {return JSON.stringify(showValue, undefined, 4);}
-        return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
+        if (typeof showValue === 'string') {
+          return <span className="break-words">
+            { JSON.stringify(showValue, undefined, 6)}
+          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
       },
     },
   ],
