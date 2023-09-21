@@ -203,7 +203,7 @@ export const defi_list = {
 export const homeDefiColumns: any = {
   rank: '10%',
   protocol: '25%',
-  tvl: '10%',
+  tvl: '20%',
   tvl_change_rate_in_24h: '30%',
   users: '',
 };
