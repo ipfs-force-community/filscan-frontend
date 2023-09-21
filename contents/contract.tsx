@@ -821,8 +821,8 @@ export const contract_detail = {
   abiOptions: {
     placeholder: 'source_abi_default',
     list: [
-      { title: 'Json_Format', value: 'json' },
-      {title:'Text_Format',value:'text'}
+      { label: 'Json_Format', value: 'json' },
+      {label:'Text_Format',value:'text'}
     ],
   },
 }

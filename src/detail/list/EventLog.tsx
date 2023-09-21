@@ -56,7 +56,7 @@ export default ({ actorId }: {actorId?:string | string[]}) => {
   }
   return <>
     {data.map((item,index) => {
-      return <Content contents={contract_log} ns={"contract"} data={item} key={index} />
+      return <Content contents={contract_log} className="border-b border_color mt-5 last:border-none" ns={"contract"} data={item} key={index} />
     })}
     <Pagination showQuickJumper className={`custom_Pagination`} style={{float:'right'}} pageSize={5} current={current} total={total} onChange={handleChange} />
 
