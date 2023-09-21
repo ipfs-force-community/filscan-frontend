@@ -90,9 +90,8 @@ export default ({
   };
   return (
     <>
-      <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:formatNumber(data.total)})}</span>
       <BrowserView>
-        <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:data.total})}</span>
+        <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:formatNumber(data.total)})}</span>
       </BrowserView>
       <Table
         key='list_token'
