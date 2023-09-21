@@ -146,6 +146,11 @@ export function formatFilNum(
     : flag + res + (pure ? '' : unit);
 }
 
+export const unitConversionNum = (str:string) => {
+  let sizes:any = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+  return sizes.findIndex((v:string)=>v===str)
+}
+
 export const unitConversion = (
   item: string | number,
   len?: number,

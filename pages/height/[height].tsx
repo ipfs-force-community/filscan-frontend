@@ -12,17 +12,14 @@ export default () => {
   const router = useRouter()
   const { height } = router.query;
   const { tr } = Translation({ ns: 'detail' });
-  const { axiosData } = useAxiosData()
+  const { axiosData ,loading} = useAxiosData()
   const [data, setData] = useState<any>({})
-  const [loading,setLoading]= useState(false)
   useEffect(() => {
     load()
   }, [height])
 
   const load = async () => {
-    setLoading(true)
     const result: any = await axiosData(heightDetail, { height: Number(height) });
-    setLoading(false)
     setData(result?.tipset_detail)
   }
 
