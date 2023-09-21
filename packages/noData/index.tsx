@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 
-export default () => {
+export default ({ text}:{text?:string}) => {
   return <div className={styles.noData}>
-        No Data
+    { text || 'No Data'}
   </div>
 }

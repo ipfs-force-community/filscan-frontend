@@ -20,16 +20,27 @@ export default ({ verifyData, actorId, type }: { verifyData: any, type: string, 
   }, [actorId])
 
   const abiData = useMemo(() => {
+    const newData:any = [];
     if (verifyData) {
-      return verifyData.ABI&&JSON.parse(verifyData.ABI).filter((v: any) => {
-        if (type === 'view') {
-          //只读
-          return v?.stateMutability === 'view' || v.stateMutability ==='pure'
+      verifyData.ABI && JSON.parse(verifyData.ABI).forEach((v: any) => {
+        if (v.type === 'function') {
+
+          if (type === 'view') {
+            //只读
+            if (v?.stateMutability === 'view' || v.stateMutability === 'pure') {
+              newData.push(v)
+            }
+          } else {
+            //读写
+            if (v?.stateMutability !== 'view' && v.stateMutability !== 'pure') {
+              newData.push(v)
+            }
+          }
         }
-        //读写
-        return v?.stateMutability !== 'view' && v?.stateMutability !== 'pure'&&v.type !=='constructor'
+
       })
     }
+    return newData
 
   }, [verifyData, type])
 
@@ -85,7 +96,7 @@ export default ({ verifyData, actorId, type }: { verifyData: any, type: string, 
   return <div>
     <Wallet />
     <ul className="flex flex-col gap-y-2.5 mt-5">
-      { verifyData && abiData.length === 0 && <NoData />}
+      {verifyData && abiData.length === 0 && <NoData text={type === 'view'?'Sorry, there are no available Contract ABI methods to read. Unable to read contract info.':'Sorry, no public Write functions were found for this contract.' } />}
       {abiData.map((abi: any, index: number) => {
         const payloadKey: {name:string,type:string}[]=[]
         return <Show key={index} title={`${index + 1}.${abi?.name}`}>
