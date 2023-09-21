@@ -8,7 +8,7 @@ import { pool_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import Selects from '@/packages/selects';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageLimit } from '@/utils';
+import { formatNumber, pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
@@ -113,7 +113,7 @@ export default () => {
             {tr('pool_list')}
           </div>
           <div className='text_des text-xs'>
-            {tr(pool_list.total_list, { value: dataSource.total })}
+            {tr(pool_list.total_list, { value: formatNumber(dataSource?.total||0)})}
           </div>
         </div>
         <Selects
