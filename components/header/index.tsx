@@ -74,7 +74,7 @@ export default () => {
   return (
     <>
       <MobileView>
-        <MHeader/>
+        <MHeader data={{...fil,...finalHeight}}/>
       </MobileView>
       <BrowserView>
         <div className={`${show ? ' header-fade-in visible fixed top-0 ':'absolute top-0'} z-50 w-full h-[110px] main_bg_color` }>
@@ -134,25 +134,6 @@ export default () => {
               }}>
                 { getSvgIcon(theme === 'dark' ? 'sun' : 'moon')}
               </span>
-              {/* <Image
-                src={showTheme}
-                width={28}
-                height={28}
-                alt='theme'
-                className='cursor-pointer'
-                key='moon'
-                onClick={() => {
-                  localStorage.setItem(
-                    'theme',
-                    theme === 'dark' ? 'light' : 'dark'
-                  );
-                  setTheme(theme === 'dark' ? 'light' : 'dark');
-                }}
-              /> */}
-              {/* <Link href='/account/login' as='/account/login' scroll={ false}>
-                     <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
-                </Link> */}
-              {/* <Account /> */}
             </div>
           </div>
           <hr className='border_color'/>

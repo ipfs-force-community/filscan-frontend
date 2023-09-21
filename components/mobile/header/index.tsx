@@ -12,11 +12,14 @@ import _ from 'lodash'
 const rootSubmenuKeys = ['1', '2', '3','4','5'];
 import Logo from '@/assets/images/logo.png';
 import LogoText from '@/assets/images/logoText.png'
+import { Translation } from '@/components/hooks/Translation';
 
 import Image from 'next/image'
+import { header_top } from '@/contents/common'
 
-const Header = () => {
+const Header = (props:any) => {
   const {t} = useTranslation("nav")
+  const { tr } = Translation({ ns: 'common' });
   const [open,setOpen] = useState(false)
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectKeys, setSelectKeys] = useState<string[]>([]);
@@ -91,11 +94,28 @@ const Header = () => {
 
   return <div className={styles['header-wrap']}>
     <div className={styles['header']}>
-      <div onClick={onClick}>
-        <Image src={Logo} alt='logo' width={95} height={16}></Image>
-        <Image src={LogoText} alt='logo' width={95} height={16}></Image>
+      <div className={styles.nav}>
+        <div onClick={onClick}>
+          <Image src={Logo} alt='logo' width={95} height={16}></Image>
+          <Image src={LogoText} alt='logo' width={95} height={16}></Image>
+        </div>
+        { open ? <IconClose onClick={onOpen}/> :<IconOpen onClick={onOpen}/>}
       </div>
-      { open ? <IconClose onClick={onOpen}/> :<IconOpen onClick={onOpen}/>}
+      <div className={styles.fil}>
+        {header_top.left.filter((value)=>{
+          return value.dataIndex === "base_fee" || value.dataIndex === 'price'
+        }).map((item,index)=>{
+          const { title, dataIndex, render } = item;
+          const value = props.data&&props.data[dataIndex];
+          let renderDom = render && render(value, props.data);
+          return (
+            <li key={dataIndex} className='flex gap-x-1'>
+              <span>{tr(title)}:</span>
+              <span>{renderDom || value}</span>
+            </li>
+          );
+        })}
+      </div>
     </div>
     <div id='mask' onClick={onMaskClick} className={classNames(styles.body,open?styles.active:'')}>
       <div onClick={(e)=>{

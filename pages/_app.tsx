@@ -52,7 +52,6 @@ function App({ Component, pageProps, isMobile }: any) {
   const [loading,setLoading]= useState(true)
   const [lang, setLang] = useState('zh');
   const [theme, setTheme] = useState('light');
-  const [home, setHome] = useState<boolean>(false);
   const [wallet, setWallet] = useState({
     wallet: '',
     account:''
@@ -94,22 +93,7 @@ function App({ Component, pageProps, isMobile }: any) {
         setUserInfo(lastUser);
       }
     }
-    //loadUser();
   }, []);
-
-  // const loadUser = async () => {
-  //   const userData: any = await fetchData(proApi.userInfo);
-  //   setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
-  //   localStorage.setItem(
-  //     'userInfo',
-  //     JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
-  //   );
-  // };
-
-  useEffect(()=>{
-    const pathname = router.pathname
-    setHome(pathname === '/' || pathname === '/home')
-  }, [router.pathname])
 
   if (loading) {
     return null
@@ -154,13 +138,9 @@ function App({ Component, pageProps, isMobile }: any) {
                   <div className={classNames(`container_body text-sm ${theme}`)}>
                     <HeaderMain />
                     <MobileView>
-                      {home && <div className={classNames(styles.title)}>
-                        <span>Filecoin </span>
-                        <span>{t('blockchain_browser')}</span>
-                      </div>}
-                      <Search className={home ? styles['search-home'] : styles['search']}/>
+                      <Search className={styles['search']}/>
                     </MobileView>
-                    <div className={classNames(home ? styles.home : styles.other,styles.component)}>
+                    <div className={classNames(styles.home ,styles.component)}>
                       <Component {...pageProps} />
                     </div>
                     <Footer />
