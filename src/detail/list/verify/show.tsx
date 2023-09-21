@@ -10,7 +10,7 @@ export default (props: Props) => {
   const {title,children } = props
   const [show,setShow] = useState(false)
   return <div className="flex items-center flex-col min-h-[36px] h-fit rounded-[5px] border border_color" >
-    <div className={ `flex justify-between items-center w-full bg-bg_hover py-3 px-2.5 rounded-[5px] ${show ? 'rounded-b-none':''}`} onClick={() => setShow(!show)}>
+    <div className={ `flex justify-between items-center w-full des_bg_color py-3 px-2.5 rounded-[5px] ${show ? 'rounded-b-none':''}`} onClick={() => setShow(!show)}>
       <span className="flex items-center text-base "> {title}</span>
       { show ?<DownOutlined rev={undefined} />: <LeftOutlined rev={undefined} />}
     </div>
