@@ -1,3 +1,4 @@
+import { BrowserView, MobileView } from "@/components/device-detect";
 import { Translation } from "@/components/hooks/Translation";
 import { account_detail, owner_detail_overview } from "@/contents/detail"
 import Content from "@/packages/content"
@@ -18,7 +19,12 @@ export default ({ data,type }: { data: any,type:string }) => {
       {tr(type=== 'owner'?'owner_title':'account_overview')}
     </div>
     <div className="card_shadow w-full border rounded-xl p-2.5 pt-5 border_color">
-      <Content contents={contents} ns={"detail"} columns={type=== 'owner'? 1:2} data={data} />
+      <MobileView>
+        <Content contents={contents} ns={"detail"} columns={1} data={data} />
+      </MobileView>
+      <BrowserView>
+        <Content contents={contents} ns={"detail"} columns={type=== 'owner'? 1:2} data={data} />
+      </BrowserView>
     </div>
   </div>
 }
