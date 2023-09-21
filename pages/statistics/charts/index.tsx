@@ -57,7 +57,10 @@ export default () => {
       </BrowserView>
 
       <div className="flex flex-1 flex-col gap-y-6 ">
-        { hash ==='BlockChain' ||!hash && <>
+        { !hash && <Meta />}
+        { hash === 'networks'&&
+          <Meta />}
+        { hash ==='BlockChain' && <>
           <PowerTrend />
           <DCCTrend />
           <BlockRewardTrend />
@@ -67,10 +70,6 @@ export default () => {
         { hash === 'fil_overview' && <>
           <FilChart />
           <Charts />
-        </>}
-
-        { hash === 'networks' && <>
-          <Meta />
         </>}
 
       </div>

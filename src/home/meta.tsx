@@ -10,6 +10,10 @@ import useAxiosData from '@/store/useAxiosData';
 import Skeleton from '@/packages/skeleton';
 import Tooltip from '@/packages/tooltip';
 import useInterval from '@/components/hooks/useInterval';
+import Link from 'next/link';
+import { BrowserView, MobileView } from '@/components/device-detect';
+import GoIcon from '@/assets/images/black_go.svg';
+import GoMobileIcon from '@/assets/images/icon-right-white.svg';
 
 type ElementType<T extends readonly any[]> =
   T extends readonly (infer ElementType)[] ? ElementType : never;
@@ -57,9 +61,24 @@ function Meta() {
   return (
     <div
       //ref={ref}
+      className={classNames(styles.meta,`relative border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 pl-10 pr-6  py-10 rounded-xl border_color overflow-hidden`)} >
+      <Link href={`/statistics/charts#networks`} className='absolute right-2 top-5'>
+        <MobileView>
+          <GoMobileIcon
+            width={28}
+            height={28}
+          />
+        </MobileView>
+        <BrowserView>
+          <GoIcon
+            className='cursor-pointer mr-2.5'
+            width={18}
+            height={18}
+          />
+        </BrowserView>
 
-      className={classNames(styles.meta,`border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 pl-10 pr-6  py-10 rounded-xl border_color overflow-hidden`)} >
-      {home_meta.map((item: Item|any, index: number) => {
+      </Link>
+      {home_meta.map((item: Item | any, index: number) => {
         const { render, dataIndex, title } = item;
         const dataSource = {...data,...contractData}
         const value = (dataSource && dataSource[dataIndex]) ||'';
@@ -109,6 +128,7 @@ function Meta() {
           </div>
         );
       })}
+
     </div>
   );
 }

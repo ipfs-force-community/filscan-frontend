@@ -152,7 +152,7 @@ export default () => {
               {/* <Link href='/account/login' as='/account/login' scroll={ false}>
                      <span className="flex items-center justify-center w-14 h-7 border border-border rounded-[5px] text-font">{ tr('login')}</span>
                 </Link> */}
-              <Account />
+              {/* <Account /> */}
             </div>
           </div>
           <hr className='border_color'/>

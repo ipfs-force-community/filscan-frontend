@@ -20,7 +20,7 @@ const zh ={
   statistics_gas: '가스 요금 추세',
   statistics_base: '해싱 파워 추세',
   statistics_fil: 'FIL',
-  statistics_charts: '차트 통계',
+  statistics_charts: '통계',
   statistics_map: '노드 맵',
   resources:'자원',
   resources_tools: '자주 쓰는 도구',

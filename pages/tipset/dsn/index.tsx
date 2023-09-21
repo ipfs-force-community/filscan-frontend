@@ -8,7 +8,7 @@ import Search from '@/components/search';
 import { dsn_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageLimit } from '@/utils';
+import { formatNumber, pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
@@ -90,7 +90,7 @@ export default () => {
             {tr('dsn_list')}
           </div>
           <div className='text_des text-xs'>
-            {tr(dsn_list.total_list, { value: dataSource.total })}
+            {tr(dsn_list.total_list, { value: formatNumber(dataSource?.total||0) })}
           </div>
         </div>
         <Search

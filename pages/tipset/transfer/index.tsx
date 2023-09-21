@@ -7,7 +7,7 @@ import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import { message_list, transfer_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageLimit } from '@/utils';
+import { formatNumber, pageLimit } from '@/utils';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
@@ -79,7 +79,7 @@ export default () => {
             {tr('transfer_list')}
           </div>
           <div className='text_des text-xs'>
-            {tr('transfer_total_list', { value: dataSource.total })}
+            {tr('transfer_total_list', { value:formatNumber(dataSource?.total||0) })}
           </div>
         </div>
 

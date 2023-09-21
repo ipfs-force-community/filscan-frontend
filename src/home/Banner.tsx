@@ -29,7 +29,7 @@ function Banner() {
     return null
   }
 
-  return <div className="group relative ">
+  return <div className="group relative overflow-hidden w-full h-full">
     {/* <span
       className="hidden group-hover:flex absolute z-10 top-1/2 cursor-pointer w-5 h-5  items-center justify-center rounded-full bg-tipColor"
       onClick={() => {
@@ -41,14 +41,14 @@ function Banner() {
       <LeftOutlined rev={undefined} className="text-white text-xs" />
     </span> */}
 
-    <Carousel autoplay autoplaySpeed={5000} ref={ carousel} className="custom-carousel" >
+    <Carousel autoplay={false} autoplaySpeed={5000} ref={carousel} infinite={true }>
       {[...data]?.map((item: any,index) => {
         return <div key={ index} onClick={() => {
           if (item.link) {
             window.open(item.link)
           }
         }}>
-          <Image preview={false} src={item.url} alt='' width='100%' className="rounded-2xl cursor-pointer"/>
+          <Image preview={false} src={item.url} alt='' width='100%' className="rounded-2xl cursor-pointer object-cover carousel-image"/>
         </div>
       })}
     </Carousel>

@@ -20,7 +20,7 @@ const en ={
   statistics_gas: 'Gas Fee',
   statistics_base: 'Power',
   statistics_fil: 'FIL',
-  statistics_charts: 'Charts',
+  statistics_charts: 'Statistics',
   statistics_map: 'Charts',
   resources:'Resources',
   resources_tools: 'Tools',

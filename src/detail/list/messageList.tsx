@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { message_list } from '@/contents/detail';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageLimit } from '@/utils';
+import { formatNumber, pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 
@@ -87,7 +87,7 @@ export default ({
 
   return (
     <>
-      <span className='absolute -top-5 text_des text-xs'>{tr('message_list_total', {value:data.total})}</span>
+      <span className='absolute -top-5 text_des text-xs'>{tr('message_list_total', {value:formatNumber(data.total)})}</span>
       <Table
         key={'list_message'}
         data={data.dataSource}

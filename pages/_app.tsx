@@ -94,17 +94,17 @@ function App({ Component, pageProps, isMobile }: any) {
         setUserInfo(lastUser);
       }
     }
-    loadUser();
+    //loadUser();
   }, []);
 
-  const loadUser = async () => {
-    const userData: any = await fetchData(proApi.userInfo);
-    setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
-    localStorage.setItem(
-      'userInfo',
-      JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
-    );
-  };
+  // const loadUser = async () => {
+  //   const userData: any = await fetchData(proApi.userInfo);
+  //   setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
+  //   localStorage.setItem(
+  //     'userInfo',
+  //     JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
+  //   );
+  // };
 
   useEffect(()=>{
     const pathname = router.pathname

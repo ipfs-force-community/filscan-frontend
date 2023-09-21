@@ -4,7 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { pageLimit } from '@/utils';
+import { formatNumber, pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import styles from './Owner.module.scss'
@@ -112,7 +112,7 @@ export default ({
   return (
     <>
       <span className='text_des text-sm ml-2.5'>
-        {tr('owner_total', { value: data.total })}
+        {tr('owner_total', { value: formatNumber(data?.total||0)})}
       </span>
       <div className='card_shadow p-5 mt-2.5 rounded-xl border border_color'>
         <Table

@@ -13,7 +13,7 @@ export default ({
   className,
 }: {
   text: string;
-  icon?: React.ReactNode;
+    icon?: React.ReactNode|JSX.Element;
     className?: string;
 
 }) => {

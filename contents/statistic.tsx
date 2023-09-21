@@ -377,7 +377,13 @@ export const fil_charts = {
   ]
 }
 //charts
-export const chartsNav:Array<Menu_Info> = [
+export const chartsNav: Array<Menu_Info> = [
+  {
+    key: 'networks',
+    preIcon: 'meta',
+    title:'networks_overview',
+
+  },
   {
     key: 'BlockChain',
     preIcon: 'block_chain',
@@ -411,10 +417,5 @@ export const chartsNav:Array<Menu_Info> = [
     title:'fil_overview',
 
   },
-  {
-    key: 'networks',
-    preIcon: 'fil_overview',
-    title:'networks_overview',
 
-  }
 ]
