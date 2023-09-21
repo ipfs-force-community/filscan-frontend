@@ -5,7 +5,7 @@ import { pageLimit } from '@/utils';
 import { Pagination, Skeleton, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { TableProps } from 'antd/lib';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import NoData from '../noData';
@@ -15,8 +15,8 @@ interface Props extends TableProps<any> {
   columns: ColumnsType<any> | Array<any>;
   loading: boolean;
   limit?: number;
-  current?: number;
   total?: number;
+  current?:number;
   className?: string;
   onChange?: (pagination: any, filters?: any, sorter?: any) => void;
 }
@@ -26,9 +26,9 @@ export default (props: Props) => {
     data,
     columns,
     loading,
-    current,
     total = 0,
     limit,
+    current,
     className = '',
     onChange,
   } = props;
@@ -37,21 +37,38 @@ export default (props: Props) => {
     return limit || pageLimit;
   }, [limit]);
 
+  useEffect(()=>{
+    if (current) {
+      setCur(current)
+    }
+  },[
+    current
+  ])
+
+  const [cur,setCur] =useState(1)
+
   return <>
     <MobileView>
       <div className={styles['mobile-table']}>
         {
           [...mobileContent].filter(([key,value])=>key.loading === loading).map(([key,value])=> value.call(this,data,columns))
         }
-        {total > showLimit ? <Pagination
-          current={current}
-          total={total}
-          onChange={(cur: number) => {
-            if (onChange) {
-              onChange({ current: cur });
-            }
-          }}
-        /> : <></>}
+        <div style={{width:"100%"}}>
+          <Pagination
+            current={cur}
+            total={total}
+            pageSize={pageLimit}
+            showQuickJumper={false}
+            showSizeChanger={false}
+            hideOnSinglePage={true}
+            onChange={(cur: number) => {
+              if (onChange) {
+                setCur(cur)
+                onChange({ current: cur });
+              }
+            }}
+          />
+        </div>
       </div>
     </MobileView>
     <BrowserView>
