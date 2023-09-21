@@ -170,7 +170,7 @@ export const miner_overview = {
       title: 'block_count',
       width: '25%',
       dataIndex: 'block_count_increase',
-      title_tip: 'block_count_tip',
+      // title_tip: 'block_count_tip',
       render: (text: any) => String(text) || '--',
     },
     {

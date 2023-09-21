@@ -185,6 +185,16 @@
   transform: translateY(0);
 }
 
+.showHeader{
+   transition: top 0.3s ease-in-out;
+  top: 0;
+}
+
+.hideHeader{
+  transition: top 0.3s ease-in-out;
+  top: -120px; /* 假设你的div的高度为100px */
+}
+
 /* progress mark*/
 .mark{
   background-color: var(--bgColor);
@@ -296,7 +306,6 @@ cursor: pointer;
 
 .break-words{
     word-wrap: break-word;
-
     overflow-wrap: break-word;
 
 
