@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next"
 import Progress from "@/packages/progress"
 import { unitConversion } from "@/utils"
 import { observer } from "mobx-react"
+import { useRouter } from "next/router"
 
 interface Sort {
     field:string,
@@ -21,6 +22,7 @@ const Rank = ()=>{
     order:'descend'
   })
   const {t} = useTranslation("rank")
+  const router = useRouter()
   const columns = useMemo(()=>{
     return getColumn('growth','').filter((item)=>{
       if (item.dataIndex === 'rank') {
@@ -73,7 +75,11 @@ const Rank = ()=>{
         dataSource={homeStore.minerPowerRankData?.items}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
+      <div onClick={()=>{
+        router.push('/rank#growth')
+        console.log("=======ank#growth=========");
+
+      }} className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }
