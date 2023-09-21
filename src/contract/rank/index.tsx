@@ -117,7 +117,7 @@ export default ({ origin }: { origin?: string }) => {
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     let cur: number = pagination.current || current;
     let order = { ...sort };
-    if (sorter.field) {
+    if (sorter?.field) {
       order = {
         field: sorter.field,
         order: sorter.order,

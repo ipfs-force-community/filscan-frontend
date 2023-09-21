@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next"
 import { observer } from "mobx-react"
 import Link from "next/link"
 import VerifySvg from '@/assets/images/verify.svg';
+import { useRouter } from "next/router"
 
 interface Sort {
   field:string,
@@ -21,6 +22,7 @@ const ContractRank =()=>{
     order:'descend'
   })
   const {t} = useTranslation('contract')
+  const router = useRouter()
 
   const columns = useMemo(()=>{
     return contract_rank?.mobileColumns.filter((value,index)=>{
@@ -62,7 +64,10 @@ const ContractRank =()=>{
         columns={columns}
         dataSource={homeStore.contractData?.evm_contract_list}
         pagination={false} loading={false}></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
+      <div onClick={()=>{
+        router.push('/contract/rank')
+
+      }} className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }

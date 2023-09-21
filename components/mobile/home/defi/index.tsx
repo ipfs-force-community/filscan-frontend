@@ -9,6 +9,7 @@ import styles from './index.module.scss'
 import Image from "next/image"
 import Table from "@/packages/mobile/table"
 import { get$Number } from "@/utils"
+import { useRouter } from "next/router"
 
 interface Sort {
   field:string,
@@ -17,6 +18,7 @@ interface Sort {
 
 const Defi = ()=>{
   const {t} = useTranslation('fevm')
+  const router = useRouter()
   const [sort,setSort] = useState<Sort>({
     field:'tvl',
     order:'descend'
@@ -78,7 +80,9 @@ const Defi = ()=>{
         dataSource={homeStore.defiData?.items}
         pagination={false}
       ></Table>
-      <div className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
+      <div onClick={()=>{
+        router.push('/contract/rank')
+      }} className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
 }
