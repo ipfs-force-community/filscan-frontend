@@ -1,14 +1,12 @@
 /** @format */
 
 import Image from 'next/image';
-import Logo from '@/assets/images/logo.png';
 import { navMenu } from '@/contents/nav';
 import { Translation } from '@/components/hooks/Translation';
 import Link from 'next/link';
 import Search from './Search';
 import { useRouter } from 'next/router';
 import { getSvgIcon } from '@/svgsIcon';
-import LogoText from '@/assets/images/logoText.png'
 
 export default () => {
   const { tr } = Translation({ ns: 'nav' });
@@ -40,9 +38,9 @@ export default () => {
       <Link
         href={'/'}
         className='flex gap-x-2 items-center text_color cursor-pointer mt-1' >
-        <Image src={Logo} width={40} height={40} alt='logo' />
+        <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logo.png'} width={40} height={40} alt='logo' />
         {/* {getSvgIcon('logoText')} */}
-        <Image src={LogoText} alt='logo' width={95} height={16}></Image>
+        <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logoText.png'} alt='logo' width={95} height={16}></Image>
         {/* <span className='font-Barlow font-bold text-xl '>Filscan</span> */}
       </Link>
       <div className='flex-1 ml-5 mr-10'>
