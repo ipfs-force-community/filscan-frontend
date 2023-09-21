@@ -1,8 +1,25 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const nextConfig = {
+const publicPa = process.env['NEXT_PUBLIC_NODE_ENV']
+const environment = process.env['NEXT_PUBLIC_environment']
 
+const ossAddress = {
+  dev: 'http://localhost:3003/',
+  calibration:'https://filscan-v2.oss-accelerate.aliyuncs.com/filscan-cali',
+  mainner:
+    'https://filscan-v2.oss-accelerate.aliyuncs.com/client',
+}
+let publicUrl;
+if (publicPa && publicPa === 'production' && environment) {
+  publicUrl = ossAddress[environment]
+}
+
+if (publicPa === 'development') {
+  publicUrl = undefined;
+}
+
+const nextConfig = {
   reactStrictMode: true,
   env: {
     APP_ENV:process.env['NEXT_PUBLIC_environment'],
@@ -13,6 +30,16 @@ const nextConfig = {
     NET_WORK:process.env['NEXT_PUBLIC_NET_WORK'],
     PORT: process.env['NEXT_PUBLIC_PORT'],
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+    prependData: `@import "custom.scss";`
+  },
+  generateBuildId: async () => {
+    return 'build-web';
+  },
+  output:'standalone',
+  assetPrefix: publicUrl,
+
   i18n: {
     locales: ['zh', 'en', 'kr'],
     defaultLocale: 'zh',

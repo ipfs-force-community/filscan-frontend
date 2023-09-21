@@ -8,7 +8,7 @@ const MyDocument = () => (
   <Html lang="en">
 
     <Head >
-      <title>Filscan--Filecoin Explorer</title>
+      <title>Filscan Filecoin Explorer</title>
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta
         name='viewport'
