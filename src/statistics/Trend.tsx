@@ -286,7 +286,7 @@ export default (props: Props) => {
 
         </div>
         {origin === 'home' && (
-          <Link href={`/statistics/power/`}>
+          <Link href={`/statistics/charts#BlockChain`}>
             <MobileView>
               <GoMobileIcon
                 width={28}

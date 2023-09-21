@@ -46,7 +46,7 @@ export default () => {
     let content;
     switch (item.type) {
     case 'Input':
-      content = <Input className="custom_input !h-10" placeholder={ tr(placeholder)} />
+      content = <Input className="custom_input !h-9" placeholder={ tr(placeholder)} />
       break;
     default:
       content = <Select className="custom_select"

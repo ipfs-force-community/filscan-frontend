@@ -22,7 +22,7 @@ export default () => {
   const router = useRouter();
   const { miner } = router.query;
   const [data, setData] = useState<any>({});
-  const [loadingBalance, setBalanceLoading] = useState<boolean>(false);
+  const [loadingBalance, setBalanceLoading] = useState<boolean>(true);
   const [method, setMethod] = useState<any>([]);
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData()
@@ -52,12 +52,23 @@ export default () => {
   };
 
   const loadMinerData = async () => {
-    setBalanceLoading(true);
-    const result: any = await axiosData(apiUrl.detail_account, {
-      account_id: miner,
-    });
-    setBalanceLoading(false);
-    setData(result?.account_info?.account_miner || {});
+    try {
+      setBalanceLoading(true);
+      const result: any = await axiosData(apiUrl.detail_account, {
+        account_id: miner,
+      });
+      setData(result?.account_info?.account_miner || {});
+    } catch (error) {
+      console.error(error); // 这里可以打印错误信息，或者进行其他的错误处理
+    } finally {
+      setBalanceLoading(false); // 无论是否发生错误，都将 loading 状态设置为 false
+    }
+    // setBalanceLoading(true);
+    // const result: any = await axiosData(apiUrl.detail_account, {
+    //   account_id: miner,
+    // });
+    // setBalanceLoading(false);
+    // setData(result?.account_info?.account_miner || {});
   };
 
   const newTabList = useMemo(() => {

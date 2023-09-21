@@ -47,24 +47,27 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   const loadTrans = (id: string) => {
     //erc20
-    axiosData(apiUrl.contract_transferInMessage, { cid: id }).then(
-      (result: any) => {
-        setTransfer(result?.items || []);
-      }
-    );
-    //nft
-    axiosData(apiUrl.contract_transferInMessageNft, { cid: id }).then(
-      (result: any) => {
-        setTransferNft(result?.items || []);
-      }
-    );
+    if (id) {
+      axiosData(apiUrl.contract_transferInMessage, { cid: id }).then(
+        (result: any) => {
+          setTransfer(result?.items || []);
+        }
+      );
+      //nft
+      axiosData(apiUrl.contract_transferInMessageNft, { cid: id }).then(
+        (result: any) => {
+          setTransferNft(result?.items || []);
+        }
+      );
 
-    //contract_swap
-    axiosData(apiUrl.contract_swap, { cid: id }).then(
-      (result: any) => {
-        setSwap(result?.swap_info);
-      }
-    );
+      //contract_swap
+      axiosData(apiUrl.contract_swap, { cid: id }).then(
+        (result: any) => {
+          setSwap(result?.swap_info);
+        }
+      );
+    }
+
   };
 
   if (loading) {

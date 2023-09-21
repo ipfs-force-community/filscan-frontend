@@ -61,6 +61,7 @@ function Meta() {
   return (
     <div
       //ref={ref}
+      style={{overflow:'hidden'} } //safari 不生效
       className={classNames(styles.meta,`relative border card_shadow flex-1 items-center h-[270px] inline-grid grid-cols-4 gap-2 pl-10 pr-6  py-10 rounded-xl border_color overflow-hidden`)} >
       <Link href={`/statistics/charts#networks`} className='absolute right-2 top-5'>
         <MobileView>

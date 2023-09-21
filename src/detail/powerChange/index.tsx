@@ -8,19 +8,20 @@ import Segmented from '@/packages/segmented';
 import { useFilscanStore } from '@/store/FilscanStore';
 import fetchData from '@/store/server';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, unitConversion } from '@/utils';
+import { formatDateTime, unitConversion, unitConversionNum } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss'
 import classNames from 'classnames';
+import { max } from 'lodash';
 export default ({ accountId,type }: { accountId?: string | string[],type:string}) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const [interval, setInterval] = useState('1m');
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
-
+  const [unit,setUnit] = useState('TiB')
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
@@ -75,7 +76,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
             color: color.textStyle,
           },
           axisLabel: {
-            formatter: '{value} TiB',
+            formatter: `{value} ${unit}`,
             textStyle: {
               //  fontSize: this.fontSize,
               color: color.labelColor,
@@ -122,7 +123,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         },
       },
     };
-  }, [theme]);
+  }, [theme,unit]);
 
   useEffect(() => {
     if (accountId) {
@@ -147,6 +148,18 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         account_type:type,
       },
     });
+    let maxValue = 0;
+    let unitNum = -1;
+    ((result?.power_trend_by_account_id_list || [])).forEach((v:any) => {
+      const { block_time, power, power_increase } = v;
+      maxValue = Number(power) > maxValue ? Number(power):maxValue
+    })
+
+    if (maxValue) {
+      const unit = unitConversion(maxValue, 4)?.split(' ')[1]
+      setUnit(unit)
+      unitNum= unitConversionNum(unit)
+    }
     (result?.power_trend_by_account_id_list || []).forEach(
       (value: any) => {
         const { block_time, power, power_increase } = value;
@@ -155,10 +168,11 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         timeData.push(showTime);
         //y轴
         const [powerValue, powerUnit] = power
-          ? unitConversion(power, 4, 4).split(' ')
+          ? unitConversion(power, 4, unitNum||4).split(' ')
           : [];
+
         const [increaseValue, increaseUnit] = power_increase
-          ? unitConversion(power_increase, 4, 4)?.split(' ')
+          ? unitConversion(power_increase, 4, unitNum||4)?.split(' ')
           : [];
         //amount
         const [powerValue_amount, powerValue_unit] = power

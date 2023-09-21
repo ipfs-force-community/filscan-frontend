@@ -80,11 +80,11 @@ const statistic = {
 
   //chartsnav
   cc_dc_power: 'CC/DC PowerTrend',
-  static_overview: 'Charts',
+  static_overview: 'Statistics',
   contract_trend: 'Contract Transaction',
   fil_overview: 'FIL Overview',
   charts_title: 'FIL Allocation Guidelines',
-  networks_overview:'Filecoin Network Data Index'
+  networks_overview:'Network Overview'
 
 }
 

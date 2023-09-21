@@ -31,8 +31,8 @@ export default () => {
       const newData = {...contractData,...data}
       const value = newData[dataIndex];
       let renderDom = render ? render(value, newData, tr) : value;
-      return <li className="flex flex-col items-center w-[210px] py-4 gap-y-2.5 border border_color rounded-[5px]" key={index}>
-        <div className="font-medium">{renderDom}</div>
+      return <li className="flex flex-col items-center w-[210px] py-4 gap-y-1 border border_color rounded-[5px]" key={index}>
+        <div className="font-medium font-DINPro-Bold text-base">{renderDom}</div>
         {tip ?
           <>
             <Tooltip context={tr(tip)} icon={ false}>

@@ -64,7 +64,7 @@ const tipset = {
   pool_list:'Message Pool List',
   gas_fee_cap: 'Gas Limit',
   gas_premium: 'Gas Premium',
-  block_list:'Block List',
+  block_list:'Tipsets List',
 
 }
 export default tipset

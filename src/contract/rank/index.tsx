@@ -85,7 +85,6 @@ export default ({ origin }: { origin?: string }) => {
           );
         }
       }
-
       if (item.dataIndex === 'contract_name') {
         item.render = (text: string, record: any) => {
           if (text) {

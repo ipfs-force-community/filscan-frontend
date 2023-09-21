@@ -50,7 +50,7 @@ function Home(props: any) {
           <Banner />
         </BrowserView>
         <div className='main_contain !mt-[26px]'>
-          <div className='flex justify-between h-[270px] gap-x-5 meta-gas'>
+          <div className='flex justify-between h-[270px] gap-x-5 meta-gas '>
             <Meta />
             <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
               <BrowserView>

@@ -8,13 +8,13 @@ import { useEffect, useState } from "react";
 import CidTable from '@/src/detail/cidDetail'
 import styles from './index.module.scss'
 import classNames from "classnames";
+import { Skeleton } from "antd";
 
 export default () => {
   const router = useRouter()
   const { cid } = router.query;
   const { tr } = Translation({ ns: 'detail' });
-  const { axiosData } = useAxiosData()
-  const [loading, setLoading] = useState(false)
+  const { axiosData,loading } = useAxiosData()
   const [options,setOptions]= useState<Array<any>>([])
   const [data, setData] = useState({})
   useEffect(() => {
@@ -22,7 +22,6 @@ export default () => {
   }, [cid])
 
   const load = async () => {
-    setLoading(true)
     const optionsResult = await axiosData(apiUrl.tipset_block_message_opt, { cid });
     const newObj = optionsResult?.method_name_list || {};
     const opt:Array<any> = [];
@@ -33,7 +32,15 @@ export default () => {
     setOptions(opt);
     const result = await axiosData(apiUrl.tipset_BlockDetails, { block_cid:cid })
     setData(result?.block_details || {})
-    setLoading(false)
+  }
+  if (loading) {
+    return (
+      <div className='main_contain'>
+        <Skeleton active />
+        <Skeleton active />
+        <Skeleton active />
+      </div>
+    );
   }
   return <div className={classNames(styles.cid,"main_contain")}>
     <div className='mx-2.5 font-PingFang font-semibold text-lg '>
