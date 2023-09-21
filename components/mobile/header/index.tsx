@@ -96,7 +96,7 @@ const Header = (props:any) => {
     <div className={styles['header']}>
       <div className={styles.nav}>
         <div onClick={onClick}>
-          <Image src={Logo} alt='logo' width={95} height={16}></Image>
+          <Image src={Logo} alt='logo' width={19.5} height={18}></Image>
           <Image src={LogoText} alt='logo' width={95} height={16}></Image>
         </div>
         { open ? <IconClose onClick={onOpen}/> :<IconOpen onClick={onOpen}/>}
