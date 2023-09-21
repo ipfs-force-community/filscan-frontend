@@ -8,5 +8,6 @@ export const BrowserView = (props: HTMLAttributes<HTMLDivElement>) => {
 }
 
 export const MobileView = (props: HTMLAttributes<HTMLDivElement>) => {
-  return <div className={classNames(styles.mobile)}>{props.children}</div>
+  const {isMobile} = useWindow()
+  return !isMobile ? <></> : <div className={classNames(styles.mobile)}>{props.children}</div>
 }
