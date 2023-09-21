@@ -84,7 +84,7 @@ const statistic = {
   contract_trend: 'Contract Transaction',
   fil_overview: 'FIL Overview',
   charts_title: 'FIL Allocation Guidelines',
-  networks_overview:'Filecoin Network Data Index'
+  networks_overview:'Network Overview'
 
 }
 
