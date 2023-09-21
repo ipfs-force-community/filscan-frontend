@@ -190,7 +190,7 @@ export const meta_list = [
     }
   }, //当前基础费率
   {
-    title: 'gas_in_32g',
+    title: 'gas_in_32g_meta',
     tip: 'gas_in_32g_tip',
     dataIndex:'gas_in_32g',
 
@@ -223,7 +223,7 @@ export const meta_list = [
     render:(v:any)=>Number(formatFil(v,'FIL',4)).toLocaleString() + ' FIL' }, //每赢票奖励，单位Fil
 
   {
-    title: 'gas_in_64g',
+    title: 'gas_in_64g_meta',
     tip: 'gas_in_64g_tip',
     dataIndex:'gas_in_64g',
     render: (v: number | string) => Number(v) < 0.0001 ?formatFil(v,'nanoFIL',4) + 'nanoFIL/TiB' : formatFil(v,'FIL',4) + ' FIL/TiB'
@@ -267,6 +267,68 @@ export const meta_list = [
     dataIndex:'circulating_percent',
     render: (v: number) => Number(v * 100).toFixed(2) + '%'
   }, //流通率
+  {
+    title: 'total_contract/24h_contract',
+    dataIndex: 'total_contract',
+    tip:'total_contract/24h_contract_tip',
+    tipContent: [
+      { title: 'verified_contracts', dataIndex: 'verified_contracts' },
+    ],
+    render: (v: number | string,record:any) => {
+      const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
+      const flag = changeText ? changeText > 0 ? '+' : '-':'';
+      return <span className='flex gap-x-1 items-baseline'>
+        {formatNumber(v, 2)}
+        {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>}
+      </span>
+    },
+  }, //全网合约数/24h变化
+  {
+    title: 'contract_transaction/24h_change',
+    dataIndex: 'contract_txs',
+    render: (v: number | string,record:any) => {
+      const changeText =record?.contract_txs_change_in_24h&& Number(record.contract_txs_change_in_24h);
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
+      const flag = changeText ? changeText > 0 ? '+' : '-':'';
+      return <span className='flex gap-x-1 items-baseline'>
+        {formatNumber(v, 2)}
+        {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{changeText}</span>}
+      </span>
+    },
+  }, //合约交易数/24h变化
+  {
+    title: 'contract_address/24h_change',
+    dataIndex: 'contract_users',
+    render: (v: number | string,record:any) => {
+      const changeText =record?.contract_users_change_in_24h&& Number(record.contract_users_change_in_24h);
+      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
+      const flag = changeText ? changeText > 0 ? '+' : '-':'';
+      return <span className='flex gap-x-1 items-baseline'>
+        {formatNumber(v, 2)}
+        {changeText && <span className={`${className} font-medium  font-DINPro-Medium text-xs`}>{flag} {changeText}</span>}
+      </span>
+    },
+  }, //合约交易地址/24h变化
+  {
+    title: 'gas_24',
+    dataIndex: 'sum',
+    tipContent: [
+      { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 2) },
+    ],
+    render: (v: any) => {
+      const [show, unit] = formatFilNum(v, false, false, 4).split(' ');
+      return (
+        <>
+          <span>{show}</span>
+          <span className='text-xs ml-1	'>{unit}</span>
+        </>
+      );
+    },
+  }, //近24h产出效率，单位FIL/TiB
+  { title: 'quality_power_Cc', dataIndex: 'Cc' ,render: (text:string|number) => unitConversion(text, 2)},
+  {title:'quality_power_Dc',dataIndex:'Dc',render: (text:string|number) => unitConversion(text, 2)},
+
 ]
 
 export const no_result = {

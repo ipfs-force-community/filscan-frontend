@@ -704,6 +704,8 @@ const hot = <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.or
 const newIcon =<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" height="12" viewBox="0 0 26 12" width="26"><defs><linearGradient id="a" x1="0%" x2="97.050251%" y1="48.02269%" y2="53.393509%"><stop offset="0" stopColor="#e73b3b"/><stop offset="1" stopColor="#f55520"/></linearGradient><path id="d" d="m6.00597015 9v-4.22191011l2.45522388 4.22191011h.73880597v-6h-.80597015v4.21348315l-2.45522388-4.21348315h-.73880597v6zm7.99402985 0v-.81741573h-2.4404396v-1.80337079h2.0817583v-.80898876h-2.0817583v-1.75280899h2.4404396v-.81741573h-3.2v6zm2.9107185 0 1.0855124-4.20505618 1.0930506 4.20505618h.7085984l1.4021201-6h-.859364l-.9347467 4.28932584-1.0779741-4.28932584h-.6558304l-1.0779741 4.28932584-.9347467-4.28932584h-.859364l1.4021201 6z"/><filter id="c" height="266.7%" width="162.5%" x="-31.2%" y="-66.7%"><feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/><feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5"/><feColorMatrix in="shadowBlurOuter1" type="matrix" values="0 0 0 0 0.590750874   0 0 0 0 0.0496372439   0 0 0 0 0.0300789199  0 0 0 0.24182385 0"/></filter></defs><g fill="none" fillRule="evenodd"><path d="m2 0h19c2.7614237 0 5 2.23857625 5 5v5c0 1.1045695-.8954305 2-2 2h-18c-3.3137085 0-6-2.6862915-6-6v-4c0-1.1045695.8954305-2 2-2z" fill="url(#a)" transform="matrix(-1 0 0 1 26 0)"/><g fillRule="nonzero"><use fill="#000" filter="url(#c)" xlinkHref="#d"/><use fill="#fff" xlinkHref="#d"/></g></g></svg>
 const barLegend = <svg xmlns="http://www.w3.org/2000/svg" height="6" viewBox="0 0 6 6" width="6"><path d="m359 852h4c.552285 0 1 .447715 1 1v4c0 .552285-.447715 1-1 1h-4c-.552285 0-1-.447715-1-1v-4c0-.552285.447715-1 1-1z" fill="currentColor" fill-rule="evenodd" transform="translate(-358 -852)" /></svg>
 
+const meta = <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 16 16" width="16"><g fill="none" fill-rule="evenodd"><rect height="16" rx=".388889" width="16"/><path d="m6.00275429 3.32213902c.1408294.28569071.0229383.63122835-.26331715.77177991-1.56914067.77044887-2.58415591 2.36469182-2.58415591 4.14107086 0 2.54714181 2.06894809 4.61200821 4.6211249 4.61200821 1.76436301 0 3.35013897-.9953181 4.12994157-2.5403361.1435194-.2843542.4908352-.39875283.7757514-.2555165.2849163.1432363.399541.4898668.2560216.774221-.9742627 1.9303006-2.956778 3.1746336-5.16171457 3.1746336-3.19022102 0-5.77640613-2.581083-5.77640613-5.76501021 0-2.21998464 1.26892223-4.21302892 3.22944876-5.17564844.28625545-.14055157.63247612-.02289304.77330553.26279767zm2.17106467-1.32213902c3.09867234.25765748 5.56800754 2.72657396 5.82618104 5.82513172l-.0164727.20629333c-.1399534.56578827-.6483137.96857495-1.2380421.96857495h-4.4687107c-.70514309 0-1.2767745-.57162418-1.2767745-1.27675834v-4.4686542c0-.56717421.37296998-1.06138665.93913314-1.23105872l.02851855-.00705305zm.10231715 1.2932094.00063839 4.43003226 4.4291307-.00031919-.0350145-.23634375c-.3783985-2.19238008-2.1558215-3.90694569-4.37909473-4.19064632z" fill="currentColor" fill-rule="nonzero"/></g></svg>
+
 const svgTypes: Record<string, JSX.Element> = {
   moon,
   sun,
@@ -739,7 +741,8 @@ const svgTypes: Record<string, JSX.Element> = {
   fil_overview,
   hot,
   newIcon,
-  barLegend
+  barLegend,
+  meta
 };
 
 export const getSvgIcon = (type: string) => {

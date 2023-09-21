@@ -4,6 +4,8 @@ import { EnterOutlined } from "@ant-design/icons"
 import { Button, Input, message } from "antd"
 import WalletStore, { addNetwork, getNetWork } from "@/store/wallet";
 import Web3 from 'web3';
+import NoData from '@/packages/noData';
+
 import Show from "./show"
 
 const web3 = new Web3(window.ethereum);
@@ -83,11 +85,12 @@ export default ({ verifyData, actorId, type }: { verifyData: any, type: string, 
   return <div>
     <Wallet />
     <ul className="flex flex-col gap-y-2.5 mt-5">
+      { verifyData && abiData.length === 0 && <NoData />}
       {abiData.map((abi: any, index: number) => {
         const payloadKey: {name:string,type:string}[]=[]
         return <Show key={index} title={`${index + 1}.${abi?.name}`}>
           <>
-            {abi.inputs.map((item_input: any, index: number) => {
+            {abi?.inputs?.map((item_input: any, index: number) => {
               payloadKey.push({
                 name: `${abi?.name}/${item_input.name}`,
                 type:item_input?.type

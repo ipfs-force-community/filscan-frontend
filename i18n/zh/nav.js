@@ -23,7 +23,6 @@ const zh ={
   statistics_fil: 'FIL',
   statistics_charts: '图表统计',
   statistics_map: '节点地图',
-
   develop:'开发者',
   resources:'资源',
   resources_tools: '常用工具',
