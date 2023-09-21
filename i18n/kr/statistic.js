@@ -82,7 +82,8 @@ const statistic = {
   cc_dc_power: 'CC/DC 전력 추세',
   static_overview: '图表统计',
   contract_trend: '계약 거래',
-  charts_title:'FIL 할당 지침',
+  charts_title: 'FIL 할당 지침',
+  networks_overview:'전체 네트워크 데이터 지표'
 
 }
 
