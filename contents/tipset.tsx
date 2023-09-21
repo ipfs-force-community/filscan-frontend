@@ -39,7 +39,7 @@ export const message_list = {
       title: 'height',
       width: '10%',
       render: (text: string) => (
-        <Link href={`/tipset/chain?height=${text}`} className='link'>
+        <Link href={`/height/${text}`} className='link'>
           {text}
         </Link>
       ),
@@ -424,7 +424,7 @@ export const transfer_list = {
       dataIndex: "height",
       title: "height",
       render: (text:string) => {
-        return <Link href={`/tipset/chain?height=${text}`} className="link" >{ text}</Link>
+        return <Link href={`/height/${text}`} className="link" >{ text}</Link>
       }
     },
     {

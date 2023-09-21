@@ -47,13 +47,13 @@ export default () => {
           } else if (type === 'address') {
             Router.push(`/address/${showInput}`)
           } else if (type === 'height') {
-            Router.push(`/tipset/chain?height=${showInput}`)
+            Router.push(`/height/${showInput}`)
           } else if (type === 'message_details') {
             Router.push(`/message/${showInput}`)
           } else if (type === 'miner') {
             Router.push(`/miner/${showInput}`)
           } else if (type === 'block_details') {
-            Router.push(`/tipset/chain?cid=${showInput}`)
+            Router.push(`/cid/${showInput}`)
           } else {
             Router.push(`/address/${showInput}`)
           }

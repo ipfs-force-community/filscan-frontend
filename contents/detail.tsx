@@ -543,7 +543,7 @@ export const message_detail = {
       type: ['message_basic'],
       render: (text: string) => {
         return (
-          <Link className='link' href={`/tipset/chain?height=${text}`}>
+          <Link className='link' href={`/height/${text}`}>
             {text}
           </Link>
         );
@@ -807,7 +807,7 @@ export const message_detail = {
                       <Link
                         key={index}
                         className='link link-html'
-                        href={`/tipset/chain?cid=${item}`}>
+                        href={`/cid/${item}`}>
                         {item}
                       </Link>
                       <Copy text={item} />
@@ -819,7 +819,7 @@ export const message_detail = {
                         <Link
                           key={index}
                           className='link link-html'
-                          href={`/tipset/chain?cid=${item}`}>
+                          href={`/cid/${item}`}>
                           {item}
                         </Link>
                       </span>
@@ -1274,7 +1274,7 @@ export const message_list = (fromList: any, toList: any) => [
     title: 'height',
     width: '10%',
     render: (text: string) => (
-      <Link href={`/tipset/chain?height=${text}`} className='link_text'>
+      <Link href={`/height/${text}`} className='link_text'>
         {text}
       </Link>
     ),
@@ -1353,7 +1353,7 @@ export const block_list = (fromList: any, toList: any) => [
     title: 'block_height',
     width: '20%',
     render: (text: string) => (
-      <Link href={`/tipset/chain?height=${text}`} className='link_text'>
+      <Link href={`/height/${text}`} className='link_text'>
         {text}
       </Link>
     ),
@@ -1626,7 +1626,7 @@ export const cid_list = {
       dataIndex: "cid", title: "cid",
       render: (text: string) => <Link href={`/message/${text}`} className='link'>{text ? isIndent(text, 6) : ''}</Link>
     },
-    { dataIndex: "height", title: "height",render: (text: string) => <Link href={`/tipset/chain?height=${text}` }className='link'>{ text}</Link> },
+    { dataIndex: "height", title: "height",render: (text: string) => <Link href={`/height/${text}` }className='link'>{ text}</Link> },
     { dataIndex: "block_time", title: "block_time", render: (text: string|number)=> formatDateTime(text,'YYYY-MM-DD HH:mm')},
     {
       dataIndex: "from", title: "from",
@@ -1672,7 +1672,7 @@ export const deal_list = {
   list: [
     { dataIndex: 'deal_id', title: 'deal_id' },
     { dataIndex: 'service_start_time', title: 'service_start_time' ,render:(text:string) =>formatDateTime(text)},
-    { dataIndex: 'epoch', title: 'epoch', render: (text:number|string) => <Link className="link" href={`/tipset/chain?height=${text}`}>{ text}</Link> },
+    { dataIndex: 'epoch', title: 'epoch', render: (text:number|string) => <Link className="link" href={`/height/${text}`}>{ text}</Link> },
     {dataIndex:'message_cid',title:'message_cid',render: (text:number|string) => <Link className="link" href={`/message/${text}`}>{ text}</Link> },
     {dataIndex:'piece_cid',title:'piece_cid'},
     {
