@@ -268,45 +268,73 @@ export const meta_list = [
     render: (v: number) => Number(v * 100).toFixed(2) + '%'
   }, //流通率
   {
-    title: 'total_contract/24h_contract',
+    title: 'total_contract',
     dataIndex: 'total_contract',
     tip:'total_contract/24h_contract_tip',
-    tipContent: [
-      { title: 'verified_contracts', dataIndex: 'verified_contracts' },
-    ],
+
+    render: (v: number | string,record:any) => {
+      const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
+      return <span className='flex gap-x-1 items-baseline'>
+        {formatNumber(v, 2)}
+        {/* {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>} */}
+      </span>
+    },
+  }, //全网合约数/24h变化
+  {
+    title: 'total_contract_24h_contract',
+    dataIndex: 'total_contract_change_in_24h',
     render: (v: number | string,record:any) => {
       const changeText =record?.total_contract_change_in_24h&& Number(record.total_contract_change_in_24h);
       const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-baseline'>
-        {formatNumber(v, 2)}
-        {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>}
+        {flag}{Math.abs(changeText)}
+        {/* {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>} */}
       </span>
     },
-  }, //全网合约数/24h变化
+  }, //24h变化
+
+  { title: 'verified_contracts', dataIndex: 'verified_contracts' },
+
   {
-    title: 'contract_transaction/24h_change',
+    title: 'contract_transaction',
     dataIndex: 'contract_txs',
     render: (v: number | string,record:any) => {
-      const changeText =record?.contract_txs_change_in_24h&& Number(record.contract_txs_change_in_24h);
-      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
-      const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-baseline'>
         {formatNumber(v, 2)}
-        {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{changeText}</span>}
+        {/* {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{changeText}</span>} */}
       </span>
     },
   }, //合约交易数/24h变化
   {
-    title: 'contract_address/24h_change',
+    title: 'contract_transaction_24h_change',
+    dataIndex: 'contract_txs',
+    render: (v: number | string,record:any) => {
+      const changeText =record?.contract_txs_change_in_24h&& Number(record.contract_txs_change_in_24h);
+      const flag = changeText ? changeText > 0 ? '+' : '-':'';
+      return <span className='flex gap-x-1 items-baseline'>
+        {changeText && <span >{flag}{changeText}</span>}
+      </span>
+    },
+  }, //合约交易数/24h变化
+  {
+    title: 'contract_address',
+    dataIndex: 'contract_users',
+    render: (v: number | string,record:any) => {
+      return <span className='flex gap-x-1 items-baseline'>
+        {formatNumber(v, 2)}
+      </span>
+    },
+  }, //合约交易地址/24h变化
+  {
+    title: 'contract_address_24h_change',
     dataIndex: 'contract_users',
     render: (v: number | string,record:any) => {
       const changeText =record?.contract_users_change_in_24h&& Number(record.contract_users_change_in_24h);
-      const className = changeText ? changeText < 0 ? 'text_red' : 'text_green':'';
       const flag = changeText ? changeText > 0 ? '+' : '-':'';
       return <span className='flex gap-x-1 items-baseline'>
-        {formatNumber(v, 2)}
-        {changeText && <span className={`${className} font-medium  font-DINPro-Medium text-xs`}>{flag} {changeText}</span>}
+        {/* {formatNumber(v, 2)} */}
+        {changeText && <span >{flag} {changeText}</span>}
       </span>
     },
   }, //合约交易地址/24h变化

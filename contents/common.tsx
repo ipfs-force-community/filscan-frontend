@@ -97,13 +97,13 @@ export const networkOptions: Array<Option_Item> = [
 
 export const SEO:any = {
   'zh': {
-    title: 'Filscan--Filecoin 浏览器',
+    title: 'Filscan Filecoin 浏览器',
     description:'Filecoin官方区块浏览器,Filecoin官方浏览器, Filscan,Filecoin,最新区块,Filecoin Explorer,FIL,IPFS，FIL,Filecoin区块链查询浏览器,FIL浏览器,Filecoin浏览器,Filecoin区块查询,区块链搜索引擎,区块高度,区块链交易',
     keywords: 'Filecoin官方区块浏览器,Filecoin官方浏览器,',
     url: 'https://filscan.io/',
   },
   'en': {
-    title: 'Filscan--Filecoin Explorer',
+    title: 'Filscan Filecoin Explorer',
     description:`Filscan is a blockchain explorer that serves as a fundamental tool for the Filecoin ecosystem, providing real-time on-chain data. It enables users to query information about Filecoin's blockchain, transactions, FIL tokens, wallets, etc., and synchronizes real-time information from all nodes.`,
     keywords: 'Filecoin官方区块浏览器,Filecoin官方浏览器, Filecoin Explorer,fvm,Filscan,Filecoin, blockchain, crypto, currency,最新区块,FIL,IPFS，FIL,Filecoin区块链查询浏览器,FIL浏览器,Filecoin浏览器,Filecoin区块查询,区块链搜索引擎,区块高度,区块链交易',
     url: 'https://filscan.io/en',

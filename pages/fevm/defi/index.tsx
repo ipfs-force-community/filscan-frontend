@@ -4,10 +4,10 @@ import { defi_market } from "@/contents/fevm";
 import useAxiosData from "@/store/useAxiosData";
 import DefiList from '@/src/fevm/defi'
 import { formatDateTime, get$Number } from "@/utils";
-import { data } from "autoprefixer";
 import { BrowserView, MobileView } from "@/components/device-detect";
 import classNames from "classnames";
 import styles from './index.module.scss'
+import Skeleton from "@/packages/skeleton";
 export default () => {
   const { data: defiData, loading } = useAxiosData(apiUrl.fevm_defiSummary);
   const { tr } = Translation({ ns: 'fevm' });
@@ -48,7 +48,7 @@ export default () => {
           return <li className="flex-1 flex items-center justify-center border-r border_color last:border-0" key={ item.dataIndex}>
             <span className="flex flex-col w-fit " >
               <span className="text-sm font-DIN mb-2.5 text_des">{tr(title)}</span>
-              <span className="text-xl font-DINPro-Bold">{ showValue}</span>
+              <span className="text-xl font-DINPro-Bold">{loading?<Skeleton />:showValue}</span>
             </span>
           </li>
         })}
