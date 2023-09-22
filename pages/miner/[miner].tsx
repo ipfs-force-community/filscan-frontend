@@ -56,7 +56,7 @@ export default () => {
       setBalanceLoading(true);
       const result: any = await axiosData(apiUrl.detail_account, {
         account_id: miner,
-      });
+      }, {isCancel:false});
       setData(result?.account_info?.account_miner || {});
     } catch (error) {
       console.error(error); // 这里可以打印错误信息，或者进行其他的错误处理
