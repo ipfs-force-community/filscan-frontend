@@ -472,9 +472,9 @@ export const transfer_list = {
       dataIndex: "value",
       title: "value",
       render: (text: string) => {
-        let str = formatFilNum(text, false, false);
-        let ArrStr = str.split(" ");
-        return Number(ArrStr[0]).toFixed(3) + " " + ArrStr[1];
+        // let str = formatFilNum(text, false, false);
+        // let ArrStr = str.split(" ");
+        return formatFilNum(text)
       },
     },
     {
