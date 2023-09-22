@@ -19,7 +19,6 @@ import Search from '@/components/mobile/search';
 import styles from './_app.module.scss'
 import { useTranslation } from 'react-i18next';
 import { DeviceContext } from '@/store/DeviceContext';
-// import MobileDetect from 'mobile-detect';
 import WalletState from '@/store/wallet';
 import i18n from '@/i18n';
 import Ap from 'next/app'
@@ -85,14 +84,14 @@ function App({ Component, pageProps, isMobile }: any) {
     }
   };
 
-  useEffect(() => {
-    if (localStorage?.getItem('userInfo')) {
-      const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '');
-      if (lastUser) {
-        setUserInfo(lastUser);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage?.getItem('userInfo')) {
+  //     const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '');
+  //     if (lastUser) {
+  //       setUserInfo(lastUser);
+  //     }
+  //   }
+  // }, []);
 
   if (loading) {
     return null

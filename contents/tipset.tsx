@@ -445,7 +445,7 @@ export const transfer_list = {
     {
       dataIndex: "from",
       title: "from",
-      render: (text: string,record:any) => get_account_type(text)
+      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>{ get_account_type(text)}</span>
     //   render: (text: string) => (
     //   <Link href={`/address/${text}`} className='table_link'>
     //     {isIndent(text)}
@@ -455,7 +455,7 @@ export const transfer_list = {
     {
       dataIndex: "to",
       title: "to",
-      render: (text: string, record: any) => get_account_type(text)
+      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>{ get_account_type(text)}</span>
       // render: (text: string) => {
       //   if (text.length > 8 && !text.startsWith('f0')) {
       //     return  <Link href={`/address/${text}`} className='table_link'>

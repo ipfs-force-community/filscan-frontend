@@ -31,10 +31,10 @@ const navMenu: Array<Menu_Info|any> = [
         key: 'tipset_pool-message',
         link: '/tipset/pool-message/'
       },
-      // {
-      //   key: 'tipset_transfer',
-      //   link: '/tipset/transfer/'
-      // },
+      {
+        key: 'tipset_transfer',
+        link: '/tipset/transfer/'
+      },
     ]
   },
   {

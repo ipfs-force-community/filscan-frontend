@@ -41,7 +41,7 @@ export default () => {
     setActorId('');
     setMethodOptions([]);
     setInterval('24h');
-    setAccountType('')
+    setAccountType('');
     if (address) {
       loadMethod();
       load();

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import useAxiosData from '@/store/useAxiosData';
 import { apiUrl } from '@/contents/apiUrl';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 
 export default ({
@@ -22,6 +22,14 @@ export default ({
   const [options, setOptions] = useState([])
   const [active, setActive] = useState('')
   const [searchLoading, setSearchLoading] = useState(false)
+
+  useEffect(() => {
+    if (router.asPath.includes('address/miner')) {
+      const addressValue = router.asPath.split('?')[1]
+      const showValue = addressValue.split('=')[1]
+      handleSearch(showValue)
+    }
+  },[router])
 
   const handleSearch = async(value:string) => {
     const showInput = value.trim();
