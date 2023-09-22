@@ -133,12 +133,13 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
                   });
                   return null
                 }
-                return notification.error({
-                  className: 'custom-notification',
-                  message: 'Error',
-                  duration: 100,
-                  description: thrown?.message || 'Network Error'
-                })
+                return null
+                // return notification.error({
+                //   className: 'custom-notification',
+                //   message: 'Error',
+                //   duration: 100,
+                //   description: thrown?.message || 'Network Error'
+                // })
               }
 
             }
