@@ -33,7 +33,6 @@ function Overview({ className }: { className?: string }) {
         },
         formatter(v: any) {
           const { name, value ,data} = v;
-          console.log('====333',v)
           return `${v.marker} ${data.showName}`;
         },
         position: "right",

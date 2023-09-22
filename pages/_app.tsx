@@ -24,8 +24,6 @@ import WalletState from '@/store/wallet';
 import i18n from '@/i18n';
 import Ap from 'next/app'
 import { SEO } from '@/contents/common';
-import fetchData from '@/store/server';
-import { proApi } from '@/contents/apiUrl';
 import Script from 'next/script';
 
 App.getInitialProps = async (context:any)=>{

@@ -11,10 +11,21 @@ export function useHash() {
   const [hash, setHash] = useState('')
   const [hashParams, setHashParams] = useState<HashParams>({});
 
+  function checkUrl(url: string) {
+    /*
+    匹配/xxx#hash
+    /xxx/?name=xxx#xxx
+    /xxx#xxx?xxx=xxx
+
+    */
+    const regex = /\/[^\/#?]*?(#[^#\/?]*|\?name=[^#]*#[^#\/]*|#[^#\/?]*\?[^#]*=[^#\/]*)$/;
+    return regex.test(url);
+  }
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       let hashParams = router.asPath?.split('?')[1];
-      if (router.pathname.length > 3) {
+      if (router.pathname.length > 3 && checkUrl(router.asPath)) {
         if (hashParams?.includes('#')) {
           hashParams = hashParams.split('#')[0]
         }
