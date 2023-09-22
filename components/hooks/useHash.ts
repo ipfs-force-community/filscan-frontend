@@ -25,7 +25,7 @@ export function useHash() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       let hashParams = router.asPath?.split('?')[1];
-      if (router.pathname.length > 3 && checkUrl(router.asPath)) {
+      if (router.pathname.length > 3 && checkUrl(router.asPath) || hashParams) {
         if (hashParams?.includes('#')) {
           hashParams = hashParams.split('#')[0]
         }
