@@ -131,11 +131,11 @@ export default (props: Props) => {
 
       const [cc_amount, cc_unit] =cc && unitConversion(cc, 2)?.split(' ');
 
-      const [dc_amount, dc_unit] =dc &&unitConversion(dc, 2)?.split(' ');
+      const [dc_amount, dc_unit] = dc && unitConversion(dc, 2)?.split(' ');
       //amount
       seriesObj.cc.push({
         amount: cc_amount,
-        value: unitConversion(cc, 2, 6).split(' ')[0],
+        value: unitConversion(cc, 2, 5).split(' ')[0],
         showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         unit: cc_unit,
 
@@ -143,7 +143,7 @@ export default (props: Props) => {
       seriesObj.dc.push({
         amount: dc_amount,
         showTime:formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
-        value: Number(unitConversion(dc, 2, 6).split(' ')[0]),
+        value: Number(unitConversion(dc, 2, 5).split(' ')[0]),
         unit: dc_unit,
 
       });

@@ -39,7 +39,6 @@ function Home(props: any) {
   const { tr } = Translation({ ns: 'home' });
   const ref = useObserver();
   const ref1 = useObserver();
-
   return (
     <div className={styles['home-page']}>
       <div >
