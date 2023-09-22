@@ -41,8 +41,13 @@ export function useHash() {
           currentHash = currentHash?.split('?')[0]
         }
         setHash(currentHash);
+      } else {
+        if (hash) {
+          setHash('');
+          setHashParams({})
+        }
       }
-      setHash('');
+
     }
 
   }, [router])
