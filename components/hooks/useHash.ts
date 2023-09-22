@@ -14,21 +14,24 @@ export function useHash() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       let hashParams = router.asPath?.split('?')[1];
-      if (hashParams?.includes('#')) {
-        hashParams = hashParams.split('#')[0]
-      }
-      const params: Record<string, any> = new URLSearchParams(hashParams);
-      const result: HashParams = {};
+      if (router.pathname.length > 3) {
+        if (hashParams?.includes('#')) {
+          hashParams = hashParams.split('#')[0]
+        }
+        const params: Record<string, any> = new URLSearchParams(hashParams);
+        const result: HashParams = {};
 
-      for (const [key, value] of params.entries()) {
-        result[key] = value;
+        for (const [key, value] of params.entries()) {
+          result[key] = value;
+        }
+        setHashParams(result);
+        let currentHash = router.asPath?.split('#')[1];
+        if (hashParams) {
+          currentHash = currentHash?.split('?')[0]
+        }
+        setHash(currentHash);
       }
-      setHashParams(result);
-      let currentHash = router.asPath?.split('#')[1];
-      if (hashParams) {
-        currentHash = currentHash?.split('?')[0]
-      }
-      setHash(currentHash);
+
     }
 
   }, [router])
