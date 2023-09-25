@@ -17,8 +17,8 @@ import { get } from 'lodash'
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
-  const { axiosData } = useAxiosData();
-  const [loading,setLoading] = useState(false)
+  const { axiosData,loading } = useAxiosData();
+  // const [loading,setLoading] = useState(false)
   const [current, setCurrent] = useState<number>(1);
   const [data, setData] = useState({
     dataSource: [],
@@ -30,7 +30,6 @@ export default () => {
   },[])
 
   const load = async (cur?: number) => {
-    setLoading(true)
     const index = cur || current
     const result:any = await axiosData(apiUrl.tipset_chain, {
       filters: {
@@ -39,7 +38,6 @@ export default () => {
 
       }
     })
-    setLoading(false)
     setData({
       dataSource: result?.tipset_list || [],
       total:result?.total_count||0

@@ -28,11 +28,16 @@ export default () => {
   const { axiosData } = useAxiosData()
 
   useEffect(() => {
-    if (miner) {
-      loadMinerData();
+    let newMiner = miner;
+    if (miner === 'miner' || miner === 'address') {
+      newMiner = router?.query?.miner || router?.query?.address;
+    }
+    console.log('----3',newMiner,router)
+    if (newMiner && typeof newMiner === 'string') {
+      loadMinerData(newMiner);
       loadMethod();
     }
-  }, [miner]);
+  }, [miner,router]);
 
   const loadMethod = async () => {
     const result: any = await axiosData(apiUrl.detail_list_method, {
@@ -51,11 +56,11 @@ export default () => {
     setMethod(newMethod);
   };
 
-  const loadMinerData = async () => {
+  const loadMinerData = async (minerId?:string) => {
     try {
       setBalanceLoading(true);
       const result: any = await axiosData(apiUrl.detail_account, {
-        account_id: miner,
+        account_id: minerId||miner,
       }, {isCancel:false});
       setData(result?.account_info?.account_miner || {});
     } catch (error) {
