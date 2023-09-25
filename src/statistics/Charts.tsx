@@ -4,14 +4,16 @@ import { Translation } from "@/components/hooks/Translation";
 import { fil_charts } from "@/contents/statistic";
 import { useFilscanStore } from "@/store/FilscanStore";
 import { getColor } from "@/utils/echarts";
+import classNames from "classnames";
 import { useEffect, useMemo, useState } from "react";
-
+import styles from './Charts.module.scss'
+import useWindow from "@/components/hooks/useWindown";
 function Overview() {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
   const [legendData, setLegendData ] = useState<any>({});
   const [data, setData] = useState<any>({})
-
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
@@ -75,10 +77,15 @@ function Overview() {
         }
       })
       newData.series[0].data = series;
+      if (isMobile) {
+        newData.series[0].radius = '80%',
+
+        newData.series[0].label.show = false
+      }
     }
 
     return newData
-  }, [data, legendData])
+  }, [data, legendData,isMobile])
 
   const handleLegend = (legendKey:string) => {
     const newLegend = { ...legendData };
@@ -92,8 +99,8 @@ function Overview() {
     </div>
     <div className="card_shadow w-full border border_color rounded-[12px]">
 
-      <div className="flex flex-row border-b border_color">
-        <div className="w-2/3 h-[350px] py-5">
+      <div className={classNames("flex flex-row border-b border_color",styles['chart-wrap'],styles['chart-wrap-reset'])}>
+        <div className={classNames("w-2/3 h-[350px] py-5",styles.chart)}>
           <EChart options={options}/>
         </div>
         <ul className="1/3 flex gap-y-2.5  flex-col justify-center">
@@ -106,7 +113,6 @@ function Overview() {
             </li>
           })}
         </ul>
-
       </div>
       <div className="p-10 text-xs font-DINPro-Medium text_des">
         <ul className="border border_color rounded-[5px]">

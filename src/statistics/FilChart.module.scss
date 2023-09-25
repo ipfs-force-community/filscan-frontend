@@ -1,0 +1,39 @@
+@media only screen and (max-width: 1000px)  {
+
+    .card-reset{
+        overflow: unset;
+        border:unset;
+        border-radius: unset;
+        box-shadow: unset;
+    }
+    .card {
+        padding: 12px;
+        border: 1px solid var(--mobile-divide-line);
+        border-radius: 6px;
+
+        .echart {
+            height: 300px;
+        }
+    }
+    .legend-wrap {
+        display: flex;
+        flex-direction: column;
+
+        row-gap: 10px;
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+            .legend-item-left {
+                display: flex;
+                align-items: center;
+                color: var(--mobile-des-color);
+                column-gap: 6px;
+            }
+        }
+    }
+    
+}
