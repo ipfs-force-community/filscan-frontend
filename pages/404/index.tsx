@@ -37,9 +37,9 @@ export default () => {
     if (searchValue) {
       axiosData(apiUrl.searchInfo, {
         input:showInput,
-      }).then((res: any) => {
+      }, {isCancel:false}).then((res: any) => {
         setShow_404(true)
-        const type = res?.result?.result_type;
+        const type = res?.result_type;
         if (type) {
           if (type === 'owner') {
           //owner
