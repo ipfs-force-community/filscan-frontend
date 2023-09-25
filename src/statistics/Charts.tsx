@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useEffect, useMemo, useState } from "react";
 import styles from './Charts.module.scss'
 import useWindow from "@/components/hooks/useWindown";
+import { BrowserView, MobileView } from "@/components/device-detect";
 function Overview() {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
@@ -48,6 +49,7 @@ function Overview() {
       const name = `${tr(item.key)}`;
       legendData[item.key]={
         name,
+        value,
         color: item.color,
         key:item.key,
         isShow:true
@@ -94,7 +96,7 @@ function Overview() {
   }
 
   return <div>
-    <div className='flex items-center h-9 w-fit font-PingFang font-semibold text-lg pl-2.5 mb-4'>
+    <div className={classNames('flex items-center h-9 w-fit font-PingFang font-semibold text-lg pl-2.5 mb-4')}>
       { tr('charts_title') }
     </div>
     <div className="card_shadow w-full border border_color rounded-[12px]">
@@ -109,24 +111,49 @@ function Overview() {
             return <li key={legendKey} className='flex gap-x-2 items-center text-xs text_des cursor-pointer'
               onClick={() => { handleLegend(legendKey)}}>
               <span className='block w-4 h-4 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
-              <span>{ legend?.name||""}</span>
+              <span className="flex">
+                <span className="flex-shrink-0">{ legend?.name||""}</span>
+                <MobileView>
+                  <span>{`(${legend?.value})%`}</span>
+                </MobileView>
+              </span>
             </li>
           })}
         </ul>
       </div>
-      <div className="p-10 text-xs font-DINPro-Medium text_des">
-        <ul className="border border_color rounded-[5px]">
-          {fil_charts.content.map((v,index) => {
-            return <li key={ index} className="flex border-b border_color w-full break-words min-h-[36px] flex items-center last:border-none">
-              <div style={{width:'20%'}} className="flex items-center h-full min-h-[36px] px-2.5  border-r border_color" >{tr(v.label)}</div>
-              <div style={{width:'25%'}} className="flex items-center h-full min-h-[36px]  px-2.5 border-r border_color">{index === 0 ? tr(v.value): v.value}</div>
-              <div style={{width:'40%'}} className="px-2.5" >{ tr(v.description)}</div>
-
-            </li>
-          })}
-        </ul>
-
-      </div>
+      <BrowserView>
+        <div className="p-10 text-xs font-DINPro-Medium text_des">
+          <ul className="border border_color rounded-[5px]">
+            {fil_charts.content.map((v,index) => {
+              return <li key={ index} className="border-b border_color w-full break-words min-h-[36px] flex items-center last:border-none">
+                <div style={{width:'20%'}} className="flex items-center h-full min-h-[36px] px-2.5  border-r border_color" >{tr(v.label)}</div>
+                <div style={{width:'25%'}} className="flex items-center h-full min-h-[36px]  px-2.5 border-r border_color">{index === 0 ? tr(v.value): v.value}</div>
+                <div style={{width:'40%'}} className="px-2.5" >{ tr(v.description)}</div>
+              </li>
+            })}
+          </ul>
+        </div>
+      </BrowserView>
+      <MobileView>
+        {fil_charts.content.filter((value)=>{
+          return value.label !== 'Allocation'
+        }).map((v,index) => {
+          return <li key={ index} className="flex flex-col text_des px-[12px] py-[14px] gap-y-[28px] border-b border_color last:border-none">
+            <div className="flex" >
+              <span className="min-w-[100px]">{tr('Allocation')}:</span>
+              <span className="font-DINPro-Medium text-base text-black">{tr(v.label)}</span>
+            </div>
+            <div className="flex">
+              <span className="min-w-[100px]">{tr('value')}:</span>
+              <span className="font-DINPro-Medium text-base text-black">{index === 0 ? tr(v.value): v.value}</span>
+            </div>
+            <div className="flex" >
+              <span className="min-w-[100px]">{tr('description')}:</span>
+              <span className="font-DINPro-Medium text-base text-black">{ tr(v.description)}</span>
+            </div>
+          </li>
+        })}
+      </MobileView>
     </div>
   </div>
 }

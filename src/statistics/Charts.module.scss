@@ -1,16 +1,18 @@
 @media only screen and (max-width: 1000px) {
+  .title {
+    padding: unset !important;
+  }
+  .chart-wrap-reset {
+  }
+  .chart-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
 
-    .chart-wrap-reset {
-
+    .chart {
+      padding: unset;
+      width: unset;
+      height: 300px;
     }
-    .chart-wrap {
-        display: flex;
-        flex-direction: column;
-        padding: 12px;
-        .chart {
-            padding: unset;
-            width: unset;
-            height: 300px;
-        }
-    }
+  }
 }

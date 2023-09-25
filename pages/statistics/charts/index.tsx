@@ -58,8 +58,8 @@ export default () => {
 
       <MobileView>
         <div className={styles['nav-wrap']}>
-          {chartsNav.map((value,)=>{
-            return <Link className={hash === value.key ? styles.active : ''} key={value.key} href={`/statistics/charts#${value.key}`}>{tr(value.title||value.key)}</Link>
+          {chartsNav.map((value,index)=>{
+            return <Link className={(hash === value.key || (hash==='' && index == 0)) ? styles.active : ''} key={value.key} href={`/statistics/charts#${value.key}`}>{tr(value.title||value.key)}</Link>
           })}
         </div>
       </MobileView>

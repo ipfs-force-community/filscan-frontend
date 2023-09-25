@@ -188,7 +188,7 @@ function Overview({ className }: { className?: string }) {
     {fil_overviewList.map((dataItem, index: number) => {
       const legendData = index === 1 ? legendB: legendA;
       return <div key={ dataItem.title} className={`w-full h-full ${className} `}>
-        <div className='flex items-center h-9 w-fit font-PingFang font-semibold text-lg pl-2.5 mb-4'>
+        <div className={classNames('flex items-center h-9 w-fit font-PingFang font-semibold text-lg pl-2.5 mb-4',styles.title)}>
           { tr( dataItem.title) }
         </div>
         <div className={classNames('card_shadow border border_color rounded-[12px]',styles.card,styles['card-reset'])}>
