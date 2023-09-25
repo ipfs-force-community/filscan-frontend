@@ -12,7 +12,7 @@ import FilChart from "@/src/statistics/FilChart";
 import Charts from "@/src/statistics/Charts";
 import DCCTrend from "@/src/statistics/DCCTrend";
 import classNames from "classnames";
-import { BrowserView } from "@/components/device-detect";
+import { BrowserView, MobileView } from "@/components/device-detect";
 import Meta from '@/src/statistics/Meta';
 
 import styles from './index.module.scss'
@@ -32,7 +32,7 @@ export default () => {
     </ul>
   }
   return <div className={classNames(styles['statistics-charts'],"main_contain !overflow-auto")}>
-    <div className="flex gap-x-5">
+    <div className={classNames("flex gap-x-5",styles.content)}>
       <BrowserView>
         <div className="w-[209px]">
           <div className='flex justify-center h-10 flex-col text-lg font-medium gap-y-2.5 mb-2.5 mx-2.5'>
@@ -55,6 +55,14 @@ export default () => {
           </ul>
         </div>
       </BrowserView>
+
+      <MobileView>
+        <div className={styles['nav-wrap']}>
+          {chartsNav.map((value,index)=>{
+            return <Link className={(hash === value.key || (hash==='' && index == 0)) ? styles.active : ''} key={value.key} href={`/statistics/charts#${value.key}`}>{tr(value.title||value.key)}</Link>
+          })}
+        </div>
+      </MobileView>
 
       <div className="flex flex-1 flex-col gap-y-6 ">
         { !hash && <Meta />}

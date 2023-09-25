@@ -17,7 +17,6 @@ const Table = (props:TProps)=>{
     current,
     total = 0,
     limit,
-    onChange,
   } = props;
 
   const showLimit = useMemo(() => {
@@ -27,9 +26,9 @@ const Table = (props:TProps)=>{
   return <div className={classNames(styles.wrap)}>
     <T
       loading={loading}
-      columns={props.columns}
+      columns={columns}
       dataSource={props.dataSource}
-      onChange={onChange}
+      onChange={props.onChange}
       pagination={
         total > showLimit
           ? {

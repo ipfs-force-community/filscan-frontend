@@ -9,7 +9,10 @@ import { apiUrl } from '@/contents/apiUrl';
 import { fil_overviewList } from '@/contents/statistic';
 import { formatFil, formatNumberUnit } from '@/utils';
 import _ from 'lodash'
-
+import { BrowserView, MobileView } from '@/components/device-detect';
+import styles from './FilChart.module.scss'
+import classNames from 'classnames';
+import useWindow from '@/components/hooks/useWindown';
 function Overview({ className }: { className?: string }) {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
@@ -18,7 +21,7 @@ function Overview({ className }: { className?: string }) {
   const [legendA, setLegendA] = useState<any>({});
   const [optionsB, setOptionB] = useState<any>({});
   const [legendB, setLegendB] = useState<any>({});
-
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
@@ -58,6 +61,7 @@ function Overview({ className }: { className?: string }) {
   const newData:any= useMemo(() => {
     const newList: any = {};
     const data = filData?.fil_compose || {}
+
     fil_overviewList.forEach((itemList: any) => {
       newList[itemList.title] = itemList.list.map((itemValue: any) => {
         const show_value = data&&formatFil(data[itemValue.key], 'FIL',);
@@ -139,10 +143,15 @@ function Overview({ className }: { className?: string }) {
           newData.push(v)
         }
       })
+      if (isMobile) {
+        newOption.series[0].label.show = false
+        newOption.series[0].radius = "80%"
+        // newOption.series[0].center =['50%', '40%']
+      }
       newOption.series[0].data = newData;
     }
     return newOption
-  }, [legendA, optionsA])
+  }, [legendA, optionsA,isMobile])
 
   const newOptionsB = useMemo(() => {
     const newData:any = [];
@@ -153,10 +162,15 @@ function Overview({ className }: { className?: string }) {
           newData.push(v)
         }
       })
+      if (isMobile) {
+        newOption.series[0].label.show = false
+        newOption.series[0].radius = "80%"
+        // newOption.series[0].center =['50%', '40%']
+      }
       newOption.series[0].data = newData;
     }
     return newOption
-  }, [legendB, optionsB])
+  }, [legendB, optionsB,isMobile])
 
   const handleLegend = (type:string,key:string) => {
     if (type === 'pie_title_a') {
@@ -174,23 +188,39 @@ function Overview({ className }: { className?: string }) {
     {fil_overviewList.map((dataItem, index: number) => {
       const legendData = index === 1 ? legendB: legendA;
       return <div key={ dataItem.title} className={`w-full h-full ${className} `}>
-        <div className='flex items-center h-9 w-fit font-PingFang font-semibold text-lg pl-2.5 mb-4'>
+        <div className={classNames('flex items-center h-9 w-fit font-PingFang font-semibold text-lg pl-2.5 mb-4',styles.title)}>
           { tr( dataItem.title) }
         </div>
-        <div className=' card_shadow border border_color rounded-[12px]'>
-          <div className='w-full h-[400px]'>
+        <div className={classNames('card_shadow border border_color rounded-[12px]',styles.card,styles['card-reset'])}>
+          <div className={classNames('w-full h-[400px]',styles.echart)}>
             <EChart options={index === 1 ? { ...newOptionsB } : { ...newOptionsA }} />
           </div>
-          <ul className='w-full flex flex-wrap gap-y-2.5 px-10 pb-10 '>
-            {Object.keys(legendData).map((legendKey: any) => {
-              const legend = legendData[legendKey];
-              return <li key={legendKey} className='flex gap-x-2 items-center text-xs text_des w-1/3 cursor-pointer'
-                onClick={() => { handleLegend(dataItem.title, legendKey) }}>
-                <span className='block w-2 h-2 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
-                <span>{ legend?.name||""}</span>
-              </li>
-            })}
-          </ul>
+          <BrowserView>
+            <ul className='w-full flex flex-wrap gap-y-2.5 px-10 pb-10 '>
+              {Object.keys(legendData).map((legendKey: any) => {
+                const legend = legendData[legendKey];
+                return <li key={legendKey} className='flex gap-x-2 items-center text-xs text_des w-1/3 cursor-pointer'
+                  onClick={() => { handleLegend(dataItem.title, legendKey) }}>
+                  <span className='block w-2 h-2 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
+                  <span>{ legend?.name||""}</span>
+                </li>
+              })}
+            </ul>
+          </BrowserView>
+          <MobileView>
+            <ul className={classNames(styles['legend-wrap'])}>
+              {Object.keys(legendData).map((legendKey: any) => {
+                const legend = legendData[legendKey];
+                return <li key={legendKey} className={classNames(styles['legend-item'])}
+                  onClick={() => { handleLegend(dataItem.title, legendKey) }}>
+                  <div className={classNames(styles['legend-item-left'])}>
+                    <span className='block w-2 h-2 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
+                    <span>{ legend?.name||""}</span>
+                  </div>
+                </li>
+              })}
+            </ul>
+          </MobileView>
         </div>
 
       </div>

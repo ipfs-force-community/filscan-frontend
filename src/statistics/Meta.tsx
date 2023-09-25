@@ -6,8 +6,9 @@ import Tooltip from "@/packages/tooltip";
 import useAxiosData from "@/store/useAxiosData";
 import { getSvgIcon } from "@/svgsIcon";
 import { data } from "autoprefixer";
+import classNames from "classnames";
 import { useEffect, useState } from "react";
-
+import styles from './Meta.module.scss'
 export default () => {
   const { tr } = Translation({ ns: 'home' });
   const {axiosData } = useAxiosData();
@@ -25,13 +26,13 @@ export default () => {
     setContractData(result || {})
   };
 
-  return <ul className="flex flex-wrap gap-5 card_shadow py-5 px-6 border border_color rounded-[12px] mt-[46px]">
+  return <ul className={classNames("flex flex-wrap gap-5 card_shadow py-5 px-6 border border_color rounded-[12px] mt-[46px]",styles.wrap,styles['wrap-reset'])}>
     {meta_list.map((item: any, index: number) => {
       const { title,tip, render, dataIndex } = item;
       const newData = {...contractData,...data}
       const value = newData[dataIndex];
       let renderDom = render ? render(value, newData, tr) : value;
-      return <li className="flex flex-col items-center w-[210px] py-4 gap-y-1 border border_color rounded-[5px]" key={index}>
+      return <li className={classNames("flex flex-col items-center w-[210px] py-4 gap-y-1 border border_color rounded-[5px]",styles.item,styles['item-reset'])} key={index}>
         <div className="font-medium font-DINPro-Bold text-base">{renderDom}</div>
         {tip ?
           <>
