@@ -17,7 +17,7 @@ const ImageWithFallback = (props: any) => {
     <Image
       alt=''
       {...rest}
-      className='rounded-full	'
+      className='rounded-full	cursor-pointer'
       src={imgSrc}
       onError={() => {
         setImgSrc(fallbackSrc);
