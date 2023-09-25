@@ -22,18 +22,6 @@ import MobileRank from '@/components/mobile/home/rank'
 import Search from '@/components/mobile/search';
 import classNames from 'classnames';
 import ContractTrend from '@/src/statistics/ContractTrend';
-//import fetchData from '@/store/server';
-
-// type HomeProps = {
-//   home_meta: any
-// }
-
-// export const getServerSideProps = async () => {
-//   const home_meta = await fetchData(apiUrl.home_meta);
-//   console.log('---3',home_meta)
-//    return { props: { home_meta } }
-
-// }
 
 function Home(props: any) {
   const { tr } = Translation({ ns: 'home' });

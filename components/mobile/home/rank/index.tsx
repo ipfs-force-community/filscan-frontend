@@ -52,6 +52,10 @@ const Rank = ()=>{
   },[t])
 
   useEffect(()=>{
+    load()
+  },[sort])
+
+  const load = ()=>{
     homeStore.fetchMinerPowerRank({
       index:1,
       limit:10,
@@ -62,23 +66,37 @@ const Rank = ()=>{
       },
       sector_size:null,
     })
-  },[])
+  }
 
-  useEffect(()=>{
-  },[homeStore.minerPowerRankData?.items])
+  const handleChange = (pagination: any, filters?: any, sorter?: any) => {
+    let order = { ...sort };
+    if (sorter?.field) {
+      if (sorter.order) {
+        order = {
+          field: sorter.field,
+          order: sorter.order,
+        };
+      } else {
+        order = {
+          field:'power_ratio',
+          order: 'descend',
+        }
+      }
+    }
+    setSort(order);
+  };
 
   return <div className={styles.wrap}>
     <div className={styles.title}>{t('growth')}</div>
     <div className={styles.content}>
       <Table
+        onChange={handleChange}
         columns={columns}
         dataSource={homeStore.minerPowerRankData?.items}
         pagination={false}
       ></Table>
       <div onClick={()=>{
         router.push('/rank#growth')
-        console.log("=======ank#growth=========");
-
       }} className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>
