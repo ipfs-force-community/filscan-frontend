@@ -9,7 +9,7 @@ interface HashParams {
 export function useHash() {
   const router = useRouter()
   const [hash, setHash] = useState('')
-  const [hashParams, setHashParams] = useState<HashParams>({});
+  const [lastHashParams, setHashParams] = useState<HashParams>({});
 
   function checkUrl(url: string) {
     /*
@@ -35,15 +35,17 @@ export function useHash() {
         for (const [key, value] of params.entries()) {
           result[key] = value;
         }
-        setHashParams(result);
         let currentHash = router.asPath?.split('#')[1];
         if (hashParams) {
           currentHash = currentHash?.split('?')[0]
         }
         setHash(currentHash);
+        setHashParams(result);
       } else {
         if (hash) {
           setHash('');
+        }
+        if (lastHashParams) {
           setHashParams({})
         }
       }
@@ -52,5 +54,5 @@ export function useHash() {
 
   }, [router])
 
-  return { hash, hashParams }
+  return { hash, hashParams:lastHashParams }
 }

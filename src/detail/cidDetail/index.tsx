@@ -113,6 +113,7 @@ export default ({
           <div className='text_des'>{tr('message_list_total', { value: data.total })}</div>
         </div>
         <Selects
+          className='!min-w-[240px]'
           value={method}
           options={options}
           onChange={(value) => {

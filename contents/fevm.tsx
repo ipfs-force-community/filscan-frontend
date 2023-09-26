@@ -125,7 +125,6 @@ export const defi_list = {
       width: '20%',
       defaultSortOrder: 'descend',
       sorter: true,
-
       render: (text: string, record: any) => {
         if (origin === 'home') {
           return <TextTip text={get$Number(text)} />
@@ -133,7 +132,7 @@ export const defi_list = {
         const left = 100 - (Number(text) / Number(progress)) * 100;
         return <span className='flex items-center gap-x-2'>
           <Progress left={left + '%'} />
-          <TextTip text={get$Number(text)} />
+          <span>{get$Number(text)}</span>
         </span>
       }
     },
