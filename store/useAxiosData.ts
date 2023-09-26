@@ -67,7 +67,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
 
     let currentKey:any = `${method}:${url}`;
     if (currentKey) {
-      current[currentKey] = 1;
+      current[currentKey] = current[currentKey] || 1;
     }
 
     if (currentKey) {
@@ -109,9 +109,8 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
           current[currentKey] = 0;
           return data?.result || data // 请求成功，跳出循环
         } catch (thrown: any) {
-          current[currentKey] += 1;
+          current[currentKey] = current[currentKey] +1;
           if (axios.isCancel(thrown)) {
-            // console.log('----34325',url)
             console.log('Request canceled', thrown.message);
             break;  //取消请求，跳出循环
           } else {
@@ -124,7 +123,7 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
                 result: null,
                 error: 'Error',
               });
-              if ( current[currentKey] === maxRetries) {
+              if (current[currentKey] === maxRetries) {
                 current[currentKey] = 0;
                 if (thrown?.response?.status === 401) {
                   setData({
@@ -133,14 +132,18 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
                   });
                   return null
                 }
+                setData({
+                  result: null,
+                  error: 'Invalid credentials',
+                });
                 return null
-                // return notification.error({
-                //   className: 'custom-notification',
-                //   message: 'Error',
-                //   duration: 100,
-                //   description: thrown?.message || 'Network Error'
-                // })
               }
+              // return notification.error({
+              //   className: 'custom-notification',
+              //   message: 'Error',
+              //   duration: 100,
+              //   description: thrown?.message || 'Network Error'
+              // })
 
             }
           }

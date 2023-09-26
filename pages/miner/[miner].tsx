@@ -32,7 +32,6 @@ export default () => {
     if (miner === 'miner' || miner === 'address') {
       newMiner = router?.query?.miner || router?.query?.address;
     }
-    console.log('----3',newMiner,router)
     if (newMiner && typeof newMiner === 'string') {
       loadMinerData(newMiner);
       loadMethod();
@@ -42,7 +41,7 @@ export default () => {
   const loadMethod = async () => {
     const result: any = await axiosData(apiUrl.detail_list_method, {
       account_id: miner,
-    });
+    }, {isCancel:false});
     const newMethod: any = [
       {
         title: tr('all_method'),
@@ -86,6 +85,8 @@ export default () => {
     });
     return newTabs;
   }, [method]);
+
+  console.log('====33',newTabList)
 
   return (
     <div className={classNames(styles.miner, 'main_contain')}>

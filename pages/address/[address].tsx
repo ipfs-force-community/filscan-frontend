@@ -20,6 +20,7 @@ import { formatNumber, get$Number } from '@/utils';
 import Image from '@/packages/image'
 import Link from 'next/link';
 import { getSvgIcon } from '@/svgsIcon';
+import Loading from '@/components/loading';
 /** @format */
 export default () => {
   const router = useRouter();
@@ -197,7 +198,12 @@ export default () => {
       },]
     }
     return [...defaultOpt, ...evmList];
-  }, [methodOptions,transOptions,verifyData]);
+  }, [methodOptions, transOptions, verifyData]);
+
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <div className={classNames(styles.address,'main_contain')}>
       <div className={classNames(styles['address-row'],'mb-2.5 ml-2.5 DINPro-Medium font-medium text-lg flex items-center')}>

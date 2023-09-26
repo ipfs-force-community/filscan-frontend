@@ -18,27 +18,38 @@ const useRemoveQueryParam = () => {
           pathname: router.pathname,
           query: restQueryParams,
           hash: hash
+        }, undefined, {
+          scroll: false,
+          shallow: false,
         });
       } else {
         router.push({
           pathname: router.pathname,
           query: restQueryParams,
+        }, undefined, {
+          scroll: false,
+          shallow: false,
         });
       }
 
     } else {
       const { [param]: removed, ...restQueryParams } = router.query;
       if (hash) {
-
         router.push({
           pathname: router.pathname ,
           query: restQueryParams,
           hash:hash
+        } ,undefined, {
+          scroll: false,
+          shallow: false,
         });
       } else {
         router.push({
           pathname: router.pathname ,
           query: restQueryParams,
+        }, undefined, {
+          scroll: false,
+          shallow: false,
         });
       }
 

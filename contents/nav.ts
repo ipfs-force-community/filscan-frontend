@@ -31,10 +31,10 @@ const navMenu: Array<Menu_Info|any> = [
         key: 'tipset_pool-message',
         link: '/tipset/pool-message/'
       },
-      {
-        key: 'tipset_transfer',
-        link: '/tipset/transfer/'
-      },
+      // {
+      //   key: 'tipset_transfer',
+      //   link: '/tipset/transfer/'
+      // },
     ]
   },
   {
@@ -77,6 +77,7 @@ const navMenu: Array<Menu_Info|any> = [
       },
       { key: 'statistics_gas', link: '/statistics/gas' },
       { key: 'statistics_charts', link: '/statistics/charts' },
+      { key: 'cw', link: '/cw' },
     ]
   },
   {

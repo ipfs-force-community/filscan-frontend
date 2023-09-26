@@ -2,7 +2,7 @@ import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
 import useAxiosData from "@/store/useAxiosData";
 import { useEffect, useMemo, useState } from "react";
-import Image from "@/packages/image";
+import Image from "next/image";
 import { BrowserView, MobileView } from "@/components/device-detect";
 import classNames from "classnames";
 import styles from "./index.module.scss";
@@ -105,7 +105,7 @@ export default () => {
                     )}
                   >
                     <div className={classNames("flex items-center gap-x-1",styles.right)}>
-                      <Image src={item.logo} alt="" width="36" height="36" />
+                      <Image src={item.logo} alt="" width="36" height="36" className="rounded-full"/>
                       <span
                         className={classNames("flex flex-col ", styles.text)}
                       >

@@ -22,6 +22,7 @@ const zh ={
   statistics_fil: 'FIL',
   statistics_charts: '통계',
   statistics_map: '노드 맵',
+  cw:'ChainWatch',
   resources:'자원',
   resources_tools: '자주 쓰는 도구',
   provider: '스토리지 공급자',
