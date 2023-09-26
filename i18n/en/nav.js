@@ -17,6 +17,7 @@ const en ={
   "tipset_pool-message": 'Pool Messages',
   ranking: 'Ranking',
   statistics: 'Statistics',
+  cw:'ChainWatch',
   statistics_gas: 'Gas Fee',
   statistics_base: 'Power',
   statistics_fil: 'FIL',

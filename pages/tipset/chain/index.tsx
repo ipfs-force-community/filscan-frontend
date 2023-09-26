@@ -13,10 +13,13 @@ import { BrowserView, MobileView } from "@/components/device-detect";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { get } from 'lodash'
+import { useRouter } from "next/router";
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
+  const router = useRouter();
+  const { cid,height } = router.query;
   const { axiosData,loading } = useAxiosData();
   // const [loading,setLoading] = useState(false)
   const [current, setCurrent] = useState<number>(1);
@@ -26,8 +29,14 @@ export default () => {
   })
 
   useEffect(() => {
-    load()
-  },[])
+    if (cid) {
+      router.push(`/cid/${cid}`)
+    } else if (height) {
+      router.push(`/height/${height}`)
+    } else {
+      load()
+    }
+  },[cid,height])
 
   const load = async (cur?: number) => {
     const index = cur || current
