@@ -9,7 +9,7 @@ interface HashParams {
 export function useHash() {
   const router = useRouter()
   const [hash, setHash] = useState('')
-  const [lastHashParams, setHashParams] = useState<HashParams>({});
+  const [lastHashParams, setLastHashParams] = useState<HashParams>({});
 
   function checkUrl(url: string) {
     /*
@@ -40,13 +40,13 @@ export function useHash() {
           currentHash = currentHash?.split('?')[0]
         }
         setHash(currentHash);
-        setHashParams(result);
+        setLastHashParams(result);
       } else {
         if (hash) {
           setHash('');
         }
         if (lastHashParams) {
-          setHashParams({})
+          setLastHashParams({})
         }
       }
 
