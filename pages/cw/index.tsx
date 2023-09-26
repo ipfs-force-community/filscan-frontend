@@ -1,6 +1,6 @@
 import { formatNumber, isIndent } from '@/utils';
 import style from './index.module.scss';
-import { cwStyle } from '@/utils/echarts';
+import { useRef, useState } from 'react';
 
 const data:any = {
   Valuation: {
@@ -91,11 +91,30 @@ const data:any = {
 
   }
 }
+const colors = ['rgba(29, 107, 253, 0.08)','rgba(112, 79, 228, 0.08)','rgba(240, 176, 71, 0.08)','rgba(57, 178, 226, 0.08)','rgba(233, 119, 70, 0.08)','rgba(116, 204, 110, 0.08)']
 
 export default () => {
   const { heightDetails } = data;
+  const [isDragging, setDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const scrollContainer = useRef<any>(null);
 
-  const colors = cwStyle['light']
+  const handleMouseDown = (e:any) => {
+    setDragging(true);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
+  const handleMouseMove = (e: any) => {
+    if (isDragging && scrollContainer.current) {
+      console.log('-----33',scrollContainer, e.clientX ,startX)
+      scrollContainer.current.scrollLeft = scrollContainer.current?.scrollLeft - e.clientX + startX;
+      setStartX(e.clientX);
+    }
+  };
 
   return <div className={`main_contain`}>
     <div className={`card_shadow ${style.cwContain}`}>
@@ -106,7 +125,11 @@ export default () => {
           }</div>
         })}
       </div>
-      <div className={style.cwContain_right }>
+      <div className={style.cwContain_right}
+        ref={scrollContainer}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}>
         {Object.keys(heightDetails).map((itemKey:any, index) => {
           const showData = heightDetails[itemKey];
           return <ul key={index} className={style.cwContain_rightContent} style={{backgroundColor: colors[index % colors.length]}}>
