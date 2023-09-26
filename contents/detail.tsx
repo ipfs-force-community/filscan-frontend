@@ -1346,7 +1346,7 @@ export const block_list = (fromList: any, toList: any) => [
     width: '20%',
     render: (text: string) =>
       text ? (
-        <Link href={`/tipset/chain?cid=${text}`} className='link_text'>
+        <Link href={`/cid/${text}`} className='link_text'>
           {text ? isIndent(text, 6) : ''}
         </Link>
       ) : (
