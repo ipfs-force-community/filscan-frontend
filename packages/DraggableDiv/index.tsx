@@ -5,11 +5,12 @@ import classNames from "classnames";
 
 interface Props {
               children: React.ReactElement | JSX.Element
-              className?:string
+              className?: string,
+              contentRef?: React.ReactElement | JSX.Element|any
 }
 
 const DraggableDiv = (props: Props) => {
-  const {children,className } = props;
+  const {children,className,contentRef } = props;
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [startY, setStartY] = useState(0);
@@ -20,9 +21,9 @@ const DraggableDiv = (props: Props) => {
 
   const handleMouseDown = (e:React.MouseEvent<HTMLDivElement>) => {
     setIsDown(true);
-    setStartX(e.clientX - (divRef.current?.offsetLeft || 0));
+    setStartX(e.clientX - (contentRef.current.offsetLeft || 0));
     setStartY(e.clientY - (divRef.current?.offsetTop || 0));
-    setScrollLeft(divRef.current?.scrollLeft || 0);
+    setScrollLeft(contentRef.current.scrollLeft || 0);
     setScrollTop(divRef.current?.scrollTop || 0);
   };
 
@@ -37,8 +38,11 @@ const DraggableDiv = (props: Props) => {
     const y = e.clientY - (divRef.current?.offsetTop || 0);
     const walkX = (x - startX);
     const walkY = (y - startY);
-    if(divRef.current) {
-      divRef.current.scrollLeft = scrollLeft - walkX;
+    if (contentRef && contentRef.current) {
+      contentRef.current.scrollLeft = scrollLeft - walkX;
+    }
+    if (divRef.current) {
+
       divRef.current.scrollTop = scrollTop - walkY;
     }
   };

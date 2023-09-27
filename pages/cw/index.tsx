@@ -119,10 +119,54 @@ const newData:any = {
       miner: 'f01234',
       height: 3235210,
       time:'2023-09-25 13:14:00',
+    },{
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },
+    {
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
     }]
   },
   '3235209': {
     list: [{
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },
+    {
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },{
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },
+    {
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },{
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },
+    {
+      cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
+      miner: 'f01234',
+      height: 3235210,
+      time:'2023-09-25 13:14:00',
+    },{
       cid: 'bafy2bzaceavdnmbdk46aiz2k37bmxvwzcoegu6foarn2rncwowx6fex63odje',
       miner: 'f01234',
       height: 3235210,
@@ -226,10 +270,11 @@ const colors = ['rgba(29, 107, 253, 0.08)','rgba(112, 79, 228, 0.08)','rgba(240,
 export default () => {
   console.log('===3',)
   const keys = Object.keys(newData)?.reverse() || []
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // return <SVGChart newData={ newData} />
   return <div className={`main_contain`}>
-    <DraggableDiv className={style.cwContain}>
+    <DraggableDiv className={style.cwContain} contentRef={contentRef }>
       <>
         <div className={style.cwContain_left }>
           {keys?.map((item,index) => {
@@ -238,33 +283,35 @@ export default () => {
             }</div>
           })}
         </div>
-        <div className={style.cwContain_right}
+        <div className={`${style.cwContain_right} custom_draggable`}
+          ref={ contentRef}
         >
-          {keys?.map((itemKey:any, index) => {
-            const { list, orphanBlock } = newData[itemKey];
-            return <div key={index} className={style.cwContain_rightContent}>
-              <ul className={style.cwContain_rightContent_orphan}>
-                {orphanBlock?.map((orphanItem:any,index:number) => {
-                  return <li key={ index} className={style.cwContain_rightContent_orphan_Item}>
-                    <span className={style.cwContain_rightContent_li_heightMiner}>{ `${orphanItem.miner } - ${orphanItem.height}`}</span>
-                    <span>{ isIndent(orphanItem.cid)}</span>
-                    <span>{ orphanItem.time}</span>
-                  </li>
-                })}
-              </ul>
-              <ul
-                className={style.cwContain_rightContent_content}
-                style={{ backgroundColor: colors[index % colors.length] }}>
-                {list?.map((item:any,itemIndex:number) => {
-                  return <li key={itemIndex} className={style.cwContain_rightContent_content_Item}>
-                    <span className={style.cwContain_rightContent_li_heightMiner}>{ `${item.miner } - ${item.height}`}</span>
-                    <span>{ isIndent(item.cid)}</span>
-                    <span>{ item.time}</span>
-                  </li>
-                }) }
-              </ul>
-            </div>
-          })}
+          <>
+            {keys?.map((itemKey:any, index) => {
+              const { list, orphanBlock } = newData[itemKey];
+              return <div key={index} className={style.cwContain_rightContent}>
+                { orphanBlock && orphanBlock.length > 0 && <ul className={style.cwContain_rightContent_orphan}>
+                  {orphanBlock?.map((orphanItem:any,index:number) => {
+                    return <li key={ index} className={style.cwContain_rightContent_orphan_Item}>
+                      <span className={style.cwContain_rightContent_li_heightMiner}>{ `${orphanItem.miner } - ${orphanItem.height}`}</span>
+                      <span>{ isIndent(orphanItem.cid)}</span>
+                      <span>{ orphanItem.time}</span>
+                    </li>
+                  })}
+                </ul>}
+                <ul
+                  className={style.cwContain_rightContent_content}
+                  style={{ backgroundColor: colors[index % colors.length] }}>
+                  {list?.map((item:any,itemIndex:number) => {
+                    return <li key={itemIndex} className={style.cwContain_rightContent_content_Item}>
+                      <span className={style.cwContain_rightContent_li_heightMiner}>{ `${item.miner } - ${item.height}`}</span>
+                      <span>{ isIndent(item.cid)}</span>
+                      <span>{ item.time}</span>
+                    </li>
+                  }) }
+                </ul>
+              </div>
+            })}</>
         </div>
       </>
     </DraggableDiv>

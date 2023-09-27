@@ -22,9 +22,12 @@
               position: relative;
               display: flex;
               align-items: center;
+              z-index: 1;
               height: 74px;
               min-height: 74px;
               padding-right: 15px;
+              background-color: var(--bgColor);
+              box-shadow: 0 0 15px 15px var(--bgColor);
               &::before{
                 content: '';
                 position: absolute;
@@ -47,6 +50,11 @@
                }  
               &_right{
                width: calc(100% - 100px);
+                cursor: grab;
+                overflow-x: hidden;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;  /* IE and Edge */
+                padding: -30px;
               }
               &_rightContent{
                             position: relative;
@@ -55,7 +63,8 @@
                             margin: auto;
                              height: 74px;
                             border-radius: 5px;
-                           
+                              scrollbar-width: none; /* Firefox */
+                            -ms-overflow-style: none;  /* IE and Edge */
                             &_orphan,&_content{
                               display: flex;
                               &_Item{
@@ -64,7 +73,7 @@
                                   align-items: center;
                                   padding:4px 8px;
                                   margin: 8px 0px 8px 8px;
-                                
+                                min-width: 140px;
                                   &:last-child{
                                     margin: 8px;
                                   }
@@ -76,7 +85,7 @@
             
                             &_orphan{
                               background-color: var(--cw-bgDesColor);
-                              margin-right: 40px;
+                              margin:0px 40px 0px 100px;
                               &_Item{
                               background-color: var(--cw-bgColor);
                               }

@@ -7,7 +7,7 @@ import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import EChart from '@/components/echarts';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
-import { formatFilNum } from '@/utils';
+import { formatFilNum, formatNumber } from '@/utils';
 import useAxiosData from '@/store/useAxiosData';
 
 interface Props {
@@ -53,9 +53,10 @@ function Gas(props: Props) {
           // },
 
           formatter(v: any) {
-            return new BigNumber(Number(v))
-              .dividedBy(Math.pow(10, 9))
-              .toFixed(2) +' nanoFIL';
+            // return new BigNumber(Number(v))
+            //   .dividedBy(Math.pow(10, 9))
+            //   .toFixed(2) +' attoFIL';
+            return formatNumber(v)+' attoFIL';
           },
 
         },
@@ -132,7 +133,7 @@ function Gas(props: Props) {
         }
         dateList.push(showTime);
         seriesObj.base_fee.push({
-          value: base_fee,
+          value:Number(base_fee),
           showValue: formatFilNum(base_fee, false, false, 4, false).split(
             ' '
           )[0],
