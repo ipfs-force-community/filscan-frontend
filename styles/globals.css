@@ -8,7 +8,6 @@
   /*
   PC端
   */
-
   --activeColor: #ffffff;
   --bgColor: #ffffff;
   --main-bg-color: #f9f9f9;
@@ -26,6 +25,9 @@
   --bgDesColor: #f6f6f6;
   --table-hover: #f8f8f8;
   --tips-bgColor:#ffffff;
+  --cw-bgDesColor: #F5F5F5;
+  --cw-bgColor: #D4D4D4;;
+
   /*
   手机端
   */

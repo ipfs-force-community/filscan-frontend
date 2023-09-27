@@ -205,7 +205,7 @@ export function formatDateTime(
 }
 
 export function formatTime(from:number, to?:number, ago = true) {
-  let startTime = from; // 开始时间
+  let startTime = from ||0; // 开始时间
   let endTime = to || new Date().getTime(); // 结束时间
   let usedTime = endTime - startTime; // 相差的毫秒数
   //timeDifference(usedTime)

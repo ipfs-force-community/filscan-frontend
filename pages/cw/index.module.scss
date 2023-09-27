@@ -1,28 +1,41 @@
+
+
 .cwContain{
             display: flex;
-            border: 1px solid var(--border-color);  
-            border-radius: 12px;
-            height: 500px;
+            height: 450px;
             padding: 20px 0px;
             color: var(--font_des); 
             font-family: DINPro-Medium, DINPro;
-            overflow: hidden;
-  &_left,&_right{
+            border-radius: 12px;
+            border: 1px solid var(--border-color);  
+            background-color: var(--bgColor);
+         &_left,&_right{
               display: flex;
               flex-direction: column;
               row-gap: 20px;  
               font-size: 12px;        
               }            
-   &_left{
+         &_left{
               min-width: 100px;
-              border-right: 1px dashed var(--border-color);
               align-items: end;
               &Item{
               position: relative;
               display: flex;
               align-items: center;
-                 height: 74px;
-                 padding-right: 15px;
+              z-index: 1;
+              height: 74px;
+              min-height: 74px;
+              padding-right: 15px;
+              background-color: var(--bgColor);
+              box-shadow: 0 0 15px 15px var(--bgColor);
+              &::before{
+                content: '';
+                position: absolute;
+                right: -1px;
+                width: 1px;
+                height: calc(100% + 20px);
+                border:1px dashed var(--border-color); ;
+              }
                  &::after{
                             content: '';
                             position: absolute;
@@ -32,50 +45,74 @@
                             border-radius: 5px;
                             background-color: var(--bgColor);
                             border: 2px solid var(--border-color);
-                 }
-              }
-      }  
+                     }
+                  }
+               }  
               &_right{
                width: calc(100% - 100px);
-               overflow-x: auto;
-               scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none;  /* IE 10+ */
-               &Content{
+                cursor: grab;
+                overflow-x: hidden;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;  /* IE and Edge */
+                padding: -30px;
+              }
+              &_rightContent{
                             position: relative;
                             display: flex;
                             width: fit-content;
                             margin: auto;
-                            background-color: rgba(29, 107, 253, 0.08);
+                             height: 74px;
                             border-radius: 5px;
-                     
-                            &::after{
-                                          content: '';
-                                          position: absolute;
-                                          bottom: -10px;
-                                          left: 50%;
-                                          width: 14px;
-                                          height: 6px;
-                                          border-radius: 2px;
-                                           transform: translate(-50%,0);
-                                            background-image: url('../../assets/images/cwDown.svg');  
-                                          background-size: contain;  
-                                          background-repeat: no-repeat;  
+                              scrollbar-width: none; /* Firefox */
+                            -ms-overflow-style: none;  /* IE and Edge */
+                            &_orphan,&_content{
+                              display: flex;
+                              &_Item{
+                                  display: flex;
+                                  flex-direction: column;
+                                  align-items: center;
+                                  padding:4px 8px;
+                                  margin: 8px 0px 8px 8px;
+                                min-width: 140px;
+                                  &:last-child{
+                                    margin: 8px;
+                                  }
+                                  &_heightMiner{
+                                    color: var(--font-color);
+                                    }
+                                  }
+                            }
+            
+                            &_orphan{
+                              background-color: var(--cw-bgDesColor);
+                              margin:0px 40px 0px 100px;
+                              &_Item{
+                              background-color: var(--cw-bgColor);
+                              }
+                            }
+                            &_content{
+                              position: relative;
+                              width: fit-content;
+                               &::after{
+                                content: '';
+                                position: absolute;
+                                bottom: -10px;
+                                left: 50%;
+                                width: 14px;
+                                height: 6px;
+                                border-radius: 2px;
+                                transform: translate(-50%,0);
+                                background-image: url('../../assets/images/cwDown.svg');  
+                                background-size: contain;  
+                                background-repeat: no-repeat;  
 
                             }
-                            &_li{
-                                          display: flex;
-                                          flex-direction: column;
-                                          align-items: center;
-                            padding:4px 8px;
-                            margin: 8px 0px 8px 8px;
-                            background-color: var(--bgColor);
-                            &:last-child{
-                                          margin: 8px;
+                               &_Item{
+                                background-color: var(--bgColor);
+                              }
                             }
-                            &_heightMiner{
-                                          color: var(--font-color);
-                            }
-                            }
-               }
-   } 
+                           
+                  
+                           
+               } 
 }

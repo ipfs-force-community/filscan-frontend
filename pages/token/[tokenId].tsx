@@ -11,7 +11,8 @@ import { Translation } from '@/components/hooks/Translation';
 import List from '@/src/fevm/list';
 import styles from './[tokenId].module.scss'
 import useWindow from '@/components/hooks/useWindown';
-import { BrowserView, MobileView } from '@/components/device-detect';
+import TwitterIcon from '@/assets/images/twitter.svg'
+import NetworkIcon from '@/assets/images/network.svg'
 import classNames from 'classnames';
 import Link from 'next/link';
 import Copy from '@/components/copy';
@@ -43,17 +44,44 @@ export default () => {
   const load = () => {};
   return (
     <div className={classNames('main_contain',styles.wrap)}>
-      <div className={classNames('flex items-center text-xl font-DINPro-Bold gap-x-1 mb-4',styles.token)}>
-        {overviewData?.token_name && (
-          <Image width={40} height={40} src={overviewData.icon_url} alt='' />
-        )}
-        {overviewData?.token_name?.toLocaleUpperCase()}
+      <div className={classNames('flex justify-between items-center text-xl font-DINPro-Bold gap-x-1 mb-4',styles.token)}>
+        <div className='flex gap-x-1'>
+          {overviewData?.token_name && (
+            <Image width={40} height={40} src={overviewData.icon_url} alt='' />
+          )}
+          {overviewData?.token_name?.toLocaleUpperCase()}
+        </div>
+        <div className="flex gap-x-2">
+          {overviewData.twitter_link && (
+            <span
+              onClick={() => {
+                if (overviewData.twitter_link) {
+                  window.open(overviewData.twitter_link);
+                }
+              }}
+              className={classNames('border border_color reverse_color rounded-[5px] p-[4px] cursor-pointer hover:bg-primary')}
+            >
+              <TwitterIcon width='16px'/>
+            </span>
+          )}
+          {overviewData.main_site && (
+            <span
+              onClick={() => {
+                if (overviewData.main_site) {
+                  window.open(overviewData.main_site);
+                }
+              }}
+              className={classNames('border border_color reverse_color rounded-[5px] p-[4px] cursor-pointer hover:bg-primary')}
+            >
+              <NetworkIcon/>
+            </span>
+          )}
+        </div>
       </div>
       <div className={classNames('flex gap-x-5',styles['card-wrap'])}>
         {token_details.headerList.map((tokenItem,index) => {
           const showData =
             tokenItem.title === 'market' ? marketData : overviewData;
-
           if (isMobile && tokenItem.title === 'market') {
             tokenItem.list.forEach((value)=>{
               if (value.dataIndex === "contract_id") {
