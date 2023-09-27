@@ -5,23 +5,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 12px 12px 20px;
+            padding: 12px 12px 12px 16px;
             .label{
                 flex-shrink: 0;
+                color: var(--mobile-title-color);
+                font-weight: 500;
                 font-size: 14px;
                 font-family: DINPro-Medium, DINPro;
-                font-weight: 500;
-                color: var(--mobile-title-color);
                 line-height: 12px;
             }
         }
         :global{
             .main_contain{
                 .meta-gas{
-                    padding: 0 12px;
                     display: flex;
                     flex-direction: column;
                     margin-bottom: 18px;
+                    padding: 0 12px;
                     height: auto;
 
                     row-gap: 10px;
@@ -30,10 +30,10 @@
                     }
                 }
                 .box-column{
-                    padding: 0 12px;
                     display: flex;
                     flex-direction: column;
                     margin-top: 0;
+                    padding: 0 12px;
                     height: auto;
 
                     row-gap:18px;
