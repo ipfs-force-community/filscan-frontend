@@ -10,6 +10,7 @@ import Progress from "@/packages/progress"
 import { unitConversion } from "@/utils"
 import { observer } from "mobx-react"
 import { useRouter } from "next/router"
+import classNames from "classnames"
 
 interface Sort {
     field:string,
@@ -28,6 +29,7 @@ const Rank = ()=>{
       if (item.dataIndex === 'rank') {
         item.width = '15%'
         item.align = "left"
+        item.render = (text: string) => <span className={classNames('rank_icon',styles['rank-icon'])}>{text}</span>
       }
       if (item.dataIndex === 'miner_id') {
         item.width = '30%'
@@ -36,9 +38,11 @@ const Rank = ()=>{
         item.align = "right"
         item.width = '0'
         item.render = (value:any,render:MinerPowerRank)=>{
-          const left = 100 - (Number(value) / Number(render.power_ratio)) * 100;
+          const left = 100 - (Number(value) / Number(homeStore.maxPower)) * 100;
+          const showLeft = left > 100 ? 100 : left;
+
           return (
-            <span className='flex justify-end gap-x-2'>
+            <span className='flex justify-end gap-x-2 items-center'>
               <Progress left={left + '%'} />
               <span>{unitConversion(value, 2) + '/D'}</span>
             </span>

@@ -50,6 +50,7 @@ const Defi = ()=>{
               textOverflow: 'ellipsis',
               cursor: 'pointer',
             }}
+            className="font-DINPro-Medium"
           >{value}</div>
         </div>
       },
@@ -60,7 +61,7 @@ const Defi = ()=>{
       key:'tvl',
       align:"right",
       render(value) {
-        return get$Number(value)
+        return <div className="font-DINPro-Medium">{get$Number(value)}</div>
       },
     },
   ]
