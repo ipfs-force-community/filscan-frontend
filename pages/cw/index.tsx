@@ -1,6 +1,7 @@
 import { formatNumber, isIndent } from '@/utils';
 import style from './index.module.scss';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import DraggableDiv from '@/packages/DraggableDiv';
 
 const data:any = {
   Valuation: {
@@ -95,55 +96,63 @@ const colors = ['rgba(29, 107, 253, 0.08)','rgba(112, 79, 228, 0.08)','rgba(240,
 
 export default () => {
   const { heightDetails } = data;
-  const [isDragging, setDragging] = useState(false);
+  const divRef = useRef<any>(null);
+  const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
-  const scrollContainer = useRef<any>(null);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  useEffect(() => {
+
+  },[])
 
   const handleMouseDown = (e:any) => {
-    setDragging(true);
-    setStartX(e.clientX);
+    setIsDown(true);
+    setStartX(e.pageX - divRef.current.offsetLeft);
+    setScrollLeft(divRef.current.scrollLeft);
   };
 
   const handleMouseUp = () => {
-    setDragging(false);
+    setIsDown(false);
   };
 
   const handleMouseMove = (e: any) => {
-    if (isDragging && scrollContainer.current) {
-      console.log('-----33',scrollContainer, e.clientX ,startX)
-      scrollContainer.current.scrollLeft = scrollContainer.current?.scrollLeft - e.clientX + startX;
-      setStartX(e.clientX);
-    }
+    if (!isDown) return;
+
+    e.preventDefault();
+    const x = e.pageX - divRef.current.offsetLeft;
+    console.log('----33',x)
+    const walk = (x - startX);
+    divRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return <div className={`main_contain`}>
-    <div className={`card_shadow ${style.cwContain}`}>
-      <div className={style.cwContain_left }>
-        {Object.keys(heightDetails).map((item,index) => {
-          return <div className={style.cwContain_leftItem} key={index}>{
-            formatNumber(item)
-          }</div>
-        })}
-      </div>
-      <div className={style.cwContain_right}
-        ref={scrollContainer}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}>
-        {Object.keys(heightDetails).map((itemKey:any, index) => {
-          const showData = heightDetails[itemKey];
-          return <ul key={index} className={style.cwContain_rightContent} style={{backgroundColor: colors[index % colors.length]}}>
-            {showData.map((item:any,itemIndex:number) => {
-              return <li key={itemIndex} className={style.cwContain_rightContent_li}>
-                <span className={style.cwContain_rightContent_li_heightMiner}>{ `${item.miner } - ${item.height}`}</span>
-                <span>{ isIndent(item.cid)}</span>
-                <span>{ item.time}</span>
-              </li>
-            }) }
-          </ul>
-        })}
-      </div>
-    </div>
+    <DraggableDiv className={style.cwContain}>
+      <>
+        <div className={style.cwContain_left }>
+          {Object.keys(heightDetails).map((item,index) => {
+            return <div className={style.cwContain_leftItem} key={index}>{
+              formatNumber(item)
+            }</div>
+          })}
+        </div>
+        <div className={style.cwContain_right}
+
+        >
+          {Object.keys(heightDetails).map((itemKey:any, index) => {
+            const showData = heightDetails[itemKey];
+            return <ul key={index} className={style.cwContain_rightContent} style={{backgroundColor: colors[index % colors.length]}}>
+              {showData.map((item:any,itemIndex:number) => {
+                return <li key={itemIndex} className={style.cwContain_rightContent_li}>
+                  <span className={style.cwContain_rightContent_li_heightMiner}>{ `${item.miner } - ${item.height}`}</span>
+                  <span>{ isIndent(item.cid)}</span>
+                  <span>{ item.time}</span>
+                </li>
+              }) }
+            </ul>
+          })}
+        </div>
+      </>
+    </DraggableDiv>
 
   </div>
 }

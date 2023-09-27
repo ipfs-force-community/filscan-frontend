@@ -1,28 +1,38 @@
+
+
 .cwContain{
             display: flex;
-            border: 1px solid var(--border-color);  
-            border-radius: 12px;
-            height: 500px;
+            height: 450px;
             padding: 20px 0px;
             color: var(--font_des); 
             font-family: DINPro-Medium, DINPro;
-            overflow: hidden;
-  &_left,&_right{
+            border-radius: 12px;
+            border: 1px solid var(--border-color);  
+            background-color: var(--bgColor);
+         &_left,&_right{
               display: flex;
               flex-direction: column;
               row-gap: 20px;  
               font-size: 12px;        
               }            
-   &_left{
+         &_left{
               min-width: 100px;
-              border-right: 1px dashed var(--border-color);
               align-items: end;
               &Item{
               position: relative;
               display: flex;
               align-items: center;
-                 height: 74px;
-                 padding-right: 15px;
+              height: 74px;
+              min-height: 74px;
+              padding-right: 15px;
+              &::before{
+                content: '';
+                position: absolute;
+                right: -1px;
+                width: 1px;
+                height: calc(100% + 20px);
+                border:1px dashed var(--border-color); ;
+              }
                  &::after{
                             content: '';
                             position: absolute;
@@ -32,22 +42,19 @@
                             border-radius: 5px;
                             background-color: var(--bgColor);
                             border: 2px solid var(--border-color);
-                 }
-              }
-      }  
+                     }
+                  }
+               }  
               &_right{
                width: calc(100% - 100px);
-               overflow-x: auto;
-               scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none;  /* IE 10+ */
                &Content{
                             position: relative;
                             display: flex;
                             width: fit-content;
                             margin: auto;
+                             height: 74px;
                             background-color: rgba(29, 107, 253, 0.08);
                             border-radius: 5px;
-                     
                             &::after{
                                           content: '';
                                           position: absolute;
@@ -63,18 +70,18 @@
 
                             }
                             &_li{
-                                          display: flex;
-                                          flex-direction: column;
-                                          align-items: center;
-                            padding:4px 8px;
-                            margin: 8px 0px 8px 8px;
-                            background-color: var(--bgColor);
+                              display: flex;
+                              flex-direction: column;
+                              align-items: center;
+                              padding:4px 8px;
+                              margin: 8px 0px 8px 8px;
+                              background-color: var(--bgColor);
                             &:last-child{
-                                          margin: 8px;
+                              margin: 8px;
                             }
                             &_heightMiner{
-                                          color: var(--font-color);
-                            }
+                              color: var(--font-color);
+                              }
                             }
                }
    } 
