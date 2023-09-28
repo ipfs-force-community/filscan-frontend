@@ -23,7 +23,7 @@ export const home_meta = [
       return (
         <>
           <span>{textValue}</span>
-          <span className='inline text-xs ml-1'>{unit}</span>
+          <span className='inline text-xs ml-1 unit'>{unit}</span>
           <span className={`${className} font-DINPro-Medium text-xs ml-1`}>
             {`${flag}${unitConversion(Math.abs(changeText), 2)}`}
           </span>
@@ -47,7 +47,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs ml-1	'>{unit + '/TiB'}</span>
+          <span className='text-xs ml-1	unit'>{unit + '/TiB'}</span>
         </>
       );
     },
@@ -60,7 +60,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs ml-1'>{unit + '/TiB'}</span>
+          <span className='text-xs ml-1 unit'>{unit + '/TiB'}</span>
         </>
       );
     },
@@ -74,7 +74,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs ml-1'>{unit + '/TiB'}</span>
+          <span className='text-xs ml-1 unit'>{unit + '/TiB'}</span>
         </>
       );
     },
@@ -134,7 +134,7 @@ export const home_meta = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs ml-1	'>{unit}</span>
+          <span className='text-xs ml-1	unit'>{unit}</span>
         </>
       );
     },

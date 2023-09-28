@@ -30,12 +30,13 @@ const Header = () => {
       <IconLogo />
       <div>Filscan.io</div>
     </div>
-    <div className={classNames(styles['text'])}>        <span>
-      { t('footer_des1')}
-    </span>
-    <span>
-      { t('footer_des2')}
-    </span></div>
+    <div className={classNames(styles['text'])}>
+      <div>
+        { t('footer_des1')}
+      </div>
+      <div>
+        { t('footer_des2')}
+      </div></div>
     <div className={classNames(styles.bottom)}>
       {links.map((item,index)=>{
         return <a key={item.label}

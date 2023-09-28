@@ -43,21 +43,6 @@ function Meta() {
     setContractData(result || {})
   };
 
-  // useInterval(() => {
-  //   loadInterval();
-  // }, 15000);
-
-  const loadInterval = async () => {
-    const lastData = await axiosData(apiUrl.tipset_chain_FinalHeight);
-    // postAxios(apiUrl.tipset_chain_FinalHeight).then((res: any) => {
-    //   const data = res?.result || {};
-    //   setLast({
-    //     latest_height: data.height,
-    //     latest_block_time: data.block_time,
-    //   });
-    // });
-  };
-
   return (
     <div
       //ref={ref}
@@ -105,13 +90,13 @@ function Meta() {
         if (item.tipContent) {
           return <div className={`${styles['meta-item']} cursor-pointer relative`} key={item.dataIndex}>
             <Tooltip context={tipContent} icon={false}>
-              <div className='text_clip DINPro-Bold font-bold	 text-xl'>
+              <div className={classNames('text_clip DINPro-Bold font-bold	 text-xl',styles['solid-text'])}>
                 {!value && <Skeleton />}
                 {renderDom}
               </div>
             </Tooltip>
 
-            <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
+            <div className={classNames('flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang',styles.title)}>
               {tr(title)}
               { item.tip && <Tooltip context={tr(item.tip)} icon={true}/>}
             </div>
@@ -119,11 +104,11 @@ function Meta() {
         }
         return (
           <div className={styles['meta-item']} key={item.dataIndex}>
-            <div className='text_clip DINPro-Bold font-bold	 text-xl'>
+            <div className={classNames('text_clip DINPro-Bold font-bold	 text-xl',styles['solid-text'])}>
               { !value && <Skeleton />}
               {renderDom}
             </div>
-            <div className='flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang'>
+            <div className={classNames('flex items-center gap-x-1 text-xs text_des mt-1 font-PingFang',styles.title)}>
               {tr(title)}
               { item.tip && <Tooltip context={tr(item.tip)} icon={true}/>}</div>
           </div>

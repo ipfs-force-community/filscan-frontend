@@ -12,13 +12,15 @@ import { getColor } from '@/utils/echarts';
 import { theme } from 'antd';
 import Item from 'antd/es/list/Item';
 import { useEffect, useMemo, useState } from 'react';
-import styles from './style.module.scss'
+import styles from './index.module.scss'
 import { getSvgIcon } from '@/svgsIcon';
 import Tooltip from '@/packages/tooltip';
+import useWindow from '@/components/hooks/useWindown';
 
 export default ({ data, loading }: { data: any; loading: boolean }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
+  const {isMobile} = useWindow()
 
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
@@ -121,6 +123,11 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
         newSeries.push(v);
       }
     });
+    if (isMobile) {
+      newOpt.series[0].radius = ['45%', '80%']
+      newOpt.series[0].center = ['50%', '50%']
+      newOpt.tooltip.show = false
+    }
     newOpt.series[0].data = newSeries;
 
     return newOpt;

@@ -146,6 +146,7 @@ function Overview({ className }: { className?: string }) {
       if (isMobile) {
         newOption.series[0].label.show = false
         newOption.series[0].radius = "80%"
+        newOption.tooltip.show = false
         // newOption.series[0].center =['50%', '40%']
       }
       newOption.series[0].data = newData;
@@ -165,6 +166,7 @@ function Overview({ className }: { className?: string }) {
       if (isMobile) {
         newOption.series[0].label.show = false
         newOption.series[0].radius = "80%"
+        newOption.tooltip.show = false
         // newOption.series[0].center =['50%', '40%']
       }
       newOption.series[0].data = newData;
