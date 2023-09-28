@@ -126,7 +126,11 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
     if (isMobile) {
       newOpt.series[0].radius = ['45%', '80%']
       newOpt.series[0].center = ['50%', '50%']
-      newOpt.tooltip.show = false
+      newOpt.tooltip.position = ['50%', '50%']
+      newOpt.tooltip.formatter= (v: any)=> {
+        const { name, value } = v;
+        return `${v.marker} ${formatFilNum(value)}`;
+      }
     }
     newOpt.series[0].data = newSeries;
 

@@ -332,7 +332,7 @@ export const owner_detail = {
       dataIndex: 'account_address',
       render: (text: string) => {
         return (
-          <div className='flex gap-x-2 items-center'>
+          <div className='flex gap-x-2 items-center owner'>
             <Link className='link' href={`/address/${text}`}>
               {text}
             </Link>

@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
 import styles from './index.module.scss'
+import useWindow from '@/components/hooks/useWindown';
 export default ({
   accountId,
   interval,
@@ -28,6 +29,7 @@ export default ({
   const { tr } = Translation({ ns: 'detail' });
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
+  const {isMobile} = useWindow()
 
   const color = useMemo(() => {
     return getColor(theme);
@@ -140,10 +142,14 @@ export default ({
         locked_funds,
         initial_pledge,
       } = item;
-      const showTime: string =
+      let showTime: string =
         interval === '24h'
           ? formatDateTime(block_time, 'HH:mm')
           : formatDateTime(block_time, 'MM-DD HH:mm');
+
+      if (isMobile) {
+        showTime = formatDateTime(block_time, 'MM-DD');
+      }
       dateList.push(showTime);
       const [balance_amount, balance_unit] = balance
         ? formatFilNum(balance, false, false, 4, false)?.split(' ')
