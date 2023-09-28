@@ -353,7 +353,7 @@ export const getMobileColumn = (type:string)=>{
   case 'provider':
     return ['rank','miner_id','quality_adj_power']
   case 'pool':
-    return ['rank','owner_id','pool_power']
+    return ['rank','owner_id','quality_adj_power']
   case 'growth':
     return ['rank','miner_id','power_ratio']
   case 'rewards':
