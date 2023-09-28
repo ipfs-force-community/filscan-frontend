@@ -1,17 +1,32 @@
 @media screen and (max-width: 1000px){
     .message-list{
         padding: 12px;
+
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+
+            .select {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
         :global{
             .block_time-hide,.height-hide{
                 display: none !important;
             }
             .card_shadow{
+                overflow:hidden;
                 padding: 0;
+                border-color:transparent;
                 background-color:transparent;
                 box-shadow:none;
-                border-color:transparent;
-                overflow:hidden;
             }
+
+            .mt-4 {
+                margin-top: 10px;
+            }
+
             .h-full{
                 height: auto;
             }
