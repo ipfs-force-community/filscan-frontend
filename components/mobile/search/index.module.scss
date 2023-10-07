@@ -50,10 +50,11 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        width: 46px;
         color: var(--mobile-title-color);
         font-weight: 400;
         font-size: 15px;
+
+        padding-inline: 10px;
       }
     }
 

@@ -73,7 +73,7 @@ const Search = (props:SearchProps)=>{
           />
         </form>
       </div>
-      <div onClick={onCancelClick}>取消</div>
+      <div onClick={onCancelClick}>{t('cancel')}</div>
     </div>
     <div onClick={onMaskClick} className={classNames(styles['mask-wrap'],isSearch ? styles.disabled:"")}>
       <div className={classNames(styles['mask'])}>
