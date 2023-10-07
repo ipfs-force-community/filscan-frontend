@@ -84,11 +84,11 @@ export default ({ data }: { data: any }) => {
                 return (
                   <li key={dataIndex} className='flex items-center gap-x-1'>
                     <span
-                      className='font-DINPro-Medium text-sm font-medium'
+                      className={classNames('font-DINPro-Medium text-sm font-medium',styles['sector-status-value'])}
                       style={{ color: color }}>
                       {formatNumber(value)}
                     </span>
-                    <span className='text-sm text_des '>{tr(title)}</span>
+                    <span className={classNames('text-sm text_des',styles['sector-status-title'])}>{tr(title)}</span>
                   </li>
                 );
               })}

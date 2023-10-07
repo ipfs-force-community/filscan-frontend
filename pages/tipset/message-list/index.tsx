@@ -109,7 +109,7 @@ export default () => {
 
   return (
     <div className={classNames(styles['message-list'],'main_contain')}>
-      <div className='flex justify-between items-center mx-2.5'>
+      <div className={classNames('flex justify-between items-center mx-2.5',styles['title-wrap'])}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('message_list')}
@@ -121,7 +121,7 @@ export default () => {
         <Selects
           value={method}
           options={newOptions}
-          className='!min-w-[240px]'
+          className={classNames('!min-w-[240px]',styles.select)}
           // className='custom-select'
           onChange={(value) => {
             if (value !== 'all') {

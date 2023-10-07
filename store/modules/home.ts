@@ -27,16 +27,19 @@ class HomeStore {
 
   contractData?:EvmContractData
   minerPowerRankData?: MinerPowerRankData
+  maxPower: string;
   constructor() {
     this.defiData = undefined
     this.contractData = undefined
     this.minerPowerRankData = undefined
+    this.maxPower = "1"
     makeObservable(this, {
       meta: observable,
       fee: observable,
       defiData:observable,
       contractData:observable,
       minerPowerRankData:observable,
+      maxPower:observable,
       fetchContractRank:action,
     });
   }
@@ -80,6 +83,12 @@ class HomeStore {
     if (!res.error) {
       runInAction(()=>{
         this.minerPowerRankData = res;
+
+        if (this.minerPowerRankData?.items && this.minerPowerRankData?.items.length > 0) {
+          if (this.minerPowerRankData?.items[0].power_ratio > this.maxPower) {
+            this.maxPower = this.minerPowerRankData?.items[0].power_ratio
+          }
+        }
       })
     }
   }

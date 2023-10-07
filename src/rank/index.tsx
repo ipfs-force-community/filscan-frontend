@@ -160,7 +160,7 @@ export default ({ origin }: { origin: string }) => {
           item.align = "right"
           item.width = '0'
           item.render = (value:any,render:MinerPowerRank)=>{
-            const left = 100 - (Number(value) / Number(render.power_ratio)) * 100;
+            const left = 100 - (Number(value) / Number(progress[active])) * 100;
             return (
               <span className='flex justify-end gap-x-2'>
                 <Progress left={left + '%'} />
@@ -173,14 +173,11 @@ export default ({ origin }: { origin: string }) => {
         if (item.dataIndex === 'quality_adj_power') {
           item.align = "right"
           item.render = (text: string | number, record: any) => {
-            const text1 = record.quality_power_ratio;
-            const left = 100 - (Number(text) / Number(progress)) * 100;
+            const left = 100 - (Number(text) / Number(progress[active])) * 100;
             return (
               <span className={classNames(styles['item-right-quality'])}>
                 <Progress left={left + '%'} />
-                <span>{`${unitConversion(text, 2)} / ${(
-                  Number(text1) * 100
-                ).toFixed(2)}%`}</span>
+                <span>{unitConversion(record.quality_adj_power, 2)}</span>
               </span>
             );
           }
@@ -199,7 +196,7 @@ export default ({ origin }: { origin: string }) => {
         if (item.dataIndex === 'pool_power') {
           item.align = "right";
           item.render = (text:any,record:any)=>{
-            const left = 100 - (Number(record.quality_adj_power) / Number(progress)) * 100;
+            const left = 100 - (Number(record.quality_adj_power) / Number(progress[active])) * 100;
             return (
               <span className={styles['item-right-pool']}>
                 <Progress left={left + '%'} />

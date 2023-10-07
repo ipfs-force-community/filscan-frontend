@@ -19,7 +19,6 @@ import styles from './style.module.scss';
 import Defi from '@/components/mobile/home/defi';
 import MobileContractRank from '@/components/mobile/home/contractRank'
 import MobileRank from '@/components/mobile/home/rank'
-import Search from '@/components/mobile/search';
 import classNames from 'classnames';
 import ContractTrend from '@/src/statistics/ContractTrend';
 

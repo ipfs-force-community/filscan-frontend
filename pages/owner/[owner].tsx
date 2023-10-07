@@ -13,7 +13,8 @@ import AccountChange from '@/src/detail/accountChange';
 import PowerChange from '@/src/detail/powerChange';
 import { Translation } from '@/components/hooks/Translation';
 import Copy from '@/components/copy';
-
+import classNames from 'classnames';
+import styles from './[owner].module.scss'
 export default () => {
   const router = useRouter();
   const { owner } = router.query;
@@ -37,13 +38,13 @@ export default () => {
   };
 
   return (
-    <div className='main_contain'>
+    <div className={classNames('main_contain',styles.miner)}>
       <div className={'flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg'}>
         <span>{owner}</span>
         { owner&& typeof owner === 'string'&& <Copy text={owner} />}
       </div>
       <div className='w-full card_shadow rounded-xl'>
-        <div className='flex w-full border-b border_color'>
+        <div className={classNames('flex w-full border-b border_color',styles.column)}>
           <AccountBalance
             data={data?.account_indicator || {}}
             loading={loading}
@@ -51,7 +52,7 @@ export default () => {
           <Power data={data?.account_indicator || {}} />
         </div>
 
-        <ul className='py-8 px-7  flex gap-y-6 flex-col'>
+        <ul className={classNames('py-8 px-7  flex gap-y-6 flex-col',styles['owner-wrap'])}>
           {owner_detail.list.map((item) => {
             const { title, render, dataIndex } = item;
             const value = data[dataIndex];

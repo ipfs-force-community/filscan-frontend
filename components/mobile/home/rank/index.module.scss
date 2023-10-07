@@ -1,12 +1,19 @@
-.wrap {
-  .title {
-    padding: 10px 0px;
-    font-size: 16px;
-    font-family: "DINPro-Medium";
+@media only screen and (max-width: 1000px) {
+  .wrap {
+    .title {
+      padding: 18px 0px 10px 0px;
+      font-size: 16px;
+      font-family: "DINPro-Medium";
+    }
+    .content {
+      border: 1px solid #eeeff1;
+      border-radius: 6px !important;
+      background: white;
+    }
   }
-  .content {
-    border: 1px solid #eeeff1;
-    border-radius: 6px !important;
-    background: white;
+
+  .rank-icon {
+    font-family: DINPro-Medium;  
   }
+  
 }

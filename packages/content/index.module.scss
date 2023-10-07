@@ -4,6 +4,9 @@
     .item-wrap {
       align-items: baseline;
       padding: 8px 12px;
+      .title {
+        min-width: 90px;
+      }
       .value {
         a {
           word-break: break-all;

@@ -86,8 +86,6 @@ export default () => {
     return newTabs;
   }, [method]);
 
-  console.log('====33',newTabList)
-
   return (
     <div className={classNames(styles.miner, 'main_contain')}>
       <div className={'mb-2.5 DINPro-Medium font-medium text-lg flex items-center'}>

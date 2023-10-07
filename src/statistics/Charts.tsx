@@ -81,11 +81,15 @@ function Overview() {
       newData.series[0].data = series;
       if (isMobile) {
         newData.series[0].radius = '80%',
-
         newData.series[0].label.show = false
+        newData.tooltip.position = ["60%","50%"]
+        newData.tooltip.show = true
+        newData.tooltip.formatter = (v: any) =>{
+          const { name, value ,data} = v;
+          return `${v.marker} ${data.value}%`;
+        }
       }
     }
-
     return newData
   }, [data, legendData,isMobile])
 

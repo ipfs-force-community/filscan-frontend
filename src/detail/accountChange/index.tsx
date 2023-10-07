@@ -11,7 +11,9 @@ import { formatDateTime, formatFil, formatFilNum } from '@/utils';
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
-
+import classNames from 'classnames';
+import styles from './index.module.scss'
+import useWindow from '@/components/hooks/useWindown';
 export default ({
   accountId,
   interval,
@@ -27,6 +29,7 @@ export default ({
   const { tr } = Translation({ ns: 'detail' });
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
+  const {isMobile} = useWindow()
 
   const color = useMemo(() => {
     return getColor(theme);
@@ -139,10 +142,14 @@ export default ({
         locked_funds,
         initial_pledge,
       } = item;
-      const showTime: string =
+      let showTime: string =
         interval === '24h'
           ? formatDateTime(block_time, 'HH:mm')
           : formatDateTime(block_time, 'MM-DD HH:mm');
+
+      if (isMobile) {
+        showTime = formatDateTime(block_time, 'MM-DD');
+      }
       dateList.push(showTime);
       const [balance_amount, balance_unit] = balance
         ? formatFilNum(balance, false, false, 4, false)?.split(' ')
@@ -247,7 +254,7 @@ export default ({
       {options?.legendData?.map((v: any) => {
         return (
           <span
-            className='text-xs flex cursor-pointer items-center gap-x-1'
+            className={classNames('text-xs flex cursor-pointer items-center gap-x-1',styles['legend-title-wrap'])}
             key={v.dataIndex}
             onClick={() => {
               setNoShow({
@@ -257,7 +264,7 @@ export default ({
             }}
             style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
             {getSvgIcon('legendIcon')}
-            <span className='text-xs text_des font-normal'>
+            <span className={classNames('text-xs text_des font-normal',styles['legend-title'])}>
               {tr(v.title)}
             </span>
           </span>
