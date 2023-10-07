@@ -25,7 +25,8 @@ const zh ={
   message_id: 'メッセージID',
   height: 'チップセット',
   cid: 'ブロックCid',
-  node:'ノートID'
+  node:'ノートID',
+  language:"言語"
 
 }
 export default zh

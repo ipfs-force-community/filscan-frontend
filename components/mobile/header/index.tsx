@@ -16,6 +16,8 @@ import { Translation } from '@/components/hooks/Translation';
 
 import Image from 'next/image'
 import { header_top } from '@/contents/common'
+import { useFilscanStore } from '@/store/FilscanStore'
+import i18n from '@/i18n'
 
 const Header = (props:any) => {
   const {t} = useTranslation("nav")
@@ -26,6 +28,8 @@ const Header = (props:any) => {
 
   const [items, setItems] = useState<MenuItem[]>([]);
   const router = useRouter()
+
+  const {lang,setLang} = useFilscanStore()
 
   useEffect(()=>{
     document.body.style.overflow = open ? "hidden" : 'auto'
@@ -48,8 +52,20 @@ const Header = (props:any) => {
   const onSelect:MenuProps['onSelect'] = (select)=>{
     setOpen(false)
     setSelectKeys(select.selectedKeys)
-    const link = _.get(mobileNavMenu,select.key).link
-    router.push(link)
+    const child = _.get(mobileNavMenu,select.key)
+
+    if (child.value) {
+      const value = child.value
+      if (child.type === 'lang') {
+        localStorage.setItem('lang', value);
+        setLang(value);
+        router.push(router.asPath, router.asPath, { locale: value });
+        return
+      }
+      return
+    }
+
+    router.push(child.link)
   }
   type MenuItem = Required<MenuProps>['items'][number];
   function getItem(
@@ -82,7 +98,7 @@ const Header = (props:any) => {
     })
     setItems(_items)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[lang])
 
   const onClick=()=>{
     router.push('/')
