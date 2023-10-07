@@ -38,6 +38,12 @@
       }
     }
 
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
     :global {
       .copy-row {
         display: inline-block;

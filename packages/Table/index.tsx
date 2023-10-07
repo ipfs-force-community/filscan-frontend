@@ -53,7 +53,7 @@ export default (props: Props) => {
         {
           [...mobileContent].filter(([key,value])=>key.loading === loading).map(([key,value])=> value.call(this,data,columns))
         }
-        <div style={{width:"100%"}}>
+        <div className={styles.pagination}>
           <Pagination
             current={cur}
             total={total}
