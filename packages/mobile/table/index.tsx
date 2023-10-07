@@ -36,7 +36,7 @@ const Table = (props:TProps)=>{
             current: current,
             pageSize: pageLimit,
             showSizeChanger: false,
-            responsive:true,
+            showLessItems:true,
             total,
           }
           : false
