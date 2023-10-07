@@ -26,7 +26,7 @@ const zh ={
   height: 'チップセット',
   cid: 'ブロックCid',
   node:'ノートID',
-  language:"言語"
-
+  language:"言語",
+  network:"通信網",
 }
 export default zh

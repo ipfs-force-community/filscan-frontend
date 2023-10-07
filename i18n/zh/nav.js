@@ -30,6 +30,7 @@ const zh ={
   provider: '存储提供者',
   fvm: 'FVM生态总览',
   account:'节点管家',
-  language:"语言"
+  language:"语言",
+  network:"网络",
 }
 export default zh

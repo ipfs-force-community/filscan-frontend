@@ -29,6 +29,7 @@ const zh ={
   fvm: 'FVM 생태계 개요',
   account: 'Miner Metrics',
   develop:'Developer',
-  language:"언어"
+  language:"언어",
+  network:"회로망",
 }
 export default zh

@@ -9,15 +9,14 @@ import { useTranslation } from 'react-i18next'
 import { mobileNavMenu } from '@/contents/nav'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
-const rootSubmenuKeys = ['1', '2', '3','4','5'];
 import Logo from '@/assets/images/logo.png';
 import LogoText from '@/assets/images/logoText.png'
 import { Translation } from '@/components/hooks/Translation';
-
 import Image from 'next/image'
 import { header_top } from '@/contents/common'
 import { useFilscanStore } from '@/store/FilscanStore'
-import i18n from '@/i18n'
+
+const rootSubmenuKeys = ['1', '2', '3','4','5'];
 
 const Header = (props:any) => {
   const {t} = useTranslation("nav")
@@ -62,7 +61,15 @@ const Header = (props:any) => {
         router.push(router.asPath, router.asPath, { locale: value });
         return
       }
-      return
+
+      if (child.type === 'network') {
+        if (value === 'Calibration') {
+          window.open('https://calibration.filscan.io/')
+        } else if (value === 'Mainnet') {
+          window.open('https://filscan.io/')
+        }
+        return
+      }
     }
 
     router.push(child.link)

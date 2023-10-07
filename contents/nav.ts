@@ -201,6 +201,30 @@ const mobileNavMenu: Menu_Info[] = [
       },
     ],
   },
+  {
+    key:"network",
+    children:[
+      {
+        key:"Mainnet",
+        value:"Mainnet",
+        type: "network",
+      },
+      {
+        key:"Calibration",
+        value:"Calibration",
+        type: "network",
+      }
+    ]
+  }
 ];
+
+// {
+//   value: "Mainnet",
+//   label: "Mainnet",
+// },
+// {
+//   value: "Calibration",
+//   label: "Calibration",
+// },
 
 export { navMenu, mobileNavMenu };
