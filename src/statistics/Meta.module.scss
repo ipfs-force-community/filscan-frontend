@@ -19,6 +19,8 @@
             width: unset;
         }
         .item {
+            align-items: flex-start;
+            padding: 12px 10px;
             border: 1px solid var(--mobile-divide-line);
             border-radius: 6px;
             background: var(--mobile-bg-color);
