@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { power_trend } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, isMobile, unitConversion } from '@/utils';
+import { formatDateTime, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
 import GoIcon from '@/assets/images/black_go.svg';
 import GoMobileIcon from '@/assets/images/icon-right-white.svg';
@@ -16,6 +16,7 @@ import styles from './trend.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import useAxiosData from '@/store/useAxiosData';
+import useWindow from '@/components/hooks/useWindown';
 interface Props {
   origin?: string;
   className?: string;
@@ -29,7 +30,7 @@ export default (props: Props) => {
   const { axiosData } = useAxiosData()
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const [options, setOptions] = useState<any>({});
-
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
@@ -39,7 +40,7 @@ export default (props: Props) => {
   }, [theme]);
 
   const defaultOptions = useMemo(() => {
-    return {
+    let options = {
       grid: {
         top: 30,
         left: 20,
@@ -114,7 +115,7 @@ export default (props: Props) => {
           var obj = {top:80};
           //@ts-ignore
           obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-          return isMobile() ? obj:undefined;
+          return isMobile ? obj:undefined;
         },
         trigger: 'axis',
         backgroundColor: color.toolbox,
@@ -139,7 +140,18 @@ export default (props: Props) => {
         },
       },
     };
-  }, [theme]);
+    if (isMobile) {
+      (options as any)['grid'] = {
+        top:"16px",
+        right:"12px",
+        bottom:"16px",
+        left: "12px",
+        containLabel: true
+      }
+    }
+    return options
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   useEffect(() => {
     load();
@@ -311,7 +323,7 @@ export default (props: Props) => {
         </div>
       </BrowserView>
       <MobileView>
-        <div className={`w-full pb-2 card_shadow border border_color rounded-xl`}>
+        <div className={classNames(`w-full pb-2 card_shadow border border_color rounded-xl`,styles['chart-wrap'])}>
           <span className='flex gap-x-4 chart-legend'>
             {options?.legendData?.map((v: any) => {
               return (

@@ -9,6 +9,7 @@ import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
 import { formatFilNum, formatNumber } from '@/utils';
 import useAxiosData from '@/store/useAxiosData';
+import useWindow from '@/components/hooks/useWindown';
 
 interface Props {
   active?: string;
@@ -39,8 +40,10 @@ function Gas(props: Props) {
     return get_xAxis(theme);
   }, [theme]);
 
+  const {isMobile} = useWindow()
+
   const defaultOptions: any = useMemo(() => {
-    return {
+    let options = {
       yAxis: {
         type: 'value',
         scale: true,
@@ -105,7 +108,19 @@ function Gas(props: Props) {
         },
       },
     };
-  }, [theme]);
+
+    if (isMobile) {
+      (options as any)['grid'] = {
+        top:"10%",
+        right:"20px",
+        bottom:"0%",
+        left: "12px",
+        containLabel: true
+      }
+    }
+    return options
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   const [options, setOptions] = useState<any>();
 
