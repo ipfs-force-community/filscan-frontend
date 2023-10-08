@@ -1,7 +1,6 @@
 import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
 import { chain_list } from "@/contents/tipset"
-import Skeleton from "@/packages/skeleton";
 import { useFilscanStore } from "@/store/FilscanStore";
 import useAxiosData from "@/store/useAxiosData";
 import { formatDateTime, formatFilNum, pageLimit } from "@/utils";
@@ -14,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { get } from 'lodash'
 import { useRouter } from "next/router";
+import Loading from "@/components/loading";
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
@@ -60,14 +60,7 @@ export default () => {
   }, [tr])
 
   function renderLoading(){
-    return <div className="h-[500px] flex flex-col gap-y-5">
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-    </div>
+    return <Loading />
   }
 
   return <div className={classNames(styles['chain-list'],'main_contain')}>

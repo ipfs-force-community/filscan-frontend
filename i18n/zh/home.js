@@ -43,7 +43,7 @@ const home = {
   gas_in_64g: '24小时64G扇区封装每T所需Gas',
   gas_in_64g_meta:'64GiB扇区Gas消耗',
   gas_in_64g_tip: '近24小时密封64G扇区每T所要消耗的Gas值',
-  add_power_in_64g: '预估64GiB扇区新增算力成本',
+  add_power_in_64g: '64GiB扇区新增算力成本',
   add_power_in_64g_tip:'近24小时64G扇区新增算力所需要花费的成本，包括扇区质押和封装手续费',
   win_count_reward: '每赢票奖励',
   win_count_reward_tip: '最新高度的单位出块奖励，每个高度有多个区块，每个区块均可获得该奖励',

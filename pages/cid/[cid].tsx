@@ -1,6 +1,6 @@
 import { Translation } from "@/components/hooks/Translation";
-import { apiUrl, heightDetail } from "@/contents/apiUrl";
-import { cid_list, height_list } from "@/contents/detail";
+import { apiUrl } from "@/contents/apiUrl";
+import { cid_list } from "@/contents/detail";
 import Content from "@/packages/content";
 import useAxiosData from "@/store/useAxiosData";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import CidTable from '@/src/detail/cidDetail'
 import styles from './[cid].module.scss'
 import classNames from "classnames";
-import { Skeleton } from "antd";
+import Loading from "@/components/loading";
 
 export default () => {
   const router = useRouter()
@@ -34,13 +34,7 @@ export default () => {
     setData(result?.block_details || {})
   }
   if (loading) {
-    return (
-      <div className='main_contain'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+    return <Loading />
   }
   return <div className={classNames(styles.cid,"main_contain")}>
     <div className='mx-2.5 font-PingFang font-semibold text-lg '>
