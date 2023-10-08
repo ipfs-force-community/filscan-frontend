@@ -1,16 +1,12 @@
 /** @format */
-import { EvmTxsHistory } from '@/contents/apiUrl';
+import { EvmGasTrend } from '@/contents/apiUrl';
 import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
-import { contract_trend, timeList } from '@/contents/statistic';
+import { contract_gas, timeList } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { formatDateTime } from '@/utils';
+import { formatDateTime, formatFil, formatFilNum } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
-import GoMobileIcon from '@/assets/images/icon-right-white.svg';
-import GoIcon from '@/assets/images/black_go.svg';
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import useObserver from '@/components/hooks/useObserver';
 import styles from './ContractTrend.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
@@ -26,7 +22,6 @@ export default (props: Props) => {
   const { origin, className } = props;
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'static' });
-  const ref = useObserver();
   const { axiosData } = useAxiosData()
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const [options, setOptions] = useState<any>({});
@@ -106,7 +101,7 @@ export default (props: Props) => {
                 item.marker +
                 tr(item.seriesName) +
                 ': ' +
-                item.data.amount +
+                formatFilNum(item.data.amount,false,false,4) +
                 item.data.unit;
             }
           });
@@ -122,17 +117,17 @@ export default (props: Props) => {
 
   const load = async (time?:string) => {
     const seriesObj: any = {};
-    contract_trend.list.forEach((v) => {
+    contract_gas.list.forEach((v) => {
       seriesObj[v.dataIndex] = [];
     });
     const dateList: any = [];
     const seriesData: any = [];
     const inter = time || interval
-    const result: any = await axiosData(EvmTxsHistory, { interval:inter });
+    const result: any = await axiosData(EvmGasTrend, { interval:inter });
     result?.points?.forEach((value: any) => {
       const {
         timestamp,
-        txs_count, //合约交易
+        txs_gas, //合约gas交易
       } = value;
       let showTime = inter === '24h' ? formatDateTime(timestamp, 'HH:mm'):formatDateTime(timestamp, 'MM-DD HH:mm');
       if (isMobile) {
@@ -141,15 +136,15 @@ export default (props: Props) => {
       dateList.push(showTime);
       //amount
 
-      seriesObj.txs_count.push({
-        amount: txs_count,
-        value: txs_count,
+      seriesObj.txs_gas.push({
+        amount: txs_gas,
+        value: formatFil(txs_gas,'FIL'),
         showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
         unit:'',
       });
     });
 
-    contract_trend.list.forEach((item: any) => {
+    contract_gas.list.forEach((item: any) => {
       seriesData.push({
         type: item.type,
         data: seriesObj[item.dataIndex],
@@ -182,17 +177,14 @@ export default (props: Props) => {
     };
   }, [options, defaultOptions, noShow]);
 
-  const propsRef = origin === 'home' ? { ref } : {}
-
   return (
     <div
-      className={classNames(styles.trend, `w-full h-[full]  ${className} ${origin === 'home'?'mt-20':''}`)}
-      {...propsRef}
+      className={classNames(styles.trend, `w-full h-[full]  ${className}`)}
     >
       <div className={classNames(`flex justify-between flex-wrap items-center min-h-[36px] mb-2.5 ${lang === 'en' ? 'h-[60px]':''}`,styles['title-wrap'])}>
         <div className='flex-1 flex flex-row flex-wrap items-center'>
           <div className={classNames('min-w-[120px] w-fit font-PingFang font-semibold text-lg pl-2.5',styles.title)}>
-            {tr('contract_trend')}
+            {tr('contract_gas')}
           </div>
         </div>
         <BrowserView>
@@ -202,32 +194,7 @@ export default (props: Props) => {
               onChange={(interval) => { setInterval(interval); load(interval) }} />
           </div>
         </BrowserView>
-        <div>
-          {origin === 'home' && (
-            <>
-              <MobileView>
-                <Link href={`/statistics/charts#fevm`}>
-                  <GoMobileIcon
-                    width={28}
-                    height={28}
-                  /></Link>
-              </MobileView>
-              <BrowserView>
-                <Link href={`/statistics/charts#fevm`}>
-                  <GoIcon
-                    className='cursor-pointer mr-2.5'
-                    width={18}
-                    height={18}
-                  />
-                </Link>
-
-              </BrowserView>
-            </>
-
-          )}
-        </div>
       </div>
-
       <div className={`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`}>
         <EChart options={newOptions} />
       </div>

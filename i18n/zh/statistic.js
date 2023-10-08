@@ -85,7 +85,9 @@ const statistic = {
   circulating: '可交易流通的Fil',
   dc_trend: 'DC',
   cc_trend: 'CC',
-  networks_overview:'全网指标'
+  networks_overview: '全网指标',
+  contract_gas: '合约Gas消耗',
+  contract_addr:'合约交易地址'
 }
 
 export default statistic

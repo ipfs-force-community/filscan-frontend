@@ -16,6 +16,9 @@ import { BrowserView, MobileView } from "@/components/device-detect";
 import Meta from '@/src/statistics/Meta';
 
 import styles from './index.module.scss'
+import ContractTrend from "@/src/statistics/ContractTrend";
+import ContractGas from "@/src/statistics/contractGas";
+import ContractAddr from "@/src/statistics/contractAddr";
 export default () => {
   const { tr } = Translation({ ns: 'static' });
   const { hash } = useHash()
@@ -68,6 +71,12 @@ export default () => {
         { !hash && <Meta />}
         { hash === 'networks'&&
           <Meta />}
+        { hash === 'fevm'&&
+          <>
+            <ContractAddr />
+            <ContractTrend />
+            <ContractGas />
+          </>}
         { hash ==='BlockChain' && <>
           <PowerTrend />
           <DCCTrend />

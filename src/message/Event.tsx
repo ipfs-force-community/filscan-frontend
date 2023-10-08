@@ -1,4 +1,5 @@
 import { Translation } from "@/components/hooks/Translation";
+import Loading from "@/components/loading";
 import { apiUrl } from "@/contents/apiUrl";
 import { message_detail } from "@/contents/detail"
 import Content from "@/packages/content";
@@ -24,13 +25,7 @@ export default ({ cid }: {cid?:string | string[]}) => {
   }
 
   if (loading) {
-    return (
-      <div className='main_contain'>
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-      </div>
-    );
+    return <Loading />
   }
 
   if (!loading &&data.length === 0) {

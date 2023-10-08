@@ -21,6 +21,7 @@ import { UserInfo } from '@/store/UserStore';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MinerStoreContext } from '@/src/account/content';
+import Loading from '@/components/loading';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -83,13 +84,7 @@ const Account: React.FC = () => {
   }, [userInfo.mail]);
 
   if (minerLoading) {
-    return (
-      <div className='mt-10 main_contain'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+    return <Loading />
   }
 
   return (

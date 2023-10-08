@@ -164,7 +164,7 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'win_count',
       title_tip: 'win_count_tip',
-      render: (text: any) => String(text) || '--',
+      render: (text: any) =>text? String(text):'--',
     },
     {
       title: 'block_count',
@@ -193,8 +193,12 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'lucky',
       title_tip: 'lucky_tip',
-      render: (text: string | number) =>
-        text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--',
+      render: (text: string | number) => {
+        if (!text && Number(text) !== 0) {
+          return '--'
+        }
+        return text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--';
+      }
     },
     {
       title: 'net_profit_per_tb',
@@ -204,11 +208,17 @@ export const miner_overview = {
       render: (text: string | number) =>
         text ? formatFilNum(text, false, false, 3) : '--',
     },
-
     {
       title: 'power_increase_indicators',
       style: { width: '20%', justifyContent: 'flex-end' },
       dataIndex: 'power_increase',
+      render: (text: string | number) =>
+        text ? unitConversion(text, 2) : '--',
+    },
+    {
+      title: 'windowPost_gas',
+      style: { width: '20%', justifyContent: 'flex-end' },
+      dataIndex: 'windowpost_gas',
       render: (text: string | number) =>
         text ? unitConversion(text, 2) : '--',
     },
@@ -847,11 +857,11 @@ export const message_detail = {
         if (!showValue) return null;
         if (typeof showValue === 'string') {
           return <span className="break-words">
-            { JSON.stringify(showValue, undefined, 6)}
+            { JSON.stringify(showValue, undefined, 2)}
           </span>}
         return (
           <div className='code'>
-            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 6)}</pre>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 1)}</pre>
             {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
           </div>
         );
@@ -865,8 +875,8 @@ export const message_detail = {
         if (!showValue) return null;
         if (typeof showValue === 'string') {
           return <span className="break-words">
-            { JSON.stringify(showValue, undefined, 6)}
-          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
+            { JSON.stringify(showValue, undefined, 2)}
+          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 1)}</pre>;
       },
     },
   ],

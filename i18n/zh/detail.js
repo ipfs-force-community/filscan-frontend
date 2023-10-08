@@ -69,6 +69,7 @@ const detail = {
   sector_ratio: '扇区增速',
   sector_ratio_tip:'',
   win_count: '赢票数量',
+  windowPost_gas:'维持算力消耗',
   win_count_tip:'Filecoin经济模型中，一个高度 （tipset）下可能有多个区块（block），每 个区块可能获得多份奖励（win count）。 累计出块份数=每次出块获得奖励份数的总和',
   net_profit_per_tb:'单T消耗',
   net_profit_per_tb_tip:'选定周期内单T封装扇区大小Gas消耗',

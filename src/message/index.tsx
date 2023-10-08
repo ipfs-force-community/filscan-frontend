@@ -17,6 +17,7 @@ import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
 import Trade from './Trade'
 import Event from './Event';
+import Loading from '@/components/loading';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
@@ -71,13 +72,7 @@ export default ({ cid }: { cid: string | string[] }) => {
   };
 
   if (loading) {
-    return (
-      <div className='main_contain'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+    return <Loading />
   }
   if (!loading && Object.keys(data).length === 0) {
     return <NoData />;

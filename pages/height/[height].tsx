@@ -8,6 +8,7 @@ import styles from './index.module.scss'
 import classNames from "classnames";
 import { Skeleton } from "antd";
 import Content from "@/packages/content";
+import Loading from "@/components/loading";
 export default () => {
   const router = useRouter()
   const { height } = router.query;
@@ -24,13 +25,7 @@ export default () => {
   }
 
   if (loading) {
-    return (
-      <div className='main_contain'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+    return <Loading />
   }
 
   return <div className={classNames(styles.height,"main_contain")}>
