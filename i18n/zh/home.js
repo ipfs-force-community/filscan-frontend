@@ -61,7 +61,7 @@ const home = {
   footer_detail_b: ' 和 ',
   footer_detail_c: '版权协议',
   search_notFound: '搜索无结果',
-  warn_text: 'Oops! 您输入的搜索字符:',
+  warn_text: '很遗憾，您输入的字符暂无结果',
   warn_details: '对不起！这是一个无效的字符串',
   go_home: '返回首页',
   quality_power_Cc:'Commited Capacity (CC)',

@@ -847,11 +847,11 @@ export const message_detail = {
         if (!showValue) return null;
         if (typeof showValue === 'string') {
           return <span className="break-words">
-            { JSON.stringify(showValue, undefined, 6)}
+            { JSON.stringify(showValue, undefined, 2)}
           </span>}
         return (
           <div className='code'>
-            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 6)}</pre>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 1)}</pre>
             {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
           </div>
         );
@@ -865,8 +865,8 @@ export const message_detail = {
         if (!showValue) return null;
         if (typeof showValue === 'string') {
           return <span className="break-words">
-            { JSON.stringify(showValue, undefined, 6)}
-          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
+            { JSON.stringify(showValue, undefined, 2)}
+          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 1)}</pre>;
       },
     },
   ],

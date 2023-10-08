@@ -1,9 +1,14 @@
 
-import Router,{ useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import style from './index.module.scss'
 import { no_result } from '@/contents/home';
 import Link from 'next/link';
+import Image from 'next/image';
+import searchLight from '@/assets/images/search_light.png'
+import searchDark from '@/assets/images/search_dark.png'
+import { useMemo } from 'react';
+import { useFilscanStore } from '@/store/FilscanStore';
 
 export default () => {
   const router = useRouter();
@@ -12,16 +17,25 @@ export default () => {
   const tr = (label: string): string => {
     return t(label, { ns: "home" });
   };
-  return <div className={`main_contain ${style.wrap} !text-xl`} >
-    <div className='!text-3xl font-medium'>{tr(no_result.title)}</div>
-    <div className='text_des mt-4'>
+  const { theme } = useFilscanStore();
+
+  const showImage = useMemo(() => {
+    return theme === 'light'?searchLight:searchDark
+  },[theme])
+
+  return <div className={`main_contain flex items-center flex-col  justify-center ${style.wrap}  !text-xl`} >
+    <Image src={showImage } width={400} height={400} alt='' />
+    <div className='font-medium'>{tr(no_result.title)}</div>
+    <div className='text_des mt-4 text-xs'>
       {tr(no_result.warn_text)}
-      <span className={'text_color !text-2xl '}>{search }</span>
     </div>
-    <div className='text_des mt-2.5'>
+    <div className={'text-primary'}>
+      {search}
+    </div>
+    {/* <div className='text_des mt-2.5'>
       { tr(no_result.warn_details)}
-    </div>
-    <Link className='primary_btn !px-5 !py-2.5 !mt-8 !text-base' href={'/home'}>
+    </div> */}
+    <Link className='primary_btn !px-5 !py-1 !mt-5 !text-base' href={'/home'}>
       { tr(no_result.go_home)}
     </Link>
 

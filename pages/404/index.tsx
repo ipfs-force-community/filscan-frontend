@@ -1,20 +1,25 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Router, { useRouter } from "next/router"
 import Image from 'next/image'
-import noImg from '@/assets/images/404.png'
+import lightImg from '@/assets/images/404_light.png'
+import darkImg from '@/assets/images/404_dark.png'
+
 import useAxiosData from "@/store/useAxiosData";
 import { apiUrl } from "@/contents/apiUrl";
 import Link from "next/link";
 import Loading from "@/components/loading";
 import classNames from "classnames";
 import styles from './index.module.scss'
+import { useFilscanStore } from "@/store/FilscanStore";
+
 export default () => {
   const router = useRouter();
   let searchValue = router.asPath?.split('=')[1]
   const [show404, setShow_404] = useState(false)
-  const {axiosData } = useAxiosData()
+  const { axiosData } = useAxiosData();
+  const { theme } = useFilscanStore();
 
   useEffect(() => {
     searchValue = router.asPath?.split('=')[1]
@@ -67,13 +72,25 @@ export default () => {
 
   }
 
+  const showImage = useMemo(() => {
+    return theme === 'light'?lightImg:darkImg
+  },[theme])
+
   if (searchValue || !show404) {
     return <Loading />
   }
 
   return <div className={classNames(`main_contain`,styles.wrap)}>
-    <Image src={noImg} className="m-auto" width={600} alt='' />
-    <Link className='primary_btn mx-auto mt-10 !px-5 !py-2.5 !text-base' href='/home'>
+    <Image src={showImage} className="m-auto" width={400} alt='' />
+    <div className="flex items-center justify-center flex-col m-auto">
+      <span className="text-xl font-medium">
+        404
+      </span>
+      <span className="text_des text-xs font-medium">
+        Sorry, the page you visited does not exist
+      </span>
+    </div>
+    <Link className='primary_btn mx-auto mt-5 !px-5 !py-1 !text-base' href='/home'>
       Back Home
     </Link>
 
