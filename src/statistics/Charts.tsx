@@ -88,6 +88,7 @@ function Overview() {
           const { name, value ,data} = v;
           return `${v.marker} ${data.value}%`;
         }
+        newData.series[0].center =['50%', '45%']
       }
     }
     return newData
