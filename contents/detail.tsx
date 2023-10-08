@@ -164,7 +164,7 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'win_count',
       title_tip: 'win_count_tip',
-      render: (text: any) => String(text) || '--',
+      render: (text: any) =>text? String(text):'--',
     },
     {
       title: 'block_count',
@@ -193,8 +193,12 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'lucky',
       title_tip: 'lucky_tip',
-      render: (text: string | number) =>
-        text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--',
+      render: (text: string | number) => {
+        if (!text && Number(text) !== 0) {
+          return '--'
+        }
+        return text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--';
+      }
     },
     {
       title: 'net_profit_per_tb',
