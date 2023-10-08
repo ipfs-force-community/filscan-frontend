@@ -30,6 +30,19 @@
             width: fit-content;
             height: 12px;
           }
+
+          &>:first-child{
+            width: 21px;
+            height: unset;
+
+            aspect-ratio: 1.0968;
+          }
+          &>:last-child {
+            width: unset;
+            height: 10px;
+
+            aspect-ratio: 5.9;
+          }
         }
         & > svg {
           padding: 12px 0px 12px 12px;
