@@ -148,11 +148,33 @@ export const power_trend = {
 
 //合约交易走势图
 export const contract_trend = {
-
   list: [
     {
       title: 'contract_trend',
       dataIndex: 'txs_count',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ],
+};
+//合约地址走势
+export const contract_addr = {
+  list: [
+    {
+      title: 'contract_addr',
+      dataIndex: 'contract_users',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ],
+};
+
+//合约gas 走势
+export const contract_gas = {
+  list: [
+    {
+      title: 'contract_gas',
+      dataIndex: 'txs_gas',
       type: 'line',
       color: '#1C6AFD',
     },
@@ -383,6 +405,11 @@ export const chartsNav: Array<Menu_Info> = [
     preIcon: 'meta',
     title:'networks_overview',
 
+  },
+  {
+    key: 'fevm',
+    preIcon: 'meta',
+    title:'FEVM',
   },
   {
     key: 'BlockChain',

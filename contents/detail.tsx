@@ -204,11 +204,17 @@ export const miner_overview = {
       render: (text: string | number) =>
         text ? formatFilNum(text, false, false, 3) : '--',
     },
-
     {
       title: 'power_increase_indicators',
       style: { width: '20%', justifyContent: 'flex-end' },
       dataIndex: 'power_increase',
+      render: (text: string | number) =>
+        text ? unitConversion(text, 2) : '--',
+    },
+    {
+      title: 'windowPost_gas',
+      style: { width: '20%', justifyContent: 'flex-end' },
+      dataIndex: 'windowpost_gas',
       render: (text: string | number) =>
         text ? unitConversion(text, 2) : '--',
     },

@@ -54,6 +54,7 @@ const home = {
   'total_contract_24h_contract': '활성 계약 수/24시간',
   'total_contract/24h_contract': '활성 계약 수/24시간',
   verified_contracts: '검증된 스마트 계약 리스트',
+  "contract_address_24h_change": '계약 거래 주소는 24시간 변경됩니다',
   'contract_transaction': '계약 거래 수',
   'contract_transaction_24h_change': '활성 계약 수 24시간 변동',
   'contract_transaction/24h_change': '계약 거래 수 24시간 변동',
