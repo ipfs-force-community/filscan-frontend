@@ -2,8 +2,6 @@
   .title {
     padding: unset !important;
   }
-  .chart-wrap-reset {
-  }
   .chart-wrap {
     display: flex;
     flex-direction: column;
@@ -13,6 +11,11 @@
       padding: unset;
       width: unset;
       height: 300px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
     }
   }
 }

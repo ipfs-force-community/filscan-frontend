@@ -114,7 +114,7 @@ function Overview() {
             const legend = legendData[legendKey];
             return <li key={legendKey} className='flex gap-x-2 items-center text-xs text_des cursor-pointer'
               onClick={() => { handleLegend(legendKey)}}>
-              <span className='block w-4 h-4 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
+              <span className={classNames('block w-4 h-4 rounded-full',styles.dot)} style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
               <span className="flex">
                 <span className="flex-shrink-0">{ legend?.name||""}</span>
                 <MobileView>
@@ -144,7 +144,7 @@ function Overview() {
         }).map((v,index) => {
           return <li key={ index} className="flex flex-col text_des px-[12px] py-[14px] gap-y-[28px] border-b border_color last:border-none">
             <div className="flex" >
-              <span className="min-w-[100px]">{tr('Allocation')}:</span>
+              <span className="min-w-[100px] pt-[2px]">{tr('Allocation')}:</span>
               <span className="font-DINPro-Medium text-base text-black">{tr(v.label)}</span>
             </div>
             <div className="flex">
