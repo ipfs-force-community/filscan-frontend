@@ -64,7 +64,7 @@ export default () => {
   }
 
   return <div className={classNames(styles['chain-list'],'main_contain')}>
-    <div className='font-PingFang font-semibold text-lg mx-2.5'>
+    <div className={classNames('font-PingFang font-semibold text-lg mx-2.5',styles.title)}>
       {tr('block_list')}
     </div>
     <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
