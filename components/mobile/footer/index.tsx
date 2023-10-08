@@ -1,8 +1,10 @@
-import IconLogo from '@/assets/images/logo-mobile.svg'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { getSvgIcon } from '@/svgsIcon'
+import Logo from '@/assets/images/logo.png';
+import LogoText from '@/assets/images/logoText.png'
+import Image from 'next/image';
 
 const links = [
   {
@@ -25,27 +27,28 @@ const links = [
 const Header = () => {
   const {t} = useTranslation("common")
 
-  return <div className={styles['footer-wrap']}>
-    <div className={styles.top}>
-      <IconLogo />
-      <div>Filscan.io</div>
-    </div>
-    <div className={classNames(styles['text'])}>
-      <div>
-        { t('footer_des1')}
+  return (
+    <div className={styles['footer-wrap']}>
+      <div className={styles.top} >
+        <Image src={Logo} alt='logo'></Image>
+        <Image src={LogoText} alt='logo' ></Image>
       </div>
-      <div>
-        { t('footer_des2')}
-      </div></div>
-    <div className={classNames(styles.bottom)}>
-      {links.map((item,index)=>{
-        return <a key={item.label}
-          className='w-5 h-5 bg-white rounded'
-          target={item.type}
-          style={{ color: '#fff' }} href={item.link}>{
-            getSvgIcon(item.label)}</a>
-      })}
+      <div className={classNames(styles['text'])}>
+        <div>
+          { t('footer_des1')}
+        </div>
+        <div>
+          { t('footer_des2')}
+        </div></div>
+      <div className={classNames(styles.bottom)}>
+        {links.map((item,index)=>{
+          return <a key={item.label}
+            target={item.type}
+            style={{ color: '#fff' }} href={item.link}>{
+              getSvgIcon(item.label)}</a>
+        })}
+      </div>
     </div>
-  </div>
+  )
 }
 export default Header
