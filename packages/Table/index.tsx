@@ -53,7 +53,7 @@ export default (props: Props) => {
         {
           [...mobileContent].filter(([key,value])=>key.loading === loading).map(([key,value])=> value.call(this,data,columns))
         }
-        <div style={{width:"100%"}}>
+        <div className={styles.pagination}>
           <Pagination
             current={cur}
             total={total}
@@ -61,6 +61,7 @@ export default (props: Props) => {
             showQuickJumper={false}
             showSizeChanger={false}
             hideOnSinglePage={true}
+            showLessItems={true}
             onChange={(cur: number) => {
               if (onChange) {
                 setCur(cur)
@@ -84,11 +85,6 @@ export default (props: Props) => {
         loading={loading}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
-        // loading={{
-        //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
-        //   indicator: <Skeleton active />,
-        //   wrapperClassName: 'custom_table_loading',
-        // }}
         pagination={
           total > showLimit
             ? {

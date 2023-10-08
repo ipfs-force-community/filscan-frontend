@@ -1,0 +1,25 @@
+@media only screen and (max-width: 1000px) {
+  .title-wrap {
+    align-items: flex-start;
+    flex-direction: column;
+
+    margin-inline: unset;
+
+    .select {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+
+  .table-reset {
+    margin: unset;
+    padding: unset;
+    min-height: unset;
+    border: unset;
+    background: unset;
+    box-shadow: unset;
+  }
+  .table {
+    margin-top: 10px;
+  }
+}

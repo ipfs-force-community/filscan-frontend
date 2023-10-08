@@ -6,10 +6,12 @@ import { HtmlHTMLAttributes, useRef, useState } from "react"
 import useAxiosData from "@/store/useAxiosData"
 import { apiUrl } from "@/contents/apiUrl"
 import { useRouter } from "next/router"
+import { useTranslation } from 'react-i18next'
 interface SearchProps extends HtmlHTMLAttributes<HTMLDivElement>{
 }
 const Search = (props:SearchProps)=>{
   const [isSearch,setIsSearch] = useState<boolean>(false)
+  const {t} = useTranslation("common")
   const ref = useRef<any>()
   const onMaskClick = ()=>{
     setIsSearch(true)
@@ -71,12 +73,12 @@ const Search = (props:SearchProps)=>{
           />
         </form>
       </div>
-      <div onClick={onCancelClick}>取消</div>
+      <div onClick={onCancelClick}>{t('cancel')}</div>
     </div>
     <div onClick={onMaskClick} className={classNames(styles['mask-wrap'],isSearch ? styles.disabled:"")}>
       <div className={classNames(styles['mask'])}>
         <IconSearch/>
-        <div>搜索区块/高度/账户/地址/消息/FNS</div>
+        <div>{t('search_holder')}</div>
       </div>
     </div>
   </div>

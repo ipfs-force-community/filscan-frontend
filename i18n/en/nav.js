@@ -30,5 +30,7 @@ const en ={
   account: 'Miner Metrics',
   network_overview: 'Network Overview',
   develop:'Developer',
+  language:"Language",
+  network:"Network",
 }
 export default en
