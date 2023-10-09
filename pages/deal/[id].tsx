@@ -93,7 +93,7 @@ export default () => {
           </div>
         </div>
 
-        <div className={classNames(styles.space,`flex items-center justify-center flex-col py-2.5 rounded-[5px] border border-color`)}>
+        <div className={classNames(styles.space,`flex items-center justify-center flex-col gap-y-4 py-2.5 h-[114px] rounded-[5px] border border-color`)}>
           <span className="flex items-center gap-x-1 text_color font-DINPro-Medium">
             <Cloud width={14} height={14} />
             { data?.piece_size && unitConversion( data.piece_size)}
