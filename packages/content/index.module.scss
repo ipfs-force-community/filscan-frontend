@@ -7,6 +7,7 @@
       align-items: baseline;
       min-height: unset;
       .title {
+        flex-shrink: 1;
         min-width: 90px;
       }
       .value {
