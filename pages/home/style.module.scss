@@ -1,6 +1,12 @@
 @media screen and (max-width: 1000px){
     .home-page{
         width: 100%;
+        .content {
+            margin-top: 4px !important;
+            .gas-wrap {
+                border-radius: 6px;
+            }
+        }
         .chart-title{
             display: flex;
             align-items: center;

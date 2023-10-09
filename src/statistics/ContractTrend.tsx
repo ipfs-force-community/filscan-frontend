@@ -41,7 +41,7 @@ export default (props: Props) => {
   }, [theme]);
 
   const defaultOptions = useMemo(() => {
-    return {
+    let options = {
       grid: {
         top: 30,
         left: 20,
@@ -114,7 +114,17 @@ export default (props: Props) => {
         },
       },
     };
-  }, [theme,tr]);
+    if (isMobile) {
+      (options as any)['grid'] = {
+        top:"8%",
+        right:"12px",
+        bottom:"16px",
+        left: "12px",
+        containLabel: true
+      }
+    }
+    return options
+  }, [theme,tr,isMobile]);
 
   useEffect(() => {
     load();
@@ -228,7 +238,7 @@ export default (props: Props) => {
         </div>
       </div>
 
-      <div className={`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`}>
+      <div className={classNames(`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`,styles['chart-wrap'])}>
         <EChart options={newOptions} />
       </div>
     </div>

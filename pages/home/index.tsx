@@ -35,10 +35,10 @@ function Home(props: any) {
         <BrowserView>
           <Banner />
         </BrowserView>
-        <div className='main_contain !mt-[26px]'>
+        <div className={classNames('main_contain !mt-[26px]',styles.content)}>
           <div className='flex justify-between h-[270px] gap-x-5 meta-gas '>
             <Meta />
-            <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
+            <div className={classNames('border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap',styles['gas-wrap'])}>
               <BrowserView>
                 <div className={`flex justify-between text-xs font-PingFang p-5`}>
                   {tr('base_gas')}

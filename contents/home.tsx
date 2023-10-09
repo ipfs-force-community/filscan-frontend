@@ -28,7 +28,6 @@ export const home_meta = [
             {`${flag}${unitConversion(Math.abs(changeText), 2)}`}
           </span>
         </>
-
       );
     },
   },
@@ -147,7 +146,11 @@ export const meta_list = [
     dataIndex:'power_increase_24h',
     render: (v: number | string) => {
       if(!v) return '--'
-      return unitConversion(v, 4)
+      const [textValue, unit] = unitConversion(v, 4).split(' ');
+      return <span>
+        <span>{textValue + ' '}</span>
+        <span className='unit'>{unit}</span>
+      </span>
     }
   }, //近24h增长算力
 
@@ -165,21 +168,36 @@ export const meta_list = [
     dataIndex:'total_quality_power',
 
     render: (v: number | string) => {
-      return unitConversion(v, 4)
+      if(!v) return '--'
+      const [textValue, unit] = unitConversion(v, 4).split(' ');
+      return <span>
+        <span>{textValue + ' '}</span>
+        <span className='unit'>{unit}</span>
+      </span>
     }
   }, //全网有效算力
   {
     title: 'rewards_increase_24h',
     dataIndex:'rewards_increase_24h',
 
-    render: (v: number | string) => formatNumber(formatFil(v,'FIL'), 2) + ' FIL'
+    render: (v: number | string) => {
+      return <span>
+        <span>{formatNumber(formatFil(v,'FIL'), 2) + ' '}</span>
+        <span className='unit'>{'FIL'}</span>
+      </span>
+    }
   }, //近24h出块奖励
 
   {
     title: 'miner_initial_pledge',
     dataIndex:'miner_initial_pledge',
 
-    render: (v: string | number) => formatNumber(formatFil(v,'FIL',4)) + ' FIL/TiB'
+    render: (v: string | number) => {
+      return <span>
+        <span>{formatNumber(formatFil(v,'FIL',4)) + ' '}</span>
+        <span className='unit'>{'FIL/TiB'}</span>
+      </span>
+    }
   }, //当前扇区质押量
   // {
   //   title: 'base_fee',
@@ -194,14 +212,34 @@ export const meta_list = [
     tip: 'gas_in_32g_tip',
     dataIndex:'gas_in_32g',
 
-    render: (v: number | string) => Number(v) < 0.0001 ?formatFil(v,'nanoFIL',4) + 'nanoFIL/TiB' :formatFil(v,'FIL',4) + ' FIL/TiB'
+    render: (v: number | string) => {
+      let value = ''
+      let unit = ''
+      if (Number(v) < 0.0001) {
+        value =formatFil(v,'nanoFIL',4)
+        unit = 'nanoFIL/TiB'
+      }
+      else {
+        value =formatFil(v,'FIL',4)
+        unit = 'FIL/TiB'
+      }
+      return <span>
+        <span>{value + ' '}</span>
+        <span className='unit'>{unit}</span>
+      </span>
+    }
   }, //32GiB扇区Gas消耗，单位FIL/TiB
   {
     title: 'add_power_in_32g',
     tip: 'add_power_in_32g_tip',
     dataIndex:'add_power_in_32g',
 
-    render: (v: number | string) => formatFil(v,'FIL',4) + ' FIL/TiB'
+    render: (v: number | string) => {
+      return <span>
+        <span>{formatFil(v,'FIL',4) + ' '}</span>
+        <span className='unit'>{'FIL/TiB'}</span>
+      </span>
+    }
   }, //32GiB扇区新增算力成本，单位FIL/TiB
   {
     title: 'fil_per_tera_24h',
@@ -209,31 +247,65 @@ export const meta_list = [
     dataIndex:'fil_per_tera_24h',
 
     render: (v: string) => {
-      return formatFil(v,'FIL',4) + ' FIL/TiB'
+      return <span>
+        <span>{formatFil(v,'FIL',4) + ' '}</span>
+        <span className='unit'>{'FIL/TiB'}</span>
+      </span>
+
     } }, //近24h产出效率，单位FIL/TiB
   {
     title: 'total_rewards',
     dataIndex:'total_rewards',
 
     render: (v: number | string) => {
-      return Number(formatFil(v,'FIL')).toLocaleString() + ' FIL'
+      // return Number(formatFil(v,'FIL')).toLocaleString() + ' FIL'
+      return <span>
+        <span>{Number(formatFil(v,'FIL')).toLocaleString() + ' '}</span>
+        <span className='unit'>{'FIL'}</span>
+      </span>
     }
   }, //全网出块奖励，单位Fil
   { title: 'win_count_reward', dataIndex:'win_count_reward',
-    render:(v:any)=>Number(formatFil(v,'FIL',4)).toLocaleString() + ' FIL' }, //每赢票奖励，单位Fil
+    render:(v:any)=> {
+      return <span>
+        <span>{Number(formatFil(v,'FIL',4)).toLocaleString() + ' '}</span>
+        <span className='unit'>{'FIL'}</span>
+      </span>
+    }
+
+  }, //每赢票奖励，单位Fil
 
   {
     title: 'gas_in_64g_meta',
     tip: 'gas_in_64g_tip',
     dataIndex:'gas_in_64g',
-    render: (v: number | string) => Number(v) < 0.0001 ?formatFil(v,'nanoFIL',4) + 'nanoFIL/TiB' : formatFil(v,'FIL',4) + ' FIL/TiB'
+    render: (v: number | string) => {
+      let value = ''
+      let unit = ''
+      if (Number(v) < 0.0001) {
+        value = formatFil(v,'nanoFIL',4)
+        unit = 'nanoFIL/TiB'
+      }else {
+        value = formatFil(v,'FIL',4)
+        unit = 'FIL/TiB'
+      }
+      return <span>
+        <span>{value + ' '}</span>
+        <span className='unit'>{unit}</span>
+      </span>
+    }
   }, //64GiB扇区Gas消耗，单位FIL/TiB
   {
     title: 'add_power_in_64g',
     tip: 'add_power_in_64g_tip',
     dataIndex:'add_power_in_64g',
 
-    render: (v: number | string) => formatFil(v,'FIL',4) + ' FIL/TiB'
+    render: (v: number | string) => {
+      return <span>
+        <span>{formatFil(v,'FIL',4) + ' '}</span>
+        <span className='unit'>{'FIL/TiB'}</span>
+      </span>
+    }
   }, //64GiB扇区新增算力成本，单位FIL/TiB
   {
     title: 'avg_block_count',
@@ -260,7 +332,12 @@ export const meta_list = [
     title: 'burnt',
     dataIndex:'burnt',
 
-    render: (v: number | string) => formatNumber(formatFil(v,'FIL'), 4) + ' FIL'
+    render: (v: number | string) => {
+      return <span>
+        <span>{formatNumber(formatFil(v,'FIL'), 4) + ' '}</span>
+        <span className='unit'>{'FIL'}</span>
+      </span>
+    }
   }, //销毁量
   {
     title: 'circulating_percent',
@@ -349,13 +426,28 @@ export const meta_list = [
       return (
         <>
           <span>{show}</span>
-          <span className='text-xs ml-1	'>{unit}</span>
+          <span className='text-xs ml-1	unit'>{unit}</span>
         </>
       );
     },
   }, //近24h产出效率，单位FIL/TiB
-  { title: 'quality_power_Cc', dataIndex: 'Cc' ,render: (text:string|number) => unitConversion(text, 2)},
-  {title:'quality_power_Dc',dataIndex:'Dc',render: (text:string|number) => unitConversion(text, 2)},
+  { title: 'quality_power_Cc',
+    dataIndex: 'Cc' ,
+    render: (text:string|number) => {
+      const [textValue, unit] = unitConversion(text, 2).split(' ');
+      return <span>
+        <span>{textValue + ' '}</span>
+        <span className='unit'>{unit}</span>
+      </span>
+    }
+  },
+  {title:'quality_power_Dc',dataIndex:'Dc',render: (text:string|number) => {
+    const [textValue, unit] = unitConversion(text, 2).split(' ');
+    return <span>
+      <span>{textValue + ' '}</span>
+      <span className='unit'>{unit}</span>
+    </span>
+  } },
 
 ]
 

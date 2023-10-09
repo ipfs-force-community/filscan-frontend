@@ -1,10 +1,12 @@
-.wrap {
+@media only screen and (max-width: 1000px) {
+  .wrap {
     :global {
         td {
           padding: 0;
         }
         .ant-table {
           padding: 0px 12px !important;
+          border-radius: unset;
           // border: 1px solid #eeeff1;
           .ant-table-thead {
             th {
@@ -30,4 +32,5 @@
           }
         }
       }
+}
 }

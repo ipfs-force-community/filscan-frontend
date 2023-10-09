@@ -10,8 +10,20 @@
     .top {
       display: flex;
       align-items: center;
-      color: var(--mobile-text-unimportant);
-      column-gap: 5px;
+      column-gap: 4px;
+
+      &>:first-child{
+        width: 21px;
+        height: unset;
+
+        aspect-ratio: 1.0968;
+      }
+      &>:last-child {
+        width: unset;
+        height: 10px;
+
+        aspect-ratio: 5.9;
+      }
     }
     .text {
       color: var(--mobile-text-60);

@@ -151,7 +151,7 @@ function Overview({ className }: { className?: string }) {
           const { name, value ,data} = v;
           return `${v.marker} ${data.value}`;
         }
-        // newOption.series[0].center =['50%', '40%']
+        newOption.series[0].center =['50%', '45%']
       }
       newOption.series[0].data = newData;
     }
@@ -175,7 +175,7 @@ function Overview({ className }: { className?: string }) {
           const { name, value ,data} = v;
           return `${v.marker} ${data.value}`;
         }
-        newOption.series[0].center =['50%', '40%']
+        newOption.series[0].center =['50%', '45%']
       }
       newOption.series[0].data = newData;
     }

@@ -30,6 +30,19 @@
             width: fit-content;
             height: 12px;
           }
+
+          &>:first-child{
+            width: 21px;
+            height: unset;
+
+            aspect-ratio: 1.0968;
+          }
+          &>:last-child {
+            width: unset;
+            height: 10px;
+
+            aspect-ratio: 5.9;
+          }
         }
         & > svg {
           padding: 12px 0px 12px 12px;
@@ -43,6 +56,7 @@
         height: 30px;
         background: var(--mobile-bg-color);
         font-weight: 500;
+        font-size: 12px;
         column-gap: 15px;
 
         padding-inline: 12px;

@@ -1,13 +1,16 @@
 @media screen and (max-width: 1000px){
     .chain-list{
         padding: 12px;
+        .title {
+            margin: unset;
+        }
         :global{
             .card_shadow{
+                overflow:hidden;
                 padding: 0;
+                border-color:transparent;
                 background-color:transparent;
                 box-shadow:none;
-                border-color:transparent;
-                overflow:hidden;
             }
             .h-full{
                 height: auto;
@@ -23,39 +26,40 @@
     }
     .block-list{
         .block-item{
-            background: var(--mobile-bg-color);
-            border-radius: 6px;
-            border: 1px solid var(--mobile-divide-line);
             margin-bottom: 10px;
+            border: 1px solid var(--mobile-divide-line);
+            border-radius: 6px;
+            background: var(--mobile-bg-color);
             &:last-child{
                 margin-bottom: 0;
             }
             .height{
                 display: flex;
                 align-items: center;
-                border-bottom: 1px solid var(--mobile-divide-line);
                 padding: 17px 12px;
+                border-bottom: 1px solid var(--mobile-divide-line);
                 .label{
+                    margin-right: 15px;
+                    color: #666666;
+                    font-weight: 400;
                     font-size: 16px;
                     font-family: PingFangSC-Regular, PingFang SC;
-                    font-weight: 400;
-                    color: #666666;
                     line-height: 15px;
-                    margin-right: 15px;
                 }
                 .link{
+                    margin-right: 8px;
+                    color: var(--mobile-link-color);
+                    font-weight: 500;
                     font-size: 18px;
                     font-family: DINPro-Medium, DINPro;
-                    font-weight: 500;
-                    color: var(--mobile-link-color);
                     line-height: 18px;
-                    margin-right: 8px;
                 }
                 .time{
+                    padding-top: 5px;
+                    color: var(--mobile-des-color);
+                    font-weight: 500;
                     font-size: 12px;
                     font-family: DINPro-Medium, DINPro;
-                    font-weight: 500;
-                    color: var(--mobile-des-color);
                     line-height: 12px;
                 }
             }
@@ -66,10 +70,10 @@
                     align-content: center;
                     justify-content: space-between;
                     padding: 12px;
+                    color: var( --mobile-title-color);
+                    font-weight: 500;
                     font-size: 14px;
                     font-family: DINPro-Medium, DINPro;
-                    font-weight: 500;
-                    color: var( --mobile-title-color);
                     line-height: 14px;
                 }
             }
