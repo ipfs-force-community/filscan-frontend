@@ -20,9 +20,7 @@
           display: block;
           .copy {
             padding-left: 5px;
-            img {
-              display: inline-block;
-            }
+  
           }
         }
         .card_shadow {
@@ -96,12 +94,14 @@
             }
             .copy {
               padding-left: 5px;
+
               svg {
                 font-size: 14px;
+                line-height: 14px;
               }
-              img {
-                display: inline-block;
-              }
+              // img {
+              //   display: inline-block;
+              // }
             }
           }
         }

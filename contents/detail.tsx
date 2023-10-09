@@ -809,7 +809,6 @@ export const message_detail = {
             {text.map((item: string, index: number) => {
               if (!text) return '--';
               return (
-
                 <>
                   <BrowserView>
                     <span className='flex gap-x-2 items-center  mb-2 last:mb-0' key={index}>
@@ -823,7 +822,7 @@ export const message_detail = {
                     </span>
                   </BrowserView>
                   <MobileView>
-                    <span className='copy-row'>
+                    <span className='copy-row mt-1'>
                       <span className='text'>
                         <Link
                           key={index}
