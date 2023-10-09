@@ -2,13 +2,23 @@
   .wrap {
     padding: 0px 12px;
     .staked-top {
+      display: flex;
+      justify-content: space-between;
       margin-top: 10px;
+      border: 1px solid var(--mobile-divide-line);
       border-radius: 6px;
       background: linear-gradient(
         90deg,
         transparent 0%,
         var(--mobile-bg-5) 100%
       );
+
+      svg {
+        margin-right: 10px;
+        min-height: 100%;
+        width: unset;
+        height: 70px;
+      }
 
       .content {
         display: flex;

@@ -1,6 +1,12 @@
 
 @media screen and (max-width: 1000px){
   .account-balance{
+    .title-label {
+      font-size: 16px;
+    }
+    .title-value {
+      font-size: 17px;
+    }
     .chart{
       position: relative;
       width: 100%;

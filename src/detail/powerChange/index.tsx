@@ -15,6 +15,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss'
 import classNames from 'classnames';
 import { max } from 'lodash';
+import useWindow from '@/components/hooks/useWindown';
 export default ({ accountId,type }: { accountId?: string | string[],type:string}) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
@@ -22,6 +23,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const [unit,setUnit] = useState('TiB')
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
@@ -40,34 +42,6 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         containLabel: true,
       },
       yAxis: [
-        // {
-        //   type: 'value',
-        //   position: 'left',
-        //   scale: true,
-        //   nameTextStyle: {
-        //     color: color.textStyle,
-        //   },
-        //   axisLabel: {
-        //     formatter: '{value} TiB',
-        //     textStyle: {
-        //       //  fontSize: this.fontSize,
-        //       color: color.labelColor,
-        //     },
-        //   },
-        //   axisLine: {
-        //     show: ,
-        //   },
-        //   axisTick: {
-        //     show: false,
-        //   },
-        //   splitLine: {
-        //     show: false,
-        //     lineStyle: {
-        //       type: 'dashed',
-        //       color: color.splitLine,
-        //     },
-        //   },
-        // },
         {
           type: 'value',
           position: 'left',
@@ -228,11 +202,6 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
     });
   };
 
-  const handleTabChange = (value: string) => {
-    setInterval(value);
-    load(value);
-  };
-
   const newOptions = useMemo(() => {
     const newSeries: any = [];
     (options?.series || []).forEach((seriesItem: any) => {
@@ -240,6 +209,11 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         newSeries.push(seriesItem);
       }
     });
+
+    if (isMobile) {
+      defaultOptions.grid.left = 0
+    }
+
     return {
       ...defaultOptions,
       xAxis: {
@@ -248,7 +222,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
       },
       series: newSeries,
     };
-  }, [options, default_xAxis, noShow, defaultOptions]);
+  }, [options, default_xAxis, noShow, defaultOptions,isMobile]);
 
   const ledRender = ()=>{
     return <span className='flex gap-x-4'>

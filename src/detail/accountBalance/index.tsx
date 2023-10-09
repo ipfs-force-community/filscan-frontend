@@ -16,6 +16,7 @@ import styles from './index.module.scss'
 import { getSvgIcon } from '@/svgsIcon';
 import Tooltip from '@/packages/tooltip';
 import useWindow from '@/components/hooks/useWindown';
+import classNames from 'classnames';
 
 export default ({ data, loading }: { data: any; loading: boolean }) => {
   const { theme, lang } = useFilscanStore();
@@ -139,11 +140,11 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
 
   const renderTotal = ()=>{
     return <div className='flex flex-col gap-x-1'>
-      <span className='flex items-center gap-x-2 text-sm text_des'>
+      <span className={classNames('flex items-center gap-x-2 text-sm text_des',styles['title-label'])}>
         {tr(account_balance.title)}
         <Tooltip context={tr('total_balance_tip')} />
       </span>
-      <span className='font-DINPro-Bold text-xl text_clip'>
+      <span className={classNames('font-DINPro-Bold text-xl text_clip',styles['title-value'])}>
         {loading ? (
           <SkeletonScreen />
         ) : data?.balance ? (

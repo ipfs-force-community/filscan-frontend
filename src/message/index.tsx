@@ -107,19 +107,19 @@ export default ({ cid }: { cid: string | string[] }) => {
             get(data,'consume_list')?.map((n:any,index:number)=>{
               return <div className={styles.card} key={`card-${index}`}>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('from_ath')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('from_ath')}：</div>
                   <div className={styles['card-item-value']}> {get_account_type(n['from'])}</div>
                 </div>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('to_ath')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('to_ath')}：</div>
                   <div className={styles['card-item-value']}> {get_account_type(n['to'])}</div>
                 </div>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('value')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('value')}：</div>
                   <div className={styles['card-item-value']}> {formatFilNum(n['value'], false, false, 4) || '--'}</div>
                 </div>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('consume_type')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('consume_type')}：</div>
                   <div className={styles['card-item-value']}> {tr(n['consume_type'])}</div>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   return (
     <div className={classNames(styles.message,'main_contain')}>
-      <div className='flex items-center my-2.5'>
+      <div className={classNames('flex items-center my-2.5',styles['title-wrap'])}>
         <span className={classNames('font-DINPro-Bold font-semibold text-lg',styles['top-title'])}>
           {tr(message_detail?.title || '')}
         </span>

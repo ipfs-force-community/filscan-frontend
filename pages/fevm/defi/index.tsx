@@ -8,6 +8,8 @@ import { BrowserView, MobileView } from "@/components/device-detect";
 import classNames from "classnames";
 import styles from './index.module.scss'
 import Skeleton from "@/packages/skeleton";
+import DefiLogo from '@/assets/images/defiLogo.svg'
+import Image from "next/image";
 export default () => {
   const { data: defiData, loading } = useAxiosData(apiUrl.fevm_defiSummary);
   const { tr } = Translation({ ns: 'fevm' });
@@ -24,6 +26,7 @@ export default () => {
               <div className={styles.value}>{get$Number(data)}</div>
               <div className={styles.title}>{tr(value.title)}</div>
             </div>
+            <DefiLogo />
           </div>
         })}
       </div>

@@ -14,7 +14,6 @@ import Copy from '@/components/copy';
 import { getSvgIcon } from '@/svgsIcon';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import CopySvgMobile from '@/assets/images/icon-copy.svg';
-import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import DropDown from '@/packages/customDrop';
 import ShowText from '@/packages/showText';
@@ -233,20 +232,6 @@ export const account_detail = {
       type: ["account_basic"],
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
-    // {
-    //   title: 'account_address',
-    //   dataIndex: 'account_address',
-    //   type: ["account_basic"],
-    //   render: (text: string) => {
-    //     if(!text) return '--'
-    //     return <span className="flex items-baseline gap-x-2">
-    //       <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
-    //       <Copy text={text} />
-    //     </span>
-    //   }
-
-    // },
-
     {
       title: 'owner_address',
       dataIndex: 'owner_address',
@@ -810,7 +795,6 @@ export const message_detail = {
             {text.map((item: string, index: number) => {
               if (!text) return '--';
               return (
-
                 <>
                   <BrowserView>
                     <span className='flex gap-x-2 items-center  mb-2 last:mb-0' key={index}>
@@ -824,7 +808,7 @@ export const message_detail = {
                     </span>
                   </BrowserView>
                   <MobileView>
-                    <span className='copy-row'>
+                    <span className='copy-row mt-1'>
                       <span className='text'>
                         <Link
                           key={index}

@@ -208,7 +208,6 @@ export default () => {
     <div className={classNames(styles.address,'main_contain')}>
       <div className={classNames(styles['address-row'],'mb-2.5 ml-2.5 DINPro-Medium font-medium text-lg flex items-center')}>
         <span className={styles.label}>{tr('account_title')}:</span>
-
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{address}</span>
@@ -224,7 +223,7 @@ export default () => {
           {typeof address === 'string' && domains?.domains && domains?.domains[address] && <Link className='ml-2' href={`/domain/${domains?.domains[address]}?provider=${domains.provider}`}>({ domains?.domains[address]})</Link> }
         </BrowserView>
       </div>
-      <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>
+      <div className={classNames('card_shadow border border_color p-7 rounded-xl flex items-center',styles.content)}>
         <BrowserView>
           <Content contents={contentList} ns={'detail'} columns={2} data={{...data,tokenList}} />
         </BrowserView>

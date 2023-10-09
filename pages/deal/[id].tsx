@@ -98,13 +98,13 @@ export default () => {
             <Cloud width={14} height={14} />
             { data?.piece_size && unitConversion( data.piece_size)}
           </span>
-          <span>
+          <span className={classNames(styles.time)}>
             {formatDateTime(data?.service_start_time)}
             { tr(deal_list.content.time)}
             { formatDateTime(data?.end_time)}
           </span>
           <span>
-            {tr(deal_list.content?.cash)}:
+            <span className={styles.cash}>{tr(deal_list.content?.cash)}:</span>
             <span className="text_color font-DINPro-Medium">
               { data?.storage_price_per_epoch&&formatFilNum(data?.storage_price_per_epoch)}
             </span>
