@@ -849,9 +849,29 @@ export const message_detail = {
       borderTop: true,
       render: (text: any) => text,
     },
+
     {
       dataIndex: 'params_detail',
       title: 'params',
+      render: (text: string, record?: any) => {
+        const showValue = text || record?.params;
+        if (!showValue) return null;
+        if (typeof showValue === 'string') {
+          return <span className="break-words">
+            { JSON.stringify(showValue, undefined, 2)}
+          </span>}
+        return (
+          <div className='code'>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 1)}</pre>
+            {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
+          </div>
+        );
+      },
+    },
+    {
+      dataIndex: 'err',
+      title: 'err_message',
+      elasticity: true,
       render: (text: string, record?: any) => {
         const showValue = text || record?.params;
         if (!showValue) return null;

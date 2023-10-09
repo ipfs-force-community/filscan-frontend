@@ -144,6 +144,7 @@ const detail = {
   Transfer: '송금',
   Burn: '취합 비용 폐기',
   exit_code: '상태',
+  err_message:'에러 메시지',
 
   //内部交易
   amount: '액수',

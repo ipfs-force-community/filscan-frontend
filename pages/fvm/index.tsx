@@ -123,7 +123,7 @@ export default () => {
                               window.open(item.twitter);
                             }
                           }}
-                          className={classNames('border border_color rounded-[5px] p-[7px] box-border cursor-pointer  hover:bg-primary',styles.twitter)}
+                          className={classNames('border_color rounded-[5px] p-[7px] box-border cursor-pointer  hover:bg-primary',styles.twitter)}
                         >
                           <TwitterIcon/>
                         </span>
@@ -135,7 +135,7 @@ export default () => {
                               window.open(item.main_site);
                             }
                           }}
-                          className={classNames('border border_color rounded-[5px] p-[7px] cursor-pointer hover:bg-primary',styles.network)}
+                          className={classNames('border_color rounded-[5px] p-[7px] cursor-pointer hover:bg-primary',styles.network)}
                         >
                           <NetworkIcon/>
                         </span>
