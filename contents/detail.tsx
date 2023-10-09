@@ -232,20 +232,6 @@ export const account_detail = {
       type: ["account_basic"],
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
-    // {
-    //   title: 'account_address',
-    //   dataIndex: 'account_address',
-    //   type: ["account_basic"],
-    //   render: (text: string) => {
-    //     if(!text) return '--'
-    //     return <span className="flex items-baseline gap-x-2">
-    //       <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
-    //       <Copy text={text} />
-    //     </span>
-    //   }
-
-    // },
-
     {
       title: 'owner_address',
       dataIndex: 'owner_address',

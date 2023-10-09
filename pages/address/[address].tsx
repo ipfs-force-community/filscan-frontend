@@ -208,7 +208,6 @@ export default () => {
     <div className={classNames(styles.address,'main_contain')}>
       <div className={classNames(styles['address-row'],'mb-2.5 ml-2.5 DINPro-Medium font-medium text-lg flex items-center')}>
         <span className={styles.label}>{tr('account_title')}:</span>
-
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{address}</span>

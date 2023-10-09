@@ -352,7 +352,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
             onClick={() => {
               account_link(value);
             }}>
-            {value}
+            {isIndent(value,unit)}
           </span>
           <Copy text={value} icon={<CopySvgMobile/>} className='copy'/>
         </span>
