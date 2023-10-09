@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import NoData from '../noData';
+import Loading from '@/components/loading';
 
 interface Props extends TableProps<any> {
   data: Array<any>;
@@ -82,7 +83,11 @@ export default (props: Props) => {
         rowClassName={'custom_table_row'}
         rowKey={new Date().getTime()}
         onChange={onChange}
-        loading={loading}
+        // loading={loading}
+        loading={{
+          spinning:loading,
+          indicator:<Loading width={ 160} height={90 } />
+        }}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
         pagination={

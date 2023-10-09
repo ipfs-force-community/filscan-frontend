@@ -1,6 +1,6 @@
 
 const mainUrl = process.env.APP_BASE_URL;
-//const testUrl = 'http://192.168.19.80:17000/api/v1'
+// const testUrl = 'http://192.168.19.80:17000/api/v1'
 const proUrl = process.env.APP_BASE_URL_PRO || 'http://192.168.1.177:27000/pro/v1';
 export const fvmUrl = process.env.FVM_URL;
 
@@ -45,7 +45,8 @@ export const heightDetail = mainUrl + '/TipsetDetail';
 export const EvmContractSummary = mainUrl + '/EvmContractSummary';
 export const EvmTxsHistory = mainUrl + '/EvmTxsHistory'
 export const EvmGasTrend = mainUrl + '/EvmGasTrend'
-export const ContractUsersTrend =mainUrl +'/ContractUsersTrend'
+export const ContractUsersTrend = mainUrl + '/ContractUsersTrend'
+export const ContractCntTrend = mainUrl + '/ContractCntTrend'
 export const FilPrice= mainUrl+'/FilPrice'
 export const FinalHeight = mainUrl + '/FinalHeight'
 export const DCTrend = mainUrl + '/DCTrend'

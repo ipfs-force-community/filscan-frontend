@@ -86,8 +86,9 @@ const statistic = {
   dc_trend: 'DC',
   cc_trend: 'CC',
   networks_overview: '全网指标',
+  contract_con:'合约部署走势',
   contract_gas: '合约Gas消耗',
-  contract_addr:'合约交易地址'
+  contract_addr:'合约交易地址',
 }
 
 export default statistic

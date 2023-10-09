@@ -146,6 +146,8 @@ const detail = {
   Transfer: 'Transfer',
   Burn: 'Burn',
   exit_code: 'Status',
+  err_message:'Error Message',
+
   //内部交易
   amount:'Value',
   method: 'Method',

@@ -19,6 +19,7 @@ import styles from './index.module.scss'
 import ContractTrend from "@/src/statistics/ContractTrend";
 import ContractGas from "@/src/statistics/contractGas";
 import ContractAddr from "@/src/statistics/contractAddr";
+import ContractCon from "@/src/statistics/contractCon";
 export default () => {
   const { tr } = Translation({ ns: 'static' });
   const { hash } = useHash()
@@ -73,6 +74,7 @@ export default () => {
           <Meta />}
         { hash === 'fevm'&&
           <>
+            <ContractCon />
             <ContractAddr />
             <ContractTrend />
             <ContractGas />

@@ -1,16 +1,17 @@
 .wrap {
   .twitter,
   .network {
+    border-width: 0.5px;
     svg {
       width: 14px;
       height:14px;
-
       fill:var(--font-color);
     }
   }
 
   .twitter:hover,.network:hover {
     background: var(--primary);
+    color: #ffffff;
     svg {
       fill: var(--activeColor);
     }
@@ -44,7 +45,7 @@
         padding: 8px;
         width: unset;
         border-radius: 6px;
-
+        border-width: 0.5px;
         .right {
           img {
             width: 26px;

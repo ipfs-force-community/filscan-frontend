@@ -149,6 +149,7 @@ const detail = {
   // Transfer: '转账',
   // Burn: '销毁聚合费用',
   exit_code: '状态',
+  err_message:'错误信息',
 
   //内部交易
   amount:'价值',
