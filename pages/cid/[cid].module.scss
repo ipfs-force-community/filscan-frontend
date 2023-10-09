@@ -3,33 +3,15 @@
         padding: 12px;
         :global{
             .des{
+                color: var(--mobile-title-color);
+                word-break: break-all;
+                font-weight: 500;
                 font-size: 15px;
                 font-family: DINPro-Medium, DINPro;
-                font-weight: 500;
-                color: var(--mobile-title-color);
                 line-height: 14px;
-                word-break: break-all;
             }
             .ant-pagination{
                 justify-content: flex-end;
-            }
-
-
-            .copy-row {
-                display: inline-block;
-                align-items: center;
-                .text {
-                    color: var(--mobile-link-color);
-                    word-break: break-all;
-                }
-                .copy {
-                    display: inline-block;
-                    align-items: center;
-                    padding-left: 5px;
-                    img {
-                        display: inline-block;
-                    }
-                }
             }
         }
     }
