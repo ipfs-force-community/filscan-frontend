@@ -14,7 +14,6 @@ import Copy from '@/components/copy';
 import { getSvgIcon } from '@/svgsIcon';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import CopySvgMobile from '@/assets/images/icon-copy.svg';
-import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import DropDown from '@/packages/customDrop';
 import ShowText from '@/packages/showText';

@@ -1,6 +1,9 @@
 @media screen and (max-width: 1000px) {
   .miner {
     padding: 12px;
+    .title {
+      margin: unset;
+    }
     .column {
       display: flex;
       flex-direction: column;
