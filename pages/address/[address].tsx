@@ -224,7 +224,7 @@ export default () => {
           {typeof address === 'string' && domains?.domains && domains?.domains[address] && <Link className='ml-2' href={`/domain/${domains?.domains[address]}?provider=${domains.provider}`}>({ domains?.domains[address]})</Link> }
         </BrowserView>
       </div>
-      <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>
+      <div className={classNames('card_shadow border border_color p-7 rounded-xl flex items-center',styles.content)}>
         <BrowserView>
           <Content contents={contentList} ns={'detail'} columns={2} data={{...data,tokenList}} />
         </BrowserView>

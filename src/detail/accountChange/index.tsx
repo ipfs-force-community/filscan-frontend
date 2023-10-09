@@ -115,7 +115,7 @@ export default ({
     if (accountId) {
       load();
     }
-  }, [accountId, interval]);
+  }, [accountId, interval,isMobile]);
 
   const load = async () => {
     const result: any = await fetchData(apiUrl.account_change, {
@@ -147,7 +147,7 @@ export default ({
           ? formatDateTime(block_time, 'HH:mm')
           : formatDateTime(block_time, 'MM-DD HH:mm');
 
-      if (isMobile) {
+      if (isMobile && interval !== '24h') {
         showTime = formatDateTime(block_time, 'MM-DD');
       }
       dateList.push(showTime);
@@ -239,6 +239,14 @@ export default ({
         newSeries.push(seriesItem);
       }
     });
+    if (isMobile) {
+      (defaultOptions as any).legend = {
+        show:false
+      };
+      (defaultOptions as any).grid.left = 0;
+      (defaultOptions as any).grid.right = '10px';
+      (default_xAxis as any).axisLabel.padding = [0, 10, 0, 0];
+    }
     return {
       ...defaultOptions,
       xAxis: {
@@ -247,7 +255,7 @@ export default ({
       },
       series: newSeries,
     };
-  }, [options, default_xAxis, noShow, defaultOptions]);
+  }, [options, default_xAxis, noShow, defaultOptions,isMobile]);
 
   const ledRender = ()=>{
     return <span className='flex gap-x-4 mr-2.5'>
@@ -281,21 +289,21 @@ export default ({
           <span className='text-lg font-semibold mr-5 name-height mx-2.5'>
             {tr(account_change.title)}
           </span>
-          {
-            <BrowserView>
+          <BrowserView>
+            {ledRender()}
+          </BrowserView>
+          <MobileView>
+            <div className="tips">
               {ledRender()}
-            </BrowserView>
-          }
+            </div>
+          </MobileView>
         </div>
       )}
 
       <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
-        <MobileView>
-          <div className="tips">
-            {ledRender()}
-          </div>
-        </MobileView>
-        <div className='w-full h-[348px]'><Echarts options={newOptions}/></div>
+        <div className='w-full h-[348px]'>
+          <Echarts options={newOptions}/>
+        </div>
       </div>
 
     </div>
