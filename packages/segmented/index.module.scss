@@ -9,4 +9,7 @@
       flex-shrink: 0;
     }
   }
+  .segmented::-webkit-scrollbar {
+    display: none;
+  }
 }
