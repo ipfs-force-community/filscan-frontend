@@ -2,8 +2,9 @@ import { BrowserView, MobileView } from "@/components/device-detect";
 import { Translation } from "@/components/hooks/Translation";
 import { account_detail, owner_detail_overview } from "@/contents/detail"
 import Content from "@/packages/content"
+import classNames from "classnames";
 import { useMemo } from "react";
-
+import styles from './index.module.scss'
 export default ({ data,type }: { data: any,type:string }) => {
   const { tr } = Translation({ ns: 'detail' });
 
@@ -14,7 +15,7 @@ export default ({ data,type }: { data: any,type:string }) => {
     return account_detail.list(tr)
   },[type])
 
-  return <div className="mt-5">
+  return <div className={classNames("mt-5",styles.wrap)}>
     <div className=' mb-2 h-[32px] text-lg font-semibold mr-5 name-height mx-2.5'>
       {tr(type=== 'owner'?'owner_title':'account_overview')}
     </div>

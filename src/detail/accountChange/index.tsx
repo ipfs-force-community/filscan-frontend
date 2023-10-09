@@ -258,7 +258,7 @@ export default ({
   }, [options, default_xAxis, noShow, defaultOptions,isMobile]);
 
   const ledRender = ()=>{
-    return <span className='flex gap-x-4 mr-2.5'>
+    return options?.legendData?.length >1 ? <span className='flex gap-x-4 mr-2.5'>
       {options?.legendData?.map((v: any) => {
         return (
           <span
@@ -278,7 +278,7 @@ export default ({
           </span>
         );
       })}
-    </span>
+    </span> : <></>
   }
   return (
     <div className='flex-1'>
@@ -292,15 +292,15 @@ export default ({
           <BrowserView>
             {ledRender()}
           </BrowserView>
-          <MobileView>
-            <div className="tips">
-              {ledRender()}
-            </div>
-          </MobileView>
         </div>
       )}
 
       <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
+        <MobileView>
+          <div className="tips">
+            {ledRender()}
+          </div>
+        </MobileView>
         <div className='w-full h-[348px]'>
           <Echarts options={newOptions}/>
         </div>

@@ -1,13 +1,16 @@
 @media screen and (max-width: 1000px){
     .transfer-list{
         padding: 12px;
+        .table {
+            margin-top: 10px;
+        }
         :global{
             .card_shadow{
+                overflow:hidden;
                 padding: 0;
+                border-color:transparent;
                 background-color:transparent;
                 box-shadow:none;
-                border-color:transparent;
-                overflow:hidden;
             }
             .h-full{
                 height: auto;
