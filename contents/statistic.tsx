@@ -169,6 +169,18 @@ export const contract_addr = {
   ],
 };
 
+//合约部署走势
+export const contract_con = {
+  list: [
+    {
+      title: 'contract_counts',
+      dataIndex: 'contract_counts',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ],
+};
+
 //合约gas 走势
 export const contract_gas = {
   list: [

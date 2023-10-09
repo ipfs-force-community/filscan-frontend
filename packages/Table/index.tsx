@@ -83,11 +83,11 @@ export default (props: Props) => {
         rowClassName={'custom_table_row'}
         rowKey={new Date().getTime()}
         onChange={onChange}
-        loading={loading}
-        // loading={{
-        //   spinning:loading,
-        //   indicator:<Loading />
-        // }}
+        // loading={loading}
+        loading={{
+          spinning:loading,
+          indicator:<Loading width={ 160} height={90 } />
+        }}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
         pagination={

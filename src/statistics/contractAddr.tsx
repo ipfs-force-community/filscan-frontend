@@ -144,7 +144,6 @@ export default (props: Props) => {
       });
     });
 
-    console.log('---3',seriesObj)
     contract_addr.list.forEach((item: any) => {
       seriesData.push({
         type: item.type,
