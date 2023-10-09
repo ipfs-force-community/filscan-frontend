@@ -4,7 +4,10 @@
 
         .title-wrap {
             display: flex;
+            align-items: flex-start;
             flex-direction: column;
+
+            margin-inline: unset;
 
             .select {
                 margin-top: 10px;
