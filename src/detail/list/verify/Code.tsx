@@ -1,11 +1,13 @@
 import Copy from "@/components/copy";
+import { BrowserView } from "@/components/device-detect";
 import { Translation } from "@/components/hooks/Translation";
 import { contract_detail } from "@/contents/contract";
 import Select from "@/packages/select";
 import Selects from "@/packages/selects";
 import { getSvgIcon } from "@/svgsIcon";
+import classNames from "classnames";
 import dynamic from "next/dynamic";
-
+import styles from './Code.module.scss'
 const Editor = dynamic(() => import('@/components/ace'), { ssr: false });
 
 export default ({ data = {},actorId }: {data:Record<string,any>,actorId?:string}) => {
@@ -19,7 +21,7 @@ export default ({ data = {},actorId }: {data:Record<string,any>,actorId?:string}
     }
   }
 
-  return <div className="mt-5">
+  return <div className={classNames("mt-5")}>
     <span className="flex items-center gap-x-1">
       { getSvgIcon('successIcon')}
       {tr('verify_contract')}
@@ -34,44 +36,46 @@ export default ({ data = {},actorId }: {data:Record<string,any>,actorId?:string}
         </li>
       })}
     </ul>
-    <div className="my-5">
-      <div className="mb-5">
-        <span className="text-sm font-medium">{`${tr('source_code')} (Solidity)`} </span>
-      </div>
-      {source_file?.map((item:any,index:number) => {
-        return <div key={ index}>
-          <div className="flex justify-between items-center my-2.5">
-            <span>
-              {item?.file_name || ''}
-            </span>
-            <span className="w-7 h-7 flex items-center justify-center border border_color rounded-[5px]">
-              <Copy text={item.source_code} className="text_color"/>
-            </span>
-          </div>
-          <Editor value={item.source_code || {}} otherProps={{readOnly:true}} />
+    <BrowserView>
+      <div className="my-5">
+        <div className="mb-5">
+          <span className="text-sm font-medium">{`${tr('source_code')} (Solidity)`} </span>
         </div>
+        {source_file?.map((item:any,index:number) => {
+          return <div key={ index}>
+            <div className="flex justify-between items-center my-2.5">
+              <span>
+                {item?.file_name || ''}
+              </span>
+              <span className="w-7 h-7 flex items-center justify-center border border_color rounded-[5px]">
+                <Copy text={item.source_code} className="text_color"/>
+              </span>
+            </div>
+            <Editor value={item.source_code || {}} otherProps={{readOnly:true}} />
+          </div>
 
-      })}
+        })}
 
-    </div>
-    <div className="my-5">
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-medium">{`${tr('contract_abi')}`} </span>
-        <Selects
-          placeholder={tr(contract_detail.abiOptions.placeholder)}
-          options={contract_detail.abiOptions.list}
-          onChange={handleAbiChange} />
       </div>
-      <div className="h-[300px] p-5 overflow-auto border border_color rounded-[5px] break-words">{ compiled_file?.ABI||''}</div>
-    </div>
-    <div className="my-5">
-      <div className="flex justify-between items-center mb-3">
-        <span className="text-sm font-medium">{`${tr('source_code_create')}`} </span>
-        <span className="w-7 h-7 flex items-center justify-center border border_color rounded-[5px]">
-          <Copy text={compiled_file?.byte_code} className="text_color"/>
-        </span>
+      <div className="my-5">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm font-medium">{`${tr('contract_abi')}`} </span>
+          <Selects
+            placeholder={tr(contract_detail.abiOptions.placeholder)}
+            options={contract_detail.abiOptions.list}
+            onChange={handleAbiChange} />
+        </div>
+        <div className="h-[300px] p-5 overflow-auto border border_color rounded-[5px] break-words">{ compiled_file?.ABI||''}</div>
       </div>
-      <div className="h-[300px] p-5 overflow-auto border border_color rounded-[5px] break-words">{ compiled_file?.byte_code||''}</div>
-    </div>
+      <div className="my-5">
+        <div className="flex justify-between items-center mb-3">
+          <span className="text-sm font-medium">{`${tr('source_code_create')}`} </span>
+          <span className="w-7 h-7 flex items-center justify-center border border_color rounded-[5px]">
+            <Copy text={compiled_file?.byte_code} className="text_color"/>
+          </span>
+        </div>
+        <div className="h-[300px] p-5 overflow-auto border border_color rounded-[5px] break-words">{ compiled_file?.byte_code||''}</div>
+      </div>
+    </BrowserView>
   </div>
 }
