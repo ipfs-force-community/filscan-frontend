@@ -57,7 +57,7 @@ export default ({
 
   return (
     <div className={classNames(styles.overview,'w-full')}>
-      <div className='w-full flex items-center mt-7 mb-5 ml-2.5'>
+      <div className={classNames('w-full flex items-center mt-7 mb-5 ml-2.5',styles.title)}>
         <span className='text-lg font-semibold mr-5'>{tr(overView.title)}</span>
         <Segmented
           data={overView.tabList}

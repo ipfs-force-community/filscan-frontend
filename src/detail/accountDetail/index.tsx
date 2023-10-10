@@ -61,10 +61,10 @@ export default ({ data,type }: { data: any,type:string }) => {
   },[type])
 
   return <div className={classNames("mt-5",styles.wrap)}>
-    <div className=' mb-2 h-[32px] text-lg font-semibold mr-5 name-height mx-2.5'>
+    <div className={classNames('mb-2 h-[32px] text-lg font-semibold mr-5 name-height mx-2.5',styles.title)}>
       {tr(type=== 'owner'?'owner_title':'account_overview')}
     </div>
-    <div className="card_shadow w-full border rounded-xl p-2.5 pt-5 border_color">
+    <div className={classNames("card_shadow w-full border rounded-xl p-2.5 pt-5 border_color",styles['content'])}>
       <MobileView>
         <Content contents={contents} ns={"detail"} columns={1} data={data} />
       </MobileView>

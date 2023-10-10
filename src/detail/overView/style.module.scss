@@ -1,6 +1,7 @@
 @media screen and (min-width: 1000px){
     .list{
       display: grid;
+
       grid-template-columns: (25% 30% 30% 15%);
     }
   
@@ -12,15 +13,19 @@
         justify-content: space-between;
       }
     }
+    .title {
+      margin-block: 20px;
+    }
     .list{
       flex-direction: column;
       flex-wrap: nowrap;
       height: auto;
+      border-radius: 6px;
       .list-row{
-        width: 100% !important;
         display: flex;
-        justify-content: space-between !important;
         align-items: center;
+        justify-content: space-between !important;
+        width: 100% !important;
       }
     }
   }

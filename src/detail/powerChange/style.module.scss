@@ -1,10 +1,17 @@
-@media screen and (max-width: 1000px){
-  .power-change{
+@media screen and (max-width: 1000px) {
+
+  .title {
+    margin-inline: unset;
+  }
+  .chart {
+    border-radius: 6px;
+  }
+  .power-change {
     padding: 10px 0;
-    
-    .between{
-      width: 100%;
+
+    .between {
       justify-content: space-between;
+      width: 100%;
     }
   }
 }

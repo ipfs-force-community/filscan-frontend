@@ -95,7 +95,7 @@ export default () => {
           { miner&& typeof miner ==='string' && <Copy text={miner} />}
         </span>
       </div>
-      <div className='flex w-full card_shadow rounded-xl !overflow-hidden'>
+      <div className={classNames('flex w-full card_shadow rounded-xl !overflow-hidden',styles.balance)}>
         <AccountBalance
           data={data?.account_indicator || {}}
           loading={loadingBalance}
