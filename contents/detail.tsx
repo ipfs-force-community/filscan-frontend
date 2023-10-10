@@ -163,14 +163,14 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'win_count',
       title_tip: 'win_count_tip',
-      render: (text: any) =>text? String(text):'--',
+      render: (text: any) =>String(text) === '0' || text ? String(text) : '--'
     },
     {
       title: 'block_count',
       width: '25%',
       dataIndex: 'block_count_increase',
       // title_tip: 'block_count_tip',
-      render: (text: any) => String(text) || '--',
+      render: (text: any) =>String(text) === '0' || text ? String(text) : '--'
     },
     {
       title: 'block_rewards',
@@ -748,7 +748,22 @@ export const message_detail = {
 
       render: (text: any) => text,
     },
-
+    {
+      dataIndex: 'replaced',
+      title: 'replaced',
+      render: (text: any) => String(text) === 'true' ? 'True':'False'
+    },
+    {
+      dataIndex: 'base_cid',
+      title: 'base_cid',
+      elasticity: true,
+      render: (text: any) => {
+        if (String(text) === 'true') {
+          return text;
+        }
+        return null
+      }
+    },
     {
       borderTop: true,
       dataIndex: 'all_gas_fee',
@@ -758,12 +773,10 @@ export const message_detail = {
     {
       dataIndex: 'base_fee',
       title: 'base_fee',
-
       render: (text: string) => {
         return formatFilNum(text, false, false, 4);
       },
     },
-
     {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',

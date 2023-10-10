@@ -94,6 +94,7 @@ export default ({ cid }: { cid: string | string[] }) => {
               contents={message_detail.trans}
               data={{
                 ...data,
+                base_cid:cid,
                 message_ERC20Trans: TransferData,
                 nftTrans: TransferNFTData,
                 swap_info:swap

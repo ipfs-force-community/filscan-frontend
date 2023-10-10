@@ -144,7 +144,9 @@ const detail = {
   Transfer: '송금',
   Burn: '취합 비용 폐기',
   exit_code: '상태',
-  err_message:'에러 메시지',
+  err_message: '에러 메시지',
+  replaced: 'CID를 덮어썼습니다',
+  base_cid:'재정의된 CID',
 
   //内部交易
   amount: '액수',
@@ -201,7 +203,6 @@ const detail = {
   erc20_transfer_total: '총 {{value}}개 송금',
 
   power_change: 'Power Change',
-  owned_active_miners: 'Active Miners',
 
   //height
   blcok_time: '블록 시간',
