@@ -15,6 +15,10 @@
     .trans,
     .detail {
       margin-bottom: 18px;
+
+      .content-wrap {
+        border-radius: 6px;
+      }
       :global {
         .link-row {
           display: block;

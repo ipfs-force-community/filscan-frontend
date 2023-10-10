@@ -88,7 +88,7 @@ export default ({ cid }: { cid: string | string[] }) => {
       return <>
         <div className={classNames(styles.detail,'flex gap-y-5 flex-col mb-5')}>
           <div
-            className='card_shadow border border_color rounded-xl p-5'>
+            className={classNames('card_shadow border border_color rounded-xl p-5',styles['content-wrap'])}>
             <Content
               ns='detail'
               contents={message_detail.trans}
