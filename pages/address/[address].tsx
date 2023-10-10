@@ -15,7 +15,6 @@ import styles from './index.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import CopySvgMobile from '@/assets/images/icon-copy.svg';
-import { useHash } from '@/components/hooks/useHash';
 import { formatNumber, get$Number } from '@/utils';
 import Image from '@/packages/image'
 import Link from 'next/link';
@@ -31,7 +30,7 @@ export default () => {
   const [tokenList, setTokenList] = useState<Array<any>>([]);
   const [verifyData, setVerifyData] = useState<any>({})
   const [accountType, setAccountType] = useState('');
-  const [interval, setInterval] = useState('24h');
+  const [interval, setInterval] = useState('1m');
   const [methodOptions, setMethodOptions] = useState([]);
   const [transOptions,setTransOptions] = useState([])
   const [actorId,setActorId] = useState('')
@@ -41,7 +40,7 @@ export default () => {
   useEffect(() => {
     setActorId('');
     setMethodOptions([]);
-    setInterval('24h');
+    setInterval('1m');
     setAccountType('');
     if (address) {
       loadMethod();
@@ -242,7 +241,7 @@ export default () => {
             <Segmented
               data={address_detail.account_change.tabsList || []}
               ns='detail'
-              defaultValue='24h'
+              defaultValue='1m'
               isHash={false}
               onChange={(value: string) => {
                 setInterval(value);
@@ -256,7 +255,7 @@ export default () => {
       />
       <List
         tabList={tabsList}
-        defaultActive='message_list'
+        defaultActive='traces_list'
         accountId={address}
         actorId={actorId}
         verifyData={verifyData }

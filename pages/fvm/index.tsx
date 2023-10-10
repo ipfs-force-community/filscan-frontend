@@ -6,7 +6,7 @@ import Image from "next/image";
 import { BrowserView, MobileView } from "@/components/device-detect";
 import classNames from "classnames";
 import styles from "./index.module.scss";
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import useWindow from "@/components/hooks/useWindown";
 import TwitterIcon from '@/assets/images/twitter.svg'
 import NetworkIcon from '@/assets/images/network.svg'
@@ -86,6 +86,9 @@ export default () => {
                   </li>
                 );
               })}
+              <li className="primary_btn mt-20 !w-full cursor-pointer">
+                share
+              </li>
             </ul>
           </BrowserView>
           <div className="flex-1">

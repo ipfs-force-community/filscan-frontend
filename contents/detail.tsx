@@ -232,6 +232,18 @@ export const account_detail = {
       type: ["account_basic"],
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
+
+    {
+      title: 'worker_address',
+      dataIndex: 'worker_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
     {
       title: 'owner_address',
       dataIndex: 'owner_address',
@@ -244,14 +256,19 @@ export const account_detail = {
       }
     },
     {
-      title: 'worker_address',
-      dataIndex: 'worker_address',
-      render: (text: string) => {
-        if(!text) return '--'
-        return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
-          <Copy text={text} />
-        </span>
+      title: 'controllers_address',
+      dataIndex: 'controllers_address',
+      render: (text: any, record: any) => {
+        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
+        return '--'
+        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
+        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
+        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
+        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
+        //       <Copy text={linkItem} />
+        //     </span>
+        //   }):'--'}
+        // </div>
       }
     },
     {
@@ -270,22 +287,6 @@ export const account_detail = {
             <Copy text={text} />
           </span>}
         </div>
-      }
-    },
-    {
-      title: 'controllers_address',
-      dataIndex: 'controllers_address',
-      render: (text: any, record: any) => {
-        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
-        return '--'
-        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
-        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
-        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
-        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
-        //       <Copy text={linkItem} />
-        //     </span>
-        //   }):'--'}
-        // </div>
       }
     },
 
@@ -1252,11 +1253,6 @@ export const power_change = {
 
 export const address_tabs = [
   {
-    title: 'message_list',
-    dataIndex: 'message_list',
-    optionsUrl: 'AllMethodByAccountID',
-  },
-  {
     title: 'traces_list',
     dataIndex: 'traces_list',
     optionsUrl: 'TransferMethodByAccountID',
@@ -1269,6 +1265,12 @@ export const address_tabs = [
     //   { title: 'Receive', value: 'receive', isIndent: true },
     // ],
   },
+  {
+    title: 'message_list',
+    dataIndex: 'message_list',
+    optionsUrl: 'AllMethodByAccountID',
+  },
+
   {
     title: 'erc20_transfer',
     dataIndex:'ercList',

@@ -1,12 +1,7 @@
 import { Menu_Info } from "./type";
 
 const navMenu: Array<Menu_Info | any> = [
-  {
-    key: "fvm",
-    sufIcon: "hot",
-    color: "#F44C30",
-    link: "/fvm",
-  },
+
   // {
   //   key: 'home',
   //   link: '/home'
@@ -80,6 +75,12 @@ const navMenu: Array<Menu_Info | any> = [
       { key: "statistics_charts", link: "/statistics/charts" },
       // { key: "cw", link: "/cw" },
     ],
+  },
+  {
+    key: "fvm",
+    sufIcon: "hot",
+    color: "#F44C30",
+    link: "/fvm",
   },
   {
     key: "develop",
