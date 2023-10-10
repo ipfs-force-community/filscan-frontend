@@ -20,6 +20,20 @@
 
     .chart-wrap {
       border-radius: 6px;
+
+      .legend {
+        overflow-x: auto;
+        margin-bottom: 10px;
+        .value {
+          flex-shrink: 0;
+          color: var(--mobile-des-color);
+          font-size: 10px;
+        }
+
+        svg {
+          max-width: 14px;
+        }
+      }
     }
 
     :global {

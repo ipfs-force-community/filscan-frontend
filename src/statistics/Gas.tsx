@@ -31,16 +31,15 @@ function Gas(props: Props) {
   const { active = '24h', className = '' } = props;
   const [value, setValue] = useState(active);
   const { axiosData } = useAxiosData();
+  const {isMobile} = useWindow()
 
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
-
-  const {isMobile} = useWindow()
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions: any = useMemo(() => {
     let options = {
@@ -50,7 +49,7 @@ function Gas(props: Props) {
         axisLabel: {
           fontFamily: 'DINPro',
           fontSize: 14,
-          color: color.labelColor,
+          color: isMobile ? color.mobileLabelColor : color.labelColor,
           // formatter(v: any) {
           //   return v+'attoFil'
           // },

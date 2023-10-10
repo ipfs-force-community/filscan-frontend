@@ -33,11 +33,12 @@ export default (props: Props) => {
   const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     let options = {
@@ -60,7 +61,7 @@ export default (props: Props) => {
             formatter: '{value} EiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisLine: {
@@ -88,7 +89,7 @@ export default (props: Props) => {
             formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisTick: {
@@ -324,7 +325,7 @@ export default (props: Props) => {
       </BrowserView>
       <MobileView>
         <div className={classNames(`w-full pb-2 card_shadow border border_color rounded-xl`,styles['chart-wrap'])}>
-          <span className='flex gap-x-4 chart-legend'>
+          <span className={classNames('flex gap-x-4 chart-legend',styles.legend)}>
             {options?.legendData?.map((v: any) => {
               return (
                 <span
@@ -335,7 +336,7 @@ export default (props: Props) => {
                   }}
                   style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
                   {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
-                  <span className='text-xs text_des font-normal'>
+                  <span className={classNames('text-xs text_des font-normal',styles.value)}>
                     {tr(v.name)}
                   </span>
                 </span>

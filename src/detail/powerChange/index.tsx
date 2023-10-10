@@ -29,8 +29,8 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -53,7 +53,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
             formatter: `{value} ${unit}`,
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisTick: {
@@ -97,7 +97,8 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         },
       },
     };
-  }, [theme,unit]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,unit,isMobile]);
 
   useEffect(() => {
     if (accountId) {

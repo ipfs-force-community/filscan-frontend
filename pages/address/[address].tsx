@@ -211,7 +211,7 @@ export default () => {
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{address}</span>
-            { address&& typeof address ==='string' && <Copy text={address} icon={<CopySvgMobile/>} className='copy'/>}
+            { address&& typeof address ==='string' && <Copy text={address} icon={<CopySvgMobile/>} className='copy-lg'/>}
           </span>
         </MobileView>
 

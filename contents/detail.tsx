@@ -1032,9 +1032,21 @@ const default_content = [
   {
     title: 'stable_address', dataIndex: 'stable_address', elasticity: true,
     type: ['account_basic'],
-    render: (text: string) => text ? <span className="flex items-center gap-x-2">
-      {text?.length > 30 ? isIndent(text, 10, 10) : text}
-      <Copy text={text} /></span> : text
+    render: (text: string) => {
+
+      return text ? <>
+        <BrowserView>
+          <span className="flex items-center gap-x-2">
+            {text?.length > 30 ? isIndent(text, 10, 10) : text}
+            <Copy text={text} /></span>
+        </BrowserView>
+        <MobileView>
+          <span className="copy-row">
+            <span className='normal-text'>{text?.length > 30 ? isIndent(text, 10, 10) : text}</span>
+            <Copy text={text} icon={<CopySvgMobile/>} className='copy'/></span>
+        </MobileView>
+      </>: text
+    }
   },
   { title: 'Initial Balance', dataIndex: 'initial_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text, },
   { title: 'Locking Balance', dataIndex: 'locked_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text },

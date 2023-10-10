@@ -1,26 +1,5 @@
 @media only screen and (max-width: 1000px)  {
     .wrap {
         margin-top: 10px;
-        :global {
-            .copy-row {
-              display: inline-block;
-              align-items: center;
-              .text {
-                color: var(--mobile-link-color);
-                word-break: break-all;
-              }
-              .normal-text {
-                word-break: break-all;
-              }
-              .copy {
-                display: inline-block;
-                align-items: center;
-                padding-left: 5px;
-                img {
-                  display: inline-block;
-                }
-              }
-            }
-          }
     }
 }

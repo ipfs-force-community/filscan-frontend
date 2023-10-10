@@ -37,8 +37,8 @@ export default (props: Props) => {
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     let options = {
@@ -62,7 +62,7 @@ export default (props: Props) => {
           hideOverlap:true,
           textStyle: {
             //  fontSize: this.fontSize,
-            color: color.labelColor,
+            color: isMobile ? color.mobileLabelColor : color.labelColor,
           },
         },
         axisLine: {
@@ -124,6 +124,7 @@ export default (props: Props) => {
       }
     }
     return options
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme,tr,isMobile]);
 
   useEffect(() => {

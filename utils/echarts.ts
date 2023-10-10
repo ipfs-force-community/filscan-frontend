@@ -22,7 +22,8 @@ const lightStyle = {
   textStyle: "#000000",
   labelColor:'rgba(0,0,0,0.6)',
   itemBorder: "#ffffff",
-  toolbox:'rgba(0,0,0,0.4)'
+  toolbox:'rgba(0,0,0,0.4)',
+  mobileLabelColor:'#B3B3B3',
 }
 const blackStyle = {
   lineStyle: "rgba(255,255,255,0.15)",
@@ -30,7 +31,8 @@ const blackStyle = {
   textStyle: "#ffffff",
   itemBorder: "#ffffff",
   labelColor:'rgba(255,255,255,0.6)',
-  toolbox:'rgba(0,0,0,0.4)'
+  toolbox:'rgba(0,0,0,0.4)',
+  mobileLabelColor:'#B3B3B3',
 }
 
 export const seriesArea= {
@@ -82,12 +84,12 @@ export const seriesChangeArea= {
   },
 }
 
-export const get_xAxis=(theme:string)=>{
+export const get_xAxis=(theme:string,isMobile:boolean)=>{
   const color = getColor(theme);
   return {
     type: 'category',
     axisLabel: {
-      color: color.labelColor,
+      color: isMobile ? color.mobileLabelColor: color.labelColor,
     },
     axisLine: {
       lineStyle: {

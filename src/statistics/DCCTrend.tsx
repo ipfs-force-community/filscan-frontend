@@ -4,13 +4,14 @@ import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
 import { cc_dc_trend, timeList } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { formatDateTime, isMobile, unitConversion } from '@/utils';
+import { formatDateTime, unitConversion } from '@/utils';
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './trend.module.scss'
 import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
 import Segmented from '@/packages/segmented';
+import useWindow from '@/components/hooks/useWindown';
 
 interface Props {
   origin?: string;
@@ -24,14 +25,14 @@ export default (props: Props) => {
   const { axiosData } = useAxiosData()
   const [options, setOptions] = useState<any>({});
   const [interval,setInterval]= useState('24h')
-
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -53,7 +54,7 @@ export default (props: Props) => {
           formatter: '{value} PiB',
           textStyle: {
             //  fontSize: this.fontSize,
-            color: color.labelColor,
+            color: isMobile ? color.mobileLabelColor : color.labelColor,
           },
         },
         axisLine: {
@@ -80,7 +81,7 @@ export default (props: Props) => {
           var obj = {top:80};
           //@ts-ignore
           obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-          return isMobile() ? obj:undefined;
+          return isMobile ? obj:undefined;
         },
         trigger: 'axis',
         backgroundColor: color.toolbox,
@@ -105,7 +106,8 @@ export default (props: Props) => {
         },
       },
     };
-  }, [theme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   useEffect(() => {
     load();
