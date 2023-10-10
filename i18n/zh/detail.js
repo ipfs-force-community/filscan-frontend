@@ -95,6 +95,7 @@ const detail = {
   create_time: '创建时间',
   account_type: '账户类型',
   peer_id: '节点标识',
+  peer_detail:'节点详情',
   account_address:'地址',
   // eslint-disable-next-line no-dupe-keys
   owner_address: 'Owner',
@@ -110,7 +111,9 @@ const detail = {
   //pool_overview_title:'账户',
   //power_change
   power_change: '算力变化',
-  owned_active_miners:'实际工作节点',
+  owned_active_miners: '实际工作节点',
+  miner_owner: '节点存储者',
+  no_area:'未知',
 
   // message
   message_overview_detail: '交易明细',

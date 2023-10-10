@@ -224,6 +224,40 @@ export const miner_overview = {
   ],
 };
 
+export const peerList = [
+  {
+    title: 'ID',
+    dataIndex: 'peer_id',
+    render: (text: any, record: any, tr: any) => {
+      return text?tr(text):'--'
+    }
+  },
+  {
+    title: 'miner_owner',
+    dataIndex: 'account_id',
+    type: ["account_basic"],
+    render: (text: any, record: any, tr: any) => {
+      if (!text) return '--';
+      return <Link href={`/miner/${text}` } className='link_text'>{ text }</Link>
+    }
+  },
+  {
+    title: 'area',
+    dataIndex: 'ip_address',
+    type: ["account_basic"],
+    render:(text:any,record:any,tr:any)=>text?text:tr('no_area')
+  },
+  {
+    title: 'MultiAddresses',
+    dataIndex: 'multi_addrs',
+    type: ["account_basic"],
+    render: (text: any, record: any, tr: any) => {
+      if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={10} />
+      return '--'
+    }
+  },
+]
+
 export const account_detail = {
   list:(tr:any)=> [
     {
@@ -232,7 +266,19 @@ export const account_detail = {
       type: ["account_basic"],
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
-
+    {
+      title: 'peer_id',
+      dataIndex: 'peer_id',
+      render: (text: string,record:any) => {
+        if (!text) return '--'
+        const accountId = record?.account_basic?.account_id;
+        return <span className="flex items-baseline gap-x-2">
+          { accountId ? <Link href={`/peer/${accountId}`} className='link_text' >{isIndent(text,10)}</Link>
+            :<span>{isIndent(text,10)}</span>}
+          <Copy text={text} />
+        </span>
+      }
+    },
     {
       title: 'worker_address',
       dataIndex: 'worker_address',

@@ -104,6 +104,10 @@ const detail = {
   nonce: 'Nonce 값',
   contract_verify: '계약 검증',
   contract_name: '계약 명칭',
+  peer_detail: '노드 세부정보',
+  miner_owner: '노드 세이버',
+  no_area:'Unknown',
+
   //miner
   //pool_overview_title:'账户',
 

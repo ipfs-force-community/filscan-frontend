@@ -94,6 +94,9 @@ const detail = {
   sector_size:'Sector Size',
   sector_status: 'Sector Status',
   contract_verify:'Contract',
+  peer_detail: 'Miner Detail',
+  miner_owner: 'Owner',
+  no_area:'Unknown',
 
   //账户总览
   account_overview:'Account Overview',

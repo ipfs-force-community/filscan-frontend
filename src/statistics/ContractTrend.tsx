@@ -223,7 +223,7 @@ export default (props: Props) => {
                     height={28}
                   /></Link>
               </MobileView>
-              <BrowserView>
+              {/* <BrowserView>
                 <Link href={`/statistics/charts#fevm`}>
                   <GoIcon
                     className='cursor-pointer mr-2.5'
@@ -231,7 +231,7 @@ export default (props: Props) => {
                     height={18}
                   />
                 </Link>
-              </BrowserView>
+              </BrowserView> */}
             </>
 
           )}
