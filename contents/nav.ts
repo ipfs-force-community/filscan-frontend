@@ -1,5 +1,4 @@
 import { Menu_Info } from "./type";
-import Hot from "@/assets/images/hot.svg";
 
 const navMenu: Array<Menu_Info | any> = [
   {
@@ -79,7 +78,7 @@ const navMenu: Array<Menu_Info | any> = [
       },
       { key: "statistics_gas", link: "/statistics/gas" },
       { key: "statistics_charts", link: "/statistics/charts" },
-      { key: "cw", link: "/cw" },
+      // { key: "cw", link: "/cw" },
     ],
   },
   {
