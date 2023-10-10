@@ -62,7 +62,6 @@ function Meta() {
             height={18}
           />
         </BrowserView>
-
       </Link>
       {home_meta.map((item: Item | any, index: number) => {
         const { render, dataIndex, title } = item;
