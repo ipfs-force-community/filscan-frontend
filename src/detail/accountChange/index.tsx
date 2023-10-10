@@ -36,8 +36,8 @@ export default ({
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -69,7 +69,7 @@ export default ({
             color: color.lineStyle,
           },
           textStyle: {
-            color: color.labelColor,
+            color: isMobile ? color.mobileLabelColor : color.labelColor,
           },
           formatter(v: string) {
             return v + ' FIL';
@@ -109,7 +109,8 @@ export default ({
         },
       },
     };
-  }, [theme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   useEffect(() => {
     if (accountId) {

@@ -33,11 +33,12 @@ export default (props: Props) => {
   const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     let options = {
@@ -60,7 +61,7 @@ export default (props: Props) => {
             formatter: '{value} EiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisLine: {
@@ -88,7 +89,7 @@ export default (props: Props) => {
             formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisTick: {
