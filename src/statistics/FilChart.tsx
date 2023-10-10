@@ -194,7 +194,7 @@ function Overview({ className }: { className?: string }) {
     }
   }
 
-  return <div className='flex  flex-col gap-y-5 h-fit'>
+  return <div className={classNames('flex  flex-col gap-y-5 h-fit',styles.wrap)}>
     {fil_overviewList.map((dataItem, index: number) => {
       const legendData = index === 1 ? legendB: legendA;
       return <div key={ dataItem.title} className={`w-full h-full ${className} `}>
