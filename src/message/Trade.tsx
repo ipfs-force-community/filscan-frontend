@@ -4,8 +4,9 @@ import { message_detail } from "@/contents/detail"
 import Table from "@/packages/Table"
 import { useFilscanStore } from "@/store/FilscanStore";
 import useAxiosData from "@/store/useAxiosData";
+import classNames from "classnames";
 import { useEffect, useMemo, useState } from "react"
-
+import styles from './Trade.module.scss'
 export default ({ cid }: {cid?:string | string[]}) => {
   const { tr } = Translation({ ns: 'detail' });
   const { theme, lang } = useFilscanStore();
@@ -29,7 +30,7 @@ export default ({ cid }: {cid?:string | string[]}) => {
     })
   }, [lang])
 
-  return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
+  return <div className={classNames("card_shadow border border_color rounded-xl p-5 min-h-[500px]",styles.wrap)}>
     <Table
       data={data}
       columns={columns}
