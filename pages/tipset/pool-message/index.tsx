@@ -20,9 +20,9 @@ export default () => {
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const { name, p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -65,7 +65,7 @@ export default () => {
   }, [method, current]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
+  //  setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
     const result: any = await axiosData(apiUrl.tipset_pool, {
@@ -75,7 +75,7 @@ export default () => {
         method_name,
       },
     });
-    setLoading(false);
+    // setLoading(false);
     setDataSource({
       data: (result?.messages_pool_list || [])?.map((item: any) => {
         return {

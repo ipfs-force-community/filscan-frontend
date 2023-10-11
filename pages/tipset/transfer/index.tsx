@@ -19,9 +19,9 @@ export default () => {
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const { p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState({
     data: [],
     total: undefined,
@@ -39,7 +39,7 @@ export default () => {
   }, [current]);
 
   const load = async (cur?: number) => {
-    setLoading(true);
+    // setLoading(true);
     const showIndex = cur || current;
     const result: any = await axiosData(apiUrl.tipset_transfer, {
       filters: {
@@ -47,7 +47,7 @@ export default () => {
         limit: pageLimit,
       },
     });
-    setLoading(false);
+    //setLoading(false);
     setDataSource({
       data: result?.large_transfer_list || [],
       total: result?.total_count,
