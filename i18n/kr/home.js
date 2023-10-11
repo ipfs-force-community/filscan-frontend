@@ -3,6 +3,8 @@ const home = {
   minutes: '분',
   hours: '시간',
   day: '일',
+  base_gas: '24시간 기본 수수료 추세',
+
   //meta
   meta_title: '전체 네트워크 데이터 지표',
   mata_show: '펼치기',
