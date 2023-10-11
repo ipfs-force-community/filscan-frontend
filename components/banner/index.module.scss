@@ -3,9 +3,10 @@
     width: 100%;
     height: 350px;
     //background: linear-gradient(126deg, #181A1B 0%, #010101 100%);
-    background-image:url('https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/bannerBg.png') ;
+    //background-image:url('https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/bannerBg.png') ;
+    background-image:url('../../assets/images/bannerBg.png');
     background-size: cover;
-background-repeat: no-repeat;
+    background-repeat: no-repeat;
     &_bg{
         // &_bl{
         // position: absolute;
