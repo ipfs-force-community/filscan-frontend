@@ -28,7 +28,7 @@ export default () => {
         <Gas />
       </div>
       <>
-        <div className='flex flex-col text-lg font-medium gap-y-2.5 my-5'>
+        <div className={classNames('flex flex-col text-lg font-medium gap-y-2.5 my-5',styles.title)}>
           <span>{tr('gas_24')}</span>
         </div>
         <div className={classNames('border rounded-xl p-5 card_shadow border_color flex items-center gas-table')}>
