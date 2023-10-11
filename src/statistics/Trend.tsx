@@ -309,8 +309,6 @@ export default (props: Props) => {
             <BrowserView>
               <GoIcon
                 className='cursor-pointer mr-2.5'
-                width={18}
-                height={18}
               />
             </BrowserView>
 

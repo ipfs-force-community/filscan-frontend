@@ -58,8 +58,8 @@ function Home(props: any) {
                   <Link href={`/statistics/gas/`}>
                     <GoMobileIcon
                       className='cursor-pointer'
-                      width={18}
-                      height={18}
+                      width={22}
+                      height={22}
                     />
                   </Link>
                 </div>

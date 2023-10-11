@@ -148,13 +148,15 @@ function Meta() {
           );
         })}
       </div>
-      <div className={classNames(styles["see-wrap"])}>
-        <Link
-          href={`/statistics/charts#networks`}
-        >
-          <div className={classNames(styles["see-more"])}>{tr("see_more")}</div>
-        </Link>
-      </div>
+      <MobileView>
+        <div className={classNames(styles["see-wrap"])}>
+          <Link
+            href={`/statistics/charts#networks`}
+          >
+            <div className={classNames(styles["see-more"])}>{tr("see_more")}</div>
+          </Link>
+        </div>
+      </MobileView>
     </>
   );
 }
