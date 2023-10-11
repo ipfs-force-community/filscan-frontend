@@ -4,20 +4,32 @@ import { Button, Modal } from 'antd';
 import Image from 'next/image'
 import fvmBg from '@/assets/images/fvmBg.png';
 import fvm from '@/assets/images/fvm.png';
-import logo from '@/assets/images/logo.png';
+import code from '@/assets/images/code.png'
+import style from './index.module.scss'
+import { Translation } from '@/components/hooks/Translation';
 
 function Share({ data,title }: {data:any,title:string}) {
-  const myRef = useRef();
-  const [open, setOpen] = useState(false)
-  const [content, setContent] = useState({})
+  const myRef = useRef<any>();
+  const [open, setOpen] = useState(true)
+  const { tr } = Translation({ ns: 'common' });
 
-  //   const handleScreenshot = () => {
-  //     html2canvas(myRef.current).then((canvas) => {
-  //       // 你可以在这里对 canvas 进行操作，例如将其转换为图片
-  //       const imgData = canvas.toDataURL('image/png');
-  //       console.log(imgData);
-  //     });
-  //   };
+  const [content, setContent] = useState<Record<string,Array<any>>>({})
+
+  const handleScreenshot = () => {
+    html2canvas(myRef.current,{
+      useCORS: true
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      console.log(imgData);
+      const link = document.createElement('a');
+      link.href = imgData;
+      link.download = `filscan-fvm.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  };
+
   useEffect(() => {
     if (title === 'all') {
       const newObj: any = {};
@@ -33,29 +45,66 @@ function Share({ data,title }: {data:any,title:string}) {
     }
   }, [data, title]);
 
-  console.log('----345', data, title,content)
-
   return (
     <>
       <Button className="primary_btn mt-20 !w-full cursor-pointer" onClick={ ()=>setOpen(true)}>Share</Button>
       <Modal
         open={open}
         width={750}
-        className='custom_modal'
+        footer={ null}
+        wrapClassName='noPaddingModal'
         onCancel={() => { setOpen(false) }}>
-        <div className='bg-fvmBg p-8' >
-          <div className='flex justify-between'>
-            <div className='flex items-center'>
-              <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logo.png'} width={60} height={60} alt='logo' />
-              {/* {getSvgIcon('logoText')} */}
-              <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logoText.png'} alt='logo' width={95} height={16}></Image>
+        <div className={style.shareFvmContent} >
+          <div className={style['shareFvmContent-main']} ref={myRef} >
+            <Image className={style['shareFvmContent-bg']} src={ fvmBg} width={ 750} alt='' />
+            <div className={style['shareFvmContent-header'] }>
+              <div className='flex items-center gap-x-2' >
+                <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logo.png'} width={60} height={60} alt='logo' />
+                <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logoText.png'} alt='logo' width={142} height={24}></Image>
+              </div>
+              <Image src={fvm} alt='' width={220} height={192}/>
             </div>
+            <div className={style['shareFvmContent-content']}>
+              {Object.keys(content).map(key => {
+                return <div key={key}>
+                  <div className={style['shareFvmContent-content-title']}>{`${key} (${content[key].length})`}</div>
+                  {content[key] && content[key].length > 0 && <ul className={style['shareFvmContent-content-main']}>
+                    {content[key].map((item,index) => {
+                      return <li key={index} className={style['shareFvmContent-content-item']}>
+                        <Image src={item.logo} alt="" width="36" height="36" className="rounded-full"/>
+                        <div
+                          className={style['shareFvmContent-content-item-name']}
+                        >
+                          <span className="font-medium">{item?.name||''}</span>
+                          <span className={style['shareFvmContent-content-item-name-des']}>
+                            {item?.detail || ""}
+                          </span>
+                        </div>
+                      </li>
+                    }) }
 
-            <Image src={fvm} alt='' width={220} height={192}/>
+                  </ul> }
+
+                </div>
+              })}
+            </div>
+            <div className={style['shareFvmContent-footer']}>
+              <div className={style['shareFvmContent-footer-text']}>
+                <div>
+                  { tr('footer_des1')}
+                </div>
+                <div>
+                  { tr('footer_des2')}
+                </div>
+              </div>
+              <div className={style['shareFvmContent-footer-code']}>
+                <Image src={code} alt='' width={100} />
+
+              </div>
+            </div>
           </div>
-          {/* 这里是你想要转换为图片的内容 */}
+          <div className='primary_btn m-auto cursor-pointer' onClick={handleScreenshot}>保存图片</div>
         </div>
-        {/* <button onClick={handleScreenshot}>生成截图</button> */}
       </Modal></>
   );
 }

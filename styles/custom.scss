@@ -469,6 +469,13 @@ font-display: auto;
     }
 }
 
+.noPaddingModal{
+      .ant-modal-content{
+        padding: 0px !important;
+      }
+}
+
+
 .custom_collapse_gaps{
         border: none;
         background-color: var(--bgColor) !important;
