@@ -314,43 +314,43 @@ export const fil_charts = {
       key: 'FilecoinFoundation',
       name: 'Filecoin基金会',
       value: '5',
-      color: '#477DE5'
+      color: '#4988FD'
     },
     {
       key: 'Contributors',
       name: '协议实验室团队及贡献者',
       value: '4.5',
-      color: '#4FD0A1'
+      color: '#1C6AFD'
     },
     {
       key: 'protocolLab',
       name: '协议实验室',
       value: '10.5',
-      color: '#5D77A3'
+      color: '#E77E8E'
     },
     {
       key: 'FundraisingRemainder',
       name: '募资 – 剩余通证',
       value: '2.5',
-      color: '#E8B61B'
+      color: '#6E69CF'
     },
     {
       key: 'FundraisingSAFT',
       name: '募资 – 未来通证简单协议',
       value: '7.5',
-      color: '#D75B42'
+      color: '#F9D02C'
     },
     {
       key: 'MiningReserve',
       name: '为存储服务提供者预留通证',
       value: '15',
-      color: '#59BAE3'
+      color: '#F6A823'
     },
     {
       key: 'TokenAllocation',
       name: '存储提供者通证分配',
       value: '55',
-      color: '#876AC3'
+      color: '#4ACAB4'
     }
   ],
   content: [

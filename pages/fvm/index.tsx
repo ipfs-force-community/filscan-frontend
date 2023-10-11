@@ -63,7 +63,7 @@ export default () => {
         ></Select> : <></>}
         <BrowserView>
           <h3 className="text-lg font-DINPro-Medium mb-4">
-            Explore FVM on Filscan
+            Explore Filecoin Ecosystem on Filscan
           </h3>
         </BrowserView>
         <div className="flex gap-x-5">

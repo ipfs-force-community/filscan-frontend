@@ -51,6 +51,7 @@ function Share({ data,title }: {data:any,title:string}) {
       <Modal
         open={open}
         width={750}
+        closeIcon={ false }
         footer={ null}
         wrapClassName='noPaddingModal'
         onCancel={() => { setOpen(false) }}>

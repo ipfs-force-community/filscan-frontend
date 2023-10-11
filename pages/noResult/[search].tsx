@@ -24,7 +24,7 @@ export default () => {
   },[theme])
 
   return <div className={`main_contain flex items-center flex-col  justify-center ${style.wrap}  !text-xl`} >
-    <Image src={showImage } width={400} height={400} alt='' />
+    <Image src={showImage } width={300} height={300} alt='' />
     <div className='font-medium'>{tr(no_result.title)}</div>
     <div className='text_des mt-4 text-xs'>
       {tr(no_result.warn_text)}

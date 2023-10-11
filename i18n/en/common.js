@@ -23,7 +23,7 @@ const common = {
   cid: 'Block CID',
   node: 'Node',
   save_pic: 'Save Image',
-  fvm_share:'Share Filscan project',
+  fvm_share:'Share This Page',
 
   //messages
   no_account:'This email is not registered. Please register first.',
