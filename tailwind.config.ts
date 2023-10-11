@@ -58,7 +58,8 @@ const config: Config = {
         bgCopy:'rgba(51, 106, 250, 0.5)',
         secondary: '#00FF00',
         success: '#059b02',
-        tipColor:'#1c1c1c',
+        tipColor: '#1c1c1c',
+        fvmBg:'#020A1A',
         success_bg: 'rgba(64, 162, 145, 0.10)',
         // // 暗色模式颜色配置
         // dark: {

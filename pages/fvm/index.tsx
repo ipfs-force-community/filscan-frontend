@@ -11,6 +11,7 @@ import useWindow from "@/components/hooks/useWindown";
 import TwitterIcon from '@/assets/images/twitter.svg'
 import NetworkIcon from '@/assets/images/network.svg'
 import { useFilscanStore } from "@/store/FilscanStore";
+import Share from '@/src/fvm'
 
 export default () => {
   const {theme} = useFilscanStore()
@@ -86,9 +87,10 @@ export default () => {
                   </li>
                 );
               })}
-              <li className="primary_btn mt-20 !w-full cursor-pointer">
+              <Share data={content} title={ active} />
+              {/* <li className="primary_btn mt-20 !w-full cursor-pointer">
                 share
-              </li>
+              </li> */}
             </ul>
           </BrowserView>
           <div className="flex-1">
