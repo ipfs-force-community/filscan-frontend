@@ -1,11 +1,11 @@
 import { Translation } from "@/components/hooks/Translation"
-import { apiUrl } from "@/contents/apiUrl"
 import { verify_tabs } from "@/contents/contract"
 import useAxiosData from "@/store/useAxiosData"
 import { useEffect, useState } from "react"
 import Code from "./Code"
 import dynamic from "next/dynamic"
-
+import classNames from "classnames"
+import styles from './index.module.scss'
 const Read = dynamic(() => import('./Read'), { ssr: false });
 
 export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => {
@@ -33,8 +33,8 @@ export default ({ actorId,verifyData }: { actorId?: string,verifyData:any }) => 
 
   // }
 
-  return <div >
-    <ul className="flex items-center gap-x-2 des_bg_color rounded-md  w-fit">
+  return <div data-content={tr('pleaseCheckContractWithPC')} className={classNames(styles.wrap)}>
+    <ul className={classNames("flex items-center gap-x-2 des_bg_color rounded-md  w-fit")}>
       {verify_tabs.map(item => {
         return <li
           onClick={ ()=>setActive(item.dataIndex)}

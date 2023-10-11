@@ -130,7 +130,7 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
       newOpt.tooltip.position = ['50%', '50%']
       newOpt.tooltip.formatter= (v: any)=> {
         const { name, value } = v;
-        return `${v.marker} ${formatFilNum(value)}`;
+        return `${v.marker} ${tr(name)}:\n <div>${formatFilNum(value)}</div>`;
       }
     }
     newOpt.series[0].data = newSeries;

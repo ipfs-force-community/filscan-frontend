@@ -68,7 +68,7 @@ export default () => {
         </div>
       </MobileView>
 
-      <div className="flex flex-1 flex-col gap-y-6 ">
+      <div className={classNames("flex flex-1 flex-col gap-y-6",styles['tab-content'])}>
         { !hash && <Meta />}
         { hash === 'networks'&&
           <Meta />}

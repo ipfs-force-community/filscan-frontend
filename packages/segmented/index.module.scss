@@ -1,7 +1,9 @@
 @media screen and (max-width: 1000px) {
   .segmented {
-    overflow-x: auto;
+    overflow-x: scroll;
     margin-left: 0;
+    max-width: fit-content;
+    width: 100%;
     border-radius: 6px;
     background: var(--mobile-F2F2F2);
 

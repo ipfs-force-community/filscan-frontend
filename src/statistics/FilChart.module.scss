@@ -1,47 +1,52 @@
-@media only screen and (max-width: 1000px)  {
+@media only screen and (max-width: 1000px) {
+  .wrap {
+    margin-top: 15px;
 
+    row-gap: 15px;
     .title {
-        padding: unset;
-        height: unset;
+      margin: unset;
+      padding: unset;
+      height: unset;
 
-        padding-block: 15px 10px;
-        
+      padding-block: 0px 10px;
     }
 
-    .card-reset{
-        overflow: unset;
-        border:unset;
-        border-radius: unset;
-        box-shadow: unset;
+    .card-reset {
+      overflow: unset;
+      border: unset;
+      border-radius: unset;
+      box-shadow: unset;
     }
     .card {
-        padding: 12px;
-        border: 1px solid var(--mobile-divide-line);
-        border-radius: 6px;
+      padding: 12px;
+      border: 1px solid var(--mobile-divide-line);
+      border-radius: 6px;
 
-        .echart {
-            height: 300px;
-        }
+      .echart {
+        height: 280px;
+      }
     }
     .legend-wrap {
+      display: flex;
+      flex-direction: column;
+
+      row-gap: 10px;
+
+      .legend-item {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
 
-        row-gap: 10px;
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-
-            .legend-item-left {
-                display: flex;
-                align-items: center;
-                color: var(--mobile-des-color);
-                column-gap: 6px;
-            }
+        .legend-item-left {
+          display: flex;
+          align-items: center;
+          color: var(--mobile-des-color);
+          column-gap: 6px;
+          .legend-value {
+            color: var(--mobile-title-color);
+          }
         }
+      }
     }
-    
+  }
 }

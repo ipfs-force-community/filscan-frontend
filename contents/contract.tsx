@@ -847,8 +847,8 @@ export const contract_log = [
       if (Array.isArray(text)) {
         return text.map((item:string,index:number) => {
           return <li key={item} className='flex items-center gap-x-1 mb-1' >
-            <span className="flex item-center justify-center bg-bg_hover border rounded-[5px] w-5 h-5">{ index}</span>
-            { item}
+            <span className="flex item-center flex-shrink-0 justify-center bg-bg_hover border rounded-[5px] w-5 h-5">{ index}</span>
+            <span> { item}</span>
           </li>
         })
       }

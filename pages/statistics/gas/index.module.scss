@@ -1,6 +1,17 @@
 @media screen and (max-width: 1000px){
     .statistics-gas{
         padding:12px 12px 0 12px;
+
+        .gas {
+            padding: unset;
+            padding-bottom: 12px;
+            border-radius: 6px;
+        }
+        .title {
+            margin: unset;
+
+            margin-block: 10px;
+        }
         :global{
             .gas-title{
                 margin: unset;

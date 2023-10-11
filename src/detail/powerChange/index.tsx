@@ -248,9 +248,9 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
 
   return (
     <div className={classNames(styles['power-change'],'flex-1')}>
-      <div className='flex justify-between items-center mb-2 mx-2.5 h-[32px]'>
+      <div className={classNames('flex justify-between items-center mb-2 mx-2.5 h-[32px]',styles.title)}>
         <div className={classNames(styles.between,'flex gpa-x-5 items-center')}>
-          <span className='text-lg font-semibold mr-5'>
+          <span className={classNames('text-lg font-semibold mr-5',)}>
             {tr(power_change.title)}
           </span>
           {/* <Segmented
@@ -263,7 +263,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         </div>
         <BrowserView>{ledRender()}</BrowserView>
       </div>
-      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
+      <div className={classNames('card_shadow w-full border rounded-xl p-2.5 pt-5 border_color',styles.chart)}>
         <MobileView>
           <div className="tips">
             {ledRender()}

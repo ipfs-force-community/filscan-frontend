@@ -106,8 +106,9 @@ function Overview({ className }: { className?: string }) {
       item.list.forEach((seriesItem: any, index: number) => {
         const baseData = showData[index];
         const showValue = formatNumberUnit(baseData?.value)
-        const name = `${tr(seriesItem.key)}: (${showValue} FIL)`;
-        legend[seriesItem.key]={name,color:seriesItem.color,isShow:true, key:seriesItem.key}
+        const name = `${tr(seriesItem.key)}:`;
+        const value = `${showValue} FIL`;
+        legend[seriesItem.key]={name,value,color:seriesItem.color,isShow:true, key:seriesItem.key}
         seriesData.push({
           ...baseData,
           name,
@@ -194,7 +195,7 @@ function Overview({ className }: { className?: string }) {
     }
   }
 
-  return <div className='flex  flex-col gap-y-5 h-fit'>
+  return <div className={classNames('flex  flex-col gap-y-5 h-fit',styles.wrap)}>
     {fil_overviewList.map((dataItem, index: number) => {
       const legendData = index === 1 ? legendB: legendA;
       return <div key={ dataItem.title} className={`w-full h-full ${className} `}>
@@ -226,6 +227,11 @@ function Overview({ className }: { className?: string }) {
                   <div className={classNames(styles['legend-item-left'])}>
                     <span className='block w-2 h-2 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
                     <span>{ legend?.name||""}</span>
+                    <span>
+                      {'('}
+                      <span className={styles['legend-value']}>{ legend?.value||""}</span>
+                      {')'}
+                    </span>
                   </div>
                 </li>
               })}

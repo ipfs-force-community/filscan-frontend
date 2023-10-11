@@ -34,14 +34,33 @@
     }
     .solid-text {
       background: unset;
-      -webkit-background-clip: unset;  -webkit-text-fill-color:unset;   
+      -webkit-background-clip: unset;
+
+      -webkit-text-fill-color: unset;
     }
+
     :global {
       .unit {
         color: var(--mobile-des-color);
         font-weight: 500;
         font-family: "DINPro-Medium";
       }
+    }
+  }
+  .see-wrap {
+    display: flex;
+    justify-content: center;
+    .see-more {
+      display: flex;
+      align-items: center;
+      height: 32px;
+      border: 1px solid #f5f5f5;
+      border-radius: 16px;
+      background: #f5f5f5;
+      color: #999999;
+      font-size: 14px;
+
+      padding-inline: 16px;
     }
   }
 }

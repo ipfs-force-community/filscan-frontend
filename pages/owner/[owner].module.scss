@@ -7,19 +7,30 @@
     }
 
     .owner-wrap {
-        :global{
-            .owner {
-                display: inline-block;
-                word-break: break-all;
+      .owner-item-reset {
+        align-items: unset;
+      }
+      .owner-item {
+        flex-direction: column;
 
-                span {
-                    display: inline-block;
-                    margin-top: 1px;
-                    margin-left: 5px;
-                }
-                
-            }
+        row-gap: 10px;
+      }
+      :global {
+        .owner {
+          display: inline-block;
+          word-break: break-all;
+
+          span {
+            display: inline-block;
+            margin-top: 1px;
+            margin-left: 5px;
+          }
         }
+      }
+    }
+
+    .bottom {
+      flex-direction: column;
     }
   }
 }

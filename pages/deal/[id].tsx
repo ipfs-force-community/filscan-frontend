@@ -113,7 +113,7 @@ export default () => {
 
         <div className={styles.card}>
           <div className={styles.left}>
-            <DealClient width={45} height={45} />
+            <DealMiner width={45} height={45} />
           </div>
           <div className={styles.right}>
             <div className={styles.name}>{tr(deal_list.content.right_title)}</div>

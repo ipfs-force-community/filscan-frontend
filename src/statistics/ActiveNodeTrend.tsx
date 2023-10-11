@@ -7,7 +7,7 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { formatDateTime} from '@/utils';
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
-import styles from './trend.module.scss'
+import styles from './ActiveNodeTrend.module.scss'
 import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
 import Segmented from '@/packages/segmented';
@@ -168,13 +168,14 @@ export default (props: Props) => {
       },
       series: newSeries,
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options, defaultOptions]);
   return (
     <div
       //id='active_nodes'
-      className={classNames(styles.trend,`w-full h-[full]  ${className}`)}
+      className={classNames(styles.wrap,`w-full h-[full]  ${className}`)}
     >
-      <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5' >
+      <div className={classNames('flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5',styles['title-wrap'])} >
         <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
           {tr('active_nodes')}
         </div>
@@ -189,7 +190,7 @@ export default (props: Props) => {
           }}
         />
       </div>
-      <div className={`h-[350px] w-full card_shadow border pb-2 border_color rounded-xl`}>
+      <div className={classNames(`h-[350px] w-full card_shadow border pb-2 border_color rounded-xl`,styles.content)}>
         <EChart options={newOptions} />
       </div>
     </div>

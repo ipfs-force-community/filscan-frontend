@@ -50,14 +50,7 @@ function Gas(props: Props) {
           fontFamily: 'DINPro',
           fontSize: 14,
           color: isMobile ? color.mobileLabelColor : color.labelColor,
-          // formatter(v: any) {
-          //   return v+'attoFil'
-          // },
-
           formatter(v: any) {
-            // return new BigNumber(Number(v))
-            //   .dividedBy(Math.pow(10, 9))
-            //   .toFixed(2) +' attoFIL';
             return formatNumber(v)+' attoFIL';
           },
 
@@ -110,7 +103,7 @@ function Gas(props: Props) {
 
     if (isMobile) {
       (options as any)['grid'] = {
-        top:"10%",
+        top:"5%",
         right:"20px",
         bottom:"0%",
         left: "12px",

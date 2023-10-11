@@ -14,6 +14,7 @@
         margin-top: 10px;
 
         grid-template-columns: repeat(2,1fr);
+        gap: 8px;
 
         .item-reset {
             width: unset;
@@ -24,6 +25,13 @@
             border: 1px solid var(--mobile-divide-line);
             border-radius: 6px;
             background: var(--mobile-bg-color);
+
+            :global {
+                .text_des {
+                    color: var(--mobile-des-color);
+                    font-size: 12px;
+                }
+            }
         }
     }
 }

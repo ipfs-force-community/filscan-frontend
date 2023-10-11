@@ -286,7 +286,7 @@ export default ({
       {header ? (
         header
       ) : (
-        <div className='flex justify-between  items-center mb-2 h-[32px]'>
+        <div className={classNames('flex justify-between  items-center mb-2 h-[32px]')}>
           <span className='text-lg font-semibold mr-5 name-height mx-2.5'>
             {tr(account_change.title)}
           </span>
@@ -296,7 +296,7 @@ export default ({
         </div>
       )}
 
-      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
+      <div className={classNames('card_shadow w-full border rounded-xl p-2.5 pt-5 border_color',styles.echart)}>
         <MobileView>
           <div className="tips">
             {ledRender()}
