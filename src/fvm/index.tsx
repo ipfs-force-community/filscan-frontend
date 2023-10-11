@@ -10,7 +10,7 @@ import { Translation } from '@/components/hooks/Translation';
 
 function Share({ data,title }: {data:any,title:string}) {
   const myRef = useRef<any>();
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const { tr } = Translation({ ns: 'common' });
 
   const [content, setContent] = useState<Record<string,Array<any>>>({})
@@ -47,7 +47,7 @@ function Share({ data,title }: {data:any,title:string}) {
 
   return (
     <>
-      <Button className="primary_btn mt-20 !w-full cursor-pointer" onClick={ ()=>setOpen(true)}>Share</Button>
+      <Button className="primary_btn mt-20 !w-full cursor-pointer" onClick={() => setOpen(true)}>{ tr('fvm_share')}</Button>
       <Modal
         open={open}
         width={750}
@@ -103,7 +103,7 @@ function Share({ data,title }: {data:any,title:string}) {
               </div>
             </div>
           </div>
-          <div className='primary_btn m-auto cursor-pointer' onClick={handleScreenshot}>保存图片</div>
+          <div className='primary_btn m-auto cursor-pointer' onClick={handleScreenshot}>{ tr('save_pic')}</div>
         </div>
       </Modal></>
   );

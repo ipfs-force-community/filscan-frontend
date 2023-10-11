@@ -68,7 +68,7 @@ export default () => {
         </BrowserView>
         <div className="flex gap-x-5">
           <BrowserView>
-            <ul className="w-[210px] border border_color rounded-lg card_shadow px-4 py-5">
+            <ul className="w-[210px] border border_color rounded-lg card_shadow px-4 py-5 h-fit">
               {fvmListOpt.map((item) => {
                 return (
                   <li
@@ -88,9 +88,6 @@ export default () => {
                 );
               })}
               <Share data={content} title={ active} />
-              {/* <li className="primary_btn mt-20 !w-full cursor-pointer">
-                share
-              </li> */}
             </ul>
           </BrowserView>
           <div className="flex-1">
