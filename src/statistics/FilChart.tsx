@@ -152,7 +152,7 @@ function Overview({ className }: { className?: string }) {
           const { name, value ,data} = v;
           return `${v.marker} ${data.value}`;
         }
-        newOption.series[0].center =['50%', '45%']
+        newOption.series[0].center =['50%', '50%']
       }
       newOption.series[0].data = newData;
     }
@@ -176,7 +176,7 @@ function Overview({ className }: { className?: string }) {
           const { name, value ,data} = v;
           return `${v.marker} ${data.value}`;
         }
-        newOption.series[0].center =['50%', '45%']
+        newOption.series[0].center =['50%', '50%']
       }
       newOption.series[0].data = newData;
     }
@@ -227,11 +227,7 @@ function Overview({ className }: { className?: string }) {
                   <div className={classNames(styles['legend-item-left'])}>
                     <span className='block w-2 h-2 rounded-full' style={{ background: legend.isShow ? legend?.color || "":'#d1d5db' }} />
                     <span>{ legend?.name||""}</span>
-                    <span>
-                      {'('}
-                      <span className={styles['legend-value']}>{ legend?.value||""}</span>
-                      {')'}
-                    </span>
+                    <span className={styles['legend-value']}>{ legend?.value||""}</span>
                   </div>
                 </li>
               })}

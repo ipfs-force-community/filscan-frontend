@@ -18,9 +18,23 @@
       height: 300px;
     }
 
+    .legend-label-wrap {
+      color: var(--mobile-des-color);
+      font-size: 12px;
+      .value {
+        color: var(--mobile-title-color);
+        font-family: "DINPro-Medium";
+      }
+    }
+
     .dot {
       width: 8px;
       height: 8px;
+    }
+  }
+  .describe-item {
+    .label {
+      color: var(--mobile-des-color);
     }
   }
 }
