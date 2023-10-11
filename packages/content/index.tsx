@@ -67,7 +67,7 @@ export default (props:ContentProps) => {
             key={index}
             className={
               classNames(`flex items-baseline gap-2.5 min-h-[32px]
-            ${ borderTop ? 'pt-5 border-t border_color relative' : '' }
+            ${ borderTop ? 'min-h-[48px] pt-5 border-t border_color relative' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
             style={{...style,width:isSplitWidth||showWidth }}>

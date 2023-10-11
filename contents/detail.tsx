@@ -163,14 +163,14 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'win_count',
       title_tip: 'win_count_tip',
-      render: (text: any) =>text? String(text):'--',
+      render: (text: any) =>String(text) === '0' || text ? String(text) : '--'
     },
     {
       title: 'block_count',
       width: '25%',
       dataIndex: 'block_count_increase',
       // title_tip: 'block_count_tip',
-      render: (text: any) => String(text) || '--',
+      render: (text: any) =>String(text) === '0' || text ? String(text) : '--'
     },
     {
       title: 'block_rewards',
@@ -224,6 +224,40 @@ export const miner_overview = {
   ],
 };
 
+export const peerList = [
+  {
+    title: 'ID',
+    dataIndex: 'peer_id',
+    render: (text: any, record: any, tr: any) => {
+      return text?tr(text):'--'
+    }
+  },
+  {
+    title: 'miner_owner',
+    dataIndex: 'account_id',
+    type: ["account_basic"],
+    render: (text: any, record: any, tr: any) => {
+      if (!text) return '--';
+      return <Link href={`/miner/${text}` } className='link_text'>{ text }</Link>
+    }
+  },
+  {
+    title: 'area',
+    dataIndex: 'ip_address',
+    type: ["account_basic"],
+    render:(text:any,record:any,tr:any)=>text?text:tr('no_area')
+  },
+  {
+    title: 'MultiAddresses',
+    dataIndex: 'multi_addrs',
+    type: ["account_basic"],
+    render: (text: any, record: any, tr: any) => {
+      if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={10} />
+      return '--'
+    }
+  },
+]
+
 export const account_detail = {
   list:(tr:any)=> [
     {
@@ -233,12 +267,14 @@ export const account_detail = {
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
     {
-      title: 'owner_address',
-      dataIndex: 'owner_address',
-      render: (text: string) => {
-        if(!text) return '--'
+      title: 'peer_id',
+      dataIndex: 'peer_id',
+      render: (text: string,record:any) => {
+        if (!text) return '--'
+        const accountId = record?.account_basic?.account_id;
         return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+          { accountId ? <Link href={`/peer/${accountId}`} className='link_text' >{isIndent(text,10)}</Link>
+            :<span>{isIndent(text,10)}</span>}
           <Copy text={text} />
         </span>
       }
@@ -252,6 +288,33 @@ export const account_detail = {
           <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
           <Copy text={text} />
         </span>
+      }
+    },
+    {
+      title: 'owner_address',
+      dataIndex: 'owner_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
+    {
+      title: 'controllers_address',
+      dataIndex: 'controllers_address',
+      render: (text: any, record: any) => {
+        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
+        return '--'
+        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
+        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
+        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
+        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
+        //       <Copy text={linkItem} />
+        //     </span>
+        //   }):'--'}
+        // </div>
       }
     },
     {
@@ -270,22 +333,6 @@ export const account_detail = {
             <Copy text={text} />
           </span>}
         </div>
-      }
-    },
-    {
-      title: 'controllers_address',
-      dataIndex: 'controllers_address',
-      render: (text: any, record: any) => {
-        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
-        return '--'
-        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
-        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
-        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
-        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
-        //       <Copy text={linkItem} />
-        //     </span>
-        //   }):'--'}
-        // </div>
       }
     },
 
@@ -748,7 +795,22 @@ export const message_detail = {
 
       render: (text: any) => text,
     },
-
+    {
+      dataIndex: 'replaced',
+      title: 'replaced',
+      render: (text: any) => String(text) === 'true' ? 'True':'False'
+    },
+    {
+      dataIndex: 'base_cid',
+      title: 'base_cid',
+      elasticity: true,
+      render: (text: any) => {
+        if (String(text) === 'true') {
+          return text;
+        }
+        return null
+      }
+    },
     {
       borderTop: true,
       dataIndex: 'all_gas_fee',
@@ -758,12 +820,10 @@ export const message_detail = {
     {
       dataIndex: 'base_fee',
       title: 'base_fee',
-
       render: (text: string) => {
         return formatFilNum(text, false, false, 4);
       },
     },
-
     {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',
@@ -1239,11 +1299,6 @@ export const power_change = {
 
 export const address_tabs = [
   {
-    title: 'message_list',
-    dataIndex: 'message_list',
-    optionsUrl: 'AllMethodByAccountID',
-  },
-  {
     title: 'traces_list',
     dataIndex: 'traces_list',
     optionsUrl: 'TransferMethodByAccountID',
@@ -1256,6 +1311,12 @@ export const address_tabs = [
     //   { title: 'Receive', value: 'receive', isIndent: true },
     // ],
   },
+  {
+    title: 'message_list',
+    dataIndex: 'message_list',
+    optionsUrl: 'AllMethodByAccountID',
+  },
+
   {
     title: 'erc20_transfer',
     dataIndex:'ercList',

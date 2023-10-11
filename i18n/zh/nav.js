@@ -28,7 +28,7 @@ const zh ={
   resources:'资源',
   resources_tools: '常用工具',
   provider: '存储提供者',
-  fvm: 'FVM生态总览',
+  fvm: 'Filecoin生态总览',
   account:'节点管家',
   language:"语言",
   network:"网络",

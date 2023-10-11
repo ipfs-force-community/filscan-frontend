@@ -139,7 +139,7 @@ function Overview() {
                 >
                   <span
                     className={classNames(
-                      "block w-4 h-4 rounded-full",
+                      "block w-2 h-2 rounded-full",
                       styles.dot
                     )}
                     style={{

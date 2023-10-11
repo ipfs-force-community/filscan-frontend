@@ -80,8 +80,8 @@ export default () => {
     return <Loading />
   }
 
-  return <div className={classNames(`main_contain`,styles.wrap)}>
-    <Image src={showImage} className="m-auto" width={400} alt='' />
+  return <div className={classNames(`main_contain !pt-20`,styles.wrap)}>
+    <Image src={showImage} className="m-auto" width={300} alt='' />
     <div className="flex items-center justify-center flex-col m-auto">
       <span className="text-xl font-medium">
         404

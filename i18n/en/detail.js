@@ -94,6 +94,9 @@ const detail = {
   sector_size:'Sector Size',
   sector_status: 'Sector Status',
   contract_verify:'Contract',
+  peer_detail: 'Miner Detail',
+  miner_owner: 'Owner',
+  no_area:'Unknown',
 
   //账户总览
   account_overview:'Account Overview',
@@ -146,7 +149,9 @@ const detail = {
   Transfer: 'Transfer',
   Burn: 'Burn',
   exit_code: 'Status',
-  err_message:'Error Message',
+  err_message: 'Error Message',
+  replaced: 'Cid is overwritten',
+  base_cid:'Overridden CID',
 
   //内部交易
   amount:'Value',
@@ -205,7 +210,7 @@ const detail = {
   erc20_transfer: 'Token Transactions',
   platform: 'Platform',
   power_change: 'Power Change',
-  owned_active_miners: '实际工作节点',
+  owned_active_miners: 'Active Miners',
 
   //height
   blcok_time: 'Block Time',

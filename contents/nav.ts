@@ -1,17 +1,34 @@
 import { Menu_Info } from "./type";
-import Hot from "@/assets/images/hot.svg";
 
 const navMenu: Array<Menu_Info | any> = [
-  {
-    key: "fvm",
-    sufIcon: "hot",
-    color: "#F44C30",
-    link: "/fvm",
-  },
+
   // {
   //   key: 'home',
   //   link: '/home'
   // },
+  {
+    key: "network_overview",
+    link: "/rank",
+    sufIcon: "newIcon",
+    children: [
+      {
+        key: "ranking",
+        link: "/rank",
+      },
+      {
+        key: "tipset_ranking",
+        link: "/tipset/address-list/",
+      },
+      {
+        key: 'tipset_transfer',
+        sufIcon: "newIcon",
+        link: '/tipset/transfer/'
+      },
+      { key: "statistics_gas", link: "/statistics/gas" },
+      { key: "statistics_charts", link: "/statistics/charts" },
+      // { key: "cw", link: "/cw" },
+    ],
+  },
   {
     key: "tipset",
     children: [
@@ -31,15 +48,10 @@ const navMenu: Array<Menu_Info | any> = [
         key: "tipset_pool-message",
         link: "/tipset/pool-message/",
       },
-      // {
-      //   key: 'tipset_transfer',
-      //   link: '/tipset/transfer/'
-      // },
     ],
   },
   {
     key: "contract",
-    sufIcon: "newIcon",
     color: "#F44C30",
     children: [
       {
@@ -66,21 +78,10 @@ const navMenu: Array<Menu_Info | any> = [
   },
 
   {
-    key: "network_overview",
-    link: "/rank",
-    children: [
-      {
-        key: "ranking",
-        link: "/rank",
-      },
-      {
-        key: "tipset_ranking",
-        link: "/tipset/address-list/",
-      },
-      { key: "statistics_gas", link: "/statistics/gas" },
-      { key: "statistics_charts", link: "/statistics/charts" },
-      { key: "cw", link: "/cw" },
-    ],
+    key: "fvm",
+    sufIcon: "hot",
+    color: "#F44C30",
+    link: "/fvm",
   },
   {
     key: "develop",

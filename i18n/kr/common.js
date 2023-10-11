@@ -22,6 +22,8 @@ const common = {
   height: '블록 높이',
   cid: '블록 CID',
   node: '노드',
+  save_pic: '사진을 저장하다',
+  fvm_share:'이 페이지를 공유하세요',
 
   //messages
   no_account: '해당 이메일은 등록되어 있지 않습니다. 먼저 회원 가입을 진행해 주세요.',

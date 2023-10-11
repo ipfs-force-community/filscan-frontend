@@ -6,11 +6,12 @@ import Image from "next/image";
 import { BrowserView, MobileView } from "@/components/device-detect";
 import classNames from "classnames";
 import styles from "./index.module.scss";
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import useWindow from "@/components/hooks/useWindown";
 import TwitterIcon from '@/assets/images/twitter.svg'
 import NetworkIcon from '@/assets/images/network.svg'
 import { useFilscanStore } from "@/store/FilscanStore";
+import Share from '@/src/fvm'
 
 export default () => {
   const {theme} = useFilscanStore()
@@ -62,12 +63,12 @@ export default () => {
         ></Select> : <></>}
         <BrowserView>
           <h3 className="text-lg font-DINPro-Medium mb-4">
-            Explore FVM on Filscan
+            Explore Filecoin Ecosystem on Filscan
           </h3>
         </BrowserView>
         <div className="flex gap-x-5">
           <BrowserView>
-            <ul className="w-[210px] border border_color rounded-lg card_shadow px-4 py-5">
+            <ul className="w-[210px] border border_color rounded-lg card_shadow px-4 py-5 h-fit">
               {fvmListOpt.map((item) => {
                 return (
                   <li
@@ -86,6 +87,7 @@ export default () => {
                   </li>
                 );
               })}
+              <Share data={content} title={ active} />
             </ul>
           </BrowserView>
           <div className="flex-1">

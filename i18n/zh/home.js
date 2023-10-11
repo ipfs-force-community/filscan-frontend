@@ -69,7 +69,7 @@ const home = {
   base_gas: '24h基础手续费走势',
   rank: '排行榜',
   contract_rank: '合约排行',
-  defi_list:'Defi Protocol',
+  defi_list:'DeFi Protocol',
   blockchain_browser:'区块浏览器',
   see_more:'查看更多',
 
