@@ -66,6 +66,6 @@ const home = {
   contract_gas: '계약 가스 비용',
   quality_power_Cc:'Commited Capacity (CC)',
   quality_power_Dc:'DataCap (DC)',
-
+  see_more:'더보기',
 }
 export default home

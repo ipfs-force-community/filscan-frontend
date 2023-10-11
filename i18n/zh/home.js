@@ -70,7 +70,8 @@ const home = {
   rank: '排行榜',
   contract_rank: '合约排行',
   defi_list:'Defi Protocol',
-  blockchain_browser:'区块浏览器'
+  blockchain_browser:'区块浏览器',
+  see_more:'查看更多',
 
 }
 export default home
