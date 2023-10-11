@@ -23,7 +23,6 @@ export default ({
   overView: any;
   accountId?: string | string[];
 }) => {
-  const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const {axiosData } = useAxiosData();
   const [interval, setInterval] = useState('24h');
