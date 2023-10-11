@@ -180,11 +180,9 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
                     : balance_item.color,
                 }}
               />
-
               <Tooltip context={tr(balance_item.title_tip)} icon={ false}>
-                <span className='flex gap-x-1 items-center'>{ tr(balance_item.title)}{ getSvgIcon('tip')}</span>
+                <span className={classNames('flex gap-x-1 items-center',styles['legend-title'])}>{ tr(balance_item.title)}{ getSvgIcon('tip')}</span>
               </Tooltip>
-
             </span>
             <span className='font-DINPro-Medium text-sm font-medium  ml-5'>
               {loading ? (

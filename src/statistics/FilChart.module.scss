@@ -1,8 +1,8 @@
 @media only screen and (max-width: 1000px) {
   .wrap {
-    margin-top: 15px;
+    margin-top: 20px;
 
-    row-gap: 15px;
+    row-gap: 20px;
     .title {
       margin: unset;
       padding: unset;
@@ -18,9 +18,11 @@
       box-shadow: unset;
     }
     .card {
-      padding: 12px;
       border: 1px solid var(--mobile-divide-line);
       border-radius: 6px;
+
+      padding-inline: 12px;
+      padding-block: 0px 15px;
 
       .echart {
         height: 280px;
@@ -41,9 +43,12 @@
           display: flex;
           align-items: center;
           color: var(--mobile-des-color);
+          font-size: 12px;
           column-gap: 6px;
           .legend-value {
             color: var(--mobile-title-color);
+            font-weight: 500;
+            font-family: "DINPro-Medium";
           }
         }
       }

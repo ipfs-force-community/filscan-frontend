@@ -1,33 +1,36 @@
-
-@media screen and (max-width: 1000px){
-  .pow{
+@media screen and (max-width: 1000px) {
+  .pow {
     padding: 0;
     width: auto;
     height: auto;
     border-left: unset;
-    .row{
+    .row {
       display: flex;
       align-items: center;
       flex-direction: row;
       padding-top: 8px;
       padding-bottom: 8px;
-      &.between{
+      &.between {
         justify-content: space-between;
         padding-right: 12px;
         padding-left: 12px;
       }
-      &.between>:last-child {
+      &.between > :last-child {
         justify-content: flex-end;
-        &>:last-child{
+        & > :last-child {
           width: fit-content;
         }
       }
-      :global{
-        .text_des{
+
+      .label {
+        color: var(--mobile-des-color);
+      }
+      :global {
+        .text_des {
           flex-shrink: 0;
         }
       }
-      .value{
+      .value {
         padding-left: 3px;
         color: var(--mobile-title-color);
         font-weight: 500;
@@ -37,40 +40,44 @@
       }
     }
 
-    .column{
+    .column {
       flex-direction: column;
       flex-wrap: nowrap;
       margin-top: unset;
       padding: 0 12px;
-      max-height:none;
-      .full{
+      max-height: none;
+      .full {
         display: flex;
         justify-content: space-between;
         width: 100%;
+
+        .label {
+          color: var(--mobile-des-color);
+        }
       }
     }
 
-
-    .status{
+    .status {
       align-items: flex-start;
       flex-direction: column;
       margin-top: 15px;
       padding: 15px 12px 15px;
-      border-top:1px solid var(--mobile-divide-line);
-      .status-row{
+      border-top: 1px solid var(--mobile-divide-line);
+      .status-row {
         padding-top: 10px;
       }
-      .sector-status-value,.sector-status-title {
+      .sector-status-value,
+      .sector-status-title {
         font-size: 12px;
       }
     }
 
-    :global{
-      .pb-7{
+    :global {
+      .pb-7 {
         padding-bottom: 0;
         border-bottom: none;
       }
-      .mt-9{
+      .mt-9 {
         margin-top: 0;
       }
     }

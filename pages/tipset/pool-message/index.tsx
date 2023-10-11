@@ -107,7 +107,7 @@ export default () => {
   };
   return (
     <div className={classNames(styles['pool-message-list'],'main_contain')}>
-      <div className='flex justify-between items-center mx-2.5'>
+      <div className={classNames('flex justify-between items-center mx-2.5',styles['title-wrap'])}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('pool_list')}
@@ -117,7 +117,7 @@ export default () => {
           </div>
         </div>
         <Selects
-          className='w-[200px]'
+          className={classNames('w-[200px]',styles.select)}
           value={method}
           options={headerOptions}
           onChange={(value) => {

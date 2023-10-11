@@ -80,13 +80,13 @@ function Overview() {
       });
       newData.series[0].data = series;
       if (isMobile) {
-        (newData.series[0].radius = "80%"),
-        (newData.series[0].label.show = false);
-        newData.tooltip.position = ["60%", "50%"];
+        newData.series[0].radius = "80%";
+        newData.series[0].label.show = false;
+        newData.tooltip.position = ["40%", "50%"];
         newData.tooltip.show = true;
         newData.tooltip.formatter = (v: any) => {
           const { name, value, data } = v;
-          return `${v.marker} ${data.value}%`;
+          return `${v.marker} ${data.value}% <div>${data.name}</div>`;
         };
         newData.series[0].center = ["50%", "45%"];
       }
@@ -148,10 +148,14 @@ function Overview() {
                         : "#d1d5db",
                     }}
                   />
-                  <span className="flex">
+                  <span
+                    className={classNames("flex", styles["legend-label-wrap"])}
+                  >
                     <span className="flex-shrink-0">{legend?.name || ""}</span>
                     <MobileView>
-                      <span>{`(${legend?.value})%`}</span>
+                      <span className={styles.value}>
+                        {" " + `${legend?.value}%`}
+                      </span>
                     </MobileView>
                   </span>
                 </li>
@@ -198,10 +202,18 @@ function Overview() {
               return (
                 <li
                   key={index}
-                  className="flex flex-col text_des px-[12px] py-[14px] gap-y-[28px] border-b border_color last:border-none"
+                  className={classNames(
+                    "flex flex-col text_des px-[12px] py-[14px] gap-y-[15px] border-b border_color last:border-none",
+                    styles["describe-item"]
+                  )}
                 >
                   <div className="flex">
-                    <span className="min-w-[100px] pt-[2px]">
+                    <span
+                      className={classNames(
+                        "min-w-[100px] pt-[2px]",
+                        styles.label
+                      )}
+                    >
                       {tr("Allocation")}:
                     </span>
                     <span className="font-DINPro-Medium  text-black">
@@ -209,13 +221,17 @@ function Overview() {
                     </span>
                   </div>
                   <div className="flex">
-                    <span className="min-w-[100px]">{tr("value")}:</span>
+                    <span className={classNames("min-w-[100px]", styles.label)}>
+                      {tr("value")}:
+                    </span>
                     <span className="font-DINPro-Medium  text-black">
                       {index === 0 ? tr(v.value) : v.value}
                     </span>
                   </div>
                   <div className="flex">
-                    <span className="min-w-[100px]">{tr("description")}:</span>
+                    <span className={classNames("min-w-[100px]", styles.label)}>
+                      {tr("description")}:
+                    </span>
                     <span className="font-DINPro-Medium  text-black">
                       {tr(v.description)}
                     </span>

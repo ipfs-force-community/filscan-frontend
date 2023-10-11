@@ -1,8 +1,13 @@
 @media screen and (max-width: 1000px){
     .chain-list{
-        padding: 12px;
+        padding-inline: 12px;
+        padding-block: 20px 12px;
         .title {
             margin: unset;
+            line-height: unset;
+        }
+        .content {
+            margin-top: 15px;
         }
         :global{
             .card_shadow{
