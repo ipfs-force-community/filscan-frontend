@@ -67,7 +67,7 @@ export default () => {
     <div className={classNames('font-PingFang font-semibold text-lg mx-2.5',styles.title)}>
       {tr('block_list')}
     </div>
-    <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
+    <div className={classNames("mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs",styles.content)}>
       <BrowserView>
         <ul className="flex p-5">
           {columns.map(itemHeader => {
@@ -130,14 +130,24 @@ export default () => {
           </BrowserView>
         </>
       }
-
-      <div className={`mt-5 flex justify-end items-center`} >
-        <Pagination showQuickJumper showSizeChanger={ false} current={current} total={data.total}
-          onChange={(cur) => {
-            load(cur);
-            setCurrent(cur)
-          } } />
-      </div>
+      <BrowserView>
+        <div className={`mt-5 flex justify-end items-center`} >
+          <Pagination showQuickJumper showSizeChanger={ false} current={current} total={data.total}
+            onChange={(cur) => {
+              load(cur);
+              setCurrent(cur)
+            } } />
+        </div>
+      </BrowserView>
+      <MobileView>
+        <div className={`mt-5 flex justify-end items-center`} >
+          <Pagination showQuickJumper showLessItems={true} showSizeChanger={ false} current={current} total={data.total}
+            onChange={(cur) => {
+              load(cur);
+              setCurrent(cur)
+            } } />
+        </div>
+      </MobileView>
 
     </div>
 
