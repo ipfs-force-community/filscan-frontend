@@ -25,8 +25,9 @@ const useUpdateQuery = () => {
         {
           pathname: router.pathname,
           query: { ...router.query, ...newQuery },
+          hash: hash
         },
-        `${router.pathname}?${new URLSearchParams(query).toString()}#${hash}`,
+        undefined,
         {
           scroll: false,
           shallow: false,
