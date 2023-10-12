@@ -6,8 +6,9 @@ import Content from "@/packages/content";
 import NoData from "@/packages/noData";
 import Skeleton from "@/packages/skeleton";
 import useAxiosData from "@/store/useAxiosData";
+import classNames from "classnames";
 import { useEffect, useState } from "react"
-
+import styles from './Event.module.scss'
 export default ({ cid }: {cid?:string | string[]}) => {
   const { axiosData } = useAxiosData()
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ export default ({ cid }: {cid?:string | string[]}) => {
       <NoData />
     </div>
   }
-  return <div className="card_shadow border border_color rounded-xl p-5 min-h-[500px]">
+  return <div className={classNames("card_shadow border border_color rounded-xl p-5 min-h-[500px]",styles.wrap)}>
     {data.map((item,index) => {
       return <Content contents={message_detail.eventLog} className="border-b border_color mt-5 last:border-none" ns={"detail"} data={item} key={index} />
 
