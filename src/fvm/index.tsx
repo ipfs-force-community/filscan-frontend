@@ -57,7 +57,7 @@ function Share({ data,title }: {data:any,title:string}) {
         onCancel={() => { setOpen(false) }}>
         <div className={style.shareFvmContent} >
           <div className={style['shareFvmContent-main']} ref={myRef} >
-            <Image className={style['shareFvmContent-bg']} src={ fvmBg} width={ 750} alt='' />
+            <Image className={style['shareFvmContent-bg']} src={ fvmBg} width={750} alt='' />
             <div className={style['shareFvmContent-header'] }>
               <div className='flex items-center gap-x-2' >
                 <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logo.png'} width={60} height={60} alt='logo' />

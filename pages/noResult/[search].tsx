@@ -23,13 +23,13 @@ export default () => {
     return theme === 'light'?searchLight:searchDark
   },[theme])
 
-  return <div className={`main_contain flex items-center flex-col  justify-center ${style.wrap}  !text-xl`} >
+  return <div style={{marginTop:'3%'}} className={`main_contain flex items-center justify-center flex-col ${style.wrap}  !text-xl`} >
     <Image src={showImage } width={300} height={300} alt='' />
     <div className='font-medium'>{tr(no_result.title)}</div>
-    <div className='text_des mt-4 text-xs'>
+    <div className='text_des mt-2 text-sm'>
       {tr(no_result.warn_text)}
     </div>
-    <div className={'text-primary'}>
+    <div className={'text-primary  mt-2'}>
       {search}
     </div>
     {/* <div className='text_des mt-2.5'>

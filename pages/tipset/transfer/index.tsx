@@ -74,7 +74,7 @@ export default () => {
   return (
     <div className={classNames(styles['transfer-list'],'main_contain')}>
       <div className='flex justify-between items-center'>
-        <div>
+        <div className='mx-2.5'>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('transfer_list')}
           </div>

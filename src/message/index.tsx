@@ -150,7 +150,7 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   return (
     <div className={classNames(styles.message,'main_contain')}>
-      <div className={classNames('flex items-center my-2.5',styles['title-wrap'])}>
+      <div className={classNames('flex items-center m-2.5',styles['title-wrap'])}>
         <span className={classNames('font-DINPro-Bold font-semibold text-lg',styles['top-title'])}>
           {tr(message_detail?.title || '')}
         </span>
