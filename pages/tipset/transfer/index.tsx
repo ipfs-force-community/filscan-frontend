@@ -4,7 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
-import { message_list, transfer_list } from '@/contents/tipset';
+import {transfer_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { formatNumber, pageLimit } from '@/utils';
@@ -46,7 +46,7 @@ export default () => {
         index: showIndex - 1,
         limit: pageLimit,
       },
-    });
+    }, {isCancel:false});
     //setLoading(false);
     setDataSource({
       data: result?.large_transfer_list || [],
@@ -74,7 +74,7 @@ export default () => {
   return (
     <div className={classNames(styles['transfer-list'],'main_contain')}>
       <div className='flex justify-between items-center'>
-        <div>
+        <div className='mx-2.5'>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('transfer_list')}
           </div>

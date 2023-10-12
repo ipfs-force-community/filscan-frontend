@@ -99,7 +99,7 @@ export default (props: Props) => {
                 tr(item.seriesName) +
                 ': ' +
                 item.data.amount +
-                item.data.unit;
+                item.data.unit+'/T';
             }
           });
           return result;

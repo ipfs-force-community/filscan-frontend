@@ -57,13 +57,13 @@ function Share({ data,title }: {data:any,title:string}) {
         onCancel={() => { setOpen(false) }}>
         <div className={style.shareFvmContent} >
           <div className={style['shareFvmContent-main']} ref={myRef} >
-            <Image className={style['shareFvmContent-bg']} src={ fvmBg} width={ 750} alt='' />
+            <Image className={style['shareFvmContent-bg']} src={ fvmBg} width={750} alt='' />
             <div className={style['shareFvmContent-header'] }>
               <div className='flex items-center gap-x-2' >
                 <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logo.png'} width={60} height={60} alt='logo' />
                 <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logoText.png'} alt='logo' width={142} height={24}></Image>
               </div>
-              <Image src={fvm} alt='' width={220} height={192}/>
+              <Image src={fvm} alt='' width={190} className='mt-[20px]'/>
             </div>
             <div className={style['shareFvmContent-content']}>
               {Object.keys(content).map(key => {

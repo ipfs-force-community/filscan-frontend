@@ -61,11 +61,16 @@ function Wallet() {
 
   const handleClick = async (item: any) => {
     if (item.value === 'TokenPocket') {
-      if (!window?.ethereum.isTokenPocket) {
+      if (!window?.ethereum?.isTokenPocket) {
         //dowm wallet
         window.open(item.url);
         window.location.reload()
       }
+    }
+    if (!window.ethereum) {
+      //未连接钱包
+      console.log("=不支持钱包 || 未下载钱包");
+      return window.open('https://metamask.io/');
     }
     const chainId = await getNetWork();
     let account:any = ''

@@ -3,9 +3,10 @@
     width: 100%;
     height: 350px;
     //background: linear-gradient(126deg, #181A1B 0%, #010101 100%);
-    background-image:url('https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/bannerBg.png') ;
+    //background-image:url('https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/bannerBg.png') ;
+    background-image:url('../../assets/images/bannerBg.png');
     background-size: cover;
-background-repeat: no-repeat;
+    background-repeat: no-repeat;
     &_bg{
         // &_bl{
         // position: absolute;
@@ -39,8 +40,7 @@ background-repeat: no-repeat;
             width: 100px;
             height: 100px;
             border-radius: 50%;
-                    background: linear-gradient(355deg, #1764FF 0%, #16E5D8 100%);
-
+            background: linear-gradient(355deg, #1764FF 0%, #16E5D8 100%);
             //background: linear-gradient(295deg, #055FCA 0%, #0291AD 100%);
             opacity: 0.58;
             filter: blur(6px);

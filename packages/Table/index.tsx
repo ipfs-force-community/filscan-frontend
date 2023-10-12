@@ -9,7 +9,8 @@ import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import NoData from '../noData';
-import Loading from '@/components/loading';
+import Image from 'next/image';
+import loadingPng from '@/assets/images/loading.png'
 
 interface Props extends TableProps<any> {
   data: Array<any>;
@@ -85,8 +86,12 @@ export default (props: Props) => {
         onChange={onChange}
         // loading={loading}
         loading={{
-          spinning:loading,
-          indicator:<Loading width={ 160} height={90 } />
+          spinning: loading,
+          size: 'large',
+          wrapperClassName:'custom-table-loading',
+          indicator: <div className='custom-table-loading-div' >
+            <Image src={loadingPng} width={160} height={160} alt="" />
+          </div>
         }}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}

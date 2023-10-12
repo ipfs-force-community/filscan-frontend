@@ -22,14 +22,13 @@ import Loading from '@/components/loading';
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData();
+  const [data, setData] = useState<any>({});
+  const [dataLoading, setDataLoading] = useState(true);
   const [TransferData, setTransfer] = useState<any>(undefined);
   const [TransferNFTData, setTransferNft] = useState<any>(undefined);
   // const [isF4, setIsF4] = useState(false);
   const [swap, setSwap] = useState();
   const { hash } = useHash()
-  const { data: result, loading } = useAxiosData(apiUrl.detail_message, {
-    message_cid: cid,
-  });
 
   const active = useMemo(() => {
     if (hash) {
@@ -38,13 +37,16 @@ export default ({ cid }: { cid: string | string[] }) => {
     return 'detail'
   },[hash])
 
-  const data = useMemo(() => {
-    return result?.MessageDetails || {};
-  }, [result]);
-
   useEffect(() => {
     loadTrans(data?.message_basic?.cid);
+    load()
   }, [data?.message_basic?.cid]);
+
+  const load = async () => {
+    const result: any = await axiosData(apiUrl.detail_message, { message_cid: cid, }, { isCancel: false })
+    setDataLoading(false)
+    setData(result?.MessageDetails || {})
+  }
 
   const loadTrans = (id: string) => {
     //erc20
@@ -71,10 +73,10 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   };
 
-  if (loading) {
+  if (dataLoading) {
     return <Loading />
   }
-  if (!loading && Object.keys(data).length === 0) {
+  if (!dataLoading && Object.keys(data).length === 0) {
     return <NoData />;
   }
 
@@ -150,7 +152,7 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   return (
     <div className={classNames(styles.message,'main_contain')}>
-      <div className={classNames('flex items-center my-2.5',styles['title-wrap'])}>
+      <div className={classNames('flex items-center m-2.5',styles['title-wrap'])}>
         <span className={classNames('font-DINPro-Bold font-semibold text-lg',styles['top-title'])}>
           {tr(message_detail?.title || '')}
         </span>

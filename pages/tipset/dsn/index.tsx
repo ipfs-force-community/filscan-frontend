@@ -52,7 +52,7 @@ export default () => {
         index: showIndex - 1,
         limit: pageLimit,
       },
-    });
+    }, {isCancel:false});
     //setLoading(false);
     setDataSource({
       data: result?.market_deals_list || [],

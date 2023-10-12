@@ -2,6 +2,7 @@
 
 import {
   formatDateTime,
+  formatFil,
   formatFilNum,
   formatNumber,
   get_account_type,
@@ -219,7 +220,7 @@ export const miner_overview = {
       style: { width: '20%', justifyContent: 'flex-end' },
       dataIndex: 'windowpost_gas',
       render: (text: string | number) =>
-        text ? unitConversion(text, 2) : '--',
+        text ? formatFilNum(text, false, false, 3) +'/TiB' : '--',
     },
   ],
 };
@@ -1087,7 +1088,7 @@ const default_content = [
     title: 'balance',
     dataIndex: 'account_balance',
     type: ['account_basic'],
-    render: (text: string) => (text ? formatFilNum(text) : '--'),
+    render: (text: string) => (text ? formatFil(text,'FIL',4)+' FIL' : '--'),
   },
   {
     title: 'stable_address', dataIndex: 'stable_address', elasticity: true,

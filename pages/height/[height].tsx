@@ -30,7 +30,7 @@ export default () => {
   }
 
   return <div className={classNames(styles.height,"main_contain")}>
-    <div className='font-PingFang font-semibold text-lg'>
+    <div className='font-PingFang font-semibold text-lg mx-2.5'>
       {tr('height')}
       { height&&<span className="ml-1"> #{height}</span> }
     </div>
@@ -39,7 +39,7 @@ export default () => {
       <BrowserView>
         <ul>
           {data?.block_basic?.map((dataItem: any, index: any) => {
-            return <Content key={index} contents={height_list.columns} ns={"detail"} data={dataItem} className="border-b border_color last:border-none"/>
+            return <Content key={index} contents={height_list.columns} ns={"detail"} data={dataItem} className="border-b pt-5 border_color last:border-none"/>
           })}
         </ul>
       </BrowserView>

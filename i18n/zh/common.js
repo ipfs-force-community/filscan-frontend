@@ -23,7 +23,7 @@ const common = {
   cid: '区块CID',
   node: '节点',
   save_pic: '保存图片',
-  fvm_share:'分享此页',
+  fvm_share:'分享给朋友',
 
   //messages
   no_account:'该邮箱未注册,请先注册',

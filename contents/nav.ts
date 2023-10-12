@@ -115,6 +115,27 @@ const mobileNavMenu: Menu_Info[] = [
     link: "/",
   },
   {
+    key: "network_overview",
+    link: "/rank",
+    children: [
+      {
+        key: "ranking",
+        link: "/rank",
+      },
+      {
+        key: "tipset_ranking",
+        link: "/tipset/address-list/",
+      },
+      {
+        key: "tipset_transfer",
+        link: "/tipset/transfer/",
+      },
+      { key: "statistics_gas", link: "/statistics/gas" },
+      { key: "statistics_charts", link: "/statistics/charts" },
+
+    ],
+  },
+  {
     key: "tipset",
     children: [
       {
@@ -133,10 +154,7 @@ const mobileNavMenu: Menu_Info[] = [
         key: "tipset_pool-message",
         link: "/tipset/pool-message/",
       },
-      {
-        key: "tipset_transfer",
-        link: "/tipset/transfer/",
-      },
+
     ],
   },
   {
@@ -166,22 +184,7 @@ const mobileNavMenu: Menu_Info[] = [
       },
     ],
   },
-  {
-    key: "network_overview",
-    link: "/rank",
-    children: [
-      {
-        key: "ranking",
-        link: "/rank",
-      },
-      {
-        key: "tipset_ranking",
-        link: "/tipset/address-list/",
-      },
-      { key: "statistics_gas", link: "/statistics/gas" },
-      { key: "statistics_charts", link: "/statistics/charts" },
-    ],
-  },
+
   {
     key: "language",
     children: [

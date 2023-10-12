@@ -107,8 +107,8 @@ export default () => {
   return (
     <div className={classNames(styles["address-list"], "main_contain")}>
       <div className={classNames("flex justify-between items-center",styles['header-wrap'])}>
-        <div>
-          <div className="font-PingFang font-semibold text-lg">
+        <div className="mx-2.5">
+          <div className="font-PingFang font-semibold text-lg ">
             {tr("address_list")}
           </div>
           <div className="text_des text-xs">
