@@ -745,7 +745,7 @@ export const message_detail = {
                 <div className='flex flex-col gap-y-4 align-baseline'>
                   {text.map((item: any, index) => {
                     return (
-                      <div key={index} className='grid grid-cols-1'>
+                      <div key={index} className='grid grid-cols-1 gap-y-1'>
                         <span className='flex items-center gap-x-2'>
                           <span className='text_des'>{tr('from_ath')}</span>
                           <span className='flex gap-x-2 items-center'>
