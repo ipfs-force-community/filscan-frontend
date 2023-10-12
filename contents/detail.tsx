@@ -713,31 +713,63 @@ export const message_detail = {
         if (Array.isArray(text)) {
           if(text.length === 0) return null
           return (
-            <div className='flex flex-col gap-y-4 align-baseline'>
-              {text.map((item: any, index) => {
-                return (
-                  <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-2'>
-                      <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.from)}
-                      </span>
-                    </span>
-                    <span className='flex items-center gap-x-2 '>
-                      <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.to)}
-                      </span>
-                    </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
-                      <span className='font_weight'>For</span>
-                      <span>{Number(item?.amount).toFixed(4) || '--'}</span>
-                      <span>{ item?.token_name}</span>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <>
+              <BrowserView>
+                <div className='flex flex-col gap-y-4 align-baseline'>
+                  {text.map((item: any, index) => {
+                    return (
+                      <div key={index} className='flex gap-x-2.5'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                          <span>{ item?.token_name}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </BrowserView>
+              <MobileView>
+                <div className='flex flex-col gap-y-4 align-baseline'>
+                  {text.map((item: any, index) => {
+                    return (
+                      <div key={index} className='grid grid-cols-1 gap-y-1'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                          <span>{ item?.token_name}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </MobileView>
+            </>
           );
         }
         return null
@@ -757,29 +789,58 @@ export const message_detail = {
             <div className='flex flex-col gap-y-4 align-baseline'>
               {text.map((item: any, index) => {
                 return (
-                  <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-2'>
-                      <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.from)}
-                      </span>
-                    </span>
-                    <span className='flex items-center gap-x-2 '>
-                      <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.to)}
-                      </span>
-                    </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
-                      <span className='font_weight'>For</span>
-                      <span>
-                        {formatFilNum(item.value, false, false, 4) || '--'}
-                      </span>
-                      <span className='text_des font-PingFang'>
-                  ({tr(item.consume_type)})
-                      </span>
-                    </span>
-                  </div>
+                  <>
+                    <BrowserView>
+                      <div key={index} className='flex gap-x-2.5'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>
+                            {formatFilNum(item.value, false, false, 4) || '--'}
+                          </span>
+                          <span className='text_des font-PingFang'>
+                          ({tr(item.consume_type)})
+                          </span>
+                        </span>
+                      </div>
+                    </BrowserView>
+                    <MobileView>
+                      <div key={index} className='grid grid-cols-1'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>
+                            {formatFilNum(item.value, false, false, 4) || '--'}
+                          </span>
+                          <span className='text_des font-PingFang'>
+                            ({tr(item.consume_type)})
+                          </span>
+                        </span>
+                      </div>
+                    </MobileView>
+                  </>
                 );
               })}
             </div>
