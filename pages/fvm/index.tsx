@@ -101,7 +101,6 @@ export default () => {
                   styles["content-wrap"]
                 )}
               >
-
                 {content?.map((item: any, index: number) => {
                   return (
                     <li
@@ -153,9 +152,7 @@ export default () => {
                 })}
               </ul>
             </Watermark>
-
           </div>
-
         </div>
       </div>
 
