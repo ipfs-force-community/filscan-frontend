@@ -22,9 +22,9 @@
         .mobile-table-card-item-label {
           display: flex;
           flex: 2;
-          flex-shrink: 0;
           max-width: 40%;
           color: var(--mobile-des-color);
+          word-break: break-word;
           font-weight: 400;
           font-size: 15px;
         }
