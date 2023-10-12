@@ -65,7 +65,7 @@ const tipset = {
   pool_list:'메시지 풀 목록',
   gas_fee_cap: 'Gas 한도',
   gas_premium: 'Gas 프리미엄',
-  block_list:'Block List',
+  block_list:'Tipsets List',
 
 }
 export default tipset

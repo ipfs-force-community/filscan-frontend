@@ -8,7 +8,7 @@ const en ={
   contract_list: 'Verified Contracts',
   contract_rank: 'Contract Rank',
   defi_dashboard:'DeFi Protocol',
-  tipset: 'BlockChain',
+  tipset: 'Blockchain',
   tipset_chain: "Tipsets",
   tipset_message:'Messages',
   tipset_ranking: 'Wealth Ranking',

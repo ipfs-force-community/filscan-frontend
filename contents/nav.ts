@@ -104,12 +104,7 @@ const navMenu: Array<Menu_Info | any> = [
 ];
 
 const mobileNavMenu: Menu_Info[] = [
-  {
-    key: "fvm",
-    sufIcon: "hotIcon",
-    color: "#F44C30",
-    link: "/fvm",
-  },
+
   {
     key: "home",
     link: "/",
@@ -184,7 +179,12 @@ const mobileNavMenu: Menu_Info[] = [
       },
     ],
   },
-
+  {
+    key: "fvm",
+    sufIcon: "hotIcon",
+    color: "#F44C30",
+    link: "/fvm",
+  },
   {
     key: "language",
     children: [
