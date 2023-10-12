@@ -155,10 +155,20 @@ export const contract_rank = {
         if (!text) return '--';
         return (
           <span className='flex gap-x-2 items-center'>
-            <Link className='link_text' href={`/address/${text}`}>
-              {isIndent(text, 5, 4)}
-            </Link>
-            <Copy text={text} />
+            <BrowserView>
+              <Link className='link_text' href={`/address/${text}`}>
+                {isIndent(text, 5, 4)}
+              </Link>
+              <Copy text={text} />
+            </BrowserView>
+            <MobileView>
+              <span className='copy-row'>
+                <Link className='link_text' href={`/address/${text}`}>
+                  {isIndent(text, 5, 4)}
+                </Link>
+                <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+              </span>
+            </MobileView>
           </span>
         );
       },

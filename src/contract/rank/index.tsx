@@ -16,6 +16,8 @@ import Copy from '@/components/copy';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './index.module.scss'
 import classNames from 'classnames';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
+
 import _ from 'lodash'
 const default_sort = {
   field: 'transfer_count',
@@ -77,10 +79,18 @@ export default ({ origin }: { origin?: string }) => {
           if (!record?.contract_address) return '--';
           return (
             <span className='flex gap-x-2 items-center'>
-              <Link className='link_text' href={`/address/${record?.contract_address}`}>
-                {isIndent(record?.contract_address, 5, 4)}
-              </Link>
-              <Copy text={record?.contract_address} />
+              <BrowserView>
+                <Link className='link_text' href={`/address/${record?.contract_address}`}>
+                  {isIndent(record?.contract_address, 5, 4)}
+                </Link>
+                <Copy text={record?.contract_address} />
+              </BrowserView>
+              <span className='copy-row'>
+                <Link className='link_text' href={`/address/${record?.contract_address}`}>
+                  {isIndent(record?.contract_address, 5, 4)}
+                </Link>
+                <Copy text={record?.contract_address} icon={<CopySvgMobile/>} className='copy'/>
+              </span>
             </span>
           );
         }
