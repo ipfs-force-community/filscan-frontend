@@ -13,7 +13,7 @@ import {
 import Link from 'next/link';
 import { Item } from './type';
 import { BrowserView, MobileView } from '@/components/device-detect';
-import copySvgMobile from '@/assets/images/icon-copy.svg';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 
 //消息列表
 export const message_list = {
@@ -26,11 +26,22 @@ export const message_list = {
       width: '12%',
       render: (text: string) => (
         <span className='flex items-center gap-x-1'>
-          <Link href={`/message/${text}`} className='link'>
-            <MobileView>{isIndent(text,6,6)}</MobileView>
-            <BrowserView>{isIndent(text)}</BrowserView>
-          </Link>
-          <Copy text={text} />
+
+          <BrowserView>
+            <Link href={`/message/${text}`} className='link'>
+              <MobileView>{isIndent(text,6,6)}</MobileView>
+              <BrowserView>{isIndent(text)}</BrowserView>
+            </Link>
+            <Copy text={text} />
+          </BrowserView>
+          <MobileView>
+            <span className='copy-row'>
+              <Link href={`/message/${text}`} className='link'>
+                {isIndent(text,6,6)}
+              </Link>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+            </span>
+          </MobileView>
         </span>
       ),
     },
@@ -66,7 +77,7 @@ export const message_list = {
                 }}>
                 {isIndent(text,6,6)}
               </span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
             </span>
           </MobileView>
           <BrowserView>{get_account_type(text)}</BrowserView>
@@ -89,7 +100,7 @@ export const message_list = {
                 }}>
                 {isIndent(text,6,6)}
               </span>
-              <Copy text={text} icon={copySvgMobile} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
             </span>
           </MobileView>
           <BrowserView>{get_account_type(text)}</BrowserView>

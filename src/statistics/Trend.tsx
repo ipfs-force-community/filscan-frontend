@@ -323,24 +323,47 @@ export default (props: Props) => {
       </BrowserView>
       <MobileView>
         <div className={classNames(`w-full pb-2 card_shadow border border_color rounded-xl`,styles['chart-wrap'])}>
-          <span className={classNames('flex gap-x-4 chart-legend',styles.legend)}>
-            {options?.legendData?.map((v: any) => {
-              return (
-                <span
-                  className='text-xs flex cursor-pointer items-center gap-x-1'
-                  key={v.name}
-                  onClick={() => {
-                    setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
-                  }}
-                  style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                  {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
-                  <span className={classNames('text-xs text_des font-normal',styles.value)}>
-                    {tr(v.name)}
+          {(()=>{
+            if ((lang==="en" || lang === "ka") && isMobile) {
+              return <span className={classNames('grid grid-cols-2 gap-2 chart-legend',styles.legend)}>
+                {options?.legendData?.map((v: any) => {
+                  return (
+                    <span
+                      className='text-xs flex cursor-pointer items-center gap-x-1'
+                      key={v.name}
+                      onClick={() => {
+                        setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                      }}
+                      style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                      {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
+                      <span className={classNames('text-xs text_des font-normal',styles.value)}>
+                        {tr(v.name)}
+                      </span>
+                    </span>
+                  );
+                })}
+              </span>
+            }
+            return <span className={classNames('flex gap-x-4 chart-legend',styles.legend)}>
+              {options?.legendData?.map((v: any) => {
+                return (
+                  <span
+                    className='text-xs flex cursor-pointer items-center gap-x-1'
+                    key={v.name}
+                    onClick={() => {
+                      setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                    }}
+                    style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                    {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
+                    <span className={classNames('text-xs text_des font-normal',styles.value)}>
+                      {tr(v.name)}
+                    </span>
                   </span>
-                </span>
-              );
-            })}
-          </span>
+                );
+              })}
+            </span>
+
+          })()}
           <div className='h-[350px]'>
             <EChart options={newOptions} />
           </div>

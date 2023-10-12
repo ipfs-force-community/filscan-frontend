@@ -33,11 +33,11 @@ export default ({ data }: { data: any }) => {
               : showData[dataIndex] || '--';
 
             return (
-              <li className={classNames(styles.row,'flex flex-col w-1/2')} key={dataIndex}>
+              <li className={classNames(styles['row-item'],'flex flex-col w-1/2')} key={dataIndex}>
                 <span className={classNames('text-sm text_des',styles.label)}>{tr(title)}</span>
                 <>
                   <BrowserView>
-                    <span className='text_clip font-DINPro-Bold text-xl	 '>
+                    <span className='text_clip font-DINPro-Bold text-xl'>
                       {loading ? <SkeletonScreen /> : value}
                     </span>
                   </BrowserView>

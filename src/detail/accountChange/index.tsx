@@ -259,7 +259,30 @@ export default ({
   }, [options, default_xAxis, noShow, defaultOptions,isMobile]);
 
   const ledRender = ()=>{
-    return options?.legendData?.length >1 ? <span className='flex gap-x-4 mr-2.5'>
+    if ((lang === 'en' || lang === 'ka') &&isMobile) {
+      return options?.legendData?.length >1 ? <span className={classNames('grid grid-cols-2 gap-2')}>
+        {options?.legendData?.map((v: any) => {
+          return (
+            <span
+              className={classNames('text-xs flex cursor-pointer items-center gap-x-1',styles['legend-title-wrap'])}
+              key={v.dataIndex}
+              onClick={() => {
+                setNoShow({
+                  ...noShow,
+                  [v.dataIndex]: !noShow[v.dataIndex],
+                });
+              }}
+              style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
+              {getSvgIcon('legendIcon')}
+              <span className={classNames('text-xs text_des font-normal',styles['legend-title'])}>
+                {tr(v.title)}
+              </span>
+            </span>
+          );
+        })}
+      </span> : <></>
+    }
+    return options?.legendData?.length >1 ? <span className={classNames('flex gap-x-4 mr-2.5')}>
       {options?.legendData?.map((v: any) => {
         return (
           <span
@@ -298,7 +321,7 @@ export default ({
 
       <div className={classNames('card_shadow w-full border rounded-xl p-2.5 pt-5 border_color',styles.echart)}>
         <MobileView>
-          <div className="tips">
+          <div className="tips mb-2">
             {ledRender()}
           </div>
         </MobileView>
