@@ -4,7 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
-import { message_list, transfer_list } from '@/contents/tipset';
+import {transfer_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { formatNumber, pageLimit } from '@/utils';
@@ -46,7 +46,7 @@ export default () => {
         index: showIndex - 1,
         limit: pageLimit,
       },
-    });
+    }, {isCancel:false});
     //setLoading(false);
     setDataSource({
       data: result?.large_transfer_list || [],
