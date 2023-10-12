@@ -326,10 +326,20 @@ export const contract_token = {
         dataIndex: 'total_supply',
         title: () => {
           return (
-            <span className='flex items-center gap-x-2'>
-              {tr('total_supply')}
-              <Tooltip context={tr('total_supply_tip')} />
-            </span>
+            <>
+              <BrowserView>
+                <span className='flex items-center gap-x-2'>
+                  <span> {tr('total_supply')}</span>
+                  <Tooltip context={tr('total_supply_tip')} />
+                </span>
+              </BrowserView>
+              <MobileView>
+                <span className='flex items-center gap-x-2'>
+                  <span style={{width:"min-content",wordBreak:"initial"}}> {tr('total_supply')}</span>
+                  <Tooltip context={tr('total_supply_tip')} />
+                </span>
+              </MobileView>
+            </>
           );
         },
         render: (text: string | number) => {

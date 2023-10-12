@@ -20,6 +20,18 @@ export default ({ data,type }: { data: any,type:string }) => {
     }
     return account_detail.list(tr).map((value)=>{
       if (isMobile) {
+
+        if (value.dataIndex === 'peer_id') {
+          value.render = (text: string,record:any) => {
+            if(!text) return '--'
+            const accountId = record?.account_basic?.account_id;
+            return <span className="flex items-baseline gap-x-2 copy-row">
+              <span className="text"> { accountId ? <Link href={`/peer/${accountId}`} className='link_text' >{isIndent(text,10)}</Link>
+                :<span>{isIndent(text,10)}</span>}</span>
+              <Copy text={text} icon={<CopySvgMobile/>} className="copy" />
+            </span>
+          }
+        }
         if (value.dataIndex === 'owner_address') {
           value.render = (text: string) => {
             if(!text) return '--'

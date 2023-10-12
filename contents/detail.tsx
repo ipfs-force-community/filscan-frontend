@@ -442,7 +442,7 @@ export const message_detail = {
           return <ul className='flex flex-col gap-y-2'>
             { text.map((item:string,index:number) => {
               return <li key={item} className='flex items-center gap-x-2'>
-                <span className='flex items-center justify-center w-5 h-5 bg-bg_hover rounded-[5px]'>{ index}</span>
+                <span className='flex items-center justify-center flex-shrink-0 w-5 h-5 bg-bg_hover rounded-[5px] '>{ index}</span>
                 { item}
               </li>
             })}
@@ -1010,7 +1010,7 @@ const default_content = [
             <span className='copy-row'>
               <span className='normal-text'>{text}</span>
               <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
-              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn mt-2'>
                 {tr('account_detail')}
               </Link>}
             </span>

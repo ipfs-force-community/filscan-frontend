@@ -381,9 +381,11 @@
     .text {
       color: var(--mobile-link-color);
       word-break: break-all;
+      font-size: 15px;
     }
     .normal-text {
       word-break: break-all;
+      font-size: 15px;
     }
     .copy {
       position: relative;
