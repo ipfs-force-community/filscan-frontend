@@ -7,7 +7,7 @@ import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import EChart from '@/components/echarts';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
-import { formatFilNum, formatNumber } from '@/utils';
+import { formatFil, formatFilNum, formatNumber } from '@/utils';
 import useAxiosData from '@/store/useAxiosData';
 import useWindow from '@/components/hooks/useWindown';
 
@@ -51,7 +51,7 @@ function Gas(props: Props) {
           fontSize: 14,
           color: isMobile ? color.mobileLabelColor : color.labelColor,
           formatter(v: any) {
-            return formatNumber(v)+' attoFIL';
+            return formatNumber(v)+' nanoFiL';
           },
 
         },
@@ -140,7 +140,7 @@ function Gas(props: Props) {
         }
         dateList.push(showTime);
         seriesObj.base_fee.push({
-          value:Number(base_fee),
+          value:formatFil(base_fee,'nanoFiL'),
           showValue: formatFilNum(base_fee, false, false, 4, false).split(
             ' '
           )[0],
