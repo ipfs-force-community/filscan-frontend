@@ -5,6 +5,7 @@
     svg {
       width: 14px;
       height:14px;
+
       fill:var(--font-color);
     }
   }
@@ -40,12 +41,12 @@
       display: grid;
 
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 16px;
+      grid-gap: 10px;
       .item-wrap {
         padding: 8px;
         width: unset;
-        border-radius: 6px;
         border-width: 0.5px;
+        border-radius: 6px;
         .right {
           img {
             width: 26px;
