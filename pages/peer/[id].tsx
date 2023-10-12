@@ -1,3 +1,4 @@
+import { BrowserView, MobileView } from "@/components/device-detect";
 import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
 import { peerList } from "@/contents/detail";
@@ -25,18 +26,41 @@ export default (props:any) => {
     setData(result?.account_info?.account_miner || {});
   }
   return <div className="main_contain">
-    <div className='mb-2.5 DINPro-Medium font-medium text-lg flex items-center'>
-      <span>{ tr('peer_detail')}</span>
-    </div>
-    <div
-      className='card_shadow border border_color rounded-xl p-5'>
-      <Content
-        ns='detail'
-        contents={peerList}
-        data={{
-          ...data,
-        }}
-      />
-    </div>
+
+    < MobileView>
+      <div className='m-2.5 DINPro-Medium font-medium text-lg flex items-center !mx-2.5'>
+        <span>{ tr('peer_detail')}</span>
+      </div>
+    </MobileView>
+    <BrowserView>
+      <div className='mb-2.5 DINPro-Medium font-medium text-lg flex items-center !mx-2.5'>
+        <span>{ tr('peer_detail')}</span>
+      </div></BrowserView>
+
+    <MobileView>
+      <div
+        className='card_shadow border border_color rounded-xl p-[12px] m-[10px]'>
+        <Content
+          ns='detail'
+          contents={peerList}
+          data={{
+            ...data,
+          }}
+        />
+      </div>
+    </MobileView>
+    <BrowserView>
+      <div
+        className='card_shadow border border_color rounded-xl p-5'>
+        <Content
+          ns='detail'
+          contents={peerList}
+          data={{
+            ...data,
+          }}
+        />
+      </div>
+    </BrowserView>
+
   </div>
 }

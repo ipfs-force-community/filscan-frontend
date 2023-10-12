@@ -77,7 +77,7 @@ export default ({
           data={tabList || []}
           ns='detail'
           defaultValue={activeTab}
-          defaultActive={ defaultActive}
+          defaultActive={defaultActive}
           isHash={true}
         />
         <MobileView>

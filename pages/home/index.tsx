@@ -84,7 +84,7 @@ function Home(props: any) {
                   <div className='font-PingFang font-semibold text-lg'>
                     {tr('defi_list')}
                   </div>
-                  <Link href={`/contract/rank`}>
+                  <Link href={`/fevm/defi`}>
                     <GoIcon
                       className='cursor-pointer'
                       width={18}

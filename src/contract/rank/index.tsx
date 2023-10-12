@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from 'react';
 import VerifySvg from '@/assets/images/verify.svg';
 import GoIcon from '@/assets/images/black_go.svg';
 import Link from 'next/link';
-import { formatDateTime, isIndent, pageHomeLimit, pageLimit } from '@/utils';
+import { formatDateTime, formatNumber, isIndent, pageHomeLimit, pageLimit } from '@/utils';
 import useWindow from '@/components/hooks/useWindown';
 import Copy from '@/components/copy';
 import { BrowserView, MobileView } from '@/components/device-detect';
@@ -144,7 +144,7 @@ export default ({ origin }: { origin?: string }) => {
           {tr('contract_rank')}
         </div>
         <div className={classNames('text-xs text_des ',styles['title-description'])}>
-          {tr('contract_list_total', {value:dataSource.total})}
+          {tr('contract_list_total', {value:formatNumber(dataSource?.total||0)})}
         </div>
       </MobileView>
       <BrowserView>
@@ -162,7 +162,7 @@ export default ({ origin }: { origin?: string }) => {
             />
           </Link>}
         </div>
-        {origin !== 'home' && <div className='text-xs text_des mx-2.5'> {tr('contract_list_total', {value:dataSource.total})}</div>}
+        {origin !== 'home' && <div className='text-xs text_des mx-2.5'> {tr('contract_list_total', {value:formatNumber(dataSource?.total||0)})}</div>}
       </BrowserView>
       <div className={classNames(`mt-4 border  rounded-xl p-5	card_shadow border_color ${origin === 'home'?'h-[650px] ':'h-full'}`,styles.reset,styles.table)}>
         <Table
