@@ -265,7 +265,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
       </div>
       <div className={classNames('card_shadow w-full border rounded-xl p-2.5 pt-5 border_color',styles.chart)}>
         <MobileView>
-          <div className="tips">
+          <div className="tips mb-2">
             {ledRender()}
           </div>
         </MobileView>
