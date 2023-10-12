@@ -1010,7 +1010,7 @@ const default_content = [
             <span className='copy-row'>
               <span className='normal-text'>{text}</span>
               <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
-              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn mt-2'>
                 {tr('account_detail')}
               </Link>}
             </span>
