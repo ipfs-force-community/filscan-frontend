@@ -16,6 +16,7 @@ import Verify from './verify';
 import TokenList from './TokenList';
 import { Translation } from '@/components/hooks/Translation';
 import { MobileView } from '@/components/device-detect';
+import { formatNumber } from '@/utils';
 
 export default ({
   accountId,
@@ -80,7 +81,7 @@ export default ({
           isHash={true}
         />
         <MobileView>
-          <span className='text_des text-xs pt-[8px]'>{tr('message_list_total', {value:num})}</span>
+          <span className='text_des text-xs pt-[8px]'>{tr('message_list_total', {value:formatNumber(num)})}</span>
         </MobileView>
         {activeItem?.headerOptions && (
           <Selects
