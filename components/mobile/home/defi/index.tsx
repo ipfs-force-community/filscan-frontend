@@ -43,7 +43,7 @@ const Defi = ()=>{
       },
       render(value, record, index) {
         return <div className={styles.protocol}>
-          <Image fill src={record.icon_url} alt="" />
+          <Image fill src={record.icon_url} alt="" className="mr-1"/>
           <div
             style={{
               overflow: 'hidden',

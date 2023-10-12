@@ -223,11 +223,16 @@ export const contract_rank = {
       render: (text: any, record: any) => {
         if (!text) return '--';
         return (
-          <span className='flex gap-x-2 items-center'>
+          <span className='flex gap-x-2 items-center copy-row'>
             <Link className='link_text' href={`/address/${text}`}>
               {isIndent(text, 5, 4)}
             </Link>
-            <Copy text={text} />
+            <BrowserView>
+              <Copy text={text} />
+            </BrowserView>
+            <MobileView>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+            </MobileView>
           </span>
         );
       },

@@ -526,13 +526,13 @@ export const message_detail = {
           <>
             <BrowserView>
               <span className='flex items-center gap-x-2'>
-                <span className='normal-text'>{text}</span>
+                <span className='text'>{text}</span>
                 <Copy text={text} />
               </span>
             </BrowserView>
             <MobileView>
               <span className='copy-row'>
-                <span className='text'>{text}</span>
+                <span className='normal-text'>{text}</span>
                 <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               </span>
             </MobileView>
