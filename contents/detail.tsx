@@ -862,17 +862,18 @@ export const message_detail = {
       title: 'replaced',
       render: (text: any) => String(text) === 'true' ? 'True':'False'
     },
-    {
-      dataIndex: 'base_cid',
-      title: 'base_cid',
-      elasticity: true,
-      render: (text: any) => {
-        if (String(text) === 'true') {
-          return text;
-        }
-        return null
-      }
-    },
+    // {
+    //   dataIndex: 'base_cid',
+    //   title: 'base_cid',
+    //   elasticity: true,
+    //   render: (text: any,record:any) => {
+    //     console.log('---333',text,record)
+    //     if (String(text)) {
+    //       return text;
+    //     }
+    //     return null
+    //   }
+    // },
     {
       borderTop: true,
       dataIndex: 'all_gas_fee',
