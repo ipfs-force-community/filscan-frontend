@@ -6,6 +6,7 @@ import {
   account_link,
   formatDateTime,
   formatFilNum,
+  formatNumber,
   get_account_type,
   isIndent,
   unitConversion,
@@ -322,7 +323,7 @@ export const pool_list = {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',
       width: '12%',
-      render: (text: string) => text || '--',
+      render: (text: string) => text || String(text) === '0'? formatNumber(text) : '--',
     },
     {
       dataIndex: 'gas_premium',

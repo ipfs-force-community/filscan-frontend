@@ -76,10 +76,10 @@ export default () => {
     </MobileView>
     <BrowserView>
       <div>
-        <span className='flex flex-col text-xl font-medium gap-y-2.5'>{tr('verify_title')}</span>
-        <span className="text_des text-xs">{ tr('verify_des')}</span>
+        <span className='flex flex-col text-xl font-medium gap-y-2.5 mx-2.5'>{tr('verify_title')}</span>
+        <span className="text_des text-xs  mx-2.5">{ tr('verify_des')}</span>
       </div>
-      <div className='border rounded-xl p-5 card_shadow border_color mt-2.5 flex flex-col items-center'>
+      <div className='border rounded-xl p-5 card_shadow border_color mt-2.5  flex flex-col items-center'>
         <div className="text_des text-xs leading-6">{tr('verify_content')}</div>
         <div className="mt-12 w-[500px]">
           <Form className="!w-full custom_form"
