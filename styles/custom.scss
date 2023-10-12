@@ -239,6 +239,21 @@ font-display: auto;
         }
     }
 }
+.ant-spin-blur{
+    .ant-table-placeholder{
+       visibility: hidden;
+    }
+}
+
+.custom-table-loading{
+    &-div{
+        height: 160px !important;
+        width: 160px !important;
+         left: 50%;
+         transform: translate(0,-45%);
+         margin-top: 20px !important;
+    }
+}
 
 //custom_table_tooltip
   .ant-tooltip {
