@@ -155,7 +155,7 @@ function Overview({ className }: { className?: string }) {
       if (isMobile) {
         newOption.series[0].label.show = false;
         newOption.series[0].radius = "80%";
-        newOption.tooltip.position = ["50%", "50%"];
+        newOption.tooltip.position = ["15%", "50%"];
         newOption.tooltip.formatter = (v: any) => {
           const { name, value, data } = v;
           return `${v.marker} ${data.value} <div>${data.name}</div>`;
@@ -180,7 +180,7 @@ function Overview({ className }: { className?: string }) {
       if (isMobile) {
         newOption.series[0].label.show = false;
         newOption.series[0].radius = "80%";
-        newOption.tooltip.position = ["50%", "50%"];
+        newOption.tooltip.position = ["15%", "50%"];
         newOption.tooltip.formatter = (v: any) => {
           const { name, value, data } = v;
           return `${v.marker} ${data.value} <div>${data.name}</div>`;
