@@ -78,7 +78,7 @@ export default ({
           return (
             <li key={dataIndex} className={classNames(styles['list-row'], 'flex')}>
 
-              <span className='text-sm text_des min-w-20 flex flex-wrap'>
+              <span className={classNames('text-sm text_des min-w-20 flex flex-wrap',styles.label)}>
                 {title_tip ? <Tooltip context={tr(title_tip)} icon={false} >
                   <span className='flex items-center gap-x-1 cursor-pointer'>{tr(title)} {getSvgIcon('tip')}:</span>
                 </Tooltip> : `${tr(title)}:`}
