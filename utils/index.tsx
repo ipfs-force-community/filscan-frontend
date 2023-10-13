@@ -234,6 +234,13 @@ export function formatTime(from:number, to?:number, ago = true) {
   };
 }
 
+export function ellipsis(str: string, unit: number = 6,) {
+  const suffixNum = unit;
+  return str && unit && str.length > suffixNum
+    ? str?.slice(0, unit) + "..."
+    : str;
+}
+
 export function isIndent(str: string, unit: number = 6, unitNum?: number ) {
   const showUnit = unitNum ? unit + unitNum : unit * 2;
   const suffixNum = unitNum || unit;
