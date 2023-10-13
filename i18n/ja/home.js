@@ -35,7 +35,7 @@ const home = {
   active_miners: 'アクティブなマイナー数',
   burnt: '破壊された量',
   circulating_percent: '流通率',
-  rank:'ランキング'
-
+  rank:'ランキング',
+  see_more:'See More',
 }
 export default home

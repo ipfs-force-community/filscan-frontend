@@ -1,23 +1,33 @@
-@media screen and (max-width: 1000px){
-  .miner{
+@media screen and (max-width: 1000px) {
+  .miner {
     padding: 12px;
-    .column{
+    .title-wrap {
+      font-size: 17px;
+      .title {
+        margin: unset;
+      }
+    }
+
+    .balance {
+      border-radius: 6px;
+    }
+
+    .column {
       display: flex;
       flex-direction: column;
-     
-      
+      margin-top: 10px;
     }
-    :global{
-      .flex{
-        &.card_shadow{
+    :global {
+      .flex {
+        &.card_shadow {
           flex-direction: column;
         }
       }
 
-      .height-auto{
+      .height-auto {
         height: auto;
       }
-      .tips{
+      .tips {
         margin-bottom: 10px;
       }
     }

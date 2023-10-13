@@ -17,18 +17,18 @@ import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
 import Trade from './Trade'
 import Event from './Event';
+import Loading from '@/components/loading';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
   const { axiosData } = useAxiosData();
+  const [data, setData] = useState<any>({});
+  const [dataLoading, setDataLoading] = useState(true);
   const [TransferData, setTransfer] = useState<any>(undefined);
   const [TransferNFTData, setTransferNft] = useState<any>(undefined);
   // const [isF4, setIsF4] = useState(false);
   const [swap, setSwap] = useState();
   const { hash } = useHash()
-  const { data: result, loading } = useAxiosData(apiUrl.detail_message, {
-    message_cid: cid,
-  });
 
   const active = useMemo(() => {
     if (hash) {
@@ -37,13 +37,16 @@ export default ({ cid }: { cid: string | string[] }) => {
     return 'detail'
   },[hash])
 
-  const data = useMemo(() => {
-    return result?.MessageDetails || {};
-  }, [result]);
-
   useEffect(() => {
     loadTrans(data?.message_basic?.cid);
+    load()
   }, [data?.message_basic?.cid]);
+
+  const load = async () => {
+    const result: any = await axiosData(apiUrl.detail_message, { message_cid: cid, }, { isCancel: false })
+    setDataLoading(false)
+    setData(result?.MessageDetails || {})
+  }
 
   const loadTrans = (id: string) => {
     //erc20
@@ -70,16 +73,10 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   };
 
-  if (loading) {
-    return (
-      <div className='main_contain'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+  if (dataLoading) {
+    return <Loading />
   }
-  if (!loading && Object.keys(data).length === 0) {
+  if (!dataLoading && Object.keys(data).length === 0) {
     return <NoData />;
   }
 
@@ -93,12 +90,13 @@ export default ({ cid }: { cid: string | string[] }) => {
       return <>
         <div className={classNames(styles.detail,'flex gap-y-5 flex-col mb-5')}>
           <div
-            className='card_shadow border border_color rounded-xl p-5'>
+            className={classNames('card_shadow border border_color rounded-xl p-5',styles['content-wrap'])}>
             <Content
               ns='detail'
               contents={message_detail.trans}
               data={{
                 ...data,
+                base_cid:cid,
                 message_ERC20Trans: TransferData,
                 nftTrans: TransferNFTData,
                 swap_info:swap
@@ -112,19 +110,19 @@ export default ({ cid }: { cid: string | string[] }) => {
             get(data,'consume_list')?.map((n:any,index:number)=>{
               return <div className={styles.card} key={`card-${index}`}>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('from_ath')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('from_ath')}：</div>
                   <div className={styles['card-item-value']}> {get_account_type(n['from'])}</div>
                 </div>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('to_ath')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('to_ath')}：</div>
                   <div className={styles['card-item-value']}> {get_account_type(n['to'])}</div>
                 </div>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('value')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('value')}：</div>
                   <div className={styles['card-item-value']}> {formatFilNum(n['value'], false, false, 4) || '--'}</div>
                 </div>
                 <div className={styles['card-item']}>
-                  <div className={classNames(styles['card-item-label'],'w-28')}>{tr('consume_type')}：</div>
+                  <div className={classNames(styles['card-item-label'])}>{tr('consume_type')}：</div>
                   <div className={styles['card-item-value']}> {tr(n['consume_type'])}</div>
                 </div>
               </div>
@@ -154,7 +152,7 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   return (
     <div className={classNames(styles.message,'main_contain')}>
-      <div className='flex items-center my-2.5'>
+      <div className={classNames('flex items-center m-2.5',styles['title-wrap'])}>
         <span className={classNames('font-DINPro-Bold font-semibold text-lg',styles['top-title'])}>
           {tr(message_detail?.title || '')}
         </span>

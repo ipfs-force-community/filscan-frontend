@@ -20,9 +20,9 @@ export default () => {
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const { name, p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -65,7 +65,7 @@ export default () => {
   }, [method, current]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
+  //  setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
     const result: any = await axiosData(apiUrl.tipset_pool, {
@@ -75,7 +75,7 @@ export default () => {
         method_name,
       },
     });
-    setLoading(false);
+    // setLoading(false);
     setDataSource({
       data: (result?.messages_pool_list || [])?.map((item: any) => {
         return {
@@ -107,7 +107,7 @@ export default () => {
   };
   return (
     <div className={classNames(styles['pool-message-list'],'main_contain')}>
-      <div className='flex justify-between items-center mx-2.5'>
+      <div className={classNames('flex justify-between items-center mx-2.5',styles['title-wrap'])}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('pool_list')}
@@ -117,7 +117,7 @@ export default () => {
           </div>
         </div>
         <Selects
-          className='w-[200px]'
+          className={classNames('w-[200px]',styles.select)}
           value={method}
           options={headerOptions}
           onChange={(value) => {

@@ -1,65 +1,93 @@
-
-@media screen and (max-width: 1000px){
-  .pow{
+@media screen and (max-width: 1000px) {
+  .pow {
+    padding: 0;
     width: auto;
     height: auto;
-    padding: 0;
-    .row{
+    border-left: unset;
+    .row {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      &.between{
-        padding-left: 12px;
-        padding-right: 12px;
+      flex-direction: row;
+      padding-top: 15px;
+      padding-bottom: 20px;
+      &.between {
         justify-content: space-between;
+        padding-right: 12px;
+        padding-left: 12px;
       }
-      :global{
-        .text_des{
+      &.between > :first-child {
+        width: 70%;
+      }
+      &.between > :last-child {
+        justify-content: flex-end;
+        & > :last-child {
+          width: fit-content;
+        }
+      }
+
+      .row-item {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
+
+      .label {
+        color: var(--mobile-des-color);
+      }
+      :global {
+        .text_des {
           flex-shrink: 0;
         }
       }
-      .value{
+      .value {
+        flex-shrink: 0;
         padding-left: 3px;
+        color: var(--mobile-title-color);
+        font-weight: 500;
         font-size: 15px;
         font-family: DINPro-Medium, DINPro;
-        font-weight: 500;
-        color: var(--mobile-title-color);
         line-height: 18px;
       }
     }
 
-    .column{
+    .column {
       flex-direction: column;
       flex-wrap: nowrap;
-      max-height:none;
+      margin-top: unset;
       padding: 0 12px;
-      .full{
-        width: 100%;
+      max-height: none;
+      .full {
         display: flex;
         justify-content: space-between;
+        width: 100%;
+
+        .label {
+          color: var(--mobile-des-color);
+        }
       }
     }
 
-
-    .status{
-      padding: 15px 12px 15px;
-      border-top:1px solid var(--mobile-divide-line);
-      flex-direction: column;
+    .status {
       align-items: flex-start;
+      flex-direction: column;
       margin-top: 15px;
-      .status-row{
+      padding: 15px 12px 15px;
+      border-top: 1px solid var(--mobile-divide-line);
+      .status-row {
         padding-top: 10px;
       }
+      .sector-status-value,
+      .sector-status-title {
+        font-size: 12px;
+      }
     }
 
-    :global{
-      .pb-7{
+    :global {
+      .pb-7 {
         padding-bottom: 0;
         border-bottom: none;
       }
-      .mt-9{
+      .mt-9 {
         margin-top: 0;
       }
     }

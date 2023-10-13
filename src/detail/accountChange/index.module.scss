@@ -1,0 +1,14 @@
+@media only screen and (max-width: 1000px) {
+  .echart {
+    border-radius: 6px;
+  }
+  .legend-title-wrap {
+    svg {
+      width: 15px;
+    }
+    .legend-title {
+      text-wrap: nowrap;
+      font-size: 10px;
+    }
+  }
+}

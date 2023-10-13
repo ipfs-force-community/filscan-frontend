@@ -2,20 +2,30 @@
   .message {
     padding: 12px;
 
+    .title-wrap {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-top: unset;
+      margin-left: unset;
+
+      row-gap: 5px;
+    }
     .top-title {
-        margin-right: 10px;
+      margin-right: 10px;
     }
     .trans,
     .detail {
       margin-bottom: 18px;
+
+      .content-wrap {
+        border-radius: 6px;
+      }
       :global {
         .link-row {
           display: block;
           .copy {
             padding-left: 5px;
-            img {
-              display: inline-block;
-            }
+  
           }
         }
         .card_shadow {
@@ -66,47 +76,38 @@
         column-gap: 10px;
         .card-item-label {
           flex-shrink: 0;
+          min-width: 90px;
           color: var(--mobile-des-color);
           font-weight: 400;
           font-size: 15px;
           font-family: PingFangSC-Regular, PingFang SC;
-          line-height: 14px;
+          line-height: 16px;
         }
         .card-item-value {
           color: var(--mobile-title-color);
           font-weight: 500;
           font-size: 15px;
-          font-family: DINPro-Medium, DINPro;
-          line-height: 14px;
+          font-family: DINPro-Medium;
+          line-height: 16px;
           :global {
             .text {
               color: var(--mobile-link-color);
               word-break: break-all;
+              font-weight: 500;
+              font-size: 15px;
+              line-height: 21px;
             }
             .copy {
               padding-left: 5px;
-              img {
-                display: inline-block;
+
+              svg {
+                font-size: 14px;
+                line-height: 14px;
               }
+              // img {
+              //   display: inline-block;
+              // }
             }
-          }
-        }
-      }
-    }
-    :global {
-      .copy-row {
-        display: inline-block;
-        align-items: center;
-        .text {
-          color: var(--mobile-link-color);
-          word-break: break-all;
-        }
-        .copy {
-          display: inline-block;
-          align-items: center;
-          padding-left: 5px;
-          img {
-            display: inline-block;
           }
         }
       }

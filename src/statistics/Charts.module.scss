@@ -1,0 +1,40 @@
+@media only screen and (max-width: 1000px) {
+  .title {
+    margin: unset;
+    padding: unset;
+    padding-bottom: 15px;
+  }
+  .content {
+    border-radius: 6px;
+  }
+  .chart-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+
+    .chart {
+      padding: unset;
+      width: unset;
+      height: 300px;
+    }
+
+    .legend-label-wrap {
+      color: var(--mobile-des-color);
+      font-size: 12px;
+      .value {
+        color: var(--mobile-title-color);
+        font-family: "DINPro-Medium";
+      }
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+    }
+  }
+  .describe-item {
+    .label {
+      color: var(--mobile-des-color);
+    }
+  }
+}

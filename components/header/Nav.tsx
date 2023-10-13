@@ -22,8 +22,9 @@ export default () => {
             <Link
               key={index}
               href={`${item.link}`}
-              className='h-10 text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>
+              className='relative h-10 text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>
               <span className='px-4'>{tr(item.key)}</span>
+              {item.sufIcon && <span className='absolute -top-[2px] -right-2'>{getSvgIcon(item.sufIcon)}</span>}
             </Link>
           );
         })}

@@ -1,6 +1,7 @@
 .wrap {
   .twitter,
   .network {
+    border-width: 0.5px;
     svg {
       width: 14px;
       height:14px;
@@ -11,6 +12,7 @@
 
   .twitter:hover,.network:hover {
     background: var(--primary);
+    color: #ffffff;
     svg {
       fill: var(--activeColor);
     }
@@ -19,6 +21,8 @@
 
 @media only screen and (max-width: 1000px) {
   .wrap {
+    padding-bottom: 20px;
+
     padding-inline: 12px;
     .select {
       margin: 16px 0px 8px;
@@ -39,12 +43,12 @@
       display: grid;
 
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 16px;
+      grid-gap: 10px;
       .item-wrap {
         padding: 8px;
         width: unset;
+        border-width: 0.5px;
         border-radius: 6px;
-
         .right {
           img {
             width: 26px;
@@ -52,6 +56,10 @@
           }
           .text {
             & > :first-child {
+              overflow: hidden;
+              max-width: 60px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
               font-size: 13px;
             }
             & > :last-child {

@@ -15,11 +15,11 @@ import styles from './index.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import CopySvgMobile from '@/assets/images/icon-copy.svg';
-import { useHash } from '@/components/hooks/useHash';
 import { formatNumber, get$Number } from '@/utils';
 import Image from '@/packages/image'
 import Link from 'next/link';
 import { getSvgIcon } from '@/svgsIcon';
+import Loading from '@/components/loading';
 /** @format */
 export default () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ export default () => {
   const [tokenList, setTokenList] = useState<Array<any>>([]);
   const [verifyData, setVerifyData] = useState<any>({})
   const [accountType, setAccountType] = useState('');
-  const [interval, setInterval] = useState('24h');
+  const [interval, setInterval] = useState('1m');
   const [methodOptions, setMethodOptions] = useState([]);
   const [transOptions,setTransOptions] = useState([])
   const [actorId,setActorId] = useState('')
@@ -40,7 +40,7 @@ export default () => {
   useEffect(() => {
     setActorId('');
     setMethodOptions([]);
-    setInterval('24h');
+    setInterval('1m');
     setAccountType('');
     if (address) {
       loadMethod();
@@ -197,16 +197,20 @@ export default () => {
       },]
     }
     return [...defaultOpt, ...evmList];
-  }, [methodOptions,transOptions,verifyData]);
+  }, [methodOptions, transOptions, verifyData]);
+
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <div className={classNames(styles.address,'main_contain')}>
       <div className={classNames(styles['address-row'],'mb-2.5 ml-2.5 DINPro-Medium font-medium text-lg flex items-center')}>
         <span className={styles.label}>{tr('account_title')}:</span>
-
         <MobileView>
           <span className='copy-row'>
             <span className='normal-text'>{address}</span>
-            { address&& typeof address ==='string' && <Copy text={address} icon={<CopySvgMobile/>} className='copy'/>}
+            { address&& typeof address ==='string' && <Copy text={address} icon={<CopySvgMobile/>} className='copy-lg'/>}
           </span>
         </MobileView>
 
@@ -218,7 +222,7 @@ export default () => {
           {typeof address === 'string' && domains?.domains && domains?.domains[address] && <Link className='ml-2' href={`/domain/${domains?.domains[address]}?provider=${domains.provider}`}>({ domains?.domains[address]})</Link> }
         </BrowserView>
       </div>
-      <div className='card_shadow border border_color p-7 rounded-xl flex items-center'>
+      <div className={classNames('card_shadow border border_color p-7 rounded-xl flex items-center',styles.content)}>
         <BrowserView>
           <Content contents={contentList} ns={'detail'} columns={2} data={{...data,tokenList}} />
         </BrowserView>
@@ -237,7 +241,7 @@ export default () => {
             <Segmented
               data={address_detail.account_change.tabsList || []}
               ns='detail'
-              defaultValue='24h'
+              defaultValue='1m'
               isHash={false}
               onChange={(value: string) => {
                 setInterval(value);
@@ -251,7 +255,7 @@ export default () => {
       />
       <List
         tabList={tabsList}
-        defaultActive='message_list'
+        defaultActive='traces_list'
         accountId={address}
         actorId={actorId}
         verifyData={verifyData }

@@ -65,7 +65,8 @@ const detail = {
   lucky: '행운값',
   lucky_tip:'행운 값: 실제 블록 보상 수와 예상 블록 보상 수의 비율입니다. QualityAdjPower가 1 PiB 미만인 경우, 이 값은 상당한 무작위성을 가지며 참고 용도로만 사용되어야 합니다',
   sector_ratio: '섹터 증가 속도',
-  sector_ratio_tip:'',
+  sector_ratio_tip: '',
+  windowPost_gas:'컴퓨팅 전력 소비 유지',
   win_count: '우승자 보상',
   win_count_tip:'Filecoin 경제 모델에서 한 높이 (tipset)하에는 여러 블록 (block)이 있을 수 있으며, 각 블록 (block)은 여러 보상 (win count)을 받을 수 있습니다. 누적 블록 수 =모든 보상 수의 총합',
   net_profit_per_tb:'Gas 소비/T',
@@ -103,6 +104,10 @@ const detail = {
   nonce: 'Nonce 값',
   contract_verify: '계약 검증',
   contract_name: '계약 명칭',
+  peer_detail: '노드 세부정보',
+  miner_owner: '노드 세이버',
+  no_area:'Unknown',
+
   //miner
   //pool_overview_title:'账户',
 
@@ -143,6 +148,9 @@ const detail = {
   Transfer: '송금',
   Burn: '취합 비용 폐기',
   exit_code: '상태',
+  err_message: '에러 메시지',
+  replaced: 'CID를 덮어썼습니다',
+  base_cid:'재정의된 CID',
 
   //内部交易
   amount: '액수',
@@ -199,7 +207,6 @@ const detail = {
   erc20_transfer_total: '총 {{value}}개 송금',
 
   power_change: 'Power Change',
-  owned_active_miners: 'Active Miners',
 
   //height
   blcok_time: '블록 시간',

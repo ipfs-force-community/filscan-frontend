@@ -1,0 +1,17 @@
+@media only screen and (max-width: 1000px) {
+  .wrap {
+    margin-top: 10px;
+
+    .title {
+      height: unset;
+
+      margin-inline: unset;
+      margin-block: 10px;
+    }
+    .content {
+      border-radius: 6px;
+
+      padding-block: 15px;
+    }
+  }
+}

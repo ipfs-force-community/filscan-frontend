@@ -9,13 +9,14 @@ import { useTranslation } from 'react-i18next'
 import { mobileNavMenu } from '@/contents/nav'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
-const rootSubmenuKeys = ['1', '2', '3','4','5'];
 import Logo from '@/assets/images/logo.png';
 import LogoText from '@/assets/images/logoText.png'
 import { Translation } from '@/components/hooks/Translation';
-
 import Image from 'next/image'
 import { header_top } from '@/contents/common'
+import { useFilscanStore } from '@/store/FilscanStore'
+
+const rootSubmenuKeys = ['1', '2', '3','4','5'];
 
 const Header = (props:any) => {
   const {t} = useTranslation("nav")
@@ -26,6 +27,8 @@ const Header = (props:any) => {
 
   const [items, setItems] = useState<MenuItem[]>([]);
   const router = useRouter()
+
+  const {lang,setLang} = useFilscanStore()
 
   useEffect(()=>{
     document.body.style.overflow = open ? "hidden" : 'auto'
@@ -48,8 +51,28 @@ const Header = (props:any) => {
   const onSelect:MenuProps['onSelect'] = (select)=>{
     setOpen(false)
     setSelectKeys(select.selectedKeys)
-    const link = _.get(mobileNavMenu,select.key).link
-    router.push(link)
+    const child = _.get(mobileNavMenu,select.key)
+
+    if (child.value) {
+      const value = child.value
+      if (child.type === 'lang') {
+        localStorage.setItem('lang', value);
+        setLang(value);
+        router.push(router.asPath, router.asPath, { locale: value });
+        return
+      }
+
+      if (child.type === 'network') {
+        if (value === 'Calibration') {
+          window.open('https://calibration.filscan.io/')
+        } else if (value === 'Mainnet') {
+          window.open('https://filscan.io/')
+        }
+        return
+      }
+    }
+
+    router.push(child.link)
   }
   type MenuItem = Required<MenuProps>['items'][number];
   function getItem(
@@ -82,7 +105,7 @@ const Header = (props:any) => {
     })
     setItems(_items)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[lang])
 
   const onClick=()=>{
     router.push('/')
@@ -95,9 +118,9 @@ const Header = (props:any) => {
   return <div className={styles['header-wrap']}>
     <div className={styles['header']}>
       <div className={styles.nav}>
-        <div onClick={onClick}>
-          <Image src={Logo} alt='logo' width={19.5} height={18}></Image>
-          <Image src={LogoText} alt='logo' width={95} height={16}></Image>
+        <div className={styles.logo} onClick={onClick}>
+          <Image src={Logo} alt='logo'></Image>
+          <Image src={LogoText} alt='logo' ></Image>
         </div>
         { open ? <IconClose onClick={onOpen}/> :<IconOpen onClick={onOpen}/>}
       </div>

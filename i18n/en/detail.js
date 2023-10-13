@@ -71,6 +71,7 @@ const detail = {
   lucky_tip:'The ratio of the actual number of block reward to the expected number of block reward. If the QualityAdjPower is less than 1 PiB, this value has significant randomness and should be taken as a reference only',
   sector_ratio: 'Sector Rate',
   win_count: 'Winner Rewards',
+  windowPost_gas:'Maintain computing power consumption',
   win_count_tip:'In Filecoin mining model, there may be multiple blocks under a tipset, and each block may receive multiple win counts.',
   net_profit_per_tb:'Gas Consumption/T',
   net_profit_per_tb_tip:'The gas consumption for sealing a single sector of size T within a selected period',
@@ -93,6 +94,9 @@ const detail = {
   sector_size:'Sector Size',
   sector_status: 'Sector Status',
   contract_verify:'Contract',
+  peer_detail: 'Miner Detail',
+  miner_owner: 'Owner',
+  no_area:'Unknown',
 
   //账户总览
   account_overview:'Account Overview',
@@ -145,6 +149,10 @@ const detail = {
   Transfer: 'Transfer',
   Burn: 'Burn',
   exit_code: 'Status',
+  err_message: 'Error Message',
+  replaced: 'Cid is overwritten',
+  base_cid:'Overridden CID',
+
   //内部交易
   amount:'Value',
   method: 'Method',
@@ -202,7 +210,7 @@ const detail = {
   erc20_transfer: 'Token Transactions',
   platform: 'Platform',
   power_change: 'Power Change',
-  owned_active_miners: '实际工作节点',
+  owned_active_miners: 'Active Miners',
 
   //height
   blcok_time: 'Block Time',

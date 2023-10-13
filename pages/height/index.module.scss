@@ -1,6 +1,12 @@
 @media screen and (max-width: 1000px){
     .height{
         padding: 12px;
+        .content {
+            padding: 12px;
+            .title {
+                padding-bottom: 16px;
+            }
+        }
         :global{
            
         }

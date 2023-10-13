@@ -26,6 +26,8 @@
   --bgDesColor: #f6f6f6;
   --table-hover: #f8f8f8;
   --tips-bgColor:#ffffff;
+  --cw-bgDesColor: #F5F5F5;
+  --cw-bgColor: #D4D4D4;
   /*
   手机端
   */
@@ -49,7 +51,7 @@
   --mobile-2473FA-0:rgba(36, 115, 250, 0.05);
   --mobile-2473FA-5:rgba(36, 115, 250, 0.05);
   --mobile-F9F9F9:#F9F9F9;
-  --mobile-F2F2F2:#F2F2F2;
+  --mobile-F2F2F2:#F2F2F2;;
   
 }
 
@@ -106,6 +108,13 @@ body {
 @media screen and (max-width: 1000px){
     .container_body{
       padding-top: 0px;
+    }
+
+    html,body {
+      cursor: none !important;
+    }
+    .cursor-pointer {
+      cursor: none;
     }
 }
 

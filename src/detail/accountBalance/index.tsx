@@ -12,13 +12,16 @@ import { getColor } from '@/utils/echarts';
 import { theme } from 'antd';
 import Item from 'antd/es/list/Item';
 import { useEffect, useMemo, useState } from 'react';
-import styles from './style.module.scss'
+import styles from './index.module.scss'
 import { getSvgIcon } from '@/svgsIcon';
 import Tooltip from '@/packages/tooltip';
+import useWindow from '@/components/hooks/useWindown';
+import classNames from 'classnames';
 
 export default ({ data, loading }: { data: any; loading: boolean }) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
+  const {isMobile} = useWindow()
 
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
@@ -121,6 +124,15 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
         newSeries.push(v);
       }
     });
+    if (isMobile) {
+      newOpt.series[0].radius = ['45%', '80%']
+      newOpt.series[0].center = ['50%', '50%']
+      newOpt.tooltip.position = ['50%', '50%']
+      newOpt.tooltip.formatter= (v: any)=> {
+        const { name, value } = v;
+        return `${v.marker} ${tr(name)}:\n <div>${formatFilNum(value)}</div>`;
+      }
+    }
     newOpt.series[0].data = newSeries;
 
     return newOpt;
@@ -128,11 +140,11 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
 
   const renderTotal = ()=>{
     return <div className='flex flex-col gap-x-1'>
-      <span className='flex items-center gap-x-2 text-sm text_des'>
+      <span className={classNames('flex items-center gap-x-2 text-sm text_des',styles['title-label'])}>
         {tr(account_balance.title)}
         <Tooltip context={tr('total_balance_tip')} />
       </span>
-      <span className='font-DINPro-Bold text-xl text_clip'>
+      <span className={classNames('font-DINPro-Bold text-xl text_clip',styles['title-value'])}>
         {loading ? (
           <SkeletonScreen />
         ) : data?.balance ? (
@@ -168,11 +180,9 @@ export default ({ data, loading }: { data: any; loading: boolean }) => {
                     : balance_item.color,
                 }}
               />
-
               <Tooltip context={tr(balance_item.title_tip)} icon={ false}>
-                <span className='flex gap-x-1 items-center'>{ tr(balance_item.title)}{ getSvgIcon('tip')}</span>
+                <span className={classNames('flex gap-x-1 items-center',styles['legend-title'])}>{ tr(balance_item.title)}{ getSvgIcon('tip')}</span>
               </Tooltip>
-
             </span>
             <span className='font-DINPro-Medium text-sm font-medium  ml-5'>
               {loading ? (

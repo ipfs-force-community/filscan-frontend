@@ -211,13 +211,12 @@ font-display: auto;
                             background-color: var( --table-hover) !important;
                         }
                         .ant-table-column-sort{            
-                             background-color:  var(--table-hove) ;
+                             background-color:  var( --table-hover) !important ;
                         }
                         }
-                        .ant-table-column-sort{
-                            background-color:  var(--bgColor) ;
-
                         
+                        .ant-table-column-sort{
+                            background-color:  transparent;
                         }
                         .ant-table-cell{
                         height: 58px;
@@ -226,6 +225,9 @@ font-display: auto;
                         color:var(--font-color);
                         padding: 10px;
                         border-bottom:1px solid var(--border-color);
+                        &:hover{
+                            background-color: var( --table-hover) !important;
+                        }
                     }
                     &:last-child{
                      .ant-table-cell{          
@@ -237,10 +239,25 @@ font-display: auto;
         }
     }
 }
+.ant-spin-blur{
+    .ant-table-placeholder{
+       visibility: hidden;
+    }
+}
+
+.custom-table-loading{
+    &-div{
+        height: 160px !important;
+        width: 160px !important;
+         left: 50%;
+         transform: translate(0,-45%);
+         margin-top: 20px !important;
+         margin-left: -80px !important;
+    }
+}
 
 //custom_table_tooltip
   .ant-tooltip {
-   
      .ant-tooltip-arrow{
         &::after{
              background-color: var(--tips-bgColor)!important;
@@ -469,6 +486,13 @@ font-display: auto;
     }
 }
 
+.noPaddingModal{
+      .ant-modal-content{
+        padding: 0px !important;
+      }
+}
+
+
 .custom_collapse_gaps{
         border: none;
         background-color: var(--bgColor) !important;
@@ -671,7 +695,7 @@ font-display: auto;
     width: 100%;
 }
 .ant-modal-mask{
-    background-color: rgba(0, 0, 0, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
 }
 .custom_modal_wrapper{
     width: 100%;

@@ -67,11 +67,11 @@ export default (props:ContentProps) => {
             key={index}
             className={
               classNames(`flex items-baseline gap-2.5 min-h-[32px]
-            ${ borderTop ? 'pt-5 border-t border_color relative' : '' }
+            ${ borderTop ? 'min-h-[48px] pt-5 border-t border_color relative' : '' }
             ${columns !== 1 ? 'justify-between' : ''}`,styles['item-wrap'])
             }
             style={{...style,width:isSplitWidth||showWidth }}>
-            <div className={`min-w-[120px] flex-shrink-0 items-baseline text_des self-start`}>
+            <div className={classNames(`min-w-[120px] flex-shrink-0 items-baseline text_des self-start`,styles.title)}>
               {showTitle}:
             </div>
             <MobileView>

@@ -1,0 +1,32 @@
+@media screen and (max-width: 1000px) {
+    .trend {
+      margin-top: 0;
+      transform: translateY(0);
+      animation: none;
+  
+      .title-wrap {
+        margin: unset;
+        .title {
+          padding-left: unset;
+          font-size: 17px;
+          line-height: 17px;
+        }
+  
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      .chart-wrap {
+        border-radius: 6px;
+      }
+  
+      :global {
+        .chart-legend {
+          padding: 15px 15px 0px 15px;
+        }
+      }
+    }
+  }
+  

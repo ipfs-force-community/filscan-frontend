@@ -55,6 +55,16 @@ function App({ Component, pageProps, isMobile }: any) {
     account:''
   })
 
+  const onResize = ()=>{
+    const theme_Local = localStorage.getItem('theme');
+    if (window.innerWidth < 1000) {
+      isMobile = true
+      loadTheme("light")
+      return
+    }
+    isMobile = false
+    loadTheme(theme_Local)
+  }
   useEffect(() => {
     const theme_Local = localStorage.getItem('theme');
     let lang_Local = localStorage.getItem('lang');
@@ -74,24 +84,22 @@ function App({ Component, pageProps, isMobile }: any) {
     i18n.changeLanguage(lang_Local); // 更改i18n语言
     if (lang_Local) setLang(lang_Local);
     setLoading(false)
+
+    if (typeof window !== undefined) {
+      window.addEventListener("resize",onResize)
+      return ()=>{
+        window.removeEventListener("resize",onResize)
+      }
+    }
   }, []);
 
   const loadTheme = (theme_Local: any) => {
-    if (theme_Local === 'dark') {
+    if (theme_Local === 'dark' && !isMobile) {
       document.documentElement.setAttribute('theme', 'dark');
     } else {
       document.documentElement.setAttribute('theme', 'light');
     }
   };
-
-  // useEffect(() => {
-  //   if (localStorage?.getItem('userInfo')) {
-  //     const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '');
-  //     if (lastUser) {
-  //       setUserInfo(lastUser);
-  //     }
-  //   }
-  // }, []);
 
   if (loading) {
     return null

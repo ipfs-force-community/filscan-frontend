@@ -55,7 +55,8 @@ export const defi_market = [
     title: 'staked_change_in_24h',
     dataIndex: 'staked_change_in_24h',
     render: (text:string,record:any) => {
-      return <span className={Number(text) < 0 ? 'text_red':'text_green' }>
+      return <span className={Number(text) < 0 ? 'text_red' : 'text_green'}>
+        {Number(text) > 0 ?'+':'' }
         {get$Number(text)}
       </span>
     }
@@ -71,7 +72,8 @@ export const defi_market = [
     title: 'user_change_in_24h',
     dataIndex: 'user_change_in_24h',
     render: (text:string,record:any) => {
-      return <span className={Number(text) < 0 ? 'text_red':'text_green' }>
+      return <span className={Number(text) < 0 ? 'text_red' : 'text_green'}>
+        {Number(text) > 0 ?'+':'' }
         {formatNumber(text, 2)}
       </span>
     }
@@ -125,7 +127,6 @@ export const defi_list = {
       width: '20%',
       defaultSortOrder: 'descend',
       sorter: true,
-
       render: (text: string, record: any) => {
         if (origin === 'home') {
           return <TextTip text={get$Number(text)} />
@@ -133,7 +134,7 @@ export const defi_list = {
         const left = 100 - (Number(text) / Number(progress)) * 100;
         return <span className='flex items-center gap-x-2'>
           <Progress left={left + '%'} />
-          <TextTip text={get$Number(text)} />
+          <span>{get$Number(text)}</span>
         </span>
       }
     },
@@ -143,7 +144,8 @@ export const defi_list = {
       sorter: true,
       width: '15%',
       render: (text: string) => (
-        <span className={Number(text) < 0 ? 'text_red':'text_green'}>
+        <span className={Number(text) < 0 ? 'text_red' : 'text_green'}>
+          {Number(text) > 0 ?'+':'' }
           {Number(text).toFixed(2) + '%'}
         </span>
       ),
@@ -155,7 +157,8 @@ export const defi_list = {
       width: '15%',
       render: (text: string) => {
         return (
-          <span className={Number(text) < 0 ? 'text_red':'text_green'}>
+          <span className={Number(text) < 0 ? 'text_red' : 'text_green'}>
+            {Number(text) > 0 ?'+':'' }
             {get$Number(text)}
           </span>
         );

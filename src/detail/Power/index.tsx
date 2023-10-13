@@ -33,11 +33,11 @@ export default ({ data }: { data: any }) => {
               : showData[dataIndex] || '--';
 
             return (
-              <li className={classNames(styles.row,'flex flex-col w-1/2')} key={dataIndex}>
-                <span className='text-sm text_des'>{tr(title)}</span>
+              <li className={classNames(styles['row-item'],'flex flex-col w-1/2')} key={dataIndex}>
+                <span className={classNames('text-sm text_des',styles.label)}>{tr(title)}</span>
                 <>
                   <BrowserView>
-                    <span className='text_clip font-DINPro-Bold text-xl	 '>
+                    <span className='text_clip font-DINPro-Bold text-xl'>
                       {loading ? <SkeletonScreen /> : value}
                     </span>
                   </BrowserView>
@@ -62,7 +62,7 @@ export default ({ data }: { data: any }) => {
             : showData[dataIndex] || '--';
           return (
             <li key={dataIndex} className={classNames(styles.full,'w-1/2 flex flex-0')}>
-              <span className='text-sm text_des w-28'>{tr(title)}</span>
+              <span className={classNames('text-sm text_des w-28',styles['label'])}>{tr(title)}</span>
               <span className='font-DINPro-Medium text-sm font-medium'>
                 {loading ? <SkeletonScreen /> : value}
               </span>
@@ -84,11 +84,11 @@ export default ({ data }: { data: any }) => {
                 return (
                   <li key={dataIndex} className='flex items-center gap-x-1'>
                     <span
-                      className='font-DINPro-Medium text-sm font-medium'
+                      className={classNames('font-DINPro-Medium text-sm font-medium',styles['sector-status-value'])}
                       style={{ color: color }}>
                       {formatNumber(value)}
                     </span>
-                    <span className='text-sm text_des '>{tr(title)}</span>
+                    <span className={classNames('text-sm text_des',styles['sector-status-title'])}>{tr(title)}</span>
                   </li>
                 );
               })}

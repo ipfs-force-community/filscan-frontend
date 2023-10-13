@@ -2,6 +2,7 @@
 
 import {
   formatDateTime,
+  formatFil,
   formatFilNum,
   formatNumber,
   get_account_type,
@@ -14,7 +15,6 @@ import Copy from '@/components/copy';
 import { getSvgIcon } from '@/svgsIcon';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import CopySvgMobile from '@/assets/images/icon-copy.svg';
-import JSONPretty from 'react-json-pretty';
 import Image from '@/packages/image'
 import DropDown from '@/packages/customDrop';
 import ShowText from '@/packages/showText';
@@ -164,14 +164,14 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'win_count',
       title_tip: 'win_count_tip',
-      render: (text: any) => String(text) || '--',
+      render: (text: any) =>String(text) === '0' || text ? String(text) : '--'
     },
     {
       title: 'block_count',
       width: '25%',
       dataIndex: 'block_count_increase',
       // title_tip: 'block_count_tip',
-      render: (text: any) => String(text) || '--',
+      render: (text: any) =>String(text) === '0' || text ? String(text) : '--'
     },
     {
       title: 'block_rewards',
@@ -193,8 +193,12 @@ export const miner_overview = {
       width: '25%',
       dataIndex: 'lucky',
       title_tip: 'lucky_tip',
-      render: (text: string | number) =>
-        text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--',
+      render: (text: string | number) => {
+        if (!text && Number(text) !== 0) {
+          return '--'
+        }
+        return text !== '-1' ? Number(100 * Number(text)).toFixed(4) + ' %' : '--';
+      }
     },
     {
       title: 'net_profit_per_tb',
@@ -204,7 +208,6 @@ export const miner_overview = {
       render: (text: string | number) =>
         text ? formatFilNum(text, false, false, 3) : '--',
     },
-
     {
       title: 'power_increase_indicators',
       style: { width: '20%', justifyContent: 'flex-end' },
@@ -212,8 +215,49 @@ export const miner_overview = {
       render: (text: string | number) =>
         text ? unitConversion(text, 2) : '--',
     },
+    {
+      title: 'windowPost_gas',
+      style: { width: '20%', justifyContent: 'flex-end' },
+      dataIndex: 'windowpost_gas',
+      render: (text: string | number) =>
+        text ? formatFilNum(text, false, false, 3) +'/TiB' : '--',
+    },
   ],
 };
+
+export const peerList = [
+  {
+    title: 'ID',
+    dataIndex: 'peer_id',
+    render: (text: any, record: any, tr: any) => {
+      return text?tr(text):'--'
+    }
+  },
+  {
+    title: 'miner_owner',
+    dataIndex: 'account_id',
+    type: ["account_basic"],
+    render: (text: any, record: any, tr: any) => {
+      if (!text) return '--';
+      return <Link href={`/miner/${text}` } className='link_text'>{ text }</Link>
+    }
+  },
+  {
+    title: 'area',
+    dataIndex: 'ip_address',
+    type: ["account_basic"],
+    render:(text:any,record:any,tr:any)=>text?text:tr('no_area')
+  },
+  {
+    title: 'MultiAddresses',
+    dataIndex: 'multi_addrs',
+    type: ["account_basic"],
+    render: (text: any, record: any, tr: any) => {
+      if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={10} />
+      return '--'
+    }
+  },
+]
 
 export const account_detail = {
   list:(tr:any)=> [
@@ -223,27 +267,15 @@ export const account_detail = {
       type: ["account_basic"],
       render:(text:any,record:any,tr:any)=>text?tr(text):'--'
     },
-    // {
-    //   title: 'account_address',
-    //   dataIndex: 'account_address',
-    //   type: ["account_basic"],
-    //   render: (text: string) => {
-    //     if(!text) return '--'
-    //     return <span className="flex items-baseline gap-x-2">
-    //       <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
-    //       <Copy text={text} />
-    //     </span>
-    //   }
-
-    // },
-
     {
-      title: 'owner_address',
-      dataIndex: 'owner_address',
-      render: (text: string) => {
-        if(!text) return '--'
+      title: 'peer_id',
+      dataIndex: 'peer_id',
+      render: (text: string,record:any) => {
+        if (!text) return '--'
+        const accountId = record?.account_basic?.account_id;
         return <span className="flex items-baseline gap-x-2">
-          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+          { accountId ? <Link href={`/peer/${accountId}`} className='link_text' >{isIndent(text,10)}</Link>
+            :<span>{isIndent(text,10)}</span>}
           <Copy text={text} />
         </span>
       }
@@ -257,6 +289,33 @@ export const account_detail = {
           <Link href={`/address/${text}`} className='link_text' >{isIndent(text,10)}</Link>
           <Copy text={text} />
         </span>
+      }
+    },
+    {
+      title: 'owner_address',
+      dataIndex: 'owner_address',
+      render: (text: string) => {
+        if(!text) return '--'
+        return <span className="flex items-baseline gap-x-2">
+          <Link href={`/address/${text}`} className='link' >{isIndent(text,10)}</Link>
+          <Copy text={text} />
+        </span>
+      }
+    },
+    {
+      title: 'controllers_address',
+      dataIndex: 'controllers_address',
+      render: (text: any, record: any) => {
+        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
+        return '--'
+        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
+        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
+        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
+        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
+        //       <Copy text={linkItem} />
+        //     </span>
+        //   }):'--'}
+        // </div>
       }
     },
     {
@@ -275,22 +334,6 @@ export const account_detail = {
             <Copy text={text} />
           </span>}
         </div>
-      }
-    },
-    {
-      title: 'controllers_address',
-      dataIndex: 'controllers_address',
-      render: (text: any, record: any) => {
-        if (Array.isArray(text) && text.length > 0) return <ShowText content={text} unit={ 10} />
-        return '--'
-        // return <div className='flex flex-wrap items-baseline justify-end gap-x-2'>
-        //   {text&& Array.isArray(text)?text?.map((linkItem:string,index:number) => {
-        //     return <span className="flex items-baseline gap-x-2" key={linkItem}>
-        //       <Link href={`/address/${linkItem}`} className='link' >{isIndent(linkItem,10)}</Link>
-        //       <Copy text={linkItem} />
-        //     </span>
-        //   }):'--'}
-        // </div>
       }
     },
 
@@ -332,7 +375,7 @@ export const owner_detail = {
       dataIndex: 'account_address',
       render: (text: string) => {
         return (
-          <div className='flex gap-x-2 items-center'>
+          <div className='flex gap-x-2 items-center owner'>
             <Link className='link' href={`/address/${text}`}>
               {text}
             </Link>
@@ -399,7 +442,7 @@ export const message_detail = {
           return <ul className='flex flex-col gap-y-2'>
             { text.map((item:string,index:number) => {
               return <li key={item} className='flex items-center gap-x-2'>
-                <span className='flex items-center justify-center w-5 h-5 bg-bg_hover rounded-[5px]'>{ index}</span>
+                <span className='flex items-center justify-center flex-shrink-0 w-5 h-5 bg-bg_hover rounded-[5px] '>{ index}</span>
                 { item}
               </li>
             })}
@@ -465,7 +508,7 @@ export const message_detail = {
             </BrowserView>
             <MobileView>
               <span className='copy-row'>
-                <span className='text'>{text}</span>
+                <span className='normal-text'>{text}</span>
                 <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               </span>
             </MobileView>
@@ -490,7 +533,7 @@ export const message_detail = {
             </BrowserView>
             <MobileView>
               <span className='copy-row'>
-                <span className='text'>{text}</span>
+                <span className='normal-text'>{text}</span>
                 <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
               </span>
             </MobileView>
@@ -670,31 +713,63 @@ export const message_detail = {
         if (Array.isArray(text)) {
           if(text.length === 0) return null
           return (
-            <div className='flex flex-col gap-y-4 align-baseline'>
-              {text.map((item: any, index) => {
-                return (
-                  <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-2'>
-                      <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.from)}
-                      </span>
-                    </span>
-                    <span className='flex items-center gap-x-2 '>
-                      <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.to)}
-                      </span>
-                    </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
-                      <span className='font_weight'>For</span>
-                      <span>{Number(item?.amount).toFixed(4) || '--'}</span>
-                      <span>{ item?.token_name}</span>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <>
+              <BrowserView>
+                <div className='flex flex-col gap-y-4 align-baseline'>
+                  {text.map((item: any, index) => {
+                    return (
+                      <div key={index} className='flex gap-x-2.5'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                          <span>{ item?.token_name}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </BrowserView>
+              <MobileView>
+                <div className='flex flex-col gap-y-4 align-baseline'>
+                  {text.map((item: any, index) => {
+                    return (
+                      <div key={index} className='grid grid-cols-1 gap-y-1'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>{Number(item?.amount).toFixed(4) || '--'}</span>
+                          <span>{ item?.token_name}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </MobileView>
+            </>
           );
         }
         return null
@@ -714,29 +789,58 @@ export const message_detail = {
             <div className='flex flex-col gap-y-4 align-baseline'>
               {text.map((item: any, index) => {
                 return (
-                  <div key={index} className='flex gap-x-2.5'>
-                    <span className='flex items-center gap-x-2'>
-                      <span className='text_des'>{tr('from_ath')}</span>
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.from)}
-                      </span>
-                    </span>
-                    <span className='flex items-center gap-x-2 '>
-                      <span className='text_des'>{tr('to_ath')}</span>{' '}
-                      <span className='flex gap-x-2 items-center'>
-                        {get_account_type(item.to)}
-                      </span>
-                    </span>
-                    <span className='flex items-center font-DINPro-Medium gap-x-2 '>
-                      <span className='font_weight'>For</span>
-                      <span>
-                        {formatFilNum(item.value, false, false, 4) || '--'}
-                      </span>
-                      <span className='text_des font-PingFang'>
-                  ({tr(item.consume_type)})
-                      </span>
-                    </span>
-                  </div>
+                  <>
+                    <BrowserView>
+                      <div key={index} className='flex gap-x-2.5'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>
+                            {formatFilNum(item.value, false, false, 4) || '--'}
+                          </span>
+                          <span className='text_des font-PingFang'>
+                          ({tr(item.consume_type)})
+                          </span>
+                        </span>
+                      </div>
+                    </BrowserView>
+                    <MobileView>
+                      <div key={index} className='grid grid-cols-1'>
+                        <span className='flex items-center gap-x-2'>
+                          <span className='text_des'>{tr('from_ath')}</span>
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.from)}
+                          </span>
+                        </span>
+                        <span className='flex items-center gap-x-2 '>
+                          <span className='text_des'>{tr('to_ath')}</span>{' '}
+                          <span className='flex gap-x-2 items-center'>
+                            {get_account_type(item.to)}
+                          </span>
+                        </span>
+                        <span className='flex items-center font-DINPro-Medium gap-x-2 '>
+                          <span className='font_weight'>For</span>
+                          <span>
+                            {formatFilNum(item.value, false, false, 4) || '--'}
+                          </span>
+                          <span className='text_des font-PingFang'>
+                            ({tr(item.consume_type)})
+                          </span>
+                        </span>
+                      </div>
+                    </MobileView>
+                  </>
                 );
               })}
             </div>
@@ -753,7 +857,23 @@ export const message_detail = {
 
       render: (text: any) => text,
     },
-
+    {
+      dataIndex: 'replaced',
+      title: 'replaced',
+      render: (text: any) => String(text) === 'true' ? 'True':'False'
+    },
+    // {
+    //   dataIndex: 'base_cid',
+    //   title: 'base_cid',
+    //   elasticity: true,
+    //   render: (text: any,record:any) => {
+    //     console.log('---333',text,record)
+    //     if (String(text)) {
+    //       return text;
+    //     }
+    //     return null
+    //   }
+    // },
     {
       borderTop: true,
       dataIndex: 'all_gas_fee',
@@ -763,12 +883,10 @@ export const message_detail = {
     {
       dataIndex: 'base_fee',
       title: 'base_fee',
-
       render: (text: string) => {
         return formatFilNum(text, false, false, 4);
       },
     },
-
     {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',
@@ -800,7 +918,6 @@ export const message_detail = {
             {text.map((item: string, index: number) => {
               if (!text) return '--';
               return (
-
                 <>
                   <BrowserView>
                     <span className='flex gap-x-2 items-center  mb-2 last:mb-0' key={index}>
@@ -814,7 +931,7 @@ export const message_detail = {
                     </span>
                   </BrowserView>
                   <MobileView>
-                    <span className='copy-row'>
+                    <span className='copy-row mt-1'>
                       <span className='text'>
                         <Link
                           key={index}
@@ -839,6 +956,7 @@ export const message_detail = {
       borderTop: true,
       render: (text: any) => text,
     },
+
     {
       dataIndex: 'params_detail',
       title: 'params',
@@ -847,11 +965,30 @@ export const message_detail = {
         if (!showValue) return null;
         if (typeof showValue === 'string') {
           return <span className="break-words">
-            { JSON.stringify(showValue, undefined, 6)}
+            { JSON.stringify(showValue, undefined, 2)}
           </span>}
         return (
           <div className='code'>
-            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 6)}</pre>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 1)}</pre>
+            {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
+          </div>
+        );
+      },
+    },
+    {
+      dataIndex: 'err',
+      title: 'err_message',
+      elasticity: true,
+      render: (text: string, record?: any) => {
+        const showValue = text || record?.params;
+        if (!showValue) return null;
+        if (typeof showValue === 'string') {
+          return <span className="break-words">
+            { JSON.stringify(showValue, undefined, 2)}
+          </span>}
+        return (
+          <div className='code'>
+            <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(showValue, undefined, 1)}</pre>
             {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
           </div>
         );
@@ -865,8 +1002,8 @@ export const message_detail = {
         if (!showValue) return null;
         if (typeof showValue === 'string') {
           return <span className="break-words">
-            { JSON.stringify(showValue, undefined, 6)}
-          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 4)}</pre>;
+            { JSON.stringify(showValue, undefined, 2)}
+          </span>} return <pre className='pre' style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(showValue, undefined, 1)}</pre>;
       },
     },
   ],
@@ -935,7 +1072,7 @@ const default_content = [
             <span className='copy-row'>
               <span className='normal-text'>{text}</span>
               <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
-              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn ml-2'>
+              { owned_miners.length > 0 && <Link href={`/owner/${record?.account_basic?.account_id}`} className='primary_btn mt-2'>
                 {tr('account_detail')}
               </Link>}
             </span>
@@ -1013,14 +1150,26 @@ const default_content = [
     title: 'balance',
     dataIndex: 'account_balance',
     type: ['account_basic'],
-    render: (text: string) => (text ? formatFilNum(text) : '--'),
+    render: (text: string) => (text ? formatFil(text,'FIL',4)+' FIL' : '--'),
   },
   {
     title: 'stable_address', dataIndex: 'stable_address', elasticity: true,
     type: ['account_basic'],
-    render: (text: string) => text ? <span className="flex items-center gap-x-2">
-      {text?.length > 30 ? isIndent(text, 10, 10) : text}
-      <Copy text={text} /></span> : text
+    render: (text: string) => {
+
+      return text ? <>
+        <BrowserView>
+          <span className="flex items-center gap-x-2">
+            {text?.length > 30 ? isIndent(text, 10, 10) : text}
+            <Copy text={text} /></span>
+        </BrowserView>
+        <MobileView>
+          <span className="copy-row">
+            <span className='normal-text'>{text?.length > 30 ? isIndent(text, 10, 10) : text}</span>
+            <Copy text={text} icon={<CopySvgMobile/>} className='copy'/></span>
+        </MobileView>
+      </>: text
+    }
   },
   { title: 'Initial Balance', dataIndex: 'initial_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text, },
   { title: 'Locking Balance', dataIndex: 'locked_balance', elasticity: true, render: (text: string) => text ? formatFilNum(text) : text },
@@ -1213,11 +1362,6 @@ export const power_change = {
 
 export const address_tabs = [
   {
-    title: 'message_list',
-    dataIndex: 'message_list',
-    optionsUrl: 'AllMethodByAccountID',
-  },
-  {
     title: 'traces_list',
     dataIndex: 'traces_list',
     optionsUrl: 'TransferMethodByAccountID',
@@ -1230,6 +1374,12 @@ export const address_tabs = [
     //   { title: 'Receive', value: 'receive', isIndent: true },
     // ],
   },
+  {
+    title: 'message_list',
+    dataIndex: 'message_list',
+    optionsUrl: 'AllMethodByAccountID',
+  },
+
   {
     title: 'erc20_transfer',
     dataIndex:'ercList',
@@ -1346,7 +1496,7 @@ export const block_list = (fromList: any, toList: any) => [
     width: '20%',
     render: (text: string) =>
       text ? (
-        <Link href={`/tipset/chain?cid=${text}`} className='link_text'>
+        <Link href={`/cid/${text}`} className='link_text'>
           {text ? isIndent(text, 6) : ''}
         </Link>
       ) : (

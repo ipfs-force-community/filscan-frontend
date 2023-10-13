@@ -9,6 +9,8 @@ import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import NoData from '../noData';
+import Image from 'next/image';
+import loadingPng from '@/assets/images/loading.png'
 
 interface Props extends TableProps<any> {
   data: Array<any>;
@@ -53,7 +55,7 @@ export default (props: Props) => {
         {
           [...mobileContent].filter(([key,value])=>key.loading === loading).map(([key,value])=> value.call(this,data,columns))
         }
-        <div style={{width:"100%"}}>
+        <div className={styles.pagination}>
           <Pagination
             current={cur}
             total={total}
@@ -61,6 +63,7 @@ export default (props: Props) => {
             showQuickJumper={false}
             showSizeChanger={false}
             hideOnSinglePage={true}
+            showLessItems={true}
             onChange={(cur: number) => {
               if (onChange) {
                 setCur(cur)
@@ -81,14 +84,17 @@ export default (props: Props) => {
         rowClassName={'custom_table_row'}
         rowKey={new Date().getTime()}
         onChange={onChange}
-        loading={loading}
+        // loading={loading}
+        loading={{
+          spinning: loading,
+          size: 'large',
+          wrapperClassName:'custom-table-loading',
+          indicator: <div className='custom-table-loading-div' >
+            <Image src={loadingPng} width={160} height={160} alt="" />
+          </div>
+        }}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
-        // loading={{
-        //   spinning: loading, // 这里应该是一个状态，表示数据是否正在加载
-        //   indicator: <Skeleton active />,
-        //   wrapperClassName: 'custom_table_loading',
-        // }}
         pagination={
           total > showLimit
             ? {
@@ -137,7 +143,7 @@ const mobileContent = new Map(
                 return (
                   <div className={classNames(styles['mobile-table-card-item'],`${dataIndex}-hide`)} key={idx}>
                     <div className={styles['mobile-table-card-item-label']}>
-                      {showTitle}：
+                      {showTitle}
                     </div>
                     <div className={styles['mobile-table-card-item-value']}>
                       {showValue}

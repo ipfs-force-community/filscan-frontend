@@ -1,0 +1,37 @@
+@media only screen and (max-width: 1000px)  {
+
+    .wrap-reset {
+        overflow: unset;
+        margin: unset;
+        padding: unset;
+        border: unset;
+        border-radius: unset;
+        background: unset;
+        box-shadow: unset;
+    }
+    .wrap {
+        display: grid;
+        margin-top: 10px;
+
+        grid-template-columns: repeat(2,1fr);
+        gap: 8px;
+
+        .item-reset {
+            width: unset;
+        }
+        .item {
+            align-items: flex-start;
+            padding: 12px 10px;
+            border: 1px solid var(--mobile-divide-line);
+            border-radius: 6px;
+            background: var(--mobile-bg-color);
+
+            :global {
+                .text_des {
+                    color: var(--mobile-des-color);
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

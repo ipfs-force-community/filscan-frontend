@@ -9,7 +9,7 @@
     .mobile-table-card {
       padding: 8px 0;
       border: 1px solid var(--mobile-divide-line);
-      border-radius: 12px;
+      border-radius: 6px;
       background: var(--mobile-bg-color);
       &:last-child {
         margin-bottom: 0;
@@ -22,9 +22,9 @@
         .mobile-table-card-item-label {
           display: flex;
           flex: 2;
-          flex-shrink: 0;
           max-width: 40%;
           color: var(--mobile-des-color);
+          word-break: break-word;
           font-weight: 400;
           font-size: 15px;
         }
@@ -38,42 +38,10 @@
       }
     }
 
-    :global {
-      .copy-row {
-        display: inline-block;
-        align-items: center;
-        .text {
-          color: var(--mobile-link-color);
-          word-break: break-all;
-        }
-        .normal-text {
-          word-break: break-all;
-        }
-        .copy {
-          display: inline-block;
-          align-items: center;
-          padding-left: 5px;
-          img {
-            display: inline-block;
-          }
-        }
-      }
-      // .copy-row {
-      //   display: inline-block;
-      //   align-items: center;
-      //   .text {
-      //     color: var(--mobile-link-color);
-      //     word-break: break-all;
-      //   }
-      //   .copy {
-      //     display: inline-block;
-      //     align-items: center;
-      //     padding-left: 5px;
-      //     img {
-      //       display: inline-block;
-      //     }
-      //   }
-      // }
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
     }
   }
 }

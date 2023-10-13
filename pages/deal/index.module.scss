@@ -1,76 +1,72 @@
-@media screen and (max-width: 1000px){
-    .deal{
-        padding: 12px;
-        overflow: hidden;
-        .line{
-            position: relative;
-            padding: 12px;
+@media screen and (max-width: 1000px) {
+  .deal {
+    overflow: hidden;
+    padding: 12px;
+    .line {
+      position: relative;
+      padding: 12px;
 
-            &::after{
-                content: '';
-                width: calc(100% + 2.5rem);
-                height: 1px;
-                background: var(--mobile-divide-line);
-                position: absolute;
-                top: 12px;
-                left: -1.25rem;
-            }
-        }
-        .title{
-            font-size: 14px;
-            font-family: PingFangSC-Medium, PingFang SC;
-            font-weight: 500;
-            color: var(--mobile-title-color);
-            line-height: 12px;
-            margin-bottom: 15px;
-        }
-        .card{
-            display: flex;
-            align-items: center;
-            background: linear-gradient(270deg, var(--mobile-2473FA-0) 0%, var(--mobile-2473FA-5) 100%);
-            border-radius: 6px;
-            padding: 22px 15px;
-            .left{
-
-            }
-            .right{
-                padding-left: 8px;
-                .name{
-                    font-size: 16px;
-                    font-family: PingFangSC-Medium, PingFang SC;
-                    font-weight: 500;
-                    color: var(--mobile-title-color);
-                    line-height: 16px;
-                    margin-bottom: 8px;
-                }
-            }
-        }
-        .space{
-            margin: 10px 0;
-        }
-        :global{
-            .copy-row {
-                display: inline-block;
-                align-items: center;
-                .text {
-                    color: var(--mobile-link-color);
-                    word-break: break-all;
-                }
-                .copy {
-                    display: inline-block;
-                    align-items: center;
-                    padding-left: 5px;
-                    img {
-                        display: inline-block;
-                    }
-                }
-            }
-            .des{
-                word-break: break-all;
-                .link{
-                    word-break: break-all;
-                }
-            }
-        }
+      &::after {
+        position: absolute;
+        top: 12px;
+        left: -1.25rem;
+        width: calc(100% + 2.5rem);
+        height: 1px;
+        background: var(--mobile-divide-line);
+        content: "";
+      }
     }
+    .title {
+      margin-bottom: 15px;
+      color: var(--mobile-title-color);
+      font-weight: 500;
+      font-size: 14px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      line-height: 12px;
+    }
+    .card {
+      display: flex;
+      align-items: center;
+      padding: 22px 15px;
+      border-radius: 6px;
+      background: linear-gradient(
+        270deg,
+        rgba(36, 115, 250, 0) 0%,
+        rgba(36, 115, 250, 0.1) 100%
+      );
+
+      .right {
+        padding-left: 8px;
+        .name {
+          margin-bottom: 8px;
+          color: var(--mobile-title-color);
+          font-weight: 500;
+          font-size: 16px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          line-height: 16px;
+        }
+      }
+    }
+    .space {
+      margin: 10px 0;
+
+      row-gap: 8px;
+      .time {
+        color: var(--mobile-des-color);
+        font-size: 12px;
+      }
+
+      .cash {
+        color: var(--mobile-des-color);
+      }
+    }
+    :global {
+      .des {
+        word-break: break-all;
+        .link {
+          word-break: break-all;
+        }
+      }
+    }
+  }
 }

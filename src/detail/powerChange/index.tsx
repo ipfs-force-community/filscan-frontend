@@ -15,6 +15,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import styles from './style.module.scss'
 import classNames from 'classnames';
 import { max } from 'lodash';
+import useWindow from '@/components/hooks/useWindown';
 export default ({ accountId,type }: { accountId?: string | string[],type:string}) => {
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
@@ -22,13 +23,14 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const [unit,setUnit] = useState('TiB')
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -40,34 +42,6 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         containLabel: true,
       },
       yAxis: [
-        // {
-        //   type: 'value',
-        //   position: 'left',
-        //   scale: true,
-        //   nameTextStyle: {
-        //     color: color.textStyle,
-        //   },
-        //   axisLabel: {
-        //     formatter: '{value} TiB',
-        //     textStyle: {
-        //       //  fontSize: this.fontSize,
-        //       color: color.labelColor,
-        //     },
-        //   },
-        //   axisLine: {
-        //     show: ,
-        //   },
-        //   axisTick: {
-        //     show: false,
-        //   },
-        //   splitLine: {
-        //     show: false,
-        //     lineStyle: {
-        //       type: 'dashed',
-        //       color: color.splitLine,
-        //     },
-        //   },
-        // },
         {
           type: 'value',
           position: 'left',
@@ -79,7 +53,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
             formatter: `{value} ${unit}`,
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisTick: {
@@ -123,7 +97,8 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         },
       },
     };
-  }, [theme,unit]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,unit,isMobile]);
 
   useEffect(() => {
     if (accountId) {
@@ -228,11 +203,6 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
     });
   };
 
-  const handleTabChange = (value: string) => {
-    setInterval(value);
-    load(value);
-  };
-
   const newOptions = useMemo(() => {
     const newSeries: any = [];
     (options?.series || []).forEach((seriesItem: any) => {
@@ -240,6 +210,11 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         newSeries.push(seriesItem);
       }
     });
+
+    if (isMobile) {
+      defaultOptions.grid.left = 0
+    }
+
     return {
       ...defaultOptions,
       xAxis: {
@@ -248,7 +223,7 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
       },
       series: newSeries,
     };
-  }, [options, default_xAxis, noShow, defaultOptions]);
+  }, [options, default_xAxis, noShow, defaultOptions,isMobile]);
 
   const ledRender = ()=>{
     return <span className='flex gap-x-4'>
@@ -273,9 +248,9 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
 
   return (
     <div className={classNames(styles['power-change'],'flex-1')}>
-      <div className='flex justify-between items-center mb-2 mx-2.5 h-[32px]'>
+      <div className={classNames('flex justify-between items-center mb-2 mx-2.5 h-[32px]',styles.title)}>
         <div className={classNames(styles.between,'flex gpa-x-5 items-center')}>
-          <span className='text-lg font-semibold mr-5'>
+          <span className={classNames('text-lg font-semibold mr-5',)}>
             {tr(power_change.title)}
           </span>
           {/* <Segmented
@@ -288,9 +263,9 @@ export default ({ accountId,type }: { accountId?: string | string[],type:string}
         </div>
         <BrowserView>{ledRender()}</BrowserView>
       </div>
-      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
+      <div className={classNames('card_shadow w-full border rounded-xl p-2.5 pt-5 border_color',styles.chart)}>
         <MobileView>
-          <div className="tips">
+          <div className="tips mb-2">
             {ledRender()}
           </div>
         </MobileView>

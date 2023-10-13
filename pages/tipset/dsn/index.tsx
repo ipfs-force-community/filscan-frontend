@@ -19,12 +19,12 @@ import classNames from 'classnames';
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const updateQuery = useUpdateQuery();
 
   const removeQueryParam = useRemoveQueryParam();
   const { p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -43,7 +43,7 @@ export default () => {
   }, [current]);
 
   const load = async (cur?: number, searching?: string) => {
-    setLoading(true);
+    //setLoading(true);
     const showIndex = cur || current;
     const input = searching || search;
     const result: any = await axiosData(apiUrl.tipset_Dsn, {
@@ -52,8 +52,8 @@ export default () => {
         index: showIndex - 1,
         limit: pageLimit,
       },
-    });
-    setLoading(false);
+    }, {isCancel:false});
+    //setLoading(false);
     setDataSource({
       data: result?.market_deals_list || [],
       total: result?.total_count,

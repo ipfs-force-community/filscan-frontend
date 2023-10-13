@@ -4,13 +4,14 @@ import EChart from '@/components/echarts';
 import { Translation } from '@/components/hooks/Translation';
 import { cc_dc_trend, timeList } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
-import { formatDateTime, isMobile, unitConversion } from '@/utils';
+import { formatDateTime, unitConversion } from '@/utils';
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
-import styles from './trend.module.scss'
+import styles from './DCCTrend.module.scss'
 import classNames from 'classnames';
 import useAxiosData from '@/store/useAxiosData';
 import Segmented from '@/packages/segmented';
+import useWindow from '@/components/hooks/useWindown';
 
 interface Props {
   origin?: string;
@@ -24,14 +25,14 @@ export default (props: Props) => {
   const { axiosData } = useAxiosData()
   const [options, setOptions] = useState<any>({});
   const [interval,setInterval]= useState('24h')
-
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -53,7 +54,7 @@ export default (props: Props) => {
           formatter: '{value} PiB',
           textStyle: {
             //  fontSize: this.fontSize,
-            color: color.labelColor,
+            color: isMobile ? color.mobileLabelColor : color.labelColor,
           },
         },
         axisLine: {
@@ -80,7 +81,7 @@ export default (props: Props) => {
           var obj = {top:80};
           //@ts-ignore
           obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-          return isMobile() ? obj:undefined;
+          return isMobile ? obj:undefined;
         },
         trigger: 'axis',
         backgroundColor: color.toolbox,
@@ -105,7 +106,8 @@ export default (props: Props) => {
         },
       },
     };
-  }, [theme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   useEffect(() => {
     load();
@@ -183,10 +185,10 @@ export default (props: Props) => {
   return (
     <div
       // id='block_reward_per'
-      className={classNames(styles.trend,`w-full h-[full]  ${className}`)}
+      className={classNames(styles.wrap,`w-full h-[full]  ${className}`)}
     >
-      <div className='flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5' >
-        <div className='min-w-[120px] w-fit font-PingFang font-semibold text-lg '>
+      <div className={classNames('flex-1 flex flex-row flex-wrap  justify-between items-center mb-4 mx-2.5',styles['title-wrap'])} >
+        <div className={classNames('min-w-[120px] w-fit font-PingFang font-semibold text-lg ',styles.title)}>
           {tr('cc_dc_power')}
         </div>
         <Segmented
@@ -200,7 +202,7 @@ export default (props: Props) => {
           }}
         />
       </div>
-      <div className={`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`}>
+      <div className={classNames(`h-[350px] w-full card_shadow border border_color pb-2 rounded-xl`,styles.content)}>
         <EChart options={newOptions} />
       </div>
     </div>

@@ -5,7 +5,7 @@ import { Translation } from '@/components/hooks/Translation';
 import { power_trend } from '@/contents/statistic';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { getSvgIcon } from '@/svgsIcon';
-import { formatDateTime, isMobile, unitConversion } from '@/utils';
+import { formatDateTime, unitConversion } from '@/utils';
 import { getColor, get_xAxis } from '@/utils/echarts';
 import GoIcon from '@/assets/images/black_go.svg';
 import GoMobileIcon from '@/assets/images/icon-right-white.svg';
@@ -16,6 +16,7 @@ import styles from './trend.module.scss'
 import classNames from 'classnames';
 import { BrowserView, MobileView } from '@/components/device-detect';
 import useAxiosData from '@/store/useAxiosData';
+import useWindow from '@/components/hooks/useWindown';
 interface Props {
   origin?: string;
   className?: string;
@@ -29,17 +30,18 @@ export default (props: Props) => {
   const { axiosData } = useAxiosData()
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const [options, setOptions] = useState<any>({});
-
+  const {isMobile} = useWindow()
   const color = useMemo(() => {
     return getColor(theme);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
-    return {
+    let options = {
       grid: {
         top: 30,
         left: 20,
@@ -59,7 +61,7 @@ export default (props: Props) => {
             formatter: '{value} EiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisLine: {
@@ -87,7 +89,7 @@ export default (props: Props) => {
             formatter: '{value} PiB',
             textStyle: {
               //  fontSize: this.fontSize,
-              color: color.labelColor,
+              color: isMobile ? color.mobileLabelColor : color.labelColor,
             },
           },
           axisTick: {
@@ -114,7 +116,7 @@ export default (props: Props) => {
           var obj = {top:80};
           //@ts-ignore
           obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-          return isMobile() ? obj:undefined;
+          return isMobile ? obj:undefined;
         },
         trigger: 'axis',
         backgroundColor: color.toolbox,
@@ -139,7 +141,18 @@ export default (props: Props) => {
         },
       },
     };
-  }, [theme]);
+    if (isMobile) {
+      (options as any)['grid'] = {
+        top:"16px",
+        right:"12px",
+        bottom:"16px",
+        left: "12px",
+        containLabel: true
+      }
+    }
+    return options
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   useEffect(() => {
     load();
@@ -256,9 +269,9 @@ export default (props: Props) => {
       className={classNames(styles.trend, `w-full h-[full]  ${className} ${origin ==='home'?'mt-20':''}`)}
       {...propsRef}
     >
-      <div className={ `flex justify-between flex-wrap items-center min-h-[36px] mb-2.5 ${lang === 'en' ? 'h-[60px]':''}`}>
+      <div className={ classNames(`flex justify-between flex-wrap items-center min-h-[36px] mb-2.5 ${lang === 'en' ? 'h-[60px]':''}`,styles['title-wrap'])}>
         <div className='flex-1 flex flex-row flex-wrap items-center'>
-          <div className='w-fit font-PingFang font-semibold text-lg pl-2.5'>
+          <div className={classNames('w-fit font-PingFang font-semibold text-lg pl-2.5',styles.title)}>
             {tr('power')}
           </div>
           <div className='w-fit'>
@@ -296,8 +309,6 @@ export default (props: Props) => {
             <BrowserView>
               <GoIcon
                 className='cursor-pointer mr-2.5'
-                width={18}
-                height={18}
               />
             </BrowserView>
 
@@ -311,25 +322,48 @@ export default (props: Props) => {
         </div>
       </BrowserView>
       <MobileView>
-        <div className={`w-full pb-2 card_shadow border border_color rounded-xl`}>
-          <span className='flex gap-x-4 chart-legend'>
-            {options?.legendData?.map((v: any) => {
-              return (
-                <span
-                  className='text-xs flex cursor-pointer items-center gap-x-1'
-                  key={v.name}
-                  onClick={() => {
-                    setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
-                  }}
-                  style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
-                  {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
-                  <span className='text-xs text_des font-normal'>
-                    {tr(v.name)}
+        <div className={classNames(`w-full pb-2 card_shadow border border_color rounded-xl`,styles['chart-wrap'])}>
+          {(()=>{
+            if ((lang==="en" || lang === "ka") && isMobile) {
+              return <span className={classNames('grid grid-cols-2 gap-2 chart-legend',styles.legend)}>
+                {options?.legendData?.map((v: any) => {
+                  return (
+                    <span
+                      className='text-xs flex cursor-pointer items-center gap-x-1'
+                      key={v.name}
+                      onClick={() => {
+                        setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                      }}
+                      style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                      {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
+                      <span className={classNames('text-xs text_des font-normal',styles.value)}>
+                        {tr(v.name)}
+                      </span>
+                    </span>
+                  );
+                })}
+              </span>
+            }
+            return <span className={classNames('flex gap-x-4 chart-legend',styles.legend)}>
+              {options?.legendData?.map((v: any) => {
+                return (
+                  <span
+                    className='text-xs flex cursor-pointer items-center gap-x-1'
+                    key={v.name}
+                    onClick={() => {
+                      setNoShow({ ...noShow, [v.name]: !noShow[v.name] });
+                    }}
+                    style={{ color: noShow[v.name] ? '#d1d5db' : v.color }}>
+                    {getSvgIcon(v.type==='bar' ? 'barLegend':'legendIcon')}
+                    <span className={classNames('text-xs text_des font-normal',styles.value)}>
+                      {tr(v.name)}
+                    </span>
                   </span>
-                </span>
-              );
-            })}
-          </span>
+                );
+              })}
+            </span>
+
+          })()}
           <div className='h-[350px]'>
             <EChart options={newOptions} />
           </div>

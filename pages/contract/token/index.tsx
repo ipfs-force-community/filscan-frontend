@@ -9,10 +9,13 @@ import { useMemo } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
 import useWindow from '@/components/hooks/useWindown';
+import Tooltip from '@/packages/tooltip';
+import { useFilscanStore } from '@/store/FilscanStore';
 export default () => {
   const { tr } = Translation({ ns: 'contract' });
   const {isMobile} = useWindow()
   const { data: TokenData, loading } = useAxiosData(apiUrl.contract_ERC20List);
+  const { lang } = useFilscanStore(); // 使用你的 store 获取 lang 状态
 
   const columns = useMemo(() => {
     return contract_token.columns(tr).map((v) => {
@@ -24,6 +27,15 @@ export default () => {
                 {`No.${index + 1}`}
               </>
             );
+          }
+        }
+
+        if (v.dataIndex ==="total_supply") {
+          v.title = ()=>{
+            return (<span className='flex items-center gap-x-2'>
+              <span style={{width: lang == "en" ? "min-content" :"",wordBreak:"initial"}}> {tr('total_supply')}</span>
+              <Tooltip context={tr('total_supply_tip')} />
+            </span>)
           }
         }
       }

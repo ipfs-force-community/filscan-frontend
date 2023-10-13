@@ -1,6 +1,7 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
+import Loading from '@/components/loading';
 import { overview } from '@/contents/account';
 import { proApi } from '@/contents/apiUrl';
 import Table from '@/packages/Table';
@@ -8,7 +9,6 @@ import ExportExcel from '@/packages/exportExcel';
 import Selects from '@/packages/selects';
 import useAxiosData from '@/store/useAxiosData';
 import { formatDateTime } from '@/utils';
-import { Skeleton } from 'antd';
 import { useMemo, useState } from 'react';
 
 export default ({
@@ -49,13 +49,7 @@ export default ({
   }, [groupsData?.group_list, tr])
 
   if (loading) {
-    return (
-      <div className='mt-10'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+    return <Loading />
   }
   return (
     <>

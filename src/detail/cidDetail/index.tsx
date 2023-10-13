@@ -12,7 +12,8 @@ import Selects from '@/packages/selects';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import { useHash } from '@/components/hooks/useHash';
-
+import classNames from 'classnames';
+import styles from './index.module.scss'
 export default ({
   methodName,
   cid,
@@ -105,7 +106,7 @@ export default ({
   };
   return (
     <>
-      <div className='flex justify-between items-center mt-5 mx-2.5'>
+      <div className={classNames('flex justify-between items-center mt-5 mx-2.5',styles['title-wrap'])}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('blk_cids_message')}
@@ -113,6 +114,7 @@ export default ({
           <div className='text_des'>{tr('message_list_total', { value: data.total })}</div>
         </div>
         <Selects
+          className={classNames('!min-w-[240px]',styles.select)}
           value={method}
           options={options}
           onChange={(value) => {
@@ -124,7 +126,7 @@ export default ({
           }}
         />
       </div>
-      <div className='card_shadow p-5 mt-5 min-h-[200px] border border_color rounded-xl'>
+      <div className={classNames('card_shadow p-5 mt-5 min-h-[200px] border border_color rounded-xl',styles['table'],styles['table-reset'])}>
         <Table
           key={'message_list'}
           data={data.dataSource}

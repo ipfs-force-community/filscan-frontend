@@ -146,6 +146,7 @@ Hardhat 将编译输出存储在项目内的“artifacts/build-info/”目录中
   item: 'Item',
   Items: '数量',
   controller: '域名注册人',
+  pleaseCheckContractWithPC :"合约详情请前往PC端查看~",
 
   //rank
   contract_rank_des:'上次更新时间为:{{value}}',

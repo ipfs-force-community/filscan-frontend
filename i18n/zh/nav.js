@@ -23,12 +23,14 @@ const zh ={
   statistics_fil: 'FIL',
   statistics_charts: '图表统计',
   statistics_map: '节点地图',
+  cw:'ChainWatch',
   develop:'开发者',
   resources:'资源',
   resources_tools: '常用工具',
   provider: '存储提供者',
-  fvm: 'FVM生态总览',
-  account:'节点管家'
-
+  fvm: 'Filecoin生态总览',
+  account:'节点管家',
+  language:"语言",
+  network:"网络",
 }
 export default zh

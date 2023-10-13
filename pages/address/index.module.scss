@@ -1,6 +1,10 @@
 @media screen and (max-width: 1000px){
     .address{
         padding: 12px;
+        .content {
+            padding: 12px;
+            border-radius: 6px;
+        }
         .address-row{
             display: flex;
             .label{
@@ -17,7 +21,6 @@
                 height: auto;
             }
             .p-7{
-                padding: 8px 0;
                 height: auto;
             }
             .flex-col{
@@ -32,25 +35,6 @@
                 }
                 .h-9{
                     height: auto;
-                }
-            }
-            .copy-row {
-                display: inline-block;
-                align-items: center;
-                .text {
-                    color: var(--mobile-link-color);
-                    word-break: break-all;
-                }
-                .normal-text {
-                    word-break: break-all;
-                }
-                .copy {
-                    display: inline-block;
-                    align-items: center;
-                    padding-left: 5px;
-                    img {
-                        display: inline-block;
-                    }
                 }
             }
         }

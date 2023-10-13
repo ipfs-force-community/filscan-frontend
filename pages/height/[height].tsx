@@ -8,6 +8,8 @@ import styles from './index.module.scss'
 import classNames from "classnames";
 import { Skeleton } from "antd";
 import Content from "@/packages/content";
+import Loading from "@/components/loading";
+import { BrowserView, MobileView } from "@/components/device-detect";
 export default () => {
   const router = useRouter()
   const { height } = router.query;
@@ -24,27 +26,28 @@ export default () => {
   }
 
   if (loading) {
-    return (
-      <div className='main_contain'>
-        <Skeleton active />
-        <Skeleton active />
-        <Skeleton active />
-      </div>
-    );
+    return <Loading />
   }
 
   return <div className={classNames(styles.height,"main_contain")}>
-    <div className='font-PingFang font-semibold text-lg'>
+    <div className='font-PingFang font-semibold text-lg mx-2.5'>
       {tr('height')}
       { height&&<span className="ml-1"> #{height}</span> }
     </div>
-    <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
-      <Content contents={height_list.headerList} ns={"detail"} data={data} className="border-b border_color"/>
-      <ul>
+    <div className={classNames("mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs",styles.content)}>
+      <Content contents={height_list.headerList} ns={"detail"} data={data} className={classNames("border-b border_color",styles.title)}/>
+      <BrowserView>
+        <ul>
+          {data?.block_basic?.map((dataItem: any, index: any) => {
+            return <Content key={index} contents={height_list.columns} ns={"detail"} data={dataItem} className="border-b pt-5 border_color last:border-none"/>
+          })}
+        </ul>
+      </BrowserView>
+      <MobileView>
         {data?.block_basic?.map((dataItem: any, index: any) => {
-          return <Content key={index} contents={height_list.columns} ns={"detail"} data={dataItem} className="border-b border_color last:border-none"/>
+          return <Content key={index} contents={height_list.columns} ns={"detail"} data={dataItem} className="border-b border_color last:border-none !py-4"/>
         })}
-      </ul>
+      </MobileView>
     </div>
 
   </div>

@@ -15,6 +15,7 @@ const fevm = {
   tvl_change_in_24h: '24시간 TVL 변경량',
   tokens: '톱 토큰즈',
   tokens_tip:'계약에서 각 토큰의 담보 비율',
-  users: '사용자 수'
+  users: '사용자 수',
+  see_more:'더보기',
 }
 export default fevm

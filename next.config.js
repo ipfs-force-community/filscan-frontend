@@ -21,6 +21,7 @@ if (publicPa === 'development') {
 
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: true,
   env: {
     APP_ENV:process.env['NEXT_PUBLIC_environment'],
     APP_BASE_URL: process.env['NEXT_PUBLIC_APP_BASE_URL'],

@@ -8,7 +8,7 @@ const en ={
   contract_list: 'Verified Contracts',
   contract_rank: 'Contract Rank',
   defi_dashboard:'DeFi Protocol',
-  tipset: 'BlockChain',
+  tipset: 'Blockchain',
   tipset_chain: "Tipsets",
   tipset_message:'Messages',
   tipset_ranking: 'Wealth Ranking',
@@ -17,6 +17,7 @@ const en ={
   "tipset_pool-message": 'Pool Messages',
   ranking: 'Ranking',
   statistics: 'Statistics',
+  cw:'ChainWatch',
   statistics_gas: 'Gas Fee',
   statistics_base: 'Power',
   statistics_fil: 'FIL',
@@ -29,5 +30,7 @@ const en ={
   account: 'Miner Metrics',
   network_overview: 'Network Overview',
   develop:'Developer',
+  language:"Language",
+  network:"Network",
 }
 export default en

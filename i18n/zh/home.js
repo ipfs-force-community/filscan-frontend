@@ -43,7 +43,7 @@ const home = {
   gas_in_64g: '24小时64G扇区封装每T所需Gas',
   gas_in_64g_meta:'64GiB扇区Gas消耗',
   gas_in_64g_tip: '近24小时密封64G扇区每T所要消耗的Gas值',
-  add_power_in_64g: '预估64GiB扇区新增算力成本',
+  add_power_in_64g: '64GiB扇区新增算力成本',
   add_power_in_64g_tip:'近24小时64G扇区新增算力所需要花费的成本，包括扇区质押和封装手续费',
   win_count_reward: '每赢票奖励',
   win_count_reward_tip: '最新高度的单位出块奖励，每个高度有多个区块，每个区块均可获得该奖励',
@@ -61,7 +61,7 @@ const home = {
   footer_detail_b: ' 和 ',
   footer_detail_c: '版权协议',
   search_notFound: '搜索无结果',
-  warn_text: 'Oops! 您输入的搜索字符:',
+  warn_text: '很遗憾，您输入的字符暂无结果',
   warn_details: '对不起！这是一个无效的字符串',
   go_home: '返回首页',
   quality_power_Cc:'Commited Capacity (CC)',
@@ -69,8 +69,9 @@ const home = {
   base_gas: '24h基础手续费走势',
   rank: '排行榜',
   contract_rank: '合约排行',
-  defi_list:'Defi Protocol',
-  blockchain_browser:'区块浏览器'
+  defi_list:'DeFi Protocol',
+  blockchain_browser:'区块浏览器',
+  see_more:'查看更多',
 
 }
 export default home

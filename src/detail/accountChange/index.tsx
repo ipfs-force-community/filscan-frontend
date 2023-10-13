@@ -11,7 +11,9 @@ import { formatDateTime, formatFil, formatFilNum } from '@/utils';
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts';
 import { useEffect, useMemo, useState } from 'react';
 import { BrowserView, MobileView } from '@/components/device-detect';
-
+import classNames from 'classnames';
+import styles from './index.module.scss'
+import useWindow from '@/components/hooks/useWindown';
 export default ({
   accountId,
   interval,
@@ -27,14 +29,15 @@ export default ({
   const { tr } = Translation({ ns: 'detail' });
   const [options, setOptions] = useState<any>({});
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
+  const {isMobile} = useWindow()
 
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -66,7 +69,7 @@ export default ({
             color: color.lineStyle,
           },
           textStyle: {
-            color: color.labelColor,
+            color: isMobile ? color.mobileLabelColor : color.labelColor,
           },
           formatter(v: string) {
             return v + ' FIL';
@@ -106,13 +109,14 @@ export default ({
         },
       },
     };
-  }, [theme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   useEffect(() => {
     if (accountId) {
       load();
     }
-  }, [accountId, interval]);
+  }, [accountId, interval,isMobile]);
 
   const load = async () => {
     const result: any = await fetchData(apiUrl.account_change, {
@@ -139,10 +143,14 @@ export default ({
         locked_funds,
         initial_pledge,
       } = item;
-      const showTime: string =
+      let showTime: string =
         interval === '24h'
           ? formatDateTime(block_time, 'HH:mm')
           : formatDateTime(block_time, 'MM-DD HH:mm');
+
+      if (isMobile && interval !== '24h') {
+        showTime = formatDateTime(block_time, 'MM-DD');
+      }
       dateList.push(showTime);
       const [balance_amount, balance_unit] = balance
         ? formatFilNum(balance, false, false, 4, false)?.split(' ')
@@ -232,6 +240,14 @@ export default ({
         newSeries.push(seriesItem);
       }
     });
+    if (isMobile) {
+      (defaultOptions as any).legend = {
+        show:false
+      };
+      (defaultOptions as any).grid.left = 0;
+      (defaultOptions as any).grid.right = '10px';
+      (default_xAxis as any).axisLabel.padding = [0, 10, 0, 0];
+    }
     return {
       ...defaultOptions,
       xAxis: {
@@ -240,14 +256,37 @@ export default ({
       },
       series: newSeries,
     };
-  }, [options, default_xAxis, noShow, defaultOptions]);
+  }, [options, default_xAxis, noShow, defaultOptions,isMobile]);
 
   const ledRender = ()=>{
-    return <span className='flex gap-x-4 mr-2.5'>
+    if ((lang === 'en' || lang === 'ka') &&isMobile) {
+      return options?.legendData?.length >1 ? <span className={classNames('grid grid-cols-2 gap-2')}>
+        {options?.legendData?.map((v: any) => {
+          return (
+            <span
+              className={classNames('text-xs flex cursor-pointer items-center gap-x-1',styles['legend-title-wrap'])}
+              key={v.dataIndex}
+              onClick={() => {
+                setNoShow({
+                  ...noShow,
+                  [v.dataIndex]: !noShow[v.dataIndex],
+                });
+              }}
+              style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
+              {getSvgIcon('legendIcon')}
+              <span className={classNames('text-xs text_des font-normal',styles['legend-title'])}>
+                {tr(v.title)}
+              </span>
+            </span>
+          );
+        })}
+      </span> : <></>
+    }
+    return options?.legendData?.length >1 ? <span className={classNames('flex gap-x-4 mr-2.5')}>
       {options?.legendData?.map((v: any) => {
         return (
           <span
-            className='text-xs flex cursor-pointer items-center gap-x-1'
+            className={classNames('text-xs flex cursor-pointer items-center gap-x-1',styles['legend-title-wrap'])}
             key={v.dataIndex}
             onClick={() => {
               setNoShow({
@@ -257,38 +296,38 @@ export default ({
             }}
             style={{ color: noShow[v.dataIndex] ? '#d1d5db' : v.color }}>
             {getSvgIcon('legendIcon')}
-            <span className='text-xs text_des font-normal'>
+            <span className={classNames('text-xs text_des font-normal',styles['legend-title'])}>
               {tr(v.title)}
             </span>
           </span>
         );
       })}
-    </span>
+    </span> : <></>
   }
   return (
     <div className='flex-1'>
       {header ? (
         header
       ) : (
-        <div className='flex justify-between  items-center mb-2 h-[32px]'>
+        <div className={classNames('flex justify-between  items-center mb-2 h-[32px]')}>
           <span className='text-lg font-semibold mr-5 name-height mx-2.5'>
             {tr(account_change.title)}
           </span>
-          {
-            <BrowserView>
-              {ledRender()}
-            </BrowserView>
-          }
+          <BrowserView>
+            {ledRender()}
+          </BrowserView>
         </div>
       )}
 
-      <div className='card_shadow w-full border rounded-xl p-2.5 pt-5 border_color'>
+      <div className={classNames('card_shadow w-full border rounded-xl p-2.5 pt-5 border_color',styles.echart)}>
         <MobileView>
-          <div className="tips">
+          <div className="tips mb-2">
             {ledRender()}
           </div>
         </MobileView>
-        <div className='w-full h-[348px]'><Echarts options={newOptions}/></div>
+        <div className='w-full h-[348px]'>
+          <Echarts options={newOptions}/>
+        </div>
       </div>
 
     </div>

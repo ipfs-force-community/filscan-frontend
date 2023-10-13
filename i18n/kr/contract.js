@@ -128,6 +128,7 @@ Hardhat은 컴파일 출력을 프로젝트 내의 "artifacts/build-info/" 디�
   nfts_list: 'NFT 목록',
   item: '아이템',
   Items: '수량',
+  pleaseCheckContractWithPC :"PC측에서 계약내역을 확인해주세요~",
 
   //rcontract_rank_des:'上次更新时间为:{{value}}',
   contract_rank_des:'마지막 업데이트 시간: {{value}}',

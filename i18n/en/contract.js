@@ -128,6 +128,7 @@ Hardhat stores the compilation outputs in the "artifacts/build-info/" directory 
   owner_nft: 'Owner',
   item: 'Item',
   controller: 'Registrant',
+  pleaseCheckContractWithPC :"Please check the contract details on PC",
 
   //rank
   contract_rank_des:'Latest Update on:{{value}}',

@@ -205,7 +205,7 @@ export function formatDateTime(
 }
 
 export function formatTime(from:number, to?:number, ago = true) {
-  let startTime = from; // 开始时间
+  let startTime = from ||0; // 开始时间
   let endTime = to || new Date().getTime(); // 结束时间
   let usedTime = endTime - startTime; // 相差的毫秒数
   //timeDifference(usedTime)
@@ -250,15 +250,39 @@ export function formatNumberUnit(number: number | string, len = 2) {
   if (num >= 1e6) {
     return Number(num / 1e6).toLocaleString('en', { maximumFractionDigits: len }) +'M'
   }
+
   // if (num >= 1e3) {
   //   return Number(num / 1e3).toLocaleString('en', { maximumFractionDigits: len }) +'K'
   // }
+
   return Number(num).toLocaleString('en', { maximumFractionDigits: len })
+}
+
+//连续0后保留几位
+function truncateDecimalAfterZeros(num: string | number, decimalPlaces = 2) {
+  const strNum =num.toString()
+  const match = strNum.match(/0\.(0*)(\d{1,2})?/);
+  if (!match) {
+    return parseFloat(strNum).toFixed(decimalPlaces);
+  }
+
+  const leadingZeros = match[1];
+  const digits = match[2] || "";
+  return "0." + leadingZeros + digits;
 }
 
 // $ + number
 export function get$Number(str: string | number, len?: number) {
   const showNum = Number(str);
+  let showStr =String(str);
+  let flag = ''
+  if (showStr.includes('-')) {
+    showStr = showStr.split('-')[1];
+    flag='-'
+  }
+  if (str > '0' && str < '1') {
+    return flag+'$'+truncateDecimalAfterZeros(showStr, 2);
+  }
   const newNum =
     showNum < 0
       ? '-$' + formatNumberUnit(Math.abs(showNum), len)
@@ -269,6 +293,7 @@ export function get$Number(str: string | number, len?: number) {
 export function formatNumberPercentage(num:string|number, decimalPlaces:number =2) {
   return parseFloat((Number(num)*100).toFixed(decimalPlaces));
 }
+
 export function getClassName(str: string | number) {
   const showNum = Number(str);
   if (showNum === 0) return '';
@@ -328,7 +353,7 @@ export const get_account_type = (value: string = '', unit: number = 6) => {
             onClick={() => {
               account_link(value);
             }}>
-            {value}
+            {isIndent(value,unit)}
           </span>
           <Copy text={value} icon={<CopySvgMobile/>} className='copy'/>
         </span>

@@ -25,7 +25,9 @@ export interface Menu_Info {
   sufIcon?: string|JSX.Element;
   link?: string;
   outLink?: string;
-  color?: string
+  color?: string,
+  value?:string,
+  type?:string,
 }
 
 export interface MenuItem {

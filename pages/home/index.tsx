@@ -19,21 +19,8 @@ import styles from './style.module.scss';
 import Defi from '@/components/mobile/home/defi';
 import MobileContractRank from '@/components/mobile/home/contractRank'
 import MobileRank from '@/components/mobile/home/rank'
-import Search from '@/components/mobile/search';
 import classNames from 'classnames';
 import ContractTrend from '@/src/statistics/ContractTrend';
-//import fetchData from '@/store/server';
-
-// type HomeProps = {
-//   home_meta: any
-// }
-
-// export const getServerSideProps = async () => {
-//   const home_meta = await fetchData(apiUrl.home_meta);
-//   console.log('---3',home_meta)
-//    return { props: { home_meta } }
-
-// }
 
 function Home(props: any) {
   const { tr } = Translation({ ns: 'home' });
@@ -48,10 +35,10 @@ function Home(props: any) {
         <BrowserView>
           <Banner />
         </BrowserView>
-        <div className='main_contain !mt-[26px]'>
+        <div className={classNames('main_contain !mt-[26px]',styles.content)}>
           <div className='flex justify-between h-[270px] gap-x-5 meta-gas '>
             <Meta />
-            <div className='border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap'>
+            <div className={classNames('border card_shadow w-[403px] h-[270px] rounded-xl border_color gas-wrap',styles['gas-wrap'])}>
               <BrowserView>
                 <div className={`flex justify-between text-xs font-PingFang p-5`}>
                   {tr('base_gas')}
@@ -71,8 +58,8 @@ function Home(props: any) {
                   <Link href={`/statistics/gas/`}>
                     <GoMobileIcon
                       className='cursor-pointer'
-                      width={28}
-                      height={28}
+                      width={22}
+                      height={22}
                     />
                   </Link>
                 </div>
@@ -97,7 +84,7 @@ function Home(props: any) {
                   <div className='font-PingFang font-semibold text-lg'>
                     {tr('defi_list')}
                   </div>
-                  <Link href={`/contract/rank`}>
+                  <Link href={`/fevm/defi`}>
                     <GoIcon
                       className='cursor-pointer'
                       width={18}

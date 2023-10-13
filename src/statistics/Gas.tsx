@@ -7,8 +7,9 @@ import { getColor, get_xAxis, seriesArea } from '@/utils/echarts';
 import EChart from '@/components/echarts';
 import fetchData from '@/store/server';
 import { apiUrl } from '@/contents/apiUrl';
-import { formatFilNum } from '@/utils';
+import { formatFil, formatFilNum, formatNumber } from '@/utils';
 import useAxiosData from '@/store/useAxiosData';
+import useWindow from '@/components/hooks/useWindown';
 
 interface Props {
   active?: string;
@@ -30,32 +31,27 @@ function Gas(props: Props) {
   const { active = '24h', className = '' } = props;
   const [value, setValue] = useState(active);
   const { axiosData } = useAxiosData();
+  const {isMobile} = useWindow()
 
   const color = useMemo(() => {
     return getColor(theme);
   }, [theme]);
 
   const default_xAxis = useMemo(() => {
-    return get_xAxis(theme);
-  }, [theme]);
+    return get_xAxis(theme,isMobile);
+  }, [theme,isMobile]);
 
   const defaultOptions: any = useMemo(() => {
-    return {
+    let options = {
       yAxis: {
         type: 'value',
         scale: true,
         axisLabel: {
           fontFamily: 'DINPro',
           fontSize: 14,
-          color: color.labelColor,
-          // formatter(v: any) {
-          //   return v+'attoFil'
-          // },
-
+          color: isMobile ? color.mobileLabelColor : color.labelColor,
           formatter(v: any) {
-            return new BigNumber(Number(v))
-              .dividedBy(Math.pow(10, 9))
-              .toFixed(2) +' nanoFIL';
+            return formatNumber(v)+' nanoFiL';
           },
 
         },
@@ -104,7 +100,19 @@ function Gas(props: Props) {
         },
       },
     };
-  }, [theme]);
+
+    if (isMobile) {
+      (options as any)['grid'] = {
+        top:"5%",
+        right:"20px",
+        bottom:"0%",
+        left: "12px",
+        containLabel: true
+      }
+    }
+    return options
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme,isMobile]);
 
   const [options, setOptions] = useState<any>();
 
@@ -132,7 +140,7 @@ function Gas(props: Props) {
         }
         dateList.push(showTime);
         seriesObj.base_fee.push({
-          value: base_fee,
+          value:formatFil(base_fee,'nanoFiL'),
           showValue: formatFilNum(base_fee, false, false, 4, false).split(
             ' '
           )[0],

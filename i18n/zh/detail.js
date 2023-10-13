@@ -69,6 +69,7 @@ const detail = {
   sector_ratio: '扇区增速',
   sector_ratio_tip:'',
   win_count: '赢票数量',
+  windowPost_gas:'维持算力消耗',
   win_count_tip:'Filecoin经济模型中，一个高度 （tipset）下可能有多个区块（block），每 个区块可能获得多份奖励（win count）。 累计出块份数=每次出块获得奖励份数的总和',
   net_profit_per_tb:'单T消耗',
   net_profit_per_tb_tip:'选定周期内单T封装扇区大小Gas消耗',
@@ -94,6 +95,7 @@ const detail = {
   create_time: '创建时间',
   account_type: '账户类型',
   peer_id: '节点标识',
+  peer_detail:'节点详情',
   account_address:'地址',
   // eslint-disable-next-line no-dupe-keys
   owner_address: 'Owner',
@@ -109,7 +111,9 @@ const detail = {
   //pool_overview_title:'账户',
   //power_change
   power_change: '算力变化',
-  owned_active_miners:'实际工作节点',
+  owned_active_miners: '实际工作节点',
+  miner_owner: '节点存储者',
+  no_area:'未知',
 
   // message
   message_overview_detail: '交易明细',
@@ -148,6 +152,9 @@ const detail = {
   // Transfer: '转账',
   // Burn: '销毁聚合费用',
   exit_code: '状态',
+  err_message: '错误信息',
+  replaced: '消息被覆盖',
+  base_cid:'被覆盖CID',
 
   //内部交易
   amount:'价值',

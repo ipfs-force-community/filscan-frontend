@@ -43,13 +43,14 @@ const Defi = ()=>{
       },
       render(value, record, index) {
         return <div className={styles.protocol}>
-          <Image fill src={record.icon_url} alt="" />
+          <Image fill src={record.icon_url} alt="" className="mr-1"/>
           <div
             style={{
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               cursor: 'pointer',
             }}
+            className="font-DINPro-Medium"
           >{value}</div>
         </div>
       },
@@ -60,7 +61,7 @@ const Defi = ()=>{
       key:'tvl',
       align:"right",
       render(value) {
-        return get$Number(value)
+        return <div className="font-DINPro-Medium">{get$Number(value)}</div>
       },
     },
   ]

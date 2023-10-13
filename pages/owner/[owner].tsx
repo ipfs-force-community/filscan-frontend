@@ -1,26 +1,32 @@
 /** @format */
 /** @format */
 
-import { apiUrl } from '@/contents/apiUrl';
-import fetchData from '@/store/server';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import AccountBalance from '@/src/detail/accountBalance';
-import Power from '@/src/detail/Power';
-import OverView from '@/src/detail/overView';
-import { miner_overview, owner_detail } from '@/contents/detail';
-import AccountChange from '@/src/detail/accountChange';
-import PowerChange from '@/src/detail/powerChange';
-import { Translation } from '@/components/hooks/Translation';
-import Copy from '@/components/copy';
+import { apiUrl } from "@/contents/apiUrl";
+import fetchData from "@/store/server";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import AccountBalance from "@/src/detail/accountBalance";
+import Power from "@/src/detail/Power";
+import OverView from "@/src/detail/overView";
+import { miner_overview, owner_detail } from "@/contents/detail";
+import AccountChange from "@/src/detail/accountChange";
+import PowerChange from "@/src/detail/powerChange";
+import { Translation } from "@/components/hooks/Translation";
+import Copy from "@/components/copy";
+import classNames from "classnames";
+import styles from "./[owner].module.scss";
+import Link from "next/link";
+import CopySvgMobile from "@/assets/images/icon-copy.svg";
+import useWindow from "@/components/hooks/useWindown";
+import { BrowserView, MobileView } from "@/components/device-detect";
 
 export default () => {
   const router = useRouter();
   const { owner } = router.query;
   const [data, setData] = useState<any>({});
   const [loading, setLoading] = useState(false);
-  const { tr } = Translation({ ns: 'detail' });
-
+  const { tr } = Translation({ ns: "detail" });
+  const { isMobile } = useWindow();
   useEffect(() => {
     if (owner) {
       loadData();
@@ -37,13 +43,32 @@ export default () => {
   };
 
   return (
-    <div className='main_contain'>
-      <div className={'flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg'}>
-        <span>{owner}</span>
-        { owner&& typeof owner === 'string'&& <Copy text={owner} />}
+    <div className={classNames("main_contain", styles.miner)}>
+      <div
+        className={
+          "flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg"
+        }
+      >
+        <BrowserView>
+          <span>{owner}</span>
+          {owner && typeof owner === "string" && <Copy text={owner} />}
+        </BrowserView>
+        <MobileView>
+          <span className="copy-row">
+            <span className="normal-text">{owner}</span>
+            {owner && typeof owner === "string" && (
+              <Copy text={owner} icon={<CopySvgMobile />} className="copy-lg" />
+            )}
+          </span>
+        </MobileView>
       </div>
-      <div className='w-full card_shadow rounded-xl'>
-        <div className='flex w-full border-b border_color'>
+      <div className="w-full card_shadow rounded-xl">
+        <div
+          className={classNames(
+            "flex w-full border-b border_color",
+            styles.column
+          )}
+        >
           <AccountBalance
             data={data?.account_indicator || {}}
             loading={loading}
@@ -51,15 +76,75 @@ export default () => {
           <Power data={data?.account_indicator || {}} />
         </div>
 
-        <ul className='py-8 px-7  flex gap-y-6 flex-col'>
+        <ul
+          className={classNames(
+            "py-8 px-7  flex gap-y-6 flex-col",
+            styles["owner-wrap"]
+          )}
+        >
           {owner_detail.list.map((item) => {
+            if (isMobile) {
+              if (item.dataIndex === "account_address") {
+                item.render = (text: string) => {
+                  return (
+                    <div className={classNames("copy-row")}>
+                      <span className="text">
+                        <Link className="link" href={`/address/${text}`}>
+                          {text}
+                        </Link>
+                      </span>
+                      <Copy
+                        text={text}
+                        icon={<CopySvgMobile />}
+                        className="copy"
+                      />
+                    </div>
+                  );
+                };
+              }
+              if (
+                item.dataIndex === "owned_miners" ||
+                item.dataIndex === "active_miners"
+              ) {
+                item.render = (text: Array<any>, record: any) => {
+                  return (
+                    <span className="grid grid-cols-4 gap-4">
+                      {text &&
+                        Array.isArray(text) &&
+                        text?.map((item: any, index: number) => {
+                          return (
+                            <Link
+                              className="link"
+                              key={index}
+                              href={`/miner/${item}`}
+                            >
+                              {item}
+                            </Link>
+                          );
+                        })}
+                    </span>
+                  );
+                };
+              }
+            }
+
             const { title, render, dataIndex } = item;
             const value = data[dataIndex];
             const renderDom = render ? render(value, data) : value;
+
             return (
-              <li key={dataIndex} className='flex w-full items-baseline'>
-                <div className='text_des text-sm w-28'>{tr(title)}</div>
-                <span className='flex-1'>{renderDom}</span>
+              <li
+                key={dataIndex}
+                className={classNames(
+                  "flex w-full items-baseline",
+                  styles["owner-item-reset"],
+                  (item.dataIndex === "owned_miners" ||
+                    item.dataIndex === "active_miners") &&
+                    styles["owner-item"]
+                )}
+              >
+                <div className="text_des text-sm w-28">{tr(title)}</div>
+                <span className="flex-1">{renderDom}</span>
               </li>
             );
           })}
@@ -68,9 +153,9 @@ export default () => {
 
       <OverView overView={miner_overview} accountId={owner} />
 
-      <div className='flex mt-6 gap-x-5'>
-        <AccountChange accountId={owner} interval={'30d'} />
-        <PowerChange accountId={owner} type='owner'/>
+      <div className={classNames("flex mt-6 gap-x-5", styles.bottom)}>
+        <AccountChange accountId={owner} interval={"30d"} />
+        <PowerChange accountId={owner} type="owner" />
       </div>
     </div>
   );

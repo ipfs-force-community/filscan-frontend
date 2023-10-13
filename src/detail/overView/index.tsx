@@ -23,7 +23,6 @@ export default ({
   overView: any;
   accountId?: string | string[];
 }) => {
-  const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const {axiosData } = useAxiosData();
   const [interval, setInterval] = useState('24h');
@@ -57,7 +56,7 @@ export default ({
 
   return (
     <div className={classNames(styles.overview,'w-full')}>
-      <div className='w-full flex items-center mt-7 mb-5 ml-2.5'>
+      <div className={classNames('w-full flex items-center mt-7 mb-5 ml-2.5',styles.title)}>
         <span className='text-lg font-semibold mr-5'>{tr(overView.title)}</span>
         <Segmented
           data={overView.tabList}
@@ -79,10 +78,10 @@ export default ({
           return (
             <li key={dataIndex} className={classNames(styles['list-row'], 'flex')}>
 
-              <span className='text-sm text_des min-w-20 flex flex-wrap'>
+              <span className={classNames('text-sm text_des min-w-20 flex flex-wrap',styles.label)}>
                 {title_tip ? <Tooltip context={tr(title_tip)} icon={false} >
                   <span className='flex items-center gap-x-1 cursor-pointer'>{tr(title)} {getSvgIcon('tip')}:</span>
-                </Tooltip> : `${tr(title)}:`}
+                </Tooltip> : `${tr(title)}`}
               </span>
               <span className='font-DINPro-Medium text-sm font-medium ml-1'>
                 {loading ? <SkeletonScreen /> : value}

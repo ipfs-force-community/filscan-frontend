@@ -3,6 +3,8 @@ const home = {
   minutes: '분',
   hours: '시간',
   day: '일',
+  base_gas: '24시간 기본 수수료 추세',
+
   //meta
   meta_title: '전체 네트워크 데이터 지표',
   mata_show: '펼치기',
@@ -45,7 +47,7 @@ const home = {
   footer_detail_b: ' 및 ',
   footer_detail_c: '저작권 계약',
   search_notFound: '검색 결과 없음',
-  warn_text: 'Oops! 입력한 검색어:',
+  warn_text: '죄송합니다. 입력한 문자에 대한 결과가 없습니다',
   warn_details: '죄송합니다. 유효하지 않은 문자열입니다.',
   go_home: '홈으로 돌아가기',
   blockchain_browser: '블록 탐색기',
@@ -54,6 +56,7 @@ const home = {
   'total_contract_24h_contract': '활성 계약 수/24시간',
   'total_contract/24h_contract': '활성 계약 수/24시간',
   verified_contracts: '검증된 스마트 계약 리스트',
+  "contract_address_24h_change": '계약 거래 주소는 24시간 변경됩니다',
   'contract_transaction': '계약 거래 수',
   'contract_transaction_24h_change': '활성 계약 수 24시간 변동',
   'contract_transaction/24h_change': '계약 거래 수 24시간 변동',
@@ -65,6 +68,6 @@ const home = {
   contract_gas: '계약 가스 비용',
   quality_power_Cc:'Commited Capacity (CC)',
   quality_power_Dc:'DataCap (DC)',
-
+  see_more:'더보기',
 }
 export default home

@@ -10,6 +10,7 @@ import { observer } from "mobx-react"
 import Link from "next/link"
 import VerifySvg from '@/assets/images/verify.svg';
 import { useRouter } from "next/router"
+import classNames from "classnames"
 
 interface Sort {
   field:string,
@@ -26,6 +27,10 @@ const ContractRank =()=>{
 
   const columns = useMemo(()=>{
     return contract_rank?.mobileColumns.filter((value,index)=>{
+
+      if (value.dataIndex === 'rank') {
+        value.render = (text: string) => <span className={classNames('rank_icon',styles['rank-icon'])}>{text}</span>
+      }
       if (value.dataIndex === 'contract_name') {
         value.render = (text: string, record: any) => {
           if (text) {

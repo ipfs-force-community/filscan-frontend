@@ -17,6 +17,7 @@ import styles from './style.module.scss'
 import Copy from '@/components/copy';
 import useAxiosData from '@/store/useAxiosData';
 import AccountDetail from '@/src/detail/accountDetail';
+import CopySvgMobile from '@/assets/images/icon-copy.svg';
 
 export default () => {
   const router = useRouter();
@@ -32,7 +33,6 @@ export default () => {
     if (miner === 'miner' || miner === 'address') {
       newMiner = router?.query?.miner || router?.query?.address;
     }
-    console.log('----3',newMiner,router)
     if (newMiner && typeof newMiner === 'string') {
       loadMinerData(newMiner);
       loadMethod();
@@ -42,7 +42,7 @@ export default () => {
   const loadMethod = async () => {
     const result: any = await axiosData(apiUrl.detail_list_method, {
       account_id: miner,
-    });
+    }, {isCancel:false});
     const newMethod: any = [
       {
         title: tr('all_method'),
@@ -89,14 +89,25 @@ export default () => {
 
   return (
     <div className={classNames(styles.miner, 'main_contain')}>
-      <div className={'mb-2.5 DINPro-Medium font-medium text-lg flex items-center'}>
-        <span className={'ml-4 flex items-center gap-x-1'}>
-          <span>{ tr('account_title')}:</span>
-          <span>{miner || ''}</span>
-          { miner&& typeof miner ==='string' && <Copy text={miner} />}
-        </span>
+      <div className={classNames('mb-2.5 DINPro-Medium font-medium text-lg flex items-center',styles['title-wrap'])}>
+        <BrowserView>
+          <span className={classNames('ml-4 flex items-center gap-x-1',styles.title)}>
+            <span>{ tr('account_title')}:</span>
+            <span>{miner || ''}</span>
+            { miner&& typeof miner ==='string' && <Copy text={miner} />}
+          </span>
+        </BrowserView>
+        <MobileView>
+          <span className={classNames('ml-4 flex items-center gap-x-1',styles.title)}>
+            <span>{ tr('account_title')}:</span>
+            <span className='copy-row'>
+              <span className='normal-text'>{miner || ''}</span>
+              <span>{ miner&& typeof miner ==='string' && <Copy icon={<CopySvgMobile/>} text={miner} className='copy-lg'/>}</span>
+            </span>
+          </span>
+        </MobileView>
       </div>
-      <div className='flex w-full card_shadow rounded-xl !overflow-hidden'>
+      <div className={classNames('flex w-full card_shadow rounded-xl !overflow-hidden',styles.balance)}>
         <AccountBalance
           data={data?.account_indicator || {}}
           loading={loadingBalance}

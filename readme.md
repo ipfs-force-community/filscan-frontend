@@ -9,7 +9,7 @@ pm2 start npm --watch --name filscan_main -- run proMain
  pm2 start npm --watch --name filscan_maintain -- run dev
 
 //pre
-pm2 start npm --watch --name filscan_main -- run start:pre
+pm2 start npm --watch --name filsan_main -- run start:pre
 
 //ha 
 pm2 start npm --watch --name filscan_ha -- run start:ha

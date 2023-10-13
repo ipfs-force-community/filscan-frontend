@@ -10,6 +10,7 @@ import Progress from "@/packages/progress"
 import { unitConversion } from "@/utils"
 import { observer } from "mobx-react"
 import { useRouter } from "next/router"
+import classNames from "classnames"
 
 interface Sort {
     field:string,
@@ -28,6 +29,7 @@ const Rank = ()=>{
       if (item.dataIndex === 'rank') {
         item.width = '15%'
         item.align = "left"
+        item.render = (text: string) => <span className={classNames('rank_icon',styles['rank-icon'])}>{text}</span>
       }
       if (item.dataIndex === 'miner_id') {
         item.width = '30%'
@@ -36,9 +38,11 @@ const Rank = ()=>{
         item.align = "right"
         item.width = '0'
         item.render = (value:any,render:MinerPowerRank)=>{
-          const left = 100 - (Number(value) / Number(render.power_ratio)) * 100;
+          const left = 100 - (Number(value) / Number(homeStore.maxPower)) * 100;
+          const showLeft = left > 100 ? 100 : left;
+
           return (
-            <span className='flex justify-end gap-x-2'>
+            <span className='flex justify-end gap-x-2 items-center'>
               <Progress left={left + '%'} />
               <span>{unitConversion(value, 2) + '/D'}</span>
             </span>
@@ -52,6 +56,10 @@ const Rank = ()=>{
   },[t])
 
   useEffect(()=>{
+    load()
+  },[sort])
+
+  const load = ()=>{
     homeStore.fetchMinerPowerRank({
       index:1,
       limit:10,
@@ -62,23 +70,37 @@ const Rank = ()=>{
       },
       sector_size:null,
     })
-  },[])
+  }
 
-  useEffect(()=>{
-  },[homeStore.minerPowerRankData?.items])
+  const handleChange = (pagination: any, filters?: any, sorter?: any) => {
+    let order = { ...sort };
+    if (sorter?.field) {
+      if (sorter.order) {
+        order = {
+          field: sorter.field,
+          order: sorter.order,
+        };
+      } else {
+        order = {
+          field:'power_ratio',
+          order: 'descend',
+        }
+      }
+    }
+    setSort(order);
+  };
 
   return <div className={styles.wrap}>
     <div className={styles.title}>{t('growth')}</div>
     <div className={styles.content}>
       <Table
+        onChange={handleChange}
         columns={columns}
         dataSource={homeStore.minerPowerRankData?.items}
         pagination={false}
       ></Table>
       <div onClick={()=>{
         router.push('/rank#growth')
-        console.log("=======ank#growth=========");
-
       }} className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
     </div>
   </div>

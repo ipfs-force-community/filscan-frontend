@@ -1,0 +1,53 @@
+@media screen and (max-width: 1000px) {
+  .account-balance {
+    .title-label {
+      color: var(--mobile-des-color);
+      font-size: 16px;
+      column-gap: 4px;
+    }
+    .title-value {
+      margin-left: 5px;
+      font-weight: 500;
+      font-size: 17px;
+      font-family: "DINPro-Medium";
+    }
+    .chart {
+      position: relative;
+      width: 100%;
+      height: 250px;
+    }
+    .title {
+      padding: 10px 12px;
+    }
+
+    .legend-title {
+      color: var(--mobile-des-color);
+    }
+    .info {
+      padding: 0px 12px 14px 12px;
+      border-bottom: 1px solid var(--mobile-divide-line);
+      :global {
+        .account-balance {
+          margin-top: 0px;
+          max-height: unset;
+        }
+        .account-balance-item {
+          justify-content: space-between;
+          width: 100%;
+        }
+        .mt-24 {
+          margin-top: 0;
+          height: auto;
+        }
+      }
+    }
+    :global {
+      .flex-col {
+        align-items: center;
+        flex-direction: row;
+
+        row-gap: 10px;
+      }
+    }
+  }
+}

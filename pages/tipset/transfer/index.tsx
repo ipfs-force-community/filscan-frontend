@@ -4,7 +4,7 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Translation } from '@/components/hooks/Translation';
 import useRemoveQueryParam from '@/components/hooks/useRemoveQuery';
 import useUpdateQuery from '@/components/hooks/useUpdateQuery';
-import { message_list, transfer_list } from '@/contents/tipset';
+import {transfer_list } from '@/contents/tipset';
 import Table from '@/packages/Table';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { formatNumber, pageLimit } from '@/utils';
@@ -19,9 +19,9 @@ export default () => {
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const { p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState({
     data: [],
     total: undefined,
@@ -39,15 +39,15 @@ export default () => {
   }, [current]);
 
   const load = async (cur?: number) => {
-    setLoading(true);
+    // setLoading(true);
     const showIndex = cur || current;
     const result: any = await axiosData(apiUrl.tipset_transfer, {
       filters: {
         index: showIndex - 1,
         limit: pageLimit,
       },
-    });
-    setLoading(false);
+    }, {isCancel:false});
+    //setLoading(false);
     setDataSource({
       data: result?.large_transfer_list || [],
       total: result?.total_count,
@@ -59,7 +59,7 @@ export default () => {
       return { ...v, title: tr(v.title) };
     });
     return content;
-  }, [theme, lang]);
+  }, [theme, tr]);
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
     const showCurrent = pagination?.current;
@@ -74,7 +74,7 @@ export default () => {
   return (
     <div className={classNames(styles['transfer-list'],'main_contain')}>
       <div className='flex justify-between items-center'>
-        <div>
+        <div className='mx-2.5'>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('transfer_list')}
           </div>
@@ -85,7 +85,7 @@ export default () => {
 
       </div>
 
-      <div className='mt-4 h-full border  rounded-xl p-5	card_shadow border_color'>
+      <div className={classNames('mt-4 h-full border  rounded-xl p-5	card_shadow border_color',styles['table'])}>
         <Table
           className='-mt-2.5 '
           data={dataSource.data}

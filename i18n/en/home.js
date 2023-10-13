@@ -44,7 +44,7 @@ const home = {
   footer_detail_b: ' and ',
   footer_detail_c: 'license',
   search_notFound: 'Search Not Found',
-  warn_text: 'Oops! The search string you enterd was:',
+  warn_text: 'Sorry, there are no results for the characters you entered',
   warn_details: 'Sorry! This is an invalid search string',
   go_home: 'Back Home',
 
@@ -68,6 +68,7 @@ const home = {
   contract_gas: 'Contract Gas Cost',
   quality_power_Cc:'Commited Capacity (CC)',
   quality_power_Dc:'DataCap (DC)',
+  see_more:'See More',
 
 }
 export default home

@@ -39,7 +39,7 @@ const tipset = {
   multisig: 'multisig',
   address_list: 'Wealth Ranking',
   account_address: 'Address',
-  balance_percentage: 'Balance/Percentage',
+  balance_percentage: 'Balance / Percentage',
   account_type: 'Status',
   latest_transfer_time: 'Last Seen Time',
   //transfer

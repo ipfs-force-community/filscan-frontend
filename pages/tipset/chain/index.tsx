@@ -1,7 +1,6 @@
 import { Translation } from "@/components/hooks/Translation";
 import { apiUrl } from "@/contents/apiUrl";
 import { chain_list } from "@/contents/tipset"
-import Skeleton from "@/packages/skeleton";
 import { useFilscanStore } from "@/store/FilscanStore";
 import useAxiosData from "@/store/useAxiosData";
 import { formatDateTime, formatFilNum, pageLimit } from "@/utils";
@@ -13,10 +12,14 @@ import { BrowserView, MobileView } from "@/components/device-detect";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { get } from 'lodash'
+import { useRouter } from "next/router";
+import Loading from "@/components/loading";
 
 export default () => {
   const { tr } = Translation({ ns: 'tipset' });
   const { theme, lang } = useFilscanStore();
+  const router = useRouter();
+  const { cid,height } = router.query;
   const { axiosData,loading } = useAxiosData();
   // const [loading,setLoading] = useState(false)
   const [current, setCurrent] = useState<number>(1);
@@ -26,8 +29,14 @@ export default () => {
   })
 
   useEffect(() => {
-    load()
-  },[])
+    if (cid) {
+      router.push(`/cid/${cid}`)
+    } else if (height) {
+      router.push(`/height/${height}`)
+    } else {
+      load()
+    }
+  },[cid,height])
 
   const load = async (cur?: number) => {
     const index = cur || current
@@ -51,21 +60,14 @@ export default () => {
   }, [tr])
 
   function renderLoading(){
-    return <div className="h-[500px] flex flex-col gap-y-5">
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-    </div>
+    return <Loading />
   }
 
   return <div className={classNames(styles['chain-list'],'main_contain')}>
-    <div className='font-PingFang font-semibold text-lg mx-2.5'>
+    <div className={classNames('font-PingFang font-semibold text-lg mx-2.5',styles.title)}>
       {tr('block_list')}
     </div>
-    <div className="mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs">
+    <div className={classNames("mt-4 h-full border rounded-xl p-5 card_shadow border_color text_xs",styles.content)}>
       <BrowserView>
         <ul className="flex p-5">
           {columns.map(itemHeader => {
@@ -128,14 +130,24 @@ export default () => {
           </BrowserView>
         </>
       }
-
-      <div className={`mt-5 flex justify-end items-center`} >
-        <Pagination showQuickJumper showSizeChanger={ false} current={current} total={data.total}
-          onChange={(cur) => {
-            load(cur);
-            setCurrent(cur)
-          } } />
-      </div>
+      <BrowserView>
+        <div className={`mt-5 flex justify-end items-center`} >
+          <Pagination showQuickJumper showSizeChanger={ false} current={current} total={data.total}
+            onChange={(cur) => {
+              load(cur);
+              setCurrent(cur)
+            } } />
+        </div>
+      </BrowserView>
+      <MobileView>
+        <div className={`mt-5 flex justify-end items-center`} >
+          <Pagination showQuickJumper showLessItems={true} showSizeChanger={ false} current={current} total={data.total}
+            onChange={(cur) => {
+              load(cur);
+              setCurrent(cur)
+            } } />
+        </div>
+      </MobileView>
 
     </div>
 

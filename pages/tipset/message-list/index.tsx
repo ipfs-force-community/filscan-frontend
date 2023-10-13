@@ -21,9 +21,9 @@ export default () => {
   const { theme, lang } = useFilscanStore();
   const updateQuery = useUpdateQuery();
   const removeQueryParam = useRemoveQueryParam();
-  const { axiosData } = useAxiosData();
+  const { axiosData ,loading} = useAxiosData();
   const { name, p } = useRouter().query;
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([]);
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -66,7 +66,7 @@ export default () => {
   }, [method, current]);
 
   const load = async (cur?: number, method?: string) => {
-    setLoading(true);
+  //  setLoading(true);
     const showIndex = cur || current;
     const method_name = method === 'all' ? '' : method;
     const result: any = await axiosData(apiUrl.tipset_message, {
@@ -76,7 +76,7 @@ export default () => {
         method_name,
       },
     });
-    setLoading(false);
+    // setLoading(false);
     setDataSource({
       data: result?.message_list || [],
       total: result?.total_count,
@@ -109,7 +109,7 @@ export default () => {
 
   return (
     <div className={classNames(styles['message-list'],'main_contain')}>
-      <div className='flex justify-between items-center mx-2.5'>
+      <div className={classNames('flex justify-between items-center mx-2.5',styles['title-wrap'])}>
         <div>
           <div className='font-PingFang font-semibold text-lg'>
             {tr('message_list')}
@@ -121,7 +121,7 @@ export default () => {
         <Selects
           value={method}
           options={newOptions}
-          className='!min-w-[240px]'
+          className={classNames('!min-w-[240px]',styles.select)}
           // className='custom-select'
           onChange={(value) => {
             if (value !== 'all') {

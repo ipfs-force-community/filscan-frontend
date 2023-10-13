@@ -155,10 +155,20 @@ export const contract_rank = {
         if (!text) return '--';
         return (
           <span className='flex gap-x-2 items-center'>
-            <Link className='link_text' href={`/address/${text}`}>
-              {isIndent(text, 5, 4)}
-            </Link>
-            <Copy text={text} />
+            <BrowserView>
+              <Link className='link_text' href={`/address/${text}`}>
+                {isIndent(text, 5, 4)}
+              </Link>
+              <Copy text={text} />
+            </BrowserView>
+            <MobileView>
+              <span className='copy-row'>
+                <Link className='link_text' href={`/address/${text}`}>
+                  {isIndent(text, 5, 4)}
+                </Link>
+                <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+              </span>
+            </MobileView>
           </span>
         );
       },
@@ -213,11 +223,16 @@ export const contract_rank = {
       render: (text: any, record: any) => {
         if (!text) return '--';
         return (
-          <span className='flex gap-x-2 items-center'>
+          <span className='flex gap-x-2 items-center copy-row'>
             <Link className='link_text' href={`/address/${text}`}>
               {isIndent(text, 5, 4)}
             </Link>
-            <Copy text={text} />
+            <BrowserView>
+              <Copy text={text} />
+            </BrowserView>
+            <MobileView>
+              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+            </MobileView>
           </span>
         );
       },
@@ -311,10 +326,20 @@ export const contract_token = {
         dataIndex: 'total_supply',
         title: () => {
           return (
-            <span className='flex items-center gap-x-2'>
-              {tr('total_supply')}
-              <Tooltip context={tr('total_supply_tip')} />
-            </span>
+            <>
+              <BrowserView>
+                <span className='flex items-center gap-x-2'>
+                  <span> {tr('total_supply')}</span>
+                  <Tooltip context={tr('total_supply_tip')} />
+                </span>
+              </BrowserView>
+              <MobileView>
+                <span className='flex items-center gap-x-2'>
+                  <span style={{width:"min-content",wordBreak:"initial"}}> {tr('total_supply')}</span>
+                  <Tooltip context={tr('total_supply_tip')} />
+                </span>
+              </MobileView>
+            </>
           );
         },
         render: (text: string | number) => {
@@ -510,7 +535,7 @@ export const token_owner_columns = (ownerList: any) => {
         if (!text) return '--';
         return (
           <span className='flex link_text items-center gap-x-1'>
-            <span> {text}  </span>
+            <Link href={ `/address/${text}`}> {text}  </Link>
             {text && <Copy text={text} />}
             {ownerList?.domains && ownerList?.domains[text] && (
               <Link
@@ -847,8 +872,8 @@ export const contract_log = [
       if (Array.isArray(text)) {
         return text.map((item:string,index:number) => {
           return <li key={item} className='flex items-center gap-x-1 mb-1' >
-            <span className="flex item-center justify-center bg-bg_hover border rounded-[5px] w-5 h-5">{ index}</span>
-            { item}
+            <span className="flex item-center flex-shrink-0 justify-center bg-bg_hover border rounded-[5px] w-5 h-5">{ index}</span>
+            <span> { item}</span>
           </li>
         })
       }

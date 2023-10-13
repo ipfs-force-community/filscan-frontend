@@ -1,40 +1,32 @@
-@media screen and (max-width: 1000px){
-    .address-list{
-        padding: 12px;
-        :global{
-            .card_shadow{
-                padding: 0;
-                background-color:transparent;
-                box-shadow:none;
-                border-color:transparent;
-                overflow:hidden;
-            }
-            .h-full{
-                height: auto;
-            }
-            .border{
-                border-width: 0;
-                border-radius: 6px;
-            }
-            .ant-pagination{
-                justify-content: flex-end;
-            }
-            .copy-row {
-                display: inline-block;
-                align-items: center;
-                .text {
-                    color: var(--mobile-link-color);
-                    word-break: break-all;
-                }
-                .copy {
-                    display: inline-block;
-                    align-items: center;
-                    padding-left: 5px;
-                    img {
-                        display: inline-block;
-                    }
-                }
-            }
+@media screen and (max-width: 1000px) {
+  .address-list {
+    padding: 12px;
+    .header-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+        .select {
+            margin-top: 5px;
+            width: 100%;
         }
     }
+    :global {
+      .card_shadow {
+        overflow: hidden;
+        padding: 0;
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+      }
+      .h-full {
+        height: auto;
+      }
+      .border {
+        border-width: 0;
+        border-radius: 6px;
+      }
+      .ant-pagination {
+        justify-content: flex-end;
+      }
+    }
+  }
 }
