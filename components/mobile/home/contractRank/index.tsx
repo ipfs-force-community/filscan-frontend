@@ -11,6 +11,7 @@ import Link from "next/link"
 import VerifySvg from '@/assets/images/verify.svg';
 import { useRouter } from "next/router"
 import classNames from "classnames"
+import { ellipsis, isIndent } from "@/utils"
 
 interface Sort {
   field:string,
@@ -36,7 +37,7 @@ const ContractRank =()=>{
           if (text) {
             return (
               <span className='flex gap-x-2 items-center'>
-                <Link href={`/address/${record.contract_address}`}>{text}</Link>
+                <Link href={`/address/${record.contract_address}`}>{ellipsis(text,8)}</Link>
                 <VerifySvg width={13} height={14} />
               </span>
             );

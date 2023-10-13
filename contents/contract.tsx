@@ -227,12 +227,6 @@ export const contract_rank = {
             <Link className='link_text' href={`/address/${text}`}>
               {isIndent(text, 5, 4)}
             </Link>
-            <BrowserView>
-              <Copy text={text} />
-            </BrowserView>
-            <MobileView>
-              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
-            </MobileView>
           </span>
         );
       },
