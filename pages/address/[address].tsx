@@ -30,7 +30,7 @@ export default () => {
   const [tokenList, setTokenList] = useState<Array<any>>([]);
   const [verifyData, setVerifyData] = useState<any>({})
   const [accountType, setAccountType] = useState('');
-  const [interval, setInterval] = useState('1m');
+  const [interval, setInterval] = useState('24h');
   const [methodOptions, setMethodOptions] = useState([]);
   const [transOptions,setTransOptions] = useState([])
   const [actorId,setActorId] = useState('')
@@ -241,7 +241,7 @@ export default () => {
             <Segmented
               data={address_detail.account_change.tabsList || []}
               ns='detail'
-              defaultValue='1m'
+              defaultValue='24h'
               isHash={false}
               onChange={(value: string) => {
                 setInterval(value);

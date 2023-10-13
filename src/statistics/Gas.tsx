@@ -51,7 +51,7 @@ function Gas(props: Props) {
           fontSize: 14,
           color: isMobile ? color.mobileLabelColor : color.labelColor,
           formatter(v: any) {
-            return formatNumber(v)+' nanoFiL';
+            return formatNumber(v)+' nanoFIL';
           },
 
         },
