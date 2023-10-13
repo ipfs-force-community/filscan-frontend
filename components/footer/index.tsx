@@ -40,14 +40,14 @@ export default () => {
              <IconLogo width={30} height={30} />
               <span className='font-Barlow font-medium text-xl ml-2'>Filscan.io </span>
             </div> */}
-            <Link
-              href={'/'}
+            <div
+              //href={'/'}
               className='flex gap-x-2 items-center text_color cursor-pointer' >
               <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logo.png'} width={40} height={40} alt='logo' />
               {/* {getSvgIcon('logoText')} */}
               <Image src={'https://filscan-v2.oss-cn-hongkong.aliyuncs.com/fvm_manage/images/logoText.png'} alt='logo' width={95} height={16}></Image>
               {/* <span className='font-Barlow font-bold text-xl '>Filscan</span> */}
-            </Link>
+            </div>
             <div className='flex justify-between items-end	 text-border_des'>
               <div className='flex flex-col gap-y-1 text-xs'>
                 <span>
