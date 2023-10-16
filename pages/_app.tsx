@@ -24,6 +24,8 @@ import i18n from '@/i18n';
 import Ap from 'next/app'
 import { SEO } from '@/contents/common';
 import Script from 'next/script';
+import useAxiosData from '@/store/useAxiosData';
+import { proApi } from '@/contents/apiUrl';
 
 App.getInitialProps = async (context:any)=>{
   const initialProps = await Ap.getInitialProps(context)
@@ -45,7 +47,7 @@ App.getInitialProps = async (context:any)=>{
 function App({ Component, pageProps, isMobile }: any) {
   const {t} =useTranslation('home')
   const router = useRouter();
-
+  const {axiosData } = useAxiosData();
   const [userInfo, setUserInfo] = useState<any>();
   const [loading,setLoading]= useState(true)
   const [lang, setLang] = useState('zh');
@@ -92,6 +94,25 @@ function App({ Component, pageProps, isMobile }: any) {
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (localStorage?.getItem('userInfo')) {
+      const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '');
+      if (lastUser) {
+        setUserInfo(lastUser);
+      }
+    }
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    const userData: any = await axiosData(proApi.userInfo);
+    setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
+    );
+  };
 
   const loadTheme = (theme_Local: any) => {
     if (theme_Local === 'dark' && !isMobile) {
