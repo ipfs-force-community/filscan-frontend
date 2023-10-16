@@ -53,7 +53,7 @@ export default ({ origin }: { origin?: string }) => {
         }) || [],
       total: result?.total,
     });
-    if (sortData.field === default_sort.field && sortData.order === 'descend') {
+    if (sortData.field === default_sort.field && sortData.order === 'descend' && result?.items) {
       //默认排序，pr
       setProgress(result?.items[0]?.tvl || 0)
     }
