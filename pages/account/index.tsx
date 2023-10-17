@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MinerStoreContext } from '@/src/account/content';
 import Loading from '@/components/loading';
+import MonitorBalance from '@/src/account/monitor/balance'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -78,8 +79,7 @@ const Account: React.FC = () => {
   }, [tr]);
 
   useEffect(() => {
-    console.log('===33',userInfo)
-    if (!localStorage.getItem('token')) {
+    if (!userInfo.mail || !localStorage.getItem('token')) {
       router.push('/account/login');
     }
   }, [userInfo.mail]);
@@ -167,7 +167,9 @@ const Account: React.FC = () => {
 
                   />
                 )}
-
+                {selectedKey === 'monitorBalance' && (
+                  <MonitorBalance />
+                )}
                 {selectedKey === 'personal' && <Personal />}
               </MinerStoreContext.Provider>
             )}

@@ -24,7 +24,7 @@ type Item = ElementType<typeof home_meta>;
 
 function Meta() {
   const { tr } = Translation({ ns: "home" });
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
 
   const [data, setData] = useState<
     Record<DataIndex, number | undefined> & {
@@ -107,8 +107,8 @@ function Meta() {
                       styles["solid-text"]
                     )}
                   >
-                    {!value && <Skeleton />}
-                    {renderDom}
+                    {loading && <Skeleton />}
+                    {!loading&&renderDom}
                   </div>
                 </Tooltip>
 
@@ -132,8 +132,8 @@ function Meta() {
                   styles["solid-text"]
                 )}
               >
-                {!value && <Skeleton />}
-                {renderDom}
+                {loading && <Skeleton />}
+                {!loading&&renderDom}
               </div>
               <div
                 className={classNames(

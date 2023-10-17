@@ -157,6 +157,9 @@ export const unitConversion = (
   num = 0
 ): string => {
   let showItem: string | number = Number(item);
+  if (!showItem && showItem !== 0) {
+    return '0 Byte';
+  }
   let sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
   let positive = true;
   if (showItem == 0) {
