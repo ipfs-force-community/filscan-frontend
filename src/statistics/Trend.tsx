@@ -308,6 +308,8 @@ export default (props: Props) => {
             </MobileView>
             <BrowserView>
               <GoIcon
+                width={18}
+                height={18}
                 className='cursor-pointer mr-2.5'
               />
             </BrowserView>

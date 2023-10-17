@@ -78,7 +78,8 @@ const Account: React.FC = () => {
   }, [tr]);
 
   useEffect(() => {
-    if (!userInfo.mail || !localStorage.getItem('token')) {
+    console.log('===33',userInfo)
+    if (!localStorage.getItem('token')) {
       router.push('/account/login');
     }
   }, [userInfo.mail]);

@@ -1,11 +1,8 @@
 /** @format */
-
-import IconLogo from '@/assets/images/logo.svg'
 import { Translation } from '../hooks/Translation';
 import { getSvgIcon } from '@/svgsIcon';
 import { BrowserView, MobileView } from '../device-detect';
 import MFooter from '@/components/mobile/footer'
-import Link from 'next/link';
 import Image from 'next/image';
 
 const footerLinks = [

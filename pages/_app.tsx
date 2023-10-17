@@ -106,7 +106,8 @@ function App({ Component, pageProps, isMobile }: any) {
   }, []);
 
   const loadUser = async () => {
-    const userData: any = await axiosData(proApi.userInfo);
+    const userData: any = await axiosData(proApi.userInfo, {}, {isCancel:false});
+    console.log('000033------------------', userData)
     setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
     localStorage.setItem(
       'userInfo',

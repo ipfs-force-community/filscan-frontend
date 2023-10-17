@@ -103,7 +103,8 @@ function useAxiosData<T>(initialUrl?: string, initialPayload: any = {}, initialO
               content: response.data.message,
             });
           }
-          data = response.data || response ||{};
+          data = response.data || response || {};
+          console.log('00003345----------32356',data)
           setData(data?.result || data || {});
           setLoading(false);
           current[currentKey] = 0;

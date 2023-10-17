@@ -36,7 +36,7 @@ const common = {
   password_placeholder: 'Enter Passward',
   code_placeholder: 'Enter Verification Code',
   remember_me: 'Remember me and login automatically',
-  forgot_password: 'Forgot Passward',
+  forgot_password: 'Forgot Password',
   get_code: 'Get Verification Code',
   retry_code:'Resend Code',
   no_account: 'No Account?',
@@ -51,7 +51,7 @@ const common = {
   email_rules: 'Invalid email format, please modify',
   code_rules:'Please enter the 6-digi verification code correctly',
   password_rules: '请输入 8-20 个字符，需同时包含数字、字母以及特殊符号,密码不能与您的邮箱地址相同',
-  confirm_password_rules: 'The passwards entered do not match. Please re-enter them',
+  confirm_password_rules: 'The passwords entered do not match. Please re-enter them',
   email_exists:'Email exists',
   Export: 'Download Excel',
   //footer
