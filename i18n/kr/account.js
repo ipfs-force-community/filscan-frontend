@@ -4,6 +4,7 @@ const account={
   cancel:'Cancel',
   go_home: '홈으로',
   go_login: '로그인하다',
+  login:'노드 관리자',
   back:'뒤로',
   account_title:'节点管家',
   overview: '데이터 개요',
