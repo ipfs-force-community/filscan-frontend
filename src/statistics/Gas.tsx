@@ -31,6 +31,7 @@ function Gas(props: Props) {
   const { active = '24h', className = '' } = props;
   const [value, setValue] = useState(active);
   const { axiosData } = useAxiosData();
+  const [unit,setUnit]= useState('')
   const {isMobile} = useWindow()
 
   const color = useMemo(() => {
@@ -51,7 +52,7 @@ function Gas(props: Props) {
           fontSize: 14,
           color: isMobile ? color.mobileLabelColor : color.labelColor,
           formatter(v: any) {
-            return formatNumber(v)+' nanoFIL';
+            return formatNumber(v)+''+ unit;
           },
 
         },
@@ -112,7 +113,7 @@ function Gas(props: Props) {
     }
     return options
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [theme,isMobile]);
+  }, [theme,isMobile,unit]);
 
   const [options, setOptions] = useState<any>();
 
@@ -128,7 +129,17 @@ function Gas(props: Props) {
       base_fee: [],
     };
     const newOpt: any = {};
+    let maxGas: number = 0;
+    let showUnit='';
     axiosData(apiUrl.static_gas, { interval }).then((res: any) => {
+      res?.list?.forEach((vItem:any) => {
+        const { timestamp, base_fee, gas_in_32g, gas_in_64g } = vItem;
+        maxGas =maxGas > Number(base_fee) ?maxGas:Number(base_fee);
+      })
+      if (maxGas) {
+        showUnit = formatFilNum(maxGas, false, false, 4, false).split(' ')[1]
+        setUnit(showUnit)
+      }
       res?.list?.forEach((dataItem: any) => {
         const { timestamp, base_fee, gas_in_32g, gas_in_64g } = dataItem;
         let showTime: string = '';
@@ -140,7 +151,7 @@ function Gas(props: Props) {
         }
         dateList.push(showTime);
         seriesObj.base_fee.push({
-          value:formatFil(base_fee,'nanoFiL'),
+          value:formatFil(base_fee,showUnit),
           showValue: formatFilNum(base_fee, false, false, 4, false).split(
             ' '
           )[0],
