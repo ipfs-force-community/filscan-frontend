@@ -14,6 +14,7 @@
   --main-bg-color: #f9f9f9;
   --reverse-color: "#000000";
   --font-color: #000000;
+  --font-text-color:#131D2F;
   --select-shadow: rgba(223, 227, 234, 0.6);
   --select-bgColor: #ffffff;
   --card-shadow: rgba(223, 227, 234, 0.6);
@@ -58,6 +59,7 @@
 :root,
 :root[theme="dark"] {
   --border-color: #222222;
+  --font-text-color:#ffffff;
 
   --activeColor: #ffffff;
   --bgColor: #121212;

@@ -12,7 +12,7 @@ export default () => {
     <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2  max-w-[1440px] w-full flex justify-between	px-[70px]">
       <div className="text-white text-5xl flex justify-center flex-col  ml-[90px]">
         {tr('account_banner_bg') }
-        <div className="text-primary text-xl mt-4">
+        <div className=" text-gray-400	text-xl mt-4">
           {tr('account_banner_main') }
 
         </div>
