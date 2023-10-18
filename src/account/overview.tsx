@@ -8,6 +8,7 @@ import Table from '@/packages/Table';
 import ExportExcel from '@/packages/exportExcel';
 import Selects from '@/packages/selects';
 import useAxiosData from '@/store/useAxiosData';
+import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime } from '@/utils';
 import { useMemo, useState } from 'react';
 
@@ -96,7 +97,7 @@ export default ({
                     key={item.dataIndex}
                     className='flex flex-1 p-6 card_shadow border border_color  rounded-xl justify-between items-start'>
                     {showValue}
-                    <span>{icon && icon}</span>
+                    { icon && <span>{ getSvgIcon(icon)}</span>}
                   </li>
                 );
               })}

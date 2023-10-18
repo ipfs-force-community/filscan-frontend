@@ -241,7 +241,7 @@ export default () => {
             <Segmented
               data={address_detail.account_change.tabsList || []}
               ns='detail'
-              defaultValue='1m'
+              defaultValue={interval}
               isHash={false}
               onChange={(value: string) => {
                 setInterval(value);

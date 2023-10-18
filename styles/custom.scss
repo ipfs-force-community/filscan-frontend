@@ -374,7 +374,7 @@ font-display: auto;
     .ant-select-selector{
           cursor: pointer;
         padding: 3px 16px !important;
-        height:32px !important;
+        height:36px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgDesColor) !important;
         .ant-select-selection-item{
@@ -564,7 +564,7 @@ font-display: auto;
         position: absolute;
         left: 10px;
         top: 50%;
-     transform: translate(0px, -50%);
+         transform: translate(0px, -50%);
     }
     .custom_date_picker{
         .ant-picker-input{

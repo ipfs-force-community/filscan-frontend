@@ -21,7 +21,7 @@ import Loading from '@/components/loading';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const [data, setData] = useState<any>({});
   const [dataLoading, setDataLoading] = useState(true);
   const [TransferData, setTransfer] = useState<any>(undefined);
@@ -38,14 +38,18 @@ export default ({ cid }: { cid: string | string[] }) => {
   },[hash])
 
   useEffect(() => {
-    loadTrans(data?.message_basic?.cid);
-    load()
-  }, [data?.message_basic?.cid]);
+    if (cid) {
+      load()
+    }
+  }, [cid]);
 
   const load = async () => {
-    const result: any = await axiosData(apiUrl.detail_message, { message_cid: cid, }, { isCancel: false })
+    const result: any = await axiosData(apiUrl.detail_message, { message_cid: cid, })
     setDataLoading(false)
-    setData(result?.MessageDetails || {})
+    setData(result?.MessageDetails || {});
+    if (result?.MessageDetails.message_basic?.cid) {
+      loadTrans(result?.MessageDetails.message_basic?.cid)
+    }
   }
 
   const loadTrans = (id: string) => {
@@ -73,10 +77,10 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   };
 
-  if (dataLoading) {
+  if (loading) {
     return <Loading />
   }
-  if (!dataLoading && Object.keys(data).length === 0) {
+  if (!loading && Object.keys(data).length === 0) {
     return <NoData />;
   }
 

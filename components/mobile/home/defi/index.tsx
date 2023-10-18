@@ -10,6 +10,7 @@ import Image from "next/image"
 import Table from "@/packages/mobile/table"
 import { get$Number } from "@/utils"
 import { useRouter } from "next/router"
+import Link from "next/link"
 
 interface Sort {
   field:string,
@@ -81,9 +82,11 @@ const Defi = ()=>{
         dataSource={homeStore.defiData?.items}
         pagination={false}
       ></Table>
-      <div onClick={()=>{
-        router.push('/contract/rank')
-      }} className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</div>
+      <Link href={`/fevm/defi`}
+        // onClick={() => {
+        //   router.push('/contract/rank')
+        // }}
+        className="flex justify-center items-center h-[45px] text-[13px] font-DINPro-Medium text-mobile-text-warning">{t("see_more")}</Link>
     </div>
   </div>
 }

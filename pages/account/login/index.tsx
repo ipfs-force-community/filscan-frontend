@@ -39,7 +39,7 @@ export default () => {
     //     icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
     //   });
     // }
-    if (result.token) {
+    if (result?.token) {
       localStorage.setItem('token', result.token);
       userInfo.setUserInfo({
         last_login: result?.expired_at || '',

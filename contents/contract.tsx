@@ -109,10 +109,12 @@ export const verify_source={
     {title:'optimize',dataIndex:'optimize', type: 'Select', options: [
       {
         title: 'Yes',
+        label:'Yes',
         value: true
       },
       {
         title: 'No',
+        label:'No',
         value: false
       }
     ],

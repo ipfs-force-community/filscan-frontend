@@ -4,6 +4,7 @@ const account = {
   cancel:'Cancel',
   go_home: 'Back to Homepage',
   go_login: 'Login',
+  login:'Miner Metrics',
   back:'Back',
   account_title:'Miner Metrics',
   overview: 'Overview',

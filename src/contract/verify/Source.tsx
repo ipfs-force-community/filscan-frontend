@@ -100,7 +100,9 @@ export default (props: Props) => {
     case 'Input':
       return content = <Input className="custom_input !h-10 !text_des" value={data[dataIndex]} placeholder={ tr(placeholder)} />
     case 'Select':
-      return content = <Select className="custom_select !text_des"
+      return content = <Select
+        className="custom_select"
+        popupClassName={'custom_select_wrapper'}
         options={item.options}
         defaultValue={data[dataIndex]}
         placeholder={ tr(placeholder)}

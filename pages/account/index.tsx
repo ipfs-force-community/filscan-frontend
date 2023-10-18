@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MinerStoreContext } from '@/src/account/content';
 import Loading from '@/components/loading';
+import MonitorBalance from '@/src/account/monitor/balance'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -31,7 +32,7 @@ const Account: React.FC = () => {
   const router = useRouter()
   const { axiosData} = useAxiosData()
   const [minersNum, setMinersNum] = useState<any>({})
-  const [minerLoading,setMinerLoading] = useState(false)
+  const [minerLoading,setMinerLoading] = useState(true)
   const selectedKey = useMemo(() => {
     if (hash) {
       return hash;
@@ -78,7 +79,7 @@ const Account: React.FC = () => {
   }, [tr]);
 
   useEffect(() => {
-    if (!userInfo.mail && !localStorage.getItem('token')) {
+    if (!userInfo.mail || !localStorage.getItem('token')) {
       router.push('/account/login');
     }
   }, [userInfo.mail]);
@@ -166,7 +167,9 @@ const Account: React.FC = () => {
 
                   />
                 )}
-
+                {selectedKey === 'monitorBalance' && (
+                  <MonitorBalance />
+                )}
                 {selectedKey === 'personal' && <Personal />}
               </MinerStoreContext.Provider>
             )}

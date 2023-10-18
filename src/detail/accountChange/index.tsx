@@ -14,6 +14,7 @@ import { BrowserView, MobileView } from '@/components/device-detect';
 import classNames from 'classnames';
 import styles from './index.module.scss'
 import useWindow from '@/components/hooks/useWindown';
+import useAxiosData from '@/store/useAxiosData';
 export default ({
   accountId,
   interval,
@@ -28,6 +29,7 @@ export default ({
   const { theme, lang } = useFilscanStore();
   const { tr } = Translation({ ns: 'detail' });
   const [options, setOptions] = useState<any>({});
+  const {axiosData } = useAxiosData();
   const [noShow, setNoShow] = useState<Record<string, boolean>>({});
   const {isMobile} = useWindow()
 
@@ -119,7 +121,7 @@ export default ({
   }, [accountId, interval,isMobile]);
 
   const load = async () => {
-    const result: any = await fetchData(apiUrl.account_change, {
+    const result: any = await axiosData(apiUrl.account_change, {
       account_id: accountId,
       filters: {
         interval: interval,
