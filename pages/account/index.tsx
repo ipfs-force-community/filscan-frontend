@@ -32,7 +32,7 @@ const Account: React.FC = () => {
   const router = useRouter()
   const { axiosData} = useAxiosData()
   const [minersNum, setMinersNum] = useState<any>({})
-  const [minerLoading,setMinerLoading] = useState(false)
+  const [minerLoading,setMinerLoading] = useState(true)
   const selectedKey = useMemo(() => {
     if (hash) {
       return hash;

@@ -23,7 +23,9 @@ const common = {
   cid: 'Block CID',
   node: 'Node',
   save_pic: 'Save Image',
-  fvm_share:'Share with friends',
+  fvm_share: 'Share with friends',
+  account_banner_bg: 'Welcome to Miner Metrics!',
+  account_banner_main:'Welcome Login',
 
   //messages
   no_account:'This email is not registered. Please register first.',
