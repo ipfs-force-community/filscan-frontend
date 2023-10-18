@@ -92,10 +92,10 @@ const navMenu: Array<Menu_Info | any> = [
       },
     ],
   },
-  {
-    key: "provider",
-    outLink: "http://v1.filscan.io/account?key=login",
-  },
+  // {
+  //   key: "provider",
+  //   outLink: "http://v1.filscan.io/account?key=login",
+  // },
   // {
   //   out_key: 'account',
   //   key: 'account',

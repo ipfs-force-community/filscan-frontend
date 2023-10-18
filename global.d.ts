@@ -1,7 +1,4 @@
 // src/global.d.ts
-
-import { AnyNsRecord } from "dns"
-
 declare global {
     interface window {
         ethereum: any,

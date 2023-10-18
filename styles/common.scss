@@ -134,7 +134,7 @@
 
 /*文字渐变*/
 .text_clip {
-  color: #131D2F;
+  color: var(--font-text-color);
   // background: linear-gradient(
   //   131deg,
   //   var(--text_clip) 0%,

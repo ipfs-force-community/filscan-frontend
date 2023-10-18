@@ -46,7 +46,7 @@ function Gas(props: Props) {
     let options = {
       yAxis: {
         type: 'value',
-        scale: true,
+        //scale: true,
         axisLabel: {
           fontFamily: 'DINPro',
           fontSize: 14,

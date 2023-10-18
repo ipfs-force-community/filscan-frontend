@@ -82,21 +82,21 @@ export const registerList = [
     name: 'code',
     placeholder: 'code_placeholder',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: '${password} is required' }],
+    rules: [{ required: true, message: 'Code is required' }],
   },
   {
     label: 'password',
     name: 'new_password',
     placeholder: 'new_password',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: '${password} is required' }],
+    rules: [{ required: true, message: 'Password is required' }],
   },
   {
     label: 'password',
     name: 'confirm_password',
     placeholder: 'confirm_password',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: '${password} is required' }],
+    rules: [{ required: true, message: 'Confirm Password is required' }],
   },
 ];
 
@@ -179,7 +179,7 @@ export const personal_setting = [
     title: 'old_password',
     placeholder: 'old_placeholder',
     dataIndex: 'old_password',
-    rules: [{ required: true, message: '${old_placeholder} is required' }],
+    rules: [{ required: true, message: 'old_placeholder is required' }],
   },
   {
     title: 'new_password',
