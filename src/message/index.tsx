@@ -8,11 +8,10 @@ import { message_detail } from '@/contents/detail';
 import Content from '@/packages/content';
 import NoData from '@/packages/noData';
 import useAxiosData from '@/store/useAxiosData';
-import { Skeleton } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
-import { get, has } from 'lodash';
+import { get } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
 import Trade from './Trade'

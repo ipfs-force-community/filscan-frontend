@@ -31,7 +31,7 @@ export const login_list = (type?: string) => {
       name: 'email',
       prefix: <UserOutlined className='site-form-item-icon' />,
       placeholder: 'email_placeholder',
-      rules: [{ required: true, message: '${email} is required' }],
+      rules: [{ required: true, message: 'Email is required' }],
     },
   ];
   if (type === 'code') {
@@ -42,7 +42,7 @@ export const login_list = (type?: string) => {
         name: 'code',
         placeholder: 'code_placeholder',
         prefix: <LockOutlined className='site-form-item-icon' />,
-        rules: [{ required: true, message: '${code} is required' }],
+        rules: [{ required: true, message: 'Code is required' }],
       },
     ];
   }
@@ -54,7 +54,7 @@ export const login_list = (type?: string) => {
       name: 'password',
       placeholder: 'password_placeholder',
       prefix: <LockOutlined className='site-form-item-icon' />,
-      rules: [{ required: true, message: '${password} is required' }],
+      rules: [{ required: true, message: 'Password is required' }],
     },
   ];
 };
@@ -96,7 +96,7 @@ export const registerList = [
     name: 'confirm_password',
     placeholder: 'confirm_password',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: 'Confirm Password is required' }],
+    rules: [{ required: true, message: 'Confirm assword is required' }],
   },
 ];
 
