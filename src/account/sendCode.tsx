@@ -29,7 +29,7 @@ function VerifyCodeButton({
       resetCountdown(60); // 证码有效期为60秒
       const result: any = await fetchData(proApi.send_code, { mail: mail });
       if (result?.token) {
-        localStorage.setItem('token', result.token);
+        localStorage.setItem('send_code', result.token);
         if (onChange) onChange(result?.token);
       }
     }
