@@ -25,7 +25,7 @@ const common = {
   save_pic: '保存图片',
   fvm_share: '分享给朋友',
   account_banner_bg: '欢迎使用节点管家',
-  account_banner_main:'欢迎登录',
+  account_banner_main:'您的节点管理好帮手',
 
   //messages
   no_account:'该邮箱未注册,请先注册',

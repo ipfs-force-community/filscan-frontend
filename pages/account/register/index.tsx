@@ -30,7 +30,7 @@ export default () => {
       ...data,
       mail: data.email,
       password: data.new_password,
-      token,
+      token:token||localStorage.getItem('send_code'),
     });
 
     if (result.token) {

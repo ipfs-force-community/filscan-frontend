@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
-  const [token, setToken] = useState('token');
+  const [token, setToken] = useState('');
   const { axiosData } = useAxiosData();
   const [form] = Form.useForm();
   const router = useRouter()
@@ -29,7 +29,7 @@ export default () => {
       mail: data.email,
       password: data.new_password,
       new_password:data.new_password,
-      token,
+      token:token||localStorage.getItem('send_code'),
     });
 
     if (result) {

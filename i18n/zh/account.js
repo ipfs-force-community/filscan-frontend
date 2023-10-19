@@ -107,7 +107,7 @@ const account = {
   pledge_changed_tip: 'Sector数量的新增及终止对应的质押变化总和',
   pledge_changed_per_t_tip:'质押变化÷扇区变化(TiB)',
   penalty_tip: '被惩罚的FIL数量',
-  fault_sectors_tip: '新增的错误扇区数量/原值算力',
+  fault_sectors_tip: '新增的错误扇区数量',
   total_gas_cost_tip: '所有类型消耗Gas的总和',
   seal_gas_cost_tip: '扇区封装消耗的Gas总和（PreCommitSector+ProveCommitSector+PreCommitSectorBatch+ProveCommitAggregate+PreCommit 聚合费+ProveCommit 聚合费',
   seal_gas_per_t_tip: '封装Gas÷新增扇区(TiB)',

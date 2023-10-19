@@ -29,7 +29,7 @@ export default () => {
     const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
-      token,
+      token: token||localStorage.getItem('send_code')
     });
     // if (result?.code === 1) {
     //   //未注册
@@ -40,7 +40,6 @@ export default () => {
     //   });
     // }
     if (result?.token) {
-      localStorage.setItem('token', result.token);
       userInfo.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
@@ -129,7 +128,7 @@ export default () => {
                     onPressEnter={handlePressEnter}
                     suffix={
                       showButton && (
-                        <SendCode mail={mail} onChange={(token) => setToken(token)} />
+                        <SendCode mail={mail} onChange={(token) => {setToken(token) }}/>
                       )
                     }
                   />
