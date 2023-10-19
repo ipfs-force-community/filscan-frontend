@@ -153,7 +153,7 @@ export default () => {
                           showButton && (
                             <SendCode
                               mail={mail}
-                              onChange={(token) => setToken(token)}
+                              //onChange={(token) => setToken(token)}
                             />
                           )
                         }
