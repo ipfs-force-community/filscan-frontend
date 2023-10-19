@@ -13,6 +13,7 @@ import Link from 'next/link';
 import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
 import Banner from '@/src/account/Banner';
+import { local } from 'd3';
 
 export default () => {
   const [form] = Form.useForm();
@@ -21,7 +22,7 @@ export default () => {
   const userInfo = UserInfo();
   const { axiosData } = useAxiosData();
   const router = useRouter()
-  const [token,setToken]= useState('')
+  // const [token,setToken]= useState('')
 
   const onFinish = async () => {
     //登录
@@ -29,7 +30,7 @@ export default () => {
     const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
-      token,
+      token: localStorage.getItem('token')
     });
     // if (result?.code === 1) {
     //   //未注册
@@ -40,7 +41,6 @@ export default () => {
     //   });
     // }
     if (result?.token) {
-      localStorage.setItem('token', result.token);
       userInfo.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
@@ -129,7 +129,7 @@ export default () => {
                     onPressEnter={handlePressEnter}
                     suffix={
                       showButton && (
-                        <SendCode mail={mail} onChange={(token) => setToken(token)} />
+                        <SendCode mail={mail} />
                       )
                     }
                   />

@@ -25,7 +25,7 @@ const common = {
   save_pic: 'Save Image',
   fvm_share: 'Share with friends',
   account_banner_bg: 'Welcome to Miner Metrics!',
-  account_banner_main:'Welcome Login',
+  account_banner_main:'Your Ultimate Node Management Assistant',
 
   //messages
   no_account:'This email is not registered. Please register first.',

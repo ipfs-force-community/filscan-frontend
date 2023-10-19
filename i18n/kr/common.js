@@ -25,7 +25,7 @@ const common = {
   save_pic: '사진을 저장하다',
   fvm_share: '친구들과 공유',
   account_banner_bg: '노드 관리자에 오신 것을 환영합니다',
-  account_banner_main:'로그인해주세요',
+  account_banner_main:'노드 관리 도우미',
 
   //messages
   no_account: '해당 이메일은 등록되어 있지 않습니다. 먼저 회원 가입을 진행해 주세요.',

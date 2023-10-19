@@ -17,7 +17,7 @@ import { UserInfo } from '@/store/UserStore';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
-  const [token, setToken] = useState('token');
+  // const [token, setToken] = useState('token');
   const [success, setSuccess] = useState(false);
   const { axiosData } = useAxiosData();
   const [form] = Form.useForm();
@@ -30,7 +30,7 @@ export default () => {
       ...data,
       mail: data.email,
       password: data.new_password,
-      token,
+      token:localStorage.getItem('token'),
     });
 
     if (result.token) {
