@@ -20,7 +20,6 @@ import Loading from '@/components/loading';
 import MonitorBalance from '@/src/account/monitor/balance'
 import accountStore from '@/store/modules/account';
 import userStore from '@/store/modules/user';
-import { Menu } from 'antd';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -28,6 +27,7 @@ const Account: React.FC = () => {
   const { countMiners } = accountStore;
   const {miners_count,loading } = countMiners;
   const { hash, hashParams } = useHash();
+  const rootSubmenuKeys: Array<string> = [];
   const router = useRouter()
   const selectedKey = useMemo(() => {
     if (hash) {
@@ -35,6 +35,31 @@ const Account: React.FC = () => {
     }
     return 'overview';
   }, [hash]);
+
+  function getChildren(arr: Array<any>) {
+    return arr.map((v) => {
+      return { ...v, label: tr(v.label) };
+    });
+  }
+  const menuData = useMemo(() => {
+    let itemsArr: any = [];
+    account_manager.forEach((item) => {
+      if (item.key !== 'logout') {
+        rootSubmenuKeys.push(item.key);
+        let others = [];
+        const obj = { ...item, label: item.label };
+        delete obj.children;
+        if (item?.children) {
+          others = getChildren(item?.children || []);
+          itemsArr.push({ ...obj });
+          itemsArr.push(...others);
+        } else {
+          itemsArr.push({ ...obj });
+        }
+      }
+    });
+    return itemsArr;
+  }, [tr]);
 
   useEffect(() => {
     if (!userInfo.mail || !localStorage.getItem('token')) {
@@ -46,26 +71,6 @@ const Account: React.FC = () => {
     return <Loading />
   }
 
-  const renderMenuItem = (item:any) => {
-    if (item.children) {
-      return (
-        <Menu.SubMenu key={item.key} icon={item.icon} title={tr(item.label)}>
-          {item.children.map(renderMenuItem)}
-        </Menu.SubMenu>
-      );
-    }
-
-    return (
-      <Menu.Item key={item.key} icon={item.icon} >
-        <Link
-          href={`/account#${item.key}`}
-          scroll={false}>
-          {tr(item.label)}
-        </Link>
-      </Menu.Item>
-    );
-  };
-
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -73,9 +78,28 @@ const Account: React.FC = () => {
           <div className='w-full px-5 mb-10 text-lg font-semibold font-PingFang	'>
             {tr('account_title')}
           </div>
-          <Menu mode="inline" className='custom_menu' defaultOpenKeys={['data_details','monitor']}>
-            {account_manager.map(renderMenuItem)}
-          </Menu>
+          <ul className='list-none px-4'>
+            {menuData.map((parent: any) => {
+              return (
+                <Link
+                  key={parent.label}
+                  href={ `/account#${parent.key}`}
+                  scroll={ false}
+                  className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
+                    parent?.icon ? 'font-medium' : 'ml-5 font-normal'
+                  } ${
+                    selectedKey === parent.key
+                      ? '!text-primary bg-bg_hover'
+                      : ''
+                  }`}>
+                  <span className='flex items-center gap-x-2 px-4'>
+                    {parent.icon}
+                    {tr(parent.label)}
+                  </span>
+                </Link>
+              );
+            })}
+          </ul>
         </div>
         <div
           className='flex-grow flex flex-col px-5 py-10 w_account min-h-full'
@@ -86,6 +110,11 @@ const Account: React.FC = () => {
               <NoMiner selectedKey={selectedKey} />
             ) : (
               <>
+
+                {/* <MinerStoreContext.Provider value={{
+                  setAllNum: (value) => {
+                    setMinersNum(value)
+                  } }}> */}
                 {selectedKey === 'overview' && (
                   <Overview selectedKey='overview' />
                 )}
@@ -93,6 +122,7 @@ const Account: React.FC = () => {
                 {selectedKey === 'lucky' && (
                   <Lucky
                     selectedKey={'overview_' + selectedKey}
+
                   />
                 )}
                 {selectedKey === 'power' && (
@@ -126,6 +156,7 @@ const Account: React.FC = () => {
                   <MonitorBalance selectedKey={'monitor_balance'}/>
                 )}
                 {selectedKey === 'personal' && <Personal />}
+                {/* </MinerStoreContext.Provider> */}
               </>
             )}
         </div>

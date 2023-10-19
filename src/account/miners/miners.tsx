@@ -7,7 +7,9 @@ import { proApi } from '@/contents/apiUrl';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
-import { groupsItem } from '../type';
+import { MinerNum, groupsItem } from '../type';
+import useAxiosData from '@/store/useAxiosData';
+//import { GroupsStoreContext, useMinerStore } from '../content';
 import Groups from './Groups';
 import accountStore from '@/store/modules/account'
 
@@ -15,54 +17,74 @@ export default () => {
   const { hashParams } = useHash();
   const { type, group } = hashParams || {};
   const { tr } = Translation({ ns: 'account' });
-  const { countMiners,groupMiners,defaultGroup } = accountStore;
-  const { miners_count, max_miners_count } = countMiners;
+  const { countMiners } = accountStore;
+  const { miners_count,max_miners_count} = countMiners;
+  const [groups, setGroups] = useState<Array<groupsItem>>([]);
+  const [defaultGroupsId, setDefaultGroupsId] = useState();
+  // const {setAllNum } = useMinerStore();
+  const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
+  const { axiosData } = useAxiosData();
 
-  const selectGroupsItems = useMemo(() => {
-    const newGroups:Array<any>=[]
-    if (groupMiners) {
-      groupMiners.forEach(item => {
-        newGroups.push({
-          group_id: item.group_id,
-          is_default: item.is_default,
-          name:item.group_name,
-          label: item.is_default ? tr('default_group') : item.group_name,
-          value: item.group_id,
-        })
-      })
-    }
-    return newGroups
-  }, [groupMiners])
+  // useEffect(() => {
+  //   loadMinersNum()
+  // }, []);
+
+  // const loadMinersNum = async () => {
+  //   const result = await axiosData(proApi.account_miners, {}, { isCancel: false });
+  //   setMinerNum(result)
+  // }
+
+  useEffect(() => {
+    calcGroups(groupsData?.group_info_list || []);
+  }, [groupsData]);
+
+  //组成公共select item
+  const calcGroups = (groupResult: Array<groupsItem>) => {
+    const new_data: any = [];
+    let default_groups_id;
+    groupResult?.forEach((item: groupsItem) => {
+      if (item.is_default) {
+        default_groups_id = item.group_id;
+      }
+      new_data.push({
+        ...item,
+        label: item.is_default ? tr('default_group') : item.group_name,
+        value: item.group_id,
+      });
+    });
+    setDefaultGroupsId(default_groups_id);
+    setGroups(new_data);
+  };
 
   const groupDetail = useMemo(() => {
-    let selectGroup:any = {};
-    if (group && groupMiners ) {
-      selectGroup = groupMiners?.find(v=>v.group_id === Number(group))
+    if (group) {
+      const file = groups?.find((v: any) => v.group_id === Number(group));
+      return file;
     }
-    return selectGroup
-  },[group,groupMiners])
+    return undefined;
+  }, [group, groups]);
 
   const renderChildren = () => {
-    if (type === 'miner_add') {
+    if (type === 'miner_add' && groupsData) {
       return (
         <MinerAdd
-          groups={selectGroupsItems}
-          defaultId={defaultGroup?.group_id}
+          groups={groups}
+          defaultId={defaultGroupsId}
           minersNum={countMiners}
         />
       );
     }
-    //添加分组
+
     if (type === 'group_add' ) {
       return (
         <GroupAdd
           groupId={group}
-          //groupDetail={groupDetail}
+          groupDetail={groupDetail}
           minersNum={countMiners}
         />
       );
-    } else if (group) {
-      //编辑分组
+    }
+    if (group && groupDetail) {
       return <GroupAdd
         groupId={group}
         groupDetail={groupDetail}
@@ -73,6 +95,17 @@ export default () => {
   };
 
   return (
+    // <GroupsStoreContext.Provider
+    //   value={{
+    //     groups,
+    //     setMinerNum: (mineNum) => {
+    //       setMinerNum(mineNum);
+    //       setAllNum(mineNum)
+    //     },
+    //     setGroups: (groupsArr: Array<groupsItem>) => {
+    //       calcGroups(groupsArr);
+    //     },
+    //   }}>
     <>
       <p className='w-full mb-5 flex align-baseline justify-between	'>
         <span className='font-semibold text-lg	 font-PingFang'>
@@ -101,6 +134,6 @@ export default () => {
       </p>
       { renderChildren() }
     </>
+    // </GroupsStoreContext.Provider>
   );
 };
-

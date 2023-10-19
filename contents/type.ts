@@ -35,5 +35,6 @@ export interface MenuItem {
   label: string,
   icon?: string | JSX.Element,
   href?: string,
+  group?: string,
   children?: Array<MenuItem>
 }

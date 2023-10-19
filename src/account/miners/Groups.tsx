@@ -7,31 +7,27 @@ import { getSvgIcon } from '@/svgsIcon';
 import Link from 'next/link';
 import { Translation } from '@/components/hooks/Translation';
 import { account_miners } from '@/contents/account';
-import useAxiosData from '@/store/useAxiosData';
-import { proApi } from '@/contents/apiUrl';
-import { useGroupsStore } from '../content';
 import Modal from '@/packages/modal';
 import TagInput from '@/packages/tagInput';
 import messageManager from '@/packages/message';
+import accountStore from '@/store/modules/account';
 
-const Groups = ({ groups }: { groups: Array<any> }) => {
+const Groups = () => {
   const { tr } = Translation({ ns: 'account' });
-  const { axiosData } = useAxiosData();
-  const { setGroups, setMinerNum } = useGroupsStore();
-  const [data, setData] = useState<any>(groups);
+  const { groupMiners } = accountStore;
+  const [data, setData] = useState<any>(groupMiners);
   const [deleteLoading, setDeleteLoading] = useState<any>(false);
   const [modalItems, setModalItems] = useState<any>({});
 
   useEffect(() => {
-    setData(groups || []);
-  }, [groups]);
+    setData(groupMiners || []);
+  }, [groupMiners]);
 
   const handleDragEnd = async (result: any) => {
     if (!result.destination) {
       return;
     }
-    // else
-    // {
+
     const { source, destination } = result;
     const sourceIndex: number = source.index; //移动的index
     const destinationIndex = destination.index; //目标index
@@ -52,57 +48,46 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
       );
       groupItem?.miners_info?.splice(sourceIndex, 1);
       //给予目标group，miner_id 是唯一的
-      const result = await axiosData(proApi.saveMiner, destinationGroup);
-      if (result) {
-        setData([...data]);
-        const newGroups = await axiosData(proApi.getGroups);
-        setGroups(newGroups?.group_info_list || []);
-      }
+      accountStore.saveMiners(destinationGroup)
     } else {
       //同组内拖拽
       groupItem?.miners_info?.splice(sourceIndex, 1);
       groupItem?.miners_info?.splice(destinationIndex, 0, sourceMinerItem);
-      const result = await axiosData(proApi.saveMiner, groupItem);
-      if (result) {
-        setData([...data]);
-        const newGroups = await axiosData(proApi.getGroups);
-        setGroups(newGroups?.group_info_list || []);
-      }
+      accountStore.saveMiners(groupItem)
     }
-    // }
 
-    //保存分组 todo
   };
 
   const handleDelMiner = async (modalItem: any) => {
     setDeleteLoading(true);
     const { minerIndex, groupItem } = modalItem;
     groupItem.miners_info.splice(minerIndex, 1);
-    const data = await axiosData(proApi.saveGroup, { ...groupItem });
-    if (data) {
-      const newGroups = await axiosData(proApi.getGroups);
-      setGroups(newGroups?.group_info_list || []);
-      const minerNumResult: any = await axiosData(proApi.account_miners);
-      setMinerNum(minerNumResult);
-    }
+    await accountStore.saveMiners({...groupItem})
     setDeleteLoading(false);
   };
 
   const handleDelGroup = async (id: string | number) => {
-    const del = await axiosData(proApi.delGroup, { group_id: Number(id) });
-    if (del) {
-      //删除成功
-      const newGroups = await axiosData(proApi.getGroups);
-      setGroups(newGroups?.group_info_list || []);
-      setDeleteLoading(false);
-    }
+    setDeleteLoading(true);
+    await accountStore.delGroups(Number(id));
+    setDeleteLoading(false);
+    // const del = await axiosData(proApi.delGroup, { group_id: Number(id) });
+    // if (del) {
+    //   //删除成功
+    //   const newGroups = await axiosData(proApi.getGroups);
+    //   //setGroups(newGroups?.group_info_list || []);
+    //   setDeleteLoading(false);
+    // }
   };
 
   const handleSaveMiners = async (group: any, minerInfo: any) => {
-    const saveResult = await axiosData(proApi.saveMiner, {
+    const saveResult = await accountStore.saveMiners({
       ...group,
       miners_info: [minerInfo],
-    });
+    })
+    // const saveResult = await axiosData(proApi.saveMiner, {
+    //   ...group,
+    //   miners_info: [minerInfo],
+    // });
     if (saveResult) {
       return messageManager.showMessage({
         type: 'success',
@@ -127,7 +112,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
         key={item.group_id}>
         <span className='flex gap-x-5 items-center'>
           <span className='des_bg_color flex items-center text-xs border_color border text_des w-fit px-1 rounded-[5px] '>
-            {tr(item.label)}
+            {tr(item.group_name)}
           </span>
           <span>
             {tr('item_value', {
@@ -231,6 +216,7 @@ const Groups = ({ groups }: { groups: Array<any> }) => {
   const showType = useMemo(() => {
     return modalItems?.type || 'miner';
   }, [modalItems]);
+
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>

@@ -25,12 +25,12 @@ interface minersStore {
 
 export const MinerStoreContext = createContext<minersStore | null>(null);
 
-export const useMinerStore = (): minersStore => {
-  const minerContext = useContext(MinerStoreContext);
-  if (!minerContext) {
-    throw new Error(
-      'useFilscanStore must be used within a FilscanStoreProvider'
-    );
-  }
-  return minerContext;
-};
+// export const useMinerStore = (): minersStore => {
+//   const minerContext = useContext(MinerStoreContext);
+//   if (!minerContext) {
+//     throw new Error(
+//       'useFilscanStore must be used within a FilscanStoreProvider'
+//     );
+//   }
+//   return minerContext;
+// };

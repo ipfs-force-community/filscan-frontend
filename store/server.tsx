@@ -74,3 +74,4 @@ async function fetchData<T>(
 }
 
 export default fetchData;
+

@@ -14,8 +14,9 @@ import { Button } from 'antd';
 import SearchSelect from '@/packages/searchSelect';
 import { MinerNum } from '../type';
 import useAxiosData from '@/store/useAxiosData';
-import { useGroupsStore } from '../content';
+// import { useGroupsStore } from '../content';
 import { useRouter } from 'next/router';
+import accountStore from '@/store/modules/account';
 
 export default ({
   groups,
@@ -27,6 +28,7 @@ export default ({
   defaultId?: number;
 }) => {
   const { tr } = Translation({ ns: 'account' });
+  const {groupMiners } = accountStore;
   const router = useRouter();
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
@@ -37,8 +39,6 @@ export default ({
   const [show, setShow] = useState<boolean>(false);
   const [selectGroup, setSelectGroup] = useState<string | number>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const { axiosData } = useAxiosData();
-  const { setMinerNum, setGroups } = useGroupsStore();
 
   const handleSearch = (values: any) => {
     if (!values.startsWith('f0')){
@@ -80,7 +80,7 @@ export default ({
     if (addMiners.length > 0) {
       setLoading(true);
       const selectedGroup = selectGroup || defaultId;
-      const groupDetail = groups.find((v) => v.value === selectedGroup);
+      const groupDetail = groupMiners?.find((v) => v.group_id === selectedGroup);
       let payload = {};
       if (groupDetail) {
         //更新旧分组
@@ -97,13 +97,9 @@ export default ({
           miners_info: addMiners,
         };
       }
-      const data: any = await axiosData(proApi.saveGroup, payload);
+      const data = await accountStore.saveGroups(payload);
       setLoading(false);
-      if (data) {
-        const newGroups = await axiosData(proApi.getGroups);
-        setGroups(newGroups?.group_info_list || []);
-        const minerNum: any = await axiosData(proApi.account_miners);
-        setMinerNum(minerNum);
+      if (!data.error) {
         messageManager.showMessage({
           type: 'success',
           content: 'Add Miner successfully',

@@ -31,20 +31,13 @@ export default () => {
       mail: data.email,
       token: token||localStorage.getItem('send_code')
     });
-    // if (result?.code === 1) {
-    //   //未注册
-    //   messageManager.showMessage({
-    //     type: 'error',
-    //     content: 'invalid mail or password',
-    //     icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
-    //   });
-    // }
     if (result?.token) {
       userInfo.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
         name: result?.name,
       });
+      localStorage.setItem('token',result?.token);
       messageManager.showMessage({
         type: 'success',
         content: 'login successful',
