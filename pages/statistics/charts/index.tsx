@@ -72,13 +72,13 @@ export default () => {
         { !hash && <Meta />}
         { hash === 'networks'&&
           <Meta />}
-        {/* { hash === 'fevm'&&
+        { hash === 'fevm'&&
           <>
             <ContractTrend />
             <ContractCon />
             <ContractAddr />
             <ContractGas />
-          </>} */}
+          </>}
         { hash ==='BlockChain' && <>
           <PowerTrend />
           <DCCTrend />

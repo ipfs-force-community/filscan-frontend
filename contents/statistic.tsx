@@ -418,11 +418,11 @@ export const chartsNav: Array<Menu_Info> = [
     title:'networks_overview',
 
   },
-  // {
-  //   key: 'fevm',
-  //   preIcon: 'meta',
-  //   title:'FEVM',
-  // },
+  {
+    key: 'fevm',
+    preIcon: 'meta',
+    title:'FEVM',
+  },
   {
     key: 'BlockChain',
     preIcon: 'block_chain',
