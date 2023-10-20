@@ -2,7 +2,7 @@
 
 import { UserGroups, countMiners, delGroup, saveGroup, saveMiner } from "@/store/ApiUrl";
 import { RequestResult, axiosServer } from "@/store/axiosServer";
-import { makeObservable, observable } from "mobx";
+import { makeObservable, observable, runInAction } from "mobx";
 import { GroupInfoList } from "./type";
 
 class AccountStore {
@@ -28,10 +28,13 @@ class AccountStore {
   //用户名下节点数
   async getAccountMinersNumber () {
     const result: RequestResult = await axiosServer(countMiners)
-    this.countMiners = {
-      ...result.data,
-      loading:false,
-    } || {};
+    runInAction(()=>{
+      this.countMiners = {
+        ...result.data,
+        loading:false,
+      } || {};
+    })
+
   }
   //用户名下分组
   async getAccountGroup() {
@@ -39,8 +42,10 @@ class AccountStore {
     if (!result.error) {
       this.getAccountMinersNumber()
     }
-    this.groupMiners = result?.data?.group_info_list ? [...result?.data?.group_info_list] : [];
-    this.defaultGroup = result?.data.group_info_list?.find((v: GroupInfoList) => v.is_default)
+    runInAction(()=>{
+      this.groupMiners = result?.data?.group_info_list || [];
+      this.defaultGroup = result?.data.group_info_list?.find((v: GroupInfoList) => v.is_default)
+    })
   }
   //修改保存名下节点
   async saveMiners(groupItem:GroupInfoList[]){

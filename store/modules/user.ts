@@ -1,6 +1,6 @@
 import { RequestResult, axiosServer } from "@/store/axiosServer";
 import { userInfo } from "@/store/ApiUrl";
-import { makeObservable, observable } from "mobx";
+import { makeObservable, observable, runInAction } from "mobx";
 
 const defaultUser = {
   name: "",
@@ -24,10 +24,13 @@ class UserStore {
   //获取用户登录信息
   async getUserInfo() {
     const userData: RequestResult = await axiosServer(userInfo);
-    this.userInfo = {
-      ...userData?.data || {},
-      loading:false
-    }
+    runInAction(()=>{
+      this.userInfo = {
+        ...userData?.data || {},
+        loading:false
+      }
+    })
+
   }
 
   setUserInfo(user:any) {
