@@ -50,15 +50,16 @@ export const verify_first = {
       // rules: [{ required: true, message: '${verify_model} is required' }],
       options: [
         {
-          title: 'Solidity File',
+          label: 'Solidity File',
           value: 'single'
         },
         {
+          label:'Solidity File with Metadata',
           title: 'Solidity File with Metadata',
           value: 'multi'
         },
         {
-          title: 'Hardhat Support (Quickly)',
+          label: 'Hardhat Support (Quickly)',
           value: 'standard'
         },
       ]
@@ -68,16 +69,16 @@ export const verify_first = {
       title: 'license_type',
       dataIndex: 'license',
       placeholder: 'verify_select_placeholder',
-      options: [
-        {
-          title: 'No License(None)',
-          value: 'No license(None)'
-        },
-        {
-          title: 'MIT License(MIT)',
-          value: 'MIT license(MIT)'
-        }
-      ]
+      // options: [
+      //   {
+      //     title: 'No License(None)',
+      //     value: 'No license(None)'
+      //   },
+      //   {
+      //     title: 'MIT License(MIT)',
+      //     value: 'MIT license(MIT)'
+      //   }
+      // ]
     }
   ],
 }
