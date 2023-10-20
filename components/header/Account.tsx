@@ -7,6 +7,7 @@ import { account_manager } from '@/contents/account';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import userStore from '@/store/modules/user';
+import { useEffect } from 'react';
 
 //已登录状态
 export default () => {
@@ -14,7 +15,8 @@ export default () => {
   const { userInfo,logoutUser } = userStore;
   const {name,mail} = userInfo
   const router = useRouter();
-  const showName = name || mail ||'';
+  const showName = name || mail || '';
+
   if (!showName) {
     return (
       <Link href='/account/login' as='/account/login' scroll={false}>

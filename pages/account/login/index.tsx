@@ -6,19 +6,20 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { useEffect, useMemo, useState} from 'react';
 import SendCode from '@/src/account/sendCode';
 import { proApi } from '@/contents/apiUrl';
-import { UserInfo } from '@/store/UserStore';
+// import { UserInfo } from '@/store/UserStore';
 import { useHash } from '@/components/hooks/useHash';
 import useAxiosData from '@/store/useAxiosData';
 import Link from 'next/link';
 import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
 import Banner from '@/src/account/Banner';
+import userStore from '@/store/modules/user';
 
 export default () => {
   const [form] = Form.useForm();
   const { tr } = Translation({ ns: 'common' });
   const { hashParams } = useHash();
-  const userInfo = UserInfo();
+  const { userInfo } = userStore;
   const { axiosData } = useAxiosData();
   const router = useRouter()
   const [token,setToken]= useState('')
@@ -32,7 +33,7 @@ export default () => {
       token: token||localStorage.getItem('send_code')
     });
     if (result?.token) {
-      userInfo.setUserInfo({
+      userStore.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
         name: result?.name,

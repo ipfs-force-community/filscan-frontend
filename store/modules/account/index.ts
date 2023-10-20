@@ -39,7 +39,8 @@ class AccountStore {
     if (!result.error) {
       this.getAccountMinersNumber()
     }
-    this.groupMiners = result?.data?.group_info_list?[...result?.data?.group_info_list] : [];
+    this.groupMiners = result?.data?.group_info_list ? [...result?.data?.group_info_list] : [];
+    console.log('=====466',this.groupMiners)
     this.defaultGroup = result?.data.group_info_list?.find((v: GroupInfoList) => v.is_default)
   }
   //修改保存名下节点

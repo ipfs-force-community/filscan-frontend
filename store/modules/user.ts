@@ -19,14 +19,21 @@ class UserStore {
       userInfo: observable,
     });
     this.getUserInfo();
-
   }
 
   //获取用户登录信息
   async getUserInfo() {
     const userData: RequestResult = await axiosServer(userInfo);
+    console.log('====3566',userData)
     this.userInfo = {
       ...userData?.data || {},
+      loading:false
+    }
+  }
+
+  setUserInfo(user:any) {
+    this.userInfo = {
+      ...user|| {},
       loading:false
     }
   }

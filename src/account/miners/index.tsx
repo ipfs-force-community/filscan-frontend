@@ -1,17 +1,16 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import MinerAdd from './Add';
 import { useHash } from '@/components/hooks/useHash';
-import { proApi } from '@/contents/apiUrl';
-import { useEffect, useMemo, useState } from 'react';
+import accountStore from '@/store/modules/account'
+import { observer } from 'mobx-react';
+import MinerAdd from './Add';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
-import { groupsItem } from '../type';
 import Groups from './Groups';
-import accountStore from '@/store/modules/account'
 
-export default () => {
+export default observer(() => {
   const { hashParams } = useHash();
   const { type, group } = hashParams || {};
   const { tr } = Translation({ ns: 'account' });
@@ -102,5 +101,5 @@ export default () => {
       { renderChildren() }
     </>
   );
-};
+});
 

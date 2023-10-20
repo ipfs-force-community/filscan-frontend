@@ -70,13 +70,6 @@ const Groups = () => {
     setDeleteLoading(true);
     await accountStore.delGroups(Number(id));
     setDeleteLoading(false);
-    // const del = await axiosData(proApi.delGroup, { group_id: Number(id) });
-    // if (del) {
-    //   //删除成功
-    //   const newGroups = await axiosData(proApi.getGroups);
-    //   //setGroups(newGroups?.group_info_list || []);
-    //   setDeleteLoading(false);
-    // }
   };
 
   const handleSaveMiners = async (group: any, minerInfo: any) => {
@@ -84,10 +77,6 @@ const Groups = () => {
       ...group,
       miners_info: [minerInfo],
     })
-    // const saveResult = await axiosData(proApi.saveMiner, {
-    //   ...group,
-    //   miners_info: [minerInfo],
-    // });
     if (saveResult) {
       return messageManager.showMessage({
         type: 'success',

@@ -1,13 +1,11 @@
 //@ts-ignore
-const modulesFiles = import.meta.glob('./modules/*ts');
-const modules: Record<string, any> = {};
-
-for (const path in modulesFiles) {
-  if (Object.prototype.hasOwnProperty.call(modulesFiles, path)) {
-    const moduleName = path.replace(/^\.\/(.*)\.\w+$/, '$1');
-    modules[moduleName] = (modulesFiles[path]()).default;
-  }
-}
+const modulesFiles = require.context('./modules', true, /\.ts$/);
+const modules = modulesFiles.keys().reduce((modules:any, modulePath:string) => {
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1');
+  const value = modulesFiles(modulePath);
+  // @ts-ignore
+  modules[moduleName] = value.default;
+  return modules;
+}, {});
 
 export default modules;
-
