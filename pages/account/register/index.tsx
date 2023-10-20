@@ -13,7 +13,7 @@ import ErrorIcon from '@/assets/images/error.svg';
 import Success from '@/src/account/success';
 import useAxiosData from '@/store/useAxiosData';
 import Banner from '@/src/account/Banner';
-import { UserInfo } from '@/store/UserStore';
+import userStore from '@/store/modules/user';
 
 export default () => {
   const { tr } = Translation({ ns: 'common' });
@@ -21,7 +21,7 @@ export default () => {
   const [success, setSuccess] = useState(false);
   const { axiosData } = useAxiosData();
   const [form] = Form.useForm();
-  const userInfo = UserInfo();
+  const { userInfo} =userStore;
 
   const onFinish = async () => {
     //注册
@@ -34,7 +34,7 @@ export default () => {
     });
 
     if (result.token) {
-      userInfo.setUserInfo({...result})
+      userStore.setUserInfo({...result})
       setSuccess(true);
       localStorage.setItem('token', result.token);
       localStorage.setItem('expired_at', result.expired_at); //过期时间

@@ -11,12 +11,12 @@ export interface UserInfo {
 
 export const UserStoreContext = createContext<UserInfo | null>(null);
 
-export const UserInfo = (): UserInfo => {
-  const context = useContext(UserStoreContext);
-  if (!context) {
-    throw new Error(
-      'useFilscanStore must be used within a FilscanStoreProvider'
-    );
-  }
-  return context;
-};
+// export const UserInfo = (): UserInfo => {
+//   const context = useContext(UserStoreContext);
+//   if (!context) {
+//     throw new Error(
+//       'useFilscanStore must be used within a FilscanStoreProvider'
+//     );
+//   }
+//   return context;
+// };

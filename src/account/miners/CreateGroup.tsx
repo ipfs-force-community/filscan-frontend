@@ -1,11 +1,9 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import { proApi } from '@/contents/apiUrl';
-import useAxiosData from '@/store/useAxiosData';
+import accountStore from '@/store/modules/account';
 import { Modal, Input, Button } from 'antd';
 import { useState } from 'react';
-import { useGroupsStore } from '../content';
 
 export default ({
   show,
@@ -17,16 +15,11 @@ export default ({
   const { tr } = Translation({ ns: 'account' });
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
-  const { axiosData } = useAxiosData();
-  const { setGroups } = useGroupsStore();
 
   const handleClick = async () => {
     //添加分组
-    // onChange(value);
     setLoading(true);
-    const data = await axiosData(proApi.saveGroup, { group_name: value });
-    const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups?.group_info_list || []);
+    await accountStore.saveGroups({group_name: value })
     setLoading(false);
     onChange(false);
   };

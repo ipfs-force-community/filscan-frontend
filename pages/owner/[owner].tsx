@@ -154,7 +154,7 @@ export default () => {
       <OverView overView={miner_overview} accountId={owner} />
 
       <div className={classNames("flex mt-6 gap-x-5", styles.bottom)}>
-        <AccountChange accountId={owner} interval={"30d"} />
+        <AccountChange accountId={owner} interval={"1m"} />
         <PowerChange accountId={owner} type="owner" />
       </div>
     </div>

@@ -40,7 +40,7 @@ export const proApi = {
   saveMiner: proUrl + '/SaveUserMiners',
 
 }
-
+//account
 export const heightDetail = mainUrl + '/TipsetDetail';
 export const EvmContractSummary = mainUrl + '/EvmContractSummary';
 export const EvmTxsHistory = mainUrl + '/EvmTxsHistory'

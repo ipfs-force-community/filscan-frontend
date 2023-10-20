@@ -106,6 +106,11 @@ export const account_manager: Array<MenuItem> = [
     icon: getSvgIcon('account_overview'),
     href: 'overview',
     key: 'overview',
+  },
+  {
+    label: 'data_details',
+    icon: getSvgIcon('account_overview'),
+    key: 'data_details',
     children: [
       {
         label: 'overview_power', //算力概览
@@ -139,22 +144,22 @@ export const account_manager: Array<MenuItem> = [
     key: 'miners',
     href: 'miners',
   },
-  // {
-  //   label: 'monitor',
-  //   icon: getSvgIcon('monitor'),
-  //   href: 'monitor',
-  //   key: 'monitor',
-  //   children: [
-  //     {
-  //       label: 'monitor_balance', //余额监控
-  //       key: 'monitorBalance',
-  //     },
-  //     {
-  //       label: 'monitor_sector', //gas 消耗
-  //       key: 'monitorSector',
-  //     },
-  //   ]
-  // },
+  {
+    label: 'monitor',
+    icon: getSvgIcon('monitor'),
+    href: 'monitor',
+    key: 'monitor',
+    children: [
+      {
+        label: 'monitor_balance', //余额监控
+        key: 'monitorBalance',
+      },
+      {
+        label: 'monitor_sector', //gas 消耗
+        key: 'monitorSector',
+      },
+    ]
+  },
   {
     label: 'personal',
     icon: getSvgIcon('account_personal'),

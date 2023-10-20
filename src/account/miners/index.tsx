@@ -1,115 +1,83 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import MinerAdd from './Add';
 import { useHash } from '@/components/hooks/useHash';
-import { proApi } from '@/contents/apiUrl';
-import { useEffect, useMemo, useState } from 'react';
-import { getSvgIcon } from '@/svgsIcon';
+import accountStore from '@/store/modules/account'
+import { observer } from 'mobx-react';
+import MinerAdd from './Add';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
-import { MinerNum, groupsItem } from '../type';
-import useAxiosData from '@/store/useAxiosData';
-import { GroupsStoreContext, useMinerStore } from '../content';
 import Groups from './Groups';
 
-export default ({ minersNum }: { minersNum?: MinerNum | any }) => {
+export default observer(() => {
   const { hashParams } = useHash();
   const { type, group } = hashParams || {};
   const { tr } = Translation({ ns: 'account' });
-  const [groups, setGroups] = useState<Array<groupsItem>>([]);
-  const [defaultGroupsId, setDefaultGroupsId] = useState();
-  const [minerNum, setMinerNum] = useState(minersNum);
-  const {setAllNum } = useMinerStore();
-  const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
-  const { axiosData } = useAxiosData();
+  const { countMiners,groupMiners,defaultGroup } = accountStore;
+  const { miners_count, max_miners_count } = countMiners;
 
-  useEffect(() => {
-    loadMinersNum()
-  }, []);
-
-  const loadMinersNum = async () => {
-    const result = await axiosData(proApi.account_miners, {}, { isCancel: false });
-    setMinerNum(result)
-  }
-
-  useEffect(() => {
-    calcGroups(groupsData?.group_info_list || []);
-  }, [groupsData]);
-
-  //组成公共select item
-  const calcGroups = (groupResult: Array<groupsItem>) => {
-    const new_data: any = [];
-    let default_groups_id;
-    groupResult?.forEach((item: groupsItem) => {
-      if (item.is_default) {
-        default_groups_id = item.group_id;
-      }
-      new_data.push({
-        ...item,
-        label: item.is_default ? tr('default_group') : item.group_name,
-        value: item.group_id,
-      });
-    });
-    setDefaultGroupsId(default_groups_id);
-    setGroups(new_data);
-  };
+  const selectGroupsItems = useMemo(() => {
+    const newGroups:Array<any>=[]
+    if (groupMiners) {
+      groupMiners.forEach(item => {
+        newGroups.push({
+          group_id: item.group_id,
+          is_default: item.is_default,
+          name:item.group_name,
+          label: item.is_default ? tr('default_group') : item.group_name,
+          value: item.group_id,
+        })
+      })
+    }
+    return newGroups
+  }, [groupMiners])
 
   const groupDetail = useMemo(() => {
-    if (group) {
-      const file = groups?.find((v: any) => v.group_id === Number(group));
-      return file;
+    let selectGroup:any = {};
+    if (group && groupMiners ) {
+      selectGroup = groupMiners?.find(v=>v.group_id === Number(group))
     }
-    return undefined;
-  }, [group, groups]);
+    return selectGroup
+  },[group,groupMiners])
 
   const renderChildren = () => {
-    if (type === 'miner_add' && groupsData) {
+    if (type === 'miner_add') {
       return (
         <MinerAdd
-          groups={groups}
-          defaultId={defaultGroupsId}
-          minersNum={minerNum}
+          groups={selectGroupsItems}
+          defaultId={defaultGroup?.group_id}
+          minersNum={countMiners}
         />
       );
     }
-
+    //添加分组
     if (type === 'group_add' ) {
       return (
         <GroupAdd
           groupId={group}
-          groupDetail={groupDetail}
-          minersNum={minerNum}
+          //groupDetail={groupDetail}
+          minersNum={countMiners}
         />
       );
-    }
-    if (group && groupDetail) {
+    } else if (group) {
+      //编辑分组
       return <GroupAdd
         groupId={group}
         groupDetail={groupDetail}
-        minersNum={minerNum}
+        minersNum={countMiners}
       />
     }
-    return <Groups groups={groups} />;
+    return <Groups />;
   };
 
   return (
-    <GroupsStoreContext.Provider
-      value={{
-        groups,
-        setMinerNum: (mineNum) => {
-          setMinerNum(mineNum);
-          setAllNum(mineNum)
-        },
-        setGroups: (groupsArr: Array<groupsItem>) => {
-          calcGroups(groupsArr);
-        },
-      }}>
+    <>
       <p className='w-full mb-5 flex align-baseline justify-between	'>
         <span className='font-semibold text-lg	 font-PingFang'>
           {tr('miners')}
           <span className='text_des text-sm ml-2 font-DIN'>
-            {minerNum?.miners_count}/{minerNum?.max_miners_count}
+            {miners_count}/{max_miners_count}
           </span>
         </span>
         <div className='flex gap-x-2.5 items-center'>
@@ -130,7 +98,8 @@ export default ({ minersNum }: { minersNum?: MinerNum | any }) => {
         </div>
 
       </p>
-      {renderChildren()}
-    </GroupsStoreContext.Provider>
+      { renderChildren() }
+    </>
   );
-};
+});
+

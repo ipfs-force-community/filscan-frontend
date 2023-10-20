@@ -6,11 +6,9 @@ import AddNode from './AddNode';
 import { MinerNum, groupsItem } from '../type';
 import Breadcrumb from '@/packages/breadcrumb';
 import { useEffect, useState } from 'react';
-import useAxiosData from '@/store/useAxiosData';
-import { proApi } from '@/contents/apiUrl';
-import { useGroupsStore } from '../content';
 import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
+import accountStore from '@/store/modules/account';
 
 /** @format */
 
@@ -24,7 +22,8 @@ export default ({
   minersNum: MinerNum;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const { groups,setGroups, setMinerNum } = useGroupsStore();
+  const {groupMiners } = accountStore;
+
   const routerItems = [
     { title: tr('miners'), path: '/account#miners' },
     {
@@ -33,33 +32,27 @@ export default ({
     },
   ];
   const router = useRouter();
-  const [groupName, setGroupName] = useState(groupDetail?.label);
+  const [groupName, setGroupName] = useState(groupDetail?.group_name);
   const [groupMinders, setGroupMiners] = useState(groupDetail?.miners_info);
   const [saveLoading, setSaveLoading] = useState(false);
-  const { loading, axiosData } = useAxiosData();
 
   useEffect(() => {
-    setGroupName(groupDetail?.label);
+    setGroupName(groupDetail?.group_name);
     setGroupMiners(groupDetail?.miners_info || []);
   }, [groupDetail, groupId]);
 
   const handleSave = async () => {
     //添加分组及节点
     setSaveLoading(true);
-    // const detail
-    const groupDetail = groups.find((v) => v.value === Number(groupId));
-    const data = await axiosData(proApi.saveGroup, {
+    const groupDetail = groupMiners?.find((v) => v.group_id === Number(groupId));
+    const data = await accountStore.saveGroups({
       group_id: Number(groupId),
       is_default:groupDetail?.is_default,
       group_name: groupName,
       miners_info: groupMinders,
-    });
+    })
     setSaveLoading(false);
-    if (data) {
-      const newGroups = await axiosData(proApi.getGroups);
-      setGroups(newGroups?.group_info_list || []);
-      const minerNum: any = await axiosData(proApi.account_miners);
-      setMinerNum(minerNum);
+    if (!data.error) {
       messageManager.showMessage({
         type: 'success',
         content: 'Save Group successfully',
