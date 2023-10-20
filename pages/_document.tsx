@@ -36,7 +36,6 @@ const MyDocument = () => (
             `,
         }}
       />
-      <Script src='https://hm.baidu.com/hm.js?db68ddd1d28effdabb6dfc9f07258667' strategy="lazyOnload"></Script>
     </Head>
     <body>
       <Main />

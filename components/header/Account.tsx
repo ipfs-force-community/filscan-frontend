@@ -17,7 +17,7 @@ export default () => {
   if (!name) {
     return (
       <Link href='/account/login' as='/account/login' scroll={false}>
-        <span className='flex items-center justify-center !w-14 h-7 border border_color main_bg_color  rounded-[5px] primary_btn '>
+        <span className='flex items-center justify-center h-[46px]  border border_color  main_bg_color primary_btn !rounded-none'>
           {tr('login')}
         </span>
       </Link>

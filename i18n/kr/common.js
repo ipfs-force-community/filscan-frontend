@@ -23,7 +23,9 @@ const common = {
   cid: '블록 CID',
   node: '노드',
   save_pic: '사진을 저장하다',
-  fvm_share:'친구들과 공유',
+  fvm_share: '친구들과 공유',
+  account_banner_bg: '노드 관리자에 오신 것을 환영합니다',
+  account_banner_main:'노드 관리 도우미',
 
   //messages
   no_account: '해당 이메일은 등록되어 있지 않습니다. 먼저 회원 가입을 진행해 주세요.',
@@ -50,7 +52,7 @@ const common = {
   email_required: '이메일을 입력해주세요',
   email_rules: '이메일 형식이 잘못되었습니다. 수정해주세요',
   code_rules: '6자리 숫자 인증 코드를 올바르게 입력해주세요',
-  password_rules: '8-20자의 비밀번호를 입력하세요. 숫자, 영문자, 특수문자를 모두 포함해야 하며, 비밀번호는 이메일 주소와 동일하면 안 됩니다',
+  password_rules: '비밀번호를 설정해주세요. 8-20자의 길이여야 하며, 숫자, 문자, 특수 문자를 모두 포함해야 합니다.',
   confirm_password_rules: '입력한 비밀번호가 일치하지 않습니다. 다시 입력해주세요',
   email_exists: '이미 해당 이메일이 존재합니다',
   Export: 'Excel 파일을 다운로드하세요',

@@ -109,10 +109,12 @@ export const verify_source={
     {title:'optimize',dataIndex:'optimize', type: 'Select', options: [
       {
         title: 'Yes',
+        label:'Yes',
         value: true
       },
       {
         title: 'No',
+        label:'No',
         value: false
       }
     ],
@@ -227,12 +229,6 @@ export const contract_rank = {
             <Link className='link_text' href={`/address/${text}`}>
               {isIndent(text, 5, 4)}
             </Link>
-            <BrowserView>
-              <Copy text={text} />
-            </BrowserView>
-            <MobileView>
-              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
-            </MobileView>
           </span>
         );
       },

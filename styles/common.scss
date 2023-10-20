@@ -124,7 +124,6 @@
 .clip_text {
   background: linear-gradient(279deg, #0052f8 0%, #0a96e9 100%);
   -webkit-background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
 
@@ -135,15 +134,15 @@
 
 /*文字渐变*/
 .text_clip {
-  background: linear-gradient(
-    131deg,
-    var(--text_clip) 0%,
-    var(--font-color) 100%
-  );
-  -webkit-background-clip: text;
-  font-family: DINPro-Bold, DINPro;
-
-  -webkit-text-fill-color: transparent;
+  color: var(--font-text-color);
+  // background: linear-gradient(
+  //   131deg,
+  //   var(--text_clip) 0%,
+  //   var(--font-color) 100%
+  // );
+  // -webkit-background-clip: text;
+  // //font-family: DINPro-Bold, DINPro;
+  // -webkit-text-fill-color: transparent;
 }
 /*子元素不渐变*/
 .solid_text {
@@ -296,7 +295,7 @@
   padding: 6px 15px;
   min-width: 80px;
   width: fit-content;
-  border-radius: 5px !important;
+  border-radius: 5px;
   background: linear-gradient(315deg, #1764ff 0%, #4093ed 100%) !important;
   color: #fff !important;
 }

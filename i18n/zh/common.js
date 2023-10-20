@@ -23,7 +23,9 @@ const common = {
   cid: '区块CID',
   node: '节点',
   save_pic: '保存图片',
-  fvm_share:'分享给朋友',
+  fvm_share: '分享给朋友',
+  account_banner_bg: '欢迎使用节点管家',
+  account_banner_main:'您的节点管理好帮手',
 
   //messages
   no_account:'该邮箱未注册,请先注册',
@@ -43,7 +45,7 @@ const common = {
   no_account: '还没有账号?',
   have_account:'已有账号?',
   go_register: '立即注册',
-  new_password: '设置密码',
+  new_password: '设置密码，8-20个字符，需同时包含数字、字母及特殊字符',
   confirm_password: '确认密码',
   agreement: '注册即代表同意《协议》、《隐私政策》',
 

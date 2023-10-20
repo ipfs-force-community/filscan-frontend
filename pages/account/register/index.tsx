@@ -30,7 +30,7 @@ export default () => {
       ...data,
       mail: data.email,
       password: data.new_password,
-      token,
+      token:token||localStorage.getItem('send_code'),
     });
 
     if (result.token) {
@@ -54,7 +54,7 @@ export default () => {
   return (
     <>
       <Banner />
-      <div className='main_contain !w-2/5 !min-w-[404px]  !mb-10 !mt-8'>
+      <div className='main_contain !w-1/2 !min-w-[404px]  !mb-10 !mt-8'>
         <div className={`text-lg tex_color`}>
           {tr('register')}
         </div>
@@ -65,7 +65,7 @@ export default () => {
             <Form
               form={form}
               size='large'
-              className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
+              className='custom_form !w-full !mt-7 !flex !flex-col gap-y-6'
               initialValues={{ remember: true }}
               onFinish={onFinish}
               scrollToFirstError>
@@ -170,11 +170,11 @@ export default () => {
                 <Button
                   htmlType='submit'
                   className='!w-full !bg-primary !text-white'>
-                  {tr('register')}
+                  {tr('go_register')}
                 </Button>
               </Form.Item>
             </Form>
-            <div className=''>{tr('agreement')}</div>
+            {/* <div className=''>{tr('agreement')}</div> */}
           </>
         )}
       </div>

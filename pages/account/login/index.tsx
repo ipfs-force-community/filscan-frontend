@@ -29,7 +29,7 @@ export default () => {
     const result: any = await axiosData(proApi.login, {
       ...data,
       mail: data.email,
-      token,
+      token: token||localStorage.getItem('send_code')
     });
     // if (result?.code === 1) {
     //   //未注册
@@ -39,8 +39,7 @@ export default () => {
     //     icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
     //   });
     // }
-    if (result.token) {
-      localStorage.setItem('token', result.token);
+    if (result?.token) {
       userInfo.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
@@ -76,7 +75,7 @@ export default () => {
   return (
     < >
       <Banner />
-      <div className='main_contain !w-2/5 !min-w-[404px] !mb-10 !mt-8'>
+      <div className='main_contain !w-1/2 !min-w-[404px] !mb-10 !mt-8'>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {
             return (
@@ -103,7 +102,7 @@ export default () => {
           form={form}
           size='large'
           validateTrigger='submit'
-          className='custom_form !w-full !mt-7 !flex !flex-col gap-y-4'
+          className='custom_form !w-full !mt-7 !flex !flex-col gap-y-6'
           initialValues={{ remember: true }}
           onFinish={onFinish}>
           {login_list(hashParams && hashParams?.type).map((item) => {
@@ -129,7 +128,7 @@ export default () => {
                     onPressEnter={handlePressEnter}
                     suffix={
                       showButton && (
-                        <SendCode mail={mail} onChange={(token) => setToken(token)} />
+                        <SendCode mail={mail} onChange={(token) => {setToken(token) }}/>
                       )
                     }
                   />

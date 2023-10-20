@@ -161,7 +161,6 @@ export default (props: Props) => {
     setOptions({ series: seriesData, xData: dateList});
   };
 
-  console.log('====3',options)
   const newOptions = useMemo(() => {
     const newSeries: any = [];
     (options?.series || []).forEach((seriesItem: any) => {

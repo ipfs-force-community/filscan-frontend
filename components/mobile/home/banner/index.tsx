@@ -9,7 +9,6 @@ import { apiUrl } from '@/contents/apiUrl';
 import { Image } from 'antd'
 
 const Banner = (props: any)=> {
-
   const { axiosData } = useAxiosData()
   const { theme, lang } = useFilscanStore();
   const carousel = useRef<any>(null)
@@ -22,9 +21,9 @@ const Banner = (props: any)=> {
 
   const loadBanner = async() => {
     const result:any =await axiosData(apiUrl.home_banner, {
-      category: 'moblie_home',
+      category: 'mobile_home',
       language:lang ||'zh'
-    })
+    }, {isCancel:false})
     setData(result?.items||[])
   }
 

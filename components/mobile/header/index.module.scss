@@ -32,22 +32,22 @@
           }
 
           &>:first-child{
-            width: 21px;
+            width: 23px;
             height: unset;
 
             aspect-ratio: 1.0968;
           }
           &>:last-child {
             width: unset;
-            height: 10px;
+            height: 12px;
 
             aspect-ratio: 5.9;
           }
         }
         & > svg {
           padding: 12px 12px 12px 12px;
-          width: 44px;
-          height: 44px;
+          width: 47px;
+          height: 47px;
         }
       }
       .fil {

@@ -157,6 +157,9 @@ export const unitConversion = (
   num = 0
 ): string => {
   let showItem: string | number = Number(item);
+  if (!showItem && showItem !== 0) {
+    return '0 Byte';
+  }
   let sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
   let positive = true;
   if (showItem == 0) {
@@ -232,6 +235,13 @@ export function formatTime(from:number, to?:number, ago = true) {
   return {
     days,hours,minutes,seconds
   };
+}
+
+export function ellipsis(str: string, unit: number = 6,) {
+  const suffixNum = unit;
+  return str && unit && str.length > suffixNum
+    ? str?.slice(0, unit) + "..."
+    : str;
 }
 
 export function isIndent(str: string, unit: number = 6, unitNum?: number ) {

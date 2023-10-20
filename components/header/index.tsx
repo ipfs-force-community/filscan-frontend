@@ -134,6 +134,7 @@ export default () => {
               }}>
                 { getSvgIcon(theme === 'dark' ? 'sun' : 'moon')}
               </span>
+              <Account />
             </div>
           </div>
           <hr className='border_color'/>

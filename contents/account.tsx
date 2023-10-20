@@ -7,10 +7,10 @@ import Link from 'next/link';
 import TagInput from '@/packages/tagInput';
 import { formatDateTime, formatFil, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
 import Image from 'next/image';
-import power from '@/assets/images/power.svg';
+//import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg';
-import gas from '@/assets/images/gas.svg';
-import reward from '@/assets/images/reward.svg';
+// import gas from '@/assets/images/gas.svg';
+// import reward from '@/assets/images/reward.svg';
 import balance from '@/assets/images/balance.svg';
 
 export const logTabs = [
@@ -31,7 +31,7 @@ export const login_list = (type?: string) => {
       name: 'email',
       prefix: <UserOutlined className='site-form-item-icon' />,
       placeholder: 'email_placeholder',
-      rules: [{ required: true, message: '${email} is required' }],
+      rules: [{ required: true, message: 'Email is required' }],
     },
   ];
   if (type === 'code') {
@@ -42,7 +42,7 @@ export const login_list = (type?: string) => {
         name: 'code',
         placeholder: 'code_placeholder',
         prefix: <LockOutlined className='site-form-item-icon' />,
-        rules: [{ required: true, message: '${code} is required' }],
+        rules: [{ required: true, message: 'Code is required' }],
       },
     ];
   }
@@ -54,7 +54,7 @@ export const login_list = (type?: string) => {
       name: 'password',
       placeholder: 'password_placeholder',
       prefix: <LockOutlined className='site-form-item-icon' />,
-      rules: [{ required: true, message: '${password} is required' }],
+      rules: [{ required: true, message: 'Password is required' }],
     },
   ];
 };
@@ -82,21 +82,21 @@ export const registerList = [
     name: 'code',
     placeholder: 'code_placeholder',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: '${password} is required' }],
+    rules: [{ required: true, message: 'Code is required' }],
   },
   {
     label: 'password',
     name: 'new_password',
     placeholder: 'new_password',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: '${password} is required' }],
+    rules: [{ required: true, message: 'Password is required' }],
   },
   {
     label: 'password',
     name: 'confirm_password',
     placeholder: 'confirm_password',
     prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: '${password} is required' }],
+    rules: [{ required: true, message: 'Confirm assword is required' }],
   },
 ];
 
@@ -139,6 +139,22 @@ export const account_manager: Array<MenuItem> = [
     key: 'miners',
     href: 'miners',
   },
+  // {
+  //   label: 'monitor',
+  //   icon: getSvgIcon('monitor'),
+  //   href: 'monitor',
+  //   key: 'monitor',
+  //   children: [
+  //     {
+  //       label: 'monitor_balance', //余额监控
+  //       key: 'monitorBalance',
+  //     },
+  //     {
+  //       label: 'monitor_sector', //gas 消耗
+  //       key: 'monitorSector',
+  //     },
+  //   ]
+  // },
   {
     label: 'personal',
     icon: getSvgIcon('account_personal'),
@@ -163,7 +179,7 @@ export const personal_setting = [
     title: 'old_password',
     placeholder: 'old_placeholder',
     dataIndex: 'old_password',
-    rules: [{ required: true, message: '${old_placeholder} is required' }],
+    rules: [{ required: true, message: 'old_placeholder is required' }],
   },
   {
     title: 'new_password',
@@ -184,7 +200,7 @@ export const overview = {
     [
       {
         title: 'quality_power_24',
-        icon: <Image src={power} width={40} height={40} alt='' />,
+        icon:'power',// <Image src={power} width={40} height={40} alt='' />,
         dataIndex: 'sum_quality_adj_power',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_power_change_24h
@@ -217,7 +233,7 @@ export const overview = {
       },
       {
         title: 'total_reward_24',
-        icon: <Image src={reward} width={40} height={40} alt='' />,
+        icon: 'reward',//<Image src={reward} width={40} height={40} alt='' />,
         dataIndex: 'sum_reward_change_24h',
         render: (text: any, record: any, tr: any) => {
           // const changeText = record?.sum_reward_change_24h
@@ -255,7 +271,7 @@ export const overview = {
     [
       {
         title: 'total_out_come_gas',
-        icon: <Image src={gas} width={40} height={40} alt='' />,
+        icon: 'gas', //<Image src={gas} width={40} height={40} alt='' />,
         dataIndex: 'sum_outlay',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_gas ? Number(record.sum_gas) : '';
@@ -287,7 +303,7 @@ export const overview = {
       },
       {
         title: 'pledge_amount_24',
-        icon: <Image src={pledge} width={40} height={40} alt='' />,
+        icon: 'pledge',//<Image src={pledge} width={40} height={40} alt='' />,
         dataIndex: 'sum_pledge',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_pledge_change_24h
@@ -321,7 +337,7 @@ export const overview = {
       },
       {
         title: 'balance_24',
-        icon: <Image src={balance} width={40} height={40} alt='' />,
+        icon:'balance', //<Image src={balance} width={40} height={40} alt='' />,
         dataIndex: 'sum_balance',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_balance_change_24h

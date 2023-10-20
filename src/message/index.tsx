@@ -8,11 +8,10 @@ import { message_detail } from '@/contents/detail';
 import Content from '@/packages/content';
 import NoData from '@/packages/noData';
 import useAxiosData from '@/store/useAxiosData';
-import { Skeleton } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import classNames from 'classnames';
-import { get, has } from 'lodash';
+import { get } from 'lodash';
 import { formatFilNum, get_account_type } from '@/utils';
 import Segmented from '@/packages/segmented';
 import Trade from './Trade'
@@ -21,7 +20,7 @@ import Loading from '@/components/loading';
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' });
-  const { axiosData } = useAxiosData();
+  const { axiosData,loading } = useAxiosData();
   const [data, setData] = useState<any>({});
   const [dataLoading, setDataLoading] = useState(true);
   const [TransferData, setTransfer] = useState<any>(undefined);
@@ -38,14 +37,18 @@ export default ({ cid }: { cid: string | string[] }) => {
   },[hash])
 
   useEffect(() => {
-    loadTrans(data?.message_basic?.cid);
-    load()
-  }, [data?.message_basic?.cid]);
+    if (cid) {
+      load()
+    }
+  }, [cid]);
 
   const load = async () => {
-    const result: any = await axiosData(apiUrl.detail_message, { message_cid: cid, }, { isCancel: false })
+    const result: any = await axiosData(apiUrl.detail_message, { message_cid: cid, })
     setDataLoading(false)
-    setData(result?.MessageDetails || {})
+    setData(result?.MessageDetails || {});
+    if (result?.MessageDetails.message_basic?.cid) {
+      loadTrans(result?.MessageDetails.message_basic?.cid)
+    }
   }
 
   const loadTrans = (id: string) => {
@@ -73,10 +76,10 @@ export default ({ cid }: { cid: string | string[] }) => {
 
   };
 
-  if (dataLoading) {
+  if (loading) {
     return <Loading />
   }
-  if (!dataLoading && Object.keys(data).length === 0) {
+  if (!loading && Object.keys(data).length === 0) {
     return <NoData />;
   }
 

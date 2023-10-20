@@ -24,6 +24,8 @@ import i18n from '@/i18n';
 import Ap from 'next/app'
 import { SEO } from '@/contents/common';
 import Script from 'next/script';
+import useAxiosData from '@/store/useAxiosData';
+import { proApi } from '@/contents/apiUrl';
 
 App.getInitialProps = async (context:any)=>{
   const initialProps = await Ap.getInitialProps(context)
@@ -45,7 +47,7 @@ App.getInitialProps = async (context:any)=>{
 function App({ Component, pageProps, isMobile }: any) {
   const {t} =useTranslation('home')
   const router = useRouter();
-
+  const {axiosData } = useAxiosData();
   const [userInfo, setUserInfo] = useState<any>();
   const [loading,setLoading]= useState(true)
   const [lang, setLang] = useState('zh');
@@ -55,16 +57,6 @@ function App({ Component, pageProps, isMobile }: any) {
     account:''
   })
 
-  const onResize = ()=>{
-    const theme_Local = localStorage.getItem('theme');
-    if (window.innerWidth < 1000) {
-      isMobile = true
-      loadTheme("light")
-      return
-    }
-    isMobile = false
-    loadTheme(theme_Local)
-  }
   useEffect(() => {
     const theme_Local = localStorage.getItem('theme');
     let lang_Local = localStorage.getItem('lang');
@@ -84,6 +76,13 @@ function App({ Component, pageProps, isMobile }: any) {
     i18n.changeLanguage(lang_Local); // 更改i18n语言
     if (lang_Local) setLang(lang_Local);
     setLoading(false)
+    if (localStorage?.getItem('userInfo')) {
+      const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '');
+      if (lastUser) {
+        setUserInfo(lastUser);
+      }
+    }
+    loadUser();
 
     if (typeof window !== undefined) {
       window.addEventListener("resize",onResize)
@@ -92,6 +91,26 @@ function App({ Component, pageProps, isMobile }: any) {
       }
     }
   }, []);
+
+  const onResize = ()=>{
+    const theme_Local = localStorage.getItem('theme');
+    if (window.innerWidth < 1000) {
+      isMobile = true
+      loadTheme("light")
+      return
+    }
+    isMobile = false
+    loadTheme(theme_Local)
+  }
+
+  const loadUser = async () => {
+    const userData: any = await axiosData(proApi.userInfo, {}, {isCancel:false});
+    setUserInfo({ ...userData, last_login: userData?.last_login_at || '' });
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify({ ...userData, last_login: userData?.last_login_at || '' })
+    );
+  };
 
   const loadTheme = (theme_Local: any) => {
     if (theme_Local === 'dark' && !isMobile) {
@@ -119,10 +138,10 @@ function App({ Component, pageProps, isMobile }: any) {
           },
         ]}
         languageAlternates={[
-          { hrefLang: 'en', href: 'https://www.example.com/en-US' },
-          { hrefLang: 'zh', href: 'https://www.example.com/zh-CN' },
-          // 添加更多语言...
-        ]} />
+          { hrefLang: 'en', href: 'https://filscan.io/en' },
+          { hrefLang: 'zh', href: 'https://filscan.io/zh' },
+        ]}
+      />
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-VZ0MMF5MLC"/>
       <Script id="google-analytics">
         {`
