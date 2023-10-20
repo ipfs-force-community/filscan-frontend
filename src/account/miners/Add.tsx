@@ -9,12 +9,9 @@ import ErrorIcon from '@/assets/images/error.svg';
 import messageManager from '@/packages/message';
 import CreateGroup from './CreateGroup';
 import { getSvgIcon } from '@/svgsIcon';
-import { proApi } from '@/contents/apiUrl';
 import { Button } from 'antd';
 import SearchSelect from '@/packages/searchSelect';
 import { MinerNum } from '../type';
-import useAxiosData from '@/store/useAxiosData';
-// import { useGroupsStore } from '../content';
 import { useRouter } from 'next/router';
 import accountStore from '@/store/modules/account';
 
