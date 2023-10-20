@@ -7,10 +7,10 @@ import { account_manager } from '@/contents/account';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import userStore from '@/store/modules/user';
-import { useEffect } from 'react';
+import { observer } from 'mobx-react';
 
 //已登录状态
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'account' });
   const { userInfo,logoutUser } = userStore;
   const {name,mail} = userInfo
@@ -69,4 +69,4 @@ export default () => {
       </ul>
     </div>
   );
-};
+});
