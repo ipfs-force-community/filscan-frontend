@@ -5,7 +5,7 @@ import { makeObservable, observable, runInAction } from "mobx";
 const defaultUser = {
   name: "",
   mail: '',
-  last_login_at: 0,
+  last_login: 0,
 
 }
 
@@ -27,23 +27,34 @@ class UserStore {
     runInAction(()=>{
       this.userInfo = {
         ...userData?.data || {},
+        last_login: userData?.data?.last_login_at||"",
         loading:false
       }
     })
 
   }
 
-  setUserInfo(user:any) {
-    this.userInfo = {
-      ...user|| {},
-      loading:false
+  setUserInfo(user?: any) {
+    if (!user) {
+      this.userInfo = {
+        ...defaultUser,
+        loading: false
+      }
+    } else {
+      this.userInfo = {
+        ...user || {},
+        last_login: user?.last_login_at||"",
+        loading:false
+      }
     }
+
   }
 
   // 退出登录
   logoutUser() {
     this.userInfo = {
       ...defaultUser,
+
       loading: false
     }
   }
