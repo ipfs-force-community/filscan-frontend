@@ -18,9 +18,12 @@ import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
 import useInterval from '../hooks/useInterval';
 import cwStore from '@/store/modules/Cw';
+<<<<<<< HEAD
 import Image from 'next/image';
 
 import { spawn } from 'child_process';
+=======
+>>>>>>> 7910c2db (fix: cw)
 // import Skeleton from '@/packages/skeleton';
 
 export default () => {

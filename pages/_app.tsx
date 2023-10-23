@@ -22,6 +22,11 @@ import i18n from '@/i18n';
 import Ap from 'next/app'
 import { SEO } from '@/contents/common';
 import Script from 'next/script';
+<<<<<<< HEAD
+=======
+import useAxiosData from '@/store/useAxiosData';
+import { proApi } from '@/contents/apiUrl';
+>>>>>>> 7910c2db (fix: cw)
 import { Provider } from 'mobx-react';
 import * as mobxStores from '@/store';
 
@@ -138,7 +143,13 @@ function App({ Component, pageProps, isMobile }: any) {
         `}
       </Script>
       <Provider {...mobxStores}>
+<<<<<<< HEAD
         <ErrorBoundary>
+=======
+
+        <ErrorBoundary>
+
+>>>>>>> 7910c2db (fix: cw)
           <DeviceContext.Provider value={{isMobile}}>
             <FilscanStoreContext.Provider value={{
               theme,
@@ -149,6 +160,7 @@ function App({ Component, pageProps, isMobile }: any) {
               lang,
               setLang,
             }}>
+<<<<<<< HEAD
               <WalletState.Provider value={{
                 wallet, setWallet: (walletItem:any) => {
                   setWallet(walletItem)
@@ -167,6 +179,28 @@ function App({ Component, pageProps, isMobile }: any) {
                   </div>
                 </ConfigProvider>
               </WalletState.Provider>
+=======
+              <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
+                <WalletState.Provider value={{
+                  wallet, setWallet: (walletItem:any) => {
+                    setWallet(walletItem)
+                  }
+                }}>
+                  <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                    <div className={classNames(`container_body text-sm ${theme}`)}>
+                      <HeaderMain />
+                      <MobileView>
+                        <Search className={styles['search']}/>
+                      </MobileView>
+                      <div className={classNames(styles.home ,styles.component)}>
+                        <Component {...pageProps} />
+                      </div>
+                      <Footer />
+                    </div>
+                  </ConfigProvider>
+                </WalletState.Provider>
+              </UserStoreContext.Provider>
+>>>>>>> 7910c2db (fix: cw)
             </FilscanStoreContext.Provider>
           </DeviceContext.Provider>
         </ErrorBoundary>

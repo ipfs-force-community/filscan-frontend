@@ -53,7 +53,11 @@ export const FinalHeight = mainUrl + '/FinalHeight'
 export const DCTrend = mainUrl + '/DCTrend'
 export const TransMethod = mainUrl + '/TransferMethodByAccountID'
 export const cwUrl = mainUrl + '/TipsetStateTree'
+<<<<<<< HEAD
 export const metaOther = mainUrl + '/BannerIndicator'
+=======
+
+>>>>>>> 7910c2db (fix: cw)
 export const apiUrl: API | any = {
   fvm_hot: mainUrl + '/GetFEvmHotItems',
   fvm_category: mainUrl + '/GetFEvmCategory',
