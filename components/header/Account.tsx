@@ -35,6 +35,9 @@ export default observer(() => {
       </div>
       <ul className='hidden group-hover:block absolute z-50 inset-y-full h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow main_bg_color  border_color'>
         {account_manager.map((item, index) => {
+          if (item.children && item.children.length > 0) {
+            return null
+          }
           if (item.key === 'logout') {
             return (
               <li

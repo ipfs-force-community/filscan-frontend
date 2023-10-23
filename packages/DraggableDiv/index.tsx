@@ -21,9 +21,9 @@ const DraggableDiv = (props: Props) => {
 
   const handleMouseDown = (e:React.MouseEvent<HTMLDivElement>) => {
     setIsDown(true);
-    setStartX(e.clientX - (contentRef.current.offsetLeft || 0));
+    setStartX(e.clientX - (divRef.current?.offsetLeft|| 0));
     setStartY(e.clientY - (divRef.current?.offsetTop || 0));
-    setScrollLeft(contentRef.current.scrollLeft || 0);
+    setScrollLeft(contentRef.current.style.marginLeft || 0);
     setScrollTop(divRef.current?.scrollTop || 0);
   };
 
@@ -39,11 +39,14 @@ const DraggableDiv = (props: Props) => {
     const walkX = (x - startX);
     const walkY = (y - startY);
     if (contentRef && contentRef.current) {
-      contentRef.current.scrollLeft = scrollLeft - walkX;
+      //contentRef.current.scrollLeft = scrollLeft - walkX;
+      walkX > 0 ? contentRef.current.style.paddingLeft = `${walkX}px`:contentRef.current.style.marginLeft = `${walkX}px`;
+      //contentRef.current.style.marginLeft = `${walkX}px`;
+
     }
     if (divRef.current) {
-
       divRef.current.scrollTop = scrollTop - walkY;
+
     }
   };
 

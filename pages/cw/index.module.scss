@@ -1,28 +1,46 @@
 
 
 .cwContain{
+            position: relative;
             display: flex;
             height: 450px;
-            padding: 20px 0px;
+            //padding: 20px 0px;
             color: var(--font_des); 
             font-family: DINPro-Medium, DINPro;
             border-radius: 12px;
             border: 1px solid var(--border-color);  
             background-color: var(--bgColor);
+            // &_bottom{
+            //   position: absolute;
+            //   bottom: 0px;
+            //   left: 0px;
+            //   width: 100%;
+            //   height: 40px;
+            //   z-index: 5;
+            //   background-color: var(--bgColor);
+            // }
          &_left,&_right{
               display: flex;
               flex-direction: column;
               row-gap: 20px;  
-              font-size: 12px;        
+              font-size: 12px;  
+              margin: 20px 0px;     
               }            
+            
          &_left{
-              min-width: 100px;
+              width: 100px;
               align-items: end;
+              text-align: right;
+             background-color: var(--bgColor);
+             z-index: 3;
               &Item{
+              width: 100px;
               position: relative;
               display: flex;
               align-items: center;
+              justify-content: end;
               z-index: 1;
+              width: 100%;
               height: 74px;
               min-height: 74px;
               padding-right: 15px;
@@ -48,32 +66,27 @@
                      }
                   }
                }  
-              &_right{
+        &_right{
                width: calc(100% - 100px);
                 cursor: grab;
-                overflow-x: hidden;
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none;  /* IE and Edge */
-                padding: -30px;
+               // padding: -30px;
               }
               &_rightContent{
                             position: relative;
                             display: flex;
                             width: fit-content;
                             margin: auto;
-                             height: 74px;
+                            height: 74px;
                             border-radius: 5px;
-                              scrollbar-width: none; /* Firefox */
-                            -ms-overflow-style: none;  /* IE and Edge */
                             &_orphan,&_content{
                               display: flex;
-                              &_Item{
+                                &_Item{
                                   display: flex;
                                   flex-direction: column;
                                   align-items: center;
                                   padding:4px 8px;
                                   margin: 8px 0px 8px 8px;
-                                min-width: 140px;
+                                   min-width: 140px;
                                   &:last-child{
                                     margin: 8px;
                                   }
@@ -90,6 +103,7 @@
                               background-color: var(--cw-bgColor);
                               }
                             }
+                           
                             &_content{
                               position: relative;
                               width: fit-content;
@@ -105,14 +119,16 @@
                                 background-image: url('../../assets/images/cwDown.svg');  
                                 background-size: contain;  
                                 background-repeat: no-repeat;  
-
                             }
                                &_Item{
                                 background-color: var(--bgColor);
                               }
+                              &_after{
+                                &::after{
+                                  display: none;
+                                }
+                              }
                             }
-                           
-                  
                            
                } 
 }

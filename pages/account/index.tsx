@@ -73,7 +73,10 @@ const Account: React.FC = () => {
           <div className='w-full px-5 mb-10 text-lg font-semibold font-PingFang	'>
             {tr('account_title')}
           </div>
-          <Menu mode="inline" className='custom_menu' defaultOpenKeys={['data_details','monitor']}>
+          <Menu mode="inline"
+            className='custom_menu'
+            selectedKeys={[selectedKey] }
+            defaultOpenKeys={['data_details', 'monitor']}>
             {account_manager.map(renderMenuItem)}
           </Menu>
         </div>

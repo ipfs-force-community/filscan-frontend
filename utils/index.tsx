@@ -61,7 +61,7 @@ export function formatFil(
   if (unit.startsWith('FIL')) {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 18));
     returnValue = Number(showNum)
-  } else if (unit === 'nanoFiL') {
+  } else if (unit === 'nanoFIL') {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 9));
     returnValue = Number(showNum)
   } else {

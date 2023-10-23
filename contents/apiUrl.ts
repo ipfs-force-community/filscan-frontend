@@ -51,6 +51,7 @@ export const FilPrice= mainUrl+'/FilPrice'
 export const FinalHeight = mainUrl + '/FinalHeight'
 export const DCTrend = mainUrl + '/DCTrend'
 export const TransMethod = mainUrl + '/TransferMethodByAccountID'
+export const cwUrl = mainUrl + '/TipsetStateTree'
 
 export const apiUrl: API | any = {
   fvm_hot: mainUrl + '/GetFEvmHotItems',
