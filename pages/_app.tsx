@@ -22,7 +22,8 @@ import i18n from '@/i18n';
 import Ap from 'next/app'
 import { SEO } from '@/contents/common';
 import Script from 'next/script';
-import userStore from '@/store/modules/user';
+import useAxiosData from '@/store/useAxiosData';
+import { proApi } from '@/contents/apiUrl';
 import { Provider } from 'mobx-react';
 import * as mobxStores from '@/store';
 
@@ -139,7 +140,9 @@ function App({ Component, pageProps, isMobile }: any) {
         `}
       </Script>
       <Provider {...mobxStores}>
+
         <ErrorBoundary>
+
           <DeviceContext.Provider value={{isMobile}}>
             <FilscanStoreContext.Provider value={{
               theme,
@@ -150,30 +153,30 @@ function App({ Component, pageProps, isMobile }: any) {
               lang,
               setLang,
             }}>
-              <WalletState.Provider value={{
-                wallet, setWallet: (walletItem:any) => {
-                  setWallet(walletItem)
-                }
-              }}>
-                <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-                  <div className={classNames(`container_body text-sm ${theme}`)}>
-                    <HeaderMain />
-                    <MobileView>
-                      <Search className={styles['search']}/>
-                    </MobileView>
-                    <div className={classNames(styles.home ,styles.component)}>
-                      <Component {...pageProps} />
+              <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
+                <WalletState.Provider value={{
+                  wallet, setWallet: (walletItem:any) => {
+                    setWallet(walletItem)
+                  }
+                }}>
+                  <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                    <div className={classNames(`container_body text-sm ${theme}`)}>
+                      <HeaderMain />
+                      <MobileView>
+                        <Search className={styles['search']}/>
+                      </MobileView>
+                      <div className={classNames(styles.home ,styles.component)}>
+                        <Component {...pageProps} />
+                      </div>
+                      <Footer />
                     </div>
-                    <Footer />
-                  </div>
-                </ConfigProvider>
-
-              </WalletState.Provider>
+                  </ConfigProvider>
+                </WalletState.Provider>
+              </UserStoreContext.Provider>
             </FilscanStoreContext.Provider>
           </DeviceContext.Provider>
         </ErrorBoundary>
       </Provider>
-
     </>
   );
 }

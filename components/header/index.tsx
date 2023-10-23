@@ -16,6 +16,7 @@ import useAxiosData from '@/store/useAxiosData';
 import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
 import useInterval from '../hooks/useInterval';
+import cwStore from '@/store/modules/Cw';
 // import Skeleton from '@/packages/skeleton';
 
 export default () => {
@@ -51,6 +52,7 @@ export default () => {
     const result = await axiosData(FilPrice);
     setFilData(result || {})
     const finalHeight = await axiosData(FinalHeight);
+    cwStore.setFinalHeight(finalHeight?.height)
     setFinalHeight(finalHeight || {})
   }
 
