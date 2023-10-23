@@ -41,7 +41,7 @@ const account = {
   //total_out_come_gas: '总支出/Gas消耗',
   total_out_come_gas: '支出/Gas消耗',
   pledge_amount_24: '质押FIL/今日变化',
-  balance_24:'可用余额/今日变化',
+  balance_24:'账户余额/今日变化',
   quality_power_24: '有效算力/今日变化',
 
   //节点管理

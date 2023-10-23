@@ -36,7 +36,7 @@ const account={
   miners_group_manage: '그룹 설정',
   total_out_come_gas: '일일 비용/Gas 소비량',
   pledge_amount_24: '플레지/일일 변동',
-  balance_24:'사용 가능한 잔액/일일 변동',
+  balance_24:'계정 잔액/일일 변동',
   quality_power_24: '파워/일일 변동',
 
   //节点管理

@@ -35,14 +35,9 @@ export default () => {
     if (result) {
       localStorage.setItem('token', result?.token);
       router.push('/account/login' )
-<<<<<<< HEAD
-      // userInfo.setUserInfo({...result})
-      // localStorage.setItem('expired_at', result.expired_at); //过期时间
-=======
       //userInfo.setUserInfo({...result})
       localStorage.setItem('token', result.token);
       localStorage.setItem('expired_at', result.expired_at); //过期时间
->>>>>>> 2aa556ef (fix: gas unit auto)
     } else {
       messageManager.showMessage({
         type: 'error',
