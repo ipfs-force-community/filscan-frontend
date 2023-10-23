@@ -21,7 +21,7 @@ const showData: any = [
   {
     label: 'base_fee',
     type: 'line',
-    unit: 'nanoFiL',
+    unit: 'nanoFIL',
   },
 ];
 
@@ -132,7 +132,7 @@ function Gas(props: Props) {
     let maxGas: number = 0;
     let showUnit='';
     axiosData(apiUrl.static_gas, { interval }).then((res: any) => {
-      res?.list?.forEach((vItem:any) => {
+      res?.list?.forEach((vItem: any) => {
         const { timestamp, base_fee, gas_in_32g, gas_in_64g } = vItem;
         maxGas =maxGas > Number(base_fee) ?maxGas:Number(base_fee);
       })

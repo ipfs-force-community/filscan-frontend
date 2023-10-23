@@ -2,10 +2,15 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { useHash } from '@/components/hooks/useHash';
+<<<<<<< HEAD
 import accountStore from '@/store/modules/account'
 import { observer } from 'mobx-react';
 import MinerAdd from './Add';
 import { useMemo } from 'react';
+=======
+import { proApi } from '@/contents/apiUrl';
+import { useEffect, useMemo, useState } from 'react';
+>>>>>>> 2aa556ef (fix: gas unit auto)
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
 import Groups from './Groups';
