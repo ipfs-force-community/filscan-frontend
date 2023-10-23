@@ -89,10 +89,14 @@ export default observer(() => {
     }
     return list.map((v) => {
       if (isMobile && v.dataIndex === 'group_name') {
-        return { ...v, title: tr(v.title), render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group') : text
-          return showText
-        }}
+        return {
+          ...v,
+          title: tr(v.title),
+          render: (text: string, record: any) => {
+            const showText = record.is_default ? tr('default_group') : text
+            return showText
+          },
+        }
       }
       return { ...v, title: tr(v.title) }
     })
@@ -102,9 +106,12 @@ export default observer(() => {
     <div className={styles.power}>
       <div className={classNames('flex', styles.power_title)}>
         {tr('monitor_power')}
-        {
-            isMobile && (<div className={styles.tip}><ExclamationCircleOutlined className='mr-[2px]' />{tr('monitor_mobile_edit_tip')}</div>)
-          }
+        {isMobile && (
+          <div className={styles.tip}>
+            <ExclamationCircleOutlined className="mr-[2px]" />
+            {tr('monitor_mobile_edit_tip')}
+          </div>
+        )}
       </div>
       <Header
         onChange={handleChange}
