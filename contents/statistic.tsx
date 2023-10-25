@@ -420,7 +420,7 @@ export const chartsNav: Array<Menu_Info> = [
   },
   {
     key: 'fevm',
-    preIcon: 'meta',
+    preIcon: 'fevm',
     title:'FEVM',
   },
   {
