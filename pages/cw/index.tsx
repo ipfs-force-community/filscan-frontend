@@ -33,7 +33,7 @@ import {
   setStyle,
   setStyles
 } from "mytoolkit";
-import leecharts from "./leecharts"
+import leecharts from "@/src/cw/leecharts"
 import axios from "axios";
 import useAxiosData from '@/store/useAxiosData';
 import { cwUrl } from '@/contents/apiUrl';
@@ -438,8 +438,8 @@ const CW: React.FC<CWProps> = ({ tr }) => {
     }
   }
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>{
-    if (e.keyCode != 13) {
+  const handleSearch = (e: any) =>{
+    if (e?.keyCode != 13) {
       return
     }
 
@@ -516,7 +516,7 @@ const CW: React.FC<CWProps> = ({ tr }) => {
     let max = 0,
       groupCount = 0
     bhl.forEach(h => {
-      let gl = bhm[h]
+      let gl:Array<any> = bhm[h]
       let count = 0
       gl.forEach(g => {
         count += g.length

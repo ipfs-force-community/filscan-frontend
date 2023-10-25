@@ -40,7 +40,10 @@ class chart {
     //console.log(selector, options)
     //this.bind(['onMousemove'])
     this.d3 = d3
+<<<<<<< HEAD
     this.selector = selector;
+=======
+>>>>>>> e874ae6d (feat: update cw)
     this.defaultOptions = defaultOptions
     this.emitter = new emitter()
     this.container = d3.select(selector)
@@ -76,7 +79,11 @@ class chart {
     this.gridBottom = maybePercentValue(grid.bottom, ch)
   }
   drawChart() {
+<<<<<<< HEAD
     this.emitter?.clear('highlightChange')
+=======
+    this.emitter.clear('highlightChange')
+>>>>>>> e874ae6d (feat: update cw)
     this.setGrid()
     drawAxisX(this)
     drawAxisY(this)
@@ -362,10 +369,13 @@ class chart {
   init() {
     if (!this.container) return
     if (this.container.empty && this.container.empty()) return
+<<<<<<< HEAD
      const svgElement =this.selector.querySelector('svg.lc-root');
       if (svgElement) {
         svgElement.remove();
       }
+=======
+>>>>>>> e874ae6d (feat: update cw)
     let chart = this
 
     this.highlightIndex = null
