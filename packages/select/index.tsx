@@ -14,10 +14,12 @@ export default ({
   className,
   value,
   suffix,
+  optionsCard
 
 }: {
   ns: string;
-  options: Array<Option_Item>;
+    options?: Array<Option_Item>;
+  optionsCard?:JSX.Element;
   onChange: (value: string) => void;
   header?: JSX.Element;
   wrapClassName?: string;
@@ -30,11 +32,11 @@ export default ({
   const [active, setActive] = useState(value);
 
   useEffect(() => {
-    if (value) {
+    if (value && Array.isArray(options)) {
       const file = options.find((v) => v.value === value);
       setActive(value);
       if (file) setShowLabel(file?.label);
-    } else if (options.length > 0) {
+    } else if (options &&options.length > 0) {
       setShowLabel(options[0]?.label);
       setActive(options[0]?.value);
     }
@@ -60,18 +62,19 @@ export default ({
 
       <ul
         className={`invisible group-hover:visible absolute z-10 inset-y-full h-fit w-max list-none p-4  border rounded-[5px]  select_shadow  border_color ${className}`}>
-        {options?.map((item) => {
+
+        {Array.isArray(options)&& options?.map((item) => {
           return (
             <li
               onClick={() => handleClick(item)}
               key={item.value}
-              className={`p-2 rounded-[5px] hover:text-primary ${
-                item.value === active ? 'bg-bg_hover text-primary' : ''
+              className={`p-2 rounded-[5px] hover:text-primary ${item.value === active ? 'bg-bg_hover text-primary' : ''
               }`}>
               {tr(item.label)}
             </li>
           );
         })}
+        { optionsCard && optionsCard}
       </ul>
     </div>
   );

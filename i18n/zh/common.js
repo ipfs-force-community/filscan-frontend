@@ -26,7 +26,8 @@ const common = {
   fvm_share: '分享给朋友',
   account_banner_bg: '欢迎使用节点管家',
   account_banner_main:'您的节点管理好帮手',
-
+  mobile_code_1: '扫描二维码',
+mobile_code_2:'体验手机浏览器',
   //messages
   no_account:'该邮箱未注册,请先注册',
 

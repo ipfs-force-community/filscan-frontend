@@ -447,7 +447,28 @@ export const meta_list = [
       <span>{textValue + ' '}</span>
       <span className='unit'>{unit}</span>
     </span>
-  } },
+  }
+  },
+  {
+    title: 'proportion_32G',
+    dataIndex: 'proportion_32G',
+    render: (text: string | number) => {
+      if (!text) return '--';
+      const newText = Number(Number(text)*100 ).toFixed(2)
+      return newText+'%'
+    }
+  },
+  {
+    title: 'proportion_64G',
+    dataIndex: 'proportion_64G',
+    render: (text: string | number,record:any) => {
+      if (!text) return '--';
+      const text_32 = record.proportion_32G || 0;
+      const newText = Number(Number(text_32) * 100).toFixed(2);
+      const lastText =( 100 - Number(newText)).toFixed(2)
+      return lastText+'%'
+    }
+  }
 
 ]
 
