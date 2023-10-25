@@ -76,8 +76,12 @@ class chart {
     this.gridBottom = maybePercentValue(grid.bottom, ch)
   }
   drawChart() {
+<<<<<<< HEAD
     this.emitter?.clear('highlightChange')
 
+=======
+    this.emitter.clear('highlightChange')
+>>>>>>> e874ae6d (feat: update cw)
     this.setGrid()
     drawAxisX(this)
     drawAxisY(this)
@@ -363,10 +367,13 @@ class chart {
   init() {
     if (!this.container) return
     if (this.container.empty && this.container.empty()) return
+<<<<<<< HEAD
      const svgElement =this.selector.querySelector('svg.lc-root');
       if (svgElement) {
         svgElement.remove();
       }
+=======
+>>>>>>> e874ae6d (feat: update cw)
     let chart = this
 
     this.highlightIndex = null
