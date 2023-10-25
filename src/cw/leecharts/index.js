@@ -7,7 +7,7 @@ import {
   deepExtend,
   isInBound,
   maybePercentValue,
-} from './utils'
+} from './utils.js'
 import {
   isSet,
   debounce,

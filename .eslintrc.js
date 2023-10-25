@@ -1,6 +1,7 @@
 module.exports = {
   "extends": ["next/core-web-vitals", "plugin:storybook/recommended","prettier"],
   "plugins": ["@typescript-eslint", "no-null"],
+  "ignorePatterns": ["*.js", "**/leecharts/*.js"],
   "rules": {
     "no-null/no-null": 0,
     "no-trailing-spaces":1,
