@@ -192,7 +192,7 @@ function App({ Component, pageProps, isMobile }: any) {
                       <MobileView>
                         <Search className={styles['search']}/>
                       </MobileView>
-                      <div className={classNames(styles.home ,styles.component)}>
+                      <div className={classNames(styles.home ,styles.component,'chart-wrapper')}>
                         <Component {...pageProps} />
                       </div>
                       <Footer />
