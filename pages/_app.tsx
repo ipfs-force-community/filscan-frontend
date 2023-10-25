@@ -164,6 +164,7 @@ function App({ Component, pageProps, isMobile }: any) {
                   wallet,
                   setWallet: (walletItem: any) => {
                     setWallet(walletItem)
+<<<<<<< HEAD
                   },
                 }}
               >
@@ -183,6 +184,20 @@ function App({ Component, pageProps, isMobile }: any) {
                       )}
                     >
                       <Component {...pageProps} />
+=======
+                  }
+                }}>
+                  <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                    <div className={classNames(`container_body text-sm ${theme}`)}>
+                      <HeaderMain />
+                      <MobileView>
+                        <Search className={styles['search']}/>
+                      </MobileView>
+                      <div className={classNames(styles.home ,styles.component,'chart-wrapper')}>
+                        <Component {...pageProps} />
+                      </div>
+                      <Footer />
+>>>>>>> f4dbaf20 (feat: cw update)
                     </div>
                     <Footer />
                   </div>
