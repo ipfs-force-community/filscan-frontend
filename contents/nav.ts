@@ -25,19 +25,7 @@ const navMenu: Array<Menu_Info | any> = [
       },
       { key: "statistics_gas", link: "/statistics/gas" },
       { key: "statistics_charts", link: "/statistics/charts" },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       { key: "cw", link: "/cw", sufIcon: "newIcon" },
-=======
-      { key: "cw", link: "/cw" },
->>>>>>> 7910c2db (fix: cw)
-=======
-      // { key: "cw", link: "/cw" },
->>>>>>> f4dbaf20 (feat: cw update)
-=======
-      { key: "cw", link: "/cw" },
->>>>>>> e874ae6d (feat: update cw)
     ],
   },
   {

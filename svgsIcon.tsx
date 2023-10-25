@@ -780,9 +780,13 @@ const svgTypes: Record<string, JSX.Element> = {
   pledge,
   balance,
   monitor,
+<<<<<<< HEAD
   code,
   fevm,
   upIcon
+=======
+  code
+>>>>>>> d3b73c0f (fix: nav cw)
 };
 
 export const getSvgIcon = (type: string) => {
