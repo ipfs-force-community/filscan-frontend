@@ -19,8 +19,9 @@ import Search from '@/src/cw/Search';
 import { getSvgIcon } from '@/svgsIcon';
 import { useRouter } from 'next/router';
 
-const baseYAxis = 30;
 const calcHeight = 100;
+
+const baseYAxis = 30;
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' });
@@ -382,6 +383,7 @@ export default observer(() => {
             }
             //make clip path for stage
             let stage = stageWrap.safeSelect("g.c-stage");
+
             clipPathId = stageClipId.current
             clipPath = chart.sections.defs.safeSelect(
               `clipPath#${clipPathId}`
@@ -411,7 +413,6 @@ export default observer(() => {
                 let groupList = bhm[blh]||[];
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph);
                 let gx = (stageWidth - groupWidth) / 2;
-                console.log('----33',groupList)
                 bhEle
                   .selectAll("g.block-group")
                   .data(groupList)
