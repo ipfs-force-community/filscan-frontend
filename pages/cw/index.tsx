@@ -411,6 +411,7 @@ export default observer(() => {
                 let groupList = bhm[blh]||[];
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph);
                 let gx = (stageWidth - groupWidth) / 2;
+                console.log('----33',groupList)
                 bhEle
                   .selectAll("g.block-group")
                   .data(groupList)
