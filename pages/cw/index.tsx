@@ -95,7 +95,9 @@ export default observer(() => {
 
   const getBlocks = async (height?: number) => {
     const end = finalCurrentHeight.current || height;
+    console.log('-----333',end)
     endHeight.current = end;
+    setChartLoading(true)
     const result = await axiosData(cwUrl, {
       filters: {
         start: end-100,
@@ -667,7 +669,7 @@ export default observer(() => {
                       0 &&
                     direction === "up"
                 ) {
-                  getBlocks(endHeight.current-100)
+                  getBlocks(endHeight.current - 100)
                 }
               }
               if (transformY.current >= 10) {
@@ -749,10 +751,7 @@ export default observer(() => {
 
   return <div style={{ position: 'relative' }} className='main_contain '>
     <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
-      {chartLoading && <div className='w-full h-full flex items-center justify-center'>
-        <Image src={loading} width={260} height={260} alt="" />
-      </div>
-      }
+
     </div>
     {/* <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
       <div
@@ -808,7 +807,7 @@ export default observer(() => {
         </div>
       </div>
     </div> */}
-    {/* {processing && (
+    {chartLoading && (
       <div
         className={styles['loading-wrap']}
         style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}
@@ -817,7 +816,7 @@ export default observer(() => {
           <div className={ styles['donut']} />
         </div>
       </div>
-    )} */}
+    )}
   </div>
 })
 
