@@ -88,7 +88,9 @@ const statistic = {
   contract_con: 'Trend of Contract Deployment',
   contract_counts:'Contract Deployment',
   contract_gas: 'Contract Gas Cost',
-  contract_addr:'Contract Transaction Address'
+  contract_addr: 'Contract Transaction Address',
+    contract_balance: 'Contract Balance Trend',
+  contract_total_balance: 'Contract Balance',
 
 }
 

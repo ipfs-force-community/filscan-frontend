@@ -89,7 +89,9 @@ const statistic = {
   contract_con: '계약 배포 추이',
   contract_counts:'계약 거래 주소',
   contract_gas: '계약 Gas 소비',
-  contract_addr:' 계약 배포'
+  contract_addr: ' 계약 배포',
+      contract_balance: '계약 잔액 추세',
+  contract_total_balance: '계약 잔액',
 
 }
 

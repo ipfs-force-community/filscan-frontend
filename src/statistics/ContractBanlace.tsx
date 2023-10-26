@@ -52,7 +52,7 @@ export default (props: Props) => {
           color: color.textStyle,
         },
         axisLabel: {
-          formatter: '{value}',
+          formatter: '{value} FIL' ,
           margin:8,
           hideOverlap:true,
           textStyle: {
@@ -125,14 +125,14 @@ export default (props: Props) => {
     const seriesData: any = [];
     const inter = time || interval
     const result: any = await axiosData(ContractBalanceTrend, { interval:inter });
-    result?.points?.forEach((value: any) => {
+    result?.items?.forEach((value: any) => {
       const {
-        timestamp,
+        block_time,
         contract_total_balance, //合约余额交易
       } = value;
-      let showTime = inter === '24h' ? formatDateTime(timestamp, 'HH:mm'):formatDateTime(timestamp, 'MM-DD HH:mm');
+      let showTime = inter === '24h' ? formatDateTime(block_time, 'HH:mm'):formatDateTime(block_time, 'MM-DD HH:mm');
       if (isMobile) {
-        showTime = formatDateTime(timestamp, 'MM-DD');
+        showTime = formatDateTime(block_time, 'MM-DD');
       }
       dateList.push(showTime);
       //amount
@@ -140,7 +140,7 @@ export default (props: Props) => {
       seriesObj.contract_total_balance.push({
         amount: contract_total_balance,
         value: formatFil(contract_total_balance,'FIL'),
-        showTime: formatDateTime(timestamp, 'YYYY-MM-DD HH:mm'),
+        showTime: formatDateTime(block_time, 'YYYY-MM-DD HH:mm'),
         unit:'',
       });
     });
