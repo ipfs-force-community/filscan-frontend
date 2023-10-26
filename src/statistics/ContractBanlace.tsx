@@ -52,9 +52,15 @@ export default (props: Props) => {
           color: color.textStyle,
         },
         axisLabel: {
+<<<<<<< HEAD
           formatter: '{value} FIL',
           margin: 8,
           hideOverlap: true,
+=======
+          formatter: '{value}',
+          margin:8,
+          hideOverlap:true,
+>>>>>>> aa71b435 (feat: cw interface & contract balance)
           textStyle: {
             //  fontSize: this.fontSize,
             color: isMobile ? color.mobileLabelColor : color.labelColor,
