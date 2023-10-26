@@ -40,14 +40,7 @@ class chart {
     //console.log(selector, options)
     //this.bind(['onMousemove'])
     this.d3 = d3
-<<<<<<< HEAD
-<<<<<<< HEAD
     this.selector = selector;
-=======
->>>>>>> e874ae6d (feat: update cw)
-=======
-    this.selector = selector;
->>>>>>> aa71b435 (feat: cw interface & contract balance)
     this.defaultOptions = defaultOptions
     this.emitter = new emitter()
     this.container = d3.select(selector)
@@ -84,6 +77,7 @@ class chart {
   }
   drawChart() {
     this.emitter?.clear('highlightChange')
+
     this.setGrid()
     drawAxisX(this)
     drawAxisY(this)
@@ -369,19 +363,10 @@ class chart {
   init() {
     if (!this.container) return
     if (this.container.empty && this.container.empty()) return
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> aa71b435 (feat: cw interface & contract balance)
      const svgElement =this.selector.querySelector('svg.lc-root');
       if (svgElement) {
         svgElement.remove();
       }
-<<<<<<< HEAD
-=======
->>>>>>> e874ae6d (feat: update cw)
-=======
->>>>>>> aa71b435 (feat: cw interface & contract balance)
     let chart = this
 
     this.highlightIndex = null

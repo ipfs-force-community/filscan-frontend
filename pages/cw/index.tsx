@@ -273,7 +273,6 @@ export default observer(() => {
           draw: (chart: any, layer: any, s: any) => {
             let d3 = chart.d3
             let emitter = chart.emitter
-
             let stageWrap = layer.safeSelect("g.stage-wrap")
             let axisYWrap = layer.safeSelect("g.ay-wrap")
             let axisXWrap = layer.safeSelect("g.ax-wrap")
