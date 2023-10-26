@@ -51,7 +51,7 @@ export default () => {
                 { getSvgIcon('tip')}
               </div>
             </Tooltip>
-          </>: <div className="text_des ">{tr(item.title)}</div>
+          </>: <div className="text_des text-center ">{tr(item.title)}</div>
         }
       </li>
     })}

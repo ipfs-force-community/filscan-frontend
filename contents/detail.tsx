@@ -148,7 +148,7 @@ export const miner_overview = {
       style: { width: '25%', justifyContent: 'flex-start' },
 
       render: (text: string | number) =>
-        text ? formatFilNum(text, false, false) : text,
+        text ? formatFilNum(text, false, false) : '--',
     }, //扇区质押
     {
       title: 'gas_fee',

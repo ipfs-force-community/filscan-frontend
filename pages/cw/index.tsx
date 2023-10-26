@@ -16,6 +16,8 @@ import { Translation } from '@/components/hooks/Translation';
 import cwStore from '@/store/modules/Cw';
 import { observer } from 'mobx-react';
 
+const baseYAxis = 30;
+
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' });
   const { theme } = useFilscanStore();
@@ -29,7 +31,7 @@ export default observer(() => {
   const { axiosData } = useAxiosData();
   const blockMap = useRef<any>({});
   const transformX = useRef(0);
-  const transformY = useRef(0);
+  const transformY = useRef(30);
   const k = useRef(1);
 
   useEffect(() => {
@@ -85,7 +87,7 @@ export default observer(() => {
     getBlocks();
     let container = chartContainerRef.current
     let cc = window.document.querySelector(".main_contain")
-    let innerHeight = window.screen.availHeight
+    let innerHeight = window.screen.availHeight;
     let containerHeight:any= innerHeight
     containerHeight = cc?.getBoundingClientRect().height
     setStyle(container, "height", containerHeight)
@@ -184,7 +186,10 @@ export default observer(() => {
             let stageWrap = layer.safeSelect("g.stage-wrap")
             let axisYWrap = layer.safeSelect("g.ay-wrap")
             let axisXWrap = layer.safeSelect("g.ax-wrap")
-
+            // stageWrap.attr(
+            //   "transform",
+            //   `translate(0,20) scale(1)`
+            // )
             const blockWidth = 160
             const blockHeight = 100
             const ph = 60
@@ -282,6 +287,7 @@ export default observer(() => {
             })
             //make clip path for stage
             let stage = stageWrap.safeSelect("g.c-stage");
+
             clipPathId = stageClipId.current
             clipPath = chart.sections.defs.safeSelect(
               `clipPath#${clipPathId}`
@@ -311,7 +317,6 @@ export default observer(() => {
                 let groupList = bhm[blh];
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph);
                 let gx = (stageWidth - groupWidth) / 2;
-                console.log('----33',groupList)
                 bhEle
                   .selectAll("g.block-group")
                   .data(groupList)
@@ -331,7 +336,7 @@ export default observer(() => {
                     gx += gw + ph;
                     tipsetList.push({
                       x: blockGroup.x-5,
-                      y: blockGroup.y ,
+                      y: blockGroup.y+baseYAxis ,
                       width: blockGroup.width+10,
                       height: blockGroup.height,
                       fill: showGray ? 'rgba(102, 102, 102, 0.1)':colors[numIndex % colors.length],
@@ -350,7 +355,7 @@ export default observer(() => {
                         //@ts-ignore
                         let bh = d3.select(this)
                         let wrapX = blockGroup.x + (i + 0.5) * blockWidth;
-                        let wrapY = yCalc(curHeight);
+                        let wrapY = yCalc(curHeight)+baseYAxis;
                         d.x = wrapX
                         d.y = wrapY
                         bh.attr("transform", `translate(${wrapX}, ${wrapY})`)
@@ -468,9 +473,9 @@ export default observer(() => {
                 let p1:any = {},
                   p2:any = {}
                 p1.x = d.start.x + d.start.width / 2
-                p1.y = d.start.y + blockHeight * 0.7
+                p1.y = d.start.y + blockHeight * 0.7 + baseYAxis
                 p2.x = d.end.x + d.end.width / 2
-                p2.y = d.end.y
+                p2.y = d.end.y+baseYAxis
 
                 let line = lg.safeSelect("line").attrs({
                   stroke: "rgba(102, 102, 102, 1)",
@@ -517,7 +522,7 @@ export default observer(() => {
                 let p1:any = {},
                   p2:any = {}
                 p1.x = d.start.x + d.start.width / 2
-                p1.y = d.start.y + blockHeight * 0.7
+                p1.y = d.start.y + blockHeight * 0.7+baseYAxis
                 p2.x = d.end.x
                 p2.y = d.end.y - blockHeight * 0.29
 
@@ -588,7 +593,7 @@ export default observer(() => {
                 startY = endY
               }
               let dx = endX - startX
-              let dy = endY - startY
+              let dy = endY - startY;
               k.current = t.k
               stage.attr(
                 "transform",
@@ -662,7 +667,6 @@ export default observer(() => {
                       0 &&
                     direction === "up"
                 ) {
-                  console.log("load----------------------")
                   getBlocks(endHeight.current-100)
                 }
               }
@@ -681,7 +685,7 @@ export default observer(() => {
                   .duration(200)
                   .attr(
                     "transform",
-                    `translate(0, ${transformY.current + 50}) scale(1,${k.current})`
+                    `translate(0, ${transformY.current}) scale(1,${k.current})`
                   )
               }
             }

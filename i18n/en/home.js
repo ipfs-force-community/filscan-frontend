@@ -70,7 +70,8 @@ const home = {
   contract_gas: 'Contract Gas Cost',
   quality_power_Cc:'Commited Capacity (CC)',
   quality_power_Dc:'DataCap (DC)',
-  see_more:'See More',
+  see_more: 'See More',
+  contract_balance:'Contract Balance'
 
 }
 export default home

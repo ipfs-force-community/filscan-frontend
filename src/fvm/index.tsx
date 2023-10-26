@@ -4,7 +4,7 @@ import { Button, Modal } from 'antd';
 import Image from 'next/image'
 import fvmBg from '@/assets/images/fvmBg.png';
 import fvm from '@/assets/images/fvm.png';
-import code from '@/assets/images/code.png'
+import code from '@/assets/images/fevmCode.png'
 import style from './index.module.scss'
 import { Translation } from '@/components/hooks/Translation';
 
