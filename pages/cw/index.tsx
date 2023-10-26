@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import leecharts from "@/src/cw/leecharts"
 import { cwUrl } from '@/contents/apiUrl';
@@ -11,11 +11,15 @@ import {
   delay,
   isArray,
   setStyle,
-  setStyles
 } from "mytoolkit";
-import { colors, dotString, getGroupListWidth } from './utils';
+import { colors, dotString, getGroupListWidth } from '@/src/cw/utils';
+import { useFilscanStore } from '@/store/FilscanStore';
+import { Translation } from '@/components/hooks/Translation';
 
 export default () => {
+  const { tr } = Translation({ ns: 'static' });
+  const {theme} = useFilscanStore()
+
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
   const { axiosData } = useAxiosData();
@@ -24,14 +28,30 @@ export default () => {
   const transformY = useRef(0);
   const k = useRef(1);
 
+  useEffect(() => {
+    onResize();
+  }, [theme])
+
+  const chartColor:any = {
+    dark: {
+      fistText: `rgba(255,255,255,1)`,
+      yAxisColor:`rgba(255,255,255,0.6)`,
+      textColor:`rgba(255,255,255,1)`},
+    light:{
+      fistText:`rgba(0,0,0,1)`,
+      yAxisColor:`rgba(0,0,0,0.6)`,
+      textColor:`rgba(0,0,0,0.6)`
+    }
+  }
+
   //chart
   const stageClipId = useRef("lc-" + randStr(8));
   const axisXClipId = useRef("lc-" + randStr(8));
   const axisYClipId = useRef("lc-" + randStr(8));
 
   useEffect(() => {
-    init();
     window.addEventListener("resize", onResize);
+    init();
     return () => {
       window.removeEventListener("resize", onResize);
       if (chartRef.current) {
@@ -78,7 +98,9 @@ export default () => {
   }
 
   const drawChart = (data: Array<any>, bhm: Record<string, Array<any>> = {}) => {
-    let textColor= '#ffffff'
+    let textColor =chartColor[theme]?.textColor;
+    let yAxisColor = chartColor[theme].yAxisColor;
+    let fistText = chartColor[theme].firstText;
     const blockHeightList:Array<number> = data.map(v => v.Height);
 
     chartRef.current.setOptions({
@@ -86,14 +108,56 @@ export default () => {
         top: 20,
         right: 20,
         left: 85,
-        bottom: 50
+        bottom: 20
+      },
+      tooltip: {
+        show: true,
+        formatter: (toolTipData: any) => {
+          let p = "<ul style='padding-top: 10px;'>"
+            ;(toolTipData.Parents || []).forEach((item:any) => {
+            p += `<li style="padding-left: 20px;margin-bottom: 10px;">${item}</li>`
+          })
+          p += "</ul>"
+          return `
+                <div class="tt">
+                  <div style="margin-bottom: 10px;">cid: ${toolTipData._id}</div>
+                  <div style="margin-bottom: 10px;">miner: ${toolTipData.Miner}</div>
+                  <div style="margin-bottom: 10px;">height: ${toolTipData.Epoch}</div>
+                  <div style="margin-bottom: 10px;">parent_weight: ${
+  toolTipData.ParentWeight
+}</div>
+                              <div>
+                                parents:
+                                ${p}
+                              </div>
+                              <div style="margin-bottom: 10px;">block time: ${
+  toolTipData.Timestamp
+    ? timeToStr(toolTipData.Timestamp, "yyyy-mm-dd hh:mm:ss")
+    : ""
+}</div>
+                              <div style="margin-bottom: 10px;">first seen: ${
+  toolTipData.FirstSeen
+    ? timeToStr(toolTipData.FirstSeen, "yyyy-mm-dd hh:mm:ss")
+    : ""
+}</div>
+                            </div>
+                          `
+        },
+        styles: {
+          background: "rgba(0,0,0,.8)",
+          "font-size": "14px",
+          padding: "20px",
+          color: "#fff",
+          "border-radius": "4px",
+          "box-shadow": "1px 1px 5px #000"
+        }
       },
       series: [
         {
           type: "custom",
           draw: (chart: any, layer: any, s: any) => {
             let d3 = chart.d3
-
+            let emitter = chart.emitter
             // data.forEach(v => {
             //   //[孤块,高度]｜[高度]
             //   bhm[v.Height] =v.OrphanBlocks ? [v.OrphanBlocks,v.ChainBlocks]:[v.ChainBlocks];
@@ -106,7 +170,7 @@ export default () => {
             const blockHeight = 100
             const ph = 60
 
-            let ellipseRX = 0.9 * blockWidth
+            let ellipseRX = 0.95 * blockWidth
             let ellipseRY = 0.55 * blockHeight
 
             const heightExtent = [ data[data.length - 1]?.Height,data[0]?.Height];
@@ -141,11 +205,11 @@ export default () => {
                 `translate(0,${chart.containerHeight - chart.gridBottom})`
               )
               .attr("clip-path", `url(#${clipPathId})`)
-            axisXWrap.safeSelect("line.border").attrs({
-              stroke: "rgba(243,146,27,1)",
-              "stroke-width": "6px",
-              x2: chart.containerWidth
-            })
+            // axisXWrap.safeSelect("line.border").attrs({
+            //   stroke: "rgba(243,146,27,1)",
+            //   "stroke-width": "6px",
+            //   x2: chart.containerWidth
+            // })
 
             // make clip path axis y
             clipPathId =axisYClipId.current
@@ -167,10 +231,11 @@ export default () => {
                 `translate(${chart.gridLeft}, -${chart.gridTop})`
               )
             axisYWrap.safeSelect("line.border").attrs({
-              stroke: "rgba(243,146,27,1)",
+              stroke: "rgba(51, 51, 51, 1)",
               "stroke-width": "2px",
               y2: chart.containerHeight
             })
+            axisYWrap.safeSelect("line.border").attr("stroke-dasharray", "2, 4")
             axisYWrap.safeSelect("g.axis-y").call(
               d3
                 .axisLeft(yCalc)
@@ -186,12 +251,14 @@ export default () => {
               let t = d3.select(this)
               t.safeSelect("line").attr("stroke", "rgba(0,0,0,0)")
               t.safeSelect("text").attrs({
-                fill: textColor, //y轴字体颜色
+                fill: yAxisColor, //y轴字体颜色
                 "font-size": 14,
               })
               t.safeSelect("circle").attrs({
-                r: 5,
-                fill: "rgba(255,209,153,1)"
+                stroke: '#333333',
+                "stroke-width": "2px",
+                fill :"black",
+                r: 4,
               })
             })
             //make clip path for stage
@@ -240,9 +307,9 @@ export default () => {
                     blockGroup.height = blockHeight * 0.7
                     gx += gw + ph;
                     tipsetList.push({
-                      x: blockGroup.x,
+                      x: blockGroup.x-5,
                       y: blockGroup.y,
-                      width: blockGroup.width,
+                      width: blockGroup.width+10,
                       height: blockGroup.height,
                       fill: colors[numIndex % colors.length],
                       // fill: blockGroup[0].chain.main
@@ -262,7 +329,7 @@ export default () => {
                         let mainColor ='rgba(255,255,255,0.1)'
                         //@ts-ignore
                         let bh = d3.select(this)
-                        let wrapX = blockGroup.x + (i + 0.5) * blockWidth
+                        let wrapX = blockGroup.x + (i + 0.5) * blockWidth;
                         let wrapY = yCalc(curHeight);
                         d.x = wrapX
                         d.y = wrapY
@@ -273,12 +340,11 @@ export default () => {
                         //     ry: ellipseRY,
                         //     fill: mainColor
                         //   })
-
                         bh.on("mouseover", onMMove).on("mouseout", onMOut)
                         bh.safeSelect("rect").attrs({
                           width: ellipseRX,
                           height: ellipseRY,
-                          fill: colors[numIndex % colors.length],
+                          fill: theme === 'light' ? 'rgba(255,255,255,1)':colors[numIndex % colors.length],
                           rx: 3,
                           ry: 3,
                           x: -ellipseRX / 2,
@@ -288,7 +354,7 @@ export default () => {
                         bh.safeSelect("text.t-height")
                           .text(`${dotString(d._id)}`)
                           .attrs({
-                            fill: textColor,
+                            fill: fistText,
                             y: -12,
                             "text-anchor": "middle",
                             "font-size": 11
@@ -339,7 +405,7 @@ export default () => {
                         function makeSwitchTooltip() {
                           let timeHandle:any = null
                           let shouldShow = false
-                          let delta = 100
+                          let delta = 100;
                           return (show:any, d3Event:any) => {
                             shouldShow = show
                             if (timeHandle) {
@@ -354,7 +420,7 @@ export default () => {
                                 emitData.data = d
                                 emitData.event = d3Event
                               }
-                              //emitter.emit("showTooltip", emitData)
+                              emitter.emit("showTooltip", emitData)
                               timeHandle = null
                             }, delta)
                           }
@@ -372,7 +438,6 @@ export default () => {
               });
             //next
             let [linkData, forkEndLinkData] = getLinkData(data,blockMap.current);
-            console.log('====3',linkData,forkEndLinkData)
             linkGroup
               .selectAll("g.link")
               .data(linkData)
@@ -653,11 +718,15 @@ export default () => {
   }
 
   const onResize = () => {
-    //todo
+    if (chartRef.current) {
+      chartRef.current.resize()
+
+    }
+
   }
 
-  return <div style={{ position: 'relative'}} className='main_contain'>
-    <div className={ styles['block-header-chart']} ref={chartContainerRef}></div>
+  return <div style={{ position: 'relative'}} className='main_contain '>
+    <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}></div>
     {/* <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
       <div
         className={ styles['bc-search']}

@@ -76,7 +76,7 @@ class chart {
     this.gridBottom = maybePercentValue(grid.bottom, ch)
   }
   drawChart() {
-    this.emitter.clear('highlightChange')
+    this.emitter?.clear('highlightChange')
     this.setGrid()
     drawAxisX(this)
     drawAxisY(this)

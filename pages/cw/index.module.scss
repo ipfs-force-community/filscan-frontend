@@ -63,9 +63,11 @@
   user-select: none;
   height:80vh;
   background:var(--board-bg-color);
-  margin:0 10px 10px 10px;
+  margin:0 10px 10px 0px;
+  padding: 0px 10px;
   min-width:1200px;
   cursor:pointer;
+  
 }
 .lc-tooltip {
   user-select: none;
