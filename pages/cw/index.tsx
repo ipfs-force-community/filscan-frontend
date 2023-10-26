@@ -23,6 +23,8 @@ import { useRouter } from 'next/router'
 const baseYAxis = 30
 const calcHeight = 100
 
+const baseYAxis = 30
+
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' })
   const { theme } = useFilscanStore()
@@ -110,10 +112,10 @@ export default observer(() => {
 
   useEffect(() => {
     if (finalHeight && !finalCurrentHeight.current) {
-      finalCurrentHeight.current = finalHeight + 1;
-      init();
+      finalCurrentHeight.current = finalHeight + 1
+      init()
     }
-  },[finalHeight])
+  }, [finalHeight])
 
   const init = () => {
     if (chartRef.current) {
@@ -234,7 +236,7 @@ export default observer(() => {
       drawChart(drawData.current, bhm.current, blockHeightList.current)
     }
     setChartLoading(false)
-    setDrawData(height ?[...drawData,...newData]:newData)
+    setDrawData(height ? [...drawData, ...newData] : newData)
   }
 
   const drawChart = (
@@ -446,16 +448,9 @@ export default observer(() => {
                 const self = this // 👈️ closure of this
 
                 let bhEle: any = d3.select(self)
-<<<<<<< HEAD
-                let groupList = bhm[blh] || []
+                let groupList = bhm[blh]
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph)
                 let gx = (stageWidth - groupWidth) / 2
-=======
-                let groupList = bhm[blh];
-                let groupWidth = getGroupListWidth(groupList, blockWidth, ph);
-                let gx = (stageWidth - groupWidth) / 2;
-                console.log('----33',groupList)
->>>>>>> 669f89f4 (feat: update cw ui & OrphanBlocks)
                 bhEle
                   .selectAll('g.block-group')
                   .data(groupList)
@@ -463,7 +458,6 @@ export default observer(() => {
                   .each(function (blockGroupData: any, bhEIndex: number) {
                     //@ts-ignore
                     let bgEle = d3.select(this)
-<<<<<<< HEAD
                     let blockGroup = blockGroupData
                     if (blockGroup) {
                       let gw = getGroupListWidth(
@@ -491,134 +485,6 @@ export default observer(() => {
                           : colors[numIndex % colors.length],
                         rx: 10,
                         ry: 10,
-=======
-                    let gw = getGroupListWidth(blockGroup, blockWidth, 0);
-                    let showGray = groupList.length === 2 && bhEIndex === 0;
-
-                    blockGroup.x = gx;
-
-                    //数据高度：
-                    blockGroup.y =yCalc(blockGroup[0].Epoch) - blockHeight * 0.35
-                    blockGroup.width = gw
-                    blockGroup.height = blockHeight * 0.7;
-                    gx += gw + ph;
-                    tipsetList.push({
-                      x: blockGroup.x-5,
-                      y: blockGroup.y ,
-                      width: blockGroup.width+10,
-                      height: blockGroup.height,
-                      fill: showGray ? 'rgba(102, 102, 102, 0.1)':colors[numIndex % colors.length],
-                      rx: 10,
-                      ry: 10
-                    })
-                    blockGroup[0].tipsetList = blockGroup[0].tipsetList || [];
-                    blockGroup[0].tipsetList.push(blockGroup);
-                    bgEle
-                      .selectAll("g.block-header")
-                      .data(blockGroup)
-                      .join("g.block-header")
-                      .each(function (d: any, i: number) {
-                        let curHeight = d.Epoch
-                        let mainColor ='rgba(255,255,255,0.1)'
-                        //@ts-ignore
-                        let bh = d3.select(this)
-                        let wrapX = blockGroup.x + (i + 0.5) * blockWidth;
-                        let wrapY = yCalc(curHeight);
-                        d.x = wrapX
-                        d.y = wrapY
-                        bh.attr("transform", `translate(${wrapX}, ${wrapY})`)
-                        // bh.safeSelect("ellipse")
-                        //   .attrs({
-                        //     rx: ellipseRX,
-                        //     ry: ellipseRY,
-                        //     fill: mainColor
-                        //   })
-                        bh.on("mouseover", onMMove).on("mouseout", onMOut)
-                        bh.safeSelect("rect").attrs({
-                          width: ellipseRX,
-                          height: ellipseRY,
-                          fill: showGray ? 'rgba(102, 102, 102, 0.6)':theme === 'light' ? 'rgba(255,255,255,1)':colors[numIndex % colors.length],
-                          rx: 3,
-                          ry: 3,
-                          x: -ellipseRX / 2,
-                          y: -ellipseRY / 2
-                        })
-
-                        bh.safeSelect("text.t-height")
-                          .text(`${dotString(d._id)}`)
-                          .attrs({
-                            fill: showGray?'#ffffff':textColor,
-                            y: -12,
-                            "text-anchor": "middle",
-                            "font-size": 11
-                          })
-                          .on("click", function () {
-                          // vue中的bci是this，指向的是这个组件，但组件上没有goto方法，需要确认
-                            // goto 需要自己实现，看起来是跳转到另一个页面
-                            // bci.goTo("tipset", {
-                            //   query: { hash: d.cid }
-                            // })
-                          })
-
-                        bh.safeSelect("text.t-miner")
-                          .text(`${d.Miner} - ${d.Epoch}`)
-                          .attrs({
-                            fill: showGray?'#ffffff':textColor,
-                            "text-anchor": "middle",
-                            "font-size": 11,
-                            y: 5
-                          })
-                          .on("click", function () {
-                            // goto需要自己实现，看起来是跳转到另一个页面
-                            // bci.goTo("addressDetail", {
-                            //   query: { address: d.miner }
-                            // })
-                          })
-                        bh.safeSelect("text.t-time")
-                          .text(
-                            `${timeToStr(
-                              d.first_seen,
-                              "yyyy-mm-dd hh:mm:ss"
-                            )}`
-                          )
-                          .attrs({
-                            fill: showGray?'#ffffff':textColor,
-                            "text-anchor": "middle",
-                            "font-size": 10,
-                            y: 20
-                          })
-                        let switchTooltip = makeSwitchTooltip()
-
-                        function onMMove() {
-                          switchTooltip(true, d3.event)
-                        }
-                        function onMOut() {
-                          switchTooltip(false, d3.event)
-                        }
-                        function makeSwitchTooltip() {
-                          let timeHandle:any = null
-                          let shouldShow = false
-                          let delta = 100;
-                          return (show:any, d3Event:any) => {
-                            shouldShow = show
-                            if (timeHandle) {
-                              clearTimeout(timeHandle)
-                            }
-                            timeHandle = setTimeout(() => {
-                              let emitData:any = {
-                                type: "item",
-                                data: null
-                              }
-                              if (shouldShow) {
-                                emitData.data = d
-                                emitData.event = d3Event
-                              }
-                              emitter.emit("showTooltip", emitData)
-                              timeHandle = null
-                            }, delta)
-                          }
-                        }
->>>>>>> 669f89f4 (feat: update cw ui & OrphanBlocks)
                       })
                       blockGroup[0].tipsetList = blockGroup[0]?.tipsetList || []
                       blockGroup[0].tipsetList.push(blockGroup)
@@ -966,15 +832,11 @@ export default observer(() => {
                     0 &&
                   direction === 'up'
                 ) {
-<<<<<<< HEAD
                   // console.log('====0033',endHeight.current)
                   getBlocks(endHeight.current - calcHeight, 'up')
                 } else if (direction === 'down' && transformY.current > 30) {
                   // getBlocks(endHeight.current + calcHeight,'down')
-=======
-                  console.log("load----------------------")
-                  getBlocks(endHeight.current-100)
->>>>>>> 669f89f4 (feat: update cw ui & OrphanBlocks)
+                  getBlocks(endHeight.current - 100)
                 }
               }
               if (transformY.current >= 10) {
@@ -1050,7 +912,6 @@ export default observer(() => {
     }
   }
 
-<<<<<<< HEAD
   const handleSearch = (value: any, type: string) => {
     if (value === '') {
       searchCid.current = ''
@@ -1066,81 +927,6 @@ export default observer(() => {
       clearDrawChart(value, type)
     }
   }
-=======
-  return <div style={{ position: 'relative' }} className='main_contain '>
-    <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
-      {chartLoading && <div className='w-full h-full flex items-center justify-center'>
-        <Image src={loading} width={260} height={260} alt="" />
-      </div>
-      }
-    </div>
-    {/* <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
-      <div
-        className={ styles['bc-search']}
-        style={{
-          padding: '8px 15px',
-          borderRadius: '30px',
-          width: '200px',
-          height: '38px',
-          boxSizing: 'border-box',
-          position: 'relative',
-        }}
-      >
-        <input
-          type="text"
-          placeholder={('start')}
-          value={'key'}
-          // onChange={handleSearch}
-          style={{ width: '130px', height: '25px', paddingLeft: '10px' }}
-        />
-        <i
-          className={ `${styles['iconfont']} ${styles['icon-sosu']}`}
-          style={{ position: 'absolute', color: '#999999', top: '10px', right: '20px' }}
-        ></i>
-      </div>
-    </div>
-    <div
-      className={ `${styles['back-top-wrap']} ${styles['ignore']}`}
-      style={{ position: 'absolute', right: '105px', bottom: '105px' }}
-    >
-      <div
-        className={ styles['back-top']}
-        style={{
-          width: '200px',
-          height: '45px',
-          borderRadius: '25px',
-          fontSize: '16px',
-        }}
-        //onClick={handleBackTop}
-      >
-        <i className={ styles['el-icon-top']} style={{ fontSize: '20px' }} />
-        <div style={{ marginLeft: '8px' }}>{('latest')}</div>
-      </div>
-    </div>
-    <div
-      className={ styles['tip-wrap']}
-      style={{ position: 'absolute', left: '190px', top: '30px', color: 'rgba(153,153,153,1)' }}
-    >
-      <div className={ styles['tip-show']}>
-        <i className={ styles['el-icon-warning-outline']} style={{ fontSize: '16px' }} />
-        <div style={{ marginLeft: '8px', color: 'rgba(153,153,153,1)', fontSize: '14px' }}>
-          {('op')}
-        </div>
-      </div>
-    </div> */}
-    {/* {processing && (
-      <div
-        className={styles['loading-wrap']}
-        style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}
-      >
-        <div className={ styles['donut-wrap']}>
-          <div className={ styles['donut']} />
-        </div>
-      </div>
-    )} */}
-  </div>
-})
->>>>>>> 669f89f4 (feat: update cw ui & OrphanBlocks)
 
   const handleClickTop = () => {
     finalCurrentHeight.current = finalHeight
