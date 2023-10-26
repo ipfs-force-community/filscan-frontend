@@ -20,7 +20,6 @@ import Search from '@/src/cw/Search'
 import { getSvgIcon } from '@/svgsIcon'
 import { useRouter } from 'next/router'
 
-const baseYAxis = 30
 const calcHeight = 100
 
 const baseYAxis = 30
@@ -29,7 +28,7 @@ export default observer(() => {
   const { tr } = Translation({ ns: 'static' })
   const { theme } = useFilscanStore()
   const router = useRouter()
-  // const [drawData, setDrawData] = useState<Array<any>>([]);
+  //  const [drawData, setDrawData] = useState<Array<any>>([]);
 
   const [chartLoading, setChartLoading] = useState(true)
   const chartContainerRef = useRef<HTMLDivElement>(null)
@@ -236,7 +235,7 @@ export default observer(() => {
       drawChart(drawData.current, bhm.current, blockHeightList.current)
     }
     setChartLoading(false)
-    setDrawData(height ? [...drawData, ...newData] : newData)
+    //setDrawData(height ? [...drawData, ...newData] : newData)
   }
 
   const drawChart = (
