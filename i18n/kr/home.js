@@ -65,6 +65,8 @@ const home = {
   "contract_address/24h_change": '계약 거래 주소 /24시간 ',
   'total_contract/24h_contract_tip':'네트워크에서 거래가 이루어진 계약의 총 수',
   gas_24: '24시간 Gas 사용',
+   proportion_64G:'32GiB 섹터의 품질 조정된 파워 비율',
+  proportion_32G:'64GiB 섹터의 품질 조정된 파워 비율',
   contract_gas: '계약 가스 비용',
   quality_power_Cc:'Commited Capacity (CC)',
   quality_power_Dc:'DataCap (DC)',

@@ -54,9 +54,9 @@ const home = {
   active_miners: '活跃节点数',
   burnt: '销毁量',
   circulating_percent: '流通率',
-  proportion_64G:'64G占比',
-  proportion_32G:'32G占比',
-
+  proportion_64G:'32GiB扇区有效算力占比',
+  proportion_32G:'64GiB扇区有效算力占比',
+  contract_balance:'合约余额',
 
   rank: '排行榜',
   footer_text: 'Filscan浏览器是 Filecoin 区块链浏览器及数据服务平台.提供基于 Filecoin 的各类节点收益排行榜、区块链数据查询、可视化图表等一站式数据服务.',

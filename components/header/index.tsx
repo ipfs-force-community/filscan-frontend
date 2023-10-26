@@ -116,10 +116,10 @@ export default () => {
                 }
                 onChange={handleNetwork}
                 // options={ []}
-                optionsCard={<div >
+                optionsCard={<div className='w-[120px] flex flex-col items-center' >
                   <Image src={codeImg} alt='' width={120} />
-                  <div className='flex flex-col items-center text_des'>
-                    <div>
+                  <div className='flex flex-col items-center text_des text-xs mt-1'>
+                    <div >
                       {tr('mobile_code_1')}
                     </div>
                     { tr('mobile_code_2')}

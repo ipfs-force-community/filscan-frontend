@@ -84,7 +84,11 @@ const statistic = {
   contract_trend: 'Contract Transaction',
   fil_overview: 'FIL Overview',
   charts_title: 'FIL Allocation Guidelines',
-  networks_overview:'Network Overview'
+  networks_overview: 'Network Overview',
+  contract_con: 'Trend of Contract Deployment',
+  contract_counts:'Contract Deployment',
+  contract_gas: 'Contract Gas Cost',
+  contract_addr:'Contract Transaction Address'
 
 }
 

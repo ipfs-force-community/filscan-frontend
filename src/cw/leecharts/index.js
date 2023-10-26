@@ -40,6 +40,7 @@ class chart {
     //console.log(selector, options)
     //this.bind(['onMousemove'])
     this.d3 = d3
+    this.selector = selector;
     this.defaultOptions = defaultOptions
     this.emitter = new emitter()
     this.container = d3.select(selector)
@@ -361,6 +362,10 @@ class chart {
   init() {
     if (!this.container) return
     if (this.container.empty && this.container.empty()) return
+     const svgElement =this.selector.querySelector('svg.lc-root');
+      if (svgElement) {
+        svgElement.remove();
+      }
     let chart = this
 
     this.highlightIndex = null

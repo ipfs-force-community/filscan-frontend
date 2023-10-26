@@ -45,6 +45,7 @@ export const heightDetail = mainUrl + '/TipsetDetail';
 export const EvmContractSummary = mainUrl + '/EvmContractSummary';
 export const EvmTxsHistory = mainUrl + '/EvmTxsHistory'
 export const EvmGasTrend = mainUrl + '/EvmGasTrend'
+export const ContractBalanceTrend = mainUrl + '/ContractBalanceTrend'
 export const ContractUsersTrend = mainUrl + '/ContractUsersTrend'
 export const ContractCntTrend = mainUrl + '/ContractCntTrend'
 export const FilPrice= mainUrl+'/FilPrice'

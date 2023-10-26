@@ -85,7 +85,11 @@ const statistic = {
 
   contract_trend: '계약 거래',
   charts_title: 'FIL 할당 지침',
-  networks_overview:'전체 네트워크 데이터 지표'
+  networks_overview: '전체 네트워크 데이터 지표',
+  contract_con: '계약 배포 추이',
+  contract_counts:'계약 거래 주소',
+  contract_gas: '계약 Gas 소비',
+  contract_addr:' 계약 배포'
 
 }
 

@@ -89,7 +89,10 @@ const statistic = {
   contract_con: '合约部署走势',
   contract_counts:'合约部署',
   contract_gas: '合约Gas消耗',
-  contract_addr:'合约交易地址',
+  contract_addr: '合约交易地址',
+  contract_balance: '合约余额走势',
+  contract_total_balance: '合约余额',
+
 }
 
 export default statistic

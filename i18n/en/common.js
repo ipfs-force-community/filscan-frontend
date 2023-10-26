@@ -13,7 +13,9 @@ const common = {
   base_fee: 'Base Fee',
   last_height: 'Block Height',
   go_home:'Back to Homepage',
-  go_login:'Go Login',
+  go_login: 'Go Login',
+    mobile_code_1: 'Scan QR code',
+    mobile_code_2:'Experience filscan on your Mobile',
   //search
   'search_holder':'Please enter address/message ID/height/block CID/miner ID/FNS',
   all: 'All',

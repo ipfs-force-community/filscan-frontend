@@ -64,6 +64,8 @@ const home = {
   "contract_address":'ContTransAddr',
   'total_contract/24h_contract_tip': 'Total number of contracts that have had transactions in the network',
   gas_24: '24h Gas Cost',
+   proportion_64G:'QualityAdjPower Ratio for 32GiB Sectors',
+  proportion_32G:'QualityAdjPower Ratio for 64GiB Sectors',
   verified_contracts: 'Verified Contracts',
   contract_gas: 'Contract Gas Cost',
   quality_power_Cc:'Commited Capacity (CC)',

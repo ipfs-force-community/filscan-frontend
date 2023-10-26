@@ -20,6 +20,7 @@ import ContractTrend from "@/src/statistics/ContractTrend";
 import ContractGas from "@/src/statistics/contractGas";
 import ContractAddr from "@/src/statistics/contractAddr";
 import ContractCon from "@/src/statistics/contractCon";
+import ContractBalance from "@/src/statistics/ContractBanlace";
 export default () => {
   const { tr } = Translation({ ns: 'static' });
   const { hash } = useHash()
@@ -78,6 +79,8 @@ export default () => {
             <ContractCon />
             <ContractAddr />
             <ContractGas />
+            <ContractBalance />
+
           </>}
         { hash ==='BlockChain' && <>
           <PowerTrend />

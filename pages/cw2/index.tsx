@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.module.scss';
-import leecharts from "@/src/cw/leecharts"
-import { cwUrl } from '@/contents/apiUrl';
-import useAxiosData from '@/store/useAxiosData';
+
 import {
   contains,
   randStr,
@@ -13,21 +11,62 @@ import {
   setStyle,
   setStyles
 } from "mytoolkit";
-import { colors, dotString, getGroupListWidth } from './utils';
+import leecharts from "@/src/cw/leecharts"
+import axios from "axios";
+import { cwUrl } from '@/contents/apiUrl';
+import useAxiosData from '@/store/useAxiosData';
 
-export default () => {
-  const chartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<any>(null);
+const colors = ['rgba(29, 107, 253, 0.08)','rgba(112, 79, 228, 0.08)','rgba(240, 176, 71, 0.08)','rgba(57, 178, 226, 0.08)','rgba(233, 119, 70, 0.08)','rgba(116, 204, 110, 0.08)']
+
+const Ajax = axios.create({
+  baseURL:'https://api.filscan.io:8700/rpc/v1',
+  timeout: 100000,
+  validateStatus: () => true
+});
+Ajax.interceptors.response.use(
+  response => {
+    // TODO
+    let { data } = response
+    return data
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+interface CWProps {
+  tr: (key: string) => string;
+}
+//@ts-ignore
+const CW = () => {
   const { axiosData } = useAxiosData();
+  const [key, setKey] = useState('');
+  const [processing, setProcessing] = useState(false);
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const [option, setOption] = useState({});
+  const [prefix] = useState("blockHeaderChart");
+  const blockList = useRef<any[]>([]);
+  const chainList = useRef<BlockChain[]>([]);
+  const blockHeightList = useRef([]);
+  const blockHeightMap = useRef({});
   const blockMap = useRef<any>({});
-  const transformX = useRef(0);
-  const transformY = useRef(0);
-  const k = useRef(1);
-
-  //chart
+  const lastestHeight = useRef(0);
+  const bottomHeight = useRef(0);
   const stageClipId = useRef("lc-" + randStr(8));
   const axisXClipId = useRef("lc-" + randStr(8));
   const axisYClipId = useRef("lc-" + randStr(8));
+  const minerList = useRef<any>([]);
+  const colorList = useRef<string[]>([]);
+  const transformX = useRef(0);
+  const transformY = useRef(0);
+  const k = useRef(1);
+  const viewBoxWidth = useRef(null);
+  const viewBoxHeight = useRef(null);
+  const chainSorted = useRef(false);
+
+  const refresh = useRef(false);
+  const waitingData = useRef(false);
+
+  const chartRef = useRef<any>(null);
 
   useEffect(() => {
     init();
@@ -41,63 +80,289 @@ export default () => {
   }, []);
 
   const init = () => {
-    if (chartRef.current) {
-      chartRef.current.destroy();
-    }
     chartRef.current = leecharts(chartContainerRef.current)
-    getBlocks();
+    getBlocks()
+    setColorList()
     let container = chartContainerRef.current
-    let cc = window.document.querySelector(".main_contain")
+    let cc = window.document.querySelector(".chart-wrapper")
     let innerHeight = window.screen.availHeight
     let containerHeight:any= innerHeight
     containerHeight = cc?.getBoundingClientRect().height
     setStyle(container, "height", containerHeight)
+    // setStyles(this.$refs.chartSearch, {})
   }
 
-  const getBlocks = async (height?: number) => {
-    const result = await axiosData(cwUrl, {
-      filters: {
-        start: 3328253 ,
-        end:3328278
+  const reset = ()=> {
+    blockList.current = [];
+    chainList.current = [];
+    blockHeightList.current = [];
+    blockHeightMap.current = {};
+    blockMap.current = {};
+    lastestHeight.current = 0;
+    bottomHeight.current = 0;
+    minerList.current = [];
+    transformX.current = 0;
+    transformY.current = 0;
+    k.current = 1;
+    viewBoxWidth.current = null;
+    viewBoxHeight.current = null;
+    refresh.current = false;
+  }
+
+  const onResize = () => {
+    chartRef.current.resize()
+  }
+
+  const setColorList = () => {
+    colorList.current = [
+      "rgba(66,175,196,1)",
+      "rgba(91,51,123,1)",
+      "rgba(211,185,33,1)",
+      "rgba(174,116,32,1)",
+      "rgba(10,122,80,1)",
+      "rgba(64,93,98,1)",
+      "rgba(16,63,116,1)",
+      "rgba(227,152,56,1)",
+      "rgba(165,74,41,1)",
+      "rgba(198,65,87,1)",
+      "rgba(101,95,97,1)",
+      "rgba(65,90,115,1)",
+      "rgba(117,86,42,1)",
+      "rgba(199,160,78,1)",
+      "rgba(171,209,40,1)",
+      "rgba(117,102,74,1)",
+      "rgba(164,136,78,1)",
+      "rgba(204,109,40,1)",
+      "rgba(138,74,96,1)",
+      "rgba(198,67,51,1)"
+    ]
+  }
+
+  const getMinerColor = (miner:any) => {
+    let minerIdx = minerList.current.findIndex((m:any) => m === miner)
+    if (minerIdx === -1) {
+      minerIdx = minerList.current.length
+      minerList.current.push(miner)
+    }
+    return 'rgba(255,255,255,0.1)'
+    //return colorList.current[minerIdx % colorList.current.length]
+  }
+
+  const appendBlocks = (list:Array<any>) => {
+    if (!list || list.length == 0) {
+      return
+    }
+    let bhl:any = blockHeightList.current
+    let bhm:any =blockHeightMap.current
+    let preHeight = tail(bhl) ? tail(bhl).height : 0
+    for (let i = 0, l = list.length; i < l; i++) {
+      let block = list[i]
+      let bh:number = block.height
+      let groupsInHeight = bhm[bh] || []
+      if (bh != preHeight) {
+        bhl.push(bh)
+        preHeight = bh
       }
-    });
-    const newData = result?.tipset_list || [];
-    let bhm: Record<string, Array<any>> = {};
-    if (newData.length > 0) {
-      newData.forEach((v:any) => {
-        //[孤块,高度]｜[高度]
-        bhm[v.Height] = v.OrphanBlocks ? [v.OrphanBlocks, v.ChainBlocks] : [v.ChainBlocks];
-        if (v.ChainBlocks) {
-          v.ChainBlocks.forEach((chainItem:any) => {
-            blockMap.current[chainItem._id] =chainItem
-          })
-        }
-      });
-      drawChart(newData,bhm)
+      appendBlockToChain(block)
+      bhm[bh] = appendBlockToGroupList(groupsInHeight, block)
+      blockMap.current[block.cid] = block
     }
   }
 
-  const drawChart = (data: Array<any>, bhm: Record<string, Array<any>> = {}) => {
-    let textColor= '#ffffff'
-    const blockHeightList:Array<number> = data.map(v => v.Height);
+  const appendBlockToChain = (block:any) => {
+    let shouldMakeNew = true
+    if (!chainSorted.current && chainList.current.length > 1) {
+      chainList.current = chainList.current.sort((c1, c2) => {
+        let d = c1.tail.parent_weight - c2.tail.parent_weight
+        return d < 0 ? 1 : d == 0 ? 0 : -1
+      })
+      chainList.current[0].main = true
+      chainSorted.current = true
+    }
+    for (let i = 0, l = chainList.current.length; i < l; i++) {
+      let chain = chainList.current[i]
+      if (chain.isMember(block)) {
+        let prevtail = chain.tail
+        chain.tail = block
+        chain.grow()
+        block.chain = chain
+        shouldMakeNew = false
+        // set tail child
+        if (prevtail.height - block.height > 0) {
+          chain.tailChild = prevtail
+        }
+        break
+      }
+    }
+    if (shouldMakeNew) {
+      let chain = new BlockChain()
+      chain.head = chain.tail = block
+      chain.grow()
+      block.chain = chain
+      chainList.current.push(chain);
+    }
+  }
 
+  const handleSearch = (e: any) =>{
+    if (e?.keyCode != 13) {
+      return
+    }
+
+    const value =e.target.value
+    setKey(value);
+    let height = parseInt(value) || 0
+    refresh.current = true
+    chainSorted.current = false
+    getBlocks(height)
+  }
+
+  const handleBackTop = () =>{
+    refresh.current = true
+    chainSorted.current = false
+    getBlocks(0)
+  }
+
+  const getBlocks = (height?:number) => {
+    if (waitingData.current) {
+      return
+    }
+    let gap = 60
+    let endBlockHeight
+    if (height != null || height != undefined) {
+      endBlockHeight = height
+    } else {
+      endBlockHeight = bottomHeight.current
+    }
+    if (endBlockHeight < 0) {
+      return
+    }
+    //startBlockHeight = Math.max(endBlockHeight - gap, 0);
+    setProcessing(true)
+    waitingData.current = true
+    Ajax({
+      method: "post",
+      data: {
+        id: 1,
+        method: "filscan.GraphTipSetTree",
+        params: [gap, endBlockHeight],
+        jsonrpc: "2.0"
+      }
+    })
+      .then((res:any) => {
+        res = res || {}
+        let result = res.result
+        let error = res.error
+        if (!error && result && result.length > 0) {
+          let d = result
+          if (refresh.current) {
+            reset()
+          }
+          blockList.current = [...blockList.current, ...d]
+          appendBlocks(d)
+          drawChart()
+          // bottomHeight.current = tail(d).height - 1
+        }
+        if (error) {
+          console.log(error)
+        }
+        delay(() => (waitingData.current = false), 1000)
+        setProcessing(false)
+      })
+      .catch(() => {
+        delay(() => (waitingData.current = false), 1000)
+        setProcessing(false)
+      })
+  }
+
+  const maxBlockCountInHeight = () => {
+    let bhl =blockHeightList.current
+    let bhm = blockHeightMap.current
+    let max = 0,
+      groupCount = 0
+    bhl.forEach(h => {
+      let gl:Array<any> = bhm[h]
+      let count = 0
+      gl.forEach(g => {
+        count += g.length
+      })
+      if (count > max) {
+        max = count
+        groupCount = gl.length
+      }
+    })
+    return [max, groupCount]
+  }
+
+  /*
+    tooltip: {
+        show: true,
+        formatter: data => {
+          let p = "<ul style='padding-top: 10px;'>"
+            ;(data.parents || []).forEach(item => {
+            p += `<li style="padding-left: 20px;margin-bottom: 10px;">${item}</li>`
+          })
+          p += "</ul>"
+          return `
+                <div class="tt">
+                  <div style="margin-bottom: 10px;">cid: ${data.cid}</div>
+                  <div style="margin-bottom: 10px;">miner: ${data.miner}</div>
+                  <div style="margin-bottom: 10px;">height: ${data.height}</div>
+                  <div style="margin-bottom: 10px;">parent_weight: ${
+  data.parent_weight
+}</div>
+                  <div>
+                    parents:
+                    ${p}
+                  </div>
+                  <div style="margin-bottom: 10px;">block time: ${
+  data.block_time
+    ? timeToStr(data.block_time, "yyyy-mm-dd hh:mm:ss")
+    : ""
+}</div>
+                  <div style="margin-bottom: 10px;">first seen: ${
+  data.first_seen
+    ? timeToStr(data.first_seen, "yyyy-mm-dd hh:mm:ss")
+    : ""
+}</div>
+                </div>
+              `
+        },
+        styles: {
+          background: "rgba(0,0,0,.8)",
+          "font-size": "14px",
+          padding: "20px",
+          color: "#fff",
+          "border-radius": "4px",
+          "box-shadow": "1px 1px 5px #000"
+        }
+      },
+  */
+
+  const drawChart = () =>{
+    let textColor = '#ffffff';
+    let bci:any = this;
+    if (chainList.current.length == 1) {
+      chainList.current[0].main = true
+    }
     chartRef.current.setOptions({
       grid: {
-        top: 20,
-        right: 20,
-        left: 85,
-        bottom: 50
+        top: 40,
+        right: 100,
+        left: 150,
+        bottom: 80
       },
       series: [
         {
           type: "custom",
-          draw: (chart: any, layer: any, s: any) => {
+          draw: (chart:any, layer:any, s:any) => {
             let d3 = chart.d3
-
-            // data.forEach(v => {
-            //   //[孤块,高度]｜[高度]
-            //   bhm[v.Height] =v.OrphanBlocks ? [v.OrphanBlocks,v.ChainBlocks]:[v.ChainBlocks];
-            // });
+            let bhm: any = blockHeightMap.current;
+            //let newBlockMap = blockMap.current;
+            //             let blockList = this.blockList
+            // setChainColor(chainList?.current)
+            // resetChainTipset(chainList?.current)
+            //let maxChainBlockCount = getMaxChainBlockCount(chainList);
+            let emitter = chart.emitter
             let stageWrap = layer.safeSelect("g.stage-wrap")
             let axisYWrap = layer.safeSelect("g.ay-wrap")
             let axisXWrap = layer.safeSelect("g.ax-wrap")
@@ -109,21 +374,19 @@ export default () => {
             let ellipseRX = 0.9 * blockWidth
             let ellipseRY = 0.55 * blockHeight
 
-            const heightExtent = [ data[data.length - 1]?.Height,data[0]?.Height];
-            const maxBlockCount = 10;
-            const groupCount = 1;
-
+            let heightExtent = [tail(blockList.current).height, blockList.current[0].height];
+            let [maxBlockCount, groupCount] = maxBlockCountInHeight()
             let viewBoxWidth = maxBlockCount * blockWidth + groupCount * ph
             let viewBoxHeight =
-              (heightExtent[1] - heightExtent[0]) * blockHeight
-            let stageWidth = Math.max(viewBoxWidth, chart.containerWidth)
+                (heightExtent[1] - heightExtent[0]) * blockHeight
+
+            let stageWidth = Math.max(viewBoxWidth, chart.containerWidth);
             let stageHeight = Math.max(viewBoxHeight, chart.containerHeight)
-            let yCalc= d3
+            let y = d3
               .scaleLinear()
               .domain(heightExtent)
               .range([stageHeight - chart.gridTop, chart.gridBottom]);
-            let clipPath, clipPathId, clipRect;
-
+            let clipPath, clipPathId, clipRect
             // make clip path axis x
             clipPathId = axisXClipId.current
             clipPath = chart.sections.defs.safeSelect(
@@ -168,13 +431,13 @@ export default () => {
               )
             axisYWrap.safeSelect("line.border").attrs({
               stroke: "rgba(243,146,27,1)",
-              "stroke-width": "2px",
+              "stroke-width": "4px",
               y2: chart.containerHeight
             })
             axisYWrap.safeSelect("g.axis-y").call(
               d3
-                .axisLeft(yCalc)
-                .ticks(Math.round((heightExtent[1] - heightExtent[0])))
+                .axisLeft(y)
+                .ticks(Math.round((heightExtent[1] - heightExtent[0]) / 2))
                 //.tickFormat(d => d)
             )
             axisYWrap.safeSelect("path.domain").attrs({
@@ -182,20 +445,21 @@ export default () => {
             })
             let yTicks = axisYWrap.safeSelect("g.axis-y").selectAll("g.tick");
             yTicks.each(function () {
+              // 应该是选择组件？
               //@ts-ignore
               let t = d3.select(this)
               t.safeSelect("line").attr("stroke", "rgba(0,0,0,0)")
               t.safeSelect("text").attrs({
-                fill: textColor, //y轴字体颜色
-                "font-size": 14,
+                fill: textColor,
+                "font-size": 16
               })
               t.safeSelect("circle").attrs({
                 r: 5,
                 fill: "rgba(255,209,153,1)"
               })
             })
-            //make clip path for stage
             let stage = stageWrap.safeSelect("g.c-stage");
+            // make clip path for stage
             clipPathId = stageClipId.current
             clipPath = chart.sections.defs.safeSelect(
               `clipPath#${clipPathId}`
@@ -211,8 +475,8 @@ export default () => {
             let linkGroup = stage.safeSelect("g.link-group")
             let tipsetGroup = stage.safeSelect("g.tipset-group")
             let tipsetList:any = []
-            let forkEndLinkGroup = stage.safeSelect("g.fork-end-link-group");
-            let nodeGroup = stage.safeSelect("g.node-group");
+            let forkEndLinkGroup = stage.safeSelect("g.fork-end-link-group")
+            let nodeGroup = stage.safeSelect("g.node-group")
             nodeGroup
               .selectAll("g.block-height")
               .data(s.data)
@@ -232,10 +496,10 @@ export default () => {
                   .each( function(blockGroup: any,bhEIndex:number) {
                     //@ts-ignore
                     let bgEle = d3.select(this)
-                    let gw = getGroupListWidth(blockGroup, blockWidth, 0);
-                    blockGroup.x = gx;
-                    //数据高度：
-                    blockGroup.y =yCalc(blockGroup[0].Epoch) - blockHeight * 0.35
+                    let gw = getGroupListWidth(blockGroup, blockWidth, 0)
+                    blockGroup.x = gx
+                    blockGroup.y =
+                      y(blockGroup[0].height) - blockHeight * 0.35
                     blockGroup.width = gw
                     blockGroup.height = blockHeight * 0.7
                     gx += gw + ph;
@@ -244,26 +508,25 @@ export default () => {
                       y: blockGroup.y,
                       width: blockGroup.width,
                       height: blockGroup.height,
-                      fill: colors[numIndex % colors.length],
+                      fill: blockGroup[0].chain.main?colors[numIndex % colors.length]:"rgba(255,255,255,0.5)",
                       // fill: blockGroup[0].chain.main
                       //   ? "rgba(124,181,236,.2)"
                       //   : "rgba(255,255,255,0.5)",
                       rx: 10,
                       ry: 10
                     })
-                    blockGroup[0].tipsetList = blockGroup[0].tipsetList || [];
-                    blockGroup[0].tipsetList.push(blockGroup);
+                    blockGroup[0].chain.tipsetList.push(blockGroup);
                     bgEle
                       .selectAll("g.block-header")
                       .data(blockGroup)
                       .join("g.block-header")
                       .each(function (d: any, i: number) {
-                        let curHeight = d.Epoch
-                        let mainColor ='rgba(255,255,255,0.1)'
+                        let curHeight = d.height
+                        let mainColor = getMinerColor(d.miner)
                         //@ts-ignore
                         let bh = d3.select(this)
                         let wrapX = blockGroup.x + (i + 0.5) * blockWidth
-                        let wrapY = yCalc(curHeight);
+                        let wrapY = y(curHeight)
                         d.x = wrapX
                         d.y = wrapY
                         bh.attr("transform", `translate(${wrapX}, ${wrapY})`)
@@ -278,7 +541,9 @@ export default () => {
                         bh.safeSelect("rect").attrs({
                           width: ellipseRX,
                           height: ellipseRY,
-                          fill: colors[numIndex % colors.length],
+                          fill: d.chain.main
+                            ? mainColor
+                            : "rgba(100,100,100,0.8)",
                           rx: 3,
                           ry: 3,
                           x: -ellipseRX / 2,
@@ -286,7 +551,7 @@ export default () => {
                         })
 
                         bh.safeSelect("text.t-height")
-                          .text(`${dotString(d._id)}`)
+                          .text(`${dotString(d.cid)}`)
                           .attrs({
                             fill: textColor,
                             y: -12,
@@ -302,7 +567,7 @@ export default () => {
                           })
 
                         bh.safeSelect("text.t-miner")
-                          .text(`${d.Miner} - ${d.Epoch}`)
+                          .text(`${d.miner} - ${d.height}`)
                           .attrs({
                             fill: textColor,
                             "text-anchor": "middle",
@@ -354,7 +619,7 @@ export default () => {
                                 emitData.data = d
                                 emitData.event = d3Event
                               }
-                              //emitter.emit("showTooltip", emitData)
+                              emitter.emit("showTooltip", emitData)
                               timeHandle = null
                             }, delta)
                           }
@@ -366,13 +631,12 @@ export default () => {
               .selectAll("rect.tipset")
               .data(tipsetList)
               .join("rect.tipset")
-              .each(function (d: any) {
+              .each(function (d:any) {
                 //@ts-ignore
                 d3.select(this).attrs(d)
-              });
-            //next
-            let [linkData, forkEndLinkData] = getLinkData(data,blockMap.current);
-            console.log('====3',linkData,forkEndLinkData)
+              })
+            let [linkData, forkEndLinkData] = getLinkData(chainList?.current, blockMap.current)
+            console.log('----3333',linkData, forkEndLinkData)
             linkGroup
               .selectAll("g.link")
               .data(linkData)
@@ -400,13 +664,15 @@ export default () => {
                 }
 
                 let wtY = p1.y - p2.y
-                let wtX = p1.x - p2.x;
+                let wtX = p1.x - p2.x
                 let angleTan = Math.abs(wtY) / Math.abs(wtX)
+                console.log('=====333888',wtY,wtX ,Math.abs(wtY) / Math.abs(wtX))
+
                 let angDegree = getTanDeg(angleTan)
+
                 if (wtX < 0) {
                   angDegree = 180 - angDegree
                 }
-
                 let arrowSideLength = 9
                 let arrowAngle = (25 * Math.PI) / 180
                 lg.safeSelect("path").attrs({
@@ -449,7 +715,8 @@ export default () => {
                 let wtY = p1.y - p2.y
                 let wtX = p1.x - p2.x
                 let angleTan = Math.abs(wtY) / Math.abs(wtX)
-                let angDegree = getTanDeg(angleTan)
+                let angDegree = getTanDeg(angleTan);
+                console.log('--35346',angleTan)
                 if (wtX < 0) {
                   angDegree = 180 - angDegree
                 }
@@ -468,7 +735,7 @@ export default () => {
                 })
               })
 
-            //zoom
+            // pan and zoom
             let startT:any, startX:any, startY:any, endX:any, endY:any
             startX = startY = endX = endY = null
             if (transformY.current === 0) {
@@ -600,128 +867,254 @@ export default () => {
                   )
               }
             }
-
-            //last
           },
-          data: blockHeightList,
+          data: blockHeightList.current
         }
       ]
-    },
-    )
-  }
-
-  const getLinkData = (data: Array<any>,blockMap:Record<string,any>) => {
-    let linkData:any = []
-    let forkEndLinkData: any = [];
-    data.forEach((dataItem, index: number) => {
-      const endIndex = index + 1;
-      if (data[endIndex]) {
-        const newObj = {
-          start:data[index].ChainBlocks,
-          end: data[endIndex].ChainBlocks,
-          type:'main'
-        }
-        linkData.push(newObj);
-      }
-      if (dataItem.OrphanBlocks && Array.isArray(dataItem.OrphanBlocks)) {
-
-        dataItem.OrphanBlocks.forEach((orpItem:any) => {
-          if (orpItem.Parents && Array.isArray(orpItem.Parents)) {
-            orpItem.Parents.forEach((parItem: string) => {
-              if (blockMap[parItem]) {
-                const newPar = {
-                  start: dataItem.OrphanBlocks,
-                  end: blockMap[parItem],
-                  type:'fork-end'
-                }
-                forkEndLinkData.push(newPar)
-              }
-
-            })
-          }
-        })
-      }
-
     })
-    return [linkData,forkEndLinkData]
   }
 
-  function getTanDeg(tan:any) {
-    let result = Math.atan(tan) / (Math.PI / 180)
-    result = Math.round(result)
-    return result
-  }
-
-  const onResize = () => {
-    //todo
-  }
-
-  return <div style={{ position: 'relative'}} className='main_contain'>
-    <div className={ styles['block-header-chart']} ref={chartContainerRef}></div>
-    {/* <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
-      <div
-        className={ styles['bc-search']}
-        style={{
-          padding: '8px 15px',
-          borderRadius: '30px',
-          width: '200px',
-          height: '38px',
-          boxSizing: 'border-box',
-          position: 'relative',
-        }}
-      >
-        <input
-          type="text"
-          placeholder={('start')}
-          value={'key'}
-          // onChange={handleSearch}
-          style={{ width: '130px', height: '25px', paddingLeft: '10px' }}
-        />
-        <i
-          className={ `${styles['iconfont']} ${styles['icon-sosu']}`}
-          style={{ position: 'absolute', color: '#999999', top: '10px', right: '20px' }}
-        ></i>
-      </div>
-    </div>
-    <div
-      className={ `${styles['back-top-wrap']} ${styles['ignore']}`}
-      style={{ position: 'absolute', right: '105px', bottom: '105px' }}
-    >
-      <div
-        className={ styles['back-top']}
-        style={{
-          width: '200px',
-          height: '45px',
-          borderRadius: '25px',
-          fontSize: '16px',
-        }}
-        //onClick={handleBackTop}
-      >
-        <i className={ styles['el-icon-top']} style={{ fontSize: '20px' }} />
-        <div style={{ marginLeft: '8px' }}>{('latest')}</div>
-      </div>
-    </div>
-    <div
-      className={ styles['tip-wrap']}
-      style={{ position: 'absolute', left: '190px', top: '30px', color: 'rgba(153,153,153,1)' }}
-    >
-      <div className={ styles['tip-show']}>
-        <i className={ styles['el-icon-warning-outline']} style={{ fontSize: '16px' }} />
-        <div style={{ marginLeft: '8px', color: 'rgba(153,153,153,1)', fontSize: '14px' }}>
-          {('op')}
+  return (
+    <div style={{ position: 'relative' }}>
+      <div className={ styles['block-header-chart']} ref={chartContainerRef}></div>
+      <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
+        <div
+          className={ styles['bc-search']}
+          style={{
+            padding: '8px 15px',
+            borderRadius: '30px',
+            width: '200px',
+            height: '38px',
+            boxSizing: 'border-box',
+            position: 'relative',
+          }}
+        >
+          <input
+            type="text"
+            placeholder={('start')}
+            value={key}
+            onChange={handleSearch}
+            style={{ width: '130px', height: '25px', paddingLeft: '10px' }}
+          />
+          <i
+            className={ `${styles['iconfont']} ${styles['icon-sosu']}`}
+            style={{ position: 'absolute', color: '#999999', top: '10px', right: '20px' }}
+          ></i>
         </div>
       </div>
-    </div> */}
-    {/* {processing && (
       <div
-        className={styles['loading-wrap']}
-        style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}
+        className={ `${styles['back-top-wrap']} ${styles['ignore']}`}
+        style={{ position: 'absolute', right: '105px', bottom: '105px' }}
       >
-        <div className={ styles['donut-wrap']}>
-          <div className={ styles['donut']} />
+        <div
+          className={ styles['back-top']}
+          style={{
+            width: '200px',
+            height: '45px',
+            borderRadius: '25px',
+            fontSize: '16px',
+          }}
+          onClick={handleBackTop}
+        >
+          <i className={ styles['el-icon-top']} style={{ fontSize: '20px' }} />
+          <div style={{ marginLeft: '8px' }}>{('latest')}</div>
         </div>
       </div>
-    )} */}
-  </div>
+      <div
+        className={ styles['tip-wrap']}
+        style={{ position: 'absolute', left: '190px', top: '30px', color: 'rgba(153,153,153,1)' }}
+      >
+        <div className={ styles['tip-show']}>
+          <i className={ styles['el-icon-warning-outline']} style={{ fontSize: '16px' }} />
+          <div style={{ marginLeft: '8px', color: 'rgba(153,153,153,1)', fontSize: '14px' }}>
+            {('op')}
+          </div>
+        </div>
+      </div>
+      {processing && (
+        <div
+          className={styles['loading-wrap']}
+          style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}
+        >
+          <div className={ styles['donut-wrap']}>
+            <div className={ styles['donut']} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CW;
+
+function getTanDeg(tan:any) {
+  let result = Math.atan(tan) / (Math.PI / 180)
+  result = Math.round(result)
+  return result
 }
 
+function dotString(str = "", headLen = 6, tailLen = 6) {
+  let strLen = str.length
+  if (strLen < headLen + tailLen) {
+    return str
+  }
+  let headStr = str.slice(0, headLen)
+  let tailStr = tailLen > 0 ? str.slice(-tailLen) : ""
+  return `${headStr}...${tailStr}`
+}
+
+// function randColor(){
+//   return d3.hsl(randInt(360),randInt(60,100), randInt(20,50)).toString();
+// }
+
+function appendBlockToGroupList(gl:any, b:any) {
+  let shouldMakeNew = true
+
+  for (let i = 0, l = gl.length; i < l; i++) {
+    let g = gl[i]
+    let c1 = g[0].chain
+    let c2 = b.chain
+    if (c1.head.cid == c2.head.cid && c1.tail.cid == c2.tail.cid) {
+      shouldMakeNew = false
+      g.push(b)
+      break
+    }
+  }
+  if (shouldMakeNew) {
+    gl.push([b])
+  }
+  return gl
+}
+
+function isSameCids(cids1:any, cids2:any) {
+  let len1 = cids1.length
+  let len2 = cids2.length
+  if (len1 != len2) {
+    return false
+  }
+  for (let i = 0; i < len1; i++) {
+    let cid = cids1[i]
+    if (!contains(cids2, cid)) {
+      return false
+    }
+  }
+  return true
+}
+class BlockChain {
+  head: any;
+  tail: any;
+  main: boolean;
+  tailChild: any;
+  blockCount: number;
+  tipsetList: any[];
+
+  constructor() {
+    this.head = null
+    this.tail = null
+    this.tailChild = null
+    this.blockCount = 0
+    this.tipsetList = []
+    this.main = false
+  }
+  isMember(block:any) {
+    let tailChild = this.tailChild
+    let tailHeight = this.tail.height
+    if (block.height == tailHeight) {
+      if (tailChild) {
+        return contains(tailChild.parents, block.cid)
+      }
+      return (
+        isSameCids(this.tail.parents || [], block.parents || []) &&
+        this.tail.parent_weight - block.parent_weight == 0
+      )
+    } else {
+      return contains(this.tail.parents || [], block.cid)
+    }
+  }
+  grow() {
+    this.blockCount++
+  }
+}
+
+function getMainChainLinkCount(chainList:Array<any>) {
+  let count = 0
+  chainList.forEach(c => {
+    if (c.tipsetList.length > count) {
+      count = c.tipsetList.length
+    }
+  })
+  return count
+}
+function getGroupListWidth(gl:any, bw:any, padding:any) {
+  let w = (gl.length - 1) * padding
+  w += getGroupBlockCount(gl) * bw
+  return w
+}
+function getGroupBlockCount(gl:any) {
+  let c = 0
+  gl.forEach((g:any) => {
+    if (isArray(g)) {
+      g.forEach(() => {
+        c++
+      })
+    } else {
+      c++
+    }
+  })
+  return c
+}
+function setChainColor(chainList:Array<any>) {
+  let colors = [
+    ["rgba(124,181,236,.2)", "rgba(124,181,236,.5)"],
+    ["rgba(67,67,72,.2)", "rgba(67,67,72,.5)"],
+    ["rgba(144,237,125,.2)", "rgba(144,237,125,.5)"],
+    ["rgba(247,163,92,.2)", "rgba(247,163,92,.5)"],
+    ["rgba(128,133,233,.2)", "rgba(128,133,233,.5)"],
+    ["rgba(241,92,128,.2)", "rgba(241,92,128,.5)"],
+    ["rgba(228,211,84,.2)", "rgba(228,211,84,.5)"],
+    ["rgba(43,144,143,.2)", "rgba(43,144,143,.5)"]
+  ]
+  chainList.forEach((item, i) => {
+    if (item.color) {
+      return
+    }
+    let idx = i % colors.length
+    item.color = colors[idx][0]
+    item.linkColor = colors[idx][1]
+  })
+}
+function resetChainTipset(chainList:Array<any>) {
+  chainList.forEach(c => {
+    c.tipsetList = []
+  })
+}
+function getLinkData(chainList:Array<any>, blockMap:any) {
+  let linkData:any = []
+  let forkEndLinkData:any = []
+  let mainChainLinkCount = getMainChainLinkCount(chainList);
+  chainList.forEach(c => {
+    let chainTipsetList = c.tipsetList
+    let tail = chainTipsetList[0]
+    for (let i = 1, l = chainTipsetList.length; i < l; i++) {
+      let ts = chainTipsetList[i]
+      linkData.push({
+        type: l < mainChainLinkCount ? "fork" : "main",
+        start: tail,
+        end: ts
+      })
+      tail = ts
+    }
+    if (tail) {
+      ;(tail[0].parents || []).forEach((cid:any) => {
+        if (blockMap[cid]) {
+          forkEndLinkData.push({
+            type: "fork-end",
+            start: tail,
+            end: blockMap[cid]
+          })
+        }
+      })
+    }
+  })
+  return [linkData, forkEndLinkData]
+}
