@@ -2,26 +2,30 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import leecharts from "@/src/cw/leecharts"
 import { cwUrl } from '@/contents/apiUrl';
+import loading from '@/assets/images/loading.png'
 import useAxiosData from '@/store/useAxiosData';
+import Image from 'next/image'
 import {
-  contains,
   randStr,
-  tail,
   timeToStr,
-  delay,
-  isArray,
   setStyle,
 } from "mytoolkit";
 import { colors, dotString, getGroupListWidth } from '@/src/cw/utils';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { Translation } from '@/components/hooks/Translation';
+import cwStore from '@/store/modules/Cw';
+import { observer } from 'mobx-react';
 
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'static' });
-  const {theme} = useFilscanStore()
-
+  const { theme } = useFilscanStore();
+  const [drawData, setDrawData] = useState([]);
+  const [chartLoading, setChartLoading] = useState(true);
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
+  const finalCurrentHeight = useRef<any>(null);
+  const endHeight = useRef<any>(null);
+  const {finalHeight } = cwStore;
   const { axiosData } = useAxiosData();
   const blockMap = useRef<any>({});
   const transformX = useRef(0);
@@ -34,11 +38,15 @@ export default () => {
 
   const chartColor:any = {
     dark: {
+      yLinkColor: `rgba(51, 51, 51, 1)`,
+      yCircleColor:'#000000',
       fistText: `rgba(255,255,255,1)`,
       yAxisColor:`rgba(255,255,255,0.6)`,
       textColor:`rgba(255,255,255,1)`},
-    light:{
-      fistText:`rgba(0,0,0,1)`,
+    light: {
+      yLinkColor: `rgba(238, 239, 241, 1)`,
+      fistText: `rgba(0,0,0,1)`,
+      yCircleColor:'#FFFFFF',
       yAxisColor:`rgba(0,0,0,0.6)`,
       textColor:`rgba(0,0,0,0.6)`
     }
@@ -51,7 +59,9 @@ export default () => {
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
-    init();
+    if (finalCurrentHeight.current) {
+      init()
+    }
     return () => {
       window.removeEventListener("resize", onResize);
       if (chartRef.current) {
@@ -59,6 +69,13 @@ export default () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (finalHeight && !finalCurrentHeight.current) {
+      finalCurrentHeight.current = finalHeight + 1;
+      init();
+    }
+  },[finalHeight])
 
   const init = () => {
     if (chartRef.current) {
@@ -75,14 +92,17 @@ export default () => {
   }
 
   const getBlocks = async (height?: number) => {
+    const end = finalCurrentHeight.current || height;
+    endHeight.current = end;
     const result = await axiosData(cwUrl, {
       filters: {
-        start: 3328253 ,
-        end:3328278
+        start: end-100,
+        end:end
       }
     });
     const newData = result?.tipset_list || [];
     let bhm: Record<string, Array<any>> = {};
+
     if (newData.length > 0) {
       newData.forEach((v:any) => {
         //[孤块,高度]｜[高度]
@@ -95,17 +115,19 @@ export default () => {
       });
       drawChart(newData,bhm)
     }
+    setChartLoading(false)
+    setDrawData(height ?[...drawData,...newData]:newData)
   }
 
   const drawChart = (data: Array<any>, bhm: Record<string, Array<any>> = {}) => {
     let textColor =chartColor[theme]?.textColor;
     let yAxisColor = chartColor[theme].yAxisColor;
-    let fistText = chartColor[theme].firstText;
+    let fistText = chartColor[theme].fistText;
     const blockHeightList:Array<number> = data.map(v => v.Height);
 
     chartRef.current.setOptions({
       grid: {
-        top: 20,
+        top: 0,
         right: 20,
         left: 85,
         bottom: 20
@@ -158,10 +180,7 @@ export default () => {
           draw: (chart: any, layer: any, s: any) => {
             let d3 = chart.d3
             let emitter = chart.emitter
-            // data.forEach(v => {
-            //   //[孤块,高度]｜[高度]
-            //   bhm[v.Height] =v.OrphanBlocks ? [v.OrphanBlocks,v.ChainBlocks]:[v.ChainBlocks];
-            // });
+
             let stageWrap = layer.safeSelect("g.stage-wrap")
             let axisYWrap = layer.safeSelect("g.ay-wrap")
             let axisXWrap = layer.safeSelect("g.ax-wrap")
@@ -289,9 +308,10 @@ export default () => {
                 const self = this; // 👈️ closure of this
 
                 let bhEle: any = d3.select(self)
-                let groupList = bhm[blh]
+                let groupList = bhm[blh];
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph);
                 let gx = (stageWidth - groupWidth) / 2;
+                console.log('----33',groupList)
                 bhEle
                   .selectAll("g.block-group")
                   .data(groupList)
@@ -300,21 +320,21 @@ export default () => {
                     //@ts-ignore
                     let bgEle = d3.select(this)
                     let gw = getGroupListWidth(blockGroup, blockWidth, 0);
+                    let showGray = groupList.length === 2 && bhEIndex === 0;
+
                     blockGroup.x = gx;
+
                     //数据高度：
                     blockGroup.y =yCalc(blockGroup[0].Epoch) - blockHeight * 0.35
                     blockGroup.width = gw
-                    blockGroup.height = blockHeight * 0.7
+                    blockGroup.height = blockHeight * 0.7;
                     gx += gw + ph;
                     tipsetList.push({
                       x: blockGroup.x-5,
-                      y: blockGroup.y,
+                      y: blockGroup.y ,
                       width: blockGroup.width+10,
                       height: blockGroup.height,
-                      fill: colors[numIndex % colors.length],
-                      // fill: blockGroup[0].chain.main
-                      //   ? "rgba(124,181,236,.2)"
-                      //   : "rgba(255,255,255,0.5)",
+                      fill: showGray ? 'rgba(102, 102, 102, 0.1)':colors[numIndex % colors.length],
                       rx: 10,
                       ry: 10
                     })
@@ -344,7 +364,7 @@ export default () => {
                         bh.safeSelect("rect").attrs({
                           width: ellipseRX,
                           height: ellipseRY,
-                          fill: theme === 'light' ? 'rgba(255,255,255,1)':colors[numIndex % colors.length],
+                          fill: showGray ? 'rgba(102, 102, 102, 0.6)':theme === 'light' ? 'rgba(255,255,255,1)':colors[numIndex % colors.length],
                           rx: 3,
                           ry: 3,
                           x: -ellipseRX / 2,
@@ -354,7 +374,7 @@ export default () => {
                         bh.safeSelect("text.t-height")
                           .text(`${dotString(d._id)}`)
                           .attrs({
-                            fill: fistText,
+                            fill: showGray?'#ffffff':textColor,
                             y: -12,
                             "text-anchor": "middle",
                             "font-size": 11
@@ -370,7 +390,7 @@ export default () => {
                         bh.safeSelect("text.t-miner")
                           .text(`${d.Miner} - ${d.Epoch}`)
                           .attrs({
-                            fill: textColor,
+                            fill: showGray?'#ffffff':textColor,
                             "text-anchor": "middle",
                             "font-size": 11,
                             y: 5
@@ -389,7 +409,7 @@ export default () => {
                             )}`
                           )
                           .attrs({
-                            fill: textColor,
+                            fill: showGray?'#ffffff':textColor,
                             "text-anchor": "middle",
                             "font-size": 10,
                             y: 20
@@ -642,8 +662,8 @@ export default () => {
                       0 &&
                     direction === "up"
                 ) {
-                  console.log("load")
-                  getBlocks()
+                  console.log("load----------------------")
+                  getBlocks(endHeight.current-100)
                 }
               }
               if (transformY.current >= 10) {
@@ -720,13 +740,16 @@ export default () => {
   const onResize = () => {
     if (chartRef.current) {
       chartRef.current.resize()
-
     }
-
   }
 
-  return <div style={{ position: 'relative'}} className='main_contain '>
-    <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}></div>
+  return <div style={{ position: 'relative' }} className='main_contain '>
+    <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
+      {chartLoading && <div className='w-full h-full flex items-center justify-center'>
+        <Image src={loading} width={260} height={260} alt="" />
+      </div>
+      }
+    </div>
     {/* <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
       <div
         className={ styles['bc-search']}
@@ -792,5 +815,5 @@ export default () => {
       </div>
     )} */}
   </div>
-}
+})
 
