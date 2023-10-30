@@ -44,7 +44,7 @@ class AccountStore {
     }
     runInAction(()=>{
       this.groupMiners = result?.data?.group_info_list || [];
-      this.defaultGroup = result?.data.group_info_list?.find((v: GroupInfoList) => v.is_default)
+      this.defaultGroup = result?.data?.group_info_list?.find((v: GroupInfoList) => v.is_default)
     })
   }
   //修改保存名下节点

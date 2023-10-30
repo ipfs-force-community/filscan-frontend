@@ -14,6 +14,7 @@ import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
 import Banner from '@/src/account/Banner';
 import userStore from '@/store/modules/user';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 export default () => {
   const [form] = Form.useForm();
@@ -70,7 +71,9 @@ export default () => {
   },[hashParams.type])
   return (
     < >
-      <Banner />
+      <BrowserView>
+        <Banner />
+      </BrowserView>
       <div className='main_contain !w-1/2 !min-w-[404px] !mb-10 !mt-8'>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {
