@@ -15,18 +15,22 @@ import { useFilscanStore } from '@/store/FilscanStore';
 import { Translation } from '@/components/hooks/Translation';
 import cwStore from '@/store/modules/Cw';
 import { observer } from 'mobx-react';
+import Search from '@/src/cw/Search';
+import { getSvgIcon } from '@/svgsIcon';
+import { message} from 'antd';
 
 const baseYAxis = 30;
+const calcHeight = 100;
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' });
   const { theme } = useFilscanStore();
-  const [drawData, setDrawData] = useState([]);
+  // const [drawData, setDrawData] = useState<Array<any>>([]);
+
   const [chartLoading, setChartLoading] = useState(true);
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
-  const finalCurrentHeight = useRef<any>(null);
-  const endHeight = useRef<any>(null);
+
   const {finalHeight } = cwStore;
   const { axiosData } = useAxiosData();
   const blockMap = useRef<any>({});
@@ -35,20 +39,20 @@ export default observer(() => {
   const k = useRef(1);
 
   useEffect(() => {
-    onResize();
+    reDrawChart();
   }, [theme])
 
   const chartColor:any = {
     dark: {
       yLinkColor: `rgba(51, 51, 51, 1)`,
-      yCircleColor:'#000000',
+      yCircleColor: '#000000',
       fistText: `rgba(255,255,255,1)`,
       yAxisColor:`rgba(255,255,255,0.6)`,
       textColor:`rgba(255,255,255,1)`},
     light: {
       yLinkColor: `rgba(238, 239, 241, 1)`,
-      fistText: `rgba(0,0,0,1)`,
       yCircleColor:'#FFFFFF',
+      fistText: `rgba(0,0,0,1)`,
       yAxisColor:`rgba(0,0,0,0.6)`,
       textColor:`rgba(0,0,0,0.6)`
     }
@@ -58,6 +62,23 @@ export default observer(() => {
   const stageClipId = useRef("lc-" + randStr(8));
   const axisXClipId = useRef("lc-" + randStr(8));
   const axisYClipId = useRef("lc-" + randStr(8));
+  const bhm = useRef<any>(null)
+  const blockHeightList = useRef<any>(null)
+  const drawData = useRef<any>([])
+  const searchCid = useRef<string>('');
+  const searchHeight = useRef<number|null>(null)
+  const finalCurrentHeight = useRef<any>(null);
+  const endHeight = useRef<any>(null);
+
+  const reset=()=>{
+    transformX.current = 0;
+    transformY.current = 30;
+    k.current = 1;
+    blockMap.current = {};
+    bhm.current = null;
+    blockHeightList.current = null;
+    drawData.current = null;
+  }
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -74,7 +95,7 @@ export default observer(() => {
 
   useEffect(() => {
     if (finalHeight && !finalCurrentHeight.current) {
-      finalCurrentHeight.current = finalHeight + 1;
+      finalCurrentHeight.current = finalHeight;
       init();
     }
   },[finalHeight])
@@ -93,42 +114,93 @@ export default observer(() => {
     setStyle(container, "height", containerHeight)
   }
 
-  const getBlocks = async (height?: number) => {
-    const end = finalCurrentHeight.current || height;
-    console.log('-----333',end)
+  const getBlocks = async (value?: number|string,type?:string) => {
+    const end = Number(value) || finalCurrentHeight.current ;
     endHeight.current = end;
-    setChartLoading(true)
-    const result = await axiosData(cwUrl, {
+    setChartLoading(true);
+    let payload :any= {
       filters: {
-        start: end-100,
+        start: end-calcHeight,
         end:end
       }
+    }
+    if (type === 'cid') {
+      payload = {
+        filters: {
+          cid: value,
+          len: calcHeight
+        }
+      }
+    }
+    const result = await axiosData(cwUrl, payload);
+    let resultData = result?.tipset_list || [];
+    // if (!resultData || resultData?.length == 0) {
+    //   message.warning('not Fount')
+    // }
+    let newData: any[] = [];
+    let bhmObj: Record<string, Array<any>> = {};
+    if (type === 'search' || type === 'height') {
+      reset();
+    }
+    const res:any = [];
+    resultData.forEach((v:any) => {
+      if (v?.ChainBlocks) {
+        res.push(v)
+      } else if (v?.OrphanBlocks?.length > 0) {
+        res.push(v)
+      }
     });
-    const newData = result?.tipset_list || [];
-    let bhm: Record<string, Array<any>> = {};
-
+    if (type === 'up') {
+      //滚动条向下请求
+      newData = [...drawData.current, ...res]
+    }else {
+      newData = [...res]
+    }
+    const blockList: Array<number> = [];
+    const calcData: Array<any> = [];
     if (newData.length > 0) {
       newData.forEach((v:any) => {
         //[孤块,高度]｜[高度]
-        bhm[v.Height] = v.OrphanBlocks ? [v.OrphanBlocks, v.ChainBlocks] : [v.ChainBlocks];
-        if (v.ChainBlocks) {
-          v.ChainBlocks.forEach((chainItem:any) => {
-            blockMap.current[chainItem._id] =chainItem
+        bhmObj[v.Height] = v.OrphanBlocks ? [v.OrphanBlocks, v.ChainBlocks] : [v.ChainBlocks];
+        blockList.push(v.Height)
+        if (v.ChainBlocks && v.ChainBlocks.length > 0) {
+          v.ChainBlocks.forEach((chainItem: any) => {
+            blockMap.current[chainItem._id] = chainItem
           })
+          calcData.push(v)
+        } else if (v?.OrphanBlocks?.length > 0) {
+          calcData.push(v)
         }
       });
-      drawChart(newData,bhm)
+      if (type === 'cid' && calcData.length > 0) {
+        endHeight.current = calcData[0].Height-1;
+      }
+      drawData.current = [...calcData];
+      bhm.current = bhmObj;
+      blockHeightList.current = blockList
+      drawChart(calcData,bhmObj,blockList)
     }
     setChartLoading(false)
-    setDrawData(height ?[...drawData,...newData]:newData)
   }
 
-  const drawChart = (data: Array<any>, bhm: Record<string, Array<any>> = {}) => {
+  const clearDrawChart = (value: any,type:string) => {
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+    chartRef.current = leecharts(chartContainerRef.current);
+    getBlocks(value,type);
+  }
+
+  const reDrawChart = () => {
+    if (drawData?.current && bhm?.current && blockHeightList?.current) {
+      drawChart(drawData.current,bhm.current,blockHeightList.current)
+    }
+
+  }
+
+  const drawChart = (data: Array<any>, bhm: Record<string, Array<any>> = {},blockHeightList:Array<number>) => {
     let textColor =chartColor[theme]?.textColor;
     let yAxisColor = chartColor[theme].yAxisColor;
-    let fistText = chartColor[theme].fistText;
-    const blockHeightList:Array<number> = data.map(v => v.Height);
-
     chartRef.current.setOptions({
       grid: {
         top: 0,
@@ -199,7 +271,7 @@ export default observer(() => {
             let ellipseRX = 0.95 * blockWidth
             let ellipseRY = 0.55 * blockHeight
 
-            const heightExtent = [ data[data.length - 1]?.Height,data[0]?.Height];
+            const heightExtent = [ blockHeightList[blockHeightList.length - 1],blockHeightList[0]];
             const maxBlockCount = 10;
             const groupCount = 1;
 
@@ -254,10 +326,11 @@ export default observer(() => {
               .attr("clip-path", `url(#${clipPathId})`)
               .attr(
                 "transform",
-                `translate(${chart.gridLeft}, -${chart.gridTop})`
+                `translate(${chart.gridLeft}, ${baseYAxis})`
+                //`translate(${chart.gridLeft}, -${chart.gridTop})`
               )
             axisYWrap.safeSelect("line.border").attrs({
-              stroke: "rgba(51, 51, 51, 1)",
+              stroke: chartColor[theme].yLinkColor,
               "stroke-width": "2px",
               y2: chart.containerHeight
             })
@@ -272,24 +345,27 @@ export default observer(() => {
               stroke: "rgba(0,0,0,0)"
             })
             let yTicks = axisYWrap.safeSelect("g.axis-y").selectAll("g.tick");
-            yTicks.each(function () {
+            yTicks.each(function (yData:any) {
               //@ts-ignore
-              let t = d3.select(this)
-              t.safeSelect("line").attr("stroke", "rgba(0,0,0,0)")
+              let t = d3.select(this);
+              t.safeSelect("line").attr("stroke", chartColor[theme].yLinkColor)
               t.safeSelect("text").attrs({
-                fill: yAxisColor, //y轴字体颜色
+                fill: Number(searchHeight.current) === Number(yData) ? 'rgba(29, 107, 253, 1)':yAxisColor, //y轴字体颜色
                 "font-size": 14,
               })
               t.safeSelect("circle").attrs({
-                stroke: '#333333',
+                stroke:Number(searchHeight.current) === Number(yData) ?'rgba(29, 107, 253, 1)': chartColor[theme].yLinkColor,
                 "stroke-width": "2px",
-                fill :"black",
+                fill :chartColor[theme].yCircleColor,
                 r: 4,
               })
             })
+            if (Object.keys(blockMap.current).length === 0) {
+              return
+
+            }
             //make clip path for stage
             let stage = stageWrap.safeSelect("g.c-stage");
-
             clipPathId = stageClipId.current
             clipPath = chart.sections.defs.safeSelect(
               `clipPath#${clipPathId}`
@@ -316,17 +392,18 @@ export default observer(() => {
                 const self = this; // 👈️ closure of this
 
                 let bhEle: any = d3.select(self)
-                let groupList = bhm[blh];
+                let groupList = bhm[blh]||[];
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph);
                 let gx = (stageWidth - groupWidth) / 2;
                 bhEle
                   .selectAll("g.block-group")
                   .data(groupList)
                   .join("g.block-group")
-                  .each( function(blockGroup: any,bhEIndex:number) {
+                  .each(function (blockGroupData:any,bhEIndex:number) {
                     //@ts-ignore
                     let bgEle = d3.select(this)
-                    let gw = getGroupListWidth(blockGroup, blockWidth, 0);
+                    let blockGroup = blockGroupData || {}
+                    let gw = getGroupListWidth(blockGroup||[], blockWidth, 0);
                     let showGray = groupList.length === 2 && bhEIndex === 0;
 
                     blockGroup.x = gx;
@@ -352,8 +429,14 @@ export default observer(() => {
                       .data(blockGroup)
                       .join("g.block-header")
                       .each(function (d: any, i: number) {
-                        let curHeight = d.Epoch
-                        let mainColor ='rgba(255,255,255,0.1)'
+                        let curHeight = d.Epoch;
+                        const showCid = searchCid.current === d._id;
+                        let showColor = colors[numIndex % colors.length];
+                        if (theme === 'light') {
+                          showColor='rgba(255,255,255,1)'
+                        } if (showCid) {
+                          showColor='rgba(29, 107, 253, 1)'
+                        }
                         //@ts-ignore
                         let bh = d3.select(this)
                         let wrapX = blockGroup.x + (i + 0.5) * blockWidth;
@@ -371,7 +454,7 @@ export default observer(() => {
                         bh.safeSelect("rect").attrs({
                           width: ellipseRX,
                           height: ellipseRY,
-                          fill: showGray ? 'rgba(102, 102, 102, 0.6)':theme === 'light' ? 'rgba(255,255,255,1)':colors[numIndex % colors.length],
+                          fill: showGray ? 'rgba(102, 102, 102, 0.6)':showColor,
                           rx: 3,
                           ry: 3,
                           x: -ellipseRX / 2,
@@ -381,7 +464,7 @@ export default observer(() => {
                         bh.safeSelect("text.t-height")
                           .text(`${dotString(d._id)}`)
                           .attrs({
-                            fill: showGray?'#ffffff':textColor,
+                            fill: showGray || showCid? '#ffffff':textColor,
                             y: -12,
                             "text-anchor": "middle",
                             "font-size": 11
@@ -397,7 +480,7 @@ export default observer(() => {
                         bh.safeSelect("text.t-miner")
                           .text(`${d.Miner} - ${d.Epoch}`)
                           .attrs({
-                            fill: showGray?'#ffffff':textColor,
+                            fill: showGray || showCid?'#ffffff':textColor,
                             "text-anchor": "middle",
                             "font-size": 11,
                             y: 5
@@ -416,7 +499,7 @@ export default observer(() => {
                             )}`
                           )
                           .attrs({
-                            fill: showGray?'#ffffff':textColor,
+                            fill: showGray || showCid?'#ffffff':textColor,
                             "text-anchor": "middle",
                             "font-size": 10,
                             y: 20
@@ -463,8 +546,8 @@ export default observer(() => {
                 //@ts-ignore
                 d3.select(this).attrs(d)
               });
-            //next
-            let [linkData, forkEndLinkData] = getLinkData(data,blockMap.current);
+            //next link
+            let [linkData, forkEndLinkData] = getLinkData(data, blockMap.current);
             linkGroup
               .selectAll("g.link")
               .data(linkData)
@@ -612,7 +695,7 @@ export default observer(() => {
                 .select("g.axis-y")
                 .attr(
                   "transform",
-                  `translate(0, ${transformY.current + 50 + dy}) scale(1,${t.k})`
+                  `translate(0, ${transformY.current + dy}) scale(1,${t.k})`
                 )
             }
             function zoomStart() {
@@ -663,13 +746,16 @@ export default observer(() => {
                 }
                 if (
                   y -
-                      chart.containerHeight +
-                      viewBoxHeight +
-                      chart.gridBottom <
-                      0 &&
-                    direction === "up"
+                  chart.containerHeight +
+                  viewBoxHeight +
+                  chart.gridBottom <
+                  0 &&
+                  direction === "up"
                 ) {
-                  getBlocks(endHeight.current - 100)
+                  console.log('====0033',endHeight.current)
+                  getBlocks(endHeight.current - calcHeight,'up')
+                } else if(direction === 'down' && transformY.current > 30) {
+                  getBlocks(endHeight.current - calcHeight,'down')
                 }
               }
               if (transformY.current >= 10) {
@@ -749,64 +835,37 @@ export default observer(() => {
     }
   }
 
+  const handleSearch = (value: any, type: string) => {
+    if (value === '') {
+      searchCid.current = '';
+      searchHeight.current = null;
+      getBlocks();
+    } else if (type === 'height') {
+      searchCid.current = '';
+      searchHeight.current = Number(value)
+      clearDrawChart(Number(value) + 1, type);
+    } else if (type === 'cid') {
+      searchCid.current = value;
+      searchHeight.current = null;
+      clearDrawChart(value, type);
+
+    }
+  }
+
+  console.log('---34546',drawData.current)
   return <div style={{ position: 'relative' }} className='main_contain '>
+    <div className={`${styles['block-header']}`}>
+      {getSvgIcon('tip')}
+      <span>{ tr('cw_des')}</span>
+    </div>
+    <div className={`${styles['block-header-search']}`}>
+      <Search onSearch={ handleSearch} />
+    </div>
     <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
 
     </div>
-    {/* <div className={styles['console']} style={{ position: 'absolute', right: '85px', top: '30px' }}>
-      <div
-        className={ styles['bc-search']}
-        style={{
-          padding: '8px 15px',
-          borderRadius: '30px',
-          width: '200px',
-          height: '38px',
-          boxSizing: 'border-box',
-          position: 'relative',
-        }}
-      >
-        <input
-          type="text"
-          placeholder={('start')}
-          value={'key'}
-          // onChange={handleSearch}
-          style={{ width: '130px', height: '25px', paddingLeft: '10px' }}
-        />
-        <i
-          className={ `${styles['iconfont']} ${styles['icon-sosu']}`}
-          style={{ position: 'absolute', color: '#999999', top: '10px', right: '20px' }}
-        ></i>
-      </div>
-    </div>
-    <div
-      className={ `${styles['back-top-wrap']} ${styles['ignore']}`}
-      style={{ position: 'absolute', right: '105px', bottom: '105px' }}
-    >
-      <div
-        className={ styles['back-top']}
-        style={{
-          width: '200px',
-          height: '45px',
-          borderRadius: '25px',
-          fontSize: '16px',
-        }}
-        //onClick={handleBackTop}
-      >
-        <i className={ styles['el-icon-top']} style={{ fontSize: '20px' }} />
-        <div style={{ marginLeft: '8px' }}>{('latest')}</div>
-      </div>
-    </div>
-    <div
-      className={ styles['tip-wrap']}
-      style={{ position: 'absolute', left: '190px', top: '30px', color: 'rgba(153,153,153,1)' }}
-    >
-      <div className={ styles['tip-show']}>
-        <i className={ styles['el-icon-warning-outline']} style={{ fontSize: '16px' }} />
-        <div style={{ marginLeft: '8px', color: 'rgba(153,153,153,1)', fontSize: '14px' }}>
-          {('op')}
-        </div>
-      </div>
-    </div> */}
+    {!drawData.current||drawData.current.length===0 && <div className={`${styles['block-header-chart-noData']}`}>
+    NO Data</div>}
     {chartLoading && (
       <div
         className={styles['loading-wrap']}

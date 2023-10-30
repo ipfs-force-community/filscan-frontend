@@ -59,16 +59,36 @@
   justify-content: center;
   align-items: center;
 }
+.block-header{
+ position: absolute;
+  top: 30px;
+  left: 80px;
+  display: flex;
+  column-gap: 10px;
+  color: var(--font_des);
+}
+.block-header-search{
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
 .block-header-chart {
+ 
   user-select: none;
   height:80vh;
   background:var(--board-bg-color);
-  margin:0 0px 10px 0px;
+  margin:50px 0px 10px 0px;
   padding: 0px 10px;
   min-width:1200px;
   border-radius: 12px;
   cursor:pointer;
   
+}
+.block-header-chart-noData{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .lc-tooltip {
   user-select: none;

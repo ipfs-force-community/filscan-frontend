@@ -13,6 +13,7 @@ export default ({
   origin,
   onSearch,
   onClick,
+  onBlur,
   ns,
   placeholder = '',
   suffix,
@@ -30,6 +31,7 @@ export default ({
   clear?: boolean;
   onClick?: (value: string) => void;
   onSearch: (value: string) => void;
+  onBlur?:()=>void
 }) => {
   const { tr } = Translation({ ns });
   const [inputValue, setValue] = useState('');
@@ -61,11 +63,13 @@ export default ({
           if (clear) {
             setValue('');
           }
-          if (inputValue.length > 0) {
-            onSearch(inputValue);
+          onSearch(inputValue);
+        }, 300)}
+        onBlur={() => {
+          if (onBlur) {
+            onBlur()
           }
-
-        },300)}
+        }}
         suffix={
           (
             <span

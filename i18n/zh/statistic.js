@@ -93,6 +93,10 @@ const statistic = {
   contract_balance: '合约余额走势',
   contract_total_balance: '合约余额',
 
+  //cw 
+  'cw-search': "搜所高度/区块cid",
+  cw_des:'操作须进行拖拽'
+
 }
 
 export default statistic

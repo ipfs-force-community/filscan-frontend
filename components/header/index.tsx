@@ -119,7 +119,7 @@ export default () => {
                 optionsCard={<div className={ `w-[120px] flex flex-col items-center `} >
                   <Image src={codeImg} alt='' width={120} className={ `${theme === 'dark'?'bg-white p-2 rounded-[5px]':''}`} />
                   <div className='flex flex-col items-center text_des text-xs  mt-2.5 '>
-                    <div className='mb-[2px]' >
+                    <div className='mb-[2px] text-center' >
                       {tr('mobile_code_1')}
                     </div>
                     { tr('mobile_code_2')}
