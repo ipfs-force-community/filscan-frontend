@@ -94,7 +94,7 @@ const statistic = {
   contract_total_balance: '合约余额',
 
   //cw 
-  'cw-search': "搜所高度/区块cid",
+  'cw-search': "搜索高度/区块cid",
   cw_des: '操作须进行拖拽',
   cw_top:'最新高度',
 

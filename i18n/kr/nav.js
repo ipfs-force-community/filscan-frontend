@@ -27,7 +27,7 @@ const zh ={
   resources:'자원',
   resources_tools: '자주 쓰는 도구',
   provider: '스토리지 공급자',
-  fvm: 'Filecoin 생태계 개요',
+  fvm: '파일코인 생태계',
   account: 'Miner Metrics',
   develop:'Developer',
   language:"언어",

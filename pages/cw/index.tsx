@@ -141,12 +141,9 @@ export default observer(() => {
     }
     const result = await axiosData(cwUrl, payload);
     let resultData = result?.tipset_list || [];
-    // if (!resultData || resultData?.length == 0) {
-    //   message.warning('not Fount')
-    // }
     let newData: any[] = [];
     let bhmObj: Record<string, Array<any>> = {};
-    if (type === 'search' || type === 'height') {
+    if (type === 'cid' || type === 'height') {
       reset();
     }
     const res:any = [...resultData];
@@ -884,6 +881,7 @@ export default observer(() => {
     clearDrawChart(Number(finalHeight) + 1,'height');
   }
 
+  const hasData = !drawData?.current || drawData?.current?.length === 0;
   return <div className={`main_contain ${styles['cw_contain']} `}>
     <div className={`${styles['block-header']}`}>
       {getSvgIcon('tip')}
@@ -895,8 +893,8 @@ export default observer(() => {
     <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
 
     </div>
-    {/* {drawData?.current&&drawData?.current?.length===0 &&!chartLoading&& <div className={`${styles['block-header-chart-noData']}`}>
-    NO Data</div>} */}
+    {!chartLoading&&hasData&& <div className={`${styles['block-header-chart-noData']}`}>
+    NO Data</div>}
     {chartLoading && (
       <div
         className={styles['loading-wrap']}
@@ -908,8 +906,9 @@ export default observer(() => {
         </div>
       </div>
     )}
-    <div className={styles['top-wrap']} onClick={handleClickTop }>
-      { tr('cw_top')}
+    <div className={styles['top-wrap']} onClick={handleClickTop}>
+      {getSvgIcon('upIcon')}
+      {tr('cw_top')}
     </div>
   </div>
 })
