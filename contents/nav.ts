@@ -21,12 +21,11 @@ const navMenu: Array<Menu_Info | any> = [
       },
       {
         key: 'tipset_transfer',
-        sufIcon: "newIcon",
         link: '/tipset/transfer/'
       },
       { key: "statistics_gas", link: "/statistics/gas" },
       { key: "statistics_charts", link: "/statistics/charts" },
-      { key: "cw", link: "/cw" },
+      { key: "cw", link: "/cw", sufIcon: "newIcon" },
     ],
   },
   {
