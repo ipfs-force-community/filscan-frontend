@@ -112,8 +112,9 @@
   border-radius:5px;
   cursor:pointer;
   border:1px solid var(--border-color);
-  background:var(--bgColor);
+  // background:var(--bgColor);
   color:var(--font_des);
+      backdrop-filter: blur(2px);
   &:hover{
     color:var(--primary);
   }

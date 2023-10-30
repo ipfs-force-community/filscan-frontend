@@ -875,8 +875,8 @@ export default observer(() => {
     <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
 
     </div>
-    {!drawData.current||drawData.current.length===0 &&!chartLoading&& <div className={`${styles['block-header-chart-noData']}`}>
-    NO Data</div>}
+    {/* {drawData?.current&&drawData?.current?.length===0 &&!chartLoading&& <div className={`${styles['block-header-chart-noData']}`}>
+    NO Data</div>} */}
     {chartLoading && (
       <div
         className={styles['loading-wrap']}
