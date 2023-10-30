@@ -2,8 +2,8 @@ import {
   isArray,
 } from "mytoolkit";
 
-export const colors = ['rgba(29, 107, 253, 0.08)','rgba(112, 79, 228, 0.08)','rgba(240, 176, 71, 0.08)','rgba(57, 178, 226, 0.08)','rgba(233, 119, 70, 0.08)','rgba(116, 204, 110, 0.08)']
-export const colorsText = ['rgba(29, 107, 253, 0.1)','rgba(112, 79, 228, 0.1)','rgba(240, 176, 71, 0.1)','rgba(57, 178, 226, 0.1)','rgba(233, 119, 70, 0.1)','rgba(116, 204, 110, 0.1)']
+export const colors = ['rgba(29, 107, 253, 0.08)','rgba(112, 79, 228, 0.08)','rgba(201,78,119,0.08)','rgba(57, 178, 226, 0.08)','rgba(233, 119, 70, 0.08)','rgba(116, 204, 110, 0.08)','rgba(240, 176, 71, 0.08)']
+export const colorsText = ['rgba(29, 107, 253, 0.1)','rgba(112, 79, 228, 0.1)','rgba(201,78,119,0.1)','rgba(57, 178, 226, 0.1)','rgba(233, 119, 70, 0.1)','rgba(116, 204, 110, 0.1)','rgba(240, 176, 71, 0.1)']
 
 export function getGroupListWidth(gl: any, bw: any, padding: any) {
   let w = (gl.length - 1) * padding

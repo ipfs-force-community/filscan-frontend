@@ -206,7 +206,7 @@ const detail = {
   erc20_transfer: '토큰 거래',
   erc20_transfer_total: '총 {{value}}개 송금',
 
-  power_change: 'Power Change',
+  power_change: '전원 변경',
 
   //height
   blcok_time: '블록 시간',
@@ -223,14 +223,16 @@ const detail = {
   win_count:'윈 카운트',
   //cid_details
   message_list_total:'Total of {{value}} Messages',
-  chain_cid_detail: '区块详情',
+  chain_cid_detail: '블록 세부정보',
   cid_height: '높이',
   parent_weight: 'Parent Block 무게',
   parents_cid:'Parent CID',
   parent_base_fee:'Parent Block 기본 수수료',
   ticket_value: '티켓 값',
   state_root: '스테이트 루트',
-  message_count:'메시지 개수',
+  message_count: '메시지 개수',
+  blk_cids_message:'메시지 차단',
+
 
 }
 export default detail

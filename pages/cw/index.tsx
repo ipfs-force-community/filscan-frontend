@@ -471,7 +471,6 @@ export default observer(() => {
                           //   })
                           bh.on("mouseover", onMMove).on("mouseout", onMOut)
                           bh.on("click", function () {
-                            //----click
                             router.push(`/cid/${d._id}`)
                           })
                           bh.safeSelect("rect").attrs({
@@ -517,7 +516,7 @@ export default observer(() => {
                           bh.safeSelect("text.t-time")
                             .text(
                               `${timeToStr(
-                                d.first_seen,
+                                d.FirstSeen,
                                 "yyyy-mm-dd hh:mm:ss"
                               )}`
                             )
