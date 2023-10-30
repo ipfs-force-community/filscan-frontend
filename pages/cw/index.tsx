@@ -44,12 +44,16 @@ export default observer(() => {
 
   const chartColor:any = {
     dark: {
+      linkColor:`rgba(102,102,102,1)`,
       yLinkColor: `rgba(51, 51, 51, 1)`,
       yCircleColor: '#000000',
       fistText: `rgba(255,255,255,1)`,
       yAxisColor:`rgba(255,255,255,0.6)`,
-      textColor:`rgba(255,255,255,1)`},
+      textColor: `rgba(255,255,255,1)`
+    },
+
     light: {
+      linkColor:`rgba(216,216,216,1)`,
       yLinkColor: `rgba(238, 239, 241, 1)`,
       yCircleColor:'#FFFFFF',
       fistText: `rgba(0,0,0,1)`,
@@ -563,7 +567,7 @@ export default observer(() => {
                 p2.y = d.end.y+baseYAxis
 
                 let line = lg.safeSelect("line").attrs({
-                  stroke: "rgba(102, 102, 102, 1)",
+                  stroke: chartColor[theme].linkColor,
                   "stroke-width": 1,
                   x1: p1.x,
                   y1: p1.y,
@@ -586,7 +590,7 @@ export default observer(() => {
                 let arrowAngle = (25 * Math.PI) / 180
                 lg.safeSelect("path").attrs({
                   transform: `translate(${p2.x}, ${p2.y}) rotate(-${angDegree})`,
-                  fill: "rgba(102, 102, 102, 1)",
+                  fill: chartColor[theme].linkColor,
                   d: () => {
                     let c1 = arrowSideLength * Math.cos(arrowAngle)
                     let c2 = arrowSideLength * Math.sin(arrowAngle)
@@ -612,7 +616,7 @@ export default observer(() => {
                 p2.y = d.end.y - blockHeight * 0.29
 
                 lg.safeSelect("line").attrs({
-                  stroke: "rgba(102, 102, 102, 1)",
+                  stroke: chartColor[theme].linkColor,
                   "stroke-width": 1,
                   "stroke-dasharray": "8,4",
                   x1: p1.x,
@@ -632,7 +636,7 @@ export default observer(() => {
                 let arrowAngle = (16 * Math.PI) / 180
                 lg.safeSelect("path").attrs({
                   transform: `translate(${p2.x}, ${p2.y}) rotate(-${angDegree})`,
-                  fill: "rgba(102, 102, 102, 1)",
+                  fill: chartColor[theme].linkColor,
                   d: () => {
                     let c1 = arrowSideLength * Math.cos(arrowAngle)
                     let c2 = arrowSideLength * Math.sin(arrowAngle)
@@ -864,7 +868,7 @@ export default observer(() => {
     <div className={`${styles['block-header-chart']} card_shadow border border_color `} ref={chartContainerRef}>
 
     </div>
-    {!drawData.current||drawData.current.length===0 && <div className={`${styles['block-header-chart-noData']}`}>
+    {!drawData.current||drawData.current.length===0 &&!chartLoading&& <div className={`${styles['block-header-chart-noData']}`}>
     NO Data</div>}
     {chartLoading && (
       <div
@@ -872,7 +876,8 @@ export default observer(() => {
         style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}
       >
         <div className={ styles['donut-wrap']}>
-          <div className={ styles['donut']} />
+          {/* <div className={ styles['donut']} /> */}
+          <Image src={loading} alt='' width={160} />
         </div>
       </div>
     )}
