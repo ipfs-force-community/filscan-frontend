@@ -11,7 +11,7 @@ export function getGroupListWidth(gl: any, bw: any, padding: any) {
 }
 function getGroupBlockCount(gl:any) {
   let c = 0
-  gl.forEach((g:any) => {
+  gl?.forEach((g:any) => {
     if (isArray(g)) {
       g.forEach(() => {
         c++

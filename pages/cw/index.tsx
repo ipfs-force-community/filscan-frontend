@@ -142,14 +142,14 @@ export default observer(() => {
     if (type === 'search' || type === 'height') {
       reset();
     }
-    const res:any = [];
-    resultData.forEach((v:any) => {
-      if (v?.ChainBlocks) {
-        res.push(v)
-      } else if (v?.OrphanBlocks?.length > 0) {
-        res.push(v)
-      }
-    });
+    const res:any = [...resultData];
+    // resultData.forEach((v:any) => {
+    //   if (v?.ChainBlocks) {
+    //     res.push(v)
+    //   } else if (v?.OrphanBlocks?.length > 0) {
+    //     res.push(v)
+    //   }
+    // });
     if (type === 'up') {
       //滚动条向下请求
       newData = [...drawData.current, ...res]
