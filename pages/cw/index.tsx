@@ -19,9 +19,8 @@ import Search from '@/src/cw/Search';
 import { getSvgIcon } from '@/svgsIcon';
 import { useRouter } from 'next/router';
 
-const calcHeight = 100;
-
 const baseYAxis = 30;
+const calcHeight = 100;
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' });
@@ -188,6 +187,9 @@ export default observer(() => {
               searchHeight.current = Number(orphanItem.Epoch)
             }
           })
+          calcData.push(v)
+        } else if (v?.OrphanBlocks?.length > 0) {
+          calcData.push(v)
         }
       });
       if (type === 'cid' && calcData.length > 0) {
@@ -383,7 +385,6 @@ export default observer(() => {
             }
             //make clip path for stage
             let stage = stageWrap.safeSelect("g.c-stage");
-
             clipPathId = stageClipId.current
             clipPath = chart.sections.defs.safeSelect(
               `clipPath#${clipPathId}`
