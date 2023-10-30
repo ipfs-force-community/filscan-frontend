@@ -239,7 +239,7 @@ export default observer(() => {
                   <div style="margin-bottom: 10px;">cid: ${toolTipData._id}</div>
                   <div style="margin-bottom: 10px;">miner: ${toolTipData.Miner}</div>
                   <div style="margin-bottom: 10px;">height: ${toolTipData.Epoch}</div>
-                  <div style="margin-bottom: 10px;">parent_weight: ${
+                  <div style="margin-bottom: 10px;">parent weight: ${
   toolTipData.ParentWeight
 }</div>
                               <div>
@@ -893,7 +893,7 @@ export default observer(() => {
 
     </div>
     {!chartLoading&&hasData&& <div className={`${styles['block-header-chart-noData']}`}>
-    NO Data</div>}
+    No Data</div>}
     {chartLoading && (
       <div
         className={styles['loading-wrap']}

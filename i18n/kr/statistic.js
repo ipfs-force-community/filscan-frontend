@@ -95,7 +95,7 @@ const statistic = {
   //cw
 
   'cw-search': "높이/블록 CID 검색",
-  cw_des: '작업을 하려면 드래그가 필요합니다.',
+  cw_des: '다양한 높이를 보려면 드래그하세요',
   cw_top:'최신 키',
 
 
