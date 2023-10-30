@@ -17,7 +17,8 @@ import Expired from '@/src/account/expired';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Loading from '@/components/loading';
-import MonitorBalance from '@/src/account/monitor/balance'
+import MonitorBalance from '@/src/account/monitor/balance';
+import MonitorSector from '@/src/account/monitor/sector'
 import accountStore from '@/store/modules/account';
 import userStore from '@/store/modules/user';
 import { Menu } from 'antd';
@@ -127,6 +128,9 @@ const Account: React.FC = () => {
                 )}
                 {selectedKey === 'monitorBalance' && (
                   <MonitorBalance selectedKey={'monitor_balance'}/>
+                )}
+                {selectedKey === 'monitorSector' && (
+                  <MonitorSector />
                 )}
                 {selectedKey === 'personal' && <Personal />}
               </>
