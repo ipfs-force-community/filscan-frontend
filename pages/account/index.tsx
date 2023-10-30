@@ -14,6 +14,7 @@ import NoMiner from '@/src/account/NoMiner';
 import Power from '@/src/account/power';
 import Gas from '@/src/account/gas';
 import Expired from '@/src/account/expired';
+import { UserInfo } from '@/store/UserStore';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Loading from '@/components/loading';

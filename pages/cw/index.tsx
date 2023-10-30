@@ -10,13 +10,14 @@ import {
   timeToStr,
   setStyle,
 } from "mytoolkit";
-import { colors, dotString, getGroupListWidth } from '@/src/cw/utils';
+import { colors, colorsText, dotString, getGroupListWidth } from '@/src/cw/utils';
 import { useFilscanStore } from '@/store/FilscanStore';
 import { Translation } from '@/components/hooks/Translation';
 import cwStore from '@/store/modules/Cw';
 import { observer } from 'mobx-react';
 import Search from '@/src/cw/Search';
 import { getSvgIcon } from '@/svgsIcon';
+import { useRouter } from 'next/router';
 
 const baseYAxis = 30;
 const calcHeight = 100;
@@ -24,6 +25,7 @@ const calcHeight = 100;
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' });
   const { theme } = useFilscanStore();
+  const router = useRouter();
   // const [drawData, setDrawData] = useState<Array<any>>([]);
 
   const [chartLoading, setChartLoading] = useState(true);
@@ -168,13 +170,27 @@ export default observer(() => {
         //[孤块,高度]｜[高度]
         bhmObj[v.Height] = v.OrphanBlocks ? [v.OrphanBlocks, v.ChainBlocks] : [v.ChainBlocks];
         blockList.push(v.Height)
+        let showSearch=false
         if (v.ChainBlocks && v.ChainBlocks.length > 0) {
           v.ChainBlocks.forEach((chainItem: any) => {
-            blockMap.current[chainItem._id] = chainItem
+            blockMap.current[chainItem._id] = chainItem;
+            if (type === 'cid' && chainItem._id === searchCid.current) {
+              showSearch=true
+              searchHeight.current = Number(chainItem.Epoch)
+            }
           })
           calcData.push(v)
         } else if (v?.OrphanBlocks?.length > 0) {
           calcData.push(v)
+        }
+        if (!showSearch &&v?.OrphanBlocks?.length >0) {
+          v.OrphanBlocks.forEach((orphanItem:any) => {
+            if (type === 'cid' && orphanItem._id === searchCid.current) {
+              showSearch = true;
+              console.log('----333',orphanItem)
+              searchHeight.current = Number(orphanItem.Epoch)
+            }
+          })
         }
       });
       if (type === 'cid' && calcData.length > 0) {
@@ -437,9 +453,9 @@ export default observer(() => {
                         .each(function (d: any, i: number) {
                           let curHeight = d.Epoch;
                           const showCid = searchCid.current === d._id;
-                          let showColor = colors[numIndex % colors.length];
+                          let showColor = colorsText[numIndex % colorsText.length];
                           if (theme === 'light') {
-                            showColor = 'rgba(255,255,255,1)'
+                            // showColor = 'rgba(255,255,255,1)'
                           } if (showCid) {
                             showColor = 'rgba(29, 107, 253, 1)'
                           }
@@ -457,10 +473,14 @@ export default observer(() => {
                           //     fill: mainColor
                           //   })
                           bh.on("mouseover", onMMove).on("mouseout", onMOut)
+                          bh.on("click", function () {
+                            //----click
+                            router.push(`/cid/${d._id}`)
+                          })
                           bh.safeSelect("rect").attrs({
                             width: ellipseRX,
                             height: ellipseRY,
-                            fill: showGray ? 'rgba(102, 102, 102, 0.6)' : showColor,
+                            fill: showGray&&!showCid ? 'rgba(102, 102, 102, 0.6)' : showColor,
                             rx: 3,
                             ry: 3,
                             x: -ellipseRX / 2,
