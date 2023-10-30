@@ -15,7 +15,7 @@ const account={
   welcome: 'Welcome to Filscan!',
   welcome_text1: '축하합니다! 회원 가입이 성공적으로 이루어졌습니다. 이메일 주소와 비밀번호를 사용하여 계속해서 로그인하실 수 있습니다.',
   welcome_text2: '계정에 로그인하세요!',
-  last_time: ' {{value}}마지막 업데이트',
+  last_time: '최신 업데이트 시간',
   all: '전체',
   edit:'편집하다',
   miner_add: '추가하다',
@@ -83,7 +83,7 @@ const account={
   win_count:'윈 카운트',
   block_reward:'블록 보상',
   total_reward: "전체 블록 보상",
-  total_reward_24:"전체 블록 보상 '总奖励/일일 변동今日变化",
+  total_reward_24:"총 보상/24시간 보상",
 
   //算力概览
   quality_power: '유효 체굴 파워',
