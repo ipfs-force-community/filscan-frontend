@@ -56,7 +56,7 @@ const account={
   //分组
   create_group: '그룹 생성',
   create_group_holder: '생성하려는 그룹의 이름을 입력하세요',
-  item_value: '해당 그룹에는 {{value}}명의 miner가 있습니다',
+  item_value: '해당 그룹에는 {{value}} 명의 miner가 있습니다',
   group_name: '그룹 이름',
 
   //幸运值

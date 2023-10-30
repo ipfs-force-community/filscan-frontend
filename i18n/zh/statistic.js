@@ -95,7 +95,8 @@ const statistic = {
 
   //cw 
   'cw-search': "搜所高度/区块cid",
-  cw_des:'操作须进行拖拽'
+  cw_des: '操作须进行拖拽',
+  cw_top:'最新高度',
 
 }
 

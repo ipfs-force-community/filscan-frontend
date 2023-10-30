@@ -92,6 +92,13 @@ const statistic = {
   contract_addr: ' 계약 배포',
       contract_balance: '계약 잔액 추세',
   contract_total_balance: '계약 잔액',
+  //cw
+
+  'cw-search': "높이/블록 CID 검색",
+  cw_des: '작업을 하려면 드래그가 필요합니다.',
+  cw_top:'최신 키',
+
+
 
 }
 

@@ -4,6 +4,16 @@
 .t-miner {
   cursor: pointer;
 }
+.cw_contain{
+  position: relative;
+  width:100%;
+  height: 100%;
+  // padding: 20px 70px 40px 70px;
+  //  min-width: 1024px;
+  //   max-width: 1440px;
+  
+
+}
 /**
      *  donut-spinner
      *  source from https://30-seconds.github.io/30-seconds-of-css/#donut-spinner
@@ -64,6 +74,7 @@
   top: 30px;
   left: 80px;
   display: flex;
+  align-items:center;
   column-gap: 10px;
   color: var(--font_des);
 }
@@ -73,12 +84,11 @@
   right: 40px;
 }
 .block-header-chart {
- 
   user-select: none;
-  height:80vh;
+  height:100%;
   background:var(--board-bg-color);
   margin:50px 0px 10px 0px;
-  padding: 0px 10px;
+  padding: 0px;
   min-width:1200px;
   border-radius: 12px;
   cursor:pointer;
@@ -92,4 +102,19 @@
 }
 .lc-tooltip {
   user-select: none;
+}
+
+.top-wrap{
+  position:absolute;
+  bottom:60px;
+  right:50px;
+  padding:6px 15px;
+  border-radius:5px;
+  cursor:pointer;
+  border:1px solid var(--border-color);
+  background:var(--bgColor);
+  color:var(--font_des);
+  &:hover{
+    color:var(--primary);
+  }
 }

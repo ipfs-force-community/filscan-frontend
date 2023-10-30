@@ -17,7 +17,6 @@ import cwStore from '@/store/modules/Cw';
 import { observer } from 'mobx-react';
 import Search from '@/src/cw/Search';
 import { getSvgIcon } from '@/svgsIcon';
-import { message} from 'antd';
 
 const baseYAxis = 30;
 const calcHeight = 100;
@@ -44,15 +43,17 @@ export default observer(() => {
 
   const chartColor:any = {
     dark: {
+      cidColor:'#ffffff',
       linkColor:`rgba(102,102,102,1)`,
       yLinkColor: `rgba(51, 51, 51, 1)`,
       yCircleColor: '#000000',
       fistText: `rgba(255,255,255,1)`,
       yAxisColor:`rgba(255,255,255,0.6)`,
-      textColor: `rgba(255,255,255,1)`
+      textColor: `rgba(255,255,255,0.6)`
     },
 
     light: {
+      cidColor:'#000000',
       linkColor:`rgba(216,216,216,1)`,
       yLinkColor: `rgba(238, 239, 241, 1)`,
       yCircleColor:'#FFFFFF',
@@ -111,7 +112,7 @@ export default observer(() => {
     chartRef.current = leecharts(chartContainerRef.current)
     getBlocks();
     let container = chartContainerRef.current
-    let cc = window.document.querySelector(".main_contain")
+    let cc = window.document.querySelector(".chart-wrapper")
     let innerHeight = window.screen.availHeight;
     let containerHeight:any= innerHeight
     containerHeight = cc?.getBoundingClientRect().height
@@ -469,10 +470,10 @@ export default observer(() => {
                           bh.safeSelect("text.t-height")
                             .text(`${dotString(d._id)}`)
                             .attrs({
-                              fill: showGray || showCid ? '#ffffff' : textColor,
+                              fill: showGray || showCid ? '#ffffff' : chartColor[theme].cidColor,
                               y: -12,
                               "text-anchor": "middle",
-                              "font-size": 11
+                              "font-size": 12
                             })
                             .on("click", function () {
                             // vue中的bci是this，指向的是这个组件，但组件上没有goto方法，需要确认
@@ -758,10 +759,10 @@ export default observer(() => {
                   0 &&
                   direction === "up"
                 ) {
-                  console.log('====0033',endHeight.current)
+                  // console.log('====0033',endHeight.current)
                   getBlocks(endHeight.current - calcHeight,'up')
                 } else if(direction === 'down' && transformY.current > 30) {
-                  getBlocks(endHeight.current - calcHeight,'down')
+                  // getBlocks(endHeight.current + calcHeight,'down')
                 }
               }
               if (transformY.current >= 10) {
@@ -858,8 +859,12 @@ export default observer(() => {
     }
   }
 
-  console.log('---34546',drawData.current)
-  return <div style={{ position: 'relative' }} className='main_contain '>
+  const handleClickTop = () => {
+    finalCurrentHeight.current = finalHeight;
+    clearDrawChart(Number(finalHeight) + 1,'height');
+  }
+
+  return <div className={`main_contain ${styles['cw_contain']} `}>
     <div className={`${styles['block-header']}`}>
       {getSvgIcon('tip')}
       <span>{ tr('cw_des')}</span>
@@ -883,6 +888,9 @@ export default observer(() => {
         </div>
       </div>
     )}
+    <div className={styles['top-wrap']} onClick={handleClickTop }>
+      { tr('cw_top')}
+    </div>
   </div>
 })
 

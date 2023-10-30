@@ -91,6 +91,11 @@ const statistic = {
   contract_addr: 'Contract Transaction Address',
     contract_balance: 'Contract Balance Trend',
   contract_total_balance: 'Contract Balance',
+  //cw
+    'cw-search': "Search height/block cid",
+    cw_des:'Operation requires dragging',
+  cw_top:'Latest height',
+
 
 }
 
