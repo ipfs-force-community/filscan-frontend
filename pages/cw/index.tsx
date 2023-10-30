@@ -403,143 +403,145 @@ export default observer(() => {
                   .selectAll("g.block-group")
                   .data(groupList)
                   .join("g.block-group")
-                  .each(function (blockGroupData:any,bhEIndex:number) {
+                  .each(function (blockGroupData: any, bhEIndex: number) {
                     //@ts-ignore
                     let bgEle = d3.select(this)
-                    let blockGroup = blockGroupData || {}
-                    let gw = getGroupListWidth(blockGroup||[], blockWidth, 0);
-                    let showGray = groupList.length === 2 && bhEIndex === 0;
+                    let blockGroup = blockGroupData ;
+                    if (blockGroup) {
+                      let gw = getGroupListWidth(blockGroup || [], blockWidth, 0);
+                      let showGray = groupList.length === 2 && bhEIndex === 0;
 
-                    blockGroup.x = gx;
+                      blockGroup.x = gx;
 
-                    //数据高度：
-                    blockGroup.y =yCalc(blockGroup[0].Epoch) - blockHeight * 0.35
-                    blockGroup.width = gw
-                    blockGroup.height = blockHeight * 0.7;
-                    gx += gw + ph;
-                    tipsetList.push({
-                      x: blockGroup.x-5,
-                      y: blockGroup.y+baseYAxis ,
-                      width: blockGroup.width+10,
-                      height: blockGroup.height,
-                      fill: showGray ? 'rgba(102, 102, 102, 0.1)':colors[numIndex % colors.length],
-                      rx: 10,
-                      ry: 10
-                    })
-                    blockGroup[0].tipsetList = blockGroup[0].tipsetList || [];
-                    blockGroup[0].tipsetList.push(blockGroup);
-                    bgEle
-                      .selectAll("g.block-header")
-                      .data(blockGroup)
-                      .join("g.block-header")
-                      .each(function (d: any, i: number) {
-                        let curHeight = d.Epoch;
-                        const showCid = searchCid.current === d._id;
-                        let showColor = colors[numIndex % colors.length];
-                        if (theme === 'light') {
-                          showColor='rgba(255,255,255,1)'
-                        } if (showCid) {
-                          showColor='rgba(29, 107, 253, 1)'
-                        }
-                        //@ts-ignore
-                        let bh = d3.select(this)
-                        let wrapX = blockGroup.x + (i + 0.5) * blockWidth;
-                        let wrapY = yCalc(curHeight)+baseYAxis;
-                        d.x = wrapX
-                        d.y = wrapY
-                        bh.attr("transform", `translate(${wrapX}, ${wrapY})`)
-                        // bh.safeSelect("ellipse")
-                        //   .attrs({
-                        //     rx: ellipseRX,
-                        //     ry: ellipseRY,
-                        //     fill: mainColor
-                        //   })
-                        bh.on("mouseover", onMMove).on("mouseout", onMOut)
-                        bh.safeSelect("rect").attrs({
-                          width: ellipseRX,
-                          height: ellipseRY,
-                          fill: showGray ? 'rgba(102, 102, 102, 0.6)':showColor,
-                          rx: 3,
-                          ry: 3,
-                          x: -ellipseRX / 2,
-                          y: -ellipseRY / 2
-                        })
-
-                        bh.safeSelect("text.t-height")
-                          .text(`${dotString(d._id)}`)
-                          .attrs({
-                            fill: showGray || showCid? '#ffffff':textColor,
-                            y: -12,
-                            "text-anchor": "middle",
-                            "font-size": 11
+                      //数据高度：
+                      blockGroup.y = yCalc(blockGroup[0]?.Epoch) - blockHeight * 0.35
+                      blockGroup.width = gw
+                      blockGroup.height = blockHeight * 0.7;
+                      gx += gw + ph;
+                      tipsetList.push({
+                        x: blockGroup.x - 5,
+                        y: blockGroup.y + baseYAxis,
+                        width: blockGroup.width + 10,
+                        height: blockGroup.height,
+                        fill: showGray ? 'rgba(102, 102, 102, 0.1)' : colors[numIndex % colors.length],
+                        rx: 10,
+                        ry: 10
+                      })
+                      blockGroup[0].tipsetList = blockGroup[0]?.tipsetList || [];
+                      blockGroup[0].tipsetList.push(blockGroup);
+                      bgEle
+                        .selectAll("g.block-header")
+                        .data(blockGroup)
+                        .join("g.block-header")
+                        .each(function (d: any, i: number) {
+                          let curHeight = d.Epoch;
+                          const showCid = searchCid.current === d._id;
+                          let showColor = colors[numIndex % colors.length];
+                          if (theme === 'light') {
+                            showColor = 'rgba(255,255,255,1)'
+                          } if (showCid) {
+                            showColor = 'rgba(29, 107, 253, 1)'
+                          }
+                          //@ts-ignore
+                          let bh = d3.select(this)
+                          let wrapX = blockGroup.x + (i + 0.5) * blockWidth;
+                          let wrapY = yCalc(curHeight) + baseYAxis;
+                          d.x = wrapX
+                          d.y = wrapY
+                          bh.attr("transform", `translate(${wrapX}, ${wrapY})`)
+                          // bh.safeSelect("ellipse")
+                          //   .attrs({
+                          //     rx: ellipseRX,
+                          //     ry: ellipseRY,
+                          //     fill: mainColor
+                          //   })
+                          bh.on("mouseover", onMMove).on("mouseout", onMOut)
+                          bh.safeSelect("rect").attrs({
+                            width: ellipseRX,
+                            height: ellipseRY,
+                            fill: showGray ? 'rgba(102, 102, 102, 0.6)' : showColor,
+                            rx: 3,
+                            ry: 3,
+                            x: -ellipseRX / 2,
+                            y: -ellipseRY / 2
                           })
-                          .on("click", function () {
-                          // vue中的bci是this，指向的是这个组件，但组件上没有goto方法，需要确认
+
+                          bh.safeSelect("text.t-height")
+                            .text(`${dotString(d._id)}`)
+                            .attrs({
+                              fill: showGray || showCid ? '#ffffff' : textColor,
+                              y: -12,
+                              "text-anchor": "middle",
+                              "font-size": 11
+                            })
+                            .on("click", function () {
+                            // vue中的bci是this，指向的是这个组件，但组件上没有goto方法，需要确认
                             // goto 需要自己实现，看起来是跳转到另一个页面
                             // bci.goTo("tipset", {
                             //   query: { hash: d.cid }
                             // })
-                          })
+                            })
 
-                        bh.safeSelect("text.t-miner")
-                          .text(`${d.Miner} - ${d.Epoch}`)
-                          .attrs({
-                            fill: showGray || showCid?'#ffffff':textColor,
-                            "text-anchor": "middle",
-                            "font-size": 11,
-                            y: 5
-                          })
-                          .on("click", function () {
+                          bh.safeSelect("text.t-miner")
+                            .text(`${d.Miner} - ${d.Epoch}`)
+                            .attrs({
+                              fill: showGray || showCid ? '#ffffff' : textColor,
+                              "text-anchor": "middle",
+                              "font-size": 11,
+                              y: 5
+                            })
+                            .on("click", function () {
                             // goto需要自己实现，看起来是跳转到另一个页面
                             // bci.goTo("addressDetail", {
                             //   query: { address: d.miner }
                             // })
-                          })
-                        bh.safeSelect("text.t-time")
-                          .text(
-                            `${timeToStr(
-                              d.first_seen,
-                              "yyyy-mm-dd hh:mm:ss"
-                            )}`
-                          )
-                          .attrs({
-                            fill: showGray || showCid?'#ffffff':textColor,
-                            "text-anchor": "middle",
-                            "font-size": 10,
-                            y: 20
-                          })
-                        let switchTooltip = makeSwitchTooltip()
+                            })
+                          bh.safeSelect("text.t-time")
+                            .text(
+                              `${timeToStr(
+                                d.first_seen,
+                                "yyyy-mm-dd hh:mm:ss"
+                              )}`
+                            )
+                            .attrs({
+                              fill: showGray || showCid ? '#ffffff' : textColor,
+                              "text-anchor": "middle",
+                              "font-size": 10,
+                              y: 20
+                            })
+                          let switchTooltip = makeSwitchTooltip()
 
-                        function onMMove() {
-                          switchTooltip(true, d3.event)
-                        }
-                        function onMOut() {
-                          switchTooltip(false, d3.event)
-                        }
-                        function makeSwitchTooltip() {
-                          let timeHandle:any = null
-                          let shouldShow = false
-                          let delta = 100;
-                          return (show:any, d3Event:any) => {
-                            shouldShow = show
-                            if (timeHandle) {
-                              clearTimeout(timeHandle)
-                            }
-                            timeHandle = setTimeout(() => {
-                              let emitData:any = {
-                                type: "item",
-                                data: null
-                              }
-                              if (shouldShow) {
-                                emitData.data = d
-                                emitData.event = d3Event
-                              }
-                              emitter.emit("showTooltip", emitData)
-                              timeHandle = null
-                            }, delta)
+                          function onMMove() {
+                            switchTooltip(true, d3.event)
                           }
-                        }
-                      })
+                          function onMOut() {
+                            switchTooltip(false, d3.event)
+                          }
+                          function makeSwitchTooltip() {
+                            let timeHandle: any = null
+                            let shouldShow = false
+                            let delta = 100;
+                            return (show: any, d3Event: any) => {
+                              shouldShow = show
+                              if (timeHandle) {
+                                clearTimeout(timeHandle)
+                              }
+                              timeHandle = setTimeout(() => {
+                                let emitData: any = {
+                                  type: "item",
+                                  data: null
+                                }
+                                if (shouldShow) {
+                                  emitData.data = d
+                                  emitData.event = d3Event
+                                }
+                                emitter.emit("showTooltip", emitData)
+                                timeHandle = null
+                              }, delta)
+                            }
+                          }
+                        })
+                    }
                   })
               });
             tipsetGroup
