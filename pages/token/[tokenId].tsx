@@ -61,7 +61,7 @@ export default () => {
               }}
               className={classNames('border border_color reverse_color rounded-[5px] p-[4px] cursor-pointer hover:bg-primary')}
             >
-              <TwitterIcon width='16px'/>
+              <TwitterIcon />
             </span>
           )}
           {overviewData.main_site && (
