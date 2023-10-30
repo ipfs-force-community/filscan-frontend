@@ -604,10 +604,6 @@ export default observer(() => {
                                   type: 'item',
                                   data: null,
                                 }
-                                if (shouldShow) {
-                                  emitData.data = d
-                                  emitData.event = d3Event
-                                }
                                 emitter.emit('showTooltip', emitData)
                                 timeHandle = null
                               }, delta)
