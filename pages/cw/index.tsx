@@ -191,6 +191,15 @@ export default observer(() => {
         } else if (v?.OrphanBlocks?.length > 0) {
           calcData.push(v)
         }
+        if (!showSearch &&v?.OrphanBlocks?.length >0) {
+          v.OrphanBlocks.forEach((orphanItem:any) => {
+            if (type === 'cid' && orphanItem._id === searchCid.current) {
+              showSearch = true;
+              console.log('----333',orphanItem)
+              searchHeight.current = Number(orphanItem.Epoch)
+            }
+          })
+        }
       });
       if (type === 'cid' && calcData.length > 0) {
         endHeight.current = calcData[0].Height-1;
