@@ -15,15 +15,14 @@ export default () => {
   const renderChild = (children: Array<any>, num: number) => {
     return (
       <ul
-        style={{padding:'16px'}}
         key={num}
-        className='hidden group-hover:block h-fit absolute z-50 inset-y-full max-h-fit w-max list-none  border -ml-8 rounded-[5px] select_shadow  main_bg_color  border_color'>
+        className='hidden group-hover:block h-fit absolute z-50 inset-y-full w-max list-none  border px-4 -ml-8 rounded-[5px] select_shadow  main_bg_color  border_color'>
         {children.map((item, index) => {
           return (
             <Link
               key={index}
               href={`${item.link}`}
-              className='relative h-10 text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>
+              className='relative h-10 text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover first:mt-4 last:mb-4'>
               <span className='px-4'>{tr(item.key)}</span>
               {item.sufIcon && <span className='absolute -top-[2px] -right-2'>{getSvgIcon(item.sufIcon)}</span>}
             </Link>
