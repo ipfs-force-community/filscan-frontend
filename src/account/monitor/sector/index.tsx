@@ -8,7 +8,8 @@ import Rules from './Rules'
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
-  const [showRules,setShowRules] = useState(false)
+  const [showRules, setShowRules] = useState(false);
+  const [selectGroup, setSelectGroup] = useState('all')
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
@@ -16,6 +17,9 @@ export default () => {
       break;
     case 'cancel':
       setShowRules(false)
+      break;
+    case 'group':
+      setSelectGroup(value);
       break;
     };
 
@@ -28,10 +32,10 @@ export default () => {
   }, [tr])
 
   return <div className={styles.sector}>
-    <Header onChange={handleChange} />
+    <Header onChange={handleChange} selectGroup={ selectGroup} />
     <div className={ styles.sector_table}>
       <Table data={[]} columns={columns} loading={false} />
     </div>
-    <Rules showModal={ showRules} onChange={handleChange}/>
+    <Rules showModal={showRules} onChange={handleChange}/>
   </div>
 }

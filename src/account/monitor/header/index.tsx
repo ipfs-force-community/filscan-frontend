@@ -8,11 +8,12 @@ import { useMemo } from 'react';
 import { Button } from 'antd';
 
 interface Props {
+              selectGroup:string|number
 onChange?:(type:string,value:string|number|boolean)=>void;
 }
 
 export default observer((props: Props) => {
-  const {onChange } = props;
+  const {onChange ,selectGroup} = props;
   const { groupMiners } = accountStore;
   const { tr } = Translation({ ns: 'account' });
 
@@ -28,8 +29,9 @@ export default observer((props: Props) => {
     return newGroups;
   }, [tr, groupMiners]);
 
+  const miners = useMemo(() => { },[])
+
   const handleChange = (type:string,value:string|number|boolean) => {
-    console.log('----3', type, value)
     if (onChange) {
       onChange(type,value)
     }

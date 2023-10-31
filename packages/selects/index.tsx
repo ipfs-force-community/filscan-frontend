@@ -19,7 +19,7 @@ export default ({
   border?: boolean;
   suffix?: JSX.Element;
     options: Array<Option_Item>;
-    laceholder?: string;
+    placeholder?: string;
   onChange: (value: string) => void;
 }) => {
   const [new_options, setOptions] = useState<Array<Option_Item>>([]);
