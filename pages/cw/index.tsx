@@ -463,6 +463,7 @@ export default observer(() => {
                           d.x = wrapX
                           d.y = wrapY
                           bh.attr("transform", `translate(${wrapX}, ${wrapY})`)
+                          bh.attr('cursor','pointer')
                           // bh.safeSelect("ellipse")
                           //   .attrs({
                           //     rx: ellipseRX,
