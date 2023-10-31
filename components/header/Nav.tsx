@@ -15,8 +15,9 @@ export default () => {
   const renderChild = (children: Array<any>, num: number) => {
     return (
       <ul
+        style={{padding:'16px'}}
         key={num}
-        className='hidden group-hover:block h-fit absolute z-50 inset-y-full max-h-fit w-max list-none  border p-4 -ml-8 rounded-[5px] select_shadow  main_bg_color  border_color'>
+        className='hidden group-hover:block h-fit absolute z-50 inset-y-full max-h-fit w-max list-none  border -ml-8 rounded-[5px] select_shadow  main_bg_color  border_color'>
         {children.map((item, index) => {
           return (
             <Link
