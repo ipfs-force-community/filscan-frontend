@@ -18,7 +18,8 @@ class AccountStore {
     this.defaultGroup = undefined
     makeObservable(this, {
       countMiners: observable,
-      groupMiners:observable,
+      groupMiners: observable,
+      defaultGroup:observable
     });
     this.getAccountMinersNumber()
     this.getAccountGroup()
@@ -42,8 +43,9 @@ class AccountStore {
     if (!result.error) {
       this.getAccountMinersNumber()
     }
-    runInAction(()=>{
-      this.groupMiners = result?.data?.group_info_list || [];
+    runInAction(() => {
+      console.log('-----33',result?.data?.group_info_list)
+      this.groupMiners = (result?.data?.group_info_list || []);
       this.defaultGroup = result?.data?.group_info_list?.find((v: GroupInfoList) => v.is_default)
     })
   }

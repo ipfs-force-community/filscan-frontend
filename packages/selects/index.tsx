@@ -13,13 +13,13 @@ export default ({
   border,
   placeholder
 }: {
-  value?: string;
+  value?: string|number;
   className?: string;
   popupClassName?: string;
   border?: boolean;
   suffix?: JSX.Element;
     options: Array<Option_Item>;
-    placeholder?: string;
+    laceholder?: string;
   onChange: (value: string) => void;
 }) => {
   const [new_options, setOptions] = useState<Array<Option_Item>>([]);

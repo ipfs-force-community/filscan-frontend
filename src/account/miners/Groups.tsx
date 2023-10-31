@@ -269,7 +269,6 @@ const Groups = () => {
         loading={deleteLoading}
         onOk={(e: any) => {
           //  e.stopPropagation();
-
           if (modalItems.type === 'miner') {
             handleDelMiner(modalItems);
           } else {

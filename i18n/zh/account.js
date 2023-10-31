@@ -21,6 +21,7 @@ const account = {
   welcome_text2: '请登录您的账户并享受您的Filscan服务!',
   last_time: '最新更新时间',
   all: '全部',
+  all_groups:'全部分组',
   edit:'操作',
   miner_add: '添加',
   //个人账户
@@ -146,7 +147,13 @@ const account = {
   name_length: '名称长度小于10',
 
   //下载
-  out_come_gas:'支出',
+  out_come_gas: '支出',
+  
+  //监控
+  add_rules:'添加规则',
+  examination: '规则',
+  alarm: '告警方式',
+  status:'状态'
 
 }
 

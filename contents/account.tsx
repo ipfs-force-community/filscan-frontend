@@ -1349,6 +1349,37 @@ export const account_miners = {
   ],
 };
 
+//监控columns
+export const monitor_list = [
+  {
+    dataIndex: 'group_name',
+    title: 'group_name',
+    width:'15%'
+  },
+  {
+    dataIndex: 'miner_id',
+    title: 'miner_id',
+    width:'15%'
+  }, {
+    dataIndex: 'examination',
+    title: 'examination',
+    width:'23%'
+  }, {
+    dataIndex: 'alarm',
+    title: 'alarm',
+    width:'22%'
+  }, {
+    dataIndex: 'status',
+    title: 'status',
+    width:'15%'
+  },
+  {
+    dataIndex: 'edit',
+    title: 'edit',
+    width:'15%'
+  }
+]
+
 function renderFil(text: string | number, changeText?: number | string, flag: string = '', className?: string,unit:string ='FIL') {
   const textValue = formatFil(text, unit, 4, true)
   return (
