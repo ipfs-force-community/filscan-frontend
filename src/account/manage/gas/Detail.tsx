@@ -22,10 +22,7 @@ interface Props {
 }
 
 export default observer((props:Props) => {
-  const {
-    miner,
-    selectedKey
-  } = props;
+  const {miner,selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
   const { gasDetailData,gasDetailLoading } = manageStore
   const routerItems = useMemo(() => {
