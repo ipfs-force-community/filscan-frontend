@@ -14,6 +14,8 @@ const common = {
   last_height: '최신 블록 높이',
   go_home: '홈으로',
   go_login: '로그인하러 가기',
+      mobile_code_1: 'QR 코드 스캔',
+    mobile_code_2:'모바일 브라우저를 경험해보세요',
   //search
   'search_holder': '주소/메시지 ID/높이/블록 CID/노드 ID/FNS를 입력하세요',
   all: '모든 필터 유형',

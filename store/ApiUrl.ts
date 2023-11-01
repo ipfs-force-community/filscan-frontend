@@ -10,5 +10,12 @@ export const countMiners = proUrl + '/CountUserMiners';
 export const UserGroups = proUrl + '/GetUserGroups';
 export const saveMiner = proUrl + '/SaveUserMiners';
 export const delGroup = proUrl + '/DeleteGroup';
-export const saveGroup =proUrl + '/SaveGroupMiners'
+export const saveGroup = proUrl + '/SaveGroupMiners';
+export const minerOverview = proUrl + '/MinerInfoDetail';
+export const powerData = proUrl + '/PowerDetail';
+export const gasData = proUrl + '/GasCostDetail';
+export const expiredData = proUrl + '/SectorDetail';
+export const rewardData = proUrl + '/RewardDetail';
+export const luckyData = proUrl + '/LuckyRateDetail';
+export const balanceData = proUrl + '/BalanceDetail';
 

@@ -45,7 +45,7 @@ export default () => {
   return (
     <div className={classNames('main_contain',styles.wrap)}>
       <div className={classNames('flex justify-between items-center text-xl font-DINPro-Bold gap-x-1 mb-4',styles.token)}>
-        <div className='flex gap-x-1'>
+        <div className='flex gap-x-1 items-center'>
           {overviewData?.token_name && (
             <Image width={40} height={40} src={overviewData.icon_url} alt='' />
           )}
@@ -61,7 +61,7 @@ export default () => {
               }}
               className={classNames('border border_color reverse_color rounded-[5px] p-[4px] cursor-pointer hover:bg-primary')}
             >
-              <TwitterIcon width='16px'/>
+              <TwitterIcon />
             </span>
           )}
           {overviewData.main_site && (

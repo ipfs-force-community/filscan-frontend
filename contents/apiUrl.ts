@@ -45,13 +45,15 @@ export const heightDetail = mainUrl + '/TipsetDetail';
 export const EvmContractSummary = mainUrl + '/EvmContractSummary';
 export const EvmTxsHistory = mainUrl + '/EvmTxsHistory'
 export const EvmGasTrend = mainUrl + '/EvmGasTrend'
+export const ContractBalanceTrend = mainUrl + '/ContractBalanceTrend'
 export const ContractUsersTrend = mainUrl + '/ContractUsersTrend'
 export const ContractCntTrend = mainUrl + '/ContractCntTrend'
 export const FilPrice= mainUrl+'/FilPrice'
 export const FinalHeight = mainUrl + '/FinalHeight'
 export const DCTrend = mainUrl + '/DCTrend'
 export const TransMethod = mainUrl + '/TransferMethodByAccountID'
-
+export const cwUrl = mainUrl + '/TipsetStateTree'
+export const metaOther = mainUrl + '/BannerIndicator'
 export const apiUrl: API | any = {
   fvm_hot: mainUrl + '/GetFEvmHotItems',
   fvm_category: mainUrl + '/GetFEvmCategory',

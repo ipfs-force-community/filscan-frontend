@@ -104,7 +104,7 @@ function Wallet() {
     {wallet.account ? <div >
       <div className="flex items-center gap-x-2 mt-4 ">
         <span className="w-fit cursor-pointer px-4 py-2 border border_color rounded-[5px]" onClick={() => {
-          window.open(`${window.location.host}/address/${wallet.account}/`);
+          window.open(`https://filscan.io/address/${wallet.account}/`);
         }}>
           {`Connected - Web3 [${isIndent(wallet?.account, 4)}]`}
         </span>

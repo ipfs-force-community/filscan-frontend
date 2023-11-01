@@ -35,8 +35,9 @@ export default () => {
     if (result) {
       localStorage.setItem('token', result?.token);
       router.push('/account/login' )
-      // userInfo.setUserInfo({...result})
-      // localStorage.setItem('expired_at', result.expired_at); //过期时间
+      //userInfo.setUserInfo({...result})
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('expired_at', result.expired_at); //过期时间
     } else {
       messageManager.showMessage({
         type: 'error',

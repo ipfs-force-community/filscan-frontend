@@ -86,9 +86,18 @@ const statistic = {
   dc_trend: 'DC',
   cc_trend: 'CC',
   networks_overview: '全网指标',
-  contract_con:'合约部署走势',
+  contract_con: '合约部署走势',
+  contract_counts:'合约部署',
   contract_gas: '合约Gas消耗',
-  contract_addr:'合约交易地址',
+  contract_addr: '合约交易地址',
+  contract_balance: '合约余额走势',
+  contract_total_balance: '合约余额',
+
+  //cw 
+  'cw-search': "搜索高度/区块cid",
+  cw_des: '拖拽以查看不同高度',
+  cw_top:'最新高度',
+
 }
 
 export default statistic

@@ -85,7 +85,20 @@ const statistic = {
 
   contract_trend: '계약 거래',
   charts_title: 'FIL 할당 지침',
-  networks_overview:'전체 네트워크 데이터 지표'
+  networks_overview: '전체 네트워크 데이터 지표',
+  contract_con: '계약 배포 추이',
+  contract_counts:'계약 거래 주소',
+  contract_gas: '계약 Gas 소비',
+  contract_addr: ' 계약 배포',
+      contract_balance: '계약 잔액 추세',
+  contract_total_balance: '계약 잔액',
+  //cw
+
+  'cw-search': "높이/블록 CID 검색",
+  cw_des: '다양한 높이를 보려면 드래그하세요',
+  cw_top:'최신 키',
+
+
 
 }
 

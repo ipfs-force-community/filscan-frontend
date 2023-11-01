@@ -362,7 +362,7 @@ font-display: auto;
     .ant-select-selector{
           cursor: pointer;
         padding: 3px 16px !important;
-        height:36px !important;
+        height:32px !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bgDesColor) !important;
         .ant-select-selection-item{
@@ -452,33 +452,7 @@ font-display: auto;
 }
 
 
-//ant-modal
-.ant-modal-root{
 
-    .ant-modal-content{
-        background-color: var(--bgColor) !important;
-        color: var(--font-color) !important;
-        .ant-modal-header{
-            text-align: center;
-            background-color: transparent;
-            .ant-modal-title{
-                color: var(--font-color) !important;
-            }
-            
-        }
-        .ant-modal-close-x{
-            .ant-modal-close-icon{
-                color: var(--font-color);
-            }
-        }
-    }
-}
-
-.noPaddingModal{
-      .ant-modal-content{
-        padding: 0px !important;
-      }
-}
 
 
 .custom_collapse_gaps{
@@ -509,9 +483,26 @@ font-display: auto;
   .ant-collapse-item{
  border-color: transparent !important;
   }
+    .ant-collapse-content{
+            background-color: var(--bgColor);
+            border-top: 1px solid var(--border-color);
+            border-radius: 0px 0px 12px 12px !important;
+        .ant-collapse-content-box{
+             border-radius: 0px 0px 12px 12px;
+              background-color: var(--bgColor)
+        }
+     }
 }
 .ant-collapse {
-   
+    .ant-collapse-content{
+            background-color: var(--bgColor);
+            border-top: 1px solid var(--border-color);
+            border-radius: 0px 0px 12px 12px !important;
+        .ant-collapse-content-box{
+             border-radius: 0px 0px 12px 12px;
+              background-color: var(--bgColor)
+        }
+     }
 }
   .ant-collapse-item{
         width: 100%;
@@ -547,7 +538,7 @@ font-display: auto;
     border: 1px solid var(--border-color);
     background-color: var(--bgDesColor);
     width: fit-content;
-    height: 36px;
+    height: 32px;
     &_pre{
         position: absolute;
         left: 10px;
@@ -679,6 +670,33 @@ font-display: auto;
 }
 
 //modal 
+//ant-modal
+.ant-modal-root{
+    .ant-modal-content{
+        background-color: var(--bgColor) !important;
+        color: var(--font-color) !important;
+        .ant-modal-header{
+            text-align: center;
+            background-color: transparent;
+            .ant-modal-title{
+                color: var(--font-color) !important;
+            }
+            
+        }
+        .ant-modal-close-x{
+            .ant-modal-close-icon{
+                color: var(--font-color);
+            }
+        }
+    }
+}
+
+.noPaddingModal{
+      .ant-modal-content{
+        padding: 0px !important;
+      }
+}
+
 .custom_modal{
     width: 100%;
 }
@@ -688,7 +706,6 @@ font-display: auto;
 .custom_modal_wrapper{
     width: 100%;
     height: 100%;
- 
     .custom_modal{
         width: fit-content !important;
         top: 25%;

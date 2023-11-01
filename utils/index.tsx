@@ -61,7 +61,7 @@ export function formatFil(
   if (unit.startsWith('FIL')) {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 18));
     returnValue = Number(showNum)
-  } else if (unit === 'nanoFiL') {
+  } else if (unit === 'nanoFIL') {
     const showNum = new BigNumber(num).dividedBy(Math.pow(10, 9));
     returnValue = Number(showNum)
   } else {
@@ -403,5 +403,19 @@ export const isMobile = ()=>{
   }catch(error){
     console.log('Error: Window does not exist!');
     return false
+  }
+}
+
+// save to storage
+export const saveToStorage = (key:string, value:any) => {
+  if(typeof window !== 'undefined') {
+    return window.localStorage.setItem(key, value);
+  }
+}
+
+// get from storage
+export const getFromStorage = (key:string) => {
+  if (typeof window !== 'undefined') {
+    return window.localStorage.getItem(key);
   }
 }

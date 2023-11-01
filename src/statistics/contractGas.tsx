@@ -52,7 +52,7 @@ export default (props: Props) => {
           color: color.textStyle,
         },
         axisLabel: {
-          formatter: '{value}',
+          formatter: '{value} FIL',
           margin:8,
           hideOverlap:true,
           textStyle: {

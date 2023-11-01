@@ -1,7 +1,6 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import { UserInfo } from '@/store/UserStore';
 import Logo from '@/assets/images/logo.svg';
 import UserIcon from '@/assets/images/user.svg';
 import { formatDateTime, max_name_length, validatePassword } from '@/utils';
@@ -13,13 +12,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import messageManager from '@/packages/message';
 import { getSvgIcon } from '@/svgsIcon';
+import userStore from '@/store/modules/user';
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
   const [loading, setLoading] = useState(false);
   const { axiosData } = useAxiosData();
+  const { userInfo} = userStore
   const router = useRouter();
-  const userInfo = UserInfo();
   const [form] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const [name,setName]= useState('')
@@ -51,7 +51,7 @@ export default () => {
         content: 'Update successful',
       });
       localStorage.removeItem('token');
-      userInfo.setUserInfo({ })
+      userStore.setUserInfo()
       router.push('/account/login')
     }
     setLoading(false);

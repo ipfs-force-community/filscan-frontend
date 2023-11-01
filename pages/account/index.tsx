@@ -7,26 +7,28 @@ import { useHash } from '@/components/hooks/useHash';
 import Overview from '@/src/account/overview';
 import Miners from '@/src/account/miners';
 import Personal from '@/src/account/personal';
-import Lucky from '@/src/account/lucky';
-import Balance from '@/src/account/balance';
-import Reward from '@/src/account/reward';
+import Lucky from '@/src/account/manage/lucky';
+import Balance from '@/src/account/manage/balance';
+import Reward from '@/src/account/manage/reward';
 import NoMiner from '@/src/account/NoMiner';
-import Power from '@/src/account/power';
-import Gas from '@/src/account/gas';
-import Expired from '@/src/account/expired';
+import Power from '@/src/account/manage/power';
+import Gas from '@/src/account/manage/gas';
+import Expired from '@/src/account/manage/expired';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Loading from '@/components/loading';
-import MonitorBalance from '@/src/account/monitor/balance'
+import MonitorBalance from '@/src/account/monitor/balance';
+import MonitorSector from '@/src/account/monitor/sector'
 import accountStore from '@/store/modules/account';
 import userStore from '@/store/modules/user';
 import { Menu } from 'antd';
+import { observer } from 'mobx-react';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
   const {userInfo } = userStore;
   const { countMiners } = accountStore;
-  const {miners_count,loading } = countMiners;
+  const { miners_count,loading } = countMiners;
   const { hash, hashParams } = useHash();
   const router = useRouter()
   const selectedKey = useMemo(() => {
@@ -39,9 +41,12 @@ const Account: React.FC = () => {
   useEffect(() => {
     if (!userInfo.mail || !localStorage.getItem('token')) {
       router.push('/account/login');
+      return
+    } else { 
+      accountStore.getAccountMinersNumber()
     }
   }, [userInfo.mail]);
-
+  
   if (loading) {
     return <Loading />
   }
@@ -73,7 +78,10 @@ const Account: React.FC = () => {
           <div className='w-full px-5 mb-10 text-lg font-semibold font-PingFang	'>
             {tr('account_title')}
           </div>
-          <Menu mode="inline" className='custom_menu' defaultOpenKeys={['data_details','monitor']}>
+          <Menu mode="inline"
+            className='custom_menu'
+            selectedKeys={[selectedKey] }
+            defaultOpenKeys={['data_details', 'monitor']}>
             {account_manager.map(renderMenuItem)}
           </Menu>
         </div>
@@ -125,6 +133,9 @@ const Account: React.FC = () => {
                 {selectedKey === 'monitorBalance' && (
                   <MonitorBalance selectedKey={'monitor_balance'}/>
                 )}
+                {selectedKey === 'monitorSector' && (
+                  <MonitorSector />
+                )}
                 {selectedKey === 'personal' && <Personal />}
               </>
             )}
@@ -134,4 +145,4 @@ const Account: React.FC = () => {
   );
 };
 
-export default Account; //已登录/注册
+export default observer(Account); //已登录/注册

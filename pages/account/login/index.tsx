@@ -6,7 +6,6 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { useEffect, useMemo, useState} from 'react';
 import SendCode from '@/src/account/sendCode';
 import { proApi } from '@/contents/apiUrl';
-// import { UserInfo } from '@/store/UserStore';
 import { useHash } from '@/components/hooks/useHash';
 import useAxiosData from '@/store/useAxiosData';
 import Link from 'next/link';
@@ -14,6 +13,7 @@ import messageManager from '@/packages/message';
 import { useRouter } from 'next/router';
 import Banner from '@/src/account/Banner';
 import userStore from '@/store/modules/user';
+import { BrowserView, MobileView } from '@/components/device-detect';
 
 export default () => {
   const [form] = Form.useForm();
@@ -33,6 +33,8 @@ export default () => {
       token: token||localStorage.getItem('send_code')
     });
     if (result?.token) {
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('expired_at', result.expired_at); //过期时间
       userStore.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
@@ -68,7 +70,9 @@ export default () => {
   },[hashParams.type])
   return (
     < >
-      <Banner />
+      <BrowserView>
+        <Banner />
+      </BrowserView>
       <div className='main_contain !w-1/2 !min-w-[404px] !mb-10 !mt-8'>
         <ul className='flex gap-x-6 list-none'>
           {logTabs?.map((log_item, index) => {

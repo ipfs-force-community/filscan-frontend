@@ -3,22 +3,24 @@
 import { Translation } from '@/components/hooks/Translation';
 import Loading from '@/components/loading';
 import { overview } from '@/contents/account';
-import { proApi } from '@/contents/apiUrl';
 import Table from '@/packages/Table';
 import ExportExcel from '@/packages/exportExcel';
-import Selects from '@/packages/selects';
-import useAxiosData from '@/store/useAxiosData';
 import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime } from '@/utils';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import Groups from './Groups';
+import overviewStore from '@/store/modules/account/overview';
+import { observer } from 'mobx-react';
 
-export default ({
-  selectedKey,
-}: {
-  selectedKey: string;
-}) => {
+interface Props {
+selectedKey:string
+}
+
+export default observer((props: Props) => {
+  const {selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string>('-1');
+  const { overviewData = {}, loading = true } = overviewStore;
 
   const columns = useMemo(() => {
     return overview.columns(tr).map((item) => {
@@ -26,32 +28,19 @@ export default ({
     });
   }, [tr]);
 
-  //proApi
-  const { data: overviewData, loading } = useAxiosData(proApi.getOverview, {
-    group_id: active ? Number(active) : '',
-  });
+  useEffect(() => {
+    load()
+  },[])
 
-  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
-    group_id: active ? Number(active) : null,
-  });
-  const groups:Array<any> = useMemo(() => {
-    let newGroups: Array<any> = [{
-      value: '-1',
-      label:tr('all')
-    }];
-    (groupsData?.group_list || []).forEach((group: any) => {
-      newGroups.push({
-        ...group,
-        value: String(group.group_id),
-        label: tr(group?.group_name),
-      });
-    });
-    return newGroups
-  }, [groupsData?.group_list, tr])
+  const load = (value?: string) => {
+    const groupId = value ? Number(value): Number(active)
+    overviewStore.getOverViewData(Number(groupId))
+  }
 
   if (loading) {
     return <Loading />
   }
+
   return (
     <>
       <div className='flex justify-between items-center'>
@@ -67,13 +56,10 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects
-            value={active}
-            options={groups}
-            onChange={(value: string) => {
-              setActive(value);
-            }}
-          />
+          <Groups selectGroup={active} onChange={(value: string) => {
+            load(value)
+            setActive(value);
+          }}/>
           <ExportExcel
             columns={columns}
             data={overviewData?.miner_info_detail_list || []}
@@ -110,9 +96,8 @@ export default ({
           data={overviewData?.miner_info_detail_list || []}
           columns={columns}
           loading={loading}
-          // onChange={handleChange}
         />
       </div>
     </>
   );
-};
+});

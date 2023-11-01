@@ -17,7 +17,6 @@ export const axiosServer = async <T>(
   requestConfig: RequestConfig = {}
 ): Promise<RequestResult> => {
   const { retryCount = 3, timeout } = requestConfig;
-  const token = localStorage.getItem('token'); // 从 localStorage 获取 token
   let cancelTokenSource = axios.CancelToken.source();
 
   const cancelPreviousRequests = () => {
@@ -27,6 +26,7 @@ export const axiosServer = async <T>(
 
   const request = async (retry: number): Promise<RequestResult> => {
     try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null; // 在客户端使用 localStorage
       const response: AxiosResponse<any> = await axios.request({
         url,
         method:'POST',
@@ -35,7 +35,7 @@ export const axiosServer = async <T>(
         timeout,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `${token}`,
+          Authorization:token? `${token}`:null,
         },
       });
       return {
@@ -67,12 +67,17 @@ export const axiosServer = async <T>(
   };
 
   // Listen for route change events
-  window.addEventListener('popstate', handleRouteChange);
+  if (typeof window !== 'undefined') {
+    // Listen for route change events
+    window.addEventListener('popstate', handleRouteChange);
+  }
   try {
     const result = await request(retryCount);
     return result;
   } finally {
     // Remove the route change event listener
-    window.removeEventListener('popstate', handleRouteChange);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('popstate', handleRouteChange);
+    }
   }
 };

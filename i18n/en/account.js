@@ -36,7 +36,7 @@ const account = {
   miners_group_manage: 'Manage Miners Group',
   total_out_come_gas: 'Total Cost/Gas Cost',
   pledge_amount_24: 'FIL Pledged/24H Changes',
-  balance_24:'Balance/24H Changes',
+  balance_24:'Total Balance/24H Changes',
   quality_power_24: 'Quality Power/24H Changes',
 
   //节点管理 Miner Manager

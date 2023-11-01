@@ -21,6 +21,8 @@ const account = {
   welcome_text2: '请登录您的账户并享受您的Filscan服务!',
   last_time: '最新更新时间',
   all: '全部',
+  all_groups: '全部分组',
+  all_miners:'全部节点',
   edit:'操作',
   miner_add: '添加',
   //个人账户
@@ -41,7 +43,7 @@ const account = {
   //total_out_come_gas: '总支出/Gas消耗',
   total_out_come_gas: '支出/Gas消耗',
   pledge_amount_24: '质押FIL/今日变化',
-  balance_24:'可用余额/今日变化',
+  balance_24:'账户余额/今日变化',
   quality_power_24: '有效算力/今日变化',
 
   //节点管理
@@ -146,7 +148,13 @@ const account = {
   name_length: '名称长度小于10',
 
   //下载
-  out_come_gas:'支出',
+  out_come_gas: '支出',
+  
+  //监控
+  add_rules:'添加规则',
+  examination: '规则',
+  alarm: '告警方式',
+  status:'状态'
 
 }
 

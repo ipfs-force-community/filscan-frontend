@@ -148,7 +148,7 @@ export const miner_overview = {
       style: { width: '25%', justifyContent: 'flex-start' },
 
       render: (text: string | number) =>
-        text ? formatFilNum(text, false, false) : text,
+        text ? formatFilNum(text, false, false) : '--',
     }, //扇区质押
     {
       title: 'gas_fee',
@@ -1150,7 +1150,7 @@ const default_content = [
     title: 'balance',
     dataIndex: 'account_balance',
     type: ['account_basic'],
-    render: (text: string) => (text ? formatFil(text,'FIL',4)+' FIL' : '--'),
+    render: (text: string) => (text ? formatFilNum(text) : '--'),
   },
   {
     title: 'stable_address', dataIndex: 'stable_address', elasticity: true,

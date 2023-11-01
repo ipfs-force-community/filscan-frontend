@@ -2,7 +2,7 @@
 
 import { UserGroups, countMiners, delGroup, saveGroup, saveMiner } from "@/store/ApiUrl";
 import { RequestResult, axiosServer } from "@/store/axiosServer";
-import { makeObservable, observable } from "mobx";
+import { makeObservable, observable, runInAction } from "mobx";
 import { GroupInfoList } from "./type";
 
 class AccountStore {
@@ -18,7 +18,8 @@ class AccountStore {
     this.defaultGroup = undefined
     makeObservable(this, {
       countMiners: observable,
-      groupMiners:observable,
+      groupMiners: observable,
+      defaultGroup:observable
     });
     this.getAccountMinersNumber()
     this.getAccountGroup()
@@ -28,10 +29,13 @@ class AccountStore {
   //用户名下节点数
   async getAccountMinersNumber () {
     const result: RequestResult = await axiosServer(countMiners)
-    this.countMiners = {
-      ...result.data,
-      loading:false,
-    } || {};
+    runInAction(()=>{
+      this.countMiners = {
+        ...result.data,
+        loading:false,
+      } || {};
+    })
+
   }
   //用户名下分组
   async getAccountGroup() {
@@ -39,8 +43,15 @@ class AccountStore {
     if (!result.error) {
       this.getAccountMinersNumber()
     }
-    this.groupMiners = result?.data?.group_info_list ? [...result?.data?.group_info_list] : [];
-    this.defaultGroup = result?.data.group_info_list?.find((v: GroupInfoList) => v.is_default)
+    runInAction(() => {
+      this.groupMiners = (result?.data?.group_info_list || []).map((groups:GroupInfoList)=> {
+        const miners = (groups?.miners_info||[]).map(v => {
+          return {...v,label:v.miner_tag,value:String(v.miner_id)}
+        })
+        return {...groups,miners:miners,label:groups.group_name,value:String(groups.group_id)}
+      });
+      this.defaultGroup = result?.data?.group_info_list?.find((v: GroupInfoList) => v.is_default)
+    })
   }
   //修改保存名下节点
   async saveMiners(groupItem:GroupInfoList[]){

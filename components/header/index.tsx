@@ -2,6 +2,7 @@
 
 import { header_top, langOptions, networkOptions } from '@/contents/common';
 import { Translation } from '@/components/hooks/Translation';
+import codeImg from '@/assets/images/code.png';
 import Account from './Account';
 import Nav from './Nav';
 import { useFilscanStore } from '@/store/FilscanStore';
@@ -16,6 +17,10 @@ import useAxiosData from '@/store/useAxiosData';
 import { FilPrice, FinalHeight } from '@/contents/apiUrl';
 import TimerHtml from '../TimerHtml';
 import useInterval from '../hooks/useInterval';
+import cwStore from '@/store/modules/Cw';
+import Image from 'next/image';
+
+import { spawn } from 'child_process';
 // import Skeleton from '@/packages/skeleton';
 
 export default () => {
@@ -51,6 +56,7 @@ export default () => {
     const result = await axiosData(FilPrice);
     setFilData(result || {})
     const finalHeight = await axiosData(FinalHeight);
+    cwStore.setFinalHeight(finalHeight?.height)
     setFinalHeight(finalHeight || {})
   }
 
@@ -97,6 +103,29 @@ export default () => {
               })}
             </ul>
             <div className='flex gap-x-2.5 items-center'>
+              <Select
+                ns=''
+                wrapClassName='main_bg_color'
+                className='!-inset-x-1/2	'
+                value={apiFlag || 'Mainnet'}
+                header={
+                  <div className='flex items-center justify-center w-7 h-7 border  cursor-pointer rounded-[5px] main_bg_color border_color '>
+                    {getSvgIcon('code')}
+
+                  </div>
+                }
+                onChange={handleNetwork}
+                // options={ []}
+                optionsCard={<div className={ `w-[120px] flex flex-col items-center `} >
+                  <Image src={codeImg} alt='' width={120} className={ `${theme === 'dark'?'bg-white p-2 rounded-[5px]':''}`} />
+                  <div className='flex flex-col items-center text_des text-xs  mt-2.5 text-center'>
+                    <div className='mb-[2px] ' >
+                      {tr('mobile_code_1')}
+                    </div>
+                    { tr('mobile_code_2')}
+                  </div>
+                </div>}
+              />
               <Select
                 ns=''
                 wrapClassName='main_bg_color'

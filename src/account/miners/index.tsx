@@ -2,13 +2,13 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import { useHash } from '@/components/hooks/useHash';
-import accountStore from '@/store/modules/account'
-import { observer } from 'mobx-react';
-import MinerAdd from './Add';
 import { useMemo } from 'react';
 import Link from 'next/link';
 import GroupAdd from './GroupAdd';
 import Groups from './Groups';
+import MinerAdd from './Add';
+import { observer } from 'mobx-react';
+import accountStore from '@/store/modules/account';
 
 export default observer(() => {
   const { hashParams } = useHash();

@@ -84,7 +84,18 @@ const statistic = {
   contract_trend: 'Contract Transaction',
   fil_overview: 'FIL Overview',
   charts_title: 'FIL Allocation Guidelines',
-  networks_overview:'Network Overview'
+  networks_overview: 'Network Overview',
+  contract_con: 'Trend of Contract Deployment',
+  contract_counts:'Contract Deployment',
+  contract_gas: 'Contract Gas Cost',
+  contract_addr: 'Contract Transaction Address',
+    contract_balance: 'Contract Balance Trend',
+  contract_total_balance: 'Contract Balance',
+  //cw
+  'cw-search': "Search height/block cid",
+  cw_des:'Drag To See Different Heights',
+  cw_top:'Latest Height',
+
 
 }
 

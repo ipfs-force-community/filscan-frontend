@@ -193,6 +193,18 @@ export const contract_gas = {
   ],
 };
 
+//合约余额走势
+export const contract_balance = {
+  list: [
+    {
+      title: 'contract_total_balance',
+      dataIndex: 'contract_total_balance',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ],
+};
+
 // 区块奖励走势
 export const block_rewards = {
   list: [
@@ -420,7 +432,7 @@ export const chartsNav: Array<Menu_Info> = [
   },
   {
     key: 'fevm',
-    preIcon: 'meta',
+    preIcon: 'fevm',
     title:'FEVM',
   },
   {
