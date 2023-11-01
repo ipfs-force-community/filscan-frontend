@@ -1,14 +1,15 @@
 import { Translation } from "@/components/hooks/Translation";
 import Selects from "@/packages/selects";
 import accountStore from "@/store/modules/account";
+import { observer } from "mobx-react";
 import { useMemo } from "react";
 
 interface Props {
-              selectGroup:string
-              onChange?:(value:string)=>void;
+    selectGroup:string
+  onChange?:(value:string)=>void;
 }
 
-export default (props: Props) => {
+export default observer((props: Props) => {
   const {onChange,selectGroup } = props;
   const { groupMiners } = accountStore;
   const { tr } = Translation({ ns: 'account' });
@@ -44,4 +45,4 @@ export default (props: Props) => {
       }}
     />
   </div>
-}
+})

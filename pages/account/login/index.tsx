@@ -6,7 +6,6 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { useEffect, useMemo, useState} from 'react';
 import SendCode from '@/src/account/sendCode';
 import { proApi } from '@/contents/apiUrl';
-// import { UserInfo } from '@/store/UserStore';
 import { useHash } from '@/components/hooks/useHash';
 import useAxiosData from '@/store/useAxiosData';
 import Link from 'next/link';

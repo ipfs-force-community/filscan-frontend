@@ -22,8 +22,6 @@ import i18n from '@/i18n';
 import Ap from 'next/app'
 import { SEO } from '@/contents/common';
 import Script from 'next/script';
-import useAxiosData from '@/store/useAxiosData';
-import { proApi } from '@/contents/apiUrl';
 import { Provider } from 'mobx-react';
 import * as mobxStores from '@/store';
 
@@ -153,7 +151,6 @@ function App({ Component, pageProps, isMobile }: any) {
               lang,
               setLang,
             }}>
-              <UserStoreContext.Provider value={{ ...userInfo, setUserInfo }}>
                 <WalletState.Provider value={{
                   wallet, setWallet: (walletItem:any) => {
                     setWallet(walletItem)
@@ -172,7 +169,6 @@ function App({ Component, pageProps, isMobile }: any) {
                     </div>
                   </ConfigProvider>
                 </WalletState.Provider>
-              </UserStoreContext.Provider>
             </FilscanStoreContext.Provider>
           </DeviceContext.Provider>
         </ErrorBoundary>
