@@ -8,8 +8,9 @@ import Rules from './Rules'
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
-  const [showRules, setShowRules] = useState(false);
-  const [selectGroup, setSelectGroup] = useState('all')
+  const [showRules, setShowRules] = useState(true);
+  const [selectGroup, setSelectGroup] = useState('all');
+  const [selectMiner,setSelectMiner]= useState('all')
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
@@ -19,8 +20,11 @@ export default () => {
       setShowRules(false)
       break;
     case 'group':
-      setSelectGroup(value);
-      break;
+        setSelectGroup(value);
+        setSelectMiner('all')
+        break;
+      case "miner":
+        setSelectMiner(value)
     };
 
   }
@@ -32,7 +36,7 @@ export default () => {
   }, [tr])
 
   return <div className={styles.sector}>
-    <Header onChange={handleChange} selectGroup={ selectGroup} />
+    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} addRule={true } />
     <div className={ styles.sector_table}>
       <Table data={[]} columns={columns} loading={false} />
     </div>

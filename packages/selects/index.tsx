@@ -3,25 +3,29 @@
 import { Option_Item } from '@/contents/type';
 import { Select } from 'antd';
 import { useEffect, useState } from 'react';
+import type { SelectProps } from 'antd';
 
-export default ({
-  options,
-  onChange,
-  value,
-  className = '',
-  popupClassName='',
-  border,
-  placeholder
-}: {
-  value?: string;
+interface Props extends SelectProps { 
   className?: string;
-  popupClassName?: string;
   border?: boolean;
-  suffix?: JSX.Element;
-    options: Array<Option_Item>;
-    placeholder?: string;
-  onChange: (value: string,item?:any) => void;
-}) => {
+  popupClassName?: string;
+  options?: Array<Option_Item>;
+  onChange?: (value: string,item?:any) => void;
+}
+
+
+
+export default (props:Props) => {
+  const {
+    className='',
+    popupClassName='',
+    options,
+    onChange,
+    value,
+    border,
+    placeholder,
+    disabled
+  } = props;
   const [new_options, setOptions] = useState<Array<Option_Item>>([]);
 
   useEffect(() => {
@@ -29,19 +33,16 @@ export default ({
   }, [options]);
 
   const handleChange = (value: string,item?:any) => {
-    onChange(value,item);
+   if(onChange) onChange(value,item);
   };
-  /*
-  ${
-        border ? 'border_select' : 'no_border_select'
-        }
-  */
+
   return (
     <Select
       showSearch
       placeholder={ placeholder || 'Select a person'}
       optionFilterProp='children'
       value={value}
+      disabled={ disabled}
       className={`custom_select ${className}`}
       popupClassName={'custom_select_wrapper'}
       filterOption={(input, option: any) =>

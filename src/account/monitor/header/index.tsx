@@ -4,28 +4,33 @@ import style from './index.module.scss'
 import { observer } from 'mobx-react';
 import accountStore from '@/store/modules/account'
 import { Translation } from '@/components/hooks/Translation';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Button } from 'antd';
 
 interface Props {
-              selectGroup:string|number
-onChange?:(type:string,value:string|number|boolean)=>void;
+  selectGroup: string;
+  selectMiner: string;
+  addRule?:boolean
+  onChange: (type: string, value: string | number | boolean) => void;
 }
 
 export default observer((props: Props) => {
-  const { onChange, selectGroup } = props;
-
+  const { onChange, selectGroup,selectMiner,addRule } = props;
   const { groupMiners } = accountStore;
-
   const { tr } = Translation({ ns: 'account' });
-  const groups:any = useMemo(() => {
+  const [selectItem, setSelectItem] = useState<Record<string, any>>({});
+
+  const [groups,allMiners] = useMemo(() => {
     const newMinerGroups =groupMiners ? [...groupMiners]:[]
     const allMiners = [];
-
+    allMiners.push({
+      label: tr('all_miners'),
+      value:'all',
+    })
     if (newMinerGroups&&newMinerGroups?.length > 0) {
       for (let group of newMinerGroups) {
         if (group.miners) {
-          allMiners.push(...group.miners);
+          allMiners.push(...group?.miners);
         }
         if (group.is_default) {
           group.label = tr(group.group_name);
@@ -39,31 +44,34 @@ export default observer((props: Props) => {
       value: 'all',
       miners: [...allMiners]
     }];
-    return newGroups.concat(newMinerGroups);
+    return [newGroups.concat(newMinerGroups),allMiners];
   }, [tr, groupMiners]);
 
-  const handleChange = (type:string,value:string|number|boolean) => {
-    if (onChange) {
-      onChange(type,value)
+  const handleChange = (type: string, value: string | number | boolean, item?: any) => {
+    if (type === 'group') { 
+      setSelectItem(item)
     }
+    onChange(type,value)
   }
+
+
   return <div className={style.header}>
-    <div>
+    <div className={style.header_left}>
       <Selects
-        value={'all'}
+        value={selectGroup}
         options={groups||[]}
-        onChange={(v: string) => {
-          handleChange('group',v)
+        onChange={(v: string,item:any) => {
+          handleChange('group',v,item)
         }}
       />
       <Selects
-        value={'all_miners'}
-        options={groups.miners||[]}
-        onChange={(v: string) => {
-          handleChange('group',v)
+        value={selectMiner}
+        options={selectItem?.group_id ? selectItem?.miners||[]:allMiners}
+        onChange={(v: string,item:any) => {
+          handleChange('miner',v,item)
         }}
       />
     </div>
-    <Button className='primary_btn' onClick={()=>handleChange('addRules',true)}>{ tr('add_rules')}</Button>
+    { addRule && <Button className='primary_btn' onClick={()=>handleChange('addRules',true)}>{ tr('add_rules')}</Button>}
   </div>
 })

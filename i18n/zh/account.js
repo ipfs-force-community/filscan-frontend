@@ -1,5 +1,6 @@
 const account = {
-  date:'日期',
+  date: '日期',
+  day:'天',
   confirm: '确认',
   cancel: '取消',
   login:'节点管家',
@@ -154,7 +155,19 @@ const account = {
   add_rules:'添加规则',
   examination: '规则',
   alarm: '告警方式',
-  status:'状态'
+  status: '状态',
+  //告警方式
+  warn_title:'告警方式',
+  warn_title_des: '告警方式可根据实际情况选择一种或组合',
+  email_warn: '邮箱告警',
+  message_warn: '短信告警',
+  phone_warn: '电话告警',
+  //扇区监控
+  add_sector_rules: '添加规则',
+  sector_rule_title: '扇区到期时间',
+  sector_rule_des:'可自定义,建议大于30',
+  '<=': '小于等于',
+  '>=':'大于等于'
 
 }
 
