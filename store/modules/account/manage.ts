@@ -1,4 +1,4 @@
-import { expiredData, gasData, minerOverview, powerData } from "@/store/ApiUrl";
+import { balanceData, expiredData, gasData, luckyData, minerOverview, powerData, rewardData } from "@/store/ApiUrl";
 import { RequestResult, axiosServer } from "@/store/axiosServer";
 import { makeObservable, observable, runInAction } from "mobx";
 
@@ -21,6 +21,10 @@ class ManageStore {
   gasDetailData: Record<string, any>;
   expiredData: Record<string, any>;
   expiredDetailData: Record<string, any>;
+  rewardData: Record<string, any>;
+  rewardDetailData: Record<string, any>;
+  luckyData: Record<string, any>;
+  balanceData: Record<string, any>;
 
   expiredLoading: boolean;
   powerLoading: boolean;
@@ -28,6 +32,10 @@ class ManageStore {
   gasLoading: boolean;
   gasDetailLoading: boolean;
   expiredDetailLoading: boolean;
+  rewardLoading: boolean;
+  rewardDetailLoading: boolean;
+  luckyLoading: boolean;
+  balanceLoading: boolean;
 
   constructor() {
     this.powerData = {};
@@ -36,24 +44,40 @@ class ManageStore {
     this.gasDetailData = {};
     this.expiredData = {}
     this.expiredDetailData = {}
+    this.rewardData = {}
+    this.rewardDetailData = {}
+    this.luckyData = {}
+    this.balanceData = {}
     this.powerLoading = true;
     this.powerDetailLoading = true;
     this.gasLoading = true;
     this.gasDetailLoading = true
     this.expiredLoading = true
     this.expiredDetailLoading = true
+    this.rewardLoading = true
+    this.rewardDetailLoading = true
+    this.luckyLoading = true
+    this.balanceLoading=true
     makeObservable(this, {
       powerData: observable,
       powerDetailData: observable,
       gasData: observable,
       expiredData: observable,
-      expiredDetailData:observable,
+      expiredDetailData: observable,
+      rewardData: observable,
+      rewardDetailData:observable,
+      luckyData: observable,
+      balanceData:observable,
       powerLoading: observable,
       powerDetailLoading: observable,
       gasLoading: observable,
       gasDetailLoading: observable,
       expiredLoading: observable,
-      expiredDetailLoading:observable
+      expiredDetailLoading: observable,
+      rewardLoading: observable,
+      rewardDetailLoading: observable,
+      luckyLoading: observable,
+      balanceLoading:observable
     });
 
   }
@@ -102,7 +126,6 @@ class ManageStore {
     })
   }
   //expired
-
   async getExpiredData(payload:Record<string,number|string>) {
     runInAction(() => {
       this.expiredLoading=true
@@ -121,6 +144,51 @@ class ManageStore {
     runInAction(() => {
       this.expiredDetailData = result?.data || {};
       this.expiredDetailLoading=false
+    })
+  }
+  //reward
+  async getRewardData(payload: Payload) {
+    runInAction(() => {
+      this.rewardLoading=true
+    })
+    const result: RequestResult = await axiosServer(rewardData, { ...payload });
+    runInAction(() => {
+      this.rewardData = result?.data || {};
+      this.rewardLoading=false
+    })
+  }
+
+  async getRewardDetailData(payload: PayloadDetail) {
+    runInAction(() => {
+      this.rewardDetailLoading=true
+    })
+    const result: RequestResult = await axiosServer(rewardData, { ...payload });
+    runInAction(() => {
+      this.rewardDetailData = result?.data || {};
+      this.rewardDetailLoading=false
+    })
+  }
+
+  //lucky
+  async getLuckyData(payload:Record<string,number|string>) {
+    runInAction(() => {
+      this.luckyLoading=true
+    })
+    const result: RequestResult = await axiosServer(luckyData, {...payload });
+    runInAction(() => {
+      this.luckyData = result?.data || {};
+      this.luckyLoading=false
+    })
+  }
+  //balance
+  async getBalanceData(payload:Record<string,number|string>) {
+    runInAction(() => {
+      this.balanceLoading=true
+    })
+    const result: RequestResult = await axiosServer(balanceData, {...payload });
+    runInAction(() => {
+      this.balanceData = result?.data || {};
+      this.balanceLoading=false
     })
   }
 }

@@ -1,24 +1,23 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import NoMiner from '../../NoMiner';
 import Table from '@/packages/Table';
 import { useEffect, useMemo, useState } from 'react';
-import { account_balance, account_lucky } from '@/contents/account';
-import fetchData from '@/store/server';
-import { proApi } from '@/contents/apiUrl';
-import Selects from '@/packages/selects';
+import { account_balance } from '@/contents/account';
 import ExportExcel from '@/packages/exportExcel';
 import { formatDateTime } from '@/utils';
-import useAxiosData from '@/store/useAxiosData';
+import manageStore from '@/store/modules/account/manage';
+import Groups from '../../Groups';
+import { observer } from 'mobx-react';
 
-export default ({
-  selectedKey,
+interface Props {
+selectedKey:string
+}
 
-}: {
-  selectedKey: string;
-}) => {
+export default observer((props: Props) => {
+  const {selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
+  const {balanceData,balanceLoading } = manageStore
   const [active, setActive] = useState<string>('-1');
   const columns = useMemo(() => {
     return account_balance.columns(tr).map((item) => {
@@ -26,36 +25,14 @@ export default ({
     });
   }, [tr]);
 
-  //proApi
-  const { data: balanceData, loading } = useAxiosData(proApi.getBalance, {
-    group_id: active ? Number(active) : null,
-  });
+  useEffect(() => {
+    load()
+  },[])
 
-  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
-    group_id: active ? Number(active) : null,
-  });
-
-  const groups:Array<any> = useMemo(() => {
-    let newGroups: Array<any> = [{
-      value: '-1',
-      label:tr('all')
-    }];
-    (groupsData?.group_list || []).forEach((group: any) => {
-      newGroups.push({
-        ...group,
-        value: String(group.group_id),
-        label: tr(group?.group_name),
-      });
-    });
-    return newGroups
-  },[groupsData?.group_list, tr])
-
-  const data = useMemo(() => {
-    return {
-      result: balanceData?.address_balance_list || [],
-      epoch_time: balanceData?.epoch_time,
-    };
-  }, [balanceData]);
+  const load = (value?: string) => {
+    const group_id = value ? Number(value) : Number(active);
+    manageStore.getBalanceData({ group_id: group_id })
+  }
 
   return (
     <div className='overflow-auto'>
@@ -67,33 +44,31 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(data?.epoch_time, 'YYYY/MM/DD HH:mm')}
+              {formatDateTime(balanceData?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects
-            value={active}
-            options={groups}
-            onChange={(value: string) => {
-              setActive(value);
-            }}
-          />
+          <Groups selectGroup={active} onChange={(value: string) => {
+            load(value)
+            setActive(value);
+          }}/>
+
           <ExportExcel
             columns={columns}
-            data={data.result}
+            data={balanceData?.address_balance_list || []}
             fileName={tr(selectedKey)}
           />
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
         <Table
-          data={data?.result || []}
+          data={balanceData?.address_balance_list || []}
           columns={columns}
-          loading={loading}
+          loading={balanceLoading}
           // onChange={handleChange}
         />
       </div>
     </div>
   );
-};
+});

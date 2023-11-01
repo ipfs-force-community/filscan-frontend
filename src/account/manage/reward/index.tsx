@@ -2,25 +2,25 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import Table from '@/packages/Table';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { account_reward } from '@/contents/account';
-import { proApi } from '@/contents/apiUrl';
-import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
-import useAxiosData from '@/store/useAxiosData';
 import DateTime from '@/src/account/DateTIme';
 import { formatDateTime } from '@/utils';
 import { useHash } from '@/components/hooks/useHash';
 import Detail from './Detail';
-
-export default ({
-  selectedKey,
-}: {
-  selectedKey: string;
-}) => {
+import manageStore from '@/store/modules/account/manage';
+import Groups from '../../Groups';
+import { observer } from 'mobx-react';
+interface Props {
+selectedKey:string
+}
+export default observer((props: Props) => {
+  const {selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
+  const {rewardData ,rewardLoading } = manageStore
   const { hashParams } = useHash();
-  const [active, setActive] = useState<string | number>('-1');
+  const [active, setActive] = useState<string >('-1');
   const [date, setDate] = useState({
     startTime: formatDateTime(
       new Date().getTime() / 1000,
@@ -38,34 +38,19 @@ export default ({
     });
   }, [tr]);
 
-  //proApi.getReward
-  const { data: rewardData, loading } = useAxiosData(proApi.getReward, {
-    group_id: active ? Number(active) : 0,
-    start_date: date.startTime,
-    end_date: date.endTime,
-  });
+  useEffect(() => {
+    load()
+  },[])
 
-  const data = useMemo(() => {
-    return rewardData?.reward_detail_list || [];
-  }, [rewardData]);
-
-  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
-    group_id: active ? Number(active) : null,
-  });
-  const groups:Array<any> = useMemo(() => {
-    let newGroups: Array<any> = [{
-      value: '-1',
-      label:tr('all')
-    }];
-    (groupsData?.group_list || []).forEach((group: any) => {
-      newGroups.push({
-        ...group,
-        value: String(group.group_id),
-        label: tr(group?.group_name),
-      });
-    });
-    return newGroups
-  },[groupsData?.group_list, tr])
+  const load = (value?: string, time?: Record<string, string>) => {
+    const newDate = time || date;
+    const payload = {
+      group_id: value ? Number(value) : Number(active),
+      end_date: newDate.endTime || newDate.startTime,
+      start_date: newDate.startTime,
+    }
+    manageStore.getRewardData(payload)
+  }
 
   if (hashParams?.miner) {
     return <Detail miner={hashParams.miner} selectedKey={selectedKey}/>;
@@ -85,33 +70,34 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects
-            value={String(active)}
-            options={groups}
-            onChange={(v: string) => {
-              setActive(v);
-              // load(v);
-            }}
-          />
+          <Groups selectGroup={active} onChange={(value: string) => {
+            load(value)
+            setActive(value);
+          }}/>
+
           <DateTime
             defaultValue={[date.startTime, date.endTime]}
             onChange={(start, end) => {
+              load(undefined,{
+                startTime: start,
+                endTime: end,
+              })
               setDate({
                 startTime: start,
                 endTime: end,
               });
             }}
           />
-          <ExportExcel columns={columns} data={data} fileName={tr(selectedKey)}/>
+          <ExportExcel columns={columns} data={rewardData?.reward_detail_list || []} fileName={tr(selectedKey)}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>
         <Table
           data={rewardData?.reward_detail_list || []}
           columns={columns}
-          loading={loading}
+          loading={rewardLoading}
         />
       </div>
     </>
   );
-};
+});

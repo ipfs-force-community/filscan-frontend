@@ -15,3 +15,7 @@ export const minerOverview = proUrl + '/MinerInfoDetail';
 export const powerData = proUrl + '/PowerDetail';
 export const gasData = proUrl + '/GasCostDetail';
 export const expiredData = proUrl + '/SectorDetail';
+export const rewardData = proUrl + '/RewardDetail';
+export const luckyData = proUrl + '/LuckyRateDetail';
+export const balanceData = proUrl + '/BalanceDetail';
+

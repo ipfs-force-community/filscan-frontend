@@ -1,23 +1,21 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import NoMiner from '../../NoMiner';
 import Table from '@/packages/Table';
 import { useEffect, useMemo, useState } from 'react';
 import { account_lucky } from '@/contents/account';
-import fetchData from '@/store/server';
-import { proApi } from '@/contents/apiUrl';
-import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
-import useAxiosData from '@/store/useAxiosData';
 import { formatDateTime } from '@/utils';
-
-export default ({
-  selectedKey,
-}: {
-  selectedKey: string;
-}) => {
+import manageStore from '@/store/modules/account/manage';
+import Groups from '../../Groups';
+import { observer } from 'mobx-react';
+interface Props {
+selectedKey:string
+}
+export default observer((props: Props) => {
+  const {selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
+  const {luckyData,luckyLoading } = manageStore
   const [active, setActive] = useState<string>('-1');
   const columns = useMemo(() => {
     return account_lucky.columns(tr).map((item) => {
@@ -25,32 +23,14 @@ export default ({
     });
   }, [tr]);
 
-  //proApi
-  const { data: luckyData, loading } = useAxiosData(proApi.getLucky, {
-    group_id: active ? Number(active) : '',
-  });
+  useEffect(() => {
+    load()
+  },[])
 
-  const data = useMemo(() => {
-    return luckyData?.lucky_rate_list || [];
-  }, [luckyData]);
-
-  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
-    group_id: active ? Number(active) : null,
-  });
-  const groups:Array<any> = useMemo(() => {
-    let newGroups: Array<any> = [{
-      value: '-1',
-      label:tr('all')
-    }];
-    (groupsData?.group_list || []).forEach((group: any) => {
-      newGroups.push({
-        ...group,
-        value: String(group.group_id),
-        label: tr(group?.group_name),
-      });
-    });
-    return newGroups
-  },[groupsData?.group_list, tr])
+  const load = (value?: string) => {
+    const group_id = value ? Number(value) : Number(active);
+    manageStore.getLuckyData({ group_id: group_id })
+  }
 
   return (
     <>
@@ -67,19 +47,17 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects
-            value={active}
-            options={groups}
-            onChange={(v: string) => {
-              setActive(v);
-            }}
-          />
-          <ExportExcel columns={columns} data={data} fileName={tr(selectedKey)}/>
+          <Groups selectGroup={active} onChange={(value: string) => {
+            load(value)
+            setActive(value);
+          }}/>
+
+          <ExportExcel columns={columns} data={luckyData?.lucky_rate_list || []} fileName={tr(selectedKey)}/>
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5'>
-        <Table data={data} columns={columns} loading={loading} />
+        <Table data={luckyData?.lucky_rate_list || []} columns={columns} loading={luckyLoading} />
       </div>
     </>
   );
-};
+});
