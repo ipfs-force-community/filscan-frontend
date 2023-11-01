@@ -13,14 +13,14 @@ export default ({
   border,
   placeholder
 }: {
-  value?: string|number;
+  value?: string;
   className?: string;
   popupClassName?: string;
   border?: boolean;
   suffix?: JSX.Element;
     options: Array<Option_Item>;
     placeholder?: string;
-  onChange: (value: string) => void;
+  onChange: (value: string,item?:any) => void;
 }) => {
   const [new_options, setOptions] = useState<Array<Option_Item>>([]);
 
@@ -28,8 +28,8 @@ export default ({
     setOptions(options || []);
   }, [options]);
 
-  const handleChange = (value: string) => {
-    onChange(value);
+  const handleChange = (value: string,item?:any) => {
+    onChange(value,item);
   };
   /*
   ${

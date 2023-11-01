@@ -23,12 +23,13 @@ import MonitorSector from '@/src/account/monitor/sector'
 import accountStore from '@/store/modules/account';
 import userStore from '@/store/modules/user';
 import { Menu } from 'antd';
+import { observer } from 'mobx-react';
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
   const {userInfo } = userStore;
   const { countMiners } = accountStore;
-  const {miners_count,loading } = countMiners;
+  const { miners_count,loading } = countMiners;
   const { hash, hashParams } = useHash();
   const router = useRouter()
   const selectedKey = useMemo(() => {
@@ -142,4 +143,4 @@ const Account: React.FC = () => {
   );
 };
 
-export default Account; //已登录/注册
+export default observer(Account); //已登录/注册

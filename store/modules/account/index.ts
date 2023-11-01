@@ -44,8 +44,12 @@ class AccountStore {
       this.getAccountMinersNumber()
     }
     runInAction(() => {
-      console.log('-----33',result?.data?.group_info_list)
-      this.groupMiners = (result?.data?.group_info_list || []);
+      this.groupMiners = (result?.data?.group_info_list || []).map((groups:GroupInfoList)=> {
+        const miners = groups.miners_info.map(v => {
+          return {...v,label:v.miner_tag,value:String(v.miner_id)}
+        })
+        return {...groups,miners:miners,label:groups.group_name,value:String(groups.group_id)}
+      });
       this.defaultGroup = result?.data?.group_info_list?.find((v: GroupInfoList) => v.is_default)
     })
   }

@@ -21,7 +21,8 @@ const account = {
   welcome_text2: '请登录您的账户并享受您的Filscan服务!',
   last_time: '最新更新时间',
   all: '全部',
-  all_groups:'全部分组',
+  all_groups: '全部分组',
+  all_miners:'全部节点',
   edit:'操作',
   miner_add: '添加',
   //个人账户

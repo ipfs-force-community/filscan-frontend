@@ -11,7 +11,7 @@ export interface Item {
 
 export interface Option_Item {
   label: string,
-  value: string|number,
+  value: string,
   title?:string,
   options?: Array<Item>
 }
