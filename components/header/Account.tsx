@@ -12,7 +12,7 @@ import { observer } from 'mobx-react';
 //已登录状态
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' });
-  const { userInfo,logoutUser } = userStore;
+  const { userInfo } = userStore;
   const {name,mail} = userInfo
   const router = useRouter();
   const showName = name || mail || '';
@@ -45,7 +45,7 @@ export default observer(() => {
                 onClick={() => {
                   //logout
                   localStorage.removeItem('token');
-                  logoutUser();
+                  userStore.setUserInfo()
                   router.reload();
                 }}
                 className='h-10  text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>

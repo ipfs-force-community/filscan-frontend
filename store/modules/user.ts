@@ -10,11 +10,12 @@ const defaultUser = {
 }
 
 class UserStore {
-  userInfo= {
+ userInfo:Record<string,any>
+  constructor() {
+    this.userInfo= {
     ...defaultUser,
     loading:true
   }
-  constructor() {
     makeObservable(this, {
       userInfo: observable,
     });
@@ -35,7 +36,8 @@ class UserStore {
   }
 
   setUserInfo(user?: any) {
-    if (!user) {
+     runInAction(()=>{
+      if (!user) {
       this.userInfo = {
         ...defaultUser,
         loading: false
@@ -47,16 +49,9 @@ class UserStore {
         loading:false
       }
     }
+    })
+   
 
-  }
-
-  // 退出登录
-  logoutUser() {
-    this.userInfo = {
-      ...defaultUser,
-
-      loading: false
-    }
   }
 
 }

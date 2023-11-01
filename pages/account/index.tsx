@@ -41,9 +41,12 @@ const Account: React.FC = () => {
   useEffect(() => {
     if (!userInfo.mail || !localStorage.getItem('token')) {
       router.push('/account/login');
+      return
+    } else { 
+      accountStore.getAccountMinersNumber()
     }
   }, [userInfo.mail]);
-
+  
   if (loading) {
     return <Loading />
   }
