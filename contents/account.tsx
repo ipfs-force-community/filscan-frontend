@@ -375,28 +375,36 @@ export const overview = {
     ],
   ],
   columns: (tr: any) => [
-    {
-      title: 'tag',
-      dataIndex: 'tag',
-      fixed: 'left',
-      width: 100,
-      ellipsis: {
-        showTitle: false,
-      },
-      render: (text: string, record: any) => {
-        return <TagInput text={text} isEdit={false} record={record} />;
-      },
-    },
+    // {
+    //   title: 'tag',
+    //   dataIndex: 'tag',
+    //   fixed: 'left',
+    //   width: 100,
+    //   ellipsis: {
+    //     showTitle: false,
+    //   },
+    //   render: (text: string, record: any) => {
+    //     return <TagInput text={text} isEdit={false} record={record} />;
+    //   },
+    // },
     {
       title: 'miner_id',
       dataIndex: 'miner_id',
-      width: 100,
+      width: 150,
       fixed: 'left',
-      render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
-          {text}
-        </Link>
-      ),
+      render: (text: string, record: any) => {
+        const miner_tag = record.tag;
+
+        return (
+          <div className='flex items-center'>
+            <Link href={`/miner/${text}`} className='link_text'>
+              {text}
+            </Link>
+            {miner_tag && <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit ml-2'>{miner_tag}</span> }
+          </div>
+
+        )
+      },
     },
     {
       title: 'group_name',

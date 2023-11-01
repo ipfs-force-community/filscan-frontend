@@ -1,18 +1,16 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
+import NoMiner from '../../NoMiner';
 import Table from '@/packages/Table';
-import { useMemo, useState } from 'react';
-import { account_power } from '@/contents/account';
+import { useEffect, useMemo, useState } from 'react';
+import { account_lucky } from '@/contents/account';
+import fetchData from '@/store/server';
 import { proApi } from '@/contents/apiUrl';
 import Selects from '@/packages/selects';
 import ExportExcel from '@/packages/exportExcel';
 import useAxiosData from '@/store/useAxiosData';
-import DateTime from '@/src/account/DateTIme';
 import { formatDateTime } from '@/utils';
-import { useHash } from '@/components/hooks/useHash';
-import Detail from './Detail';
-import Tooltip from '@/packages/tooltip';
 
 export default ({
   selectedKey,
@@ -20,41 +18,21 @@ export default ({
   selectedKey: string;
 }) => {
   const { tr } = Translation({ ns: 'account' });
-  const { hashParams } = useHash();
-  const [active, setActive] = useState<string | number>('-1');
-  const [date, setDate] = useState({
-    startTime: formatDateTime(
-      new Date().getTime() / 1000,
-      'YYYY-MM-DDTHH:mm:ssZ'
-    ),
-    endTime: formatDateTime(
-      new Date().getTime() / 1000,
-      'YYYY-MM-DDTHH:mm:ssZ'
-    ),
-  });
-
+  const [active, setActive] = useState<string>('-1');
   const columns = useMemo(() => {
-    return account_power.columns(tr).map((item) => {
-      if (item.titleTip) {
-        item.excelTitle= item.dataIndex === 'sector_count_change'? `${tr('raw_power')}/${tr('sector_power_count')}`:tr(item.title),
-        item.title = <span className='flex items-center gap-x-1'>
-          {tr(item.title)}
-          <Tooltip context={tr(item.titleTip)} />
-        </span>
-      } else {
-        item.title= tr(item.title)
-      }
-      return { ...item };
-
+    return account_lucky.columns(tr).map((item) => {
+      return { ...item, title: tr(item.title) };
     });
   }, [tr]);
 
   //proApi
-  const { data: powerData, loading } = useAxiosData(proApi.getPower, {
-    group_id: active ? Number(active) : 0,
-    start_date: date.startTime,
-    end_date: date.endTime || date.startTime,
+  const { data: luckyData, loading } = useAxiosData(proApi.getLucky, {
+    group_id: active ? Number(active) : '',
   });
+
+  const data = useMemo(() => {
+    return luckyData?.lucky_rate_list || [];
+  }, [luckyData]);
 
   const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
     group_id: active ? Number(active) : null,
@@ -73,13 +51,6 @@ export default ({
     });
     return newGroups
   },[groupsData?.group_list, tr])
-  const data = useMemo(() => {
-    return powerData?.power_detail_list || [];
-  }, [powerData]);
-
-  if (hashParams?.miner) {
-    return <Detail miner={hashParams.miner} selectedKey={selectedKey } />;
-  }
 
   return (
     <>
@@ -91,26 +62,16 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(powerData?.epoch_time)}
+              {formatDateTime(luckyData?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>
         <div className='flex gap-x-2.5'>
           <Selects
-            value={String(active)}
+            value={active}
             options={groups}
             onChange={(v: string) => {
               setActive(v);
-              // load(v);
-            }}
-          />
-          <DateTime
-            defaultValue={[date.startTime, date.endTime]}
-            onChange={(start, end) => {
-              setDate({
-                startTime: start,
-                endTime: end,
-              });
             }}
           />
           <ExportExcel columns={columns} data={data} fileName={tr(selectedKey)}/>

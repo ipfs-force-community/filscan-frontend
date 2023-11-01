@@ -9,7 +9,7 @@ import { getSvgIcon } from '@/svgsIcon';
 import { formatDateTime } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import Groups from './Groups';
-import managerStore from '@/store/modules/account/manager';
+import overviewStore from '@/store/modules/account/overview';
 import { observer } from 'mobx-react';
 
 interface Props {
@@ -20,7 +20,8 @@ export default observer((props: Props) => {
   const {selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
   const [active, setActive] = useState<string>('-1');
-  const { overviewData = {},} = managerStore;
+  const { overviewData = {}, loading = true } = overviewStore;
+
   const columns = useMemo(() => {
     return overview.columns(tr).map((item) => {
       return { ...item, title: tr(item.title) };
@@ -32,9 +33,12 @@ export default observer((props: Props) => {
   },[])
 
   const load = (value?: string) => {
-    console.log('------3',value)
     const groupId = value ? Number(value): Number(active)
-    managerStore.getOverViewData(Number(groupId))
+    overviewStore.getOverViewData(Number(groupId))
+  }
+
+  if (loading) {
+    return <Loading />
   }
 
   return (
@@ -91,8 +95,7 @@ export default observer((props: Props) => {
         <Table
           data={overviewData?.miner_info_detail_list || []}
           columns={columns}
-          loading={false}
-          // onChange={handleChange}
+          loading={loading}
         />
       </div>
     </>

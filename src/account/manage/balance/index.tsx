@@ -1,7 +1,7 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import NoMiner from '../NoMiner';
+import NoMiner from '../../NoMiner';
 import Table from '@/packages/Table';
 import { useEffect, useMemo, useState } from 'react';
 import { account_balance, account_lucky } from '@/contents/account';

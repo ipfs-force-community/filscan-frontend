@@ -12,4 +12,6 @@ export const saveMiner = proUrl + '/SaveUserMiners';
 export const delGroup = proUrl + '/DeleteGroup';
 export const saveGroup = proUrl + '/SaveGroupMiners';
 export const minerOverview = proUrl + '/MinerInfoDetail';
-
+export const powerData = proUrl + '/PowerDetail';
+export const gasData = proUrl + '/GasCostDetail';
+export const expiredData = proUrl + '/SectorDetail';

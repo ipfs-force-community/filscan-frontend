@@ -2,39 +2,42 @@
 
 import { Translation } from '@/components/hooks/Translation';
 import Breadcrumb from '@/packages/breadcrumb';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatDateTime, getCalcTime } from '@/utils';
 import ExportExcel from '@/packages/exportExcel';
 import Table from '@/packages/Table';
 import DateTime from '@/src/account/DateTIme';
 import {
-  account_power,
-}from '@/contents/account';
-import useAxiosData from '@/store/useAxiosData';
-import { proApi } from '@/contents/apiUrl';
+  account_gas,
+} from '@/contents/account';
 import Tooltip from '@/packages/tooltip';
+import manageStore from '@/store/modules/account/manage';
+import { observer } from 'mobx-react';
 
 /** @format */
 
-export default ({
-  miner,
-  selectedKey
-}: {
+interface Props {
   miner?: string | number | null;
   selectedKey:string
-}) => {
-  const { tr } = Translation({ ns: 'account' });
+}
 
+export default observer((props:Props) => {
+  const {
+    miner,
+    selectedKey
+  } = props;
+  const { tr } = Translation({ ns: 'account' });
+  const { gasDetailData,gasDetailLoading } = manageStore
   const routerItems = useMemo(() => {
     if (miner && typeof miner === 'string') {
       return [
         {
-          title: tr('overview_power'),
-          path: '/account#power',
+          title: tr('overview_gas'),
+          path: '/account#gas',
         },
         {
           title: <span>{miner}</span>,
-          path: `/account#power?miner=${miner}`,
+          path: `/account#gas?miner=${miner}`,
         },
       ];
     }
@@ -49,15 +52,26 @@ export default ({
     ),
   });
 
-  //proApi
-  const { data: powerDataDetail, loading } = useAxiosData(proApi.getPower, {
-    miner_id: miner,
-    start_date: date.startTime,
-    end_date: date.endTime,
-  });
+  useEffect(() => {
+    if (miner) {
+      load();
+    }
+  },[miner])
+
+  const load = ( time?: Record<string, string>) => {
+    const newDate = time || date;
+    if (miner) {
+      const payload = {
+        miner_id: miner,
+        end_date: newDate.endTime || newDate.startTime,
+        start_date: newDate.startTime,
+      }
+      manageStore.getGasDetailData(payload)
+    }
+  }
 
   const columns = useMemo(() => {
-    return account_power.columns(tr,'detail').map((item) => {
+    return account_gas.columns(tr,'detail').map((item) => {
       if (item.titleTip) {
         item.excelTitle= item.dataIndex === 'sector_count_change'? `${tr('raw_power')}/${tr('sector_power_count')}`:tr(item.title),
         item.title = <span className='flex items-center gap-x-1'>
@@ -70,11 +84,6 @@ export default ({
       return { ...item };
     });
   }, [tr]);
-
-  const showData = useMemo(() => {
-    const newData = powerDataDetail?.power_detail_list || [];
-    return newData || [];
-  }, [powerDataDetail]);
 
   return (
     <>
@@ -89,7 +98,7 @@ export default ({
           <span className='text-xs text_des'>
             <span>{tr('last_time')}</span>
             <span className='ml-2'>
-              {formatDateTime(powerDataDetail?.epoch_time, 'YYYY/MM/DD HH:mm')}
+              {formatDateTime(gasDetailData?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>
@@ -98,18 +107,22 @@ export default ({
             showEnd={true}
             defaultValue={[date.startTime, date.endTime]}
             onChange={(start, end) => {
+              load({
+                startTime: start,
+                endTime: end,
+              })
               setDate({
                 startTime: start,
                 endTime: end,
               });
             }}
           />
-          <ExportExcel columns={columns} data={showData} fileName={tr(selectedKey)+miner?String(miner):""}/>
+          <ExportExcel columns={columns} data={gasDetailData?.gas_cost_detail_list ||[]} fileName={tr(selectedKey)+miner?`(${miner})`:""} />
         </div>
       </div>
       <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
-        <Table data={showData} columns={columns} loading={loading} />
+        <Table data={gasDetailData?.gas_cost_detail_list ||[]} columns={columns} loading={gasDetailLoading} />
       </div>
     </>
   );
-};
+});

@@ -1,24 +1,24 @@
 /** @format */
 
 import { Translation } from '@/components/hooks/Translation';
-import NoMiner from '../NoMiner';
 import Table from '@/packages/Table';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { account_expired } from '@/contents/account';
-import { proApi } from '@/contents/apiUrl';
-import Selects from '@/packages/selects';
 import { formatDateTime } from '@/utils';
 import { Collapse } from 'antd';
 import { useHash } from '@/components/hooks/useHash';
 import Detail from './Detail';
-import useAxiosData from '@/store/useAxiosData';
+import manageStore from '@/store/modules/account/manage';
+import Groups from '../../Groups';
+import { observer } from 'mobx-react';
 
-export default ({
-  selectedKey,
-}: {
-  selectedKey: string;
-}) => {
+interface Props {
+selectedKey:string
+}
+export default observer((props: Props) => {
+  const { selectedKey } = props;
   const { tr } = Translation({ ns: 'account' });
+  const { expiredData,expiredLoading } = manageStore;
   const [active, setActive] = useState<string>('-1');
   const { hashParams } = useHash();
 
@@ -28,28 +28,15 @@ export default ({
     });
   }, [tr]);
 
-  //proApi
-  const { data: expiredData, loading } = useAxiosData(proApi.getSector, {
-    group_id: active ? Number(active) : '',
-  });
+  useEffect(() => {
+    load()
+  },[])
 
-  const { data: groupsData, } = useAxiosData(proApi.getGroupsId, {
-    group_id: active ? Number(active) : null,
-  });
-  const groups:Array<any> = useMemo(() => {
-    let newGroups: Array<any> = [{
-      value: '-1',
-      label:tr('all')
-    }];
-    (groupsData?.group_list || []).forEach((group: any) => {
-      newGroups.push({
-        ...group,
-        value: String(group.group_id),
-        label: tr(group?.group_name),
-      });
-    });
-    return newGroups
-  },[groupsData?.group_list, tr])
+  const load = (value?: string) => {
+    const group_id = value ? Number(value) : Number(active);
+    manageStore.getExpiredData({
+      group_id: group_id })
+  }
 
   if (hashParams?.miner) {
     return <Detail miner={hashParams.miner} selectedKey={ selectedKey} />;
@@ -70,13 +57,10 @@ export default ({
           </span>
         </div>
         <div className='flex gap-x-2.5'>
-          <Selects
-            value={active}
-            options={groups}
-            onChange={(v: string) => {
-              setActive(v);
-            }}
-          />
+          <Groups selectGroup={active} onChange={(value: string) => {
+            load(value)
+            setActive(value);
+          }}/>
           {/* <ExportExcel columns={columns} data={expiredData} /> */}
         </div>
       </div>
@@ -125,7 +109,7 @@ export default ({
                       <Table
                         data={sector_item?.sector_detail_list || []}
                         columns={columns}
-                        loading={loading}
+                        loading={expiredLoading}
                       />
                     ),
                   },
@@ -137,4 +121,4 @@ export default ({
       </div>
     </>
   );
-};
+});
