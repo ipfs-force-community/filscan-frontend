@@ -92,7 +92,6 @@ export default observer((props: Props) => {
    },[allTags,selectItem,selectMinerItem])
 
   const handleChange = (type: string, value: string | number | boolean, item?: any) => {
-    console.log('-----33',value,item)
     if (type === 'group') {
       setSelectItem(item)
     } else if (type === 'miner') { 

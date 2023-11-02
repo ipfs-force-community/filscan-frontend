@@ -11,7 +11,8 @@ export default () => {
   const [showRules, setShowRules] = useState(false);
   const [selectGroup, setSelectGroup] = useState('all');
   const [selectMiner, setSelectMiner] = useState('all');
-  const [selectTag,setSelectTag]= useState('all')
+  const [selectTag, setSelectTag] = useState('all');
+  
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
