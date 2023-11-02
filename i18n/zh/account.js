@@ -15,7 +15,8 @@ const account = {
   miners: '节点管理',
   monitor: '监控管理',
   overview_monitorBalance: '余额监控',
-  monitor_sector:'扇区监控',
+  monitor_sector: '扇区监控',
+  monitor_balance:'余额监控',
   personal: '账号信息',
   logout: '退出登录',
   default_group: '默认分组',
@@ -174,13 +175,15 @@ const account = {
   phone_warn_warning:'请输入正确的接收号码',
 
   //扇区监控
-  add_sector_rules: '添加规则',
+  add_rules: '添加规则',
+  rule_detail:'规则详情',
   sector_rule_title: '扇区到期时间',
   sector_rule_des: '可自定义,建议大于30',
   sector_ruler_placeholder: '请输入正整数',
   sector_ruler_warningText:'请输入正确正整数',
   '<=': '小于等于',
-  '>=':'大于等于'
+  '>=': '大于等于',
+  
 
 }
 

@@ -8,7 +8,7 @@ import Rules from './Rules'
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
-  const [showRules, setShowRules] = useState(true);
+  const [showRules, setShowRules] = useState(false);
   const [selectGroup, setSelectGroup] = useState('all');
   const [selectMiner,setSelectMiner]= useState('all')
   const handleChange = (type:string,value:string|boolean|number|any) => {
@@ -36,6 +36,12 @@ export default () => {
   }, [tr])
 
   return <div className={styles.sector}>
+       {/* <div className='w-full text-lg font-semibold font-PingFang	'>
+            {tr('monitor_sector')}
+          </div> */}
+    <div className={styles.sector_title}>
+      {tr('monitor_sector') }
+    </div>
     <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} addRule={true } />
     <div className={ styles.sector_table}>
       <Table data={[]} columns={columns} loading={false} />

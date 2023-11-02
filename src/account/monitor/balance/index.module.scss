@@ -1,4 +1,4 @@
- .sector{
+ .balance{
     &_table{
     padding: 15px;
     border: 1px solid var(--border-color);
@@ -8,8 +8,8 @@
     background-color: var(--bgColor);
     box-shadow: 0px 2px 30px -2px var(--card-shadow);     
   }
-  &_title{
-    font-size: 16px;
+&_title{
+  font-size: 16px;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   margin-bottom: 20px;
