@@ -54,11 +54,11 @@ export default observer((props: Props) => {
     onChange(type,value)
   }
 
-
   return <div className={style.header}>
     <div className={style.header_left}>
       <Selects
         value={selectGroup}
+        placeholder={tr('select_group') }
         options={groups||[]}
         onChange={(v: string,item:any) => {
           handleChange('group',v,item)
@@ -66,6 +66,7 @@ export default observer((props: Props) => {
       />
       <Selects
         value={selectMiner}
+        placeholder={tr('select_miner') }
         options={selectItem?.group_id ? selectItem?.miners||[]:allMiners}
         onChange={(v: string,item:any) => {
           handleChange('miner',v,item)

@@ -71,6 +71,7 @@ const Account: React.FC = () => {
     );
   };
 
+
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -106,7 +107,6 @@ const Account: React.FC = () => {
                 {selectedKey === 'power' && (
                   <Power
                     selectedKey={'overview_' + selectedKey}
-
                   />
                 )}
                 {selectedKey === 'gas' && (

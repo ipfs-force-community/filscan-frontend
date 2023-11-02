@@ -3,36 +3,60 @@ import Header from "../header";
 import { useMemo, useState } from "react";
 import { Translation } from "@/components/hooks/Translation";
 import styles from './index.module.scss';
-import Select from "@/packages/select";
 import Selects from "@/packages/selects";
 import Warn from "../warn";
+import { isPositiveInteger } from "@/utils";
 interface Props {
   showModal: boolean;
   onChange:(type:string,value:any)=>void;
 }
 
 const defaultRules = {
-  group_id: '',
-  miner_id: '',
-  rules: {}
+  group_id: undefined,
+  miner_id: undefined,
+  rule: {
+    value: '30',
+    placeholder: 'sector_ruler_placeholder',
+    warning: false,
+    warningText:'sector_ruler_warningText',
+  },
 }
 export default (props: Props) => {
   const { showModal, onChange } = props;
   const { tr } = Translation({ ns: 'account' });
-  const [selectGroup, setSelectGroup] = useState('all');
-  const [selectMiner, setSelectMiner] = useState('all');
-  const [rules, setRules] = useState<any>([{...defaultRules}])
+  const [rules, setRules] = useState<any>([{ ...defaultRules }]);
   
-  const handleChange = (type: string, value?: any) => {
+  const handleChange = (type: string, value: any, index: number) => {
+        const newRules = [...rules];
+    const newItem = rules[index];
     switch (type) { 
-       case 'group':
-        setSelectGroup(value);
-        setSelectMiner('all')
+      case 'group':
+        newItem.group_id = value;
+        newItem.miner_id = undefined;
         break;
       case "miner":
-        setSelectMiner(value)
+        newItem.miner_id = value;
+      case 'warnOk':
+        newItem.warnList = value;
+        break;
+      case 'rule':
+        if (value) { 
+          if (!isPositiveInteger(value)) {
+            newItem.rule.warning = true
+          } else { 
+            newItem.rule.warning = false;
+          }
+        }
+        break;
     }
+    newRules.splice(index, 1, newItem);
+    setRules(newRules)
   };
+
+  const handleSave = () => { 
+    //保存规则
+    console.log('==save===33',rules)
+  }
   
   const handAddRule = () => { 
     const newRules = [...rules];
@@ -51,25 +75,26 @@ export default (props: Props) => {
     destroyOnClose={true}
     closeIcon={false}
     wrapClassName="custom_left_modal"
-    open={showModal} onOk={() => { handleChange('ok') }}
+    open={showModal} onOk={handleSave}
     onCancel={() => onChange('cancel', false)}
     footer={[
       <Button className="cancel_btn" onClick={()=>onChange('cancel',false) }>{ tr('cancel')}</Button>,
-      <Button className="primary_btn" onClick={()=>handleChange('ok') }>{ tr('confirm')}</Button>
+      <Button className="primary_btn" onClick={handleSave}>{ tr('confirm')}</Button>
     ] }
   >
     <div className={styles.sector_rules}>
-      {rules.map((rule: any, index: number) => {
+      {rules.map((ruleItem: any, index: number) => {
         const showIcon = index === rules.length - 1;
         return <div key={index} className={styles.sector_rules_contain}>
           <div className={styles.sector_rules_item}>
-          <Header selectGroup={selectGroup} selectMiner={selectMiner} onChange={handleChange} />
+          <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
           { showIcon && <div className={styles.sector_rules_item_icons}>
             <span className={styles.sector_rules_item_icon} onClick={handAddRule}>+</span>
             <span className={styles.sector_rules_item_icon}>-</span>
           </div>}
         </div>
-         <div className={styles.sector_rules_rule}>
+          {ruleItem.miner_id && <>
+           <div className={styles.sector_rules_rule}>
             <div className={styles.sector_rules_rule_title}>{tr('sector_rule_title')}</div>
             <div className={styles.sector_rules_rule_main}>
               <Selects
@@ -77,17 +102,28 @@ export default (props: Props) => {
                   value={'<='}
                   disabled={true}
                   options={rulesOptions}
+              />
+              <div className={styles.sector_rules_main}>
+                <Input
+                  style={{borderColor:ruleItem.rule.warning ? 'red':''} }
+                className={`custom_input ${styles.sector_rules_rule_main_input}`}
+                defaultValue={ruleItem.rule.value}
+                placeholder={tr(ruleItem.rule.placeholder) }
+                onBlur={(e)=>handleChange('rule',e.target.value,index)}                                                      
                 />
-              <Input className={`custom_input ${styles.sector_rules_rule_main_input}`}  defaultValue={30} />
-                <div className={styles.sector_rules_rule_main_text}>{tr('day') }</div>
+                {ruleItem.rule.warning && <span className={styles.sector_rules_warningDes }>{tr(ruleItem.rule.warningText ) }</span> }
+              </div>
+             
+                <div className={styles.sector_rules_rule_main_text}>{tr('day')}</div>
             </div>
             <div className={styles.sector_rules_rule_des}>
               { tr('sector_rule_des')}
             </div>
           </div> 
           <div className={styles.sector_rules_warn}>
-            <Warn noModal={true} onChange={ handleChange} />
+            <Warn noModal={true} onChange={(type,value)=>handleChange(type,value,index)} />
           </div>
+          </>}
         </div>
       }) }
     </div>
