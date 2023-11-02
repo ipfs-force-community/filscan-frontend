@@ -10,7 +10,8 @@ export default () => {
   const { tr } = Translation({ ns: 'account' });
   const [showRules, setShowRules] = useState(false);
   const [selectGroup, setSelectGroup] = useState('all');
-  const [selectMiner,setSelectMiner]= useState('all')
+  const [selectMiner, setSelectMiner] = useState('all');
+  const [selectTag,setSelectTag]= useState('all')
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
@@ -24,7 +25,12 @@ export default () => {
         setSelectMiner('all')
         break;
       case "miner":
-        setSelectMiner(value)
+        setSelectMiner(value);
+         setSelectTag('all');
+        break;
+      case 'miner_tag':
+        setSelectTag(value);
+        break;
     };
 
   }
@@ -39,7 +45,7 @@ export default () => {
        <div className={styles.balance_title}>
       {tr('monitor_balance') }
     </div>
-    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} addRule={true } />
+    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} selectTag={ selectTag} addRule={true } />
     <div className={ styles.balance_table}>
       <Table data={[]} columns={columns} loading={false} />
     </div>

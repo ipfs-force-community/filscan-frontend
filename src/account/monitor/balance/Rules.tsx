@@ -64,26 +64,25 @@ const handAddRule = () => {
     setRules(newRules)
 }
               
-const handleSave = () => { }
+const handleSave = () => {
+console.log('----balance save',rules)
+ }
 
-              const rulesOptions = useMemo(() => {
-                            return [
-                                          { label: tr('<='), value: '<=' }, //小于等于
-                            ]
-              }, [tr]);
+const rulesOptions = useMemo(() => {
+              return [{ label: tr('<='), value: '<=' }, //小于等于
+              ]
+}, [tr]);
 
-              const CategoryOptions = useMemo(() => { 
-                            return [
-                                          { label: tr('miner_balance_alone'), value: 'miner_balance' },
-                                          { label: tr('owner_balance_alone'), value: 'owner_balance' },
-                                          { label: tr('worker_balance_alone'), value: 'worker_balance' },
-                                          { label: tr('controller_0_balance_alone'), value: 'controller_0_balance' },
-                                          { label: tr('controller_1_balance_alone'), value: 'controller_1_balance' },
-                                          { label: tr('controller_2_balance_alone'), value: 'controller_2_balance' },
-                                          
-                            ]
-
-              },[tr])
+const CategoryOptions = useMemo(() => { 
+              return [
+              { label: tr('miner_balance_alone'), value: 'miner_balance' },
+              { label: tr('owner_balance_alone'), value: 'owner_balance' },
+              { label: tr('worker_balance_alone'), value: 'worker_balance' },
+              { label: tr('controller_0_balance_alone'), value: 'controller_0_balance' },
+              { label: tr('controller_1_balance_alone'), value: 'controller_1_balance' },
+              { label: tr('controller_2_balance_alone'), value: 'controller_2_balance' },
+              ]
+},[tr])
 
  return <Modal
     title={`${tr('add_rules')}`}
@@ -144,7 +143,7 @@ const handleSave = () => { }
               {tr('balance_rule_des', {value:'100,000,00'})}
             </div>
           </div> 
-          <div className={styles.sector_rules_warn}>
+          <div className={styles.balance_warn}>
             <Warn noModal={true} onChange={(type,value)=>handleChange(type,value,index)} />
           </div>
           </>}

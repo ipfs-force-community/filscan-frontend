@@ -8,11 +8,9 @@ import Rules from './Rules'
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
-  const [showRules, setShowRules] = useState(false);
+  const [showRules, setShowRules] = useState(true);
   const [selectGroup, setSelectGroup] = useState('all');
-  const [selectMiner, setSelectMiner] = useState('all');
-  const [selectTag, setSelectTag] = useState('all');
-
+  const [selectMiner,setSelectMiner]= useState('all')
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
@@ -26,11 +24,7 @@ export default () => {
         setSelectMiner('all')
         break;
       case "miner":
-        setSelectMiner(value);
-        break;
-    case 'miner_tag':
-        setSelectTag(value);
-      break;
+        setSelectMiner(value)
     };
 
   }
@@ -41,14 +35,17 @@ export default () => {
     })
   }, [tr])
 
-  return <div className={styles.sector}>
-    <div className={styles.sector_title}>
-      {tr('monitor_sector') }
+  return <div className={styles.power}>
+       {/* <div className='w-full text-lg font-semibold font-PingFang	'>
+            {tr('monitor_power')}
+          </div> */}
+    <div className={styles.power_title}>
+      {tr('monitor_power') }
     </div>
-    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} selectTag={selectTag } addRule={true } />
-    <div className={ styles.sector_table}>
+    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} showMiner={false } addRule={true } />
+    <div className={ styles.power_table}>
       <Table data={[]} columns={columns} loading={false} />
     </div>
-    <Rules showModal={showRules} onChange={handleChange}/>
+    {/* <Rules showModal={showRules} onChange={handleChange}/> */}
   </div>
 }

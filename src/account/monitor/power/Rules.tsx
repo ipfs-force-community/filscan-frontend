@@ -16,9 +16,9 @@ const defaultRules = {
   miner_id: undefined,
   rule: {
     value: '30',
-    placeholder: 'sector_ruler_placeholder',
+    placeholder: 'power_ruler_placeholder',
     warning: false,
-    warningText:'sector_ruler_warningText',
+    warningText:'power_ruler_warningText',
   },
 }
 export default (props: Props) => {
@@ -55,7 +55,7 @@ export default (props: Props) => {
 
   const handleSave = () => { 
     //保存规则
-    console.log('==save=sector==',rules)
+    console.log('==save===33',rules)
   }
   
   const handAddRule = () => { 
@@ -86,43 +86,43 @@ export default (props: Props) => {
      <div>
       {rules.map((ruleItem: any, index: number) => {
         const showIcon = index === rules.length - 1;
-        return <div key={index} className={styles.sector_contain}>
-          <div className={styles.sector_contain_title}>{ tr('rule_detail')}</div>
-          <div className={styles.sector_contain_header}>
+        return <div key={index} className={styles.power_contain}>
+          <div className={styles.power_contain_title}>{ tr('rule_detail')}</div>
+          <div className={styles.power_contain_header}>
           <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
-          { showIcon && <div className={styles.sector_icons}>
-            <span className={styles.sector_icons_icon} onClick={handAddRule}>+</span>
-            <span className={styles.sector_icons_icon}>-</span>
+          { showIcon && <div className={styles.power_icons}>
+            <span className={styles.power_icons_icon} onClick={handAddRule}>+</span>
+            <span className={styles.power_icons_icon}>-</span>
           </div>}
         </div>
           {ruleItem.miner_id && <>
-           <div className={styles.sector_rule}>
-            <div className={styles.sector_rule_title}>{tr('sector_rule_title')}</div>
-            <div className={styles.sector_rule_main}>
+           <div className={styles.power_rule}>
+            <div className={styles.power_rule_title}>{tr('power_rule_title')}</div>
+            <div className={styles.power_rule_main}>
               <Selects
-                  className={styles.sector_rule_select}
+                  className={styles.power_rule_select}
                   value={'<='}
                   disabled={true}
                   options={rulesOptions}
               />
-              <div className={styles.sector_rule_content}>
+              <div className={styles.power_rule_content}>
                 <Input
               style={{borderColor:ruleItem.rule.warning ? 'red':''} }
-                className={`custom_input ${styles.sector_rule_input}`}
+                className={`custom_input ${styles.power_rule_input}`}
                 defaultValue={ruleItem.rule.value}
                 placeholder={tr(ruleItem.rule.placeholder) }
                 onBlur={(e)=>handleChange('rule',e.target.value,index)}                                                      
                 />
-                {ruleItem.rule.warning && <span className={styles.sector_rule_content_warning}>{tr(ruleItem.rule.warningText ) }</span> }
+                {ruleItem.rule.warning && <span className={styles.power_rule_content_warning}>{tr(ruleItem.rule.warningText ) }</span> }
               </div>
              
-                <div className={styles.sector_rule_text}>{tr('day')}</div>
+                <div className={styles.power_rule_text}>{tr('day')}</div>
             </div>
-            <div className={styles.sector_rule_des}>
-              { tr('sector_rule_des')}
+            <div className={styles.power_rule_des}>
+              { tr('power_rule_des')}
             </div>
           </div> 
-          <div className={styles.sector_warn}>
+          <div className={styles.power_warn}>
             <Warn noModal={true} onChange={(type,value)=>handleChange(type,value,index)} />
           </div>
           </>}

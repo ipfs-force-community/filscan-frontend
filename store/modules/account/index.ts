@@ -45,10 +45,10 @@ class AccountStore {
     }
     runInAction(() => {
       this.groupMiners = (result?.data?.group_info_list || []).map((groups:GroupInfoList)=> {
-        const miners = (groups?.miners_info||[]).map(v => {
-          return {...v,label:String(v.miner_id),value:String(v.miner_id)}
-        })
-        return {...groups,miners:miners,label:groups.group_name,value:String(groups.group_id)}
+        // const miners = (groups?.miners_info||[]).map(v => {
+        //   return {...v,label:String(v.miner_id),value:String(v.miner_id)}
+        // })
+        return {...groups,label:groups.group_name,value:String(groups.group_id)}
       });
       this.defaultGroup = result?.data?.group_info_list?.find((v: GroupInfoList) => v.is_default)
     })
