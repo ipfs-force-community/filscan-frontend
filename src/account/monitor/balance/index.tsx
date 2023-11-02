@@ -8,7 +8,7 @@ import Rules from './Rules'
 
 export default () => {
   const { tr } = Translation({ ns: 'account' });
-  const [showRules, setShowRules] = useState(true);
+  const [showRules, setShowRules] = useState(false);
   const [selectGroup, setSelectGroup] = useState('all');
   const [selectMiner,setSelectMiner]= useState('all')
   const handleChange = (type:string,value:string|boolean|number|any) => {

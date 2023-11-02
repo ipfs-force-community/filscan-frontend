@@ -138,7 +138,16 @@ const account={
   new_placeholder:'새로운 비밀번호를 입력해주세요',
   confirm_password:'비밀번호를 확인해주세요',
   confirm_placeholder: '새 비밀번호를 다시 입력해주세요',
-  personal_name_holder:'계정을 입력해주세요',
+  personal_name_holder: '계정을 입력해주세요',
+  
+  //余额监控
+   miner_balance: 'Miner 잔액',
+  owner_balance: 'Owner 잔액',
+  worker_balance:'Worker 잔액',
+  controller_0_balance: 'Controller0 잔액',
+  controller_1_balance: 'Controller1 잔액',
+  controller_2_balance: 'Controller2 잔액',
+  beneficiary_balance: 'Beneficiary 잔액',
 }
 
 export default account

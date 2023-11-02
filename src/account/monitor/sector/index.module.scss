@@ -70,7 +70,8 @@
             }
           }
           &_input{
-            flex:1
+            flex:1;
+            min-width: 100px;
         }
          &_text{
             width: 80px;
@@ -83,7 +84,14 @@
           margin-top: 5px;
         }
         &_content{
-              position: relative;  
+              position: relative; 
+            &_warning{
+              position: absolute;
+              left: 0;
+              bottom: -22px;
+              color: var(--font_des);
+              font-size: 12px;
+              }   
         }
         &_des{
           color: var(--font_des);
@@ -109,5 +117,8 @@
           color: var(--primary);
         }
       }     
+  }
+  &_warn{
+    margin-top: 20px;
   }
  }

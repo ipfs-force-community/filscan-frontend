@@ -74,6 +74,7 @@ export default (props: Props) => {
     title={`${tr('add_rules')}`}
     destroyOnClose={true}
     closeIcon={false}
+    width={600}
     wrapClassName="custom_left_modal"
     open={showModal} onOk={handleSave}
     onCancel={() => onChange('cancel', false)}
@@ -112,7 +113,7 @@ export default (props: Props) => {
                 placeholder={tr(ruleItem.rule.placeholder) }
                 onBlur={(e)=>handleChange('rule',e.target.value,index)}                                                      
                 />
-                {ruleItem.rule.warning && <span className={styles.sector_rule_warningDes }>{tr(ruleItem.rule.warningText ) }</span> }
+                {ruleItem.rule.warning && <span className={styles.sector_rule_content_warning}>{tr(ruleItem.rule.warningText ) }</span> }
               </div>
              
                 <div className={styles.sector_rule_text}>{tr('day')}</div>
@@ -121,7 +122,7 @@ export default (props: Props) => {
               { tr('sector_rule_des')}
             </div>
           </div> 
-          <div className={styles.sector_rules_warn}>
+          <div className={styles.sector_warn}>
             <Warn noModal={true} onChange={(type,value)=>handleChange(type,value,index)} />
           </div>
           </>}

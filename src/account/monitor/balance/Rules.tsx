@@ -14,8 +14,9 @@ interface Props {
 const defaultRules = {
   group_id: undefined,
   miner_id: undefined,
-  rule: {
-    value: '30',
+rule: {
+    category:undefined,
+    value: '',
     placeholder: 'sector_ruler_placeholder',
     warning: false,
     warningText:'sector_ruler_warningText',
@@ -40,6 +41,9 @@ export default (props:Props) => {
       case 'warnOk':
         newItem.warnList = value;
         break;
+      case 'category':
+              newItem.rule.category=value
+              break;
       case 'rule':
         if (value) { 
           if (!isPositiveInteger(value)) {
@@ -62,15 +66,29 @@ const handAddRule = () => {
               
 const handleSave = () => { }
 
- const rulesOptions = useMemo(() => {
-    return [
-      {label:tr('<='),value: '<='}, //小于等于
-    ]
-   },[tr])
+              const rulesOptions = useMemo(() => {
+                            return [
+                                          { label: tr('<='), value: '<=' }, //小于等于
+                            ]
+              }, [tr]);
+
+              const CategoryOptions = useMemo(() => { 
+                            return [
+                                          { label: tr('miner_balance_alone'), value: 'miner_balance' },
+                                          { label: tr('owner_balance_alone'), value: 'owner_balance' },
+                                          { label: tr('worker_balance_alone'), value: 'worker_balance' },
+                                          { label: tr('controller_0_balance_alone'), value: 'controller_0_balance' },
+                                          { label: tr('controller_1_balance_alone'), value: 'controller_1_balance' },
+                                          { label: tr('controller_2_balance_alone'), value: 'controller_2_balance' },
+                                          
+                            ]
+
+              },[tr])
 
  return <Modal
     title={`${tr('add_rules')}`}
     destroyOnClose={true}
+    width={700}
     closeIcon={false}
     wrapClassName="custom_left_modal"
     open={showModal} onOk={handleSave}
@@ -93,8 +111,17 @@ const handleSave = () => { }
         </div>
           {ruleItem.miner_id && <>
            <div className={styles.balance_rule}>
-            <div className={styles.balance_rule_title}>{tr('sector_rule_title')}</div>
-            <div className={styles.balance_rule_main}>
+              {/* <div className={styles.balance_rule_title}>
+             
+              </div> */}
+              <div className={styles.balance_rule_main}>
+              <Selects
+                  className={styles.balance_rule_select}
+                  value={ ruleItem.rule.category}
+                  placeholder={ tr('balance_category_placeholder')}
+                  options={CategoryOptions}
+                 onChange={(value)=>handleChange('category',value,index)}
+              />
               <Selects
                   className={styles.balance_rule_select}
                   value={'<='}
@@ -109,13 +136,12 @@ const handleSave = () => { }
                 placeholder={tr(ruleItem.rule.placeholder) }
                 onBlur={(e)=>handleChange('rule',e.target.value,index)}                                                      
                 />
-                {ruleItem.rule.warning && <span className={styles.balance_rule_warningDes }>{tr(ruleItem.rule.warningText ) }</span> }
+                {ruleItem.rule.warning && <span className={styles.balance_rule_content_warning }>{tr(ruleItem.rule.warningText ) }</span> }
               </div>
-             
-                <div className={styles.balance_rule_text}>{tr('day')}</div>
+                <div className={styles.balance_rule_text}>{'FIL'}</div>
             </div>
             <div className={styles.balance_rule_des}>
-              { tr('sector_rule_des')}
+              {tr('balance_rule_des', {value:'100,000,00'})}
             </div>
           </div> 
           <div className={styles.sector_rules_warn}>
