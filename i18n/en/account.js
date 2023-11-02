@@ -69,14 +69,14 @@ const account = {
   miner_id: 'Miner ID',
 
   //地址余额 Address Balance
-  miner_balance: 'Miner Balance',
-  owner_balance: 'Owner Balance',
-  worker_balance:'Worker Balance',
-  controller_0_balance: 'Controller0 Balance',
-  controller_1_balance: 'Controller1 Balance',
-  controller_2_balance: 'Controller2 Balance',
-  beneficiary_balance: 'Beneficiary Balance',
-  market_balance: 'Market Balance',
+  miner_balance: 'Miner Balance/Daily Change',
+  owner_balance: 'Owner Balance/Daily Change',
+  worker_balance:'Worker Balance/Daily Change',
+  controller_0_balance: 'Controller0 Balance/Daily Change',
+  controller_1_balance: 'Controller1 Balance/Daily Change',
+  controller_2_balance: 'Controller2 Balance/Daily Change',
+  beneficiary_balance: 'Beneficiary Balance/Daily Change',
+  market_balance: 'Market Balance/Daily Change',
 
   //奖励 Reward
   block_count:'Block Count',
@@ -137,7 +137,17 @@ const account = {
   new_placeholder:'Please enter new password',
   confirm_password: 'Confirm',
   confirm_placeholder: 'Please enter new password again',
-  personal_name_holder:'Please enter your account name',
+  personal_name_holder: 'Please enter your account name',
+
+
+  //余额监控
+   miner_balance: 'Miner Balance',
+  owner_balance: 'Owner Balance',
+  worker_balance:'Worker Balance',
+  controller_0_balance: 'Controller0 Balance',
+  controller_1_balance: 'Controller1 Balance',
+  controller_2_balance: 'Controller2 Balance',
+  beneficiary_balance: 'Beneficiary Balance',
 }
 
 export default account

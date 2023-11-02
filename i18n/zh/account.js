@@ -1,18 +1,25 @@
 const account = {
-  date:'日期',
+  date: '日期',
+  day:'天',
   confirm: '确认',
   cancel: '取消',
   login:'节点管家',
   go_home: '返回首页',
   go_login: '去登录',
-  back:'返回',
-  account_title:'节点管家',
+  back: '返回',
+  select_group: '请选择分组',
+  select_miner: '请选择节点',
+  select_miner_tag:'请选择标签',
+  account_title: '节点管家',
+  all_tags:'全部标签',
   overview: '数据概览',
   data_details:'数据详情',
   miners: '节点管理',
   monitor: '监控管理',
   overview_monitorBalance: '余额监控',
-  monitor_sector:'扇区监控',
+  monitor_sector: '扇区监控',
+  monitor_balance: '余额监控',
+  monitor_power:'算力监控',
   personal: '账号信息',
   logout: '退出登录',
   default_group: '默认分组',
@@ -149,12 +156,49 @@ const account = {
 
   //下载
   out_come_gas: '支出',
+
+  //余额监控
+  miner_balance_alone: '节点余额',
+  owner_balance_alone: 'Owner余额',
+  worker_balance_alone:'Worker余额',
+  controller_0_balance_alone: 'Controller0余额',
+  controller_1_balance_alone: 'Controller1余额',
+  controller_2_balance_alone: 'Controller2余额',
+  beneficiary_balance_alone: 'Beneficiary余额',
   
   //监控
   add_rules:'添加规则',
   examination: '规则',
   alarm: '告警方式',
-  status:'状态'
+  status: '状态',
+  //告警方式
+  warn_title:'告警方式',
+  warn_title_des: '告警方式可根据实际情况选择一种或组合',
+  email_warn: '邮箱告警',
+  email_warn_placeholder: '请输入告警邮箱地址',
+  email_warn_warning:'请输入正确邮箱地址',
+  email_warn_des:'当前账户注册邮箱会默认发送，无需重复提交',
+  message_warn: '短信告警',
+  message_warn_placeholder: '请输入接收号码',
+  message_warn_warning:'请输入正确的接收号码',
+
+  phone_warn: '电话告警',
+  phone_warn_placeholder: '请输入接收号码',
+  phone_warn_warning:'请输入正确的接收号码',
+
+  //扇区监控
+  add_rules: '添加规则',
+  rule_detail:'规则详情',
+  sector_rule_title: '扇区到期时间',
+  sector_rule_des: '可自定义,建议大于30',
+  sector_ruler_placeholder: '请输入正整数',
+  sector_ruler_warningText:'请输入正确正整数',
+  '<=': '小于等于',
+  '>=': '大于等于',
+  //余额监控
+  balance_category_placeholder: '请选择余额类目',
+  balance_rule_des:'当前{{value}} FIL'
+  
 
 }
 

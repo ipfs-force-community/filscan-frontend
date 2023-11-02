@@ -18,7 +18,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Loading from '@/components/loading';
 import MonitorBalance from '@/src/account/monitor/balance';
-import MonitorSector from '@/src/account/monitor/sector'
+import MonitorSector from '@/src/account/monitor/sector';
+import MonitorPower from '@/src/account/monitor/power';
 import accountStore from '@/store/modules/account';
 import userStore from '@/store/modules/user';
 import { Menu } from 'antd';
@@ -71,6 +72,22 @@ const Account: React.FC = () => {
     );
   };
 
+  const childrenData:Record<string,JSX.Element> = {
+    'overview': <Overview selectedKey='overview' />,
+    'miners': <Miners />,
+    'lucky': <Lucky selectedKey={'overview_lucky'} />,
+    'power': <Power selectedKey={'overview_power'} />,
+    'gas': <Gas selectedKey={'overview_gas'} />,
+    'balance':<Balance selectedKey={'overview_balance'}/>,
+    'expired':<Expired selectedKey={'overview_expired'}/>,
+    'reward':<Reward selectedKey={'overview_reward'}/>,
+    'monitorBalance': <MonitorBalance />,
+    'monitorSector': <MonitorSector />,
+    'monitorPower': <MonitorPower />,
+    'personal':<Personal />
+  }
+
+
   return (
     <div className='main_contain !py-6 '>
       <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
@@ -92,53 +109,7 @@ const Account: React.FC = () => {
           hashParams.type !== 'miner_add' &&
           selectedKey !== 'personal' && selectedKey !== 'miners' ? (
               <NoMiner selectedKey={selectedKey} />
-            ) : (
-              <>
-                {selectedKey === 'overview' && (
-                  <Overview selectedKey='overview' />
-                )}
-                {selectedKey === 'miners' && <Miners />}
-                {selectedKey === 'lucky' && (
-                  <Lucky
-                    selectedKey={'overview_' + selectedKey}
-                  />
-                )}
-                {selectedKey === 'power' && (
-                  <Power
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'gas' && (
-                  <Gas selectedKey={'overview_' + selectedKey} />
-                )}
-                {selectedKey === 'balance' && (
-                  <Balance
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'expired' && (
-                  <Expired
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'reward' && (
-                  <Reward
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'monitorBalance' && (
-                  <MonitorBalance selectedKey={'monitor_balance'}/>
-                )}
-                {selectedKey === 'monitorSector' && (
-                  <MonitorSector />
-                )}
-                {selectedKey === 'personal' && <Personal />}
-              </>
-            )}
+            ) : childrenData[selectedKey] }
         </div>
       </div>
     </div>

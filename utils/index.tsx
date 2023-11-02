@@ -345,6 +345,39 @@ export function validateCode(code: number | string) {
   return newCode > 99999 && newCode < 1000000;
 }
 
+//校验邮箱
+export function isEmail(email: string): boolean {
+  // 判断字符串中是否包含@符号和至少一个.符号
+  if (email.includes('@') && email.includes('.')) {
+    // 判断@符号是否在.符号之前，并且.符号不在末尾
+    if (email.indexOf('@') < email.indexOf('.') && email.indexOf('.') < email.length - 1) {
+      return true;
+    }
+  }
+  return false;
+}
+//校验手机号
+export function isPhone(phoneNumber: string): boolean {
+  const pattern = /^1[0-9]{10}$/;
+  return pattern.test(phoneNumber);
+}
+
+//判断字符是否为正整数
+export function isPositiveInteger(s: string): boolean {
+  if (!s) {  // 检查字符串是否为空
+    return false;
+  }
+  if (!/^\d+$/.test(s)) {  // 检查字符串是否只包含数字字符
+    return false;
+  }
+  const n = parseInt(s, 10);  // 将字符串转换为整数
+  if (n > 0) {  // 检查转换后的整数是否大于零
+    return true;
+  } else {
+    return false;
+  }
+}
+
 //首字母大写,其余不变
 export function titleCase(str: string | number | boolean) {
   const Str = String(str);

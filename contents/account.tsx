@@ -158,6 +158,10 @@ export const account_manager: Array<MenuItem> = [
         label: 'monitor_sector', //gas 消耗
         key: 'monitorSector',
       },
+        {
+        label: 'monitor_power', //gas 消耗
+        key: 'monitorPower',
+      },
     ]
   },
   {
@@ -1401,3 +1405,4 @@ function renderFil(text: string | number, changeText?: number | string, flag: st
     </span>
   );
 }
+
