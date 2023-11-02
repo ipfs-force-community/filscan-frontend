@@ -12,8 +12,8 @@ export default () => {
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'group':
-        setSelectGroup(value);
-        break;
+      setSelectGroup(value);
+      break;
     };
 
   }

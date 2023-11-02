@@ -22,14 +22,14 @@ export default () => {
       setShowRules(false)
       break;
     case 'group':
-        setSelectGroup(value);
-        setSelectMiner('all')
-        break;
-      case "miner":
-        setSelectMiner(value);
-        break;
+      setSelectGroup(value);
+      setSelectMiner('all')
+      break;
+    case "miner":
+      setSelectMiner(value);
+      break;
     case 'miner_tag':
-        setSelectTag(value);
+      setSelectTag(value);
       break;
     };
 

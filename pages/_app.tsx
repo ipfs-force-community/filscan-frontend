@@ -151,24 +151,24 @@ function App({ Component, pageProps, isMobile }: any) {
               lang,
               setLang,
             }}>
-                <WalletState.Provider value={{
-                  wallet, setWallet: (walletItem:any) => {
-                    setWallet(walletItem)
-                  }
-                }}>
-                  <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-                    <div className={classNames(`container_body text-sm ${theme}`)}>
-                      <HeaderMain />
-                      <MobileView>
-                        <Search className={styles['search']}/>
-                      </MobileView>
-                      <div className={classNames(styles.home ,styles.component,'chart-wrapper')}>
-                        <Component {...pageProps} />
-                      </div>
-                      <Footer />
+              <WalletState.Provider value={{
+                wallet, setWallet: (walletItem:any) => {
+                  setWallet(walletItem)
+                }
+              }}>
+                <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                  <div className={classNames(`container_body text-sm ${theme}`)}>
+                    <HeaderMain />
+                    <MobileView>
+                      <Search className={styles['search']}/>
+                    </MobileView>
+                    <div className={classNames(styles.home ,styles.component,'chart-wrapper')}>
+                      <Component {...pageProps} />
                     </div>
-                  </ConfigProvider>
-                </WalletState.Provider>
+                    <Footer />
+                  </div>
+                </ConfigProvider>
+              </WalletState.Provider>
             </FilscanStoreContext.Provider>
           </DeviceContext.Provider>
         </ErrorBoundary>

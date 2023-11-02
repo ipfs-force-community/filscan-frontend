@@ -10,12 +10,12 @@ const defaultUser = {
 }
 
 class UserStore {
- userInfo:Record<string,any>
+  userInfo:Record<string,any>
   constructor() {
     this.userInfo= {
-    ...defaultUser,
-    loading:true
-  }
+      ...defaultUser,
+      loading:true
+    }
     makeObservable(this, {
       userInfo: observable,
     });
@@ -36,21 +36,20 @@ class UserStore {
   }
 
   setUserInfo(user?: any) {
-     runInAction(()=>{
+    runInAction(()=>{
       if (!user) {
-      this.userInfo = {
-        ...defaultUser,
-        loading: false
+        this.userInfo = {
+          ...defaultUser,
+          loading: false
+        }
+      } else {
+        this.userInfo = {
+          ...user || {},
+          last_login: user?.last_login_at||"",
+          loading:false
+        }
       }
-    } else {
-      this.userInfo = {
-        ...user || {},
-        last_login: user?.last_login_at||"",
-        loading:false
-      }
-    }
     })
-   
 
   }
 

@@ -33,25 +33,25 @@ export default observer((props: Props) => {
     groupMiners?.forEach(group => {
       const miners: Array<any> = [];
       const tags:Record<string,string> = {};
-        group?.miners_info.forEach(v => { 
-          allMiners.push({
-              miner_tag:v.miner_tag,
-              label: String(v.miner_id),
-              value:String(v.miner_id)
-            })
-           miners.push({
-              miner_tag:v.miner_tag,
-              label: String(v.miner_id),
-              value:String(v.miner_id)
-            })
-            if (v.miner_tag) { 
-              allTags[v.miner_tag] = v.miner_tag
-              tags[v.miner_tag] = v.miner_tag
-            }
+      group?.miners_info.forEach(v => {
+        allMiners.push({
+          miner_tag:v.miner_tag,
+          label: String(v.miner_id),
+          value:String(v.miner_id)
         })
-       if (group.is_default) {
-          group.label = tr(group.group_name);
+        miners.push({
+          miner_tag:v.miner_tag,
+          label: String(v.miner_id),
+          value:String(v.miner_id)
+        })
+        if (v.miner_tag) {
+          allTags[v.miner_tag] = v.miner_tag
+          tags[v.miner_tag] = v.miner_tag
         }
+      })
+      if (group.is_default) {
+        group.label = tr(group.group_name);
+      }
       newMinerGroups.push({...group,miners: miners,tags:tags})
     });
     const newGroups: Array<any> = [{
@@ -68,20 +68,20 @@ export default observer((props: Props) => {
       label: tr('all_tags'),
       value:'all',
     }];
-    if (selectMinerItem.value && selectMinerItem.value !== 'all') { 
+    if (selectMinerItem.value && selectMinerItem.value !== 'all') {
       newTags.push({
         label: selectMinerItem.miner_tag,
         value: selectMinerItem.miner_tag
       })
-    } else if (selectItem.group_id) { 
-      Object.keys(selectItem.tags)?.forEach(tagKey => { 
-      newTags.push({
+    } else if (selectItem.group_id) {
+      Object.keys(selectItem.tags)?.forEach(tagKey => {
+        newTags.push({
           label: tagKey,
           value:tagKey
         })
-      })      
-    }else if (allTags && Object.keys(allTags).length > 0) { 
-      Object.keys(allTags).forEach(tagKey => { 
+      })
+    }else if (allTags && Object.keys(allTags).length > 0) {
+      Object.keys(allTags).forEach(tagKey => {
         newTags.push({
           label: tagKey,
           value:tagKey
@@ -89,17 +89,16 @@ export default observer((props: Props) => {
       })
     }
     return newTags
-   },[allTags,selectItem,selectMinerItem])
+  },[allTags,selectItem,selectMinerItem])
 
   const handleChange = (type: string, value: string | number | boolean, item?: any) => {
     if (type === 'group') {
       setSelectItem(item)
-    } else if (type === 'miner') { 
+    } else if (type === 'miner') {
       setSelectMinerItem(item)
     }
     onChange(type,value)
   }
-
 
   return <div className={style.header}>
     <div className={style.header_left}>
@@ -127,7 +126,7 @@ export default observer((props: Props) => {
           handleChange('miner_tag',v,item)
         }}
       />}
-     
+
     </div>
     { addRule && <Button className='primary_btn' onClick={()=>handleChange('addRules',true)}>{ tr('add_rules')}</Button>}
   </div>
