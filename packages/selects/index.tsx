@@ -5,15 +5,13 @@ import { Select } from 'antd';
 import { useEffect, useState } from 'react';
 import type { SelectProps } from 'antd';
 
-interface Props extends SelectProps { 
+interface Props extends SelectProps {
   className?: string;
   border?: boolean;
   popupClassName?: string;
   options?: Array<Option_Item>;
   onChange?: (value: string,item?:any) => void;
 }
-
-
 
 export default (props:Props) => {
   const {
@@ -33,7 +31,7 @@ export default (props:Props) => {
   }, [options]);
 
   const handleChange = (value: string,item?:any) => {
-   if(onChange) onChange(value,item);
+    if(onChange) onChange(value,item);
   };
 
   return (

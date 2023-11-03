@@ -1,8 +1,7 @@
 /** @format */
 
 import * as echarts from 'echarts';
-import { LabelLayout, UniversalTransition } from 'echarts/features';
-import { CanvasRenderer } from 'echarts/renderers';
+//import * as echarts from 'echarts/charts';
 import type {
   // 系列类型的定义后缀都为 SeriesOption
   BarSeriesOption,
@@ -17,7 +16,6 @@ import type {
 } from 'echarts/components';
 import type { ComposeOption } from 'echarts/core';
 import { useEffect, useRef } from 'react';
-import { useFilscanStore } from '@/store/FilscanStore';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 type ECOption = ComposeOption<
@@ -51,10 +49,24 @@ const EChartsComponent: React.FC<EChartsComponentProps> = ({
   options = {},
 }) => {
   const chartRef = useRef<HTMLDivElement>(null);
+  const chart = useRef<any>(null)
 
   useEffect(() => {
     if (chartRef.current) {
-      const chart = echarts.init(chartRef.current as unknown as HTMLDivElement);
+      chart.current = echarts.init(chartRef.current as unknown as HTMLDivElement);
+      const handleSize = () => {
+        chart.current.resize();
+      };
+      window.addEventListener('resize', handleSize);
+      return () => {
+        chart.current.dispose();
+        window.removeEventListener('resize', handleSize);
+      };
+    }
+  }, [chartRef.current]);
+
+  useEffect(() => {
+    if (chart.current) {
       const default_options = {
         backgroundColor: 'transparent',
         grid: {
@@ -66,20 +78,10 @@ const EChartsComponent: React.FC<EChartsComponentProps> = ({
         },
       };
       if (options && options.series) {
-        chart?.setOption({ ...default_options, ...options });
+        chart.current.setOption({ ...default_options, ...options });
       }
-
-      const handleSize = () => {
-        chart.resize();
-      };
-
-      window.addEventListener('resize', handleSize);
-      return () => {
-        chart.dispose();
-        window.removeEventListener('resize', handleSize);
-      };
     }
-  }, [options]);
+  }, [options,chart.current]);
 
   return <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>;
 };

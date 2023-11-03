@@ -8,7 +8,7 @@ import { Menu } from 'antd';
 import { useTranslation } from 'react-i18next'
 import { mobileNavMenu } from '@/contents/nav'
 import { useRouter } from 'next/router'
-import _ from 'lodash'
+import { get } from 'lodash'
 import Logo from '@/assets/images/logo.png';
 import LogoText from '@/assets/images/logoText.png'
 import { Translation } from '@/components/hooks/Translation';
@@ -51,7 +51,7 @@ const Header = (props:any) => {
   const onSelect:MenuProps['onSelect'] = (select)=>{
     setOpen(false)
     setSelectKeys(select.selectedKeys)
-    const child = _.get(mobileNavMenu,select.key)
+    const child = get(mobileNavMenu,select.key)
 
     if (child.value) {
       const value = child.value

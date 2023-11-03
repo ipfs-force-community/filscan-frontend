@@ -66,7 +66,7 @@ export default () => {
 
     const result1: any = await axiosData(TransMethod, {
       account_id: address,
-    },{isCancel:false});
+    }, { isCancel: false });
     const newTransMethod: any = [
       {
         label:'all',

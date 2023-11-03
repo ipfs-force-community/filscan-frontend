@@ -6,7 +6,7 @@ import { Translation } from '../hooks/Translation';
 import IconB from '@/assets/images/searchIcon_b.svg';
 import IconW from '@/assets/images/searchIcon_w.svg';
 import { useEffect, useState } from 'react';
-import _ from 'lodash'
+import { debounce } from 'lodash'
 
 export default ({
   className,
@@ -59,7 +59,7 @@ export default ({
             setValue(e.target.value.trim());
           }
         }}
-        onPressEnter={_.debounce(() => {
+        onPressEnter={debounce(() => {
           if (clear) {
             setValue('');
           }
@@ -74,7 +74,7 @@ export default ({
           (
             <span
               className='cursor-pointer'
-              onClick={_.debounce(() => {
+              onClick={debounce(() => {
                 if (onClick && inputValue?.length > 0) {
                   if (clear) {
                     setValue('');

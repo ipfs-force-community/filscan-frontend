@@ -8,7 +8,7 @@ import useAxiosData from "@/store/useAxiosData";
 import { apiUrl } from "@/contents/apiUrl";
 import { fil_overviewList } from "@/contents/statistic";
 import { formatFil, formatNumberUnit } from "@/utils";
-import _ from "lodash";
+import { cloneDeep } from "lodash";
 import { BrowserView, MobileView } from "@/components/device-detect";
 import styles from "./FilChart.module.scss";
 import classNames from "classnames";
@@ -97,8 +97,8 @@ function Overview({ className }: { className?: string }) {
   }, [newData, lang, theme]);
 
   const loadOptions = () => {
-    let options_a: any = _.cloneDeep({ ...defaultOtions });
-    let options_b: any = _.cloneDeep({ ...defaultOtions });
+    let options_a: any = cloneDeep({ ...defaultOtions });
+    let options_b: any = cloneDeep({ ...defaultOtions });
     let legend_a: any = [];
     let legend_b: any = [];
 
@@ -144,7 +144,7 @@ function Overview({ className }: { className?: string }) {
 
   const newOptionsA = useMemo(() => {
     const newData: any = [];
-    const newOption: any = _.cloneDeep(optionsA);
+    const newOption: any = cloneDeep(optionsA);
     if (newOption?.series && newOption.series.length > 0) {
       optionsA?.series &&
         optionsA?.series[0]?.data.map((v: any) => {
@@ -169,7 +169,7 @@ function Overview({ className }: { className?: string }) {
 
   const newOptionsB = useMemo(() => {
     const newData: any = [];
-    const newOption: any = _.cloneDeep(optionsB);
+    const newOption: any = cloneDeep(optionsB);
     if (newOption?.series && newOption.series.length > 0) {
       optionsB?.series &&
         optionsB?.series[0]?.data.map((v: any) => {

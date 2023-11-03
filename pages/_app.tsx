@@ -5,7 +5,7 @@ import '@/styles/custom.scss';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import enUS from 'antd/lib/locale/en_US';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { FilscanStoreContext } from '@/store/FilscanStore';
 import HeaderMain from '@/components/header';
 import ErrorBoundary from '@/components/Bounday';
@@ -138,9 +138,7 @@ function App({ Component, pageProps, isMobile }: any) {
         `}
       </Script>
       <Provider {...mobxStores}>
-
         <ErrorBoundary>
-
           <DeviceContext.Provider value={{isMobile}}>
             <FilscanStoreContext.Provider value={{
               theme,
@@ -151,24 +149,24 @@ function App({ Component, pageProps, isMobile }: any) {
               lang,
               setLang,
             }}>
-                <WalletState.Provider value={{
-                  wallet, setWallet: (walletItem:any) => {
-                    setWallet(walletItem)
-                  }
-                }}>
-                  <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-                    <div className={classNames(`container_body text-sm ${theme}`)}>
-                      <HeaderMain />
-                      <MobileView>
-                        <Search className={styles['search']}/>
-                      </MobileView>
-                      <div className={classNames(styles.home ,styles.component,'chart-wrapper')}>
-                        <Component {...pageProps} />
-                      </div>
-                      <Footer />
+              <WalletState.Provider value={{
+                wallet, setWallet: (walletItem:any) => {
+                  setWallet(walletItem)
+                }
+              }}>
+                <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+                  <div className={classNames(`container_body text-sm ${theme}`)}>
+                    <HeaderMain />
+                    <MobileView>
+                      <Search className={styles['search']}/>
+                    </MobileView>
+                    <div className={classNames(styles.home ,styles.component,'chart-wrapper')}>
+                      <Component {...pageProps} />
                     </div>
-                  </ConfigProvider>
-                </WalletState.Provider>
+                    <Footer />
+                  </div>
+                </ConfigProvider>
+              </WalletState.Provider>
             </FilscanStoreContext.Provider>
           </DeviceContext.Provider>
         </ErrorBoundary>

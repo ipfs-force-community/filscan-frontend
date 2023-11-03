@@ -12,7 +12,7 @@ export default () => {
   const [selectGroup, setSelectGroup] = useState('all');
   const [selectMiner, setSelectMiner] = useState('all');
   const [selectTag, setSelectTag] = useState('all');
-  
+
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
@@ -22,16 +22,16 @@ export default () => {
       setShowRules(false)
       break;
     case 'group':
-        setSelectGroup(value);
-        setSelectMiner('all')
-        break;
-      case "miner":
-        setSelectMiner(value);
-         setSelectTag('all');
-        break;
-      case 'miner_tag':
-        setSelectTag(value);
-        break;
+      setSelectGroup(value);
+      setSelectMiner('all')
+      break;
+    case "miner":
+      setSelectMiner(value);
+      setSelectTag('all');
+      break;
+    case 'miner_tag':
+      setSelectTag(value);
+      break;
     };
 
   }
@@ -43,13 +43,13 @@ export default () => {
   }, [tr])
 
   return <div className={styles.balance}>
-       <div className={styles.balance_title}>
+    <div className={styles.balance_title}>
       {tr('monitor_balance') }
     </div>
     <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} selectTag={ selectTag} addRule={true } />
     <div className={ styles.balance_table}>
       <Table data={[]} columns={columns} loading={false} />
     </div>
-     <Rules showModal={showRules} onChange={handleChange}/>
+    <Rules showModal={showRules} onChange={handleChange}/>
   </div>
 }

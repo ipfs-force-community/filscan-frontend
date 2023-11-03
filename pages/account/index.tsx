@@ -43,11 +43,11 @@ const Account: React.FC = () => {
     if (!userInfo.mail || !localStorage.getItem('token')) {
       router.push('/account/login');
       return
-    } else { 
+    } else {
       accountStore.getAccountMinersNumber()
     }
   }, [userInfo.mail]);
-  
+
   if (loading) {
     return <Loading />
   }
@@ -86,7 +86,6 @@ const Account: React.FC = () => {
     'monitorPower': <MonitorPower />,
     'personal':<Personal />
   }
-
 
   return (
     <div className='main_contain !py-6 '>
