@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { useMemo, useState } from 'react';
 import styles from './index.module.scss'
 import useWindow from '@/components/hooks/useWindown';
-import _ from 'lodash'
+import { cloneDeep } from 'lodash'
 export default () => {
   const { tr } = Translation({ ns: 'contract' });
   const [current, setCurrent] = useState(1);
@@ -29,7 +29,7 @@ export default () => {
   );
 
   const columns = useMemo(() => {
-    const columns = _.cloneDeep(contract_nfts.columns)
+    const columns = cloneDeep(contract_nfts.columns)
     return columns.map((v: any) => {
       if (isMobile) {
         if (v.dataIndex === 'rank') {

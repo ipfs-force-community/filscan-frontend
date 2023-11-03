@@ -5,7 +5,7 @@ import '@/styles/custom.scss';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import enUS from 'antd/lib/locale/en_US';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { FilscanStoreContext } from '@/store/FilscanStore';
 import HeaderMain from '@/components/header';
 import ErrorBoundary from '@/components/Bounday';
@@ -138,9 +138,7 @@ function App({ Component, pageProps, isMobile }: any) {
         `}
       </Script>
       <Provider {...mobxStores}>
-
         <ErrorBoundary>
-
           <DeviceContext.Provider value={{isMobile}}>
             <FilscanStoreContext.Provider value={{
               theme,

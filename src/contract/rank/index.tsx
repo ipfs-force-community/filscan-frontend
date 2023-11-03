@@ -18,7 +18,7 @@ import styles from './index.module.scss'
 import classNames from 'classnames';
 import CopySvgMobile from '@/assets/images/icon-copy.svg';
 
-import _ from 'lodash'
+import { cloneDeep } from 'lodash'
 const default_sort = {
   field: 'transfer_count',
   order: 'descend',
@@ -62,7 +62,7 @@ export default ({ origin }: { origin?: string }) => {
     const newArr =
       origin === 'home'
         ? contract_rank.columns.slice(0, 5)
-        : _.cloneDeep(contract_rank.columns);
+        : cloneDeep(contract_rank.columns);
     let content = newArr.filter((value)=>{
       if (isMobile) {
         return value.dataIndex !== 'contract_address'
