@@ -27,6 +27,7 @@ export default () => {
       break;
     case "miner":
       setSelectMiner(value);
+      setSelectTag('all')
       break;
     case 'miner_tag':
       setSelectTag(value);

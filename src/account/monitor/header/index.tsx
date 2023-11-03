@@ -11,13 +11,12 @@ interface Props {
   selectGroup: string;
   selectMiner?: string;
   selectTag?: string;
-  showMiner?: boolean;
   addRule?:boolean
   onChange: (type: string, value: string | number | boolean) => void;
 }
 
 export default observer((props: Props) => {
-  const { onChange, selectGroup,selectMiner,selectTag,addRule,showMiner=true} = props;
+  const { onChange, selectGroup,selectMiner,selectTag,addRule} = props;
   const { groupMiners } = accountStore;
   const { tr } = Translation({ ns: 'account' });
   const [selectItem, setSelectItem] = useState<Record<string, any>>({});
@@ -69,23 +68,29 @@ export default observer((props: Props) => {
       value:'all',
     }];
     if (selectMinerItem.value && selectMinerItem.value !== 'all') {
-      newTags.push({
-        label: selectMinerItem.miner_tag,
-        value: selectMinerItem.miner_tag
-      })
+      if (selectMinerItem.miner_tag) {
+        newTags.push({
+          label: selectMinerItem.miner_tag,
+          value: selectMinerItem.miner_tag
+        })
+      }
     } else if (selectItem.group_id) {
       Object.keys(selectItem.tags)?.forEach(tagKey => {
-        newTags.push({
-          label: tagKey,
-          value:tagKey
-        })
+        if (tagKey) {
+          newTags.push({
+            label: tagKey,
+            value:tagKey
+          })
+        }
       })
     }else if (allTags && Object.keys(allTags).length > 0) {
       Object.keys(allTags).forEach(tagKey => {
-        newTags.push({
-          label: tagKey,
-          value:tagKey
-        })
+        if (tagKey) {
+          newTags.push({
+            label: tagKey,
+            value:tagKey
+          })
+        }
       })
     }
     return newTags
@@ -110,7 +115,7 @@ export default observer((props: Props) => {
           handleChange('group',v,item)
         }}
       />
-      { showMiner && <Selects
+      { props.hasOwnProperty('selectMiner') && <Selects
         value={selectMiner}
         placeholder={tr('select_miner') }
         options={selectItem?.group_id ? selectItem?.miners||[]:allMiners}
@@ -118,7 +123,7 @@ export default observer((props: Props) => {
           handleChange('miner',v,item)
         }}
       />}
-      { showMiner && <Selects
+      { props.hasOwnProperty('selectTag') && <Selects
         value={selectTag}
         placeholder={tr('select_miner_tag') }
         options={showTags}

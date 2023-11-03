@@ -86,7 +86,10 @@ font-display: auto;
     height: 32px;
     color: var(--font-color) !important;
     background-color: var(--bgDesColor) !important; 
-     border: 1px solid var(--border-color) ;
+    border: 1px solid var(--border-color) ;
+    &::placeholder{
+            color: var(--font_des_unit) !important;   
+    }
      .anticon{
         color: var(--font-color) ;
      }
@@ -96,7 +99,7 @@ font-display: auto;
      input{
         color: var(--font-color);   
         &::placeholder{
-            color: var(--font_des_unit);   
+            color: var(--font_des_unit) !important;   
         }
      }
      &:hover{
@@ -126,6 +129,14 @@ font-display: auto;
             border-radius: 5px 
    
 }
+}
+
+//checkbox 
+.custom_checkbox{
+    .ant-checkbox-inner{
+        background-color: var(--bgColor);
+        border:1px solid  var(--border-color);
+    }
 }
 
 
@@ -710,7 +721,7 @@ font-display: auto;
     width: 100%;
 }
 .ant-modal-mask{
-    background-color: rgba(0, 0, 0, 0.3) !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
 }
 .custom_modal_wrapper{
     width: 100%;

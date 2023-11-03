@@ -46,12 +46,14 @@ export default (props: Props) => {
           newWarn[warnKey][index].warning = true;
         } else {
           newWarn[warnKey][index].warning = false;
+          newWarn[warnKey][index].inputValue = value;
         }
         if (warnKey !== 'email_warn' && !isPhone(value)) {
           //校验手机号
           newWarn[warnKey][index].warning = true;
         } else {
           newWarn[warnKey][index].warning = false;
+          newWarn[warnKey][index].inputValue = value;
         }
       }
       break;
@@ -81,10 +83,10 @@ export default (props: Props) => {
           {warnItem.map((warn: any, index: number) => {
             const showIcon = index === warnItem.length - 1;
             return <div key={index} className={styles.warn_content_item}>
-              <div className={styles.warn_content_item_title}>
-                <Checkbox checked={warn.checked} onChange={(e:CheckboxChangeEvent)=> handleWarn('checkbox',warnKey,index,e.target.checked) } />
+              { index === 0 && <div className={styles.warn_content_item_title}>
+                <Checkbox checked={warn.checked} className="custom_checkbox" onChange={(e:CheckboxChangeEvent)=> handleWarn('checkbox',warnKey,index,e.target.checked) } />
                 {tr(warn.title)}
-              </div>
+              </div>}
               <div className={styles.warn_content_item_main}>
                 <Input
                   style={{borderColor:warn.warning?'red':''}}

@@ -28,7 +28,7 @@ export default () => {
     <div className={styles.power_title}>
       {tr('monitor_power') }
     </div>
-    <Header onChange={handleChange} selectGroup={selectGroup} showMiner={false } addRule={false} />
+    <Header onChange={handleChange} selectGroup={selectGroup} addRule={false} />
     <div className={ styles.power_table}>
       <Table data={[]} columns={columns} loading={false} />
     </div>

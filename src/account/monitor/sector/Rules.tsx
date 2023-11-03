@@ -49,19 +49,25 @@ export default (props: Props) => {
       }
       break;
     }
+
     newRules.splice(index, 1, newItem);
     setRules(newRules)
   };
 
   const handleSave = () => {
-    //保存规则
-    console.log('==save=sector==',rules)
+    console.log('save sector---',rules)
   }
-
-  const handAddRule = () => {
+  const handleRules = (type:string,index:number) => {
+    //保存规则
     const newRules = [...rules];
-    newRules.push({ ...defaultRules });
+
+    if (type === 'delete' ) {
+      newRules.splice(index, 1)
+    } else if (type === 'add') {
+      newRules.push({ ...defaultRules });
+    }
     setRules(newRules)
+    console.log('==save=sector==',rules)
   }
 
   const rulesOptions = useMemo(() => {
@@ -74,7 +80,7 @@ export default (props: Props) => {
     title={`${tr('add_rules')}`}
     destroyOnClose={true}
     closeIcon={false}
-    width={600}
+    width={560}
     wrapClassName="custom_left_modal"
     open={showModal} onOk={handleSave}
     onCancel={() => onChange('cancel', false)}
@@ -86,14 +92,15 @@ export default (props: Props) => {
     <div>
       {rules.map((ruleItem: any, index: number) => {
         const showIcon = index === rules.length - 1;
+        const deleteIcon = rules.length > 1;
         return <div key={index} className={styles.sector_contain}>
           <div className={styles.sector_contain_title}>{ tr('rule_detail')}</div>
           <div className={styles.sector_contain_header}>
             <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
-            { showIcon && <div className={styles.sector_icons}>
-              <span className={styles.sector_icons_icon} onClick={handAddRule}>+</span>
-              <span className={styles.sector_icons_icon}>-</span>
-            </div>}
+            <div className={styles.sector_icons}>
+              { showIcon && <span className={styles.sector_icons_icon} onClick={() => handleRules('add', index)}>+</span>}
+              { deleteIcon &&<span className={styles.sector_icons_icon} onClick={()=>handleRules('delete',index) }>-</span> }
+            </div>
           </div>
           {ruleItem.miner_id && <>
             <div className={styles.sector_rule}>
