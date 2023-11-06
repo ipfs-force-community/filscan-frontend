@@ -49,13 +49,14 @@ export default ({
   const load = async (cur?: number,filter?:string) => {
     setTableLoading(true);
     const index = cur || current;
+    const showFilter = filter || selectValue;
     const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTOwners : apiUrl.contract_ERC20Owner;
     const result = await axiosData(axiosUrl, {
       contract_id: id,
       contract:id,
       page: index - 1,
       limit: pageLimit,
-      filter:filter === 'all' ? '':filter
+      filter:showFilter === 'all' ? '':showFilter
     });
     setTableLoading(false);
     setData({
@@ -130,6 +131,7 @@ export default ({
           ]}
           onChange={(value) => {
             setSelectValue(value)
+            setCurrent(1)
             load(1,value)
           }}
         />}
@@ -145,6 +147,7 @@ export default ({
           ]}
           onChange={(value) => {
             setSelectValue(value)
+            setCurrent(1)
             load(1,value)
           }}
         />}
@@ -153,6 +156,7 @@ export default ({
         <Table
           data={data.dataSource}
           total={data.total}
+          current={current}
           columns={columns}
           loading={loadingTable}
           onChange={handleChange}
