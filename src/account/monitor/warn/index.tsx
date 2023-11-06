@@ -10,8 +10,8 @@ showModal?: boolean;
 noModal?: boolean;
 onChange:(type:string,value:any)=>void;
 }
-//告警方式
 
+//告警方式
 const default_email = { title: 'email_warn', value: 'email',placeholder:'email_warn_placeholder',inputValue:'',warning:false,warningText:'email_warn_warning',checked:false };
 const default_message = { title: 'message_warn', value: 'message',placeholder:'message_warn_placeholder',inputValue:'',warning:false,warningText:'phone_warn_warning',checked:false };
 const default_phone = {title: 'phone_warn',value: 'phone',placeholder:'phone_warn_placeholder',inputValue:'',warning:false,warningText:'phone_warn_warning', checked:false }
