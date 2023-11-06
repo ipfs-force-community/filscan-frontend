@@ -34,7 +34,9 @@ export default ({
     <span
       style={{ cursor: 'pointer' ,width:'13px'}}
       className={classNames(`flex-center text-bgCopy ${className}`,styles.wrap)}
-      onClick={handleClick}>
+      onClick={handleClick}
+      onTouchStart={handleClick}
+    >
       <BrowserView>{ getSvgIcon('copyIcon')} </BrowserView>
       <MobileView>
         {icon ?? <CopySvg width={13} height={14} />}
