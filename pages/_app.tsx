@@ -24,7 +24,9 @@ import { SEO } from '@/contents/common';
 import Script from 'next/script';
 import { Provider } from 'mobx-react';
 import * as mobxStores from '@/store';
+import { theme } from 'antd';
 
+const antdTheme = theme;
 App.getInitialProps = async (context:any)=>{
   const initialProps = await Ap.getInitialProps(context)
   const regex = RegExp("Android|iPhone")
@@ -110,6 +112,12 @@ function App({ Component, pageProps, isMobile }: any) {
   }
 
   const seo = SEO[lang];
+  let themeProps = {};
+  if (theme === 'dark') {
+    themeProps = {
+      algorithm: antdTheme.darkAlgorithm,
+    }
+  }
   return (
     <>
       <NextSeo
