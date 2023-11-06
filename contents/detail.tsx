@@ -1383,7 +1383,8 @@ export const address_tabs = [
   {
     title: 'erc20_transfer',
     dataIndex:'ercList',
-    value:'ERC20AddrTransfers'
+    value: 'ERC20AddrTransfers',
+    optionsUrl:'ERC20AddrTransfersTokenTypes'
   }
 ];
 export const minerTabs = [

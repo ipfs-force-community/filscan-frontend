@@ -11,10 +11,9 @@
 */
 
 const contract = {
-
+all:'全部',
   overview: '概览',
   market: 'Market',
-
   look_adres: '查看地址',
   gohome:'返回首页',
   reset_ver:'重新验证',

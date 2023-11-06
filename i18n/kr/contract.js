@@ -1,7 +1,7 @@
 const contract = {
+  all:'All',
   overview: '개요',
   market: '마켓',
-
   look_adres: '주소 확인',
   gohome:'홈으로',
   reset_ver:'재검증',

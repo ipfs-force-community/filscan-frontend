@@ -1,4 +1,5 @@
 const contract = {
+  all:'All',
   overview: 'Overview',
   market: 'Market',
   look_adres: 'View Account',

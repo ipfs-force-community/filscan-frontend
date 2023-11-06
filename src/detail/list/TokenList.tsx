@@ -9,13 +9,14 @@ import { formatNumber, pageLimit } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import useAxiosData from '@/store/useAxiosData';
 import { BrowserView } from '@/components/device-detect';
-
 export default ({
   accountId,
   total,
+  methodName
 }: {
   accountId?: string | string[];
-  total:(num:number)=>void
+    total: (num: number) => void
+  methodName?: string;
 
 }) => {
   const { theme, lang } = useFilscanStore();
@@ -40,7 +41,7 @@ export default ({
     if (accountId) {
       load();
     }
-  }, [accountId]);
+  }, [accountId,methodName]);
 
   useEffect(()=>{
     total(data.total)
@@ -55,6 +56,7 @@ export default ({
         page: showIndex - 1,
         limit: pageLimit,
       },
+      tokenName:methodName === 'all'?'':methodName
     });
     setTableLoading(false);
     const showList = result?.items || [];
@@ -91,7 +93,7 @@ export default ({
   return (
     <>
       <BrowserView>
-        <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', {value:formatNumber(data.total)})}</span>
+        <span className='absolute -top-5 text_des text-xs'>{tr('erc20_transfer_total', { value: formatNumber(data.total) })}</span>
       </BrowserView>
       <Table
         key='list_token'
