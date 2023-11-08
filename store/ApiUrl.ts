@@ -1,5 +1,5 @@
 const mainUrl = process.env.APP_BASE_URL;
-// const testUrl = 'http://192.168.19.80:17000/api/v1'
+const testUrl = 'http://192.168.19.80:17000/api/v1'
 const proUrl = process.env.APP_BASE_URL_PRO || 'http://192.168.1.177:27000/pro/v1';
 export const fvmUrl = process.env.FVM_URL;
 
@@ -18,4 +18,5 @@ export const expiredData = proUrl + '/SectorDetail';
 export const rewardData = proUrl + '/RewardDetail';
 export const luckyData = proUrl + '/LuckyRateDetail';
 export const balanceData = proUrl + '/BalanceDetail';
+export const saveRules = testUrl + '/SaveUserRules';
 

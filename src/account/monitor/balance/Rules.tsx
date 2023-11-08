@@ -65,7 +65,29 @@ export default (props:Props) => {
   }
 
   const handleSave = () => {
-    console.log('----balance save',rules)
+    console.log('----balance save', rules);
+
+    const newPayload = rules.map((v: any) => {
+      return {
+        user_id: 19,
+        monitor_type: "BalanceMonitor",
+        "mail_alert": "yujinshicn@163.com",
+        "msg_alert": "15068720830",
+        "call_alert": "15068720830",
+        "rules": [
+          {
+            "group_id_or_all": v.group_id,
+            "miner_or_all": v.miner_id,
+            "account_type": v.category,
+            "operator": "<=",
+            "operand": v.value
+          },
+
+        ]
+
+      }
+    });
+    console.log('=====334',newPayload)
   }
 
   const rulesOptions = useMemo(() => {
