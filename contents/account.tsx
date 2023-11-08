@@ -12,6 +12,9 @@ import pledge from '@/assets/images/pledge.svg';
 // import gas from '@/assets/images/gas.svg';
 // import reward from '@/assets/images/reward.svg';
 import balance from '@/assets/images/balance.svg';
+import { Popconfirm, Switch } from 'antd';
+import monitorStore from '@/store/modules/account/monitor';
+import ActiveRules from '@/src/account/monitor/ActiveRules';
 
 export const logTabs = [
   {
@@ -158,7 +161,7 @@ export const account_manager: Array<MenuItem> = [
         label: 'monitor_sector', //gas 消耗
         key: 'monitorSector',
       },
-        {
+      {
         label: 'monitor_power', //gas 消耗
         key: 'monitorPower',
       },
@@ -1361,36 +1364,94 @@ export const account_miners = {
   ],
 };
 
+const monitorUnit:Record<string,string> = {
+  'ExpireSectorMonitor':'day'
+}
+
 //监控columns
-export const monitor_list = [
-  {
-    dataIndex: 'group_name',
-    title: 'group_name',
-    width:'15%'
-  },
-  {
-    dataIndex: 'miner_id',
-    title: 'miner_id',
-    width:'15%'
-  }, {
-    dataIndex: 'examination',
-    title: 'examination',
-    width:'23%'
-  }, {
-    dataIndex: 'alarm',
-    title: 'alarm',
-    width:'22%'
-  }, {
-    dataIndex: 'status',
-    title: 'status',
-    width:'15%'
-  },
-  {
-    dataIndex: 'edit',
-    title: 'edit',
-    width:'15%'
-  }
-]
+export const monitor_list = (tr:any,onChange:any) => {
+  return [
+    {
+      dataIndex: 'group_name',
+      title: 'group_name',
+      width:'10%'
+    },
+    {
+      dataIndex: 'miner_id_or_all',
+      title: 'miner_id',
+      width:'10%'
+    },
+    {
+      dataIndex: 'examination',
+      title: 'examination',
+      width: '25%',
+      render: (text: string, record: any) => {
+        return <ul >
+          {record.rules.map((rule:any,index:number) => {
+            return <li key={ index}>
+              {`${tr(record.monitor_type)} ${tr(rule.operator)} ${tr(rule.operand)} ${tr(monitorUnit[record.monitorType])}`}
+            </li>
+          })}
+        </ul>
+      }
+    },
+    {
+      dataIndex: 'alarm',
+      title: 'alarm',
+      width: '32%',
+      render: (text: any, record: any) => {
+        const mailList = record.mail_alert;
+        const msgList = record.msg_alert;
+        const obj :Record<string,any>= {
+          email_warn: [...mailList,...mailList],
+          message_warn: msgList,
+          phone_warn:undefined
+        }
+        return <div>
+          {
+            Object.keys(obj).map((key:string) => {
+              const resList = obj[key];
+              if (Array.isArray(resList)) {
+                return <div key={key} className='flex font-normal'>
+                  <div className='text_des' style={{width:'70px'}}>{ tr(key)}:</div>
+                  <li className=''>
+                    { resList.map((warn:string,index:number) => {
+                      return <li key={index}>
+                        { warn}
+                      </li>
+                    })}
+                  </li></div>
+
+              }
+            })
+
+          }
+        </div>
+
+        return null
+      }
+    }, {
+      dataIndex: 'is_active',
+      title: 'status',
+      width: '13%',
+      render: (text: boolean, record: any, index: number) => {
+        return <ActiveRules text={text } record={record} />
+      }
+    },
+    {
+      dataIndex: 'edit',
+      title: 'edit',
+      width: '10%',
+      render: () => {
+        return <div className='flex gap-x-2 font-normal'>
+          <span className='text-primary cursor-pointer'>{tr('edit_write')}</span>
+          <span className='text-primary cursor-pointer'>{tr('edit_delete') }</span>
+
+        </div>
+      }
+    }
+  ]
+}
 
 function renderFil(text: string | number, changeText?: number | string, flag: string = '', className?: string,unit:string ='FIL') {
   const textValue = formatFil(text, unit, 4, true)

@@ -6,6 +6,8 @@ import styles from './index.module.scss';
 import Selects from "@/packages/selects";
 import Warn from "../warn";
 import { isPositiveInteger } from "@/utils";
+import monitorStore from "@/store/modules/account/monitor";
+import { observer } from "mobx-react";
 interface Props {
   showModal: boolean;
   onChange:(type:string,value:any)=>void;
@@ -20,9 +22,11 @@ const defaultRules = {
     warning: false,
     warningText:'sector_ruler_warningText',
   },
+  warnList: undefined
 }
-export default (props: Props) => {
+export default observer((props: Props) => {
   const { showModal, onChange } = props;
+  const { saveLoading } = monitorStore
   const { tr } = Translation({ ns: 'account' });
   const [rules, setRules] = useState<any>([{ ...defaultRules }]);
 
@@ -54,13 +58,41 @@ export default (props: Props) => {
     setRules(newRules)
   };
 
-  const handleSave = () => {
-    console.log('save sector---',rules)
+  const handleSave = async () => {
+    const payload:Array<Record<string,any>> = [];
+    rules.forEach((rule: any) => {
+      const emailList = rule?.warnList?.email_warn || [];
+      const messageList = rule?.warnList?.message_warn ||[]
+      const phoneListList = rule?.warnList?.phone_warn ||[]
+      const ruleItem= rule?.rule || {}
+      const obj = {
+        monitor_type: 'ExpireSectorMonitor',
+        user_id: 27,
+        group_id_or_all: rule.group_id === 'all' ? -1:Number(rule.group_id) ,
+        miner_or_all: rule.miner_id,
+        mail_alert: emailList[0]?.checked ? emailList?.map((v: any) => v.inputValue).join(','):'',
+        msg_alert: messageList[0]?.checked ? messageList?.map((v: any) => v.inputValue).join(','):'',
+        call_alert: phoneListList[0]?.checked? phoneListList?.map((v: any) => v.inputValue).join(','):'',
+        rules: [
+          {
+            account_type: '',
+            account_addr: '',
+            operator: '<=',
+            operand: ruleItem.value
+          }
+        ]
+      };
+      payload.push(obj)
+    })
+    const result = await monitorStore.saveUserRules(payload);
+    if (result) {
+      onChange('ok',false)
+    }
   }
+
   const handleRules = (type:string,index:number) => {
     //保存规则
     const newRules = [...rules];
-
     if (type === 'delete' ) {
       newRules.splice(index, 1)
     } else if (type === 'add') {
@@ -86,7 +118,7 @@ export default (props: Props) => {
     onCancel={() => onChange('cancel', false)}
     footer={[
       <Button className="cancel_btn" key='cancel_btn' onClick={()=>onChange('cancel',false) }>{ tr('cancel')}</Button>,
-      <Button className="primary_btn" key='primary_btn' onClick={handleSave}>{ tr('confirm')}</Button>
+      <Button className="primary_btn" key='primary_btn' loading={saveLoading} onClick={handleSave}>{ tr('confirm')}</Button>
     ] }
   >
     <div>
@@ -137,4 +169,4 @@ export default (props: Props) => {
       }) }
     </div>
   </Modal>
-}
+})

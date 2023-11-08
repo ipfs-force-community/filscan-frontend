@@ -32,6 +32,9 @@ const account = {
   all_miners:'全部节点',
   edit:'操作',
   miner_add: '添加',
+  edit_write: '修改',
+  edit_delete: '删除',
+
   //个人账户
   register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
   register_btn:'开启服务',
@@ -184,8 +187,11 @@ const account = {
 
   phone_warn: '电话告警',
   phone_warn_placeholder: '请输入接收号码',
-  phone_warn_warning:'请输入正确的接收号码',
+  phone_warn_warning: '请输入正确的接收号码',
 
+
+  //监控
+  ExpireSectorMonitor:'扇区到期时间',
   //扇区监控
   add_rules: '添加规则',
   rule_detail:'规则详情',

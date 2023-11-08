@@ -132,13 +132,26 @@ font-display: auto;
 }
 
 //checkbox 
-.custom_checkbox{
+.custom_checkbox :not(.ant-checkbox-checked){
     .ant-checkbox-inner{
         background-color: var(--bgColor);
         border:1px solid  var(--border-color);
     }
 }
 
+//switch 
+.custom_switch {
+     background-color: var(--font_des);
+    .ant-switch-handle{
+        &::before{
+        background-color: var(--bgColor);
+        }
+    }
+    &:hover{
+        background-color: var(--font_des);
+    }
+
+}
 
 
 //table 
@@ -204,8 +217,11 @@ font-display: auto;
                       
                     }
                 }
-                .custom_table_row{
-                     &:hover{
+                 .ant-table-cell-row-hover{
+                     background-color:  var(--table-hove) !important;
+                 }
+                    .custom_table_row{
+                        &:hover{
                         .ant-table-cell{
                             background-color: var( --table-hover) !important;
                         }
@@ -774,6 +790,10 @@ font-display: auto;
         justify-content: flex-end;
         }
     }
+}
+
+.center_modal{
+    margin-top: 10%;
 }
 
 .ant-btn-default{

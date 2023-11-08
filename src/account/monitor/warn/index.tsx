@@ -84,7 +84,8 @@ export default (props: Props) => {
             const showIcon = index === warnItem.length - 1;
             return <div key={index} className={styles.warn_content_item}>
               { index === 0 && <div className={styles.warn_content_item_title}>
-                <Checkbox checked={warn.checked} className="custom_checkbox" onChange={(e:CheckboxChangeEvent)=> handleWarn('checkbox',warnKey,index,e.target.checked) } />
+                <Checkbox checked={warn.checked}
+                  className="custom_checkbox" onChange={(e: CheckboxChangeEvent) => handleWarn('checkbox', warnKey, index, e.target.checked)} />
                 {tr(warn.title)}
               </div>}
               <div className={styles.warn_content_item_main}>

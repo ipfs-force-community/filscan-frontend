@@ -41,7 +41,7 @@ function Banner() {
       <LeftOutlined rev={undefined} className="text-white text-xs" />
     </span> */}
 
-    <Carousel autoplay={false} autoplaySpeed={5000} ref={carousel} infinite={true }>
+    <Carousel autoplay={true} autoplaySpeed={5000} ref={carousel} infinite={true }>
       {[...data]?.map((item: any,index) => {
         return <div key={ index} onClick={() => {
           if (item.link) {

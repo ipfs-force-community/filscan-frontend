@@ -11,16 +11,19 @@ interface Props {
   onChange:(type:string,value:any)=>void;
 }
 
+const defaultRuleItem = {
+  category:undefined,
+  value: '',
+  placeholder: 'sector_ruler_placeholder',
+  warning: false,
+  warningText:'sector_ruler_warningText',
+}
 const defaultRules = {
   group_id: undefined,
   miner_id: undefined,
-  rule: {
-    category:undefined,
-    value: '',
-    placeholder: 'sector_ruler_placeholder',
-    warning: false,
-    warningText:'sector_ruler_warningText',
-  },
+  rule: [{
+    ...defaultRuleItem
+  }],
 }
 
 export default (props:Props) => {
@@ -28,7 +31,7 @@ export default (props:Props) => {
   const { tr } = Translation({ ns: 'account' });
   const [rules, setRules] = useState<any>([{ ...defaultRules }]);
 
-  const handleChange = (type: string, value: any, index: number) => {
+  const handleChange = (type: string, value: any, index: number,ruleItem:number =0) => {
     const newRules = [...rules];
     const newItem = rules[index];
     switch (type) {
@@ -42,14 +45,15 @@ export default (props:Props) => {
       newItem.warnList = value;
       break;
     case 'category':
-      newItem.rule.category=value
+      newItem.rule[ruleItem].category=value
       break;
     case 'rule':
       if (value) {
         if (!isPositiveInteger(value)) {
-          newItem.rule.warning = true
+          newItem.rule[ruleItem].warning = true
         } else {
-          newItem.rule.warning = false;
+          newItem.rule[ruleItem].warning = false;
+          newItem.rule[ruleItem].value = value;
         }
       }
       break;
@@ -58,15 +62,26 @@ export default (props:Props) => {
     setRules(newRules)
   };
 
-  const handAddRule = () => {
-    const newRules = [...rules];
-    newRules.push({ ...defaultRules });
+  const handAddRule = (keyType: string, type: string, index: number, ruleIndex?: number) => {
+    const newRules: any = [...rules];
+    if (keyType === 'add') {
+      if (type === 'ruleItem') {
+        newRules[index].rule.push({ ...defaultRuleItem })
+      } else if (type === 'rule') {
+        newRules.push({ ...defaultRules });
+      }
+    } else if (keyType === 'delete') {
+      if (type === 'ruleItem') {
+        newRules[index].rule.splice(ruleIndex,1)
+      } else if (type === 'rule') {
+        newRules.splice(index,1);
+      }
+    }
     setRules(newRules)
+
   }
 
   const handleSave = () => {
-    console.log('----balance save', rules);
-
     const newPayload = rules.map((v: any) => {
       return {
         user_id: 19,
@@ -87,7 +102,6 @@ export default (props:Props) => {
 
       }
     });
-    console.log('=====334',newPayload)
   }
 
   const rulesOptions = useMemo(() => {
@@ -126,44 +140,51 @@ export default (props:Props) => {
           <div className={styles.balance_contain_header}>
             <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
             { showIcon && <div className={styles.balance_icons}>
-              <span className={styles.balance_icons_icon} onClick={handAddRule}>+</span>
-              <span className={styles.balance_icons_icon}>-</span>
+              <span className={styles.balance_icons_icon} onClick={()=>handAddRule('add','rule',index)}>+</span>
+              <span className={styles.balance_icons_icon} onClick={()=>handAddRule('delete','rule',index)}>-</span>
             </div>}
           </div>
           {ruleItem.miner_id && <>
             <div className={styles.balance_rule}>
-              {/* <div className={styles.balance_rule_title}>
+              {ruleItem.rule.map((rule: any, ruleIndex: number) => {
+                const showIcon = ruleIndex === ruleItem.rule.length - 1;
+                return <>
+                  <div className={styles.balance_rule_main}>
+                    <Selects
+                      className={styles.balance_rule_select}
+                      value={ rule.category}
+                      placeholder={ tr('balance_category_placeholder')}
+                      options={CategoryOptions}
+                      onChange={(value)=>handleChange('category',value,index,ruleIndex)}
+                    />
+                    <Selects
+                      className={styles.balance_rule_select}
+                      value={'<='}
+                      disabled={true}
+                      options={rulesOptions}
+                    />
+                    <div className={styles.balance_rule_content}>
+                      <Input
+                        style={{borderColor:rule.warning ? 'red':''} }
+                        className={`custom_input ${styles.balance_rule_input}`}
+                        defaultValue={rule.value}
+                        placeholder={tr(rule.placeholder) }
+                        onBlur={(e)=>handleChange('rule',e.target.value,index,ruleIndex)}
+                      />
+                      {ruleItem.rule.warning && <span className={styles.balance_rule_content_warning }>{tr(ruleItem.rule.warningText ) }</span> }
+                    </div>
+                    <div className={styles.balance_rule_text}>{'FIL'}</div>
+                    <div className={styles.balance_icons}>
+                      { showIcon && <span className={styles.balance_icons_icon} onClick={()=>handAddRule('add','ruleItem',index,ruleIndex)}>+</span>}
+                      <span className={styles.balance_icons_icon} onClick={()=>handAddRule('delete','ruleItem',index,ruleIndex)}>-</span>
+                    </div>
 
-              </div> */}
-              <div className={styles.balance_rule_main}>
-                <Selects
-                  className={styles.balance_rule_select}
-                  value={ ruleItem.rule.category}
-                  placeholder={ tr('balance_category_placeholder')}
-                  options={CategoryOptions}
-                  onChange={(value)=>handleChange('category',value,index)}
-                />
-                <Selects
-                  className={styles.balance_rule_select}
-                  value={'<='}
-                  disabled={true}
-                  options={rulesOptions}
-                />
-                <div className={styles.balance_rule_content}>
-                  <Input
-                    style={{borderColor:ruleItem.rule.warning ? 'red':''} }
-                    className={`custom_input ${styles.balance_rule_input}`}
-                    defaultValue={ruleItem.rule.value}
-                    placeholder={tr(ruleItem.rule.placeholder) }
-                    onBlur={(e)=>handleChange('rule',e.target.value,index)}
-                  />
-                  {ruleItem.rule.warning && <span className={styles.balance_rule_content_warning }>{tr(ruleItem.rule.warningText ) }</span> }
-                </div>
-                <div className={styles.balance_rule_text}>{'FIL'}</div>
-              </div>
-              <div className={styles.balance_rule_des}>
-                {tr('balance_rule_des', {value:'100,000,00'})}
-              </div>
+                  </div>
+                  <div className={styles.balance_rule_des}>
+                    {tr('balance_rule_des', {value:'100,000,00'})}
+                  </div></>
+              }) }
+
             </div>
             <div className={styles.balance_warn}>
               <Warn noModal={true} onChange={(type,value)=>handleChange(type,value,index)} />
