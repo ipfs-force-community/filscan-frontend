@@ -1,5 +1,7 @@
 const mainUrl = process.env.APP_BASE_URL;
 const testUrl = 'http://192.168.19.80:27000/pro/v1'
+const test1Url = 'http://192.168.19.80:17000/pro/v1'
+
 const proUrl = process.env.APP_BASE_URL_PRO || 'http://192.168.1.177:27000/pro/v1';
 export const fvmUrl = process.env.FVM_URL;
 
@@ -21,4 +23,5 @@ export const balanceData = proUrl + '/BalanceDetail';
 export const saveRules = testUrl + '/SaveUserRules';
 export const getRules = testUrl + '/GetUserRules';
 export const rulesActive = testUrl + '/UpdateActiveState';
+export const deleteRules = testUrl + '/DeleteUserRule';
 

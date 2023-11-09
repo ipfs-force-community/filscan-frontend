@@ -15,14 +15,17 @@ export default observer(() => {
   const [selectGroup, setSelectGroup] = useState('all');
   const [selectMiner, setSelectMiner] = useState('all');
   const [selectTag, setSelectTag] = useState('all');
+  const [record, setRecord] = useState<Record<string,any>>({});
 
   const handleChange = (type:string,value:string|boolean|number|any) => {
     switch (type) {
     case 'addRules':
       setShowRules(true)
+      setRecord({})
       break;
     case 'cancel':
       setShowRules(false)
+      setRecord({})
       break;
     case 'ok':
       setShowRules(false)
@@ -31,19 +34,19 @@ export default observer(() => {
       setSelectGroup(value);
       setSelectMiner('all');
       setSelectTag('all');
-
       loadRules({miner_tag: 'all',miner_id:'all',group_id:value});
-
       break;
     case "miner":
       setSelectMiner(value);
       setSelectTag('all');
       loadRules({miner_tag: 'all',miner_id:value});
-
       break;
     case 'miner_tag':
       setSelectTag(value);
       loadRules({miner_tag: value});
+      break;
+    case 'save':
+      saveRules(value);
       break;
     };
 
@@ -51,21 +54,48 @@ export default observer(() => {
 
   useEffect(() => {
     loadRules()
-  },[])
+  }, [])
+
+  const saveRules = async (payload:Record<string,any>) => {
+    const result = await monitorStore.saveUserRules(payload);
+    if (result) {
+      setShowRules(false);
+      loadRules()
+    }
+  }
 
   const loadRules = (obj?: Record<string, string>) => {
     const group_id = obj?.group_id || selectGroup;
     const miner_tag = obj?.miner_tag || selectTag;
+    const miner_id = obj?.miner_id || selectMiner;
     const payload = {
       monitor_type:'ExpireSectorMonitor',
-      group_id_or_all: group_id === 'all' ? -1:group_id,
-      miner_or_all: obj?.miner_id|| selectMiner,
+      group_id_or_all: group_id === 'all' ? -1: Number(group_id),
+      miner_or_all: miner_id === 'all'? '':miner_id,
       miner_tag: miner_tag === 'all' ? '' :miner_tag,
     }
     monitorStore.getUserRules(payload)
   }
 
-  const handleChangeRule = (type:string,value:any,index:number) => {
+  const handleChangeRule = async (type: string, record: any, index: number) => {
+    switch (type) {
+    case 'isActive':
+      const result1 = await monitorStore.ruleActive({ uuid: record.uuid });
+      if (result1) {
+        loadRules();
+      }
+      break;
+    case 'edit_write':
+      setShowRules(true)
+      setRecord(record)
+      break;
+    case 'edit_delete':
+      const result = await monitorStore.deleteRules({uuid:record.uuid});
+      if (result) {
+        loadRules();
+      }
+      break;
+    }
   }
 
   const columns = useMemo(() => {
@@ -82,6 +112,6 @@ export default observer(() => {
     <div className={ styles.sector_table}>
       <Table data={[...rules]} columns={columns} loading={false} />
     </div>
-    <Rules showModal={showRules} onChange={handleChange}/>
+    <Rules showModal={showRules} onChange={handleChange} record={record} />
   </div>
 })

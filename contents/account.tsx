@@ -1374,12 +1374,20 @@ export const monitor_list = (tr:any,onChange:any) => {
     {
       dataIndex: 'group_name',
       title: 'group_name',
-      width:'10%'
+      width:'8%'
     },
+
     {
       dataIndex: 'miner_id_or_all',
       title: 'miner_id',
-      width:'10%'
+      width: '8%',
+      render: (text: string, record: any) => {
+        return <div className='flex items-center gap-x-1'>
+          {text}
+          {record.miner_tag && <span className='bg-bg_hover text-xs text-primary rounded-[5px] px-2 py-1  w-fit'>{record.miner_tag}</span>}
+        </div>
+
+      }
     },
     {
       dataIndex: 'examination',
@@ -1398,16 +1406,18 @@ export const monitor_list = (tr:any,onChange:any) => {
     {
       dataIndex: 'alarm',
       title: 'alarm',
-      width: '32%',
+      width: '27%',
       render: (text: any, record: any) => {
         const mailList = record.mail_alert;
         const msgList = record.msg_alert;
+        const callList = record.call_alert;
+
         const obj :Record<string,any>= {
-          email_warn: [...mailList,...mailList],
+          email_warn: mailList,
           message_warn: msgList,
-          phone_warn:undefined
+          phone_warn:callList
         }
-        return <div>
+        return <div className='flex flex-col gap-y-2'>
           {
             Object.keys(obj).map((key:string) => {
               const resList = obj[key];
@@ -1427,32 +1437,44 @@ export const monitor_list = (tr:any,onChange:any) => {
 
           }
         </div>
-
-        return null
       }
-    }, {
+    },
+    {
+      dataIndex: 'created_at',
+      title: 'created_at',
+      width: '12%',
+      render: (text: string, record: any) => {
+        return formatDateTime(text)
+      }
+    },
+    {
       dataIndex: 'is_active',
       title: 'status',
-      width: '13%',
+      width: '10%',
       render: (text: boolean, record: any, index: number) => {
-        return <ActiveRules text={text } record={record} />
+        return <ActiveRules text={text} title='isActive' onChange={()=>onChange('isActive',record,index)} />
       }
     },
     {
       dataIndex: 'edit',
       title: 'edit',
       width: '10%',
-      render: () => {
+      render: (text:any,record:any,index:number) => {
         return <div className='flex gap-x-2 font-normal'>
-          <span className='text-primary cursor-pointer'>{tr('edit_write')}</span>
-          <span className='text-primary cursor-pointer'>{tr('edit_delete') }</span>
-
+          <span className='text-primary cursor-pointer' onClick={() => onChange('edit_write', record, index)}>{tr('edit_write')}</span>
+          <ActiveRules text={text} title='edit_delete' onChange={()=>onChange('edit_delete',record,index)} />
         </div>
       }
     }
   ]
 }
 
+//告警方式
+export const defaultWarn:any = {
+  email_warn: { title: 'email_warn', value: 'email', placeholder: 'email_warn_placeholder', inputValue: '', warning: false, warningText: 'email_warn_warning', checked: false },
+  message_warn: { title: 'message_warn', value: 'message', placeholder: 'message_warn_placeholder', inputValue: '', warning: false, warningText: 'phone_warn_warning', checked: false },
+  phone_warn: {title: 'phone_warn',value: 'phone',placeholder:'phone_warn_placeholder',inputValue:'',warning:false,warningText:'phone_warn_warning', checked:false }
+}
 function renderFil(text: string | number, changeText?: number | string, flag: string = '', className?: string,unit:string ='FIL') {
   const textValue = formatFil(text, unit, 4, true)
   return (

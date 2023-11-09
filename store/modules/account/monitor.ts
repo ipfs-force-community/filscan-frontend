@@ -1,5 +1,5 @@
 import messageManager from "@/packages/message";
-import { getRules, rulesActive, saveRules } from "@/store/ApiUrl";
+import { deleteRules, getRules, rulesActive, saveRules } from "@/store/ApiUrl";
 import { axiosServer } from "@/store/axiosServer";
 import { makeObservable, observable, runInAction } from "mobx";
 
@@ -7,7 +7,8 @@ const defaultPayload:Record<string,any>= {
   ExpireSectorMonitor: {
     monitor_type:'ExpireSectorMonitor',
     group_id_or_all: -1,
-    miner_or_all:'all',
+    miner_or_all: '',
+    miner_tag:''
   },
 
 }
@@ -39,7 +40,7 @@ class MonitorStore {
 
   }
 
-  async saveUserRules(payload: any) {
+  async saveUserRules(payload: any,) {
     runInAction(() => {
       this.saveLoading = true;
     })
@@ -56,11 +57,20 @@ class MonitorStore {
     return true
   }
 
-  async ruleActive(payload:any,type:string) {
-    const result = await axiosServer(rulesActive, { ...payload });
+  async ruleActive(payload:any) {
+    await axiosServer(rulesActive, { ...payload });
+    return true
+  }
+  async deleteRules(payload: any) {
+    console.log('---deett',payload)
+    const result = await axiosServer(deleteRules, { ...payload });
     if (!result.error) {
-      this.getUserRules(defaultPayload[type]);
+      messageManager.showMessage({
+        type: 'success',
+        content: 'Delete Rule successfully',
+      });
     }
+    return true
   }
 }
 const monitorStore = new MonitorStore();

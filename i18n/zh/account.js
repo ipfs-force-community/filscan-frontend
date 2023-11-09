@@ -34,6 +34,7 @@ const account = {
   miner_add: '添加',
   edit_write: '修改',
   edit_delete: '删除',
+  created_at:'创建时间',
 
   //个人账户
   register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
