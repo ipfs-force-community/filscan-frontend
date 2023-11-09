@@ -1,4 +1,15 @@
 @media screen and (max-width: 1000px){
+    .token {
+      margin-bottom: unset;
+      padding: 18px 12px;
+      font-size: 16px;
+      font-family: "PingFangSC-Medium";
+      line-height: unset;
+      img {
+        width: 22px;
+        border-radius: 3px;
+      }
+    }
     .nft{
         padding: 12px;
         .mobile-column{

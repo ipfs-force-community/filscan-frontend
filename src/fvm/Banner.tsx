@@ -1,11 +1,10 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 import { Carousel } from "antd"
 import { useEffect, useRef, useState } from "react"
-// import { Image } from 'antd'
+import { Image } from 'antd'
 import useAxiosData from "@/store/useAxiosData"
 import { apiUrl } from "@/contents/apiUrl"
 import { useFilscanStore } from "@/store/FilscanStore"
-import Image from 'next/image'
 
 function Banner() {
 
@@ -38,7 +37,7 @@ function Banner() {
             window.open(item.link)
           }
         }}>
-          <Image src={item.url} alt='' className="rounded-2xl cursor-pointer object-cover carousel-image"/>
+          <Image preview={false} src={item.url} alt='' width='100%' className="rounded-2xl cursor-pointer object-cover carousel-image"/>
         </div>
       })}
     </Carousel>
