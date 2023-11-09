@@ -56,7 +56,7 @@ export default ({
         page: showIndex - 1,
         limit: pageLimit,
       },
-      tokenName:methodName === 'all'?'':methodName
+      token_name:methodName === 'all'?'':methodName
     });
     setTableLoading(false);
     const showList = result?.items || [];

@@ -89,7 +89,6 @@ export default () => {
                   </li>
                 );
               })}
-              <Banner />
               <Share data={content} title={ active} />
             </ul>
           </BrowserView>
