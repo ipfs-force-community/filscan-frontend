@@ -1,5 +1,5 @@
 import messageManager from "@/packages/message";
-import { deleteRules, getRules, rulesActive, saveRules } from "@/store/ApiUrl";
+import { deleteRules, getRules, minerCategory, rulesActive, saveRules } from "@/store/ApiUrl";
 import { axiosServer } from "@/store/axiosServer";
 import { makeObservable, observable, runInAction } from "mobx";
 
@@ -13,18 +13,42 @@ const defaultPayload:Record<string,any>= {
 
 }
 
+const defaultMiners = {
+  beneficiary: 'beneficiary_balance',
+  owner: 'owner_balance',
+  worker: 'worker_balance',
+}
 class MonitorStore {
   saveLoading: boolean;
   rulesLoading: boolean;
   rules: Array<any>;
+  minersCategory: Record<string,any>
   constructor() {
     this.saveLoading = false;
     this.rulesLoading = false;
+    this.minersCategory = {};
     this.rules = [];
     makeObservable(this, {
       saveLoading: observable,
       rulesLoading: observable,
-      rules:observable
+      rules: observable,
+      minersCategory:observable
+    })
+  }
+
+  async getMinerCategory(miner_id:string) {
+    const result = await axiosServer(minerCategory, { miner_id });
+    // console.log('---44', result);
+    Object.keys(result.data.miner_detail).map((v: any) => {
+      const keys = {
+        title:v
+      };
+
+      if (v.controllers && Array.isArray(v.controllers)) {
+        v.controllers.forEach((control:string,index:number) => {
+
+        })
+      }
     })
   }
 

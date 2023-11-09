@@ -20,6 +20,7 @@ export const expiredData = proUrl + '/SectorDetail';
 export const rewardData = proUrl + '/RewardDetail';
 export const luckyData = proUrl + '/LuckyRateDetail';
 export const balanceData = proUrl + '/BalanceDetail';
+export const minerCategory = testUrl + '/GetMinerInfo';
 export const saveRules = testUrl + '/SaveUserRules';
 export const getRules = testUrl + '/GetUserRules';
 export const rulesActive = testUrl + '/UpdateActiveState';

@@ -6,6 +6,7 @@ import Header from "../header";
 import { isPositiveInteger } from "@/utils";
 import Selects from "@/packages/selects";
 import Warn from "../warn";
+import monitorStore from "@/store/modules/account/monitor";
 interface Props {
   showModal: boolean;
   onChange:(type:string,value:any)=>void;
@@ -41,6 +42,8 @@ export default (props:Props) => {
       break;
     case "miner":
       newItem.miner_id = value;
+      getCategory(value);
+      break;
     case 'warnOk':
       newItem.warnList = value;
       break;
@@ -61,6 +64,10 @@ export default (props:Props) => {
     newRules.splice(index, 1, newItem);
     setRules(newRules)
   };
+
+  const getCategory = async (value:string) => {
+    monitorStore.getMinerCategory(value);
+  }
 
   const handAddRule = (keyType: string, type: string, index: number, ruleIndex?: number) => {
     const newRules: any = [...rules];
