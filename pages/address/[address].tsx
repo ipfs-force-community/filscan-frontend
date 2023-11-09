@@ -83,7 +83,7 @@ export default () => {
     const result2 = await axiosData(tokenName, { address },{isCancel:false})
     const newTokenMethod: any = [
       {
-        label:'all',
+        label:'all_token',
         value: 'all',
       },
     ];

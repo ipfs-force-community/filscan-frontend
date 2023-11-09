@@ -65,7 +65,7 @@ export default ({
   const headerOptions = useMemo(() => {
     if (activeItem?.headerOptions) {
       return activeItem?.headerOptions?.map((v: any) => {
-        return { ...v, label: tr(v.dataIndex ||v.value) }
+        return { ...v, label: tr(v.label||v.dataIndex ||v.value) }
       })
     }
     return []

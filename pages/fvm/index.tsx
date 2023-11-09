@@ -12,6 +12,7 @@ import TwitterIcon from '@/assets/images/twitter.svg'
 import NetworkIcon from '@/assets/images/network.svg'
 import { useFilscanStore } from "@/store/FilscanStore";
 import Share from '@/src/fvm'
+import Banner from '@/src/fvm/Banner'
 
 export default () => {
   const {theme} = useFilscanStore()
@@ -88,6 +89,7 @@ export default () => {
                   </li>
                 );
               })}
+              <Banner />
               <Share data={content} title={ active} />
             </ul>
           </BrowserView>

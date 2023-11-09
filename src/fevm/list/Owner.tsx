@@ -126,8 +126,8 @@ export default ({
           value={ selectValue}
           options={[
             { label: tr('all'), value: 'all' },
-            { label: '>0', value: '>0' },
-            {label:'=0',value:'=0'},
+            { label: tr('>0'), value: '>0' },
+            {label:tr('=0'),value:'=0'},
           ]}
           onChange={(value) => {
             setSelectValue(value)
@@ -142,8 +142,8 @@ export default ({
           value={ selectValue}
           options={[
             { label: tr('all'), value: 'all' },
-            { label: '>0', value: '>0' },
-            {label:'=0',value:'=0'},
+            { label: tr('>0'), value: '>0' },
+            {label:tr('=0'),value:'=0'},
           ]}
           onChange={(value) => {
             setSelectValue(value)

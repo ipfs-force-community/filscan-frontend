@@ -4,7 +4,11 @@ const contract = {
   market: '마켓',
   look_adres: '주소 확인',
   gohome:'홈으로',
-  reset_ver:'재검증',
+  reset_ver: '재검증',
+ 
+      'all_token': 'All Tokens',
+      '>0':'0보다 큰 수량',
+  '=0':'수량은 0입니다',
   next: '다음',
   reset: '리셋',
   confirm: '검증 및 발표',
