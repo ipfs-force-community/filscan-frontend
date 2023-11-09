@@ -162,13 +162,13 @@ const account = {
   out_come_gas: '支出',
 
   //余额监控
-  miner_balance_alone: '节点余额',
-  owner_balance_alone: 'Owner余额',
-  worker_balance_alone:'Worker余额',
-  controller_0_balance_alone: 'Controller0余额',
-  controller_1_balance_alone: 'Controller1余额',
-  controller_2_balance_alone: 'Controller2余额',
-  beneficiary_balance_alone: 'Beneficiary余额',
+  miner: '节点余额',
+  owner: 'Owner余额',
+  worker:'Worker余额',
+  controller_0: 'Controller0余额',
+  controller_1: 'Controller1余额',
+  controller_2: 'Controller2余额',
+  beneficiary: 'Beneficiary余额',
   
   //监控
   add_rules:'添加规则',
@@ -204,7 +204,7 @@ const account = {
   '>=': '大于等于',
   //余额监控
   balance_category_placeholder: '请选择余额类目',
-  balance_rule_des:'当前{{value}} FIL'
+  balance_rule_des:'当前 {{value}} FIL'
   
 
 }

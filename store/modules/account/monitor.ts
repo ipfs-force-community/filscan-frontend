@@ -10,6 +10,16 @@ const defaultPayload:Record<string,any>= {
     miner_or_all: '',
     miner_tag:''
   },
+  BalanceMonitor:{
+    category:undefined,
+    operand: '',
+    addr: '',
+    balance:'',
+    placeholder: 'sector_ruler_placeholder',
+    warning: false,
+    operator:'<=',
+    warningText:'sector_ruler_warningText',
+  }
 
 }
 
@@ -22,7 +32,7 @@ class MonitorStore {
   saveLoading: boolean;
   rulesLoading: boolean;
   rules: Array<any>;
-  minersCategory: Record<string,any>
+  minersCategory: Record<string, any>;
   constructor() {
     this.saveLoading = false;
     this.rulesLoading = false;
@@ -37,19 +47,14 @@ class MonitorStore {
   }
 
   async getMinerCategory(miner_id:string) {
-    const result = await axiosServer(minerCategory, { miner_id });
-    // console.log('---44', result);
-    Object.keys(result.data.miner_detail).map((v: any) => {
-      const keys = {
-        title:v
-      };
-
-      if (v.controllers && Array.isArray(v.controllers)) {
-        v.controllers.forEach((control:string,index:number) => {
-
-        })
+    const result: any = await axiosServer(minerCategory, { miner_id });
+    console.log('===0033',result)
+    runInAction(() => {
+      this.minersCategory = {
+        [miner_id]:result?.data?.miner_detail?.accounts || []
       }
     })
+
   }
 
   async getUserRules(payload: any) {
@@ -86,7 +91,6 @@ class MonitorStore {
     return true
   }
   async deleteRules(payload: any) {
-    console.log('---deett',payload)
     const result = await axiosServer(deleteRules, { ...payload });
     if (!result.error) {
       messageManager.showMessage({

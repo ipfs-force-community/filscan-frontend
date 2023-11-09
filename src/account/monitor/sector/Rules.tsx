@@ -157,8 +157,6 @@ export default observer((props: Props) => {
     ]
   }, [tr])
 
-  console.log('---46', rules);
-
   return <Modal
     title={`${tr('add_rules')}`}
     destroyOnClose={true}

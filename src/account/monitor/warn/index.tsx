@@ -24,7 +24,6 @@ export default (props: Props) => {
   })
 
   useEffect(() => {
-    console.log('---334',warnData)
     if (warnData && Object.keys(warnData).length > 0) {
       setWarnList(warnData)
     } else {
@@ -38,7 +37,6 @@ export default (props: Props) => {
 
   const handleWarn = (type: string, warnKey: string, index: number,value?:string|boolean) => {
     const newWarn = { ...warnList };
-    console.log('-0-0030',warnKey)
     switch (type) {
     case 'add':
       if (warnKey === 'email_warn') {
@@ -88,8 +86,6 @@ export default (props: Props) => {
       <span className={styles.warn_header_des }>{ tr('warn_title_des')}</span>
     </div>
   }
-
-  console.log('===--33',warnList)
 
   const renderChildren = () => {
     return <div>
