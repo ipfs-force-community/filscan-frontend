@@ -24,8 +24,14 @@ export default observer(() => {
     case 'group':
       setSelectGroup(value);
       break;
+    case 'cancel':
+      setShowRules(false);
+      setRecord({})
+      break;
     case 'save':
       saveRules(value);
+      setRecord({})
+
       break;
     };
 
