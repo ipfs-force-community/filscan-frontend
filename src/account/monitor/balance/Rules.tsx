@@ -238,7 +238,70 @@ export default observer((props: Props) => {
       })
     }
     return minersOptions
-  }, [tr, minersCategory])
+  },[tr,minersCategory])
+
+  return <Modal
+    title={`${ tr( record?.group_id ? 'edit_rules':'add_rules')}`}
+    destroyOnClose={true}
+    width={700}
+    closeIcon={false}
+    wrapClassName="custom_left_modal"
+    open={showModal}
+    onOk={handleSave}
+    onCancel={() => {
+      onChange('cancel', false);
+    }}
+    footer={[
+      <Button className="cancel_btn" key='cancel_btn' onClick={()=>onChange('cancel',false) }>{ tr('cancel')}</Button>,
+      <Button className="primary_btn" key='confirm_btn' onClick={handleSave}>{ tr('confirm')}</Button>
+    ]}>
+    <div>
+      {rules.map((ruleItem: any, index: number) => {
+        const showIcon = index === rules.length - 1;
+        return <div key={index} className={styles.balance_contain}>
+          <div className={styles.balance_contain_title}>{ tr('rule_detail')}</div>
+          <div className={styles.balance_contain_header}>
+            <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} isAllMiner={false} onChange={(type,value)=>handleChange(type,value,index)} />
+            { showIcon && <div className={styles.balance_icons}>
+              <span className={styles.balance_icons_icon} onClick={()=>handAddRule('add','rule',index)}>+</span>
+              <span className={styles.balance_icons_icon} onClick={()=>handAddRule('delete','rule',index)}>-</span>
+            </div>}
+          </div>
+          {ruleItem.miner_id && <>
+            <div className={styles.balance_rule}>
+              {ruleItem.rule.map((rule: any, ruleIndex: number) => {
+                const showIcon = ruleIndex === ruleItem.rule.length - 1;
+                return <div key={ruleIndex}>
+                  <div className={styles.balance_rule_main}>
+                    <Selects
+                      key={ruleIndex+'select'}
+                      className={styles.balance_rule_select}
+                      value={rule.category}
+                      placeholder={ tr('balance_category_placeholder')}
+                      options={CategoryOptions&&CategoryOptions[ruleItem.miner_id] ||[]}
+                      onChange={(value,item)=>handleChange('category',item,index,ruleIndex)}
+                    />
+                    <Selects
+                      className={styles.balance_rule_select}
+                      value={rule.operator}
+                      disabled={true}
+                      options={rulesOptions}
+                    />
+                    <div className={styles.balance_rule_content}>
+                      <Input
+                        style={{borderColor:rule.warning ? 'red':''} }
+                        className={`custom_input ${styles.balance_rule_input}`}
+                        defaultValue={rule.operand}
+                        placeholder={tr(rule.placeholder) }
+                        onBlur={(e)=>handleChange('rule',e.target.value,index,ruleIndex)}
+                      />
+                      {ruleItem.rule.warning && <span className={styles.balance_rule_content_warning }>{tr(ruleItem.rule.warningText ) }</span> }
+                    </div>
+                    <div className={styles.balance_rule_text}>{'FIL'}</div>
+                    <div className={styles.balance_icons}>
+                      { showIcon && <span className={styles.balance_icons_icon} onClick={()=>handAddRule('add','ruleItem',index,ruleIndex)}>+</span>}
+                      <span className={styles.balance_icons_icon} onClick={()=>handAddRule('delete','ruleItem',index,ruleIndex)}>-</span>
+                    </div>
 
   return (
     <Modal
