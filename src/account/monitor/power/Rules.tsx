@@ -63,7 +63,6 @@ export default (props: Props) => {
           newObjWarn[key] = [];
           warnData[key].forEach((item: string, index: number) => {
             //最后一位是默认邮箱
-            console.log('000033',warnData[key].length)
             if (key === 'email_warn') {
               if (warnData[key].length === 1) {
                 newObjWarn[key].push({
