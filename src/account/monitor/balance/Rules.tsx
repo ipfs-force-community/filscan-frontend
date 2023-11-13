@@ -1,15 +1,17 @@
 import { Translation } from "@/components/hooks/Translation";
 import { Button, Input, Modal } from "antd"
 import styles from './index.module.scss'
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../header";
 import { formatFil, isPositiveInteger } from "@/utils";
 import Selects from "@/packages/selects";
 import Warn from "../warn";
 import monitorStore from "@/store/modules/account/monitor";
 import { observer } from "mobx-react";
+import { defaultWarn } from "@/contents/account";
 interface Props {
   showModal: boolean;
+    record?:Record<string,any>,
   onChange:(type:string,value:any)=>void;
 }
 
@@ -32,15 +34,64 @@ const defaultRules = {
 }
 
 export default observer((props:Props) => {
-  const { showModal, onChange } = props;
+  const { showModal,record, onChange } = props;
   const { tr } = Translation({ ns: 'account' });
   const { minersCategory } = monitorStore
   const [rules, setRules] = useState<any>([{ ...defaultRules }]);
 
+  useEffect(() => {
+    if (record && Object.keys(record).length > 0) {
+      //编辑
+      const newRules = {
+        group_id: record.group_id === -1 ?'all':String( record.group_id),
+        miner_id: record.miner_id_or_all,
+        rule: record.rules.map((v:any) => {
+          return {
+            operand: v.operand,
+            operator: v.operator,
+            placeholder: 'sector_ruler_placeholder',
+            warning: false,
+            warningText:'sector_ruler_warningText'
+          }
+        }),
+        warnList: {
+          email_warn:record?.mail_alert,
+          message_warn: record?.msg_alert,
+          phone_warn:record?.call_alert,
+        }
+      };
+      const warnData:Record<string,any> = {
+        email_warn:record?.mail_alert,
+        message_warn: record?.msg_alert,
+        phone_warn:record?.call_alert,
+      }
+      const newObjWarn:any = {};
+      Object.keys(defaultWarn).forEach((key: string) => {
+        const obj = defaultWarn[key] || {};
+        if (warnData[key] && warnData[key].length > 0) {
+          newObjWarn[key] = warnData[key].map((item: string) => {
+            return {
+              ...obj,
+              inputValue: item
+            }
+          })
+        } else {
+          newObjWarn[key] = [{...obj}]
+        }
+      })
+      newRules.warnList = newObjWarn;
+      setRules([{...newRules}])
+    } else {
+      //添加
+      setRules([{
+        ...defaultRules
+      }])
+    }
+  }, [record])
+
   const handleChange = (type: string, value: any, index: number,ruleItem:number =0) => {
     const newRules = [...rules];
     const newItem = rules[index];
-    console.log('====44',value)
     switch (type) {
     case 'group':
       newItem.group_id = value;
@@ -97,7 +148,6 @@ export default observer((props:Props) => {
   }
 
   const handleSave = () => {
-    console.log('==---44', rules)
     const payload:Array<Record<string,any>> = [];
     rules.forEach((rule: any) => {
       const emailList = rule?.warnList?.email_warn || [];
@@ -122,7 +172,6 @@ export default observer((props:Props) => {
       };
       payload.push(obj)
     })
-    console.log('---4',payload)
     onChange('save',payload)
   }
 
@@ -140,9 +189,6 @@ export default observer((props:Props) => {
           return {...v,label: tr(`${v?.type?.toLocaleLowerCase()}`), value: v.type}
         })
       })
-      // return minersCategory?.map((v:any) => {
-      //   return { ...v,label: tr(`${v.type}_balance_alone`), value: 'miner_balance', }
-      // })
     }
     return minersOptions
   },[tr,minersCategory])
@@ -154,7 +200,10 @@ export default observer((props:Props) => {
     closeIcon={false}
     wrapClassName="custom_left_modal"
     open={showModal} onOk={handleSave}
-    onCancel={() => onChange('cancel', false)}
+    onCancel={() => {
+      onChange('cancel', false);
+      setRules([{ ...defaultRules }])
+    }}
     footer={[
       <Button className="cancel_btn" key='cancel_btn' onClick={()=>onChange('cancel',false) }>{ tr('cancel')}</Button>,
       <Button className="primary_btn" key='confirm_btn' onClick={handleSave}>{ tr('confirm')}</Button>

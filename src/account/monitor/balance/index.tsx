@@ -101,6 +101,6 @@ export default observer(() => {
     <div className={ styles.balance_table}>
       <Table data={[...rules]} columns={columns} loading={false} />
     </div>
-    <Rules showModal={showRules} onChange={handleChange}/>
+    <Rules showModal={showRules} onChange={handleChange} record={record}/>
   </div>
 })
