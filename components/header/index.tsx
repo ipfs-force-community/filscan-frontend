@@ -19,8 +19,6 @@ import TimerHtml from '../TimerHtml';
 import useInterval from '../hooks/useInterval';
 import cwStore from '@/store/modules/Cw';
 import Image from 'next/image';
-
-import { spawn } from 'child_process';
 // import Skeleton from '@/packages/skeleton';
 
 export default () => {

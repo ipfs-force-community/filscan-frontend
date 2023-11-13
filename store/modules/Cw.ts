@@ -11,7 +11,6 @@ class CWStore {
   }
 
   setFinalHeight(value: number) {
-    // console.log('===3',value)
     runInAction(()=>{
       this.finalHeight = value;
     })

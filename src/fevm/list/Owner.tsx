@@ -16,6 +16,9 @@ import useWindow from '@/components/hooks/useWindown';
 import Copy from '@/components/copy';
 import Link from 'next/link';
 import classNames from 'classnames';
+import Selects from '@/packages/selects';
+import { BrowserView, MobileView } from '@/components/device-detect';
+
 export default ({
   type,
   id,
@@ -34,7 +37,7 @@ export default ({
   const [current, setCurrent] = useState(1);
   const [ownerList, setOwner] = useState({});
   const [toList, setTo] = useState({});
-
+  const [selectValue, setSelectValue] = useState('all')
   const {isMobile} = useWindow()
 
   useEffect(() => {
@@ -43,15 +46,17 @@ export default ({
     }
   }, [id,type]);
 
-  const load = async (cur?: number) => {
+  const load = async (cur?: number,filter?:string) => {
     setTableLoading(true);
     const index = cur || current;
+    const showFilter = filter || selectValue;
     const axiosUrl = type === 'nfts' ? apiUrl.contract_NFTOwners : apiUrl.contract_ERC20Owner;
     const result = await axiosData(axiosUrl, {
       contract_id: id,
       contract:id,
       page: index - 1,
       limit: pageLimit,
+      filter:showFilter === 'all' ? '':showFilter
     });
     setTableLoading(false);
     setData({
@@ -111,13 +116,47 @@ export default ({
   };
   return (
     <>
+
       <span className='text_des text-sm ml-2.5'>
         {tr('owner_total', { value: formatNumber(data?.total||0)})}
       </span>
+      <BrowserView>
+        {type === 'token' &&<Selects
+          className={styles.selectTab }
+          value={ selectValue}
+          options={[
+            { label: tr('all'), value: 'all' },
+            { label: tr('>0'), value: '>0' },
+            {label:tr('=0'),value:'=0'},
+          ]}
+          onChange={(value) => {
+            setSelectValue(value)
+            setCurrent(1)
+            load(1,value)
+          }}
+        />}
+      </BrowserView>
+      <MobileView>
+        {type === 'token' &&<Selects
+          className={styles.selectMobileTab }
+          value={ selectValue}
+          options={[
+            { label: tr('all'), value: 'all' },
+            { label: tr('>0'), value: '>0' },
+            {label:tr('=0'),value:'=0'},
+          ]}
+          onChange={(value) => {
+            setSelectValue(value)
+            setCurrent(1)
+            load(1,value)
+          }}
+        />}
+      </MobileView>
       <div className='card_shadow p-5 mt-2.5 rounded-xl border border_color'>
         <Table
           data={data.dataSource}
           total={data.total}
+          current={current}
           columns={columns}
           loading={loadingTable}
           onChange={handleChange}

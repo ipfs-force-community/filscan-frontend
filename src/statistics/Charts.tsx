@@ -151,8 +151,11 @@ function Overview() {
                   <span
                     className={classNames("flex", styles["legend-label-wrap"])}
                   >
-                    <span className="flex-shrink-0">{legend?.name || ""}</span>
+                    <BrowserView>
+                      <span className="flex-shrink-0">{legend?.name || ""} </span>
+                    </BrowserView>
                     <MobileView>
+                      <span className="flex-shrink-0">{legend?.name || ""}: </span>
                       <span className={styles.value}>
                         {" " + `${legend?.value}%`}
                       </span>

@@ -5,7 +5,8 @@ const detail = {
   '7d':'7일',
   "30d": '30일',
   "1year": '1년',
-  look_all:'전체 데이터 보기',
+  look_all: '전체 데이터 보기',
+       'all_token': 'All Tokens',
   //owner
   'owner_title': '스토리지 풀 정보',
   'owner_title_tip': '스토리지 풀 정보: 노드 데이터를 모아 총합한 데이터 정보',

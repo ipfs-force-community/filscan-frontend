@@ -32,6 +32,10 @@ const account = {
   all_miners:'全部节点',
   edit:'操作',
   miner_add: '添加',
+  edit_write: '修改',
+  edit_delete: '删除',
+  created_at:'创建时间',
+
   //个人账户
   register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
   register_btn:'开启服务',
@@ -158,13 +162,13 @@ const account = {
   out_come_gas: '支出',
 
   //余额监控
-  miner_balance_alone: '节点余额',
-  owner_balance_alone: 'Owner余额',
-  worker_balance_alone:'Worker余额',
-  controller_0_balance_alone: 'Controller0余额',
-  controller_1_balance_alone: 'Controller1余额',
-  controller_2_balance_alone: 'Controller2余额',
-  beneficiary_balance_alone: 'Beneficiary余额',
+  miner: '节点余额',
+  owner: 'Owner余额',
+  worker:'Worker余额',
+  controller_0: 'Controller0余额',
+  controller_1: 'Controller1余额',
+  controller_2: 'Controller2余额',
+  beneficiary: 'Beneficiary余额',
   
   //监控
   add_rules:'添加规则',
@@ -184,9 +188,17 @@ const account = {
 
   phone_warn: '电话告警',
   phone_warn_placeholder: '请输入接收号码',
-  phone_warn_warning:'请输入正确的接收号码',
+  phone_warn_warning: '请输入正确的接收号码',
+
+  //监控
+  ExpireSectorMonitor: '扇区到期时间',
+  edit_status: '修改规则状态',
+  edit_status_content:'您确定关闭此监控吗？关闭后将无法及时收到相关告警',
+  delete_rule: '删除规则',
+  delete_rule_content:'您确定删除此监控吗?',
 
   //扇区监控
+  reset_button:'重置',
   add_rules: '添加规则',
   rule_detail:'规则详情',
   sector_rule_title: '扇区到期时间',
@@ -197,7 +209,7 @@ const account = {
   '>=': '大于等于',
   //余额监控
   balance_category_placeholder: '请选择余额类目',
-  balance_rule_des:'当前{{value}} FIL'
+  balance_rule_des:'当前 {{value}} FIL'
   
 
 }

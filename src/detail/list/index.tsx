@@ -37,7 +37,8 @@ export default ({
   const { hash, hashParams } = useHash();
   const [activeTab,setActiveTab] = useState(defaultActive);
   const { name, p } = hashParams || {};
-  const [num,setNum] = useState(0)
+  const [num, setNum] = useState(0);
+
   useEffect(() => {
     if (hash) {
       if (tabList.find((v) => v.dataIndex === hash)) {
@@ -64,7 +65,7 @@ export default ({
   const headerOptions = useMemo(() => {
     if (activeItem?.headerOptions) {
       return activeItem?.headerOptions?.map((v: any) => {
-        return { ...v, label: tr(v.dataIndex ||v.value) }
+        return { ...v, label: tr(v.label||v.dataIndex ||v.value) }
       })
     }
     return []
@@ -117,7 +118,7 @@ export default ({
           {activeTab === 'ercList' && (
             <TokenList total={(num)=>{
               setNum(num)
-            }} accountId={accountId} />
+            }} accountId={accountId} methodName={method} />
           )}
           {activeTab === 'contract_verify' && (
             <Verify actorId={actorId} verifyData={verifyData } />

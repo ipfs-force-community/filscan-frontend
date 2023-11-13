@@ -1,4 +1,5 @@
 const contract = {
+  all:'All',
   overview: 'Overview',
   market: 'Market',
   look_adres: 'View Account',
@@ -6,6 +7,9 @@ const contract = {
   reset_ver:'Revalidate',
   next: 'Continue',
   reset: 'Reset',
+  'all_token': 'All Tokens',
+    '>0':'With Balance',
+  '=0': 'No Balance',
   confirm: 'Verify&Publish',
   back:'Return to Main',
   file_name: 'SELECT *.SOL FILES',

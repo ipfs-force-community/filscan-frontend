@@ -1383,7 +1383,8 @@ export const address_tabs = [
   {
     title: 'erc20_transfer',
     dataIndex:'ercList',
-    value:'ERC20AddrTransfers'
+    value: 'ERC20AddrTransfers',
+    optionsUrl:'ERC20AddrTransfersTokenTypes'
   }
 ];
 export const minerTabs = [
@@ -1659,7 +1660,7 @@ export const ercToken_list = (fromList: any, toList: any) => {
     {
       dataIndex: "icon_url",
       width:'10%' ,
-      title: "platform", render: (text: string, record: any) => {
+      title: "Token", render: (text: string, record: any) => {
         if (!text) {
           return <Image src={text} width={25} height={25}/>
         }

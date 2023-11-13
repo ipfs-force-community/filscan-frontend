@@ -19,7 +19,7 @@ function Banner() {
 
   const loadBanner = async() => {
     const result:any =await axiosData(apiUrl.home_banner, {
-      category: 'new_home',
+      category: 'metric_banner',
       language:lang ||'zh'
     })
     setData(result?.items||[])
@@ -29,18 +29,7 @@ function Banner() {
     return null
   }
 
-  return <div className="group relative overflow-hidden w-full h-full">
-    {/* <span
-      className="hidden group-hover:flex absolute z-10 top-1/2 cursor-pointer w-5 h-5  items-center justify-center rounded-full bg-tipColor"
-      onClick={() => {
-        if (carousel.current) {
-          carousel?.current?.prev()
-        }
-
-      }}>
-      <LeftOutlined rev={undefined} className="text-white text-xs" />
-    </span> */}
-
+  return <div className="group relative overflow-hidden w-full h-full mt-5">
     <Carousel autoplay={true} autoplaySpeed={5000} ref={carousel} infinite={true }>
       {[...data]?.map((item: any,index) => {
         return <div key={ index} onClick={() => {
@@ -52,16 +41,6 @@ function Banner() {
         </div>
       })}
     </Carousel>
-    {/* <span
-      className="hidden group-hover:flex absolute z-10 top-1/2 right-0  w-5 h-5 items-center justify-center rounded-full bg-tipColor cursor-pointer"
-      onClick={() => {
-        if (carousel.current) {
-          carousel?.current?.next()
-        }
-      }}>
-      <RightOutlined rev={undefined} className="text-white text-xs"/>
-    </span> */}
-
   </div>
 }
 

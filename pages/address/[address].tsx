@@ -2,7 +2,7 @@
 
 import Copy from '@/components/copy';
 import { Translation } from '@/components/hooks/Translation';
-import { TransMethod, apiUrl } from '@/contents/apiUrl';
+import { TransMethod, apiUrl, tokenName } from '@/contents/apiUrl';
 import { address_detail, address_tabs } from '@/contents/detail';
 import Content from '@/packages/content';
 import Segmented from '@/packages/segmented';
@@ -33,7 +33,9 @@ export default () => {
   const [interval, setInterval] = useState('1m');
   const [methodOptions, setMethodOptions] = useState([]);
   const [transOptions,setTransOptions] = useState([])
-  const [actorId,setActorId] = useState('')
+  const [tokenOptions,setTokenOptions] = useState([])
+
+  const [actorId, setActorId] = useState('')
   const [loading, setLoading] = useState(false);
   const [domains, setDomains] = useState<any>({})
 
@@ -77,6 +79,18 @@ export default () => {
       newTransMethod.push({ label: li, dataIndex: li, value: li });
     });
     setTransOptions(newTransMethod);
+
+    const result2 = await axiosData(tokenName, { address },{isCancel:false})
+    const newTokenMethod: any = [
+      {
+        label:'all_token',
+        value: 'all',
+      },
+    ];
+    (result2?.token_names || [])?.forEach((li: string) => {
+      newTokenMethod.push({ label: li, dataIndex: li, value: li });
+    });
+    setTokenOptions(newTokenMethod)
   };
 
   const load = async () => {
@@ -177,6 +191,9 @@ export default () => {
       if (v?.optionsUrl === 'TransferMethodByAccountID') {
         v.headerOptions = transOptions;
       }
+      if (v?.optionsUrl === 'ERC20AddrTransfersTokenTypes') {
+        v.headerOptions = tokenOptions;
+      }
       defaultOpt.push({ ...v });
     });
 
@@ -197,7 +214,7 @@ export default () => {
       },]
     }
     return [...defaultOpt, ...evmList];
-  }, [methodOptions, transOptions, verifyData]);
+  }, [methodOptions, transOptions,tokenOptions, verifyData]);
 
   if (loading) {
     return <Loading />

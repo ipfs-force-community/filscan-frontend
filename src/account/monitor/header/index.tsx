@@ -6,18 +6,20 @@ import accountStore from '@/store/modules/account'
 import { Translation } from '@/components/hooks/Translation';
 import { useMemo, useRef, useState } from 'react';
 import { Button } from 'antd';
+import { getSvgIcon } from '@/svgsIcon';
 
 interface Props {
   selectGroup: string;
   selectMiner?: string;
   selectTag?: string;
-  showMiner?: boolean;
-  addRule?:boolean
+  addRule?: boolean;
+  isAllMiner?: boolean;
+  reset?: boolean;
   onChange: (type: string, value: string | number | boolean) => void;
 }
 
 export default observer((props: Props) => {
-  const { onChange, selectGroup,selectMiner,selectTag,addRule,showMiner=true} = props;
+  const { onChange,reset,isAllMiner=true, selectGroup,selectMiner,selectTag,addRule} = props;
   const { groupMiners } = accountStore;
   const { tr } = Translation({ ns: 'account' });
   const [selectItem, setSelectItem] = useState<Record<string, any>>({});
@@ -25,10 +27,13 @@ export default observer((props: Props) => {
 
   const [groups,allMiners,allTags] = useMemo(() => {
     const newMinerGroups:Array<any> =[]
-    const allMiners :Array<any>= [{
-      label: tr('all_miners'),
-      value:'all',
-    }];
+    const allMiners :Array<any>= [];
+    if (isAllMiner) {
+      allMiners.push({
+        label: tr('all_miners'),
+        value:'all',
+      })
+    }
     const allTags:Record<string,string> = {};
     groupMiners?.forEach(group => {
       const miners: Array<any> = [];
@@ -61,7 +66,7 @@ export default observer((props: Props) => {
       miners: [...allMiners]
     }];
     return [newGroups.concat(newMinerGroups),allMiners,allTags];
-  }, [tr, groupMiners]);
+  }, [tr, groupMiners,isAllMiner]);
 
   const showTags = useMemo(() => {
     const newTags = [{
@@ -69,23 +74,29 @@ export default observer((props: Props) => {
       value:'all',
     }];
     if (selectMinerItem.value && selectMinerItem.value !== 'all') {
-      newTags.push({
-        label: selectMinerItem.miner_tag,
-        value: selectMinerItem.miner_tag
-      })
+      if (selectMinerItem.miner_tag) {
+        newTags.push({
+          label: selectMinerItem.miner_tag,
+          value: selectMinerItem.miner_tag
+        })
+      }
     } else if (selectItem.group_id) {
       Object.keys(selectItem.tags)?.forEach(tagKey => {
-        newTags.push({
-          label: tagKey,
-          value:tagKey
-        })
+        if (tagKey) {
+          newTags.push({
+            label: tagKey,
+            value:tagKey
+          })
+        }
       })
     }else if (allTags && Object.keys(allTags).length > 0) {
       Object.keys(allTags).forEach(tagKey => {
-        newTags.push({
-          label: tagKey,
-          value:tagKey
-        })
+        if (tagKey) {
+          newTags.push({
+            label: tagKey,
+            value:tagKey
+          })
+        }
       })
     }
     return newTags
@@ -110,7 +121,7 @@ export default observer((props: Props) => {
           handleChange('group',v,item)
         }}
       />
-      { showMiner && <Selects
+      { props.hasOwnProperty('selectMiner') && <Selects
         value={selectMiner}
         placeholder={tr('select_miner') }
         options={selectItem?.group_id ? selectItem?.miners||[]:allMiners}
@@ -118,7 +129,7 @@ export default observer((props: Props) => {
           handleChange('miner',v,item)
         }}
       />}
-      { showMiner && <Selects
+      { props.hasOwnProperty('selectTag') && <Selects
         value={selectTag}
         placeholder={tr('select_miner_tag') }
         options={showTags}
@@ -126,7 +137,12 @@ export default observer((props: Props) => {
           handleChange('miner_tag',v,item)
         }}
       />}
-
+      { reset && <Button className='cancel_btn !px-2 !min-w-fit gap-x-1' onClick={() => {
+        handleChange('reset','all')
+      }} >
+        { getSvgIcon('reset') }
+        {tr('reset_button')}
+      </Button>}
     </div>
     { addRule && <Button className='primary_btn' onClick={()=>handleChange('addRules',true)}>{ tr('add_rules')}</Button>}
   </div>

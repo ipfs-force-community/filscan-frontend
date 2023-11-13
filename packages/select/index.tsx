@@ -61,8 +61,8 @@ export default ({
       )}
 
       <ul
-        className={`invisible group-hover:visible absolute z-10 inset-y-full h-fit w-max list-none p-4  border rounded-[5px]  select_shadow  border_color ${className}`}>
-
+        style={{padding:'15px'}}
+        className={`invisible group-hover:visible absolute z-10 inset-y-full h-fit w-max list-none border rounded-[5px]  select_shadow  border_color ${className}`}>
         {Array.isArray(options)&& options?.map((item) => {
           return (
             <li

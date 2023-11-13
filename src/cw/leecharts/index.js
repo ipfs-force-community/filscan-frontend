@@ -77,6 +77,7 @@ class chart {
   }
   drawChart() {
     this.emitter?.clear('highlightChange')
+
     this.setGrid()
     drawAxisX(this)
     drawAxisY(this)

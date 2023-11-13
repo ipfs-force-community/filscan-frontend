@@ -38,7 +38,7 @@ export default (props:ListProps) => {
   }, [defaultActive, hash]);
 
   return (
-    <div className={`${classNames(props.className)} mt-5`}>
+    <div className={`${classNames(props.className)} mt-5 relative`}>
       <Segmented
         data={tabList || []}
         ns='contract'

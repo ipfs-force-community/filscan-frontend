@@ -80,7 +80,6 @@ export default () => {
             <ContractAddr />
             <ContractGas />
             <ContractBalance />
-
           </>}
         { hash ==='BlockChain' && <>
           <PowerTrend />

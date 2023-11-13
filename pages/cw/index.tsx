@@ -184,6 +184,17 @@ export default observer(() => {
           v.OrphanBlocks.forEach((orphanItem:any) => {
             if (type === 'cid' && orphanItem._id === searchCid.current) {
               showSearch = true;
+              searchHeight.current = Number(orphanItem.Epoch)
+            }
+          })
+          calcData.push(v)
+        } else if (v?.OrphanBlocks?.length > 0) {
+          calcData.push(v)
+        }
+        if (!showSearch &&v?.OrphanBlocks?.length >0) {
+          v.OrphanBlocks.forEach((orphanItem:any) => {
+            if (type === 'cid' && orphanItem._id === searchCid.current) {
+              showSearch = true;
               console.log('----333',orphanItem)
               searchHeight.current = Number(orphanItem.Epoch)
             }
@@ -274,7 +285,6 @@ export default observer(() => {
           draw: (chart: any, layer: any, s: any) => {
             let d3 = chart.d3
             let emitter = chart.emitter
-
             let stageWrap = layer.safeSelect("g.stage-wrap")
             let axisYWrap = layer.safeSelect("g.ay-wrap")
             let axisXWrap = layer.safeSelect("g.ax-wrap")
