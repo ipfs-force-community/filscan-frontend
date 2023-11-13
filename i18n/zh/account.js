@@ -190,9 +190,13 @@ const account = {
   phone_warn_placeholder: '请输入接收号码',
   phone_warn_warning: '请输入正确的接收号码',
 
-
   //监控
-  ExpireSectorMonitor:'扇区到期时间',
+  ExpireSectorMonitor: '扇区到期时间',
+  edit_status: '修改规则状态',
+  edit_status_content:'您确定关闭此监控吗？关闭后将无法及时收到相关告警',
+  delete_rule: '删除规则',
+  delete_rule_content:'您确定删除此监控吗?',
+
   //扇区监控
   add_rules: '添加规则',
   rule_detail:'规则详情',

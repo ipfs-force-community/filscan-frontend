@@ -40,13 +40,18 @@ export default observer((props:Props) => {
   const [rules, setRules] = useState<any>([{ ...defaultRules }]);
 
   useEffect(() => {
-    if (record && Object.keys(record).length > 0) {
+    if (record && Object.keys(record).length > 0 && record.miner_id_or_all) {
       //编辑
+      if (record.miner_id_or_all && record.miner_id_or_all.length > 0) {
+        getCategory(record.miner_id_or_all)
+      }
       const newRules = {
         group_id: record.group_id === -1 ?'all':String( record.group_id),
         miner_id: record.miner_id_or_all,
         rule: record.rules.map((v:any) => {
           return {
+            category: v.account_type,
+            addr:v.account_addr,
             operand: v.operand,
             operator: v.operator,
             placeholder: 'sector_ruler_placeholder',
@@ -69,11 +74,17 @@ export default observer((props:Props) => {
       Object.keys(defaultWarn).forEach((key: string) => {
         const obj = defaultWarn[key] || {};
         if (warnData[key] && warnData[key].length > 0) {
-          newObjWarn[key] = warnData[key].map((item: string) => {
-            return {
-              ...obj,
-              inputValue: item
+          newObjWarn[key] = [];
+          warnData[key].forEach((item: string, index: number) => {
+            //最后一位是默认邮箱
+            if (index !== warnData[key].length - 1) {
+              newObjWarn[key].push({
+                ...obj,
+                checked:true,
+                inputValue: item
+              })
             }
+
           })
         } else {
           newObjWarn[key] = [{...obj}]
@@ -155,7 +166,6 @@ export default observer((props:Props) => {
       const phoneListList = rule?.warnList?.phone_warn ||[]
       const obj = {
         monitor_type: 'BalanceMonitor',
-        user_id: 27,
         group_id_or_all: rule.group_id === 'all' ? -1 : Number(rule.group_id),
         miner_or_all: rule.miner_id,
         mail_alert: emailList[0]?.checked ? emailList?.map((v: any) => v.inputValue).join(',') : '',
@@ -199,10 +209,10 @@ export default observer((props:Props) => {
     width={700}
     closeIcon={false}
     wrapClassName="custom_left_modal"
-    open={showModal} onOk={handleSave}
+    open={showModal}
+    onOk={handleSave}
     onCancel={() => {
       onChange('cancel', false);
-      setRules([{ ...defaultRules }])
     }}
     footer={[
       <Button className="cancel_btn" key='cancel_btn' onClick={()=>onChange('cancel',false) }>{ tr('cancel')}</Button>,

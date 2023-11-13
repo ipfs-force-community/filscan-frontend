@@ -28,7 +28,8 @@ export default observer(() => {
       setRecord({})
       break;
     case 'ok':
-      setShowRules(false)
+      setShowRules(false);
+      setRecord({})
       break;
     case 'group':
       setSelectGroup(value);

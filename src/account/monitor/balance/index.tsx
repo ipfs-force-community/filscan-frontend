@@ -23,21 +23,26 @@ export default observer(() => {
       setShowRules(true)
       break;
     case 'cancel':
-      setShowRules(false)
+      setShowRules(false);
+      setRecord({})
       break;
     case 'group':
       setSelectGroup(value);
-      setSelectMiner('all')
+      setSelectMiner('all');
+      loadRules({miner_tag: 'all',miner_id:'all',group_id:value});
       break;
     case "miner":
       setSelectMiner(value);
       setSelectTag('all');
+      loadRules({miner_tag: 'all',miner_id:value});
       break;
     case 'miner_tag':
       setSelectTag(value);
+      loadRules({miner_tag: value});
       break;
     case 'save':
       saveRules(value);
+      setRecord({})
       break;
     };
   }

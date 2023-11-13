@@ -1,11 +1,10 @@
 import { Translation } from "@/components/hooks/Translation";
 import styles from './index.module.scss'
-import { Button, Checkbox, Input, Modal } from "antd"
+import { Button, Checkbox, Input, Modal, Space } from "antd"
 import { useEffect, useState } from "react";
 import { isEmail, isPhone } from "@/utils";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { defaultWarn } from "@/contents/account";
-import Id from "@/pages/deal/[id]";
 
 interface Props {
 showModal?: boolean;
@@ -101,14 +100,24 @@ export default (props: Props) => {
                 {tr(warn.title)}
               </div>}
               <div className={styles.warn_content_item_main}>
-                <Input
-                  key={ warnKey + index+ warn.inputValue}
-                  style={{borderColor:warn.warning?'red':''}}
-                  className={`custom_input ${styles.warn_content_item_main_input}`}
-                  defaultValue={warn.inputValue}
-                  placeholder={tr(warn.placeholder)}
-                  onBlur={(e)=>handleWarn('warning',warnKey,index,e.target.value)}
-                />
+                {warnKey !=='email_warn' ? <Space.Compact>
+                  <Input style={{ width: '15%' }} value="+86" />
+                  <Input
+                    key={warnKey + index + warn.inputValue}
+                    style={{borderColor:warn.warning?'red':'',width: '85%'}}
+                    className={`custom_input ${styles.warn_content_item_main_input}`}
+                    defaultValue={warn.inputValue}
+                    placeholder={tr(warn.placeholder)}
+                    onBlur={(e)=>handleWarn('warning',warnKey,index,e.target.value)}/>
+                </Space.Compact>:
+                  <Input
+                    key={ warnKey + index+ warn.inputValue}
+                    style={{borderColor:warn.warning?'red':''}}
+                    className={`custom_input ${styles.warn_content_item_main_input}`}
+                    defaultValue={warn.inputValue}
+                    placeholder={tr(warn.placeholder)}
+                    onBlur={(e)=>handleWarn('warning',warnKey,index,e.target.value)}
+                  />}
                 {showIcon && <>
                   <div className={styles.warn_content_item_main_icon} onClick={()=>handleWarn('add',warnKey,index)}>+</div>
                 </>}
