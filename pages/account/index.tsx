@@ -17,7 +17,6 @@ import Expired from '@/src/account/manage/expired';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Loading from '@/components/loading';
-<<<<<<< HEAD
 import MonitorBalance from '@/src/account/monitor/balance';
 import MonitorSector from '@/src/account/monitor/sector';
 import MonitorPower from '@/src/account/monitor/power';
@@ -25,9 +24,6 @@ import accountStore from '@/store/modules/account';
 import userStore from '@/store/modules/user';
 import { Menu } from 'antd';
 import { observer } from 'mobx-react';
-=======
-import Banner from '@/src/fvm/Banner';
->>>>>>> baee0b19 (feat: update bannner & payload)
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' });
@@ -98,38 +94,12 @@ const Account: React.FC = () => {
           <div className='w-full px-5 mb-10 text-lg font-semibold font-PingFang	'>
             {tr('account_title')}
           </div>
-<<<<<<< HEAD
           <Menu mode="inline"
             className='custom_menu'
             selectedKeys={[selectedKey] }
             defaultOpenKeys={['data_details', 'monitor']}>
             {account_manager.map(renderMenuItem)}
           </Menu>
-=======
-          <ul className='list-none px-4'>
-            {menuData.map((parent: any) => {
-              return (
-                <Link
-                  key={parent.label}
-                  href={ `/account#${parent.key}`}
-                  scroll={ false}
-                  className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
-                    parent?.icon ? 'font-medium' : 'ml-5 font-normal'
-                  } ${
-                    selectedKey === parent.key
-                      ? '!text-primary bg-bg_hover'
-                      : ''
-                  }`}>
-                  <span className='flex items-center gap-x-2 px-4'>
-                    {parent.icon}
-                    {tr(parent.label)}
-                  </span>
-                </Link>
-              );
-            })}
-            <Banner />
-          </ul>
->>>>>>> baee0b19 (feat: update bannner & payload)
         </div>
         <div
           className='flex-grow flex flex-col px-5 py-10 w_account min-h-full'

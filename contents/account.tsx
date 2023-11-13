@@ -1424,13 +1424,13 @@ export const monitor_list = (tr:any,onChange:any) => {
               if (Array.isArray(resList)) {
                 return <div key={key} className='flex font-normal'>
                   <div className='text_des' style={{width:'70px'}}>{ tr(key)}:</div>
-                  <li className=''>
+                  <div className=''>
                     { resList.map((warn:string,index:number) => {
                       return <li key={index}>
                         { warn}
                       </li>
                     })}
-                  </li></div>
+                  </div></div>
 
               }
             })

@@ -11,15 +11,6 @@ class CWStore {
   }
 
   setFinalHeight(value: number) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // console.log('===3',value)
-=======
-    console.log('===3',value)
->>>>>>> 7910c2db (fix: cw)
-=======
-    // console.log('===3',value)
->>>>>>> f4dbaf20 (feat: cw update)
     runInAction(()=>{
       this.finalHeight = value;
     })
