@@ -198,6 +198,7 @@ const account = {
   delete_rule_content:'您确定删除此监控吗?',
 
   //扇区监控
+  reset_button:'重置',
   add_rules: '添加规则',
   rule_detail:'规则详情',
   sector_rule_title: '扇区到期时间',

@@ -9,6 +9,7 @@ import { isPositiveInteger } from "@/utils";
 import monitorStore from "@/store/modules/account/monitor";
 import { observer } from "mobx-react";
 import { defaultWarn } from "@/contents/account";
+import { getSvgIcon } from "@/svgsIcon";
 interface Props {
   showModal: boolean;
   record?:Record<string,any>,
@@ -63,11 +64,25 @@ export default observer((props: Props) => {
       Object.keys(defaultWarn).forEach((key: string) => {
         const obj = defaultWarn[key] || {};
         if (warnData[key] && warnData[key].length > 0) {
-          newObjWarn[key] = warnData[key].map((item: string) => {
-            return {
-              ...obj,
-              inputValue: item
+          newObjWarn[key] = [];
+          warnData[key].forEach((item: string, index: number) => {
+            //最后一位是默认邮箱
+            if (key === 'email_warn') {
+              if (index !== warnData[key].length - 1) {
+                newObjWarn[key].push({
+                  ...obj,
+                  checked: true,
+                  inputValue: item
+                })
+              }
+            } else {
+              newObjWarn[key].push({
+                ...obj,
+                checked: true,
+                inputValue: item
+              })
             }
+
           })
         } else {
           newObjWarn[key] = [{...obj}]
@@ -161,7 +176,7 @@ export default observer((props: Props) => {
     title={`${tr('add_rules')}`}
     destroyOnClose={true}
     closeIcon={false}
-    width={560}
+    width={630}
     wrapClassName="custom_left_modal"
     open={showModal} onOk={handleSave}
     onCancel={() => onChange('cancel', false)}
@@ -179,8 +194,8 @@ export default observer((props: Props) => {
           <div className={styles.sector_contain_header}>
             <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
             <div className={styles.sector_icons}>
-              { showIcon && <span className={styles.sector_icons_icon} onClick={() => handleRules('add', index)}>+</span>}
-              { deleteIcon &&<span className={styles.sector_icons_icon} onClick={()=>handleRules('delete',index) }>-</span> }
+              {showIcon && <span className={styles.sector_icons_icon} onClick={() => handleRules('add', index)}>{ getSvgIcon('add')}</span>}
+              {deleteIcon && <span className={styles.sector_icons_icon} onClick={() => handleRules('delete', index)}>{ getSvgIcon('cancel')}</span> }
             </div>
           </div>
           {ruleItem.miner_id && <>

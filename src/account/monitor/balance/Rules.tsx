@@ -77,10 +77,18 @@ export default observer((props:Props) => {
           newObjWarn[key] = [];
           warnData[key].forEach((item: string, index: number) => {
             //最后一位是默认邮箱
-            if (index !== warnData[key].length - 1) {
+            if (key === 'email_warn') {
+              if (index !== warnData[key].length - 1) {
+                newObjWarn[key].push({
+                  ...obj,
+                  checked: true,
+                  inputValue: item
+                })
+              }
+            } else {
               newObjWarn[key].push({
                 ...obj,
-                checked:true,
+                checked: true,
                 inputValue: item
               })
             }
@@ -224,7 +232,7 @@ export default observer((props:Props) => {
         return <div key={index} className={styles.balance_contain}>
           <div className={styles.balance_contain_title}>{ tr('rule_detail')}</div>
           <div className={styles.balance_contain_header}>
-            <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
+            <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} isAllMiner={false} onChange={(type,value)=>handleChange(type,value,index)} />
             { showIcon && <div className={styles.balance_icons}>
               <span className={styles.balance_icons_icon} onClick={()=>handAddRule('add','rule',index)}>+</span>
               <span className={styles.balance_icons_icon} onClick={()=>handAddRule('delete','rule',index)}>-</span>

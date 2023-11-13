@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { isEmail, isPhone } from "@/utils";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { defaultWarn } from "@/contents/account";
+import { getSvgIcon } from "@/svgsIcon";
 
 interface Props {
 showModal?: boolean;
@@ -100,11 +101,11 @@ export default (props: Props) => {
                 {tr(warn.title)}
               </div>}
               <div className={styles.warn_content_item_main}>
-                {warnKey !=='email_warn' ? <Space.Compact>
-                  <Input style={{ width: '15%' }} value="+86" />
+                {warnKey !=='email_warn' ? <Space.Compact className={styles.warn_content_inputs}>
+                  <Input style={{ width: '50px' }} value="+86" />
                   <Input
                     key={warnKey + index + warn.inputValue}
-                    style={{borderColor:warn.warning?'red':'',width: '85%'}}
+                    style={{borderColor:warn.warning?'red':''}}
                     className={`custom_input ${styles.warn_content_item_main_input}`}
                     defaultValue={warn.inputValue}
                     placeholder={tr(warn.placeholder)}
@@ -119,10 +120,10 @@ export default (props: Props) => {
                     onBlur={(e)=>handleWarn('warning',warnKey,index,e.target.value)}
                   />}
                 {showIcon && <>
-                  <div className={styles.warn_content_item_main_icon} onClick={()=>handleWarn('add',warnKey,index)}>+</div>
+                  <div className={styles.warn_content_item_main_icon} onClick={() => handleWarn('add', warnKey, index)}>{ getSvgIcon('add')}</div>
                 </>}
                 {
-                  index !== 0 && <div className={styles.warn_content_item_main_icon} onClick={()=>handleWarn('delete',warnKey,index)}>-</div>
+                  index !== 0 && <div className={styles.warn_content_item_main_icon} onClick={()=>handleWarn('delete',warnKey,index)}>{ getSvgIcon('cancel')}</div>
                 }
               </div>
               {warn.warning && <div className={styles.warn_warning}>{tr(warn.warningText) }</div>}

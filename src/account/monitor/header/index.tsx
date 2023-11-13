@@ -6,17 +6,20 @@ import accountStore from '@/store/modules/account'
 import { Translation } from '@/components/hooks/Translation';
 import { useMemo, useRef, useState } from 'react';
 import { Button } from 'antd';
+import { getSvgIcon } from '@/svgsIcon';
 
 interface Props {
   selectGroup: string;
   selectMiner?: string;
   selectTag?: string;
-  addRule?:boolean
+  addRule?: boolean;
+  isAllMiner?: boolean;
+  reset?: boolean;
   onChange: (type: string, value: string | number | boolean) => void;
 }
 
 export default observer((props: Props) => {
-  const { onChange, selectGroup,selectMiner,selectTag,addRule} = props;
+  const { onChange,reset,isAllMiner=true, selectGroup,selectMiner,selectTag,addRule} = props;
   const { groupMiners } = accountStore;
   const { tr } = Translation({ ns: 'account' });
   const [selectItem, setSelectItem] = useState<Record<string, any>>({});
@@ -24,10 +27,13 @@ export default observer((props: Props) => {
 
   const [groups,allMiners,allTags] = useMemo(() => {
     const newMinerGroups:Array<any> =[]
-    const allMiners :Array<any>= [{
-      label: tr('all_miners'),
-      value:'all',
-    }];
+    const allMiners :Array<any>= [];
+    if (isAllMiner) {
+      allMiners.push({
+        label: tr('all_miners'),
+        value:'all',
+      })
+    }
     const allTags:Record<string,string> = {};
     groupMiners?.forEach(group => {
       const miners: Array<any> = [];
@@ -60,7 +66,7 @@ export default observer((props: Props) => {
       miners: [...allMiners]
     }];
     return [newGroups.concat(newMinerGroups),allMiners,allTags];
-  }, [tr, groupMiners]);
+  }, [tr, groupMiners,isAllMiner]);
 
   const showTags = useMemo(() => {
     const newTags = [{
@@ -131,7 +137,12 @@ export default observer((props: Props) => {
           handleChange('miner_tag',v,item)
         }}
       />}
-
+      { reset && <Button className='cancel_btn !px-2 !min-w-fit gap-x-1' onClick={() => {
+        handleChange('reset','all')
+      }} >
+        { getSvgIcon('reset') }
+        {tr('reset_button')}
+      </Button>}
     </div>
     { addRule && <Button className='primary_btn' onClick={()=>handleChange('addRules',true)}>{ tr('add_rules')}</Button>}
   </div>

@@ -26,6 +26,11 @@ export default observer(() => {
       setShowRules(false);
       setRecord({})
       break;
+    case 'reset':
+      setSelectGroup('all')
+      setSelectMiner('all'),
+      setSelectTag('all');
+      loadRules({miner_tag: 'all',miner_id:'all',group_id:'all'});
     case 'group':
       setSelectGroup(value);
       setSelectMiner('all');
@@ -102,7 +107,8 @@ export default observer(() => {
     <div className={styles.balance_title}>
       {tr('monitor_balance') }
     </div>
-    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} selectTag={ selectTag} addRule={true } />
+    <Header onChange={handleChange} selectGroup={selectGroup} selectMiner={selectMiner} selectTag={ selectTag} reset={true }
+      addRule={true } />
     <div className={ styles.balance_table}>
       <Table data={[...rules]} columns={columns} loading={false} />
     </div>

@@ -38,8 +38,11 @@ export const home_meta = [
     dataIndex: 'add_power_in_32g',
     tipContent: [
       {
-        title: 'gas_in_32g', dataIndex: 'gas_in_32g', render: (text:string|number) => formatFilNum(text, false, false, 2)+'/TIB' },
-      {title:'gas_in_64g',dataIndex:'gas_in_64g',render: (text:string|number) => formatFilNum(text, false, false, 2)+'/TIB'},
+        title: 'gas_in_32g', dataIndex: 'gas_in_32g', render: (text: string | number) => {
+          return formatFilNum(text, false, false)+'/TIB'
+        }
+      },
+      {title:'gas_in_64g',dataIndex:'gas_in_64g',render: (text:string|number) => formatFilNum(text, false, false)+'/TIB'},
     ],
     render: (v: any) => {
       const [show, unit] = formatFilNum(v, false, false, 4).split(' ');
@@ -126,7 +129,7 @@ export const home_meta = [
     title: 'gas_24',
     dataIndex: 'sum',
     tipContent: [
-      { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 2) },
+      { title: 'contract_gas', dataIndex: 'contract_gas',render: (text:string|number) => formatFilNum(text, false, false, 4) },
     ],
     render: (v: any) => {
       const [show, unit] = formatFilNum(v, false, false, 4).split(' ');
