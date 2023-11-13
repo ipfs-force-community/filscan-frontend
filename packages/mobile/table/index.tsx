@@ -25,9 +25,8 @@ const Table = (props:TProps)=>{
 
   return <div className={classNames(styles.wrap)}>
     <T
-      loading={loading}
-      columns={columns}
-      dataSource={props.dataSource}
+
+      {...props}
       onChange={props.onChange}
       pagination={
         total > showLimit
