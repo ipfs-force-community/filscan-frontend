@@ -1435,7 +1435,7 @@ const monitorUnit: Record<string, string> = {
 }
 
 //监控columns
-export const monitor_list = (tr: any, onChange: any) => {
+export const monitor_list = (tr:any,onChange:any,type?:string) => {
   return [
     {
       dataIndex: 'group_name',
@@ -1543,24 +1543,13 @@ export const monitor_list = (tr: any, onChange: any) => {
       dataIndex: 'edit',
       title: 'edit',
       width: '10%',
-      render: (text: any, record: any, index: number) => {
-        return (
-          <div className="flex gap-x-2 font-normal">
-            <span
-              className="cursor-pointer text-primary"
-              onClick={() => onChange('edit_write', record, index)}
-            >
-              {tr('edit_write')}
-            </span>
-            <ActiveRules
-              text={text}
-              title="edit_delete"
-              onChange={() => onChange('edit_delete', record, index)}
-            />
-          </div>
-        )
-      },
-    },
+      render: (text:any,record:any,index:number) => {
+        return <div className='flex gap-x-2 font-normal'>
+          <span className='text-primary cursor-pointer' onClick={() => onChange('edit_write', record, index)}>{tr(type === 'power'?'edit_write_warn':'edit_write')}</span>
+          {type !== 'power' && <ActiveRules text={text} title='edit_delete' onChange={() => onChange('edit_delete', record, index)} />}
+        </div>
+      }
+    }
   ]
 }
 

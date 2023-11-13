@@ -21,8 +21,8 @@ export const rewardData = proUrl + '/RewardDetail';
 export const luckyData = proUrl + '/LuckyRateDetail';
 export const balanceData = proUrl + '/BalanceDetail';
 export const minerCategory = proUrl + '/GetMinerInfo';
-export const saveRules = proUrl + '/SaveUserRules';
-export const getRules = proUrl + '/GetUserRules';
-export const rulesActive = proUrl + '/UpdateActiveState';
-export const deleteRules = proUrl + '/DeleteUserRule';
+export const saveRules = testUrl + '/SaveUserRules';
+export const getRules = testUrl + '/GetUserRules';
+export const rulesActive = testUrl + '/UpdateActiveState';
+export const deleteRules = testUrl + '/DeleteUserRule';
 

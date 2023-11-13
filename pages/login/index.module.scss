@@ -1,0 +1,28 @@
+.contain{
+position: relative;
+width: 1440px;
+height: 652px;
+// background-image: linear-gradient(to right, #1764ff, #85f3c7, #2de7ff);
+// filter: blur(10px);
+// opacity: 0.8;
+&_shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+&_shape1 {
+  background-image: linear-gradient(to right, #1764ff, #85f3c7, #2de7ff);
+  filter: blur(10px);
+  opacity: 0.5;
+}
+
+&_shape2 {
+  background-image: linear-gradient(to right, #1764ff, #16cde5, #a9ffbd);
+  filter: blur(10px);
+  opacity: 0.2;
+}
+
+}
