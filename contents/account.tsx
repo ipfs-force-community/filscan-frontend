@@ -1205,29 +1205,6 @@ export const account_gas = {
   columns: (tr: any, type?: string) => {
     let arr: Array<any> = [
       {
-        title: 'tag',
-        dataIndex: 'tag',
-        fixed: 'left',
-        width: 100,
-        ellipsis: {
-          showTitle: false,
-        },
-        render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />
-        },
-      },
-      {
-        title: 'miner_id',
-        dataIndex: 'miner_id',
-        width: 100,
-        fixed: 'left',
-        render: (text: string) => (
-          <Link href={`/account#gas?miner=${text}`} className="link_text">
-            {text}
-          </Link>
-        ),
-      },
-      {
         title: 'group_name',
         dataIndex: 'group_name',
         width: 100,
@@ -1238,10 +1215,34 @@ export const account_gas = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-              {' '}
+            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
               {showText}
             </div>
+          )
+        },
+      },
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: 100,
+        fixed: 'left',
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <div className="flex items-center gap-x-[1px]">
+                <Link
+                  href={`/account#power?miner=${text}`}
+                  className="link_text"
+                >
+                  {text}
+                </Link>
+                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                  {record.tag == undefined || record.tag === ''
+                    ? '--'
+                    : record.tag}
+                </div>
+              </div>
+            </>
           )
         },
       },
@@ -1352,6 +1353,81 @@ export const account_gas = {
       )
     }
     return arr
+  },
+}
+
+export const account_gas_mobile = {
+  columns: (tr: any) => {
+    return {
+      group_name: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="text-mobile_font w-fit p-2 font-normal">
+              {showText}
+            </div>
+          )
+        },
+      },
+      miner_id: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <div className="flex items-center gap-x-[1px]">
+                <Link
+                  href={`/account#power?miner=${text}`}
+                  className="link_text"
+                >
+                  {text}
+                </Link>
+                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                  {record.tag == undefined || record.tag === ''
+                    ? '--'
+                    : record.tag}
+                </div>
+              </div>
+            </>
+          )
+        },
+      },
+
+      sector_count_change: {
+        width: 'unset',
+        fixed: false,
+      },
+      total_gas_cost: {
+        width: 'unset',
+        fixed: false,
+      },
+      seal_gas_cost: {
+        width: 'unset',
+        fixed: false,
+      },
+      seal_gas_per_t: {
+        width: 'unset',
+        fixed: false,
+      },
+      deal_gas_cost: {
+        width: 'unset',
+        fixed: false,
+      },
+      wd_post_gas_cost_tip: {
+        width: 'unset',
+        fixed: false,
+      },
+      wd_post_gas_per_t: {
+        width: 'unset',
+        fixed: false,
+      },
+      date: {
+        width: 'unset',
+        fixed: false,
+      },
+    }
   },
 }
 
