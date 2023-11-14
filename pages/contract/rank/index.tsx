@@ -1,10 +1,10 @@
-
-import Rank from "@/src/contract/rank";
+import Rank from '@/src/contract/rank'
 
 /** @format */
 export default () => {
-  return <div className="main_contain">
-
-    <Rank />
-  </div>
-};
+  return (
+    <div className="main_contain">
+      <Rank />
+    </div>
+  )
+}

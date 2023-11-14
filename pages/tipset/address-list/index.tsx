@@ -1,115 +1,120 @@
 /** @format */
 
-import { apiUrl } from "@/contents/apiUrl";
-import { Translation } from "@/components/hooks/Translation";
-import useRemoveQueryParam from "@/components/hooks/useRemoveQuery";
-import useUpdateQuery from "@/components/hooks/useUpdateQuery";
-import { address_list } from "@/contents/tipset";
-import Table from "@/packages/Table";
-import Selects from "@/packages/selects";
-import { useFilscanStore } from "@/store/FilscanStore";
-import { formatNumber, pageLimit } from "@/utils";
-import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
-import useAxiosData from "@/store/useAxiosData";
-import styles from "./index.module.scss";
-import classNames from "classnames";
-import useWindow from "@/components/hooks/useWindown";
+import { apiUrl } from '@/contents/apiUrl'
+import { Translation } from '@/components/hooks/Translation'
+import useRemoveQueryParam from '@/components/hooks/useRemoveQuery'
+import useUpdateQuery from '@/components/hooks/useUpdateQuery'
+import { address_list } from '@/contents/tipset'
+import Table from '@/packages/Table'
+import Selects from '@/packages/selects'
+import { useFilscanStore } from '@/store/FilscanStore'
+import { formatNumber, pageLimit } from '@/utils'
+import { useRouter } from 'next/router'
+import { useEffect, useMemo, useState } from 'react'
+import useAxiosData from '@/store/useAxiosData'
+import styles from './index.module.scss'
+import classNames from 'classnames'
+import useWindow from '@/components/hooks/useWindown'
 
 export default () => {
-  const { tr } = Translation({ ns: "tipset" });
-  const { theme, lang } = useFilscanStore();
-  const updateQuery = useUpdateQuery();
-  const removeQueryParam = useRemoveQueryParam();
-  const { axiosData, loading } = useAxiosData();
-  const { isMobile } = useWindow();
-  const { name, p } = useRouter().query;
+  const { tr } = Translation({ ns: 'tipset' })
+  const { theme, lang } = useFilscanStore()
+  const updateQuery = useUpdateQuery()
+  const removeQueryParam = useRemoveQueryParam()
+  const { axiosData, loading } = useAxiosData()
+  const { isMobile } = useWindow()
+  const { name, p } = useRouter().query
   // const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState({
     data: [],
     total: undefined,
-  });
+  })
 
   const headerOptions = useMemo(() => {
     return address_list.options.map((v) => {
-      return { ...v, label: tr(v.label) };
-    });
-  }, [lang]);
+      return { ...v, label: tr(v.label) }
+    })
+  }, [lang])
 
   const method = useMemo(() => {
-    if (name && typeof name === "string") {
-      return name;
+    if (name && typeof name === 'string') {
+      return name
     }
-    return "all";
-  }, [name]);
+    return 'all'
+  }, [name])
 
   const current = useMemo(() => {
-    if (p && typeof p === "string") {
-      return Number(p);
+    if (p && typeof p === 'string') {
+      return Number(p)
     }
-    return 1;
-  }, [p]);
+    return 1
+  }, [p])
 
   useEffect(() => {
-    load(current, method);
-  }, [method, current]);
+    load(current, method)
+  }, [method, current])
 
   const load = async (cur?: number, method?: string) => {
     // setLoading(true);
-    const showIndex = cur || current;
-    const method_name = method === "all" ? "" : method;
+    const showIndex = cur || current
+    const method_name = method === 'all' ? '' : method
     const result: any = await axiosData(apiUrl.tipset_address, {
       index: showIndex - 1,
       limit: pageLimit,
       order: {
         field: method_name,
       },
-    });
+    })
     // setLoading(false);
     const showData =
       result?.get_rich_account_list?.map((item: any, index: number) => {
-        return { ...item, rank: pageLimit * (showIndex - 1) + index + 1 };
-      }) || [];
+        return { ...item, rank: pageLimit * (showIndex - 1) + index + 1 }
+      }) || []
     setDataSource({
       data: showData,
       total: result?.total_count,
-    });
-  };
+    })
+  }
 
   const columns = useMemo(() => {
     const content = address_list.columns.map((v: any) => {
       if (isMobile) {
-        if (v.dataIndex === "rank") {
+        if (v.dataIndex === 'rank') {
           v.render = (value: string, record: any, index: any) => {
-            return <>{`No.${record.rank}`}</>;
-          };
+            return <>{`No.${record.rank}`}</>
+          }
         }
       }
-      if (v.dataIndex === "account_type") {
-        return { ...v, title: tr(v.title), render: (text: string) => tr(text) };
+      if (v.dataIndex === 'account_type') {
+        return { ...v, title: tr(v.title), render: (text: string) => tr(text) }
       }
-      return { ...v, title: tr(v.title) };
-    });
-    return content;
-  }, [theme, tr]);
+      return { ...v, title: tr(v.title) }
+    })
+    return content
+  }, [theme, tr])
 
   const handleChange = (pagination: any, filters?: any, sorter?: any) => {
-    const showCurrent = pagination?.current;
+    const showCurrent = pagination?.current
     if (showCurrent) {
       if (showCurrent === 1) {
-        removeQueryParam("p");
+        removeQueryParam('p')
       } else {
-        updateQuery({ p: pagination.current });
+        updateQuery({ p: pagination.current })
       }
     }
-  };
+  }
 
   return (
-    <div className={classNames(styles["address-list"], "main_contain")}>
-      <div className={classNames("flex justify-between items-center",styles['header-wrap'])}>
+    <div className={classNames(styles['address-list'], 'main_contain')}>
+      <div
+        className={classNames(
+          'flex items-center justify-between',
+          styles['header-wrap'],
+        )}
+      >
         <div className="mx-2.5">
-          <div className="font-PingFang font-semibold text-lg ">
-            {tr("address_list")}
+          <div className="font-PingFang text-lg font-semibold ">
+            {tr('address_list')}
           </div>
           <div className="text_des text-xs">
             {tr(address_list.total_list, {
@@ -122,16 +127,16 @@ export default () => {
           value={method}
           options={headerOptions}
           onChange={(value) => {
-            if (value !== "all") {
-              updateQuery({ name: value, p: "removed" });
+            if (value !== 'all') {
+              updateQuery({ name: value, p: 'removed' })
             } else {
-              removeQueryParam("name");
+              removeQueryParam('name')
             }
           }}
         />
       </div>
 
-      <div className="mt-4 border  rounded-xl p-5	card_shadow border_color">
+      <div className="card_shadow border_color  mt-4 rounded-xl	border p-5">
         <Table
           className="-mt-2.5 "
           data={dataSource.data}
@@ -143,5 +148,5 @@ export default () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}

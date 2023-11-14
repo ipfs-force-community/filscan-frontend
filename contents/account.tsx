@@ -1,20 +1,27 @@
 /** @format */
 
-import { getSvgIcon } from '@/svgsIcon';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Item, MenuItem } from './type';
-import Link from 'next/link';
-import TagInput from '@/packages/tagInput';
-import { formatDateTime, formatFil, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
-import Image from 'next/image';
+import { getSvgIcon } from '@/svgsIcon'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Item, MenuItem } from './type'
+import Link from 'next/link'
+import TagInput from '@/packages/tagInput'
+import {
+  formatDateTime,
+  formatFil,
+  formatFilNum,
+  formatNumber,
+  formatNumberPercentage,
+  unitConversion,
+} from '@/utils'
+import Image from 'next/image'
 //import power from '@/assets/images/power.svg';
-import pledge from '@/assets/images/pledge.svg';
+import pledge from '@/assets/images/pledge.svg'
 // import gas from '@/assets/images/gas.svg';
 // import reward from '@/assets/images/reward.svg';
-import balance from '@/assets/images/balance.svg';
-import { Popconfirm, Switch } from 'antd';
-import monitorStore from '@/store/modules/account/monitor';
-import ActiveRules from '@/src/account/monitor/ActiveRules';
+import balance from '@/assets/images/balance.svg'
+import { Popconfirm, Switch } from 'antd'
+import monitorStore from '@/store/modules/account/monitor'
+import ActiveRules from '@/src/account/monitor/ActiveRules'
 
 export const logTabs = [
   {
@@ -25,18 +32,18 @@ export const logTabs = [
     title: 'verification_code',
     dataIndex: 'code',
   },
-];
+]
 
 export const login_list = (type?: string) => {
   const arr = [
     {
       label: 'email',
       name: 'email',
-      prefix: <UserOutlined className='site-form-item-icon' />,
+      prefix: <UserOutlined className="site-form-item-icon" />,
       placeholder: 'email_placeholder',
       rules: [{ required: true, message: 'Email is required' }],
     },
-  ];
+  ]
   if (type === 'code') {
     return [
       ...arr,
@@ -44,10 +51,10 @@ export const login_list = (type?: string) => {
         label: 'code',
         name: 'code',
         placeholder: 'code_placeholder',
-        prefix: <LockOutlined className='site-form-item-icon' />,
+        prefix: <LockOutlined className="site-form-item-icon" />,
         rules: [{ required: true, message: 'Code is required' }],
       },
-    ];
+    ]
   }
 
   return [
@@ -56,17 +63,17 @@ export const login_list = (type?: string) => {
       label: 'password',
       name: 'password',
       placeholder: 'password_placeholder',
-      prefix: <LockOutlined className='site-form-item-icon' />,
+      prefix: <LockOutlined className="site-form-item-icon" />,
       rules: [{ required: true, message: 'Password is required' }],
     },
-  ];
-};
+  ]
+}
 
 export const registerList = [
   {
     label: 'email',
     name: 'email',
-    prefix: <UserOutlined className='site-form-item-icon' />,
+    prefix: <UserOutlined className="site-form-item-icon" />,
     placeholder: 'email_placeholder',
     rules: [
       // {
@@ -84,24 +91,24 @@ export const registerList = [
     label: 'code',
     name: 'code',
     placeholder: 'code_placeholder',
-    prefix: <LockOutlined className='site-form-item-icon' />,
+    prefix: <LockOutlined className="site-form-item-icon" />,
     rules: [{ required: true, message: 'Code is required' }],
   },
   {
     label: 'password',
     name: 'new_password',
     placeholder: 'new_password',
-    prefix: <LockOutlined className='site-form-item-icon' />,
+    prefix: <LockOutlined className="site-form-item-icon" />,
     rules: [{ required: true, message: 'Password is required' }],
   },
   {
     label: 'password',
     name: 'confirm_password',
     placeholder: 'confirm_password',
-    prefix: <LockOutlined className='site-form-item-icon' />,
+    prefix: <LockOutlined className="site-form-item-icon" />,
     rules: [{ required: true, message: 'Confirm assword is required' }],
   },
-];
+]
 
 export const account_manager: Array<MenuItem> = [
   {
@@ -165,7 +172,7 @@ export const account_manager: Array<MenuItem> = [
         label: 'monitor_power', //gas 消耗
         key: 'monitorPower',
       },
-    ]
+    ],
   },
   {
     label: 'personal',
@@ -179,7 +186,7 @@ export const account_manager: Array<MenuItem> = [
     href: '',
     key: 'logout',
   },
-];
+]
 
 export const personal_setting = [
   // {
@@ -205,47 +212,47 @@ export const personal_setting = [
     placeholder: 'confirm_password',
     rules: [{ required: true, message: '${confirm_password} is required' }],
   },
-];
+]
 
 export const overview = {
   headerList: [
     [
       {
         title: 'quality_power_24',
-        icon:'power',// <Image src={power} width={40} height={40} alt='' />,
+        icon: 'power', // <Image src={power} width={40} height={40} alt='' />,
         dataIndex: 'sum_quality_adj_power',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_power_change_24h
             ? Number(record.sum_power_change_24h)
-            : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '') : '';
+            : ''
+          const flag = changeText ? (changeText > 0 ? '+' : '') : ''
           const className = changeText
             ? changeText > 0
               ? 'text_green'
               : 'text_red'
-            : '';
-          const [textValue, unit] = unitConversion(text, 2).split( ' ' );
+            : ''
+          const [textValue, unit] = unitConversion(text, 2).split(' ')
           return (
-            <div className='flex w-full h-full flex-col justify-between'>
-              <span className='flex flex-col'>
-                <span className='text-sm text_des'>
+            <div className="flex h-full w-full flex-col justify-between">
+              <span className="flex flex-col">
+                <span className="text_des text-sm">
                   {tr('quality_power_24')}
                 </span>
                 <span className={className}>
-                  { changeText? flag + unitConversion(changeText,2) : '--'}
+                  {changeText ? flag + unitConversion(changeText, 2) : '--'}
                 </span>
               </span>
-              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
                 {textValue}
-                <span className='text-sm text_color'>{unit}</span>
+                <span className="text_color text-sm">{unit}</span>
               </span>
             </div>
-          );
+          )
         },
       },
       {
         title: 'total_reward_24',
-        icon: 'reward',//<Image src={reward} width={40} height={40} alt='' />,
+        icon: 'reward', //<Image src={reward} width={40} height={40} alt='' />,
         dataIndex: 'sum_reward_change_24h',
         render: (text: any, record: any, tr: any) => {
           // const changeText = record?.sum_reward_change_24h
@@ -257,11 +264,11 @@ export const overview = {
           //     ? 'text_green'
           //     : 'text_red'
           //   : '';
-          const [textValue,unit] = formatFil(text,'FIL',4,true).split(' ')
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ')
           return (
-            <div className='flex w-full h-full flex-col justify-between'>
-              <span className='flex flex-col'>
-                <span className='text-sm text_des'>
+            <div className="flex h-full w-full flex-col justify-between">
+              <span className="flex flex-col">
+                <span className="text_des text-sm">
                   {tr('total_reward_24')}
                 </span>
                 {/* <span className={className}>
@@ -269,14 +276,14 @@ export const overview = {
                   {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span> */}
               </span>
-              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
                 {/* {flag}
                 {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className="text-sm">{unit}</span>
               </span>
             </div>
-          );
+          )
         },
       },
     ],
@@ -286,97 +293,103 @@ export const overview = {
         icon: 'gas', //<Image src={gas} width={40} height={40} alt='' />,
         dataIndex: 'sum_outlay',
         render: (text: any, record: any, tr: any) => {
-          const changeText = record?.sum_gas ? Number(record.sum_gas) : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          const changeText = record?.sum_gas ? Number(record.sum_gas) : ''
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
           const className = changeText
             ? changeText > 0
               ? 'text_green'
               : 'text_red'
-            : 'text_des_unit';
-          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
+            : 'text_des_unit'
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ')
           return (
-            <div className='flex w-full h-full flex-col justify-between'>
-              <span className='flex flex-col'>
-                <span className='text-sm text_des'>
+            <div className="flex h-full w-full flex-col justify-between">
+              <span className="flex flex-col">
+                <span className="text_des text-sm">
                   {tr('total_out_come_gas')}
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 4,true) : '--'}
+                  {changeText
+                    ? formatFil(Math.abs(Number(changeText)), 'FIL', 4, true)
+                    : '--'}
                 </span>
               </span>
-              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
                 {textValue}
-                <span className='text-sm'>{unit}</span>
+                <span className="text-sm">{unit}</span>
               </span>
             </div>
-          );
+          )
         },
       },
       {
         title: 'pledge_amount_24',
-        icon: 'pledge',//<Image src={pledge} width={40} height={40} alt='' />,
+        icon: 'pledge', //<Image src={pledge} width={40} height={40} alt='' />,
         dataIndex: 'sum_pledge',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_pledge_change_24h
             ? Number(record.sum_pledge_change_24h)
-            : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+            : ''
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
           const className = changeText
             ? changeText > 0
               ? 'text_green'
               : 'text_red'
-            : '';
-          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
+            : ''
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ')
           return (
-            <div className='flex w-full h-full flex-col justify-between'>
-              <span className='flex flex-col'>
-                <span className='text-sm text_des'>
+            <div className="flex h-full w-full flex-col justify-between">
+              <span className="flex flex-col">
+                <span className="text_des text-sm">
                   {tr('pledge_amount_24')}
                 </span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 2,true): '--'}
+                  {changeText
+                    ? formatFil(Math.abs(Number(changeText)), 'FIL', 2, true)
+                    : '--'}
                 </span>
               </span>
-              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
                 {textValue}
-                <span className='text-sm'>{ unit}</span>
+                <span className="text-sm">{unit}</span>
               </span>
             </div>
-          );
+          )
         },
       },
       {
         title: 'balance_24',
-        icon:'balance', //<Image src={balance} width={40} height={40} alt='' />,
+        icon: 'balance', //<Image src={balance} width={40} height={40} alt='' />,
         dataIndex: 'sum_balance',
         render: (text: any, record: any, tr: any) => {
           const changeText = record?.sum_balance_change_24h
             ? Number(record.sum_balance_change_24h)
-            : '';
-          const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+            : ''
+          const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
           const className = changeText
             ? changeText > 0
               ? 'text_green'
               : 'text_red'
-            : '';
-          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ');
+            : ''
+          const [textValue, unit] = formatFil(text, 'FIL', 4, true).split(' ')
           return (
-            <div className='flex w-full h-full flex-col justify-between'>
-              <span className='flex flex-col'>
-                <span className='text-sm text_des'>{tr('balance_24')}</span>
+            <div className="flex h-full w-full flex-col justify-between">
+              <span className="flex flex-col">
+                <span className="text_des text-sm">{tr('balance_24')}</span>
                 <span className={className}>
                   {flag}
-                  {changeText?formatFil(Math.abs(Number(changeText)),'FIL', 2,true): '--'}
+                  {changeText
+                    ? formatFil(Math.abs(Number(changeText)), 'FIL', 2, true)
+                    : '--'}
                 </span>
               </span>
-              <span className='flex items-baseline gap-x-1 text-xl font-DINPro-Bold font-semibold text_clip'>
+              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
                 {textValue}
-                <span className='text-sm'>{ unit}</span>
+                <span className="text-sm">{unit}</span>
               </span>
             </div>
-          );
+          )
         },
       },
     ],
@@ -400,16 +413,19 @@ export const overview = {
       width: 150,
       fixed: 'left',
       render: (text: string, record: any) => {
-        const miner_tag = record.tag;
+        const miner_tag = record.tag
 
         return (
-          <div className='flex items-center'>
-            <Link href={`/miner/${text}`} className='link_text'>
+          <div className="flex items-center">
+            <Link href={`/miner/${text}`} className="link_text">
               {text}
             </Link>
-            {miner_tag && <span className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit ml-2'>{miner_tag}</span> }
+            {miner_tag && (
+              <span className="ml-2 w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+                {miner_tag}
+              </span>
+            )}
           </div>
-
         )
       },
     },
@@ -422,8 +438,13 @@ export const overview = {
         showTitle: false,
       },
       render: (text: string, record: any) => {
-        const showText = record.is_default ? tr('default_group'):text
-        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+        const showText = record.is_default ? tr('default_group') : text
+        return (
+          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+            {' '}
+            {showText}
+          </div>
+        )
       },
     },
     {
@@ -441,9 +462,9 @@ export const overview = {
       dataIndex: 'reward_change_24h',
       //  exports: ['reward_change_24h'],
       amountUnit: {
-        reward_change_24h: { unit: 'fil'},
+        reward_change_24h: { unit: 'fil' },
       },
-      render: (text:string) => renderFil(text)
+      render: (text: string) => renderFil(text),
       // render: (text: string, record: any) => {
       //   const changeText = Number(record?.reward_change_24h)
       //     ? Number(record.reward_change_24h)
@@ -467,13 +488,13 @@ export const overview = {
         total_gas: { unit: 'fil', number: 2 },
       },
       render: (text: string, record: any) => {
-        const changeText = record?.total_gas ? Number(record.total_gas) : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+        const changeText = record?.total_gas ? Number(record.total_gas) : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
+          : ''
         return renderFil(text, changeText, flag, className)
       },
     },
@@ -488,13 +509,13 @@ export const overview = {
       render: (text: string, record: any) => {
         const changeText = record?.pledge_change_24h
           ? Number(record.pledge_change_24h)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
+          : ''
         return renderFil(text, changeText, flag, className)
       },
     },
@@ -509,18 +530,18 @@ export const overview = {
       render: (text: string, record: any) => {
         const changeText = record?.balance_change_24h
           ? Number(record.balance_change_24h)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
+          : ''
         return renderFil(text, changeText, flag, className)
       },
     },
   ],
-};
+}
 
 export const account_lucky = {
   columns: (tr: any) => [
@@ -533,7 +554,7 @@ export const account_lucky = {
         showTitle: false,
       },
       render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />
       },
     },
     {
@@ -543,7 +564,7 @@ export const account_lucky = {
       fixed: 'left',
 
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/miner/${text}`} className="link_text">
           {text}
         </Link>
       ),
@@ -557,32 +578,47 @@ export const account_lucky = {
         showTitle: false,
       },
       render: (text: string, record: any) => {
-        const showText = record.is_default ? tr('default_group'):text
-        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+        const showText = record.is_default ? tr('default_group') : text
+        return (
+          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+            {' '}
+            {showText}
+          </div>
+        )
       },
     },
     {
-      title: '24h_lucky', dataIndex: 'lucky_rate_24h', width: '15%',
+      title: '24h_lucky',
+      dataIndex: 'lucky_rate_24h',
+      width: '15%',
       amountUnit: {
         lucky_rate_24h: { unit: '%', number: 2 },
       },
-      render: (text: string | number) => text ? formatNumberPercentage(text) + '%' : text
+      render: (text: string | number) =>
+        text ? formatNumberPercentage(text) + '%' : text,
     },
     {
-      title: '7d_lucky', dataIndex: 'lucky_rate_7d', width: '15%',
+      title: '7d_lucky',
+      dataIndex: 'lucky_rate_7d',
+      width: '15%',
       amountUnit: {
-        'lucky_rate_7d': { unit: '%', number: 2 },
+        lucky_rate_7d: { unit: '%', number: 2 },
       },
-      render: (text: string | number) => text ? formatNumberPercentage(text) + '%' : text
+      render: (text: string | number) =>
+        text ? formatNumberPercentage(text) + '%' : text,
     },
     {
-      title: '30d_lucky', dataIndex: 'lucky_rate_30d',
+      title: '30d_lucky',
+      dataIndex: 'lucky_rate_30d',
       amountUnit: {
-        'lucky_rate_30d': { unit: '%', number: 2 },
-      }, width: '15%', render: (text: string | number) => text ?formatNumberPercentage(text) + '%' : text
+        lucky_rate_30d: { unit: '%', number: 2 },
+      },
+      width: '15%',
+      render: (text: string | number) =>
+        text ? formatNumberPercentage(text) + '%' : text,
     },
   ],
-};
+}
 
 export const account_balance = {
   columns: (tr: any) => [
@@ -595,7 +631,7 @@ export const account_balance = {
         showTitle: false,
       },
       render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />;
+        return <TagInput isEdit={false} text={text} record={record} />
       },
     },
     {
@@ -604,7 +640,7 @@ export const account_balance = {
       width: 100,
       fixed: 'left',
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/miner/${text}`} className="link_text">
           {text}
         </Link>
       ),
@@ -618,8 +654,13 @@ export const account_balance = {
         showTitle: false,
       },
       render: (text: string, record: any) => {
-        const showText = record.is_default ? tr('default_group'):text
-        return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+        const showText = record.is_default ? tr('default_group') : text
+        return (
+          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+            {' '}
+            {showText}
+          </div>
+        )
       },
     },
     {
@@ -635,14 +676,14 @@ export const account_balance = {
       render: (text: string, record: any) => {
         const changeText = record?.miner_balance_changed
           ? Number(record.miner_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
+          : ''
+        return renderFil(text, changeText, flag, className)
         //   (
         //   <span className='flex flex-col'>
         //     <span>{formatFilNum(text, false, false, 2)}</span>
@@ -667,15 +708,14 @@ export const account_balance = {
       render: (text: string, record: any) => {
         const changeText = record?.Owner_balance_changed
           ? Number(record.Owner_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
-
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -685,20 +725,20 @@ export const account_balance = {
       exports: ['Worker_balance_changed'],
 
       amountUnit: {
-        worker_balance: { unit: 'fil'},
+        worker_balance: { unit: 'fil' },
         Worker_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.Worker_balance_changed
           ? Number(record.Worker_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -707,20 +747,20 @@ export const account_balance = {
       // width: 200,
       exports: ['Controller_0_balance_changed'],
       amountUnit: {
-        controller_0_balance: { unit: 'fil'},
-        Controller_0_balance_changed: { unit: 'fil'},
+        controller_0_balance: { unit: 'fil' },
+        Controller_0_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.Controller_0_balance_changed
           ? Number(record.Controller_0_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -736,14 +776,14 @@ export const account_balance = {
       render: (text: string, record: any) => {
         const changeText = record?.controller_1_balance_changed
           ? Number(record.controller_1_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -752,20 +792,20 @@ export const account_balance = {
       // width: 200,
       exports: ['controller_2_balance_changed'],
       amountUnit: {
-        controller_2_balance: { unit: 'fil', },
-        controller_2_balance_changed: { unit: 'fil', },
+        controller_2_balance: { unit: 'fil' },
+        controller_2_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.controller_2_balance_changed
           ? Number(record.controller_2_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -774,20 +814,20 @@ export const account_balance = {
       // width: 200,
       exports: ['beneficiary_balance_changed'],
       amountUnit: {
-        beneficiary_balance: { unit: 'fil', },
-        beneficiary_balance_changed: { unit: 'fil', },
+        beneficiary_balance: { unit: 'fil' },
+        beneficiary_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.beneficiary_balance_changed
           ? Number(record.beneficiary_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
     {
@@ -796,28 +836,27 @@ export const account_balance = {
       // width: 200,
       exports: ['market_balance_changed'],
       amountUnit: {
-        market_balance: { unit: 'fil', },
-        market_balance_changed: { unit: 'fil',},
+        market_balance: { unit: 'fil' },
+        market_balance_changed: { unit: 'fil' },
       },
       render: (text: string, record: any) => {
         const changeText = record?.market_balance_changed
           ? Number(record.market_balance_changed)
-          : '';
-        const flag = changeText ? (changeText > 0 ? '+' : '-') : '';
+          : ''
+        const flag = changeText ? (changeText > 0 ? '+' : '-') : ''
         const className = changeText
           ? changeText > 0
             ? 'text_green'
             : 'text_red'
-          : '';
-        return renderFil(text,changeText,flag,className);
-
+          : ''
+        return renderFil(text, changeText, flag, className)
       },
     },
   ],
-};
+}
 export const account_reward = {
   columns: (tr: any, type?: string) => {
-    let arr:Array<any> = [
+    let arr: Array<any> = [
       {
         title: 'tag',
         dataIndex: 'tag',
@@ -827,7 +866,7 @@ export const account_reward = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />;
+          return <TagInput isEdit={false} text={text} record={record} />
         },
       },
       {
@@ -836,7 +875,7 @@ export const account_reward = {
         width: '15%',
         fixed: 'left',
         render: (text: string) => (
-          <Link href={`/account#reward?miner=${text}`} className='link_text'>
+          <Link href={`/account#reward?miner=${text}`} className="link_text">
             {text}
           </Link>
         ),
@@ -850,18 +889,25 @@ export const account_reward = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group'):text
-          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+              {' '}
+              {showText}
+            </div>
+          )
         },
       },
       { title: 'block_count', dataIndex: 'block_count', width: '20%' },
       { title: 'win_count', dataIndex: 'win_count', width: '20%' },
       {
-        title: 'block_reward', dataIndex: 'block_reward', width: '20%',
+        title: 'block_reward',
+        dataIndex: 'block_reward',
+        width: '20%',
         amountUnit: {
           block_reward: { unit: 'fil', number: 4 },
         },
-        render: (text: string) => formatFilNum(text)
+        render: (text: string) => formatFilNum(text),
       },
       // {
       //   title: 'total_reward', dataIndex: 'total_reward', width: '15%',
@@ -871,27 +917,27 @@ export const account_reward = {
       //   render: (text: string) => renderFil(text)
       // },
     ]
-    if (type&&type === 'detail') {
+    if (type && type === 'detail') {
       arr.unshift({
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
         width: '10%',
-        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
-      },)
-      arr[1].width = '15%';
-      arr[2].width = '10%';
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD'),
+      })
+      arr[1].width = '15%'
+      arr[2].width = '10%'
       arr[2].render = (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/miner/${text}`} className="link_text">
           {text}
         </Link>
       )
     }
-    return arr;
+    return arr
   },
-};
+}
 export const account_power = {
-  columns: (tr: any,type?:string) => {
+  columns: (tr: any, type?: string) => {
     let arr: Array<any> = [
       {
         title: 'tag',
@@ -902,7 +948,7 @@ export const account_power = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />;
+          return <TagInput isEdit={false} text={text} record={record} />
         },
       },
       {
@@ -911,7 +957,7 @@ export const account_power = {
         width: 100,
         fixed: 'left',
         render: (text: string) => (
-          <Link href={`/account#power?miner=${text}`} className='link_text'>
+          <Link href={`/account#power?miner=${text}`} className="link_text">
             {text}
           </Link>
         ),
@@ -926,7 +972,12 @@ export const account_power = {
         fixed: 'left',
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
-          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+          return (
+            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+              {' '}
+              {showText}
+            </div>
+          )
         },
       },
       {
@@ -981,12 +1032,12 @@ export const account_power = {
         },
         //width: 200,
         render: (text: any, record: any) => {
-          const flag = text ? ( Number(text) > 0 ? '+' : '-') : '';
+          const flag = text ? (Number(text) > 0 ? '+' : '-') : ''
           const className = Number(text)
             ? Number(text) > 0
               ? 'text_green'
               : 'text_red'
-            : '';
+            : ''
           return (
             <span>
               <span className={className}>
@@ -995,7 +1046,7 @@ export const account_power = {
               </span>
               <span>/{unitConversion(record?.sector_power_change, 2)}</span>
             </span>
-          );
+          )
         },
       },
 
@@ -1007,8 +1058,7 @@ export const account_power = {
         amountUnit: {
           pledge_changed: { unit: 'fil' },
         },
-        render: (text: string, record: any) => renderFil(text)
-
+        render: (text: string, record: any) => renderFil(text),
       },
       {
         title: 'pledge_changed_per_t',
@@ -1021,7 +1071,7 @@ export const account_power = {
         },
         render: (text: string, record: any) => {
           return renderFil(text, undefined, undefined, undefined, 'FIL/T')
-        }
+        },
       },
       {
         title: 'penalty',
@@ -1030,38 +1080,42 @@ export const account_power = {
 
         //// width: 200,
         amountUnit: {
-          penalty: { unit: 'fil', },
+          penalty: { unit: 'fil' },
         },
-        render: (text: string, record: any) => renderFil(text)
+        render: (text: string, record: any) => renderFil(text),
       },
       {
         title: 'fault_sectors',
         dataIndex: 'fault_sectors',
         titleTip: 'fault_sectors_tip',
         //width: 200,
-        render: (text: string, record: any) => <span className={Number(text) ?'':"text_des_unit"}>{formatNumber(text) }</span>
+        render: (text: string, record: any) => (
+          <span className={Number(text) ? '' : 'text_des_unit'}>
+            {formatNumber(text)}
+          </span>
+        ),
       },
     ]
-    if (type&&type === 'detail') {
+    if (type && type === 'detail') {
       arr.unshift({
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
-        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
-      },)
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD'),
+      })
       arr[2].render = (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/miner/${text}`} className="link_text">
           {text}
         </Link>
       )
     }
-    return arr;
-  }
-};
+    return arr
+  },
+}
 
 export const account_gas = {
   columns: (tr: any, type?: string) => {
-    let arr:Array<any> = [
+    let arr: Array<any> = [
       {
         title: 'tag',
         dataIndex: 'tag',
@@ -1071,7 +1125,7 @@ export const account_gas = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />;
+          return <TagInput isEdit={false} text={text} record={record} />
         },
       },
       {
@@ -1080,7 +1134,7 @@ export const account_gas = {
         width: 100,
         fixed: 'left',
         render: (text: string) => (
-          <Link href={`/account#gas?miner=${text}`} className='link_text'>
+          <Link href={`/account#gas?miner=${text}`} className="link_text">
             {text}
           </Link>
         ),
@@ -1094,25 +1148,30 @@ export const account_gas = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group'):text
-          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+              {' '}
+              {showText}
+            </div>
+          )
         },
       },
       {
         title: 'sector_power_change',
         dataIndex: 'sector_count_change',
-        titleTip:'sector_power_change_tip',
+        titleTip: 'sector_power_change_tip',
         exports: ['sector_power_change'],
         amountUnit: {
           sector_power_change: { unit: 'power', number: 2 },
         },
         render: (text: any, record: any) => {
-          const flag = text ? ( Number(text) > 0 ? '+' : '-') : '';
+          const flag = text ? (Number(text) > 0 ? '+' : '-') : ''
           const className = Number(text)
             ? Number(text) > 0
               ? 'text_green'
               : 'text_red'
-            : '';
+            : ''
           return (
             <span>
               <span className={className}>
@@ -1121,14 +1180,13 @@ export const account_gas = {
               </span>
               <span>/{unitConversion(record?.sector_power_change, 2)}</span>
             </span>
-          );
+          )
         },
-
       },
       {
         title: 'total_gas_cost',
         dataIndex: 'total_gas_cost',
-        titleTip:'total_gas_cost_tip',
+        titleTip: 'total_gas_cost_tip',
 
         // width: 200,
         amountUnit: {
@@ -1139,27 +1197,29 @@ export const account_gas = {
       {
         title: 'seal_gas_cost',
         dataIndex: 'seal_gas_cost',
-        titleTip:'seal_gas_cost_tip',
+        titleTip: 'seal_gas_cost_tip',
         // width: 200,
         amountUnit: {
           total_gas_cost: { unit: 'fil' },
         },
-        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL'),
+        render: (text: any) =>
+          renderFil(text, undefined, undefined, undefined, 'FIL'),
       },
       {
         title: 'seal_gas_per_t',
         dataIndex: 'seal_gas_per_t',
-        titleTip:'seal_gas_per_t_tip',
+        titleTip: 'seal_gas_per_t_tip',
         // width: 200,
         amountUnit: {
           total_gas_cost: { unit: 'fil/T' },
         },
-        render: (text: any) =>renderFil(text,undefined,undefined,undefined,'FIL/T'),
+        render: (text: any) =>
+          renderFil(text, undefined, undefined, undefined, 'FIL/T'),
       },
       {
         title: 'deal_gas_cost',
         dataIndex: 'deal_gas_cost',
-        titleTip:'deal_gas_cost_tip',
+        titleTip: 'deal_gas_cost_tip',
 
         // width: 200,
         amountUnit: {
@@ -1169,7 +1229,7 @@ export const account_gas = {
       },
       {
         title: 'wd_post_gas_cost',
-        titleTip:'wd_post_gas_cost_tip',
+        titleTip: 'wd_post_gas_cost_tip',
         dataIndex: 'wd_post_gas_cost',
         // width: 200,
         amountUnit: {
@@ -1180,31 +1240,32 @@ export const account_gas = {
       {
         title: 'wd_post_gas_per_t',
         dataIndex: 'wd_post_gas_per_t',
-        titleTip:'wd_post_gas_per_t_tip',
+        titleTip: 'wd_post_gas_per_t_tip',
         // width: 200,
         amountUnit: {
           wd_post_gas_per_t: { unit: 'fil/T' },
         },
-        render: (text: any) => renderFil(text,undefined,undefined,undefined,'FIL/T'),
+        render: (text: any) =>
+          renderFil(text, undefined, undefined, undefined, 'FIL/T'),
       },
-    ];
-    if (type&&type === 'detail') {
+    ]
+    if (type && type === 'detail') {
       arr.unshift({
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
         // width: 200,
-        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
-      },)
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD'),
+      })
       arr[2].render = (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/miner/${text}`} className="link_text">
           {text}
         </Link>
       )
     }
-    return arr;
-  }
-};
+    return arr
+  },
+}
 
 export const account_expired = {
   headerList: [
@@ -1213,8 +1274,8 @@ export const account_expired = {
       dataIndex: 'exp_month',
       width: '20%',
       render: (text: string, record: any, tr: any) => {
-        const [year, month] = text.split('-');
-        return <span>{ formatDateTime(text,'YYYY-MM')}</span>
+        const [year, month] = text.split('-')
+        return <span>{formatDateTime(text, 'YYYY-MM')}</span>
         // return <span>{tr('exp_month', { year, month })}</span>;
       },
     },
@@ -1251,7 +1312,7 @@ export const account_expired = {
     },
   ],
   columns: (tr: any, type?: 'detail') => {
-    let arr:Array<any> = [
+    let arr: Array<any> = [
       {
         title: 'tag',
         dataIndex: 'tag',
@@ -1260,7 +1321,7 @@ export const account_expired = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />;
+          return <TagInput isEdit={false} text={text} record={record} />
         },
       },
       {
@@ -1268,7 +1329,7 @@ export const account_expired = {
         dataIndex: 'miner_id',
         width: '10%',
         render: (text: string) => (
-          <Link href={`/account#expired?miner=${text}`} className='link_text'>
+          <Link href={`/account#expired?miner=${text}`} className="link_text">
             {text}
           </Link>
         ),
@@ -1281,8 +1342,13 @@ export const account_expired = {
           showTitle: false,
         },
         render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group'):text
-          return <div className='bg-bg_hover text-xs text-primary rounded-[5px] p-2 w-fit'> {showText}</div>
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+              {' '}
+              {showText}
+            </div>
+          )
         },
       },
       {
@@ -1290,7 +1356,7 @@ export const account_expired = {
         dataIndex: 'exp_power',
         width: '15%',
         amountUnit: {
-          exp_power: { unit: 'power', number: 2 }
+          exp_power: { unit: 'power', number: 2 },
         },
         render: (text: string, record: any) => unitConversion(text, 2),
       },
@@ -1305,7 +1371,7 @@ export const account_expired = {
         dataIndex: 'exp_dc',
         width: '15%',
         amountUnit: {
-          exp_dc: { unit: 'power', number: 2 }
+          exp_dc: { unit: 'power', number: 2 },
         },
         render: (text: string, record: any) => unitConversion(text, 2),
       },
@@ -1313,31 +1379,31 @@ export const account_expired = {
         title: 'exp_pledge',
         dataIndex: 'exp_pledge',
         amountUnit: {
-          exp_pledge: { unit: 'fil', number: 4 }
+          exp_pledge: { unit: 'fil', number: 4 },
         },
         width: '15%',
         render: (text: string | number) => renderFil(text),
       },
     ]
-    if (type&&type === 'detail') {
+    if (type && type === 'detail') {
       arr.unshift({
         title: 'exp_time',
         dataIndex: 'exp_date',
         fixed: 'left',
         width: '10%',
-        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD')
-      },)
-      arr[1].width = '10%',
-      arr[3].width = '10%',
-      arr[2].render = (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
-          {text}
-        </Link>
-      )
+        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD'),
+      })
+      ;(arr[1].width = '10%'),
+        (arr[3].width = '10%'),
+        (arr[2].render = (text: string) => (
+          <Link href={`/miner/${text}`} className="link_text">
+            {text}
+          </Link>
+        ))
     }
     return arr
   },
-};
+}
 
 export const account_miners = {
   groups_miners_columns: [
@@ -1351,7 +1417,7 @@ export const account_miners = {
       title: 'miner_id',
       width: '45%',
       render: (text: string) => (
-        <Link href={`/miner/${text}`} className='link_text'>
+        <Link href={`/miner/${text}`} className="link_text">
           {text}
         </Link>
       ),
@@ -1362,19 +1428,19 @@ export const account_miners = {
       width: '10%',
     },
   ],
-};
+}
 
-const monitorUnit:Record<string,string> = {
-  'ExpireSectorMonitor':'day'
+const monitorUnit: Record<string, string> = {
+  ExpireSectorMonitor: 'day',
 }
 
 //监控columns
-export const monitor_list = (tr:any,onChange:any) => {
+export const monitor_list = (tr: any, onChange: any) => {
   return [
     {
       dataIndex: 'group_name',
       title: 'group_name',
-      width:'8%'
+      width: '8%',
     },
 
     {
@@ -1382,62 +1448,74 @@ export const monitor_list = (tr:any,onChange:any) => {
       title: 'miner_id',
       width: '8%',
       render: (text: string, record: any) => {
-        return <div className='flex items-center gap-x-1'>
-          {text}
-          {record.miner_tag && <span className='bg-bg_hover text-xs text-primary rounded-[5px] px-2 py-1  w-fit'>{record.miner_tag}</span>}
-        </div>
-
-      }
+        return (
+          <div className="flex items-center gap-x-1">
+            {text}
+            {record.miner_tag && (
+              <span className="w-fit rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                {record.miner_tag}
+              </span>
+            )}
+          </div>
+        )
+      },
     },
     {
       dataIndex: 'examination',
       title: 'examination',
       width: '25%',
       render: (text: string, record: any) => {
-        return <ul >
-          {record.rules.map((rule:any,index:number) => {
-            return <li key={ index}>
-              {`${tr(record.monitor_type)} ${tr(rule.operator)} ${tr(rule.operand)} ${tr(monitorUnit[record.monitorType])}`}
-            </li>
-          })}
-        </ul>
-      }
+        return (
+          <ul>
+            {record.rules.map((rule: any, index: number) => {
+              return (
+                <li key={index}>
+                  {`${tr(record.monitor_type)} ${tr(rule.operator)} ${tr(
+                    rule.operand,
+                  )} ${tr(monitorUnit[record.monitorType])}`}
+                </li>
+              )
+            })}
+          </ul>
+        )
+      },
     },
     {
       dataIndex: 'alarm',
       title: 'alarm',
       width: '27%',
       render: (text: any, record: any) => {
-        const mailList = record.mail_alert;
-        const msgList = record.msg_alert;
-        const callList = record.call_alert;
+        const mailList = record.mail_alert
+        const msgList = record.msg_alert
+        const callList = record.call_alert
 
-        const obj :Record<string,any>= {
+        const obj: Record<string, any> = {
           email_warn: mailList,
           message_warn: msgList,
-          phone_warn:callList
+          phone_warn: callList,
         }
-        return <div className='flex flex-col gap-y-2'>
-          {
-            Object.keys(obj).map((key:string) => {
-              const resList = obj[key];
+        return (
+          <div className="flex flex-col gap-y-2">
+            {Object.keys(obj).map((key: string) => {
+              const resList = obj[key]
               if (Array.isArray(resList)) {
-                return <div key={key} className='flex font-normal'>
-                  <div className='text_des' style={{width:'70px'}}>{ tr(key)}:</div>
-                  <div className=''>
-                    { resList.map((warn:string,index:number) => {
-                      return <li key={index}>
-                        { warn}
-                      </li>
-                    })}
-                  </div></div>
-
+                return (
+                  <div key={key} className="flex font-normal">
+                    <div className="text_des" style={{ width: '70px' }}>
+                      {tr(key)}:
+                    </div>
+                    <div className="">
+                      {resList.map((warn: string, index: number) => {
+                        return <li key={index}>{warn}</li>
+                      })}
+                    </div>
+                  </div>
+                )
               }
-            })
-
-          }
-        </div>
-      }
+            })}
+          </div>
+        )
+      },
     },
     {
       dataIndex: 'created_at',
@@ -1445,47 +1523,96 @@ export const monitor_list = (tr:any,onChange:any) => {
       width: '12%',
       render: (text: string, record: any) => {
         return formatDateTime(text)
-      }
+      },
     },
     {
       dataIndex: 'is_active',
       title: 'status',
       width: '10%',
       render: (text: boolean, record: any, index: number) => {
-        return <ActiveRules text={text} title='isActive' onChange={()=>onChange('isActive',record,index)} />
-      }
+        return (
+          <ActiveRules
+            text={text}
+            title="isActive"
+            onChange={() => onChange('isActive', record, index)}
+          />
+        )
+      },
     },
     {
       dataIndex: 'edit',
       title: 'edit',
       width: '10%',
-      render: (text:any,record:any,index:number) => {
-        return <div className='flex gap-x-2 font-normal'>
-          <span className='text-primary cursor-pointer' onClick={() => onChange('edit_write', record, index)}>{tr('edit_write')}</span>
-          <ActiveRules text={text} title='edit_delete' onChange={()=>onChange('edit_delete',record,index)} />
-        </div>
-      }
-    }
+      render: (text: any, record: any, index: number) => {
+        return (
+          <div className="flex gap-x-2 font-normal">
+            <span
+              className="cursor-pointer text-primary"
+              onClick={() => onChange('edit_write', record, index)}
+            >
+              {tr('edit_write')}
+            </span>
+            <ActiveRules
+              text={text}
+              title="edit_delete"
+              onChange={() => onChange('edit_delete', record, index)}
+            />
+          </div>
+        )
+      },
+    },
   ]
 }
 
 //告警方式
-export const defaultWarn:any = {
-  email_warn: { title: 'email_warn', value: 'email', placeholder: 'email_warn_placeholder', inputValue: '', warning: false, warningText: 'email_warn_warning', checked: false },
-  message_warn: { title: 'message_warn', value: 'message', placeholder: 'message_warn_placeholder', inputValue: '', warning: false, warningText: 'phone_warn_warning', checked: false },
-  phone_warn: {title: 'phone_warn',value: 'phone',placeholder:'phone_warn_placeholder',inputValue:'',warning:false,warningText:'phone_warn_warning', checked:false }
+export const defaultWarn: any = {
+  email_warn: {
+    title: 'email_warn',
+    value: 'email',
+    placeholder: 'email_warn_placeholder',
+    inputValue: '',
+    warning: false,
+    warningText: 'email_warn_warning',
+    checked: false,
+  },
+  message_warn: {
+    title: 'message_warn',
+    value: 'message',
+    placeholder: 'message_warn_placeholder',
+    inputValue: '',
+    warning: false,
+    warningText: 'phone_warn_warning',
+    checked: false,
+  },
+  phone_warn: {
+    title: 'phone_warn',
+    value: 'phone',
+    placeholder: 'phone_warn_placeholder',
+    inputValue: '',
+    warning: false,
+    warningText: 'phone_warn_warning',
+    checked: false,
+  },
 }
-function renderFil(text: string | number, changeText?: number | string, flag: string = '', className?: string,unit:string ='FIL') {
+function renderFil(
+  text: string | number,
+  changeText?: number | string,
+  flag: string = '',
+  className?: string,
+  unit: string = 'FIL',
+) {
   const textValue = formatFil(text, unit, 4, true)
   return (
-    <span className='flex flex-col'>
-      <span className={ `${Number(text) ? '':'text_des_unit'}`}>{textValue}</span>
-      { changeText !== undefined && <span className={`${changeText ? className:'text_des_unit'}`}>
-        {flag + ' '}
-        {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
-      </span>}
-
+    <span className="flex flex-col">
+      <span className={`${Number(text) ? '' : 'text_des_unit'}`}>
+        {textValue}
+      </span>
+      {changeText !== undefined && (
+        <span className={`${changeText ? className : 'text_des_unit'}`}>
+          {flag + ' '}
+          {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
+        </span>
+      )}
     </span>
-  );
+  )
 }
-

@@ -1,28 +1,29 @@
 /** @format */
 
-import { Translation } from '@/components/hooks/Translation';
-import { getSvgIcon } from '@/svgsIcon';
-import Link from 'next/link';
+import { Translation } from '@/components/hooks/Translation'
+import { getSvgIcon } from '@/svgsIcon'
+import Link from 'next/link'
 
 export default ({ selectedKey }: { selectedKey: string }) => {
-  const { tr } = Translation({ ns: 'account' });
+  const { tr } = Translation({ ns: 'account' })
 
   return (
     <>
-      <p className='w-full mb-5 text-lg	font-semibold font-PingFang	'>
+      <p className="mb-5 w-full font-PingFang	text-lg font-semibold	">
         {tr(selectedKey)}
       </p>
       <div
-        className='flex-1 w-full flex flex-col gap-y-5 mt-20
-          items-center justify-center'>
+        className="mt-20 flex w-full flex-1 flex-col items-center
+          justify-center gap-y-5"
+      >
         <span>{getSvgIcon('no_nodes')}</span>
-        <span className='flex gap-x-2'>
+        <span className="flex gap-x-2">
           {tr('no_node_data')}
-          <Link rel='' href={`/account#miners?type=miner_add`}>
+          <Link rel="" href={`/account#miners?type=miner_add`}>
             {tr('miners_add')}
           </Link>
         </span>
       </div>
     </>
-  );
-};
+  )
+}

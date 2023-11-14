@@ -1,5 +1,5 @@
 /** @format */
 
 export default () => {
-  return <div>power</div>;
-};
+  return <div>power</div>
+}

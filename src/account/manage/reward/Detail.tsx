@@ -1,24 +1,24 @@
 /** @format */
 
-import { Translation } from '@/components/hooks/Translation';
-import Breadcrumb from '@/packages/breadcrumb';
-import { useEffect, useMemo, useState } from 'react';
-import { formatDateTime, getCalcTime } from '@/utils';
-import ExportExcel from '@/packages/exportExcel';
-import Table from '@/packages/Table';
-import DateTime from '@/src/account/DateTIme';
-import { account_reward } from '@/contents/account';
-import manageStore from '@/store/modules/account/manage';
-import { observer } from 'mobx-react';
+import { Translation } from '@/components/hooks/Translation'
+import Breadcrumb from '@/packages/breadcrumb'
+import { useEffect, useMemo, useState } from 'react'
+import { formatDateTime, getCalcTime } from '@/utils'
+import ExportExcel from '@/packages/exportExcel'
+import Table from '@/packages/Table'
+import DateTime from '@/src/account/DateTIme'
+import { account_reward } from '@/contents/account'
+import manageStore from '@/store/modules/account/manage'
+import { observer } from 'mobx-react'
 
 /** @format */
 interface Props {
-  miner?: string | number | null;
-  selectedKey:string
+  miner?: string | number | null
+  selectedKey: string
 }
 export default observer((props: Props) => {
-  const {miner,selectedKey } = props;
-  const { tr } = Translation({ ns: 'account' });
+  const { miner, selectedKey } = props
+  const { tr } = Translation({ ns: 'account' })
   const { rewardDetailData, rewardDetailLoading } = manageStore
 
   const routerItems = useMemo(() => {
@@ -32,27 +32,27 @@ export default observer((props: Props) => {
           title: <span>{miner}</span>,
           path: `/account#reward?miner=${miner}`,
         },
-      ];
+      ]
     }
-    return [];
-  }, [miner]);
+    return []
+  }, [miner])
 
   const [date, setDate] = useState({
     startTime: formatDateTime(getCalcTime(6), 'YYYY-MM-DDTHH:mm:ssZ'),
     endTime: formatDateTime(
       new Date().getTime() / 1000,
-      'YYYY-MM-DDTHH:mm:ssZ'
+      'YYYY-MM-DDTHH:mm:ssZ',
     ),
-  });
+  })
 
   useEffect(() => {
     if (miner) {
-      load();
+      load()
     }
-  },[miner])
+  }, [miner])
 
-  const load = ( time?: Record<string, string>) => {
-    const newDate = time || date;
+  const load = (time?: Record<string, string>) => {
+    const newDate = time || date
     if (miner) {
       const payload = {
         miner_id: miner,
@@ -64,30 +64,29 @@ export default observer((props: Props) => {
   }
 
   const columns = useMemo(() => {
-    return account_reward.columns(tr,'detail').map((item:any) => {
-      return { ...item, title: tr(item.title) };
-    });
-
-  }, [tr]);
+    return account_reward.columns(tr, 'detail').map((item: any) => {
+      return { ...item, title: tr(item.title) }
+    })
+  }, [tr])
 
   return (
     <>
       {routerItems && routerItems.length > 0 && (
         <Breadcrumb items={routerItems} />
       )}
-      <div className='flex justify-between items-center mt-10'>
-        <div className='flex  flex-col'>
-          <span className='w-full text-lg font-semibold font-PingFang	'>
+      <div className="mt-10 flex items-center justify-between">
+        <div className="flex  flex-col">
+          <span className="w-full font-PingFang text-lg font-semibold	">
             {miner}
           </span>
-          <span className='text-xs text_des'>
+          <span className="text_des text-xs">
             <span>{tr('last_time')}</span>
-            <span className='ml-2'>
+            <span className="ml-2">
               {formatDateTime(rewardDetailData?.epoch_time, 'YYYY/MM/DD HH:mm')}
             </span>
           </span>
         </div>
-        <div className='flex gap-x-2.5'>
+        <div className="flex gap-x-2.5">
           <DateTime
             showEnd={true}
             defaultValue={[date.startTime, date.endTime]}
@@ -99,15 +98,23 @@ export default observer((props: Props) => {
               setDate({
                 startTime: start,
                 endTime: end,
-              });
+              })
             }}
           />
-          <ExportExcel columns={columns} data={rewardDetailData?.reward_detail_list || []} fileName={tr(selectedKey)+miner?String(miner):""}/>
+          <ExportExcel
+            columns={columns}
+            data={rewardDetailData?.reward_detail_list || []}
+            fileName={tr(selectedKey) + miner ? String(miner) : ''}
+          />
         </div>
       </div>
-      <div className='card_shadow border border_color rounded-xl p-4 mt-5 overflow-auto'>
-        <Table data={rewardDetailData?.reward_detail_list || []} columns={columns} loading={rewardDetailLoading} />
+      <div className="card_shadow border_color mt-5 overflow-auto rounded-xl border p-4">
+        <Table
+          data={rewardDetailData?.reward_detail_list || []}
+          columns={columns}
+          loading={rewardDetailLoading}
+        />
       </div>
     </>
-  );
-});
+  )
+})

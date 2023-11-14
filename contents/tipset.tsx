@@ -1,7 +1,7 @@
 /** @format */
 
-import Copy from '@/components/copy';
-import TextTip from '@/packages/textTooltip';
+import Copy from '@/components/copy'
+import TextTip from '@/packages/textTooltip'
 import {
   account_link,
   formatDateTime,
@@ -10,11 +10,11 @@ import {
   get_account_type,
   isIndent,
   unitConversion,
-} from '@/utils';
-import Link from 'next/link';
-import { Item } from './type';
-import { BrowserView, MobileView } from '@/components/device-detect';
-import CopySvgMobile from '@/assets/images/icon-copy.svg';
+} from '@/utils'
+import Link from 'next/link'
+import { Item } from './type'
+import { BrowserView, MobileView } from '@/components/device-detect'
+import CopySvgMobile from '@/assets/images/icon-copy.svg'
 
 //消息列表
 export const message_list = {
@@ -26,21 +26,20 @@ export const message_list = {
       title: 'cid',
       width: '12%',
       render: (text: string) => (
-        <span className='flex items-center gap-x-1'>
-
+        <span className="flex items-center gap-x-1">
           <BrowserView>
-            <Link href={`/message/${text}`} className='link'>
-              <MobileView>{isIndent(text,6,6)}</MobileView>
+            <Link href={`/message/${text}`} className="link">
+              <MobileView>{isIndent(text, 6, 6)}</MobileView>
               <BrowserView>{isIndent(text)}</BrowserView>
             </Link>
             <Copy text={text} />
           </BrowserView>
           <MobileView>
-            <span className='copy-row'>
-              <Link href={`/message/${text}`} className='link'>
-                {isIndent(text,6,6)}
+            <span className="copy-row">
+              <Link href={`/message/${text}`} className="link">
+                {isIndent(text, 6, 6)}
               </Link>
-              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile />} className="copy" />
             </span>
           </MobileView>
         </span>
@@ -51,7 +50,7 @@ export const message_list = {
       title: 'height',
       width: '10%',
       render: (text: string) => (
-        <Link href={`/height/${text}`} className='link'>
+        <Link href={`/height/${text}`} className="link">
           {text}
         </Link>
       ),
@@ -61,28 +60,28 @@ export const message_list = {
       title: 'block_time',
       width: '15%',
       render: (text: string | number) =>
-        formatDateTime(text, 'YYYY-MM-DD HH:mm')
+        formatDateTime(text, 'YYYY-MM-DD HH:mm'),
     },
     {
       dataIndex: 'from',
       title: 'from',
       width: '15%',
       render: (text: string, record: any) => (
-        <span className='flex items-center gap-x-1'>
+        <span className="flex items-center gap-x-1">
           <MobileView>
-            <span className='copy-row'>
+            <span className="copy-row">
               <span
-                className='w-28 text'
+                className="text w-28"
                 onClick={() => {
-                  account_link(text);
-                }}>
-                {isIndent(text,6,6)}
+                  account_link(text)
+                }}
+              >
+                {isIndent(text, 6, 6)}
               </span>
-              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile />} className="copy" />
             </span>
           </MobileView>
           <BrowserView>{get_account_type(text)}</BrowserView>
-
         </span>
       ),
     },
@@ -91,17 +90,18 @@ export const message_list = {
       title: 'to',
       width: '15%',
       render: (text: string, record: any) => (
-        <span className='flex items-center gap-x-1'>
+        <span className="flex items-center gap-x-1">
           <MobileView>
-            <span className='copy-row'>
+            <span className="copy-row">
               <span
-                className='w-28 text'
+                className="text w-28"
                 onClick={() => {
-                  account_link(text);
-                }}>
-                {isIndent(text,6,6)}
+                  account_link(text)
+                }}
+              >
+                {isIndent(text, 6, 6)}
               </span>
-              <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+              <Copy text={text} icon={<CopySvgMobile />} className="copy" />
             </span>
           </MobileView>
           <BrowserView>{get_account_type(text)}</BrowserView>
@@ -126,7 +126,7 @@ export const message_list = {
       title: 'method_name',
     },
   ],
-};
+}
 
 //富豪榜
 export const address_list = {
@@ -143,7 +143,7 @@ export const address_list = {
       dataIndex: 'rank',
       title: 'rank',
       width: '10%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       width: '20%',
@@ -151,10 +151,10 @@ export const address_list = {
       title: 'account_address',
       render: (text: string) => {
         return (
-          <span className='flex items-center gap-x-1 '>
+          <span className="flex items-center gap-x-1 ">
             {get_account_type(text)}
           </span>
-        );
+        )
       },
     },
     {
@@ -165,7 +165,7 @@ export const address_list = {
       render: (text: string, record: any) => {
         return `${formatFilNum(text, false, false, 2)} / ${(
           record.balance_percentage * 100
-        ).toFixed(2)}%`;
+        ).toFixed(2)}%`
       },
     },
     {
@@ -180,7 +180,7 @@ export const address_list = {
       render: (text: number | string) => formatDateTime(text),
     },
   ],
-};
+}
 
 //订单
 export const dsn_list = {
@@ -194,10 +194,10 @@ export const dsn_list = {
       width: '10%',
       render: (text: string, record: any) => {
         return (
-          <Link href={`/deal/${text}`} className='link'>
+          <Link href={`/deal/${text}`} className="link">
             {text}
           </Link>
-        );
+        )
       },
     },
     {
@@ -205,10 +205,12 @@ export const dsn_list = {
       title: 'piece_cid',
       width: '10%',
       render: (text: string) => {
-        return <span>
-          <MobileView>{isIndent(text,6,6)}</MobileView>
-          <BrowserView>{isIndent(text)}</BrowserView>
-        </span>;
+        return (
+          <span>
+            <MobileView>{isIndent(text, 6, 6)}</MobileView>
+            <BrowserView>{isIndent(text)}</BrowserView>
+          </span>
+        )
       },
     },
     {
@@ -222,7 +224,7 @@ export const dsn_list = {
       title: 'client_address',
       width: '12%',
       render: (text: string, record: any) => (
-        <span className='flex items-center gap-x-1'>
+        <span className="flex items-center gap-x-1">
           {get_account_type(text)}
         </span>
       ),
@@ -232,7 +234,7 @@ export const dsn_list = {
       title: 'provider_id',
       width: '12%',
       render: (text: string, record: any) => (
-        <span className='flex items-center gap-x-1'>
+        <span className="flex items-center gap-x-1">
           {get_account_type(text)}
         </span>
       ),
@@ -263,7 +265,7 @@ export const dsn_list = {
       render: (text: boolean) => String(text),
     },
   ],
-};
+}
 
 //消息池
 export const pool_list = {
@@ -275,9 +277,7 @@ export const pool_list = {
       title: 'cid',
       width: '10%',
       render: (text: string) => (
-        <Link href={`/message/${text}`}>
-          {isIndent(text)}
-        </Link>
+        <Link href={`/message/${text}`}>{isIndent(text)}</Link>
       ),
     },
     {
@@ -293,10 +293,10 @@ export const pool_list = {
       width: '13%',
       render: (text: string) => {
         return (
-          <div className='flex items-center gap-x-1 flex-wrap'>
+          <div className="flex flex-wrap items-center gap-x-1">
             {get_account_type(text)}
           </div>
-        );
+        )
       },
     },
     {
@@ -305,10 +305,10 @@ export const pool_list = {
       width: '13%',
       render: (text: string) => {
         return (
-          <span className='flex items-center gap-x-1 flex-wrap w-full'>
+          <span className="flex w-full flex-wrap items-center gap-x-1">
             {get_account_type(text)}
           </span>
-        );
+        )
       },
     },
     {
@@ -316,14 +316,15 @@ export const pool_list = {
       title: 'value',
       width: '10%',
       render: (text: string) => {
-        return formatFilNum(text, false, false);
+        return formatFilNum(text, false, false)
       },
     },
     {
       dataIndex: 'gas_fee_cap',
       title: 'gas_fee_cap',
       width: '12%',
-      render: (text: string) => text || String(text) === '0'? formatNumber(text) : '--',
+      render: (text: string) =>
+        text || String(text) === '0' ? formatNumber(text) : '--',
     },
     {
       dataIndex: 'gas_premium',
@@ -334,140 +335,178 @@ export const pool_list = {
     },
     { dataIndex: 'method_name', title: 'method_name', width: '15%' },
   ],
-};
+}
 
 // 区块
 export const chain_list: {
-  columns: Array<Item>,
+  columns: Array<Item>
 } = {
-  columns:  [
+  columns: [
     {
-      dataIndex: "height",
-      title: "height",
-      width:'15%',
+      dataIndex: 'height',
+      title: 'height',
+      width: '15%',
       render: (text: string) => {
-        return <Link className="link" href={`/height/${text}`}>{text}</Link>
-      }
+        return (
+          <Link className="link" href={`/height/${text}`}>
+            {text}
+          </Link>
+        )
+      },
     },
     {
-      dataIndex: "block_time",
-      title: "block_time",
-      width:'20%',
-      type: ["blocks", "block_basic"],
+      dataIndex: 'block_time',
+      title: 'block_time',
+      width: '20%',
+      type: ['blocks', 'block_basic'],
       render: (text: any, rowData: any) => {
-        const record = rowData.block_basic;
-        const time = record.length > 0 && record[0]?.block_time;
+        const record = rowData.block_basic
+        const time = record.length > 0 && record[0]?.block_time
         if (time) {
-          return <div >{formatDateTime(time)}</div>
+          return <div>{formatDateTime(time)}</div>
         }
         return '--'
-
-      }
+      },
     },
     {
-      dataIndex: "cid",
-      title: "blocks_cid",
-      width:'20%',
-      type:['block_basic'],
+      dataIndex: 'cid',
+      title: 'blocks_cid',
+      width: '20%',
+      type: ['block_basic'],
       render: (text: any, rowData: any) => {
-        const record:any = rowData?.block_basic;
-        return <div className="flex flex-col gap-y-2">
-          {record.map((data:any,index:number) => {
-            if (data?.cid) {
-              return <Link key={ index} className="link" href={`/cid/${data.cid }`}>{isIndent(data.cid)}</Link>
-            }
-            return '--'
-          })}
-        </div>
-      }
+        const record: any = rowData?.block_basic
+        return (
+          <div className="flex flex-col gap-y-2">
+            {record.map((data: any, index: number) => {
+              if (data?.cid) {
+                return (
+                  <Link key={index} className="link" href={`/cid/${data.cid}`}>
+                    {isIndent(data.cid)}
+                  </Link>
+                )
+              }
+              return '--'
+            })}
+          </div>
+        )
+      },
     },
     {
-      dataIndex: "miner_id",
-      title: "blocks_miner",
-      width:'20%',
-      render: (text: any, rowData:any) => {
-        const record:any = rowData?.block_basic;
-        return <div className="flex flex-col gap-y-2">
-          {record.map((data:any,index:number) => {
-            if (data?.miner_id) {
-              return <Link key={index} className="link" href={`/miner/${data.miner_id }`}>{data.miner_id}</Link>
-            }
-            return '--'
-          })}
-        </div>
-      }
-
-    },
-    {
-      dataIndex: "messages_count",
-      title: "blocks_messages",
-      width:'15%',
+      dataIndex: 'miner_id',
+      title: 'blocks_miner',
+      width: '20%',
       render: (text: any, rowData: any) => {
-        const record = rowData.block_basic;
-        return <div className="flex flex-col gap-y-2">
-          {record.map((data:any,index:number) => {
-            return <div key={index}>{data?.messages_count ||0}</div>
-          })}
-        </div>
-      }
+        const record: any = rowData?.block_basic
+        return (
+          <div className="flex flex-col gap-y-2">
+            {record.map((data: any, index: number) => {
+              if (data?.miner_id) {
+                return (
+                  <Link
+                    key={index}
+                    className="link"
+                    href={`/miner/${data.miner_id}`}
+                  >
+                    {data.miner_id}
+                  </Link>
+                )
+              }
+              return '--'
+            })}
+          </div>
+        )
+      },
     },
     {
-      dataIndex: "reward",
-      title: "blocks_reward",
-      width:'10%',
+      dataIndex: 'messages_count',
+      title: 'blocks_messages',
+      width: '15%',
       render: (text: any, rowData: any) => {
-        const record = rowData.block_basic;
-        return <div className="flex flex-col gap-y-2">
-          {record.map((data:any,index:number) => {
-            return <div key={ index}>{data?.reward ? formatFilNum(data.reward,false,false) :''}</div>
-          })}
-        </div>
-      }
+        const record = rowData.block_basic
+        return (
+          <div className="flex flex-col gap-y-2">
+            {record.map((data: any, index: number) => {
+              return <div key={index}>{data?.messages_count || 0}</div>
+            })}
+          </div>
+        )
+      },
     },
-
+    {
+      dataIndex: 'reward',
+      title: 'blocks_reward',
+      width: '10%',
+      render: (text: any, rowData: any) => {
+        const record = rowData.block_basic
+        return (
+          <div className="flex flex-col gap-y-2">
+            {record.map((data: any, index: number) => {
+              return (
+                <div key={index}>
+                  {data?.reward ? formatFilNum(data.reward, false, false) : ''}
+                </div>
+              )
+            })}
+          </div>
+        )
+      },
+    },
   ],
-
 }
 
 //大额转账
 export const transfer_list = {
-  columns : [
+  columns: [
     {
-      dataIndex: "height",
-      title: "height",
-      render: (text:string) => {
-        return <Link href={`/height/${text}`} className="link" >{ text}</Link>
-      }
-    },
-    {
-      dataIndex: "cid",
-      title: "cid",
+      dataIndex: 'height',
+      title: 'height',
       render: (text: string) => {
-        if(!text) return '--'
-        return <Link href={`/message/${text}`} className='table_link'>
-          {isIndent(text)}
-        </Link>
-      }
+        return (
+          <Link href={`/height/${text}`} className="link">
+            {text}
+          </Link>
+        )
+      },
     },
     {
-      dataIndex: "block_time",
-      title: "block_time",
-      render:(text:any)=>formatDateTime(text)
+      dataIndex: 'cid',
+      title: 'cid',
+      render: (text: string) => {
+        if (!text) return '--'
+        return (
+          <Link href={`/message/${text}`} className="table_link">
+            {isIndent(text)}
+          </Link>
+        )
+      },
     },
     {
-      dataIndex: "from",
-      title: "from",
-      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>{ get_account_type(text)}</span>
-    //   render: (text: string) => (
-    //   <Link href={`/address/${text}`} className='table_link'>
-    //     {isIndent(text)}
-    //   </Link>
-    // ),
+      dataIndex: 'block_time',
+      title: 'block_time',
+      render: (text: any) => formatDateTime(text),
     },
     {
-      dataIndex: "to",
-      title: "to",
-      render: (text: string, record: any) => <span className='flex items-center gap-x-1'>{ get_account_type(text)}</span>
+      dataIndex: 'from',
+      title: 'from',
+      render: (text: string, record: any) => (
+        <span className="flex items-center gap-x-1">
+          {get_account_type(text)}
+        </span>
+      ),
+      //   render: (text: string) => (
+      //   <Link href={`/address/${text}`} className='table_link'>
+      //     {isIndent(text)}
+      //   </Link>
+      // ),
+    },
+    {
+      dataIndex: 'to',
+      title: 'to',
+      render: (text: string, record: any) => (
+        <span className="flex items-center gap-x-1">
+          {get_account_type(text)}
+        </span>
+      ),
       // render: (text: string) => {
       //   if (text.length > 8 && !text.startsWith('f0')) {
       //     return  <Link href={`/address/${text}`} className='table_link'>
@@ -478,11 +517,11 @@ export const transfer_list = {
       //     {isIndent(text)}
       //   </Link>
 
-    // }
+      // }
     },
     {
-      dataIndex: "value",
-      title: "value",
+      dataIndex: 'value',
+      title: 'value',
       render: (text: string) => {
         // let str = formatFilNum(text, false, false);
         // let ArrStr = str.split(" ");
@@ -490,9 +529,8 @@ export const transfer_list = {
       },
     },
     {
-      dataIndex: "method_name",
-      title: "method_name",
+      dataIndex: 'method_name',
+      title: 'method_name',
     },
-  ]
+  ],
 }
-

@@ -1,18 +1,18 @@
-
-const mainUrl = process.env.APP_BASE_URL;
+const mainUrl = process.env.APP_BASE_URL
 // const testUrl = 'http://192.168.19.80:17000/api/v1'
-const proUrl = process.env.APP_BASE_URL_PRO || 'http://192.168.1.177:27000/pro/v1';
-export const fvmUrl = process.env.FVM_URL;
+const proUrl =
+  process.env.APP_BASE_URL_PRO || 'http://192.168.1.177:27000/pro/v1'
+export const fvmUrl = process.env.FVM_URL
 
 export interface API {
-    home_meta: string;
-    line_trend: string;
-    static_gas: string;
-    rank_pool: string;
-    rank_provider: string;
-    tipset_chain: string;
-    tipset_message_opt: string;
-    tipset_message: string;
+  home_meta: string
+  line_trend: string
+  static_gas: string
+  rank_pool: string
+  rank_provider: string
+  tipset_chain: string
+  tipset_message_opt: string
+  tipset_message: string
 }
 
 export const proApi = {
@@ -38,17 +38,16 @@ export const proApi = {
   getSector: proUrl + '/SectorDetail',
   account_miners: proUrl + '/CountUserMiners',
   saveMiner: proUrl + '/SaveUserMiners',
-
 }
 //account
-export const heightDetail = mainUrl + '/TipsetDetail';
-export const EvmContractSummary = mainUrl + '/EvmContractSummary';
+export const heightDetail = mainUrl + '/TipsetDetail'
+export const EvmContractSummary = mainUrl + '/EvmContractSummary'
 export const EvmTxsHistory = mainUrl + '/EvmTxsHistory'
 export const EvmGasTrend = mainUrl + '/EvmGasTrend'
 export const ContractBalanceTrend = mainUrl + '/ContractBalanceTrend'
 export const ContractUsersTrend = mainUrl + '/ContractUsersTrend'
 export const ContractCntTrend = mainUrl + '/ContractCntTrend'
-export const FilPrice= mainUrl+'/FilPrice'
+export const FilPrice = mainUrl + '/FilPrice'
 export const FinalHeight = mainUrl + '/FinalHeight'
 export const DCTrend = mainUrl + '/DCTrend'
 export const TransMethod = mainUrl + '/TransferMethodByAccountID'
@@ -73,7 +72,7 @@ export const apiUrl: API | any = {
   static_message_trend: mainUrl + '/MessageCountTrend',
   rank_pool: mainUrl + '/OwnerRank',
   rank_provider: mainUrl + '/MinerRank',
-  rank_growth: mainUrl + "/MinerPowerRank",
+  rank_growth: mainUrl + '/MinerPowerRank',
   rank_rewards: mainUrl + '/MinerRewardRank',
   tipset_chain: mainUrl + '/LatestBlocks',
 
@@ -135,5 +134,5 @@ export const apiUrl: API | any = {
   contract_domain_address: mainUrl + '/FnsAddressDomains',
 
   fevm_defiSummary: mainUrl + '/DefiSummary',
-  fevm_defiList: mainUrl + '/DefiProtocolList'
+  fevm_defiList: mainUrl + '/DefiProtocolList',
 }

@@ -1,39 +1,38 @@
 import IconSearch from '@/assets/images/header/icon_search.svg'
 import styles from './index.module.scss'
-import classNames from "classnames"
-import { Input } from "antd"
-import { HtmlHTMLAttributes, useRef, useState } from "react"
-import useAxiosData from "@/store/useAxiosData"
-import { apiUrl } from "@/contents/apiUrl"
-import { useRouter } from "next/router"
+import classNames from 'classnames'
+import { Input } from 'antd'
+import { HtmlHTMLAttributes, useRef, useState } from 'react'
+import useAxiosData from '@/store/useAxiosData'
+import { apiUrl } from '@/contents/apiUrl'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
-interface SearchProps extends HtmlHTMLAttributes<HTMLDivElement>{
-}
-const Search = (props:SearchProps)=>{
-  const [isSearch,setIsSearch] = useState<boolean>(false)
-  const {t} = useTranslation("common")
+interface SearchProps extends HtmlHTMLAttributes<HTMLDivElement> {}
+const Search = (props: SearchProps) => {
+  const [isSearch, setIsSearch] = useState<boolean>(false)
+  const { t } = useTranslation('common')
   const ref = useRef<any>()
-  const onMaskClick = ()=>{
+  const onMaskClick = () => {
     setIsSearch(true)
     ref.current.focus()
   }
-  const onCancelClick = ()=>{
+  const onCancelClick = () => {
     setIsSearch(false)
   }
   const { axiosData } = useAxiosData()
   const router = useRouter()
 
-  const onSearch = async(value:string) => {
-    const showInput = value.trim();
+  const onSearch = async (value: string) => {
+    const showInput = value.trim()
     if (showInput) {
-      const result=await axiosData(apiUrl.searchInfo, {
-        input:showInput,
+      const result = await axiosData(apiUrl.searchInfo, {
+        input: showInput,
       })
-      const type = result?.result_type;
+      const type = result?.result_type
       if (type) {
         if (type === 'owner') {
           //owner
-          router.push(`/owner/${showInput}`);
+          router.push(`/owner/${showInput}`)
         } else if (type === 'address') {
           router.push(`/address/${showInput}`)
         } else if (type === 'height') {
@@ -56,31 +55,49 @@ const Search = (props:SearchProps)=>{
     }
   }
 
-  return <div className={classNames(styles.wrap,props.className)}>
-    <div className={classNames(styles['search-wrap'],isSearch ? "" : styles.disabled)}>
-      <div className={styles.search}>
-        <form action="" id="search-form" onSubmit={(e)=>{
-          onSearch(ref.current.input.value)
-          e.preventDefault()}}>
-          <Input
-            type="search"
-            allowClear
-            ref={ref}
-            prefix={<IconSearch /> }
-            onBlur={(e)=>{
-              setIsSearch(false)
+  return (
+    <div className={classNames(styles.wrap, props.className)}>
+      <div
+        className={classNames(
+          styles['search-wrap'],
+          isSearch ? '' : styles.disabled,
+        )}
+      >
+        <div className={styles.search}>
+          <form
+            action=""
+            id="search-form"
+            onSubmit={(e) => {
+              onSearch(ref.current.input.value)
+              e.preventDefault()
             }}
-          />
-        </form>
+          >
+            <Input
+              type="search"
+              allowClear
+              ref={ref}
+              prefix={<IconSearch />}
+              onBlur={(e) => {
+                setIsSearch(false)
+              }}
+            />
+          </form>
+        </div>
+        <div onClick={onCancelClick}>{t('cancel')}</div>
       </div>
-      <div onClick={onCancelClick}>{t('cancel')}</div>
-    </div>
-    <div onClick={onMaskClick} className={classNames(styles['mask-wrap'],isSearch ? styles.disabled:"")}>
-      <div className={classNames(styles['mask'])}>
-        <IconSearch/>
-        <div>{t('search_holder')}</div>
+      <div
+        onClick={onMaskClick}
+        className={classNames(
+          styles['mask-wrap'],
+          isSearch ? styles.disabled : '',
+        )}
+      >
+        <div className={classNames(styles['mask'])}>
+          <IconSearch />
+          <div>{t('search_holder')}</div>
+        </div>
       </div>
     </div>
-  </div>
+  )
 }
 export default Search

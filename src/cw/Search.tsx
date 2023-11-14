@@ -1,14 +1,18 @@
-import Search from '@/components/search';
-import { SearchOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import Search from '@/components/search'
+import { SearchOutlined } from '@ant-design/icons'
+import { useState } from 'react'
 
-export default ({ onSearch }: {onSearch:(value:any,type:string)=>void}) => {
+export default ({
+  onSearch,
+}: {
+  onSearch: (value: any, type: string) => void
+}) => {
   // const [force,setForce]= useState(false)
   const handleSearch = (value: any) => {
     if (Number(value)) {
-      onSearch(value,'height')
+      onSearch(value, 'height')
     } else {
-      onSearch(value,'cid')
+      onSearch(value, 'cid')
     }
   }
   //bafy2bzacedj7o2cshul2y5ckjrwdfkghiojm3f4aehwwhsuu3xm6ec2tjq4aq
@@ -20,13 +24,15 @@ export default ({ onSearch }: {onSearch:(value:any,type:string)=>void}) => {
   //     <SearchOutlined />
   //   </div>
   // }
-  return <Search
-    className={'!w-[400px] !h-10'}
-    placeholder={'cw-search'}
-    onSearch={handleSearch}
-    onClick={handleSearch}
-    onBlur={handleBlur}
-    ns='static'
-    suffix={<SearchOutlined />}
-  />
+  return (
+    <Search
+      className={'!h-10 !w-[400px]'}
+      placeholder={'cw-search'}
+      onSearch={handleSearch}
+      onClick={handleSearch}
+      onBlur={handleBlur}
+      ns="static"
+      suffix={<SearchOutlined />}
+    />
+  )
 }

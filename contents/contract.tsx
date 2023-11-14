@@ -1,9 +1,9 @@
 /** @format */
 
-import Copy from '@/components/copy';
+import Copy from '@/components/copy'
 import TpWallet from '@/components/TPWallet'
-import Tooltip from '@/packages/tooltip';
-import CopySvgMobile from '@/assets/images/icon-copy.svg';
+import Tooltip from '@/packages/tooltip'
+import CopySvgMobile from '@/assets/images/icon-copy.svg'
 import {
   formatDateTime,
   formatFilNum,
@@ -12,10 +12,10 @@ import {
   get_account_type,
   isIndent,
   titleCase,
-} from '@/utils';
-import Image from '@/packages/image';
-import Link from 'next/link';
-import { BrowserView, MobileView } from '@/components/device-detect';
+} from '@/utils'
+import Image from '@/packages/image'
+import Link from 'next/link'
+import { BrowserView, MobileView } from '@/components/device-detect'
 
 //合约验证
 export const verify_first = {
@@ -25,15 +25,23 @@ export const verify_first = {
       dataIndex: 'contract_address',
       title: 'address',
       placeholder: 'address_placeholder',
-      rules: [{ required: true, message: '' }, {
-        validator: (_:any, value:string) => {
-          if (!value ||value.length == 0 || value.startsWith('0x') || value.startsWith('f') || value.startsWith('t')) {
-            return Promise.resolve();
-          }
-          return Promise.reject('');
+      rules: [
+        { required: true, message: '' },
+        {
+          validator: (_: any, value: string) => {
+            if (
+              !value ||
+              value.length == 0 ||
+              value.startsWith('0x') ||
+              value.startsWith('f') ||
+              value.startsWith('t')
+            ) {
+              return Promise.resolve()
+            }
+            return Promise.reject('')
+          },
         },
-      },],
-
+      ],
     },
     {
       type: 'Select',
@@ -51,18 +59,18 @@ export const verify_first = {
       options: [
         {
           label: 'Solidity File',
-          value: 'single'
+          value: 'single',
         },
         {
-          label:'Solidity File with Metadata',
+          label: 'Solidity File with Metadata',
           title: 'Solidity File with Metadata',
-          value: 'multi'
+          value: 'multi',
         },
         {
           label: 'Hardhat Support (Quickly)',
-          value: 'standard'
+          value: 'standard',
         },
-      ]
+      ],
     },
     {
       type: 'Select',
@@ -79,58 +87,60 @@ export const verify_first = {
       //     value: 'MIT license(MIT)'
       //   }
       // ]
-    }
+    },
   ],
 }
 export const verify = {
   tabList: [
     { dataIndex: 'source_code', title: 'source_code' },
-    { dataIndex: 'compile_output', title: 'compile_output' }
+    { dataIndex: 'compile_output', title: 'compile_output' },
   ],
   meta_list_des: [
-    { title: 'config_file_des1', },
-    { title: 'config_file_des1_1', },
+    { title: 'config_file_des1' },
+    { title: 'config_file_des1_1' },
     { title: 'config_file_des1_2' },
-    { title: 'config_file_des2', },
-    { title: 'config_file_des2_1', },
-    { title: 'config_file_des2_2'},
+    { title: 'config_file_des2' },
+    { title: 'config_file_des2_1' },
+    { title: 'config_file_des2_2' },
   ],
-
 }
 
-export const verify_source={
+export const verify_source = {
   desList: [
-    { title: 'content_des1', },
-    { title: 'content_des2', },
-    { title: 'content_des3'},
+    { title: 'content_des1' },
+    { title: 'content_des2' },
+    { title: 'content_des3' },
   ],
   headerList: [
-    { title: 'contract_address', dataIndex: 'contract_address'},
-    {title:'compile_version',dataIndex:'compile_version'},
-    {title:'optimize',dataIndex:'optimize', type: 'Select', options: [
-      {
-        title: 'Yes',
-        label:'Yes',
-        value: true
-      },
-      {
-        title: 'No',
-        label:'No',
-        value: false
-      }
-    ],
-
+    { title: 'contract_address', dataIndex: 'contract_address' },
+    { title: 'compile_version', dataIndex: 'compile_version' },
+    {
+      title: 'optimize',
+      dataIndex: 'optimize',
+      type: 'Select',
+      options: [
+        {
+          title: 'Yes',
+          label: 'Yes',
+          value: true,
+        },
+        {
+          title: 'No',
+          label: 'No',
+          value: false,
+        },
+      ],
     },
-    {title:'run_optimizer',dataIndex:'optimize_runs',type:'Input'},
-  ]
+    { title: 'run_optimizer', dataIndex: 'optimize_runs', type: 'Input' },
+  ],
 }
 
 export const verify_output = {
   headerList: [
-    {title:'compile_version',dataIndex:'compiler'},
-    {title:'optimize',dataIndex:'optimize'},
-    {title:'RUNS',dataIndex:'optimize_runs',},
-  ]
+    { title: 'compile_version', dataIndex: 'compiler' },
+    { title: 'optimize', dataIndex: 'optimize' },
+    { title: 'RUNS', dataIndex: 'optimize_runs' },
+  ],
 }
 
 export const contract_rank = {
@@ -148,32 +158,32 @@ export const contract_rank = {
       title: 'rank',
       dataIndex: 'rank',
       width: '10%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       title: 'contract_address',
       dataIndex: 'contract_address',
       width: '10%',
       render: (text: any, record: any) => {
-        if (!text) return '--';
+        if (!text) return '--'
         return (
-          <span className='flex gap-x-2 items-center'>
+          <span className="flex items-center gap-x-2">
             <BrowserView>
-              <Link className='link_text' href={`/address/${text}`}>
+              <Link className="link_text" href={`/address/${text}`}>
                 {isIndent(text, 5, 4)}
               </Link>
               <Copy text={text} />
             </BrowserView>
             <MobileView>
-              <span className='copy-row'>
-                <Link className='link_text' href={`/address/${text}`}>
+              <span className="copy-row">
+                <Link className="link_text" href={`/address/${text}`}>
                   {isIndent(text, 5, 4)}
                 </Link>
-                <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+                <Copy text={text} icon={<CopySvgMobile />} className="copy" />
               </span>
             </MobileView>
           </span>
-        );
+        )
       },
     },
     {
@@ -186,7 +196,7 @@ export const contract_rank = {
       dataIndex: 'transfer_count',
       width: '15%',
       sorter: true,
-      align:'left',
+      align: 'left',
       defaultSortOrder: 'descend',
       render: (text: number) => formatNumber(text),
     },
@@ -217,21 +227,21 @@ export const contract_rank = {
       title: 'rank',
       dataIndex: 'rank',
       width: '10%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       title: 'contract_address',
       dataIndex: 'contract_address',
       width: '30%',
       render: (text: any, record: any) => {
-        if (!text) return '--';
+        if (!text) return '--'
         return (
-          <span className='flex gap-x-2 items-center copy-row'>
-            <Link className='link_text' href={`/address/${text}`}>
+          <span className="copy-row flex items-center gap-x-2">
+            <Link className="link_text" href={`/address/${text}`}>
               {isIndent(text, 5, 4)}
             </Link>
           </span>
-        );
+        )
       },
     },
     {
@@ -243,11 +253,11 @@ export const contract_rank = {
       title: 'transaction_count',
       dataIndex: 'transfer_count',
       width: '15%',
-      align:"right",
+      align: 'right',
       render: (text: number) => formatNumber(text),
-    }
+    },
   ],
-};
+}
 
 export const homeContractRank: any = {
   rank: '10%',
@@ -255,16 +265,16 @@ export const homeContractRank: any = {
   contract_name: '20%',
   transfer_count: '15%',
   user_count: '15%',
-};
+}
 
 export const mobileHomeContractRank: string[] = [
-  "rank",
-  "contract_address",
-  "contract_name",
-  "transfer_count"
-];
+  'rank',
+  'contract_address',
+  'contract_name',
+  'transfer_count',
+]
 
-export const contract_list={
+export const contract_list = {
   columns: [
     // {
     //   dataIndex: 'rank',
@@ -274,21 +284,37 @@ export const contract_list={
     //     return <span className='rank_icon'>{ text}</span>
     //   } },
     {
-      dataIndex: 'contract_address', title: 'contract_address',
-      width:'20%',
+      dataIndex: 'contract_address',
+      title: 'contract_address',
+      width: '20%',
       render: (text: any, record: any) => {
         if (!text) return '--'
-        return <Link className="link" href={`/address/${text}`} >{ text}</Link>
-      } },
-    { dataIndex: 'contract_name', width:'10%', title: 'contract_name',render: (text:any,record:any) => {
-      if (!text) return '--'
-      return <Link href={`/address/${record.contract_address}`} >{ text}</Link>
-    } },
-    { dataIndex: 'language', title: 'language' , width:'10%',},
-    { dataIndex: 'compiler', title: 'compile_version' ,width:'15%',},
-    { dataIndex: 'optimize_runs', title: 'Optimizations' ,width:'15%',},
-    { dataIndex: 'license', title: 'license',render:(text:any)=> text || 'No License(None)',width:'20%' }
-  ]
+        return (
+          <Link className="link" href={`/address/${text}`}>
+            {text}
+          </Link>
+        )
+      },
+    },
+    {
+      dataIndex: 'contract_name',
+      width: '10%',
+      title: 'contract_name',
+      render: (text: any, record: any) => {
+        if (!text) return '--'
+        return <Link href={`/address/${record.contract_address}`}>{text}</Link>
+      },
+    },
+    { dataIndex: 'language', title: 'language', width: '10%' },
+    { dataIndex: 'compiler', title: 'compile_version', width: '15%' },
+    { dataIndex: 'optimize_runs', title: 'Optimizations', width: '15%' },
+    {
+      dataIndex: 'license',
+      title: 'license',
+      render: (text: any) => text || 'No License(None)',
+      width: '20%',
+    },
+  ],
 }
 
 export const contract_token = {
@@ -299,7 +325,7 @@ export const contract_token = {
         title: 'rank',
         width: '10%',
         render: (text: any, record: any, index: any) => {
-          return <span className='rank_icon'>{index + 1}</span>;
+          return <span className="rank_icon">{index + 1}</span>
         },
       },
       {
@@ -310,13 +336,14 @@ export const contract_token = {
             <>
               <Link
                 href={`/token/${record.contract_id}`}
-                className='flex items-center gap-x-1'>
-                <Image src={record?.icon_url} alt='' height={32} width={32} />
-                <span className='margin-6 text_color'>{text}</span>
+                className="flex items-center gap-x-1"
+              >
+                <Image src={record?.icon_url} alt="" height={32} width={32} />
+                <span className="margin-6 text_color">{text}</span>
               </Link>
               {}
             </>
-          );
+          )
         },
       },
       {
@@ -325,22 +352,25 @@ export const contract_token = {
           return (
             <>
               <BrowserView>
-                <span className='flex items-center gap-x-2'>
+                <span className="flex items-center gap-x-2">
                   <span> {tr('total_supply')}</span>
                   <Tooltip context={tr('total_supply_tip')} />
                 </span>
               </BrowserView>
               <MobileView>
-                <span className='flex items-center gap-x-2'>
-                  <span style={{width:"min-content",wordBreak:"initial"}}> {tr('total_supply')}</span>
+                <span className="flex items-center gap-x-2">
+                  <span style={{ width: 'min-content', wordBreak: 'initial' }}>
+                    {' '}
+                    {tr('total_supply')}
+                  </span>
                   <Tooltip context={tr('total_supply_tip')} />
                 </span>
               </MobileView>
             </>
-          );
+          )
         },
         render: (text: string | number) => {
-          return text ? formatNumber(text, 4) : text;
+          return text ? formatNumber(text, 4) : text
         },
       },
       {
@@ -351,17 +381,17 @@ export const contract_token = {
       {
         dataIndex: 'latest_price',
         title: 'latest_price',
-        render: (text: string) => (text ? get$Number(text): text),
+        render: (text: string) => (text ? get$Number(text) : text),
       },
       {
         dataIndex: 'market_cap',
         title: 'market_value',
-        render: (text: string) => (text ? get$Number(text): '--'),
+        render: (text: string) => (text ? get$Number(text) : '--'),
       },
       { dataIndex: 'owners', title: 'owners' },
-    ];
+    ]
   },
-};
+}
 
 export const token_details = {
   headerList: [
@@ -372,7 +402,7 @@ export const token_details = {
           title: 'total_supply',
           dataIndex: 'total_supply',
           render: (text: string) => {
-            return text ? formatNumber(text, 4) : text || '--';
+            return text ? formatNumber(text, 4) : text || '--'
           },
         },
         {
@@ -403,17 +433,17 @@ export const token_details = {
           dataIndex: 'contract_id',
           render: (text: string, record: any) => {
             if (!text) {
-              return '--';
+              return '--'
             }
             return (
-              <span className='flex items-center gap-x-2'>
-                <Link href={`/address/${text}`} className='link'>
+              <span className="flex items-center gap-x-2">
+                <Link href={`/address/${text}`} className="link">
                   {text}
                 </Link>
                 <Copy text={text} />
-                <TpWallet data={ record} />
+                <TpWallet data={record} />
               </span>
-            );
+            )
           },
         },
       ],
@@ -436,7 +466,7 @@ export const token_details = {
       total: 'dex_total',
     },
   ],
-};
+}
 
 export const token_transfer_columns = (fromList: any, toList: any) => {
   return [
@@ -446,7 +476,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       width: '10%',
       render: (text: string) =>
         text ? (
-          <Link href={`/message/${text}`} className='link'>
+          <Link href={`/message/${text}`} className="link">
             {text ? isIndent(text, 6) : ''}
           </Link>
         ) : (
@@ -457,9 +487,7 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       dataIndex: 'method',
       title: 'method',
       width: '25%',
-      render: (text: string) => (
-        <span>{titleCase(text)}</span>
-      ),
+      render: (text: string) => <span>{titleCase(text)}</span>,
     },
     {
       dataIndex: 'time',
@@ -473,18 +501,19 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       title: 'from',
       width: '15%',
       render: (text: string, record: any) => {
-        if (!text) return '--';
+        if (!text) return '--'
         return (
-          <span className='flex items-center gap-x-1'>
+          <span className="flex items-center gap-x-1">
             {get_account_type(text)}
             {fromList?.domains && fromList?.domains[text] && (
               <Link
-                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>
+                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
+              >
                 ({fromList.domains[text]})
               </Link>
             )}
           </span>
-        );
+        )
       },
     },
     {
@@ -492,18 +521,19 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       title: 'to',
       width: '15%',
       render: (text: string, record: any) => {
-        if (!text) return '--';
+        if (!text) return '--'
         return (
-          <span className='flex items-center gap-x-1'>
+          <span className="flex items-center gap-x-1">
             {get_account_type(text)}
             {toList?.domains && toList?.domains[text] && (
               <Link
-                href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>
+                href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
+              >
                 ({toList.domains[text]})
               </Link>
             )}
           </span>
-        );
+        )
       },
     },
     {
@@ -513,8 +543,8 @@ export const token_transfer_columns = (fromList: any, toList: any) => {
       render: (text: string, record: any) =>
         text ? formatNumber(text, 4) : text || '--',
     },
-  ];
-};
+  ]
+}
 
 export const token_owner_columns = (ownerList: any) => {
   return [
@@ -522,26 +552,27 @@ export const token_owner_columns = (ownerList: any) => {
       dataIndex: 'rank',
       title: 'rank',
       width: '10%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       dataIndex: 'owner',
       title: 'owner',
       width: '40%',
       render: (text: string, record: any) => {
-        if (!text) return '--';
+        if (!text) return '--'
         return (
-          <span className='flex link_text items-center gap-x-1'>
-            <Link href={ `/address/${text}`}> {text}  </Link>
+          <span className="link_text flex items-center gap-x-1">
+            <Link href={`/address/${text}`}> {text} </Link>
             {text && <Copy text={text} />}
             {ownerList?.domains && ownerList?.domains[text] && (
               <Link
-                href={`/domain/${ownerList.domains[text]}?provider=${ownerList.provider}`}>
+                href={`/domain/${ownerList.domains[text]}?provider=${ownerList.provider}`}
+              >
                 ({ownerList.domains[text]})
               </Link>
             )}
           </span>
-        );
+        )
       },
     },
     {
@@ -564,20 +595,20 @@ export const token_owner_columns = (ownerList: any) => {
       width: '15%',
       render: (text: any) => (text ? get$Number(text) : ''),
     },
-  ];
-};
+  ]
+}
 
 export const token_Dex_columns = [
   {
     dataIndex: 'cid',
     title: 'message_cid',
     render: (text: string) => {
-      if (!text) return '--';
+      if (!text) return '--'
       return (
-        <Link href={`/message/${text}`} className='link_text'>
+        <Link href={`/message/${text}`} className="link_text">
           {isIndent(text)}
         </Link>
-      );
+      )
     },
   },
   {
@@ -589,12 +620,12 @@ export const token_Dex_columns = [
     dataIndex: 'action',
     title: 'Action',
     render: (text: string) => {
-      const color = text === 'buy' ? 'green' : text === 'sell' ? 'red' : '';
+      const color = text === 'buy' ? 'green' : text === 'sell' ? 'red' : ''
       return (
         <span style={{ color }}>
           {text ? text[0].toUpperCase() + text.substr(1) : text}
         </span>
-      );
+      )
     },
   },
 
@@ -602,14 +633,14 @@ export const token_Dex_columns = [
     dataIndex: 'amount_out',
     title: 'Token_Amount_out',
     render: (text: number, record: any) => {
-      return formatNumber(text, 4) + ' ' + record?.amount_out_token_name;
+      return formatNumber(text, 4) + ' ' + record?.amount_out_token_name
     },
   },
   {
     dataIndex: 'amount_in',
     title: 'Token_Amount_in',
     render: (text: number, record: any) => {
-      return formatNumber(text, 4) + ' ' + record?.amount_in_token_name;
+      return formatNumber(text, 4) + ' ' + record?.amount_in_token_name
     },
   },
   {
@@ -629,18 +660,25 @@ export const token_Dex_columns = [
     render: (text: string, record: any) => {
       return (
         <span
-          className='link'
+          className="link"
           onClick={() => {
             if (record.dex_url) {
-              window.open(record.dex_url);
+              window.open(record.dex_url)
             }
-          }}>
-          <Image className='fvm_img_url' src={record.icon_url} alt='' width={25} height={25} />
+          }}
+        >
+          <Image
+            className="fvm_img_url"
+            src={record.icon_url}
+            alt=""
+            width={25}
+            height={25}
+          />
         </span>
-      );
+      )
     },
   },
-];
+]
 
 export const contract_nfts = {
   columns: [
@@ -648,28 +686,29 @@ export const contract_nfts = {
       dataIndex: 'rank',
       title: 'rank',
       render: (text: any, record: any, index: any) => {
-        return <span className='rank_icon'>{index + 1}</span>;
+        return <span className="rank_icon">{index + 1}</span>
       },
     },
     {
       dataIndex: 'collection',
       title: 'Collection',
       render: (text: string, record: any) => {
-        if (!text) return '--';
+        if (!text) return '--'
         return (
           <Link
             href={`/nft/${record.provider}`}
-            className='flex items-center gap-x-2'>
+            className="flex items-center gap-x-2"
+          >
             <Image
-              className='fvm_img_url'
+              className="fvm_img_url"
               src={record.icon}
-              alt=''
+              alt=""
               height={36}
               width={36}
             />
-            <span className='text_color'> {text}</span>
+            <span className="text_color"> {text}</span>
           </Link>
-        );
+        )
       },
     },
     // { dataIndex: 'trading_volume', title: 'Volume' },
@@ -680,7 +719,7 @@ export const contract_nfts = {
       render: (text: string) => (text ? formatNumber(text, 4) : '--'),
     },
   ],
-};
+}
 
 export const nft_details = {
   headerList: [
@@ -691,7 +730,7 @@ export const nft_details = {
           title: 'total_supply',
           dataIndex: 'total_supply',
           render: (text: string) => {
-            return text ? formatNumber(text, 4) : text || '--';
+            return text ? formatNumber(text, 4) : text || '--'
           },
         },
         {
@@ -715,24 +754,29 @@ export const nft_details = {
               return (
                 <>
                   <BrowserView>
-                    <span className='flex gap-x-1 '>
-                      <Link href={`/address/${text}`} className='link'>
+                    <span className="flex gap-x-1 ">
+                      <Link href={`/address/${text}`} className="link">
                         {text}
                       </Link>
                       <Copy text={text} />
                     </span>
                   </BrowserView>
                   <MobileView>
-                    <span className='copy-row'>
-                      <Link href={`/address/${text}`} className='link'>
+                    <span className="copy-row">
+                      <Link href={`/address/${text}`} className="link">
                         {text}
                       </Link>
-                      <Copy text={text} icon={<CopySvgMobile/>} className='copy'/>
+                      <Copy
+                        text={text}
+                        icon={<CopySvgMobile />}
+                        className="copy"
+                      />
                     </span>
-                  </MobileView></>
-              );
+                  </MobileView>
+                </>
+              )
             }
-            return '--';
+            return '--'
           },
         },
       ],
@@ -750,57 +794,136 @@ export const nft_details = {
       total: 'owner_total',
     },
   ],
-};
+}
 
 export const nft_transfer_columns = (fromList: any, toList: any) => {
   return [
-
     {
-      dataIndex: 'cid', title: 'message_cid',
-      render: (text: string) => text? <Link href={`/message/${text}` }className='link'>{ text?isIndent(text,6):''}</Link>:'--'
+      dataIndex: 'cid',
+      title: 'message_cid',
+      render: (text: string) =>
+        text ? (
+          <Link href={`/message/${text}`} className="link">
+            {text ? isIndent(text, 6) : ''}
+          </Link>
+        ) : (
+          '--'
+        ),
     },
-    {dataIndex:'method',title:'method',render: (text: string) => <span className="bg-render">{ titleCase(text)}</span>},
-    {dataIndex:'time',title:'time', render: (text: string|number)=> formatDateTime(text,'YYYY-MM-DD HH:mm')},
     {
-      dataIndex: "from", title: "from", render: (text: string, record: any) => {
-        if (!text) return '--';
-        return <span className="flex items-center gap-x-1">
-          {get_account_type(text)}
-          {fromList?.domains && fromList?.domains[text] && <Link href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}>({fromList.domains[text]})</Link>
-          }
-        </span>
-      }},
-    { dataIndex: "to", title: "to" , render: (text: string, record: any) => {
-      if (!text) return '--';
-      return <div className="flex items-center gap-x-1">
-        {get_account_type(text)}
-        {toList?.domains && toList?.domains[text] &&<Link href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}>({toList.domains[text]})</Link>
-
-        }
-      </div>
-    }},
+      dataIndex: 'method',
+      title: 'method',
+      render: (text: string) => (
+        <span className="bg-render">{titleCase(text)}</span>
+      ),
+    },
     {
-      dataIndex: 'item', title: 'item', render: (text: string, record: any) => {
+      dataIndex: 'time',
+      title: 'time',
+      render: (text: string | number) =>
+        formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+    },
+    {
+      dataIndex: 'from',
+      title: 'from',
+      render: (text: string, record: any) => {
+        if (!text) return '--'
+        return (
+          <span className="flex items-center gap-x-1">
+            {get_account_type(text)}
+            {fromList?.domains && fromList?.domains[text] && (
+              <Link
+                href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
+              >
+                ({fromList.domains[text]})
+              </Link>
+            )}
+          </span>
+        )
+      },
+    },
+    {
+      dataIndex: 'to',
+      title: 'to',
+      render: (text: string, record: any) => {
+        if (!text) return '--'
+        return (
+          <div className="flex items-center gap-x-1">
+            {get_account_type(text)}
+            {toList?.domains && toList?.domains[text] && (
+              <Link
+                href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
+              >
+                ({toList.domains[text]})
+              </Link>
+            )}
+          </div>
+        )
+      },
+    },
+    {
+      dataIndex: 'item',
+      title: 'item',
+      render: (text: string, record: any) => {
         if (record.url) {
-          return <Image className="fvm_img_url" alt="" width={25} height={ 25} src={record.url} />
+          return (
+            <Image
+              className="fvm_img_url"
+              alt=""
+              width={25}
+              height={25}
+              src={record.url}
+            />
+          )
         }
         return text || '--'
-      }},
+      },
+    },
   ]
 }
 
 export const nft_owner_columns = (ownerList: any) => {
   return [
-    { dataIndex: 'rank', title: 'rank', width: '10%', render: (text: string) => <span className='rank_icon'>{text}</span>},
-    {dataIndex:'owner',title:'owner', width: '50%', render: (text: string, record: any) => {
-      if (!text) return '--';
-      return <span className="flex gap-x-1 items-center">
-        { text}
-        {ownerList?.domains && ownerList?.domains[text] && <Link href={ `/domain/${ownerList.domains[text]}?provider=${ownerList.provider}`}>({ ownerList.domains[text]})</Link>}
-      </span>
-    }},
-    {dataIndex:'amount',title:'amount', width: '20%', render: (text: string,record:any) =>text? formatNumber(text,4) :text ||'--'},
-    { dataIndex: 'percentage', width: '20%', title: 'percentage', render: (text: string,record:any) =>text? Number(Number(text)*100) .toFixed(4) +'%' :text ||'--'},
+    {
+      dataIndex: 'rank',
+      title: 'rank',
+      width: '10%',
+      render: (text: string) => <span className="rank_icon">{text}</span>,
+    },
+    {
+      dataIndex: 'owner',
+      title: 'owner',
+      width: '50%',
+      render: (text: string, record: any) => {
+        if (!text) return '--'
+        return (
+          <span className="flex items-center gap-x-1">
+            {text}
+            {ownerList?.domains && ownerList?.domains[text] && (
+              <Link
+                href={`/domain/${ownerList.domains[text]}?provider=${ownerList.provider}`}
+              >
+                ({ownerList.domains[text]})
+              </Link>
+            )}
+          </span>
+        )
+      },
+    },
+    {
+      dataIndex: 'amount',
+      title: 'amount',
+      width: '20%',
+      render: (text: string, record: any) =>
+        text ? formatNumber(text, 4) : text || '--',
+    },
+    {
+      dataIndex: 'percentage',
+      width: '20%',
+      title: 'percentage',
+      render: (text: string, record: any) =>
+        text ? Number(Number(text) * 100).toFixed(4) + '%' : text || '--',
+    },
   ]
 }
 
@@ -810,93 +933,113 @@ export const nft_owner_columns = (ownerList: any) => {
 export const verify_tabs = [
   {
     title: 'Verify_code',
-    dataIndex:'Verify_code'
+    dataIndex: 'Verify_code',
   },
   {
     title: 'Verify_read',
-    dataIndex:'Verify_read'
+    dataIndex: 'Verify_read',
   },
   {
     title: 'Verify_write',
-    dataIndex:'Verify_write'
+    dataIndex: 'Verify_write',
   },
-
 ]
 export const contract_detail = {
   list: [
     {
-      dataIndex: 'contract_name', title: 'contract_name',
+      dataIndex: 'contract_name',
+      title: 'contract_name',
     },
     {
-      dataIndex: 'optimize', title: 'optimize',
+      dataIndex: 'optimize',
+      title: 'optimize',
       render: (text: boolean, record: any) => {
-        return text ? titleCase(text) +` with (${record.optimize_runs}) runs`: titleCase(text)
-      }
+        return text
+          ? titleCase(text) + ` with (${record.optimize_runs}) runs`
+          : titleCase(text)
+      },
     },
     {
-      dataIndex: 'compiler', title: 'compiler',
+      dataIndex: 'compiler',
+      title: 'compiler',
     },
     {
-      dataIndex:'license',title:'license',
-    }
+      dataIndex: 'license',
+      title: 'license',
+    },
   ],
   abiOptions: {
     placeholder: 'source_abi_default',
     list: [
       { label: 'Json_Format', value: 'json' },
-      {label:'Text_Format',value:'text'}
+      { label: 'Text_Format', value: 'text' },
     ],
   },
 }
 export const contract_log = [
   {
     dataIndex: 'epoch',
-    title:'epoch'
+    title: 'epoch',
   },
   {
     dataIndex: 'cid',
     title: 'cid',
-    render: (text: string) => <Link href={`/message/${text}`} className='link'>{ text}</Link>
+    render: (text: string) => (
+      <Link href={`/message/${text}`} className="link">
+        {text}
+      </Link>
+    ),
   },
   {
     dataIndex: 'event_name',
-    title:'event_name'
+    title: 'event_name',
   },
   {
     dataIndex: 'topics',
     title: 'topics',
-    render: (text:any,record:any) => {
+    render: (text: any, record: any) => {
       if (Array.isArray(text)) {
-        return text.map((item:string,index:number) => {
-          return <li key={item} className='flex items-center gap-x-1 mb-1' >
-            <span className="flex item-center flex-shrink-0 justify-center bg-bg_hover border rounded-[5px] w-5 h-5">{ index}</span>
-            <span> { item}</span>
-          </li>
+        return text.map((item: string, index: number) => {
+          return (
+            <li key={item} className="mb-1 flex items-center gap-x-1">
+              <span className="item-center flex h-5 w-5 flex-shrink-0 justify-center rounded-[5px] border bg-bg_hover">
+                {index}
+              </span>
+              <span> {item}</span>
+            </li>
+          )
         })
       }
-      return text||'--'
-
-    }
-  }, {
+      return text || '--'
+    },
+  },
+  {
     dataIndex: 'data',
     title: 'coompoent_data',
-    render: (text:string) => {
-      return <div className="bg-bg_hover px-2.5 py-2 rounded-md">
-        <div className='code'>
-          <pre className='pre' style={{ whiteSpace: 'pre-wrap',overflowWrap:'break-word' }}>{JSON.stringify(text, undefined, 6)}</pre>
-          {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
+    render: (text: string) => {
+      return (
+        <div className="rounded-md bg-bg_hover px-2.5 py-2">
+          <div className="code">
+            <pre
+              className="pre"
+              style={{ whiteSpace: 'pre-wrap', overflowWrap: 'break-word' }}
+            >
+              {JSON.stringify(text, undefined, 6)}
+            </pre>
+            {/* <JSONPretty id="json-pretty" data={showValue}></JSONPretty> */}
+          </div>
         </div>
-      </div>
-    }
-  }, {
+      )
+    },
+  },
+  {
     dataIndex: 'log_index',
-    title:'log_index',
-    render:(text:number)=> text
+    title: 'log_index',
+    render: (text: number) => text,
   },
   {
     dataIndex: 'removed',
     title: 'removed',
-    render:(text:boolean)=> String(text)
+    render: (text: boolean) => String(text),
   },
-
 ]
