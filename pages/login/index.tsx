@@ -23,7 +23,6 @@ export default () => {
   }, [hashParams.type])
 
   const onFinish = async () => {
-    console.log('----e finish', form)
     const data = form.getFieldsValue()
     const payload = {
       ...data,
@@ -51,6 +50,33 @@ export default () => {
           <Input
             className={`custom_input ${styles.contain_input}`}
             prefix={item.prefix}
+          />
+        )
+        break
+      case 'code':
+        newRules.push(
+          newRules.push(() => ({
+            async validator(_: any, value: any) {
+              if (value) {
+                console.log('----33', value)
+                return Promise.resolve()
+              }
+              return Promise.reject(new Error(tr('email_rules')))
+            },
+          })),
+        )
+        content = (
+          <Input
+            className={`custom_input ${styles.contain_input}`}
+            prefix={item.prefix}
+            suffix={
+              <SendCode
+                mail={form.getFieldValue('mail')}
+                onChange={(token) => {
+                  console.log('----33', token)
+                }}
+              />
+            }
           />
         )
         break

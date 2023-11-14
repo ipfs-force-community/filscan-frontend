@@ -93,15 +93,6 @@ const ExportExcel: FC<ExportToExcelProps> = ({
         }
         headers.push(title)
       }
-
-      // if (col.exports && Array.isArray(col.exports)) {
-      //   col.exports.forEach((v: string) => {
-      //     if (v === col.dataIndex) {
-      //       title = title + col.amountUnit[v]
-      //     }
-      //     headers.push(tr(v));
-      //   });
-      // }
     })
     const accessors: Array<string> = []
     columns.forEach((col: any) => {
@@ -121,15 +112,7 @@ const ExportExcel: FC<ExportToExcelProps> = ({
         if (showUnit) {
           value = getUnitValue(value, col.amountUnit[dataIndex])
         }
-        // if (col.exports) {
-        //   if (col.exports && Array.isArray(col.exports)) {
-        //     col.exports.forEach((v: string) => {
-        //       otherValue = otherValue + '/' + String(getUnitValue(dataItem[v], col.amountUnit[v]));
-        //     });
-        //   }
-        // }
-        //   row.push(String(value)+otherValue);
-
+        row.push(value)
         if (col.exports && Array.isArray(col.exports)) {
           col.exports.forEach((v: string) => {
             const otherKey = v
@@ -142,7 +125,6 @@ const ExportExcel: FC<ExportToExcelProps> = ({
             row.push(otherValue)
           })
         }
-        row.push(value)
       })
       dataRows.push(row)
     })

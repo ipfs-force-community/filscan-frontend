@@ -1,4 +1,4 @@
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined } from '@ant-design/icons'
 
 export const logTabs = [
   {
@@ -9,46 +9,46 @@ export const logTabs = [
     title: 'verification_code',
     dataIndex: 'code',
   },
-];
+]
 
-export const login_list:Record<string,any> = {
-  'password':[ {
-    label: 'email',
-    name: 'email',
-    prefix: <MailOutlined className='site-form-item-icon' />,
-    placeholder: 'email_placeholder',
-    rules: [{ required: true, message: 'Email is required' }],
-  },
-  {
-    label: 'password',
-    name: 'password',
-    placeholder: 'password_placeholder',
-    prefix: <LockOutlined className='site-form-item-icon' />,
-    rules: [{ required: true, message: 'Password is required' }],
-  }],
-  'code': [
+export const login_list: Record<string, any> = {
+  password: [
     {
-      label: 'code',
-      name: 'code',
-      placeholder: 'code_placeholder',
-      prefix: <LockOutlined className='site-form-item-icon' />,
-      rules: [{ required: true, message: 'Code is required' }],
+      label: 'email',
+      name: 'email',
+      prefix: <MailOutlined className="site-form-item-icon" />,
+      placeholder: 'email_placeholder',
+      rules: [{ required: true, message: 'Email is required' }],
     },
     {
       label: 'password',
       name: 'password',
       placeholder: 'password_placeholder',
-      prefix: <LockOutlined className='site-form-item-icon' />,
+      prefix: <LockOutlined className="site-form-item-icon" />,
       rules: [{ required: true, message: 'Password is required' }],
+    },
+  ],
+  code: [
+    {
+      label: 'email',
+      name: 'email',
+      prefix: <MailOutlined className="site-form-item-icon" />,
+      placeholder: 'email_placeholder',
+      rules: [{ required: true, message: 'Email is required' }],
+    },
+    {
+      label: 'code',
+      name: 'code',
+      placeholder: 'code_placeholder',
+      prefix: <LockOutlined className="site-form-item-icon" />,
+      rules: [{ required: true, message: 'Code is required' }],
     },
     {
       label: 'invite',
       name: 'invite',
       placeholder: 'invite_placeholder',
-      prefix: <LockOutlined className='site-form-item-icon' />,
+      prefix: <LockOutlined className="site-form-item-icon" />,
       rules: [{ required: true, message: 'Password is required' }],
-    }
-  ]
-
+    },
+  ],
 }
-

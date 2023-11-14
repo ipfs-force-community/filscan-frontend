@@ -1,12 +1,19 @@
 /** @format */
 
-import { getSvgIcon } from '@/svgsIcon';
-import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { Item, MenuItem } from './type';
-import Link from 'next/link';
-import TagInput from '@/packages/tagInput';
-import { formatDateTime, formatFil, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
-import Image from 'next/image';
+import { getSvgIcon } from '@/svgsIcon'
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
+import { Item, MenuItem } from './type'
+import Link from 'next/link'
+import TagInput from '@/packages/tagInput'
+import {
+  formatDateTime,
+  formatFil,
+  formatFilNum,
+  formatNumber,
+  formatNumberPercentage,
+  unitConversion,
+} from '@/utils'
+import Image from 'next/image'
 //import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg'
 // import gas from '@/assets/images/gas.svg';
@@ -32,7 +39,7 @@ export const login_list = (type?: string) => {
     {
       label: 'email',
       name: 'email',
-      prefix: <MailOutlined className='site-form-item-icon' />,
+      prefix: <MailOutlined className="site-form-item-icon" />,
       placeholder: 'email_placeholder',
       rules: [{ required: true, message: 'Email is required' }],
     },
@@ -691,7 +698,6 @@ export const account_balance = {
     {
       title: 'owner_balance',
       dataIndex: 'owner_balance',
-      // width: 170,
       exports: ['Owner_balance_changed'],
       amountUnit: {
         owner_balance: { unit: 'fil', number: 0 },
@@ -1425,22 +1431,28 @@ export const account_miners = {
 
 const monitorUnit: Record<string, string> = {
   ExpireSectorMonitor: 'day',
+  BalanceMonitor: 'FIL',
 }
 
 //监控columns
-export const monitor_list = (tr:any,onChange:any,type?:string) => {
+export const monitor_list = (tr: any, onChange: any, type?: string) => {
   return [
     {
       dataIndex: 'group_name',
       title: 'group_name',
-      width: '8%',
+      width: '100',
+      fixed: 'left',
     },
 
     {
       dataIndex: 'miner_id_or_all',
       title: 'miner_id',
-      width: '8%',
+      width: '200',
+      fixed: 'left',
       render: (text: string, record: any) => {
+        if (type === 'power') {
+          return 'ALL'
+        }
         return (
           <div className="flex items-center gap-x-1">
             {text}
@@ -1456,16 +1468,22 @@ export const monitor_list = (tr:any,onChange:any,type?:string) => {
     {
       dataIndex: 'examination',
       title: 'examination',
-      width: '25%',
+      width: '260',
       render: (text: string, record: any) => {
+        if (type === 'power') {
+          return <div>{tr('power_rules')}</div>
+        }
         return (
           <ul>
             {record.rules.map((rule: any, index: number) => {
               return (
                 <li key={index}>
-                  {`${tr(record.monitor_type)} ${tr(rule.operator)} ${tr(
-                    rule.operand,
-                  )} ${tr(monitorUnit[record.monitorType])}`}
+                  {`${tr(
+                    rule?.account_type?.toLocaleLowerCase() ||
+                      record.monitor_type,
+                  )} ${tr(rule.operator)} ${tr(rule.operand)} ${tr(
+                    monitorUnit[record.monitor_type],
+                  )}`}
                 </li>
               )
             })}
@@ -1476,7 +1494,7 @@ export const monitor_list = (tr:any,onChange:any,type?:string) => {
     {
       dataIndex: 'alarm',
       title: 'alarm',
-      width: '27%',
+      width: '300',
       render: (text: any, record: any) => {
         const mailList = record.mail_alert
         const msgList = record.msg_alert
@@ -1513,7 +1531,7 @@ export const monitor_list = (tr:any,onChange:any,type?:string) => {
     {
       dataIndex: 'created_at',
       title: 'created_at',
-      width: '12%',
+      width: '150',
       render: (text: string, record: any) => {
         return formatDateTime(text)
       },
@@ -1521,7 +1539,7 @@ export const monitor_list = (tr:any,onChange:any,type?:string) => {
     {
       dataIndex: 'is_active',
       title: 'status',
-      width: '10%',
+      width: '200',
       render: (text: boolean, record: any, index: number) => {
         return (
           <ActiveRules
@@ -1535,14 +1553,28 @@ export const monitor_list = (tr:any,onChange:any,type?:string) => {
     {
       dataIndex: 'edit',
       title: 'edit',
-      width: '10%',
-      render: (text:any,record:any,index:number) => {
-        return <div className='flex gap-x-2 font-normal'>
-          <span className='text-primary cursor-pointer' onClick={() => onChange('edit_write', record, index)}>{tr(type === 'power'?'edit_write_warn':'edit_write')}</span>
-          {type !== 'power' && <ActiveRules text={text} title='edit_delete' onChange={() => onChange('edit_delete', record, index)} />}
-        </div>
-      }
-    }
+      width: '100',
+      fixed: 'right',
+      render: (text: any, record: any, index: number) => {
+        return (
+          <div className="flex gap-x-2 font-normal">
+            <span
+              className="cursor-pointer text-primary"
+              onClick={() => onChange('edit_write', record, index)}
+            >
+              {tr(type === 'power' ? 'edit_write_warn' : 'edit_write')}
+            </span>
+            {type !== 'power' && (
+              <ActiveRules
+                text={text}
+                title="edit_delete"
+                onChange={() => onChange('edit_delete', record, index)}
+              />
+            )}
+          </div>
+        )
+      },
+    },
   ]
 }
 

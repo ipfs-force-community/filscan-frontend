@@ -43,6 +43,12 @@ export default ({
 
   const handleSave = async () => {
     //添加分组及节点
+    if (!groupName) {
+      return messageManager.showMessage({
+        type: 'error',
+        content: 'please add a group name',
+      })
+    }
     setSaveLoading(true)
     const groupDetail = groupMiners?.find((v) => v.group_id === Number(groupId))
     const data = await accountStore.saveGroups({

@@ -27,6 +27,8 @@ export default observer(() => {
       case 'save':
         saveRules(value)
         break
+      case 'cancel':
+        setShowRules(false)
       default:
         break
     }
