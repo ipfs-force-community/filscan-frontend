@@ -47,7 +47,13 @@ export default observer((props: Props) => {
     groupMiners?.forEach((group) => {
       const miners: Array<any> = []
       const tags: Record<string, string> = {}
-      group?.miners_info.forEach((v) => {
+      if (isAllMiner) {
+        miners.push({
+          label: tr('all_miners'),
+          value: 'all',
+        })
+      }
+      group?.miners_info?.forEach((v) => {
         allMiners.push({
           miner_tag: v.miner_tag,
           label: String(v.miner_id),

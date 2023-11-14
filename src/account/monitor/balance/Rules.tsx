@@ -38,7 +38,7 @@ const defaultRules = {
 export default observer((props: Props) => {
   const { showModal, record, onChange } = props
   const { tr } = Translation({ ns: 'account' })
-  const { minersCategory } = monitorStore
+  const { minersCategory, saveLoading } = monitorStore
   const [rules, setRules] = useState<any>([{ ...defaultRules }])
 
   useEffect(() => {
@@ -214,6 +214,7 @@ export default observer((props: Props) => {
       }
       payload.push(obj)
     })
+    console.log('----333', payload)
     onChange('save', payload)
   }
 
@@ -260,7 +261,12 @@ export default observer((props: Props) => {
         >
           {tr('cancel')}
         </Button>,
-        <Button className="primary_btn" key="confirm_btn" onClick={handleSave}>
+        <Button
+          className="primary_btn"
+          key="confirm_btn"
+          loading={saveLoading}
+          onClick={handleSave}
+        >
           {tr('confirm')}
         </Button>,
       ]}

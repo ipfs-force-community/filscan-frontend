@@ -49,7 +49,6 @@ export default observer(() => {
         break
       case 'save':
         saveRules(value)
-        setRecord({})
         break
     }
   }
@@ -102,6 +101,7 @@ export default observer(() => {
     const result = await monitorStore.saveUserRules(payload)
     if (result) {
       setShowRules(false)
+      setRecord({})
       loadRules()
     }
   }
