@@ -109,6 +109,8 @@ export default (props: Props) => {
     const newRules = { ...rules }
     if (type === 'warnOk') {
       newRules.warnList = value
+    } else if (type === 'cancel') {
+      onChange('cancel', false)
     }
     setRules({ ...newRules })
   }

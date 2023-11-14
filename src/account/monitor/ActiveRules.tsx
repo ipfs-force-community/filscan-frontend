@@ -49,9 +49,9 @@ export default ({
       <Modal
         title={`${tr(content[0])}`}
         destroyOnClose={true}
-        width={700}
+        width={title === 'isActive' ? 500 : 400}
         closeIcon={false}
-        wrapClassName="custom_left_modal"
+        wrapClassName="custom_modal custom_center_modal"
         open={show}
         onOk={handleClick}
         footer={[
@@ -73,7 +73,7 @@ export default ({
           </Button>,
         ]}
       >
-        <div className="m-4">{tr(content[1])}</div>
+        <div className="flex justify-center ">{tr(content[1])}</div>
       </Modal>
     </>
   )

@@ -133,14 +133,14 @@
 
 //switch
 .custom_switch {
-  background-color: var(--font_des);
+  background-color: var(--cw-bgColor);
   .ant-switch-handle {
     &::before {
       background-color: var(--bgColor);
     }
   }
   &:hover {
-    background-color: var(--font_des);
+    background-color: var(--cw-bgColor) !important;
   }
 }
 
@@ -753,15 +753,28 @@
       padding: 15px 20px;
     }
     .ant-modal-footer {
-      padding: 0px 20px 15px 20px;
+      padding: 0px 20px 20px 20px;
       display: flex;
       justify-content: flex-end;
+      border: none;
     }
   }
 }
 
-.center_modal {
+.custom_center_modal {
   margin-top: 10%;
+
+  .ant-modal-content {
+    padding: 24px 20px;
+  }
+  .ant-modal-body {
+    padding: 10px 0px;
+  }
+  .ant-modal-footer {
+    display: flex;
+    justify-content: center;
+    border: none;
+  }
 }
 
 .ant-btn-default {
