@@ -44,8 +44,8 @@ const Account: React.FC = () => {
       router.push('/account/login')
       return
     } else {
-      console.log('----3334')
       accountStore.getAccountMinersNumber()
+      accountStore.getAccountGroup()
     }
   }, [userInfo.mail])
 

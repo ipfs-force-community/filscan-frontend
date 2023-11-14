@@ -31,29 +31,6 @@ export default () => {
       mail: data.email,
     }
     userStore.loginUserInfo(payload)
-
-    //登录
-    //     const data = form.getFieldsValue();
-    //     const result: any = await axiosData(proApi.login, {
-    //       ...data,
-    //       mail: data.email,
-    //       token: token||localStorage.getItem('send_code')
-    //     });
-    //     if (result?.token) {
-    //       localStorage.setItem('token', result.token);
-    //       localStorage.setItem('expired_at', result.expired_at); //过期时间
-    //       userStore.setUserInfo({
-    //         last_login: result?.expired_at || '',
-    //         mail: data?.email || result?.mail,
-    //         name: result?.name,
-    //       });
-    //       localStorage.setItem('token',result?.token);
-    //       messageManager.showMessage({
-    //         type: 'success',
-    //         content: 'login successful',
-    //       });
-    //       router.push('/account#overview')
-    //     }
   };
 
   const renderChildren = (item:any) => {
