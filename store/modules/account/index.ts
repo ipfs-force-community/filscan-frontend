@@ -22,13 +22,13 @@ class AccountStore {
       defaultGroup:observable
     });
     this.getAccountMinersNumber()
-    this.getAccountGroup()
 
   }
 
   //用户名下节点数
   async getAccountMinersNumber () {
     const result: RequestResult = await axiosServer(countMiners)
+    this.getAccountGroup()
     runInAction(()=>{
       this.countMiners = {
         ...result.data,

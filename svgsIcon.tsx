@@ -751,6 +751,7 @@ const reset = <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.
 
 const add = <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' height="14" viewBox="0 0 14 14" width="14"><path d="m7 0c.55228475 0 1 .44771525 1 1v5h5c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-5.001l.001 5c0 .5522847-.44771525 1-1 1s-1-.4477153-1-1l-.001-5h-4.999c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1h5v-5c0-.55228475.44771525-1 1-1z"/></svg>
 const cancel = <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' height="2" viewBox="0 0 14 2" width="14"><path d="m14 1c0 .55228475-.4477153 1-1 1h-12c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1h12c.5522847-0 1 .44771525 1 1z"/></svg>
+
 const svgTypes: Record<string, JSX.Element> = {
   moon,
   sun,
@@ -800,6 +801,7 @@ const svgTypes: Record<string, JSX.Element> = {
   reset,
   cancel,
   add,
+
 };
 
 export const getSvgIcon = (type: string) => {

@@ -1,6 +1,8 @@
 import { RequestResult, axiosServer } from "@/store/axiosServer";
-import { userInfo } from "@/store/ApiUrl";
+import { login, userInfo } from "@/store/ApiUrl";
 import { makeObservable, observable, runInAction } from "mobx";
+import messageManager from "@/packages/message";
+import router from "next/router";
 
 const defaultUser = {
   name: "",
@@ -32,6 +34,20 @@ class UserStore {
         loading:false
       }
     })
+
+  }
+
+  async loginUserInfo(payload:Record<string,any>) {
+    const userData: any = await axiosServer(login, payload);
+    if (!userData.error) {
+      localStorage.setItem('token',userData.data?.token);
+      this.getUserInfo();
+      messageManager.showMessage({
+        type: 'success',
+        content: 'login successful',
+      });
+      router.push('/account#overview')
+    }
 
   }
 

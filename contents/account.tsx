@@ -1,19 +1,12 @@
 /** @format */
 
-import { getSvgIcon } from '@/svgsIcon'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Item, MenuItem } from './type'
-import Link from 'next/link'
-import TagInput from '@/packages/tagInput'
-import {
-  formatDateTime,
-  formatFil,
-  formatFilNum,
-  formatNumber,
-  formatNumberPercentage,
-  unitConversion,
-} from '@/utils'
-import Image from 'next/image'
+import { getSvgIcon } from '@/svgsIcon';
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
+import { Item, MenuItem } from './type';
+import Link from 'next/link';
+import TagInput from '@/packages/tagInput';
+import { formatDateTime, formatFil, formatFilNum, formatNumber, formatNumberPercentage, unitConversion } from '@/utils';
+import Image from 'next/image';
 //import power from '@/assets/images/power.svg';
 import pledge from '@/assets/images/pledge.svg'
 // import gas from '@/assets/images/gas.svg';
@@ -26,7 +19,7 @@ import ActiveRules from '@/src/account/monitor/ActiveRules'
 export const logTabs = [
   {
     title: 'password_login',
-    dataIndex: 'login',
+    dataIndex: 'password',
   },
   {
     title: 'verification_code',
@@ -39,7 +32,7 @@ export const login_list = (type?: string) => {
     {
       label: 'email',
       name: 'email',
-      prefix: <UserOutlined className="site-form-item-icon" />,
+      prefix: <MailOutlined className='site-form-item-icon' />,
       placeholder: 'email_placeholder',
       rules: [{ required: true, message: 'Email is required' }],
     },

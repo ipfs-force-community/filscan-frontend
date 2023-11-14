@@ -44,6 +44,7 @@ const Account: React.FC = () => {
       router.push('/account/login')
       return
     } else {
+      console.log('----3334')
       accountStore.getAccountMinersNumber()
     }
   }, [userInfo.mail])
@@ -92,11 +93,18 @@ const Account: React.FC = () => {
           <div className="mb-10 w-full px-5 font-PingFang text-lg font-semibold	">
             {tr('account_title')}
           </div>
+<<<<<<< HEAD
           <Menu
             mode="inline"
             className="custom_menu"
             selectedKeys={[selectedKey]}
             defaultOpenKeys={['data_details', 'monitor']}
+=======
+          <Menu mode="inline"
+            className='custom_menu'
+            selectedKeys={[selectedKey] }
+            // defaultOpenKeys={['data_details', 'monitor']}
+>>>>>>> 4bf466a0 (feat: update login)
           >
             {account_manager.map(renderMenuItem)}
           </Menu>

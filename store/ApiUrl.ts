@@ -6,13 +6,15 @@ const proUrl = process.env.APP_BASE_URL_PRO;
 export const fvmUrl = process.env.FVM_URL;
 
 //用户信息
-export const userInfo = proUrl + '/UserInfo'
+export const login = proUrl + '/Login';
+export const userInfo = proUrl + '/UserInfo';
+
 //节点管家
 export const countMiners = proUrl + '/CountUserMiners';
 export const UserGroups = proUrl + '/GetUserGroups';
 export const saveMiner = proUrl + '/SaveUserMiners';
 export const delGroup = proUrl + '/DeleteGroup';
-export const saveGroup = proUrl + '/SaveGroupMiners';
+export const saveGroup = testUrl + '/SaveGroupMiners';
 export const minerOverview = proUrl + '/MinerInfoDetail';
 export const powerData = proUrl + '/PowerDetail';
 export const gasData = proUrl + '/GasCostDetail';
