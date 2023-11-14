@@ -1440,13 +1440,15 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'group_name',
       title: 'group_name',
-      width: '10%',
+      width: '100',
+      fixed: 'left',
     },
 
     {
       dataIndex: 'miner_id_or_all',
       title: 'miner_id',
-      width: '10%',
+      width: '200',
+      fixed: 'left',
       render: (text: string, record: any) => {
         if (type === 'power') {
           return 'ALL'
@@ -1466,7 +1468,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'examination',
       title: 'examination',
-      width: '20%',
+      width: '260',
       render: (text: string, record: any) => {
         if (type === 'power') {
           return <div>{tr('power_rules')}</div>
@@ -1492,7 +1494,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'alarm',
       title: 'alarm',
-      width: '25%',
+      width: '300',
       render: (text: any, record: any) => {
         const mailList = record.mail_alert
         const msgList = record.msg_alert
@@ -1529,7 +1531,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'created_at',
       title: 'created_at',
-      width: '15%',
+      width: '150',
       render: (text: string, record: any) => {
         return formatDateTime(text)
       },
@@ -1537,7 +1539,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'is_active',
       title: 'status',
-      width: '10%',
+      width: '200',
       render: (text: boolean, record: any, index: number) => {
         return (
           <ActiveRules
@@ -1551,7 +1553,8 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'edit',
       title: 'edit',
-      width: '10%',
+      width: '100',
+      fixed: 'right',
       render: (text: any, record: any, index: number) => {
         return (
           <div className="flex gap-x-2 font-normal">

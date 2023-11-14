@@ -184,7 +184,8 @@
         }
       }
       .ant-table-tbody {
-        .ant-table-cell-fix-left {
+        .ant-table-cell-fix-left,
+        .ant-table-cell-fix-right {
           background-color: var(--bgColor);
           &:hover {
             .ant-table-cell {
