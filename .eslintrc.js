@@ -1,11 +1,16 @@
 module.exports = {
-  "extends": ["next/core-web-vitals", "plugin:storybook/recommended","prettier"],
+  "extends": [
+    "next/core-web-vitals",
+     "plugin:storybook/recommended",
+     "prettier",
+     "plugin:import/recommended",
+     "plugin:prettier/recommended",
+    ],
   "plugins": ["@typescript-eslint", "no-null"],
   "ignorePatterns": ["*.js", "**/leecharts/*.js"],
   "rules": {
     "no-null/no-null": 0,
     "no-trailing-spaces":1,
-    "indent": ["error", 2],
     "no-trailing-spaces": 1,
     "space-after-keywords": [0, "always"],
     "space-before-blocks": [0, "always"],
