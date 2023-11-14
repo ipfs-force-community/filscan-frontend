@@ -2,9 +2,9 @@
 
 export default ({ left }: { left: string }) => {
   return (
-    <ul className='flex gap-x-px w-fit h-fit relative'>
+    <ul className="relative flex h-fit w-fit gap-x-px">
       <li
-        className={`absolute mark h-full ${
+        className={`mark absolute h-full ${
           left ? 'mark' : 'bg-transparent'
         } right-0`}
         style={{
@@ -15,10 +15,10 @@ export default ({ left }: { left: string }) => {
         return (
           <li
             key={item}
-            className='w-[5px] h-[12px] rounded-[1px] bg-primary'
+            className="h-[12px] w-[5px] rounded-[1px] bg-primary"
           />
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}

@@ -4,10 +4,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Translation } from '@/components/hooks/Translation'
 import styles from './index.module.scss'
 import Selects from '@/packages/selects'
-import Warn from '../warn'
 import { isPositiveInteger } from '@/utils'
 import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
+import Warn from '@/src/account/monitor/warn'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
 interface Props {
@@ -74,7 +74,7 @@ export default observer((props: Props) => {
                 newObjWarn[key].push({
                   ...obj,
                   checked: true,
-                  inputValue: ''
+                  inputValue: '',
                 })
               } else if (index !== warnData[key].length - 1) {
                 newObjWarn[key].push({
@@ -130,6 +130,8 @@ export default observer((props: Props) => {
             newItem.rule[0].operand = value
           }
         }
+        break
+      default:
         break
     }
     newRules.splice(index, 1, newItem)
@@ -187,53 +189,73 @@ export default observer((props: Props) => {
     ]
   }, [tr])
 
-  return <Modal
-    title={`${tr(record?.group_id ? 'edit_rules':'add_rules')}`}
-    destroyOnClose={true}
-    closeIcon={false}
-    width={630}
-    wrapClassName="custom_left_modal"
-    open={showModal} onOk={handleSave}
-    onCancel={() => onChange('cancel', false)}
-    footer={[
-      <Button className="cancel_btn" key='cancel_btn' onClick={()=>onChange('cancel',false) }>{ tr('cancel')}</Button>,
-      <Button className="primary_btn" key='primary_btn' loading={saveLoading} onClick={handleSave}>{ tr('confirm')}</Button>
-    ] }
-  >
-    <div>
-      {rules.map((ruleItem: any, index: number) => {
-        const showIcon = index === rules.length - 1;
-        const deleteIcon = rules.length > 1;
-        return <div key={index} className={styles.sector_contain}>
-          <div className={styles.sector_contain_title}>{ tr('rule_detail')}</div>
-          <div className={styles.sector_contain_header}>
-            <Header selectGroup={ruleItem.group_id} selectMiner={ruleItem.miner_id} onChange={(type,value)=>handleChange(type,value,index)} />
-            <div className={styles.sector_icons}>
-              {showIcon && <span className={styles.sector_icons_icon} onClick={() => handleRules('add', index)}>{ getSvgIcon('add')}</span>}
-              {deleteIcon && <span className={styles.sector_icons_icon} onClick={() => handleRules('delete', index)}>{ getSvgIcon('cancel')}</span> }
-            </div>
-          </div>
-          {ruleItem.miner_id && <>
-            <div className={styles.sector_rule}>
-              <div className={styles.sector_rule_title}>{tr('sector_rule_title')}</div>
-              {ruleItem.rule.map((rule:any) => {
-                return <>
-                  <div className={styles.sector_rule_main}>
-                    <Selects
-                      className={styles.sector_rule_select}
-                      value={rule.operator}
-                      disabled={true}
-                      options={rulesOptions}
-                    />
-                    <div className={styles.sector_rule_content}>
-                      <Input
-                        style={{borderColor:ruleItem.rule.warning ? 'red':''} }
-                        className={`custom_input ${styles.sector_rule_input}`}
-                        value={rule.operand}
-                        placeholder={tr(rule.placeholder) }
-                        onChange={(e)=>handleChange('rule',e.target.value,index)}
-                      />
-                      {ruleItem.rule.warning && <span className={styles.sector_rule_content_warning}>{tr(rule.warningText ) }</span> }
+  return (
+    <Modal
+      title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
+      destroyOnClose={true}
+      closeIcon={false}
+      width={630}
+      wrapClassName="custom_left_modal"
+      open={showModal}
+      onOk={handleSave}
+      onCancel={() => onChange('cancel', false)}
+      footer={[
+        <Button
+          className="cancel_btn"
+          key="cancel_btn"
+          onClick={() => onChange('cancel', false)}
+        >
+          {tr('cancel')}
+        </Button>,
+        <Button
+          className="primary_btn"
+          key="primary_btn"
+          loading={saveLoading}
+          onClick={handleSave}
+        >
+          {tr('confirm')}
+        </Button>,
+      ]}
+    >
+      <div>
+        {rules.map((ruleItem: any, index: number) => {
+          const showIcon = index === rules.length - 1
+          const deleteIcon = rules.length > 1
+          return (
+            <div key={index} className={styles.sector_contain}>
+              <div className={styles.sector_contain_title}>
+                {tr('rule_detail')}
+              </div>
+              <div className={styles.sector_contain_header}>
+                <Header
+                  selectGroup={ruleItem.group_id}
+                  selectMiner={ruleItem.miner_id}
+                  onChange={(type, value) => handleChange(type, value, index)}
+                />
+                <div className={styles.sector_icons}>
+                  {showIcon && (
+                    <span
+                      className={styles.sector_icons_icon}
+                      onClick={() => handleRules('add', index)}
+                    >
+                      {getSvgIcon('add')}
+                    </span>
+                  )}
+                  {deleteIcon && (
+                    <span
+                      className={styles.sector_icons_icon}
+                      onClick={() => handleRules('delete', index)}
+                    >
+                      {getSvgIcon('cancel')}
+                    </span>
+                  )}
+                </div>
+              </div>
+              {ruleItem.miner_id && (
+                <>
+                  <div className={styles.sector_rule}>
+                    <div className={styles.sector_rule_title}>
+                      {tr('sector_rule_title')}
                     </div>
                     {ruleItem.rule.map((rule: any) => {
                       return (

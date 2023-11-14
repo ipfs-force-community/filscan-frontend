@@ -1,7 +1,7 @@
 /** @format */
 
-import { getSvgIcon } from '@/svgsIcon';
-import { message } from 'antd';
+import { getSvgIcon } from '@/svgsIcon'
+import { message } from 'antd'
 
 // 创建一个全局的消息管理器
 const messageManager = {
@@ -14,34 +14,35 @@ const messageManager = {
     icon,
     suffix,
   }: {
-    type: string;
-    content: string;
-    duration?: number;
-    icon?: JSX.Element;
-    suffix?: JSX.Element;
+    type: string
+    content: string
+    duration?: number
+    icon?: JSX.Element
+    suffix?: JSX.Element
   }) => {
     if (messageManager.hideMessage) {
-      messageManager.hideMessage();
+      messageManager.hideMessage()
     }
 
-    const show_config: any = {};
+    const show_config: any = {}
     if (icon) {
-      show_config.icon = icon;
+      show_config.icon = icon
     }
 
     messageManager.hideMessage = message.open({
       content: suffix ? (
-        <span className='flex gap-x-4 items-center'>
+        <span className="flex items-center gap-x-4">
           {content} {suffix}
         </span>
       ) : (
-        <span className='flex gap-x-4 items-center'>
+        <span className="flex items-center gap-x-4">
           {content}
           <span
-            className='cursor-pointer'
+            className="cursor-pointer"
             onClick={() => {
-              messageManager.hide();
-            }}>
+              messageManager.hide()
+            }}
+          >
             {getSvgIcon('closeIcon')}
           </span>
         </span>
@@ -49,15 +50,15 @@ const messageManager = {
       duration,
       type,
       ...show_config,
-    });
+    })
   },
 
   hide: () => {
     if (messageManager.hideMessage) {
-      messageManager.hideMessage();
-      messageManager.hideMessage = null;
+      messageManager.hideMessage()
+      messageManager.hideMessage = null
     }
   },
-};
+}
 
-export default messageManager;
+export default messageManager

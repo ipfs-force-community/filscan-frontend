@@ -1,21 +1,20 @@
-import { makeObservable, observable, runInAction } from "mobx";
+import { makeObservable, observable, runInAction } from 'mobx'
 
 class CWStore {
-
-  finalHeight: number;
+  finalHeight: number
   constructor() {
-    this.finalHeight = 0;
+    this.finalHeight = 0
     makeObservable(this, {
       finalHeight: observable,
-    });
+    })
   }
 
   setFinalHeight(value: number) {
-    runInAction(()=>{
-      this.finalHeight = value;
+    runInAction(() => {
+      this.finalHeight = value
     })
   }
 }
 
-const cwStore = new CWStore();
-export default cwStore;
+const cwStore = new CWStore()
+export default cwStore

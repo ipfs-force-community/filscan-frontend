@@ -1,15 +1,15 @@
 /** @format */
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 interface FilscanStore {
-  theme: string;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-  lang: string;
-  setLang: React.Dispatch<React.SetStateAction<string>>;
+  theme: string
+  setTheme: React.Dispatch<React.SetStateAction<string>>
+  lang: string
+  setLang: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const FilscanStoreContext = createContext<FilscanStore | null>(null);
+export const FilscanStoreContext = createContext<FilscanStore | null>(null)
 
 // export const FilscanStoreProvider = ({
 //   children,
@@ -60,11 +60,11 @@ export const FilscanStoreContext = createContext<FilscanStore | null>(null);
 // };
 
 export const useFilscanStore = (): FilscanStore => {
-  const context = useContext(FilscanStoreContext);
+  const context = useContext(FilscanStoreContext)
   if (!context) {
     throw new Error(
-      'useFilscanStore must be used within a FilscanStoreProvider'
-    );
+      'useFilscanStore must be used within a FilscanStoreProvider',
+    )
   }
-  return context;
-};
+  return context
+}

@@ -1,22 +1,21 @@
-import { makeObservable, observable } from "mobx";
+import { makeObservable, observable } from 'mobx'
 
 class WalletStore {
-  walletCard= {
+  walletCard = {
     wallet: '',
-    account:''
+    account: '',
   }
   constructor() {
     makeObservable(this, {
       walletCard: observable,
-    });
+    })
   }
 
-  setWallet(walletItem:any) {
-    this.walletCard = walletItem;
+  setWallet(walletItem: any) {
+    this.walletCard = walletItem
   }
-
 }
 
-const walletStore = new WalletStore();
+const walletStore = new WalletStore()
 
-export default walletStore;
+export default walletStore
