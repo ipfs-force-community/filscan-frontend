@@ -2,7 +2,7 @@
 
 import { getSvgIcon } from '@/svgsIcon'
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
-import { Item, MenuItem } from './type'
+import { MenuItem } from './type'
 import Link from 'next/link'
 import TagInput from '@/packages/tagInput'
 import {
@@ -13,15 +13,8 @@ import {
   formatNumberPercentage,
   unitConversion,
 } from '@/utils'
-import Image from 'next/image'
-//import power from '@/assets/images/power.svg';
-import pledge from '@/assets/images/pledge.svg'
-// import gas from '@/assets/images/gas.svg';
-// import reward from '@/assets/images/reward.svg';
-import balance from '@/assets/images/balance.svg'
-import { Popconfirm, Switch } from 'antd'
-import monitorStore from '@/store/modules/account/monitor'
 import ActiveRules from '@/src/account/monitor/ActiveRules'
+import classNames from 'classnames'
 
 export const logTabs = [
   {
@@ -939,29 +932,6 @@ export const account_power = {
   columns: (tr: any, type?: string) => {
     let arr: Array<any> = [
       {
-        title: 'tag',
-        dataIndex: 'tag',
-        fixed: 'left',
-        width: 100,
-        ellipsis: {
-          showTitle: false,
-        },
-        render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />
-        },
-      },
-      {
-        title: 'miner_id',
-        dataIndex: 'miner_id',
-        width: 100,
-        fixed: 'left',
-        render: (text: string) => (
-          <Link href={`/account#power?miner=${text}`} className="link_text">
-            {text}
-          </Link>
-        ),
-      },
-      {
         title: 'group_name',
         dataIndex: 'group_name',
         width: 100,
@@ -972,13 +942,38 @@ export const account_power = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-              {' '}
+            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
               {showText}
             </div>
           )
         },
       },
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: 100,
+        fixed: 'left',
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <div className="flex items-center gap-x-[1px]">
+                <Link
+                  href={`/account#power?miner=${text}`}
+                  className="link_text"
+                >
+                  {text}
+                </Link>
+                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                  {record.tag == undefined || record.tag === ''
+                    ? '--'
+                    : record.tag}
+                </div>
+              </div>
+            </>
+          )
+        },
+      },
+
       {
         title: 'quality_power',
         dataIndex: 'quality_power',
@@ -1109,6 +1104,100 @@ export const account_power = {
       )
     }
     return arr
+  },
+}
+
+export const account_power_mobile = {
+  columns: (tr: any) => {
+    return {
+      group_name: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="text-mobile_font w-fit p-2 font-normal">
+              {showText}
+            </div>
+          )
+        },
+      },
+      miner_id: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <div className="flex items-center gap-x-[1px]">
+                <Link
+                  href={`/account#power?miner=${text}`}
+                  className="link_text"
+                >
+                  {text}
+                </Link>
+                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                  {record.tag == undefined || record.tag === ''
+                    ? '--'
+                    : record.tag}
+                </div>
+              </div>
+            </>
+          )
+        },
+      },
+
+      quality_power: {
+        width: 'unset',
+        fixed: false,
+      },
+      raw_power: {
+        width: 'unset',
+        fixed: false,
+      },
+      dc_power: {
+        width: 'unset',
+        fixed: false,
+      },
+      cc_power: {
+        width: 'unset',
+        fixed: false,
+      },
+      sector_size: {
+        width: 'unset',
+        fixed: false,
+      },
+      pledge_changed: {
+        width: 'unset',
+        fixed: false,
+      },
+      pledge_changed_per_t: {
+        width: 'unset',
+        fixed: false,
+      },
+      penalty: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          return (
+            <div className="box-border flex flex-shrink-0">
+              {renderFil(text)}
+            </div>
+          )
+        },
+      },
+      fault_sectors: {
+        fixed: false,
+        render: (text: string, record: any) => (
+          <span className={classNames(Number(text) ? '' : 'text_des_unit')}>
+            {formatNumber(text)}
+          </span>
+        ),
+      },
+      date: {
+        width: 'unset',
+        fixed: false,
+      },
+    }
   },
 }
 
