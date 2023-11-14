@@ -4,10 +4,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Translation } from '@/components/hooks/Translation'
 import styles from './index.module.scss'
 import Selects from '@/packages/selects'
-import Warn from '../warn'
 import { isPositiveInteger } from '@/utils'
 import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
+import Warn from '@/src/account/monitor/warn'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
 interface Props {
@@ -70,7 +70,13 @@ export default observer((props: Props) => {
           warnData[key].forEach((item: string, index: number) => {
             //最后一位是默认邮箱
             if (key === 'email_warn') {
-              if (index !== warnData[key].length - 1) {
+              if (warnData[key].length === 1) {
+                newObjWarn[key].push({
+                  ...obj,
+                  checked: true,
+                  inputValue: '',
+                })
+              } else if (index !== warnData[key].length - 1) {
                 newObjWarn[key].push({
                   ...obj,
                   checked: true,
@@ -124,6 +130,8 @@ export default observer((props: Props) => {
             newItem.rule[0].operand = value
           }
         }
+        break
+      default:
         break
     }
     newRules.splice(index, 1, newItem)
@@ -183,7 +191,7 @@ export default observer((props: Props) => {
 
   return (
     <Modal
-      title={`${tr('add_rules')}`}
+      title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
       destroyOnClose={true}
       closeIcon={false}
       width={630}

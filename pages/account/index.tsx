@@ -45,6 +45,7 @@ const Account: React.FC = () => {
       return
     } else {
       accountStore.getAccountMinersNumber()
+      accountStore.getAccountGroup()
     }
   }, [userInfo.mail])
 
@@ -96,7 +97,7 @@ const Account: React.FC = () => {
             mode="inline"
             className="custom_menu"
             selectedKeys={[selectedKey]}
-            defaultOpenKeys={['data_details', 'monitor']}
+            // defaultOpenKeys={['data_details', 'monitor']}
           >
             {account_manager.map(renderMenuItem)}
           </Menu>

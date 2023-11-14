@@ -1,15 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { getSvgIcon } from '@/svgsIcon';
-import classNames from 'classnames';
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { getSvgIcon } from '@/svgsIcon'
+import classNames from 'classnames'
 import styles from './index.module.scss'
 interface Props {
-    content: Array<any>,
-    value?:any
+  content: Array<any>
+  value?: any
 }
 
-export default (props:Props) => {
-  const { content, value } = props;
-  const groupRef = useRef<any>();
+export default (props: Props) => {
+  const { content, value } = props
+  const groupRef = useRef<any>()
   //const [offset, setOffset] = useState<any>({})
   const showValue = useMemo(() => {
     if (value) {
@@ -44,20 +44,34 @@ export default (props:Props) => {
   //   console.log(offset); // {top: XX, left: XX}
   // }
 
-  return <div ref={groupRef} className={classNames(`group`,styles.wrap)}>
-    <div className={classNames('flex items-center justify-between  min-w-[230px] w-fit h-[32px] px-2.5 rounded-[5px] cursor-pointer border border_color',styles.select)}>
-      {showValue?.title}
-      {getSvgIcon('downIcon')}
+  return (
+    <div ref={groupRef} className={classNames(`group`, styles.wrap)}>
+      <div
+        className={classNames(
+          'border_color flex h-[32px]  w-fit min-w-[230px] cursor-pointer items-center justify-between rounded-[5px] border px-2.5',
+          styles.select,
+        )}
+      >
+        {showValue?.title}
+        {getSvgIcon('downIcon')}
+      </div>
+      {content.length > 0 && (
+        <ul
+          //style={{top:offset.top+36+'px',left:offset.left+'px'}}
+          className={classNames(
+            `select_shadow border_color invisible absolute inset-y-full z-10 max-h-fit w-max min-w-[230px] list-none  rounded-[5px] border  p-2.5  group-hover:visible`,
+            styles['drop-menu'],
+          )}
+        >
+          {content.map((v: any, index) => {
+            return (
+              <li key={index} className="flex min-h-[36px] items-center ">
+                {v?.title}
+              </li>
+            )
+          })}
+        </ul>
+      )}
     </div>
-    {content.length > 0 && <ul
-      //style={{top:offset.top+36+'px',left:offset.left+'px'}}
-      className={classNames(`invisible group-hover:visible absolute z-10 min-w-[230px] w-max inset-y-full max-h-fit list-none p-2.5  border rounded-[5px]  select_shadow  border_color`, styles['drop-menu'])}>
-      {content.map((v:any,index) => {
-        return <li key={index} className='flex items-center min-h-[36px] '>
-          {v?.title}
-        </li>
-      })}
-    </ul>}
-
-  </div>
+  )
 }

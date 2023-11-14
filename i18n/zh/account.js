@@ -200,7 +200,9 @@ const account = {
   //扇区监控
   reset_button:'重置',
   add_rules: '添加规则',
-  rule_detail:'规则详情',
+  edit_rules:'修改规则',
+  rule_detail: '规则详情',
+  edit_write_warn:'告警方式',
   sector_rule_title: '扇区到期时间',
   sector_rule_des: '可自定义,建议大于30',
   sector_ruler_placeholder: '请输入正整数',

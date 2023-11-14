@@ -1,14 +1,14 @@
 /** @format */
 
-import React, { useState, useEffect, useRef } from 'react';
-import { Input, InputRef } from 'antd';
-import TextTooltip from '../textTooltip';
+import React, { useState, useEffect, useRef } from 'react'
+import { Input, InputRef } from 'antd'
+import TextTooltip from '../textTooltip'
 
 interface EditableTextProps {
-  text: string;
-  record: any; // 你可以替换为你需要的类型
-  isEdit?: boolean;
-  onChange?: (value: any) => void;
+  text: string
+  record: any // 你可以替换为你需要的类型
+  isEdit?: boolean
+  onChange?: (value: any) => void
 }
 
 const EditableText: React.FC<EditableTextProps> = ({
@@ -17,36 +17,36 @@ const EditableText: React.FC<EditableTextProps> = ({
   onChange,
   isEdit = true,
 }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [currentText, setCurrentText] = useState(text);
-  const inputRef = useRef<InputRef>(null);
+  const [isEditing, setIsEditing] = useState(false)
+  const [currentText, setCurrentText] = useState(text)
+  const inputRef = useRef<InputRef>(null)
 
   useEffect(() => {
     setCurrentText(text)
-  },[text])
+  }, [text])
 
   useEffect(() => {
     if (isEditing) {
-      inputRef.current?.focus();
+      inputRef.current?.focus()
     }
-  }, [isEditing]);
+  }, [isEditing])
 
   const handleTextClick = () => {
-    setIsEditing(true);
-  };
+    setIsEditing(true)
+  }
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentText(e.target.value);
+    setCurrentText(e.target.value)
     //发起请求，修改标签
-  };
+  }
 
   const handleBlur = () => {
-    setIsEditing(false);
+    setIsEditing(false)
     if (onChange) {
-      onChange(currentText);
+      onChange(currentText)
     }
     //save current
-  };
+  }
 
   return isEditing && isEdit ? (
     <Input
@@ -57,15 +57,16 @@ const EditableText: React.FC<EditableTextProps> = ({
       showCount={true}
       maxLength={20}
       onPressEnter={handleBlur}
-      className='!rounded-md custom_input  !w-4/5' // tailwindcss样式
+      className="custom_input !w-4/5  !rounded-md" // tailwindcss样式
     />
   ) : (
     <div
       onClick={handleTextClick}
-      className='flex des_bg_color h-8 w-fit max-w-[200px] text-xs items-center p-2 rounded-[5px] cursor-default overflow-hidden text-ellipsis'>
-      <TextTooltip className='cursor-default' text={currentText || '--'} />
+      className="des_bg_color flex h-8 w-fit max-w-[200px] cursor-default items-center overflow-hidden text-ellipsis rounded-[5px] p-2 text-xs"
+    >
+      <TextTooltip className="cursor-default" text={currentText || '--'} />
     </div>
-  );
-};
+  )
+}
 
-export default EditableText;
+export default EditableText

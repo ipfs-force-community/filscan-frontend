@@ -1,29 +1,29 @@
 /** @format */
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { fvmUrl } from '@/contents/apiUrl';
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { fvmUrl } from '@/contents/apiUrl'
 
 const ImageWithFallback = (props: any) => {
-  const { src, fallbackSrc = fvmUrl + `/images/default.png`, ...rest } = props;
-  const [imgSrc, setImgSrc] = useState(src || fallbackSrc);
+  const { src, fallbackSrc = fvmUrl + `/images/default.png`, ...rest } = props
+  const [imgSrc, setImgSrc] = useState(src || fallbackSrc)
 
   useEffect(() => {
-    const showSrc = src || fallbackSrc;
-    setImgSrc(showSrc);
-  }, [src]);
+    const showSrc = src || fallbackSrc
+    setImgSrc(showSrc)
+  }, [src])
 
   return (
     <Image
-      alt=''
+      alt=""
       {...rest}
-      className='rounded-full	cursor-pointer'
+      className="cursor-pointer	rounded-full"
       src={imgSrc}
       onError={() => {
-        setImgSrc(fallbackSrc);
+        setImgSrc(fallbackSrc)
       }}
     />
-  );
-};
+  )
+}
 
-export default ImageWithFallback;
+export default ImageWithFallback

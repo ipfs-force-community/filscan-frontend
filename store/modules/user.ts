@@ -1,60 +1,71 @@
-import { RequestResult, axiosServer } from "@/store/axiosServer";
-import { userInfo } from "@/store/ApiUrl";
-import { makeObservable, observable, runInAction } from "mobx";
+import { RequestResult, axiosServer } from '@/store/axiosServer'
+import { login, userInfo } from '@/store/ApiUrl'
+import { makeObservable, observable, runInAction } from 'mobx'
+import messageManager from '@/packages/message'
+import router from 'next/router'
 
 const defaultUser = {
-  name: "",
+  name: '',
   mail: '',
   last_login: 0,
-
 }
 
 class UserStore {
-  userInfo:Record<string,any>
+  userInfo: Record<string, any>
   constructor() {
-    this.userInfo= {
+    this.userInfo = {
       ...defaultUser,
-      loading:true
+      loading: true,
     }
     makeObservable(this, {
       userInfo: observable,
-    });
-    this.getUserInfo();
+    })
+    this.getUserInfo()
   }
 
   //获取用户登录信息
   async getUserInfo() {
-    const userData: RequestResult = await axiosServer(userInfo);
-    runInAction(()=>{
+    const userData: RequestResult = await axiosServer(userInfo)
+    runInAction(() => {
       this.userInfo = {
-        ...userData?.data || {},
-        last_login: userData?.data?.last_login_at||"",
-        loading:false
+        ...(userData?.data || {}),
+        last_login: userData?.data?.last_login_at || '',
+        loading: false,
       }
     })
+  }
 
+  async loginUserInfo(payload: Record<string, any>) {
+    const userData: any = await axiosServer(login, payload)
+    if (!userData.error) {
+      localStorage.setItem('token', userData.data?.token)
+      this.getUserInfo()
+      messageManager.showMessage({
+        type: 'success',
+        content: 'login successful',
+      })
+      router.push('/account#overview')
+    }
   }
 
   setUserInfo(user?: any) {
-    runInAction(()=>{
+    runInAction(() => {
       if (!user) {
         this.userInfo = {
           ...defaultUser,
-          loading: false
+          loading: false,
         }
       } else {
         this.userInfo = {
-          ...user || {},
-          last_login: user?.last_login_at||"",
-          loading:false
+          ...(user || {}),
+          last_login: user?.last_login_at || '',
+          loading: false,
         }
       }
     })
-
   }
-
 }
 
-const userStore = new UserStore();
+const userStore = new UserStore()
 
-export default userStore;
+export default userStore

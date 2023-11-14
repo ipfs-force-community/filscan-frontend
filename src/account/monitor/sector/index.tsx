@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Translation } from '@/components/hooks/Translation'
 import { monitor_list } from '@/contents/account'
-import Table from '@/packages/Table'
-import Header from '../header'
-import styles from './index.module.scss'
-import Rules from './Rules'
 import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
+import Table from '@/packages/Table'
+import Header from '../header'
+import Rules from './Rules'
+import styles from './index.module.scss'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' })
@@ -57,6 +57,8 @@ export default observer(() => {
       case 'save':
         saveRules(value)
         break
+      default:
+        break
     }
   }
 
@@ -102,6 +104,8 @@ export default observer(() => {
         if (result) {
           loadRules()
         }
+        break
+      default:
         break
     }
   }

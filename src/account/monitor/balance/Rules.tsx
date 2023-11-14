@@ -80,7 +80,13 @@ export default observer((props: Props) => {
           warnData[key].forEach((item: string, index: number) => {
             //最后一位是默认邮箱
             if (key === 'email_warn') {
-              if (index !== warnData[key].length - 1) {
+              if (warnData[key].length === 1) {
+                newObjWarn[key].push({
+                  ...obj,
+                  checked: true,
+                  inputValue: '',
+                })
+              } else if (index !== warnData[key].length - 1) {
                 newObjWarn[key].push({
                   ...obj,
                   checked: true,
@@ -236,7 +242,7 @@ export default observer((props: Props) => {
 
   return (
     <Modal
-      title={`${tr('add_rules')}`}
+      title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
       destroyOnClose={true}
       width={700}
       closeIcon={false}
