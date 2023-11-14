@@ -18,10 +18,12 @@ export default ({
 
   const handleClick = async () => {
     //添加分组
-    setLoading(true)
-    await accountStore.saveGroups({ group_name: value })
-    setLoading(false)
-    onChange(false)
+    if (value.length > 0) {
+      setLoading(true)
+      await accountStore.saveGroups({ group_name: value })
+      setLoading(false)
+      onChange(false)
+    }
   }
 
   return (

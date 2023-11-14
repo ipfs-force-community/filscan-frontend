@@ -1432,6 +1432,7 @@ export const account_miners = {
 
 const monitorUnit: Record<string, string> = {
   ExpireSectorMonitor: 'day',
+  BalanceMonitor: 'FIL',
 }
 
 //监控columns
@@ -1480,7 +1481,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
                     rule?.account_type?.toLocaleLowerCase() ||
                       record.monitor_type,
                   )} ${tr(rule.operator)} ${tr(rule.operand)} ${tr(
-                    monitorUnit[record.monitorType],
+                    monitorUnit[record.monitor_type],
                   )}`}
                 </li>
               )

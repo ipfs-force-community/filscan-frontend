@@ -9,6 +9,7 @@ import Warn from '../warn'
 import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
 import { defaultWarn } from '@/contents/account'
+import { getSvgIcon } from '@/svgsIcon'
 interface Props {
   showModal: boolean
   record?: Record<string, any>
@@ -148,9 +149,9 @@ export default observer((props: Props) => {
             newItem.rule[ruleItem].warning = true
           } else {
             newItem.rule[ruleItem].warning = false
-            newItem.rule[ruleItem].operand = value
           }
         }
+        newItem.rule[ruleItem].operand = value
         break
     }
     newRules.splice(index, 1, newItem)
@@ -186,10 +187,24 @@ export default observer((props: Props) => {
 
   const handleSave = () => {
     const payload: Array<Record<string, any>> = []
+    let warnings = false
+
     rules.forEach((rule: any) => {
       const emailList = rule?.warnList?.email_warn || []
       const messageList = rule?.warnList?.message_warn || []
       const phoneListList = rule?.warnList?.phone_warn || []
+      const rulesList: Array<any> = []
+      rule?.rule.forEach((v: any) => {
+        if (v.warning) {
+          warnings = true
+        }
+        rulesList.push({
+          account_type: v.category,
+          account_addr: v.addr,
+          operator: v.operator,
+          operand: v.operand,
+        })
+      })
       const obj = {
         monitor_type: 'BalanceMonitor',
         group_id_or_all: rule.group_id === 'all' ? -1 : Number(rule.group_id),
@@ -203,19 +218,13 @@ export default observer((props: Props) => {
         call_alert: phoneListList[0]?.checked
           ? phoneListList?.map((v: any) => v.inputValue).join(',')
           : '',
-        rules: rule?.rule.map((v: any) => {
-          return {
-            account_type: v.category,
-            account_addr: v.addr,
-            operator: v.operator,
-            operand: v.operand,
-          }
-        }),
+        rules: rulesList,
       }
       payload.push(obj)
     })
-    console.log('----333', payload)
-    onChange('save', payload)
+    if (!warnings) {
+      onChange('save', payload)
+    }
   }
 
   const rulesOptions = useMemo(() => {
@@ -348,13 +357,13 @@ export default observer((props: Props) => {
                                   )
                                 }
                               />
-                              {ruleItem.rule.warning && (
+                              {rule.warning && (
                                 <span
                                   className={
                                     styles.balance_rule_content_warning
                                   }
                                 >
-                                  {tr(ruleItem.rule.warningText)}
+                                  {tr(rule.warningText)}
                                 </span>
                               )}
                             </div>
@@ -374,7 +383,7 @@ export default observer((props: Props) => {
                                     )
                                   }
                                 >
-                                  +
+                                  {getSvgIcon('add')}
                                 </span>
                               )}
                               <span
@@ -388,7 +397,7 @@ export default observer((props: Props) => {
                                   )
                                 }
                               >
-                                -
+                                {getSvgIcon('cancel')}
                               </span>
                             </div>
                           </div>

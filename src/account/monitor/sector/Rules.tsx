@@ -127,9 +127,9 @@ export default observer((props: Props) => {
             newItem.rule[0].warning = true
           } else {
             newItem.rule[0].warning = false
-            newItem.rule[0].operand = value
           }
         }
+        newItem.rule[0].operand = value
         break
       default:
         break
@@ -140,10 +140,23 @@ export default observer((props: Props) => {
 
   const handleSave = async () => {
     const payload: Array<Record<string, any>> = []
+    let warnings = false
     rules.forEach((rule: any) => {
       const emailList = rule?.warnList?.email_warn || []
       const messageList = rule?.warnList?.message_warn || []
       const phoneListList = rule?.warnList?.phone_warn || []
+      const rulesList: Array<any> = []
+      rule?.rule.forEach((v: any) => {
+        if (v.warning) {
+          warnings = true
+        }
+        rulesList.push({
+          account_type: v.category,
+          account_addr: v.addr,
+          operator: v.operator,
+          operand: v.operand,
+        })
+      })
       const obj = {
         monitor_type: 'ExpireSectorMonitor',
         user_id: 27,
@@ -169,7 +182,9 @@ export default observer((props: Props) => {
       }
       payload.push(obj)
     })
-    onChange('save', payload)
+    if (!warnings) {
+      onChange('save', payload)
+    }
   }
 
   const handleRules = (type: string, index: number) => {
@@ -270,9 +285,7 @@ export default observer((props: Props) => {
                             <div className={styles.sector_rule_content}>
                               <Input
                                 style={{
-                                  borderColor: ruleItem.rule.warning
-                                    ? 'red'
-                                    : '',
+                                  borderColor: rule.warning ? 'red' : '',
                                 }}
                                 className={`custom_input ${styles.sector_rule_input}`}
                                 value={rule.operand}
@@ -281,7 +294,7 @@ export default observer((props: Props) => {
                                   handleChange('rule', e.target.value, index)
                                 }
                               />
-                              {ruleItem.rule.warning && (
+                              {rule.warning && (
                                 <span
                                   className={styles.sector_rule_content_warning}
                                 >
