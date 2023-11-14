@@ -539,44 +539,41 @@ export const overview = {
 export const account_lucky = {
   columns: (tr: any) => [
     {
-      title: 'tag',
-      dataIndex: 'tag',
-      width: '20%',
-      fixed: 'left',
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: 100,
       ellipsis: {
         showTitle: false,
       },
+      fixed: 'left',
       render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />
+        const showText = record.is_default ? tr('default_group') : text
+        return (
+          <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            {showText}
+          </div>
+        )
       },
     },
     {
       title: 'miner_id',
       dataIndex: 'miner_id',
-      width: '15%',
+      width: 100,
       fixed: 'left',
-
-      render: (text: string) => (
-        <Link href={`/miner/${text}`} className="link_text">
-          {text}
-        </Link>
-      ),
-    },
-    {
-      title: 'group_name',
-      dataIndex: 'group_name',
-      fixed: 'left',
-      width: '20%',
-      ellipsis: {
-        showTitle: false,
-      },
       render: (text: string, record: any) => {
-        const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-            {' '}
-            {showText}
-          </div>
+          <>
+            <div className="flex items-center gap-x-[1px]">
+              <Link href={`/account#power?miner=${text}`} className="link_text">
+                {text}
+              </Link>
+              <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                {record.tag == undefined || record.tag === ''
+                  ? '--'
+                  : record.tag}
+              </div>
+            </div>
+          </>
         )
       },
     },
@@ -611,6 +608,60 @@ export const account_lucky = {
         text ? formatNumberPercentage(text) + '%' : text,
     },
   ],
+}
+
+export const account_lucky_mobile = {
+  columns: (tr: any, type?: string) => {
+    return {
+      group_name: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="text-mobile_font w-fit p-2 font-normal">
+              {showText}
+            </div>
+          )
+        },
+      },
+      miner_id: {
+        width: 'unset',
+        fixed: false,
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <div className="flex items-center gap-x-[1px]">
+                <Link
+                  href={`/account#power?miner=${text}`}
+                  className="link_text"
+                >
+                  {text}
+                </Link>
+                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                  {record.tag == undefined || record.tag === ''
+                    ? '--'
+                    : record.tag}
+                </div>
+              </div>
+            </>
+          )
+        },
+      },
+      '24h_lucky': {
+        width: 'unset',
+        fixed: false,
+      },
+      '7d_lucky': {
+        width: 'unset',
+        fixed: false,
+      },
+      '30d_lucky': {
+        width: 'unset',
+        fixed: false,
+      },
+    }
+  },
 }
 
 export const account_balance = {
