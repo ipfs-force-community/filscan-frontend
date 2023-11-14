@@ -1,31 +1,31 @@
 /** @format */
 
-import { rank_header } from '@/contents/rank';
-import Segmented from '@/packages/segmented';
-import Select from '@/packages/select';
-import Link from 'next/link';
-import Image from 'next/image';
-import GoIcon from '@/assets/images/black_go.svg';
-import { Translation } from '@/components/hooks/Translation';
-import { BrowserView, MobileView } from '@/components/device-detect';
+import { rank_header } from '@/contents/rank'
+import Segmented from '@/packages/segmented'
+import Select from '@/packages/select'
+import Link from 'next/link'
+import Image from 'next/image'
+import GoIcon from '@/assets/images/black_go.svg'
+import { Translation } from '@/components/hooks/Translation'
+import { BrowserView, MobileView } from '@/components/device-detect'
 import styles from './header.module.scss'
-import classNames from 'classnames';
+import classNames from 'classnames'
 export default ({
   origin,
   active,
   onChange,
 }: {
-  origin: string;
-  active: string;
-  onChange: (type: string, value: string) => void;
+  origin: string
+  active: string
+  onChange: (type: string, value: string) => void
 }) => {
-  const { tr } = Translation({ ns: 'rank' });
+  const { tr } = Translation({ ns: 'rank' })
 
-  let SegmentedProps: any = {};
+  let SegmentedProps: any = {}
   if (origin === 'home') {
     SegmentedProps.onChange = (value: string) => {
-      onChange('active', value);
-    };
+      onChange('active', value)
+    }
   }
 
   return (
@@ -34,77 +34,75 @@ export default ({
         <div className={classNames(styles['top-wrap'])}>
           <div> {tr('rank_title')}</div>
           {rank_header[active] && (
-            <div className='flex gap-x-2.5 items-center'>
+            <div className="flex items-center gap-x-2.5">
               {Object.keys(rank_header[active]).map((item) => {
                 return (
                   <Select
                     key={`${active}_${item}`}
                     options={rank_header[active][item]}
-                    ns='rank'
+                    ns="rank"
                     onChange={(value: string) => {
-                      onChange(item, value);
+                      onChange(item, value)
                     }}
                   />
-                );
+                )
               })}
             </div>
           )}
         </div>
         <Segmented
           data={rank_header.tabList}
-          ns='rank'
+          ns="rank"
           defaultValue={active}
-          defaultActive='growth'
+          defaultActive="growth"
           isHash={origin !== 'home'}
           {...SegmentedProps}
         />
       </MobileView>
       <BrowserView>
-        <div className='flex justify-between items-center mx-2.5'>
-          <div
-            className={`flex items-center w-full gap-x-2.5`}>
-            <div className='font-PingFang font-semibold text-lg'>
+        <div className="mx-2.5 flex items-center justify-between">
+          <div className={`flex w-full items-center gap-x-2.5`}>
+            <div className="font-PingFang text-lg font-semibold">
               {tr('rank_title')}
             </div>
-            <div className={ `flex items-center ${origin !== 'home'? 'flex-1 justify-between':'gap-x-4'}`}>
+            <div
+              className={`flex items-center ${
+                origin !== 'home' ? 'flex-1 justify-between' : 'gap-x-4'
+              }`}
+            >
               <Segmented
                 data={rank_header.tabList}
-                ns='rank'
+                ns="rank"
                 defaultValue={active}
-                defaultActive='growth'
+                defaultActive="growth"
                 isHash={origin !== 'home'}
                 {...SegmentedProps}
               />
               {rank_header[active] && (
-                <div className='flex gap-x-2.5 items-center'>
+                <div className="flex items-center gap-x-2.5">
                   {Object.keys(rank_header[active]).map((item) => {
                     return (
                       <Select
                         key={`${active}_${item}`}
                         options={rank_header[active][item]}
-                        ns='rank'
+                        ns="rank"
                         onChange={(value: string) => {
-                          onChange(item, value);
+                          onChange(item, value)
                         }}
                       />
-                    );
+                    )
                   })}
                 </div>
               )}
             </div>
-
           </div>
           {origin === 'home' && (
             <Link href={`/rank#${active}`}>
-              <GoIcon
-                className='cursor-pointer'
-                width={18}
-                height={18}
-              />
+              <GoIcon className="cursor-pointer" width={18} height={18} />
             </Link>
           )}
-        </div></BrowserView>
+        </div>
+      </BrowserView>
     </>
-
-  );
-};
+  )
+}

@@ -1,21 +1,35 @@
-import { DownOutlined, LeftOutlined, UpOutlined } from "@ant-design/icons"
-import { useState } from "react"
+import { DownOutlined, LeftOutlined, UpOutlined } from '@ant-design/icons'
+import { useState } from 'react'
 
 interface Props {
-    title: string,
-    children?:JSX.Element
+  title: string
+  children?: JSX.Element
 }
 
 export default (props: Props) => {
-  const {title,children } = props
-  const [show,setShow] = useState(false)
-  return <div className="flex items-center flex-col min-h-[36px] h-fit rounded-[5px] border border_color" >
-    <div className={ `flex justify-between items-center w-full des_bg_color py-3 px-2.5 rounded-[5px] ${show ? 'rounded-b-none':''}`} onClick={() => setShow(!show)}>
-      <span className="flex items-center text-base "> {title}</span>
-      { show ?<DownOutlined rev={undefined} />: <LeftOutlined rev={undefined} />}
+  const { title, children } = props
+  const [show, setShow] = useState(false)
+  return (
+    <div className="border_color flex h-fit min-h-[36px] flex-col items-center rounded-[5px] border">
+      <div
+        className={`des_bg_color flex w-full items-center justify-between rounded-[5px] px-2.5 py-3 ${
+          show ? 'rounded-b-none' : ''
+        }`}
+        onClick={() => setShow(!show)}
+      >
+        <span className="flex items-center text-base "> {title}</span>
+        {show ? (
+          <DownOutlined rev={undefined} />
+        ) : (
+          <LeftOutlined rev={undefined} />
+        )}
+      </div>
+      <div
+        className="flex w-full flex-col gap-y-2.5 bg-transparent p-5"
+        style={{ display: show ? 'flex' : 'none' }}
+      >
+        {children}
+      </div>
     </div>
-    <div className='flex flex-col w-full p-5 gap-y-2.5 bg-transparent' style={{display:show?'flex':'none'}}>
-      { children}
-    </div>
-  </div>
+  )
 }

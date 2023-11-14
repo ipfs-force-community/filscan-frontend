@@ -22,7 +22,7 @@
     "build:main": "env-cmd -f .env.minner next build",
     "build:cali": "env-cmd -f .env.calibration next build ",
     "de": "next start --port 9091",
-    "lint": "next lint"
+    "lint-fix": "eslint --fix --ext ts,tsx pages && eslint --fix --ext ts,tsx src && eslint --fix --ext ts,tsx contents && eslint --fix --ext ts,tsx components && eslint --fix --ext ts,tsx utils"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.5",

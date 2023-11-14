@@ -1,39 +1,41 @@
 /** @format */
 
-import { Translation } from '@/components/hooks/Translation';
-import AuthorIcon from '@/assets/images/author.svg';
-import DownIcon from '@/assets/images/down.svg';
-import { account_manager } from '@/contents/account';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import userStore from '@/store/modules/user';
-import { observer } from 'mobx-react';
+import { Translation } from '@/components/hooks/Translation'
+import AuthorIcon from '@/assets/images/author.svg'
+import DownIcon from '@/assets/images/down.svg'
+import { account_manager } from '@/contents/account'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import userStore from '@/store/modules/user'
+import { observer } from 'mobx-react'
 
 //已登录状态
 export default observer(() => {
-  const { tr } = Translation({ ns: 'account' });
-  const { userInfo } = userStore;
-  const {name,mail} = userInfo
-  const router = useRouter();
-  const showName = name || mail || '';
+  const { tr } = Translation({ ns: 'account' })
+  const { userInfo } = userStore
+  const { name, mail } = userInfo
+  const router = useRouter()
+  const showName = name || mail || ''
 
   if (!showName) {
     return (
-      <Link href='/account/login' as='/account/login' scroll={false}>
-        <span className='flex items-center justify-center h-[46px]  border border_color  main_bg_color primary_btn !rounded-none'>
+      <Link href="/account/login" as="/account/login" scroll={false}>
+        <span className="border_color main_bg_color primary_btn flex  h-[46px] items-center  justify-center !rounded-none border">
           {tr('login')}
         </span>
       </Link>
-    );
+    )
   }
   return (
-    <div className='group relative text-sm'>
-      <div className=' flex gap-x-2 items-center cursor-pointer'>
-        <AuthorIcon width={32} height={32} className='rounded-full'/>
-        <span>{showName?.length > 5? showName?.slice(0, 5) + '...' : showName}</span>
+    <div className="group relative text-sm">
+      <div className=" flex cursor-pointer items-center gap-x-2">
+        <AuthorIcon width={32} height={32} className="rounded-full" />
+        <span>
+          {showName?.length > 5 ? showName?.slice(0, 5) + '...' : showName}
+        </span>
         <DownIcon width={8} height={4} />
       </div>
-      <ul className='hidden group-hover:block absolute z-50 inset-y-full h-fit w-max list-none  border  p-4 rounded-[5px] select_shadow main_bg_color  border_color'>
+      <ul className="select_shadow main_bg_color border_color absolute inset-y-full z-50 hidden h-fit  w-max  list-none rounded-[5px] border p-4  group-hover:block">
         {account_manager.map((item, index) => {
           if (item.children && item.children.length > 0) {
             return null
@@ -44,32 +46,34 @@ export default observer(() => {
                 key={index}
                 onClick={() => {
                   //logout
-                  localStorage.removeItem('token');
+                  localStorage.removeItem('token')
                   userStore.setUserInfo()
-                  router.reload();
+                  router.reload()
                 }}
-                className='h-10  text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>
-                <span className='flex items-center gap-x-2 px-4'>
+                className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"
+              >
+                <span className="flex items-center gap-x-2 px-4">
                   {item.icon}
                   {tr(item.label)}
                 </span>
               </li>
-            );
+            )
           }
           return (
             <Link
               key={index}
               href={`/account/#${item.href}`}
               scroll={false}
-              className='h-10  text_color font-normal flex items-center cursor-pointer rounded-[5px]  hover:text-primary hover:bg-bg_hover'>
-              <span className='flex items-center gap-x-2 px-4'>
+              className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"
+            >
+              <span className="flex items-center gap-x-2 px-4">
                 {item.icon}
                 {tr(item.label)}
               </span>
             </Link>
-          );
+          )
         })}
       </ul>
     </div>
-  );
-});
+  )
+})

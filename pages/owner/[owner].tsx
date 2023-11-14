@@ -1,72 +1,72 @@
 /** @format */
 /** @format */
 
-import { apiUrl } from "@/contents/apiUrl";
-import fetchData from "@/store/server";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import AccountBalance from "@/src/detail/accountBalance";
-import Power from "@/src/detail/Power";
-import OverView from "@/src/detail/overView";
-import { miner_overview, owner_detail } from "@/contents/detail";
-import AccountChange from "@/src/detail/accountChange";
-import PowerChange from "@/src/detail/powerChange";
-import { Translation } from "@/components/hooks/Translation";
-import Copy from "@/components/copy";
-import classNames from "classnames";
-import styles from "./[owner].module.scss";
-import Link from "next/link";
-import CopySvgMobile from "@/assets/images/icon-copy.svg";
-import useWindow from "@/components/hooks/useWindown";
-import { BrowserView, MobileView } from "@/components/device-detect";
+import { apiUrl } from '@/contents/apiUrl'
+import fetchData from '@/store/server'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import AccountBalance from '@/src/detail/accountBalance'
+import Power from '@/src/detail/Power'
+import OverView from '@/src/detail/overView'
+import { miner_overview, owner_detail } from '@/contents/detail'
+import AccountChange from '@/src/detail/accountChange'
+import PowerChange from '@/src/detail/powerChange'
+import { Translation } from '@/components/hooks/Translation'
+import Copy from '@/components/copy'
+import classNames from 'classnames'
+import styles from './[owner].module.scss'
+import Link from 'next/link'
+import CopySvgMobile from '@/assets/images/icon-copy.svg'
+import useWindow from '@/components/hooks/useWindown'
+import { BrowserView, MobileView } from '@/components/device-detect'
 
 export default () => {
-  const router = useRouter();
-  const { owner } = router.query;
-  const [data, setData] = useState<any>({});
-  const [loading, setLoading] = useState(false);
-  const { tr } = Translation({ ns: "detail" });
-  const { isMobile } = useWindow();
+  const router = useRouter()
+  const { owner } = router.query
+  const [data, setData] = useState<any>({})
+  const [loading, setLoading] = useState(false)
+  const { tr } = Translation({ ns: 'detail' })
+  const { isMobile } = useWindow()
   useEffect(() => {
     if (owner) {
-      loadData();
+      loadData()
     }
-  }, [owner]);
+  }, [owner])
 
   const loadData = async () => {
-    setLoading(true);
+    setLoading(true)
     const result: any = await fetchData(apiUrl.detail_owner, {
       owner_id: owner,
-    });
-    setLoading(false);
-    setData(result?.account_owner || {});
-  };
+    })
+    setLoading(false)
+    setData(result?.account_owner || {})
+  }
 
   return (
-    <div className={classNames("main_contain", styles.miner)}>
+    <div className={classNames('main_contain', styles.miner)}>
       <div
         className={
-          "flex items-center gap-x-2 mb-2.5 DINPro-Medium font-medium text-lg"
+          'DINPro-Medium mb-2.5 flex items-center gap-x-2 text-lg font-medium'
         }
       >
         <BrowserView>
           <span>{owner}</span>
-          {owner && typeof owner === "string" && <Copy text={owner} />}
+          {owner && typeof owner === 'string' && <Copy text={owner} />}
         </BrowserView>
         <MobileView>
           <span className="copy-row">
             <span className="normal-text">{owner}</span>
-            {owner && typeof owner === "string" && (
+            {owner && typeof owner === 'string' && (
               <Copy text={owner} icon={<CopySvgMobile />} className="copy-lg" />
             )}
           </span>
         </MobileView>
       </div>
-      <div className="w-full card_shadow rounded-xl">
+      <div className="card_shadow w-full rounded-xl">
         <div
           className={classNames(
-            "flex w-full border-b border_color",
-            styles.column
+            'border_color flex w-full border-b',
+            styles.column,
           )}
         >
           <AccountBalance
@@ -78,16 +78,16 @@ export default () => {
 
         <ul
           className={classNames(
-            "py-8 px-7  flex gap-y-6 flex-col",
-            styles["owner-wrap"]
+            'flex flex-col  gap-y-6 px-7 py-8',
+            styles['owner-wrap'],
           )}
         >
           {owner_detail.list.map((item) => {
             if (isMobile) {
-              if (item.dataIndex === "account_address") {
+              if (item.dataIndex === 'account_address') {
                 item.render = (text: string) => {
                   return (
-                    <div className={classNames("copy-row")}>
+                    <div className={classNames('copy-row')}>
                       <span className="text">
                         <Link className="link" href={`/address/${text}`}>
                           {text}
@@ -99,12 +99,12 @@ export default () => {
                         className="copy"
                       />
                     </div>
-                  );
-                };
+                  )
+                }
               }
               if (
-                item.dataIndex === "owned_miners" ||
-                item.dataIndex === "active_miners"
+                item.dataIndex === 'owned_miners' ||
+                item.dataIndex === 'active_miners'
               ) {
                 item.render = (text: Array<any>, record: any) => {
                   return (
@@ -120,43 +120,43 @@ export default () => {
                             >
                               {item}
                             </Link>
-                          );
+                          )
                         })}
                     </span>
-                  );
-                };
+                  )
+                }
               }
             }
 
-            const { title, render, dataIndex } = item;
-            const value = data[dataIndex];
-            const renderDom = render ? render(value, data) : value;
+            const { title, render, dataIndex } = item
+            const value = data[dataIndex]
+            const renderDom = render ? render(value, data) : value
 
             return (
               <li
                 key={dataIndex}
                 className={classNames(
-                  "flex w-full items-baseline",
-                  styles["owner-item-reset"],
-                  (item.dataIndex === "owned_miners" ||
-                    item.dataIndex === "active_miners") &&
-                    styles["owner-item"]
+                  'flex w-full items-baseline',
+                  styles['owner-item-reset'],
+                  (item.dataIndex === 'owned_miners' ||
+                    item.dataIndex === 'active_miners') &&
+                    styles['owner-item'],
                 )}
               >
-                <div className="text_des text-sm w-28">{tr(title)}</div>
+                <div className="text_des w-28 text-sm">{tr(title)}</div>
                 <span className="flex-1">{renderDom}</span>
               </li>
-            );
+            )
           })}
         </ul>
       </div>
 
       <OverView overView={miner_overview} accountId={owner} />
 
-      <div className={classNames("flex mt-6 gap-x-5", styles.bottom)}>
-        <AccountChange accountId={owner} interval={"1m"} />
+      <div className={classNames('mt-6 flex gap-x-5', styles.bottom)}>
+        <AccountChange accountId={owner} interval={'1m'} />
         <PowerChange accountId={owner} type="owner" />
       </div>
     </div>
-  );
-};
+  )
+}

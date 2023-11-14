@@ -1,29 +1,29 @@
 /** @format */
 
-import { Translation } from '@/components/hooks/Translation';
-import MinerAdd from './Add';
-import { useHash } from '@/components/hooks/useHash';
-import { proApi } from '@/contents/apiUrl';
-import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import GroupAdd from './GroupAdd';
-import { MinerNum, groupsItem } from '../type';
-import useAxiosData from '@/store/useAxiosData';
+import { Translation } from '@/components/hooks/Translation'
+import MinerAdd from './Add'
+import { useHash } from '@/components/hooks/useHash'
+import { proApi } from '@/contents/apiUrl'
+import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
+import GroupAdd from './GroupAdd'
+import { MinerNum, groupsItem } from '../type'
+import useAxiosData from '@/store/useAxiosData'
 //import { GroupsStoreContext, useMinerStore } from '../content';
-import Groups from './Groups';
+import Groups from './Groups'
 import accountStore from '@/store/modules/account'
 
 export default () => {
-  const { hashParams } = useHash();
-  const { type, group } = hashParams || {};
-  const { tr } = Translation({ ns: 'account' });
-  const { countMiners } = accountStore;
-  const { miners_count,max_miners_count} = countMiners;
-  const [groups, setGroups] = useState<Array<groupsItem>>([]);
-  const [defaultGroupsId, setDefaultGroupsId] = useState();
+  const { hashParams } = useHash()
+  const { type, group } = hashParams || {}
+  const { tr } = Translation({ ns: 'account' })
+  const { countMiners } = accountStore
+  const { miners_count, max_miners_count } = countMiners
+  const [groups, setGroups] = useState<Array<groupsItem>>([])
+  const [defaultGroupsId, setDefaultGroupsId] = useState()
   // const {setAllNum } = useMinerStore();
-  const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups);
-  const { axiosData } = useAxiosData();
+  const { data: groupsData, loading, error } = useAxiosData(proApi.getGroups)
+  const { axiosData } = useAxiosData()
 
   // useEffect(() => {
   //   loadMinersNum()
@@ -35,34 +35,34 @@ export default () => {
   // }
 
   useEffect(() => {
-    calcGroups(groupsData?.group_info_list || []);
-  }, [groupsData]);
+    calcGroups(groupsData?.group_info_list || [])
+  }, [groupsData])
 
   //组成公共select item
   const calcGroups = (groupResult: Array<groupsItem>) => {
-    const new_data: any = [];
-    let default_groups_id;
+    const new_data: any = []
+    let default_groups_id
     groupResult?.forEach((item: groupsItem) => {
       if (item.is_default) {
-        default_groups_id = item.group_id;
+        default_groups_id = item.group_id
       }
       new_data.push({
         ...item,
         label: item.is_default ? tr('default_group') : item.group_name,
         value: item.group_id,
-      });
-    });
-    setDefaultGroupsId(default_groups_id);
-    setGroups(new_data);
-  };
+      })
+    })
+    setDefaultGroupsId(default_groups_id)
+    setGroups(new_data)
+  }
 
   const groupDetail = useMemo(() => {
     if (group) {
-      const file = groups?.find((v: any) => v.group_id === Number(group));
-      return file;
+      const file = groups?.find((v: any) => v.group_id === Number(group))
+      return file
     }
-    return undefined;
-  }, [group, groups]);
+    return undefined
+  }, [group, groups])
 
   const renderChildren = () => {
     if (type === 'miner_add' && groupsData) {
@@ -72,27 +72,29 @@ export default () => {
           defaultId={defaultGroupsId}
           minersNum={countMiners}
         />
-      );
+      )
     }
 
-    if (type === 'group_add' ) {
+    if (type === 'group_add') {
       return (
         <GroupAdd
           groupId={group}
           groupDetail={groupDetail}
           minersNum={countMiners}
         />
-      );
+      )
     }
     if (group && groupDetail) {
-      return <GroupAdd
-        groupId={group}
-        groupDetail={groupDetail}
-        minersNum={countMiners}
-      />
+      return (
+        <GroupAdd
+          groupId={group}
+          groupDetail={groupDetail}
+          minersNum={countMiners}
+        />
+      )
     }
-    return <Groups />;
-  };
+    return <Groups />
+  }
 
   return (
     // <GroupsStoreContext.Provider
@@ -107,33 +109,38 @@ export default () => {
     //     },
     //   }}>
     <>
-      <p className='w-full mb-5 flex align-baseline justify-between	'>
-        <span className='font-semibold text-lg	 font-PingFang'>
+      <p className="mb-5 flex w-full justify-between align-baseline	">
+        <span className="font-PingFang text-lg	 font-semibold">
           {tr('miners')}
-          <span className='text_des text-sm ml-2 font-DIN'>
+          <span className="text_des ml-2 font-DIN text-sm">
             {miners_count}/{max_miners_count}
           </span>
         </span>
-        <div className='flex gap-x-2.5 items-center'>
+        <div className="flex items-center gap-x-2.5">
           <Link
             href={`/account#miners?type=group_add`}
             scroll={false}
-            className={ `flex rounded-[5px] border border-color  items-center gap-x-2.5 text_color ${type === 'group_add' ?'confirm_btn':'cancel_btn'}`}>
+            className={`border-color text_color flex items-center  gap-x-2.5 rounded-[5px] border ${
+              type === 'group_add' ? 'confirm_btn' : 'cancel_btn'
+            }`}
+          >
             {/* {getSvgIcon('addIcon')} */}
             {tr('group_add')}
           </Link>
           <Link
             href={`/account#miners?type=miner_add`}
             scroll={false}
-            className={ `cancel_btn  border border-color flex rounded-[5px] items-center gap-x-2.5 text_color ${type === 'miner_add' ?'confirm_btn':'cancel_btn'}`}>
+            className={`cancel_btn  border-color text_color flex items-center gap-x-2.5 rounded-[5px] border ${
+              type === 'miner_add' ? 'confirm_btn' : 'cancel_btn'
+            }`}
+          >
             {/* {getSvgIcon('addIcon')} */}
             {tr('miners_add')}
           </Link>
         </div>
-
       </p>
-      { renderChildren() }
+      {renderChildren()}
     </>
     // </GroupsStoreContext.Provider>
-  );
-};
+  )
+}
