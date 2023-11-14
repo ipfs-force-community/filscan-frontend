@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react'
 import messageManager from '@/packages/message'
 import { useRouter } from 'next/router'
 import accountStore from '@/store/modules/account'
-import message from '@/src/message'
 
 /** @format */
 

@@ -698,7 +698,6 @@ export const account_balance = {
     {
       title: 'owner_balance',
       dataIndex: 'owner_balance',
-      // width: 170,
       exports: ['Owner_balance_changed'],
       amountUnit: {
         owner_balance: { unit: 'fil', number: 0 },
