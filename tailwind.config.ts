@@ -7,20 +7,21 @@ const config: Config = {
     './packages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,jsx,ts,tsx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './contents/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   variants: {
     extend: {
       visibility: ['group-hover'],
       content: ['before', 'after'],
       gridTemplateColumns: {
-        'custom': '25% 30% 30% 15%',
-      }
+        custom: '25% 30% 30% 15%',
+      },
     },
   },
   theme: {
     extend: {
       width: {
-        'inherit': 'inherit',
+        inherit: 'inherit',
       },
       screens: {
         sm: '480px',
@@ -35,33 +36,35 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily: {
-        'PingFang': ['PingFang SC', 'sans-serif'],
-        'Barlow': ['Barlow'],
-        "DIN": ['DINPro'],
-        "DINPro-Bold": ['DINPro-Bold'],
-        "DINPro-Medium": ['DINPro-Medium']
+        PingFang: ['PingFang SC', 'sans-serif'],
+        Barlow: ['Barlow'],
+        DIN: ['DINPro'],
+        'DINPro-Bold': ['DINPro-Bold'],
+        'DINPro-Medium': ['DINPro-Medium'],
       },
       //
       colors: {
         // 亮色模式颜色配置
         bgColor: '#FFFFFF',
         bgDesColor: '#F6F6F6',
+        bg_color_5: 'rgba(0,0,0,0.05)',
         footerColor: '#222121',
         font: '#000000',
         font_des: 'rgba(0,0,0,0.6)',
-        accountBg:'rgba(0,0,0,0.9)',
+        accountBg: 'rgba(0,0,0,0.9)',
         border_des: '#F0F1F3',
         border: '#E6E8Eb',
         primary: '#1C6AFD',
         bg_hover: 'rgba(28, 106, 253, 0.1)',
         select_bg: 'rgba(28, 106, 253, 0.6)',
         icon_border: 'rgba(0,0,0,0.2)',
-        bgCopy:'rgba(51, 106, 250, 0.5)',
+        bgCopy: 'rgba(51, 106, 250, 0.5)',
         secondary: '#00FF00',
         success: '#059b02',
         tipColor: '#1c1c1c',
-        fvmBg:'#020A1A',
+        fvmBg: '#020A1A',
         success_bg: 'rgba(64, 162, 145, 0.10)',
+        mobile_font: '#333',
         // // 暗色模式颜色配置
         // dark: {
         //   font:'#FFFFFF',
@@ -72,10 +75,9 @@ const config: Config = {
         //   font_des:'rgba(255,255,255,0.6)',
         // },
       },
-
     },
   },
-  plugins: []
+  plugins: [],
   // plugins: [
   //     plugin(function({ addUtilities, e, theme }) {
   //     const colors:any = theme('colors', {})

@@ -3,7 +3,7 @@
 import { Translation } from '@/components/hooks/Translation'
 import Table from '@/packages/Table'
 import { useEffect, useMemo, useState } from 'react'
-import { account_power } from '@/contents/account'
+import { account_power, account_power_mobile } from '@/contents/account'
 import ExportExcel from '@/packages/exportExcel'
 import DateTime from '@/src/account/DateTIme'
 import { formatDateTime } from '@/utils'
@@ -13,7 +13,12 @@ import Tooltip from '@/packages/tooltip'
 import manageStore from '@/store/modules/account/manage'
 import Groups from '../../Groups'
 import { observer } from 'mobx-react'
-
+import { BrowserView, MobileView } from '@/components/device-detect'
+import MTable from '@/packages/mobile/table'
+import useWindow from '@/components/hooks/useWindown'
+import { get } from 'lodash'
+import classNames from 'classnames'
+import styles from './index.module.scss'
 interface Props {
   selectedKey: string
 }
@@ -24,6 +29,7 @@ export default observer((props: Props) => {
   const { hashParams } = useHash()
   const { powerData, powerLoading } = manageStore
   const [active, setActive] = useState<string>('-1')
+  const { isMobile } = useWindow()
   const [date, setDate] = useState({
     startTime: formatDateTime(
       new Date().getTime() / 1000,
@@ -37,6 +43,13 @@ export default observer((props: Props) => {
 
   const columns = useMemo(() => {
     return account_power.columns(tr).map((item) => {
+      if (isMobile) {
+        const mItem = get(account_power_mobile.columns(tr), item['dataIndex'])
+        item = {
+          ...item,
+          ...mItem,
+        }
+      }
       if (item.titleTip) {
         ;(item.excelTitle =
           item.dataIndex === 'sector_count_change'
@@ -53,7 +66,7 @@ export default observer((props: Props) => {
       }
       return { ...item }
     })
-  }, [tr])
+  }, [tr, isMobile])
 
   useEffect(() => {
     load()
@@ -75,52 +88,106 @@ export default observer((props: Props) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div className="flex  flex-col">
-          <span className="w-full font-PingFang text-lg font-semibold	">
-            {tr(selectedKey)}
-          </span>
-          <span className="text_des text-xs">
-            <span>{tr('last_time')}</span>
-            <span className="ml-2">
-              {formatDateTime(powerData?.epoch_time)}
+      <BrowserView>
+        <div className="flex items-center justify-between">
+          <div className="flex  flex-col">
+            <span className="w-full font-PingFang text-lg font-semibold	">
+              {tr(selectedKey)}
             </span>
-          </span>
+            <span className="text_des text-xs">
+              <span>{tr('last_time')}</span>
+              <span className="ml-2">
+                {formatDateTime(powerData?.epoch_time)}
+              </span>
+            </span>
+          </div>
+          <div className="flex gap-x-2.5">
+            <Groups
+              selectGroup={active}
+              onChange={(value: string) => {
+                load(value)
+                setActive(value)
+              }}
+            />
+            <DateTime
+              defaultValue={[date.startTime, date.endTime]}
+              onChange={(start, end) => {
+                load(undefined, {
+                  startTime: start,
+                  endTime: end,
+                })
+                setDate({
+                  startTime: start,
+                  endTime: end,
+                })
+              }}
+            />
+            <BrowserView>
+              <ExportExcel
+                columns={columns}
+                data={powerData?.power_detail_list || []}
+                fileName={tr(selectedKey)}
+              />
+            </BrowserView>
+          </div>
         </div>
-        <div className="flex gap-x-2.5">
-          <Groups
-            selectGroup={active}
-            onChange={(value: string) => {
-              load(value)
-              setActive(value)
-            }}
-          />
-          <DateTime
-            defaultValue={[date.startTime, date.endTime]}
-            onChange={(start, end) => {
-              load(undefined, {
-                startTime: start,
-                endTime: end,
-              })
-              setDate({
-                startTime: start,
-                endTime: end,
-              })
-            }}
-          />
-          <ExportExcel
-            columns={columns}
+      </BrowserView>
+      <MobileView>
+        <div className={styles['title-wrap']}>
+          <div className="flex  flex-col">
+            <span className={styles.title}>{tr(selectedKey)}</span>
+            <span className={styles.time}>
+              <span>{tr('last_time')}</span>
+              <span className="ml-2">
+                {formatDateTime(powerData?.epoch_time)}
+              </span>
+            </span>
+          </div>
+          <div className="flex gap-x-2.5">
+            <Groups
+              selectGroup={active}
+              onChange={(value: string) => {
+                load(value)
+                setActive(value)
+              }}
+            />
+            <DateTime
+              defaultValue={[date.startTime, date.endTime]}
+              onChange={(start, end) => {
+                load(undefined, {
+                  startTime: start,
+                  endTime: end,
+                })
+                setDate({
+                  startTime: start,
+                  endTime: end,
+                })
+              }}
+            />
+          </div>
+        </div>
+      </MobileView>
+      <div
+        className={classNames(
+          'card_shadow border_color mt-5 rounded-xl border p-4',
+          styles['table-wrap'],
+        )}
+      >
+        <BrowserView>
+          <Table
             data={powerData?.power_detail_list || []}
-            fileName={tr(selectedKey)}
+            columns={columns}
+            loading={powerLoading}
           />
-        </div>
-      </div>
-      <div className="card_shadow border_color mt-5 rounded-xl border p-4">
-        <Table
-          data={powerData?.power_detail_list || []}
-          columns={columns}
-          loading={powerLoading}
-        />
+        </BrowserView>
+        <MobileView>
+          <MTable
+            scroll={{ x: 'max-content' }}
+            dataSource={powerData?.power_detail_list || []}
+            columns={columns}
+            loading={powerLoading}
+          />
+        </MobileView>
       </div>
     </>
   )
