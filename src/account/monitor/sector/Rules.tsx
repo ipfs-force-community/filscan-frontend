@@ -235,7 +235,7 @@ export default observer((props: Props) => {
     if (!warnings) {
       onChange('save', {
         Items: payload,
-        upload: record?.hasOwnProperty('group_id'),
+        update: !!record?.hasOwnProperty('group_id'),
       })
     }
   }
