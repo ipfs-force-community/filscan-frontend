@@ -146,6 +146,9 @@ export default observer((props: Props) => {
         newItem.rule[ruleItem].balance = value.balance
         setOtherRules({})
         break
+      case 'operator':
+        newItem.rule[ruleItem].operator = value
+        break
       case 'rule':
         if (value) {
           if (!isPositiveInteger(value)) {
@@ -310,6 +313,7 @@ export default observer((props: Props) => {
   const rulesOptions = useMemo(() => {
     return [
       { label: tr('<='), value: '<=' }, //小于等于
+      { label: tr('>='), value: '>=' }, //小于等于
     ]
   }, [tr])
 
@@ -435,8 +439,16 @@ export default observer((props: Props) => {
                             <Selects
                               className={styles.balance_rule_select}
                               value={rule.operator}
-                              disabled={true}
+                              // disabled={true}
                               options={rulesOptions}
+                              onChange={(value, item) =>
+                                handleChange(
+                                  'operator',
+                                  value,
+                                  index,
+                                  ruleIndex,
+                                )
+                              }
                             />
                             <div className={styles.balance_rule_content}>
                               <Input
