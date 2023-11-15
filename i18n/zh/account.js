@@ -178,6 +178,8 @@ const account = {
   examination: '规则',
   alarm: '告警方式',
   status: '状态',
+  rules_more: '单个弹框最多添加10组规则，如还需添加请保存后再继续',
+  warn_more: '最多支持添加3个',
   //告警方式
   warn_title: '告警方式',
   warn_title_des: '告警方式可根据实际情况选择一种或组合',
@@ -216,7 +218,9 @@ const account = {
   balance_category_placeholder: '请选择余额类目',
   balance_rule_des: '当前 {{value}} FIL',
   //算力监控
-  power_rules: '1. 扇区发生错误 2. 扇区主动终止 3. 扇区正常到期',
+  power_rules_1: '1. 扇区发生错误',
+  power_rules_2: '2. 扇区主动终止',
+  power_rules_3: '3. 扇区正常到期',
 }
 
 export default account

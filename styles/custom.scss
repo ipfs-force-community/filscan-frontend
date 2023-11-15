@@ -30,9 +30,11 @@
   color: var(--font-color);
   border-inline-end: 0px !important;
   .ant-menu-item,
-  .ant-menu-submenu-title {
+  .ant-menu-submenu-title,
+  .ant-menu-light {
     &:hover {
       color: var(--primary) !important;
+      background-color: var(--bg_hover) !important;
     }
   }
   .ant-menu-item-selected {
@@ -449,6 +451,11 @@
         color: var(--primary);
       }
     }
+  }
+}
+.custom_select_warn {
+  .ant-select-selector {
+    border: 1px solid red !important;
   }
 }
 

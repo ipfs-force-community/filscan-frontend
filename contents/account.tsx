@@ -142,15 +142,9 @@ export const account_manager: Array<MenuItem> = [
     ],
   },
   {
-    label: 'miners',
-    icon: getSvgIcon('account_miners'),
-    key: 'miners',
-    href: 'miners',
-  },
-  {
     label: 'monitor',
     icon: getSvgIcon('monitor'),
-    href: 'monitor',
+    href: 'monitorBalance',
     key: 'monitor',
     children: [
       {
@@ -168,6 +162,12 @@ export const account_manager: Array<MenuItem> = [
     ],
   },
   {
+    label: 'miners',
+    icon: getSvgIcon('account_miners'),
+    key: 'miners',
+    href: 'miners',
+  },
+  {
     label: 'personal',
     icon: getSvgIcon('account_personal'),
     key: 'personal',
@@ -175,8 +175,8 @@ export const account_manager: Array<MenuItem> = [
   },
   {
     label: 'logout',
+    href: 'logout',
     icon: getSvgIcon('account_logout'),
-    href: '',
     key: 'logout',
   },
 ]
@@ -414,7 +414,7 @@ export const overview = {
               {text}
             </Link>
             {miner_tag && (
-              <span className="ml-2 w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+              <span className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
                 {miner_tag}
               </span>
             )}
@@ -567,11 +567,11 @@ export const account_lucky = {
               <Link href={`/account#power?miner=${text}`} className="link_text">
                 {text}
               </Link>
-              <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                {record.tag == undefined || record.tag === ''
-                  ? '--'
-                  : record.tag}
-              </div>
+              {record?.tag && (
+                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                  {record.tag}
+                </div>
+              )}
             </div>
           </>
         )
@@ -638,11 +638,11 @@ export const account_lucky_mobile = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -666,27 +666,34 @@ export const account_lucky_mobile = {
 
 export const account_balance = {
   columns: (tr: any) => [
-    {
-      title: 'tag',
-      dataIndex: 'tag',
-      fixed: 'left',
-      width: 100,
-      ellipsis: {
-        showTitle: false,
-      },
-      render: (text: string, record: any) => {
-        return <TagInput isEdit={false} text={text} record={record} />
-      },
-    },
+    // {
+    //   title: 'tag',
+    //   dataIndex: 'tag',
+    //   fixed: 'left',
+    //   width: 100,
+    //   ellipsis: {
+    //     showTitle: false,
+    //   },
+    //   render: (text: string, record: any) => {
+    //     return <TagInput isEdit={false} text={text} record={record} />
+    //   },
+    // },
     {
       title: 'miner_id',
       dataIndex: 'miner_id',
       width: 100,
       fixed: 'left',
-      render: (text: string) => (
-        <Link href={`/miner/${text}`} className="link_text">
-          {text}
-        </Link>
+      render: (text: string, record: any) => (
+        <div className="flex items-center gap-x-[1px]">
+          <Link href={`/miner/${text}`} className="link_text">
+            {text}
+          </Link>
+          {record?.tag && (
+            <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+              {record.tag}
+            </div>
+          )}
+        </div>
       ),
     },
     {
@@ -932,11 +939,11 @@ export const account_reward = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -1009,11 +1016,11 @@ export const account_reward_mobile = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -1073,11 +1080,11 @@ export const account_power = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -1245,11 +1252,11 @@ export const account_power_mobile = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -1346,11 +1353,11 @@ export const account_gas = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -1494,11 +1501,11 @@ export const account_gas_mobile = {
                 >
                   {text}
                 </Link>
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag == undefined || record.tag === ''
-                    ? '--'
-                    : record.tag}
-                </div>
+                {record?.tag && (
+                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
+                    {record.tag}
+                  </div>
+                )}
               </div>
             </>
           )
@@ -1746,7 +1753,13 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
       width: '260',
       render: (text: string, record: any) => {
         if (type === 'power') {
-          return <div>{tr('power_rules')}</div>
+          return (
+            <div>
+              <div>{tr('power_rules_1')}</div>
+              <div>{tr('power_rules_2')}</div>
+              <div>{tr('power_rules_3')}</div>
+            </div>
+          )
         }
         return (
           <ul>

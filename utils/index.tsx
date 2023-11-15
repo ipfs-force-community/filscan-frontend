@@ -392,8 +392,8 @@ export function isEmail(email: string): boolean {
 }
 //校验手机号
 export function isPhone(phoneNumber: string): boolean {
-  const pattern = /^1[0-9]{10}$/
-  return pattern.test(phoneNumber)
+  const phoneNumberRegex = /^1[3456789]\d{9}$/
+  return phoneNumberRegex.test(phoneNumber)
 }
 
 //判断字符是否为正整数

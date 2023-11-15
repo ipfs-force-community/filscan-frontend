@@ -38,7 +38,9 @@ export default (props: Props) => {
       rules: rules.rules,
     }
     payload.push(obj)
-    onChange('save', payload)
+    onChange('save', {
+      Items: payload,
+    })
   }
 
   useEffect(() => {

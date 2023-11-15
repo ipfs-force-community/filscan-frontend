@@ -10,6 +10,7 @@ import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
+import messageManager from '@/packages/message'
 interface Props {
   showModal: boolean
   record?: Record<string, any>
@@ -41,6 +42,7 @@ export default observer((props: Props) => {
   const { tr } = Translation({ ns: 'account' })
   const { minersCategory, saveLoading } = monitorStore
   const [rules, setRules] = useState<any>([{ ...defaultRules }])
+  const [otherRules, setOtherRules] = useState<Record<string, any>>({})
 
   useEffect(() => {
     if (record && Object.keys(record).length > 0 && record.miner_id_or_all) {
@@ -142,6 +144,7 @@ export default observer((props: Props) => {
         newItem.rule[ruleItem].category = value.value
         newItem.rule[ruleItem].addr = value.address
         newItem.rule[ruleItem].balance = value.balance
+        setOtherRules({})
         break
       case 'rule':
         if (value) {
@@ -152,6 +155,7 @@ export default observer((props: Props) => {
           }
         }
         newItem.rule[ruleItem].operand = value
+        setOtherRules({})
         break
     }
     newRules.splice(index, 1, newItem)
@@ -173,6 +177,12 @@ export default observer((props: Props) => {
       if (type === 'ruleItem') {
         newRules[index].rule.push({ ...defaultRuleItem })
       } else if (type === 'rule') {
+        if (newRules.length >= 10) {
+          return messageManager.showMessage({
+            type: 'error',
+            content: tr('rules_more'),
+          })
+        }
         newRules.push({ ...defaultRules })
       }
     } else if (keyType === 'delete') {
@@ -188,16 +198,51 @@ export default observer((props: Props) => {
   const handleSave = () => {
     const payload: Array<Record<string, any>> = []
     let warnings = false
-
-    rules.forEach((rule: any) => {
+    let warn_text = ''
+    let other_rules: Record<string, any> = {}
+    rules.forEach((rule: any, ruleIndex: number) => {
       const emailList = rule?.warnList?.email_warn || []
       const messageList = rule?.warnList?.message_warn || []
-      const phoneListList = rule?.warnList?.phone_warn || []
+      const phoneList = rule?.warnList?.phone_warn || []
       const rulesList: Array<any> = []
-      rule?.rule.forEach((v: any) => {
+      if (!rule.group_id) {
+        warnings = true
+        other_rules[`${ruleIndex}`] = {
+          ...(other_rules[`${ruleIndex}`] || {}),
+          group: true,
+        }
+        return
+      }
+      if (!rule.miner_id) {
+        warnings = true
+        other_rules[`${ruleIndex}`] = {
+          ...(other_rules[`${ruleIndex}`] || {}),
+          miner: true,
+        }
+        return
+      }
+      rule?.rule.forEach((v: any, ItemIndex: number) => {
         if (v.warning) {
           warnings = true
+          return
         }
+        if (!v.category) {
+          warnings = true
+          other_rules[`${ruleIndex}${ItemIndex}`] = {
+            ...(other_rules[`${ruleIndex}${ItemIndex}`] || {}),
+            category: true,
+          }
+          return
+        }
+        if (!v.operand) {
+          warnings = true
+          other_rules[`${ruleIndex}${ItemIndex}`] = {
+            ...(other_rules[`${ruleIndex}${ItemIndex}`] || {}),
+            operand: true,
+          }
+          return
+        }
+
         rulesList.push({
           account_type: v.category,
           account_addr: v.addr,
@@ -205,6 +250,35 @@ export default observer((props: Props) => {
           operand: v.operand,
         })
       })
+      emailList?.forEach((v: any) => {
+        if (v.warning) {
+          warn_text = 'email_warn_warning'
+        }
+      })
+      if (!warn_text) {
+        messageList?.forEach((v: any) => {
+          if (v.warning) {
+            warn_text = 'message_warn_warning'
+          }
+        })
+      }
+      if (!warn_text) {
+        phoneList?.forEach((v: any) => {
+          if (v.warning) {
+            warn_text = 'message_warn_warning'
+          }
+        })
+      }
+      if (warn_text) {
+        warnings = true
+        return messageManager.showMessage({
+          type: 'error',
+          content: tr(warn_text),
+        })
+      }
+      if (warnings) {
+        return
+      }
       const obj = {
         monitor_type: 'BalanceMonitor',
         group_id_or_all: rule.group_id === 'all' ? -1 : Number(rule.group_id),
@@ -215,15 +289,21 @@ export default observer((props: Props) => {
         msg_alert: messageList[0]?.checked
           ? messageList?.map((v: any) => v.inputValue).join(',')
           : '',
-        call_alert: phoneListList[0]?.checked
-          ? phoneListList?.map((v: any) => v.inputValue).join(',')
+        call_alert: phoneList[0]?.checked
+          ? phoneList?.map((v: any) => v.inputValue).join(',')
           : '',
         rules: rulesList,
       }
       payload.push(obj)
     })
+    if (Object.keys(other_rules).length > 0) {
+      setOtherRules(other_rules)
+    }
     if (!warnings) {
-      onChange('save', payload)
+      onChange('save', {
+        Items: payload,
+        upload: record?.hasOwnProperty('group_id'),
+      })
     }
   }
 
@@ -282,7 +362,9 @@ export default observer((props: Props) => {
     >
       <div>
         {rules.map((ruleItem: any, index: number) => {
-          const showIcon = index === rules.length - 1
+          const showIcon = index === rules.length - 1 && !record?.group_id
+          const deleteIcon = rules.length > 1 && index !== 0
+
           return (
             <div key={index} className={styles.balance_contain}>
               <div className={styles.balance_contain_title}>
@@ -290,27 +372,39 @@ export default observer((props: Props) => {
               </div>
               <div className={styles.balance_contain_header}>
                 <Header
+                  disableAll={record?.group_id}
                   selectGroup={ruleItem.group_id}
                   selectMiner={ruleItem.miner_id}
                   isAllMiner={false}
+                  classes={{
+                    group: otherRules[`${index}`]?.group
+                      ? 'custom_select_warn'
+                      : '',
+                    miner: otherRules[`${index}`]?.miner
+                      ? 'custom_select_warn'
+                      : '',
+                  }}
                   onChange={(type, value) => handleChange(type, value, index)}
                 />
-                {showIcon && (
-                  <div className={styles.balance_icons}>
+
+                <div className={styles.balance_icons}>
+                  {showIcon && (
                     <span
                       className={styles.balance_icons_icon}
                       onClick={() => handAddRule('add', 'rule', index)}
                     >
-                      +
+                      {getSvgIcon('add')}
                     </span>
+                  )}
+                  {deleteIcon && (
                     <span
                       className={styles.balance_icons_icon}
                       onClick={() => handAddRule('delete', 'rule', index)}
                     >
-                      -
+                      {getSvgIcon('cancel')}
                     </span>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
               {ruleItem.miner_id && (
                 <>
@@ -322,7 +416,11 @@ export default observer((props: Props) => {
                           <div className={styles.balance_rule_main}>
                             <Selects
                               key={ruleIndex + 'select'}
-                              className={styles.balance_rule_select}
+                              className={`${styles.balance_rule_select} ${
+                                otherRules[`${index}${ruleIndex}`]?.category
+                                  ? 'custom_select_warn'
+                                  : ''
+                              }`}
                               value={rule.category}
                               placeholder={tr('balance_category_placeholder')}
                               options={
@@ -343,7 +441,11 @@ export default observer((props: Props) => {
                             <div className={styles.balance_rule_content}>
                               <Input
                                 style={{
-                                  borderColor: rule.warning ? 'red' : '',
+                                  borderColor:
+                                    rule.warning ||
+                                    otherRules[`${index}${ruleIndex}`]?.operand
+                                      ? 'red'
+                                      : '',
                                 }}
                                 className={`custom_input ${styles.balance_rule_input}`}
                                 defaultValue={rule.operand}
@@ -386,19 +488,21 @@ export default observer((props: Props) => {
                                   {getSvgIcon('add')}
                                 </span>
                               )}
-                              <span
-                                className={styles.balance_icons_icon}
-                                onClick={() =>
-                                  handAddRule(
-                                    'delete',
-                                    'ruleItem',
-                                    index,
-                                    ruleIndex,
-                                  )
-                                }
-                              >
-                                {getSvgIcon('cancel')}
-                              </span>
+                              {ruleIndex !== 0 && (
+                                <span
+                                  className={styles.balance_icons_icon}
+                                  onClick={() =>
+                                    handAddRule(
+                                      'delete',
+                                      'ruleItem',
+                                      index,
+                                      ruleIndex,
+                                    )
+                                  }
+                                >
+                                  {getSvgIcon('cancel')}
+                                </span>
+                              )}
                             </div>
                           </div>
                           <div className={styles.balance_rule_des}>
