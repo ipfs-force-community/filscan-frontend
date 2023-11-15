@@ -39,7 +39,7 @@ export default (props: Props) => {
     }
     payload.push(obj)
     onChange('save', {
-      Items: payload,
+      items: payload,
       update: !!record?.hasOwnProperty('group_id'),
     })
   }
