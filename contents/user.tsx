@@ -51,4 +51,35 @@ export const login_list: Record<string, any> = {
       rules: [{ required: true, message: 'Password is required' }],
     },
   ],
+  forget: [
+    {
+      label: 'email',
+      name: 'email',
+      prefix: <MailOutlined className="site-form-item-icon" />,
+      placeholder: 'email_placeholder',
+      rules: [{ required: true, message: 'Email is required' }],
+    },
+    {
+      label: 'code',
+      name: 'code',
+      placeholder: 'code_placeholder',
+      prefix: <LockOutlined className="site-form-item-icon" />,
+      rules: [{ required: true, message: 'Code is required' }],
+    },
+    {
+      label: 'password',
+      name: 'new_password',
+      placeholder: 'new_password',
+      prefix: <LockOutlined className="site-form-item-icon" />,
+      rules: [{ required: true, message: 'Password is required' }],
+    },
+    {
+      label: 'password',
+      name: 'confirm_password',
+      placeholder: 'confirm_password',
+      prefix: <LockOutlined className="site-form-item-icon" />,
+      rules: [{ required: true, message: 'Confirm assword is required' }],
+    },
+  ],
+  register: [],
 }

@@ -9,12 +9,12 @@ import { useMemo } from 'react'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { logTabs, login_list } from '@/contents/user'
 import { isEmail } from '@/utils'
-
-export default () => {
+import { observer } from 'mobx-react'
+export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
+  const { verifyCode } = userStore
   const { hashParams } = useHash()
   const [form] = Form.useForm()
-
   const type = useMemo(() => {
     if (hashParams.type) {
       return hashParams.type
@@ -27,9 +27,12 @@ export default () => {
     const payload = {
       ...data,
       mail: data.email,
+      token: verifyCode || localStorage.getItem('send_code'),
     }
     userStore.loginUserInfo(payload)
   }
+
+  const mail = Form.useWatch('email', form)
 
   const renderChildren = (item: any) => {
     let content
@@ -48,6 +51,16 @@ export default () => {
         )
         content = (
           <Input
+            placeholder={tr(item.placeholder)}
+            className={`custom_input ${styles.contain_input}`}
+            prefix={item.prefix}
+          />
+        )
+        break
+      case 'invite':
+        content = (
+          <Input
+            placeholder={tr(item.placeholder)}
             className={`custom_input ${styles.contain_input}`}
             prefix={item.prefix}
           />
@@ -58,7 +71,6 @@ export default () => {
           newRules.push(() => ({
             async validator(_: any, value: any) {
               if (value) {
-                console.log('----33', value)
                 return Promise.resolve()
               }
               return Promise.reject(new Error(tr('email_rules')))
@@ -67,16 +79,10 @@ export default () => {
         )
         content = (
           <Input
+            placeholder={tr(item.placeholder)}
             className={`custom_input ${styles.contain_input}`}
             prefix={item.prefix}
-            suffix={
-              <SendCode
-                mail={form.getFieldValue('mail')}
-                onChange={(token) => {
-                  console.log('----33', token)
-                }}
-              />
-            }
+            suffix={<SendCode mail={mail} />}
           />
         )
         break
@@ -133,17 +139,20 @@ export default () => {
           {login_list[type]?.map((item: any) => {
             return renderChildren(item)
           })}
-          <Form.Item name="remember" valuePropName="checked">
-            <div className={styles.remember}>
-              <Checkbox
-                className="custom_checkbox !text_color"
-                defaultChecked={true}
-              >
-                {tr('remember_me')}
-              </Checkbox>
-              <Link href="/account/password">{tr('forgot_password')}</Link>
-            </div>
-          </Form.Item>
+          {type !== 'code' && (
+            <Form.Item name="remember" valuePropName="checked">
+              <div className={styles.remember}>
+                <Checkbox
+                  className="custom_checkbox !text_color"
+                  defaultChecked={true}
+                >
+                  {tr('remember_me')}
+                </Checkbox>
+                <Link href="/account/password">{tr('forgot_password')}</Link>
+              </div>
+            </Form.Item>
+          )}
+
           <Form.Item className={styles.submit}>
             <Button htmlType="submit" className="primary_btn !w-full">
               {tr('login')}
@@ -153,4 +162,4 @@ export default () => {
       </div>
     </User>
   )
-}
+})

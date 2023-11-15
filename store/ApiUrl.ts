@@ -8,6 +8,8 @@ export const fvmUrl = process.env.FVM_URL
 //用户信息
 export const login = proUrl + '/Login'
 export const userInfo = proUrl + '/UserInfo'
+export const verifyCode = proUrl + '/SendVerificationCode'
+export const resetPassword = proUrl + '/ResetPasswordByCode'
 
 //节点管家
 export const countMiners = proUrl + '/CountUserMiners'
