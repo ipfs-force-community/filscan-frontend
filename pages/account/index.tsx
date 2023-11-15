@@ -55,6 +55,9 @@ const Account: React.FC = () => {
   }
 
   const renderMenuItem = (item: any) => {
+    if (item.label === 'logout') {
+      return null
+    }
     if (item.children) {
       return (
         <Menu.SubMenu key={item.key} icon={item.icon} title={tr(item.label)}>
