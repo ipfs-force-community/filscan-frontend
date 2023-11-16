@@ -1,4 +1,12 @@
-import { LockOutlined, MailOutlined } from '@ant-design/icons'
+import PowerIcon from '@/assets/images/member/memberPower.svg'
+import BalanceIcon from '@/assets/images/member/memberBalance.svg'
+import SectorIcon from '@/assets/images/member/memberSector.svg'
+import EmailIcon from '@/assets/images/member/email.svg'
+import MsgIcon from '@/assets/images/member/msg.svg'
+import PhoneIcon from '@/assets/images/member/phone.svg'
+import PowerWarnIcon from '@/assets/images/member/power.svg'
+import BalanceWarnIcon from '@/assets/images/member/balance.svg'
+import SectorWarnIcon from '@/assets/images/member/sector.svg'
 
 export const logTabs = [
   {
@@ -119,3 +127,58 @@ export const login_list: Record<string, any> = {
     },
   ],
 }
+
+export const member_list_1 = [
+  {
+    icon: <PowerIcon />,
+    title: 'power_title',
+    value: 'power_text',
+  },
+  {
+    icon: <BalanceIcon />,
+    title: 'balance_title',
+    value: 'balance_text',
+  },
+  {
+    icon: <SectorIcon />,
+    title: 'sector_title',
+    value: 'sector_text',
+  },
+]
+
+export const member_list_2 = [
+  {
+    title: [
+      {
+        icon: <PowerWarnIcon />,
+        title: 'warn_power',
+      },
+      {
+        icon: <BalanceWarnIcon />,
+        title: 'warn_balance',
+      },
+      {
+        icon: <SectorWarnIcon />,
+        title: 'warn_sector',
+      },
+    ],
+    content: 'data_text',
+  },
+  {
+    title: [
+      {
+        icon: <EmailIcon />,
+        title: 'warn_email',
+      },
+      {
+        icon: <MsgIcon />,
+        title: 'warn_msg',
+      },
+      {
+        icon: <PhoneIcon />,
+        title: 'warn_phone',
+      },
+    ],
+    content: 'warn_text',
+  },
+]

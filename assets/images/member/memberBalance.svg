@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切图</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#6D3F1A" offset="0%"></stop>
+            <stop stop-color="#6D3F1A" stop-opacity="0.2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="40.6652774%" y1="34.4299876%" x2="50%" y2="70.4291225%" id="linearGradient-2">
+            <stop stop-color="#FED7A8" offset="0%"></stop>
+            <stop stop-color="#F2C37E" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="17.9360234%" y1="33.5448641%" x2="70.6189187%" y2="66.8775139%" id="linearGradient-3">
+            <stop stop-color="#FFF2E2" offset="0%"></stop>
+            <stop stop-color="#DEB17F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="会员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-455.000000, -38.000000)">
+            <rect fill="#FFFFFF" x="0" y="0" width="1832" height="1794"></rect>
+            <g id="编组-15" transform="translate(455.000000, 38.000000)">
+                <circle id="椭圆形" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle>
+                <path d="M18.5454545,26.5454545 L45.4545455,26.5454545 C46.8603612,26.5454545 48,27.6850933 48,29.090909 L48,44.4545455 C48,45.8603612 46.8603612,47 45.4545455,47 L18.5454545,47 C17.1396388,47 16,45.8603612 16,44.4545455 L16,29.090909 C16,27.6850933 17.1396388,26.5454545 18.5454545,26.5454545 Z" id="矩形" stroke="url(#linearGradient-3)" stroke-width="0.875" fill="url(#linearGradient-2)" fill-rule="nonzero"></path>
+                <path d="M17.657364,17 L40.5178571,17 C41.6224266,17 42.5178571,17.8954305 42.5178571,19 L42.5178571,21.4166667 C42.5178571,22.5212362 41.6224266,23.4166667 40.5178571,23.4166667 L16,23.4166667 L16,23.4166667 L16,18.6041667 C16,17.7182175 16.742035,17 17.657364,17 Z" id="路径" fill="#BE9568" fill-rule="nonzero"></path>
+                <path d="M39.3918067,32.1401515 C39.3918067,32.9455668 40.0447248,33.5984848 40.8501401,33.5984848 L42.6477591,33.5984848 C43.4531744,33.5984848 44.1060924,32.9455668 44.1060924,32.1401515 C44.1060924,31.3347363 43.4531744,30.6818182 42.6477591,30.6818182 L40.8501401,30.6818182 C40.0447248,30.6818182 39.3918067,31.3347363 39.3918067,32.1401515 Z" id="路径" fill="#FFF2DC" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -25,6 +25,7 @@ import userStore from '@/store/modules/user'
 import { Menu } from 'antd'
 import { observer } from 'mobx-react'
 import { BrowserView, MobileView } from '@/components/device-detect'
+import Member from '@/src/user/member'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
@@ -122,6 +123,7 @@ const Account: React.FC = () => {
               )}
             </div>
           </div>
+          <Member showModal={true} onChange={() => {}} />
         </div>
       </BrowserView>
       <MobileView>

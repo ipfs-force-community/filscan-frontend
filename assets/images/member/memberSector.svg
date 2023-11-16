@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切图</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#6D3F1A" offset="0%"></stop>
+            <stop stop-color="#6D3F1A" stop-opacity="0.2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="40.6652774%" y1="11.892606%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FED7A8" offset="0%"></stop>
+            <stop stop-color="#F2C37E" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="17.9360234%" y1="9.72627831%" x2="70.6189187%" y2="91.307486%" id="linearGradient-3">
+            <stop stop-color="#FFF2E2" offset="0%"></stop>
+            <stop stop-color="#DEB17F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="会员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-368.000000, -38.000000)">
+            <rect fill="#FFFFFF" x="0" y="0" width="1832" height="1794"></rect>
+            <g id="扇区出错" transform="translate(368.000000, 38.000000)">
+                <circle id="椭圆形" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle>
+                <g id="编组" transform="translate(15.000000, 15.000000)" fill-rule="nonzero">
+                    <path d="M15.3443772,0.06640625 L15.3443772,17.6556075 C15.3443772,18.2078922 15.7920925,18.6556075 16.3443772,18.6556075 L33.9335937,18.6556075 L33.9335937,18.6556075 C33.0819317,27.234027 25.8442476,33.9335937 17.0419295,33.9335937 C7.66660266,33.9335937 0.06640625,26.3334746 0.06640625,16.9580534 C0.06640625,8.15570955 6.76610208,0.918103058 15.3443772,0.06640625 Z" id="形状" stroke="url(#linearGradient-3)" fill="url(#linearGradient-2)"></path>
+                    <path d="M18.9921875,0.06640625 C26.878718,0.849435442 33.1506832,7.12129779 33.9335937,15.0078125 L19.3921875,15.0078125 C19.1712736,15.0078125 18.9921875,14.8287264 18.9921875,14.6078125 L18.9921875,0.06640625 L18.9921875,0.06640625 Z" id="路径" fill="#F4C685" opacity="0.3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

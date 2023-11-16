@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切图</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#6D3F1A" offset="0%"></stop>
+            <stop stop-color="#6D3F1A" stop-opacity="0.2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="44.8487572%" y1="11.892606%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FED7A8" offset="0%"></stop>
+            <stop stop-color="#F2C37E" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="32.3059199%" y1="9.72627831%" x2="61.3782768%" y2="91.307486%" id="linearGradient-3">
+            <stop stop-color="#FFF2E2" offset="0%"></stop>
+            <stop stop-color="#DEB17F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="会员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-536.000000, -38.000000)">
+            <rect fill="#FFFFFF" x="0" y="0" width="1832" height="1794"></rect>
+            <g id="icon" transform="translate(536.000000, 38.000000)">
+                <circle id="椭圆形" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle>
+                <rect id="矩形" x="16" y="16" width="30" height="30"></rect>
+                <g id="编组" transform="translate(16.000000, 17.875000)" fill-rule="nonzero">
+                    <path d="M1.50000002,11.25 L7.49999998,11.25 C8.32842711,11.25 9,11.9215729 9,12.75 L9,24.75 C9,25.5784271 8.32842711,26.25 7.49999998,26.25 L1.50000002,26.25 C0.671572885,26.25 3.23497669e-16,25.5784271 0,24.75 L0,12.75 C1.20591541e-16,11.9215729 0.671572885,11.25 1.50000002,11.25 Z" id="路径" fill="#C49B6D"></path>
+                    <path d="M12,0 L18,0 C18.8284271,-6.65926097e-16 19.5,0.671572885 19.5,1.50000002 L19.5,24.75 C19.5,25.5784271 18.8284271,26.25 18,26.25 L12,26.25 C11.1715729,26.25 10.5,25.5784271 10.5,24.75 L10.5,1.50000002 C10.5,0.671572885 11.1715729,-6.98650087e-17 12,0 Z M22.5,7.29166667 L28.5,7.29166667 C29.3284271,7.29166667 30,7.96323955 30,8.79166669 L30,24.75 C30,25.5784271 29.3284271,26.25 28.5,26.25 L22.5,26.25 C21.6715729,26.25 21,25.5784271 21,24.75 L21,8.79166669 C21,7.96323955 21.6715729,7.29166667 22.5,7.29166667 Z" id="形状结合" stroke="url(#linearGradient-3)" stroke-width="0.875" fill="url(#linearGradient-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

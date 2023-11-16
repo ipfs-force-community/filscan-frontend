@@ -1,0 +1,76 @@
+.member {
+  width: fit-content;
+  padding: 50px;
+  background-image: url('../../../assets/images/member/memberBg.png');
+  border-radius: 12px;
+  &_header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #6d3f1a;
+    margin-bottom: 10px;
+  }
+}
+.content {
+  display: flex;
+  column-gap: 30px;
+  margin-top: 30px;
+  &_card {
+    padding: 30px;
+    min-width: 238px;
+    background: linear-gradient(315deg, #f2c37d 0%, #fff2da 100%);
+    border-radius: 12px;
+    border: 1px solid;
+    border-color: rgba(243, 215, 183, 1) rgba(221, 176, 127, 1)
+      rgba(221, 176, 127, 1) rgba(243, 215, 183, 1);
+    font-family:
+      PingFangSC-Regular,
+      PingFang SC;
+    font-weight: 400;
+    font-size: 14px;
+    color: #6d3f1a;
+    &_icon {
+      display: flex;
+      justify-content: center;
+      svg {
+        width: 54px;
+        height: 54px;
+      }
+    }
+    &_title {
+      font-weight: 500;
+      color: #6d3f1a;
+      text-align: center;
+      margin: 20px 0px;
+    }
+  }
+  &_newCard {
+    flex: 1;
+
+    &_main {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 40px;
+    }
+    &_item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 6px;
+    }
+    &_text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 6px;
+      font-weight: 500;
+      width: 100%;
+      margin-top: 25px;
+      text-align: center;
+      height: 36px;
+      color: #6d3f1a;
+      background: rgba(255, 242, 218, 0.6);
+      border-radius: 5px;
+    }
+  }
+}

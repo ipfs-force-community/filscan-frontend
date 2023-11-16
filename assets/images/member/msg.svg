@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切图</title>
+    <g id="会员" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-650.000000, -85.000000)">
+            <g id="短信" transform="translate(650.000000, 85.000000)">
+                <rect id="矩形" x="0" y="0" width="16" height="16"></rect>
+                <g id="编组" transform="translate(1.000000, 1.000000)">
+                    <path d="M0.000526482899,5.5 C-0.0219055032,7.42844977 0.672486365,9.07429215 2.08370209,10.4375271 C3.37846495,11.6882686 5.25774679,12.791074 7.72154763,13.7459432 C7.97902815,13.8457384 8.26826692,13.7170318 8.36728011,13.4592509 C8.38920847,13.4021604 8.40047706,13.3415313 8.40052648,13.2803744 L8.40052648,10.5963204 L8.40052648,10.5963204 L0.000526482899,5.5 Z" id="路径-4" fill="#DDB28E"></path>
+                    <rect id="矩形" fill="#A56B3B" x="0.0005264829" y="0" width="14" height="11" rx="5.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
