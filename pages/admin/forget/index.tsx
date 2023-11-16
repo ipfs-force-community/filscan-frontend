@@ -46,7 +46,7 @@ export default observer(() => {
         newRules.push(
           newRules.push(() => ({
             async validator(_: any, value: any) {
-              if (isEmail(value)) {
+              if (value && isEmail(value)) {
                 return Promise.resolve()
               }
               return Promise.reject(new Error(tr('email_rules')))
@@ -68,7 +68,7 @@ export default observer(() => {
               if (value) {
                 return Promise.resolve()
               }
-              return Promise.reject(new Error(tr('email_rules')))
+              return Promise.reject(new Error(tr('code_rules')))
             },
           })),
         )

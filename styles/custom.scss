@@ -44,6 +44,7 @@
 
 .custom_form {
   .ant-form-item {
+    margin-bottom: 10px;
     &-label {
       color: var(--font-color);
       label {
@@ -184,6 +185,11 @@
           color: var(--font-color);
         }
         .custom_table_row {
+          &:last-child {
+            td {
+              border-bottom: 1px solid transparent;
+            }
+          }
           .ant-table-column-sort {
             background-color: transparent;
           }

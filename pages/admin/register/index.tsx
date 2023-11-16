@@ -1,32 +1,29 @@
 import { Translation } from '@/components/hooks/Translation'
-import { useHash } from '@/components/hooks/useHash'
 import styles from './index.module.scss'
 import User from '@/src/user'
 import Link from 'next/link'
 import SendCode from '@/src/account/sendCode'
 import userStore from '@/store/modules/user'
-import { useMemo } from 'react'
-import { Button, Checkbox, Form, Input } from 'antd'
-import { logTabs, login_list } from '@/contents/user'
-import { isEmail } from '@/utils'
+import { Button, Form, Input } from 'antd'
+import { login_list } from '@/contents/user'
+import errorIcon from '@/assets/images/error.svg'
+import { isEmail, validatePassword } from '@/utils'
 import { observer } from 'mobx-react'
+import messageManager from '@/packages/message'
+import Image from 'next/image'
+
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
   const { verifyCode } = userStore
-  const { hashParams } = useHash()
   const [form] = Form.useForm()
-  const type = useMemo(() => {
-    if (hashParams.type) {
-      return hashParams.type
-    }
-    return 'password'
-  }, [hashParams.type])
 
   const onFinish = async () => {
     const data = form.getFieldsValue()
     const payload = {
       ...data,
       mail: data.email,
+      password: data.new_password,
+      new_password: data.new_password,
       token: verifyCode || localStorage.getItem('send_code'),
     }
     userStore.loginUserInfo(payload)
@@ -57,15 +54,6 @@ export default observer(() => {
           />
         )
         break
-      case 'invite':
-        content = (
-          <Input
-            placeholder={tr(item.placeholder)}
-            className={`custom_input ${styles.contain_input}`}
-            prefix={item.prefix}
-          />
-        )
-        break
       case 'code':
         newRules.push(
           newRules.push(() => ({
@@ -73,7 +61,7 @@ export default observer(() => {
               if (value) {
                 return Promise.resolve()
               }
-              return Promise.reject(new Error(tr('email_rules')))
+              return Promise.reject(new Error(tr('code_rules')))
             },
           })),
         )
@@ -86,12 +74,49 @@ export default observer(() => {
           />
         )
         break
-      case 'password':
+      case 'new_password':
+        newRules.push(() => ({
+          validator(_: any, value: any) {
+            if (
+              !value ||
+              validatePassword(value, form.getFieldValue('email'))
+            ) {
+              return Promise.resolve()
+            }
+            return Promise.reject(new Error(tr('password_rules')))
+          },
+        }))
         content = (
           <Input.Password
             className={`custom_input ${styles.contain_input}`}
             prefix={item.prefix}
             placeholder={tr(item.placeholder)}
+          />
+        )
+        break
+      case 'confirm_password':
+        newRules.push(({ getFieldValue }: { getFieldValue: Function }) => ({
+          validator(_: any, value: any) {
+            if (!value || getFieldValue('new_password') === value) {
+              return Promise.resolve()
+            }
+            return Promise.reject(new Error(tr('confirm_password_rules')))
+          },
+        }))
+        content = (
+          <Input.Password
+            className={`custom_input ${styles.contain_input}`}
+            prefix={item.prefix}
+            placeholder={tr(item.placeholder)}
+          />
+        )
+        break
+      case 'invite':
+        content = (
+          <Input
+            placeholder={tr(item.placeholder)}
+            className={`custom_input ${styles.contain_input}`}
+            prefix={item.prefix}
           />
         )
         break
@@ -111,23 +136,7 @@ export default observer(() => {
   return (
     <User>
       <div className={styles.contain}>
-        <ul className={styles.contain_header}>
-          {logTabs?.map((log_item, index) => {
-            return (
-              <Link
-                className={`${styles.contain_header_link} ${
-                  type === log_item.dataIndex ? styles.active : ''
-                }`}
-                href={`/login?type=${log_item.dataIndex}`}
-                key={index}
-                scroll={false}
-                id={log_item.dataIndex}
-              >
-                {tr(log_item.title)}
-              </Link>
-            )
-          })}
-        </ul>
+        <div className={styles.contain_header}>{tr('register')}</div>
         <Form
           form={form}
           size="large"
@@ -136,26 +145,16 @@ export default observer(() => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
         >
-          {login_list[type]?.map((item: any) => {
+          {login_list['register']?.map((item: any) => {
             return renderChildren(item)
           })}
-          {type !== 'code' && (
-            <Form.Item name="remember" valuePropName="checked">
-              <div className={styles.remember}>
-                <Checkbox
-                  className="custom_checkbox !text_color"
-                  defaultChecked={true}
-                >
-                  {tr('remember_me')}
-                </Checkbox>
-                <Link href="/account/password">{tr('forgot_password')}</Link>
-              </div>
-            </Form.Item>
-          )}
-
+          <div className={styles.contain_have}>
+            <span>{tr('have_account')}</span>
+            <Link href="/admin/login">{tr('login')}</Link>
+          </div>
           <Form.Item className={styles.submit}>
             <Button htmlType="submit" className="primary_btn !w-full">
-              {tr('login')}
+              {tr('go_register')}
             </Button>
           </Form.Item>
         </Form>
