@@ -10,6 +10,7 @@ import { observer } from 'mobx-react'
 import Warn from '@/src/account/monitor/warn'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
+import messageManager from '@/packages/message'
 interface Props {
   showModal: boolean
   record?: Record<string, any>
@@ -35,7 +36,7 @@ export default observer((props: Props) => {
   const { saveLoading } = monitorStore
   const { tr } = Translation({ ns: 'account' })
   const [rules, setRules] = useState<any>([{ ...defaultRules }])
-
+  const [otherRules, setOtherRules] = useState<Record<string, any>>({})
   useEffect(() => {
     if (record && Object.keys(record).length > 0) {
       //编辑
@@ -141,14 +142,32 @@ export default observer((props: Props) => {
   const handleSave = async () => {
     const payload: Array<Record<string, any>> = []
     let warnings = false
-    rules.forEach((rule: any) => {
+    let warn_text: string = ''
+    const other_rules: Record<string, any> = {}
+    rules.forEach((rule: any, ruleIndex: number) => {
       const emailList = rule?.warnList?.email_warn || []
       const messageList = rule?.warnList?.message_warn || []
-      const phoneListList = rule?.warnList?.phone_warn || []
-      const rulesList: Array<any> = []
+      const phoneList = rule?.warnList?.phone_warn || []
+      if (!rule.group_id) {
+        warnings = true
+        other_rules[`${ruleIndex}`] = {
+          ...(other_rules[`${ruleIndex}`] || {}),
+          group: true,
+        }
+        return
+      }
+      if (!rule.miner_id) {
+        warnings = true
+        other_rules[`${ruleIndex}`] = {
+          ...(other_rules[`${ruleIndex}`] || {}),
+          miner: true,
+        }
+        return
+      }
       rule?.rule.forEach((v: any) => {
         if (v.warning) {
           warnings = true
+          return
         }
         rulesList.push({
           account_type: v.category,
@@ -157,6 +176,34 @@ export default observer((props: Props) => {
           operand: v.operand,
         })
       })
+      emailList?.forEach((v: any) => {
+        if (v.warning) {
+          warn_text = 'email_warn_warning'
+        }
+      })
+      if (!warn_text) {
+        messageList?.forEach((v: any) => {
+          if (v.warning) {
+            warn_text = 'message_warn_warning'
+          }
+        })
+      }
+      if (!warn_text) {
+        phoneList?.forEach((v: any) => {
+          if (v.warning) {
+            warn_text = 'message_warn_warning'
+          }
+        })
+      }
+      if (warn_text) {
+        warnings = true
+        return messageManager.showMessage({
+          type: 'error',
+          content: tr(warn_text),
+        })
+      }
+      const rulesList: Array<any> = []
+
       const obj = {
         monitor_type: 'ExpireSectorMonitor',
         user_id: 27,
@@ -168,8 +215,8 @@ export default observer((props: Props) => {
         msg_alert: messageList[0]?.checked
           ? messageList?.map((v: any) => v.inputValue).join(',')
           : '',
-        call_alert: phoneListList[0]?.checked
-          ? phoneListList?.map((v: any) => v.inputValue).join(',')
+        call_alert: phoneList[0]?.checked
+          ? phoneList?.map((v: any) => v.inputValue).join(',')
           : '',
         rules: rule?.rule.map((v: any) => {
           return {
@@ -182,8 +229,14 @@ export default observer((props: Props) => {
       }
       payload.push(obj)
     })
+    if (Object.keys(other_rules).length > 0) {
+      setOtherRules(other_rules)
+    }
     if (!warnings) {
-      onChange('save', payload)
+      onChange('save', {
+        items: payload,
+        update: !!record?.hasOwnProperty('group_id'),
+      })
     }
   }
 
@@ -193,6 +246,12 @@ export default observer((props: Props) => {
     if (type === 'delete') {
       newRules.splice(index, 1)
     } else if (type === 'add') {
+      if (newRules.length >= 10) {
+        return messageManager.showMessage({
+          type: 'error',
+          content: tr('rules_more'),
+        })
+      }
       newRules.push({ ...defaultRules })
     }
     setRules(newRules)
@@ -210,7 +269,7 @@ export default observer((props: Props) => {
       destroyOnClose={true}
       closeIcon={false}
       width={630}
-      wrapClassName="custom_left_modal"
+      wrapClassName="custom_modal custom_left_modal"
       open={showModal}
       onOk={handleSave}
       onCancel={() => onChange('cancel', false)}
@@ -235,7 +294,7 @@ export default observer((props: Props) => {
       <div>
         {rules.map((ruleItem: any, index: number) => {
           const showIcon = index === rules.length - 1
-          const deleteIcon = rules.length > 1
+          const deleteIcon = rules.length > 1 && index !== 0
           return (
             <div key={index} className={styles.sector_contain}>
               <div className={styles.sector_contain_title}>
@@ -243,8 +302,17 @@ export default observer((props: Props) => {
               </div>
               <div className={styles.sector_contain_header}>
                 <Header
+                  disableAll={record?.group_id}
                   selectGroup={ruleItem.group_id}
                   selectMiner={ruleItem.miner_id}
+                  classes={{
+                    group: otherRules[`${index}`]?.group
+                      ? 'custom_select_warn'
+                      : '',
+                    miner: otherRules[`${index}`]?.miner
+                      ? 'custom_select_warn'
+                      : '',
+                  }}
                   onChange={(type, value) => handleChange(type, value, index)}
                 />
                 <div className={styles.sector_icons}>

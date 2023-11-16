@@ -87,7 +87,7 @@ export default ({
               disabled={groupDetail && groupDetail.is_default}
               placeholder={tr('create_group_holder')}
               className="custom_input mt-2 h-12 w-full"
-              value={groupName}
+              value={groupName ? tr(groupName) : ''}
               onChange={(e) => {
                 setGroupName(e.target.value)
               }}
@@ -106,7 +106,14 @@ export default ({
           </li>
         </ul>
         <div className="mt-5 flex justify-end gap-x-4">
-          <Button className="cancel_btn">{tr('cancel')}</Button>
+          <Button
+            className="cancel_btn"
+            onClick={() => {
+              router.back()
+            }}
+          >
+            {tr('cancel')}
+          </Button>
           <Button
             className="confirm_btn"
             onClick={handleSave}

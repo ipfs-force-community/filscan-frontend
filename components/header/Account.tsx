@@ -37,7 +37,7 @@ export default observer(() => {
       </div>
       <ul className="select_shadow main_bg_color border_color absolute inset-y-full z-50 hidden h-fit  w-max  list-none rounded-[5px] border p-4  group-hover:block">
         {account_manager.map((item, index) => {
-          if (item.children && item.children.length > 0) {
+          if (!item?.href) {
             return null
           }
           if (item.key === 'logout') {

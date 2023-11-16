@@ -6,6 +6,7 @@ import { isEmail, isPhone } from '@/utils'
 import { CheckboxChangeEvent } from 'antd/es/checkbox'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
+import messageManager from '@/packages/message'
 
 interface Props {
   showModal?: boolean
@@ -44,6 +45,12 @@ export default (props: Props) => {
     const newWarn = { ...warnList }
     switch (type) {
       case 'add':
+        if (newWarn[warnKey].length >= 3) {
+          return messageManager.showMessage({
+            type: 'error',
+            content: tr('warn_more'),
+          })
+        }
         if (warnKey === 'email_warn') {
           newWarn[warnKey].push({ ...defaultWarn.email_warn })
         } else if (warnKey === 'phone_warn') {
@@ -56,13 +63,12 @@ export default (props: Props) => {
         newWarn[warnKey].splice(index, 1)
         break
       case 'warning':
-        if (value && typeof value === 'string') {
+        if (typeof value === 'string' && value) {
           if (warnKey === 'email_warn') {
             if (!isEmail(value)) {
               newWarn[warnKey][index].warning = true
             } else {
               newWarn[warnKey][index].warning = false
-              newWarn[warnKey][index].inputValue = value
             }
           } else if (warnKey !== 'email_warn') {
             if (!isPhone(value)) {
@@ -70,10 +76,10 @@ export default (props: Props) => {
               newWarn[warnKey][index].warning = true
             } else {
               newWarn[warnKey][index].warning = false
-              newWarn[warnKey][index].inputValue = value
             }
           }
         }
+        newWarn[warnKey][index].inputValue = value
         break
       case 'checkbox':
         newWarn[warnKey][index].checked = value

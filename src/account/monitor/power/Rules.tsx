@@ -38,7 +38,10 @@ export default (props: Props) => {
       rules: rules.rules,
     }
     payload.push(obj)
-    onChange('save', payload)
+    onChange('save', {
+      items: payload,
+      update: !!record?.hasOwnProperty('group_id'),
+    })
   }
 
   useEffect(() => {

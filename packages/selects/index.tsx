@@ -23,6 +23,7 @@ export default (props: Props) => {
     border,
     placeholder,
     disabled,
+    style,
   } = props
   const [new_options, setOptions] = useState<Array<Option_Item>>([])
 
@@ -41,6 +42,7 @@ export default (props: Props) => {
       optionFilterProp="children"
       value={value}
       disabled={disabled}
+      style={style}
       className={`custom_select ${className}`}
       popupClassName={'custom_select_wrapper'}
       filterOption={(input, option: any) =>

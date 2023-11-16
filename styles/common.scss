@@ -230,7 +230,7 @@
   &::before {
     display: block;
     padding-top: 100%;
-    content: "";
+    content: '';
   }
 }
 
@@ -259,6 +259,7 @@
   justify-content: center;
   padding: 6px 15px;
   min-width: 80px;
+  min-height: 32px;
   width: fit-content;
   outline: none !important;
   border-color: var(--border-color) !important;
@@ -276,6 +277,7 @@
   justify-content: center;
   padding: 6px 15px;
   min-width: 80px;
+  min-height: 32px;
   width: fit-content;
   outline: none !important;
   border-color: transparent !important;
@@ -292,6 +294,7 @@
   justify-content: center;
   padding: 6px 15px;
   min-width: 80px;
+  min-height: 32px;
   width: fit-content;
   border-radius: 5px;
   background: linear-gradient(315deg, #1764ff 0%, #4093ed 100%) !important;

@@ -53,7 +53,6 @@ class MonitorStore {
 
   async getMinerCategory(miner_id: string) {
     const result: any = await axiosServer(minerCategory, { miner_id })
-    console.log('===0033', result)
     runInAction(() => {
       this.minersCategory = {
         [miner_id]: result?.data?.miner_detail?.accounts || [],
@@ -76,7 +75,7 @@ class MonitorStore {
     runInAction(() => {
       this.saveLoading = true
     })
-    const result = await axiosServer(saveRules, { Items: payload })
+    const result = await axiosServer(saveRules, { ...payload })
     runInAction(() => {
       this.saveLoading = false
     })

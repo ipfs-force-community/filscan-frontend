@@ -57,7 +57,7 @@ const Groups = () => {
     setDeleteLoading(true)
     const { minerIndex, groupItem } = modalItem
     groupItem.miners_info.splice(minerIndex, 1)
-    await accountStore.saveMiners({ ...groupItem })
+    await accountStore.saveGroups({ ...groupItem })
     setDeleteLoading(false)
   }
 

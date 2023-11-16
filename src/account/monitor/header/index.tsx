@@ -13,7 +13,9 @@ interface Props {
   selectTag?: string
   addRule?: boolean
   isAllMiner?: boolean
+  disableAll?: boolean
   reset?: boolean
+  classes?: Record<string, any>
   onChange: (type: string, value: string | number | boolean) => void
 }
 
@@ -21,11 +23,13 @@ export default observer((props: Props) => {
   const {
     onChange,
     reset,
+    disableAll = false,
     isAllMiner = true,
     selectGroup,
     selectMiner,
     selectTag,
     addRule,
+    classes,
   } = props
   const { groupMiners } = accountStore
   const { tr } = Translation({ ns: 'account' })
@@ -133,12 +137,13 @@ export default observer((props: Props) => {
     }
     onChange(type, value)
   }
-
   return (
     <div className={style.header}>
       <div className={style.header_left}>
         <Selects
+          disabled={disableAll}
           value={selectGroup}
+          className={classes?.group}
           placeholder={tr('select_group')}
           options={groups || []}
           onChange={(v: string, item: any) => {
@@ -147,11 +152,11 @@ export default observer((props: Props) => {
         />
         {props.hasOwnProperty('selectMiner') && (
           <Selects
+            disabled={disableAll}
             value={selectMiner}
+            className={classes?.miner}
             placeholder={tr('select_miner')}
-            options={
-              selectItem?.group_id ? selectItem?.miners || [] : allMiners
-            }
+            options={selectItem?.miners ? selectItem?.miners || [] : allMiners}
             onChange={(v: string, item: any) => {
               handleChange('miner', v, item)
             }}
@@ -159,6 +164,7 @@ export default observer((props: Props) => {
         )}
         {props.hasOwnProperty('selectTag') && (
           <Selects
+            disabled={disableAll}
             value={selectTag}
             placeholder={tr('select_miner_tag')}
             options={showTags}

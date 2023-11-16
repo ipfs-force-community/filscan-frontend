@@ -1,5 +1,5 @@
 import { RequestResult, axiosServer } from '@/store/axiosServer'
-import { login, userInfo } from '@/store/ApiUrl'
+import { login, resetPassword, userInfo, verifyCode } from '@/store/ApiUrl'
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
 import router from 'next/router'
@@ -12,15 +12,40 @@ const defaultUser = {
 
 class UserStore {
   userInfo: Record<string, any>
+  verifyCode: string
   constructor() {
     this.userInfo = {
       ...defaultUser,
       loading: true,
     }
+    this.verifyCode = ''
     makeObservable(this, {
       userInfo: observable,
     })
     this.getUserInfo()
+  }
+
+  //验证码登录，获取验证码
+  async getVerifyCode(mail: string) {
+    const result: RequestResult = await axiosServer(verifyCode, { mail: mail })
+    localStorage.setItem('send_code', result?.data?.token)
+    runInAction(() => {
+      this.verifyCode = result?.data?.token
+    })
+  }
+
+  //重置密码
+
+  async resetPassword(payload: any) {
+    const userData: RequestResult = await axiosServer(resetPassword, {
+      ...payload,
+    })
+    if (userData.error) {
+      return false
+    }
+    if (!userData.error) {
+      router.push('/admin.login')
+    }
   }
 
   //获取用户登录信息
@@ -37,7 +62,13 @@ class UserStore {
 
   async loginUserInfo(payload: Record<string, any>) {
     const userData: any = await axiosServer(login, payload)
-    if (!userData.error) {
+    if (userData?.data?.code) {
+      return messageManager.showMessage({
+        type: 'error',
+        content: userData?.data?.message || '',
+      })
+    }
+    if (!userData.error && !userData?.data?.code) {
       localStorage.setItem('token', userData.data?.token)
       this.getUserInfo()
       messageManager.showMessage({
