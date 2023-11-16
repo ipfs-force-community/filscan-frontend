@@ -10,6 +10,7 @@ import { Button, Checkbox, Form, Input } from 'antd'
 import { logTabs, login_list } from '@/contents/user'
 import { isEmail } from '@/utils'
 import { observer } from 'mobx-react'
+import { BrowserView, MobileView } from '@/components/device-detect'
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
   const { verifyCode } = userStore
@@ -108,9 +109,9 @@ export default observer(() => {
     )
   }
 
-  return (
-    <User>
-      <div className={styles.contain}>
+  const renderContent = () => {
+    return (
+      <div className={`main_contain ${styles.contain}`}>
         <ul className={styles.contain_header}>
           {logTabs?.map((log_item, index) => {
             return (
@@ -118,7 +119,7 @@ export default observer(() => {
                 className={`${styles.contain_header_link} ${
                   type === log_item.dataIndex ? styles.active : ''
                 }`}
-                href={`/login?type=${log_item.dataIndex}`}
+                href={`/admin/login?type=${log_item.dataIndex}`}
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
@@ -148,7 +149,7 @@ export default observer(() => {
                 >
                   {tr('remember_me')}
                 </Checkbox>
-                <Link href="/admin/password">{tr('forgot_password')}</Link>
+                <Link href="/admin/forget">{tr('forgot_password')}</Link>
               </div>
             </Form.Item>
           )}
@@ -159,7 +160,21 @@ export default observer(() => {
             </Button>
           </Form.Item>
         </Form>
+        <div className={styles.go_register}>
+          <span>{tr('no_account')}</span>
+          <Link href={'/admin/register'} className="text-primary">
+            {tr('go_register')}
+          </Link>
+        </div>
       </div>
-    </User>
+    )
+  }
+  return (
+    <>
+      <BrowserView>
+        <User>{renderContent()}</User>
+      </BrowserView>
+      <MobileView>{renderContent()}</MobileView>
+    </>
   )
 })

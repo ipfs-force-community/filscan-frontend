@@ -11,6 +11,7 @@ import { isEmail, validatePassword } from '@/utils'
 import { observer } from 'mobx-react'
 import messageManager from '@/packages/message'
 import Image from 'next/image'
+import { BrowserView, MobileView } from '@/components/device-detect'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
@@ -132,9 +133,8 @@ export default observer(() => {
       </Form.Item>
     )
   }
-
-  return (
-    <User>
+  const renderContent = () => {
+    return (
       <div className={styles.contain}>
         <div className={styles.contain_header}>{tr('register')}</div>
         <Form
@@ -159,6 +159,15 @@ export default observer(() => {
           </Form.Item>
         </Form>
       </div>
-    </User>
+    )
+  }
+
+  return (
+    <>
+      <BrowserView>
+        <User>{renderContent()}</User>
+      </BrowserView>
+      <MobileView>{renderContent()}</MobileView>
+    </>
   )
 })

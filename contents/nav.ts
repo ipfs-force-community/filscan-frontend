@@ -215,6 +215,16 @@ const mobileNavMenu: Menu_Info[] = [
       },
     ],
   },
+  {
+    key: 'login',
+    link: '/admin/login',
+    // children: [
+    //   {
+    //     key: 'tipset_chain',
+    //     link: '/tipset/chain/',
+    //   },
+    // ],
+  },
 ]
 
 // {
