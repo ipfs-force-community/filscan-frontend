@@ -67,6 +67,7 @@
     }
     &_select {
       flex: 1;
+      margin-right: 10px;
       .ant-select-selection-item {
         color: var(--font_des);
       }
@@ -80,11 +81,13 @@
     &_main {
       display: flex;
       align-items: center;
-      column-gap: 10px;
+      // column-gap: 10px;
       margin-top: 5px;
     }
     &_content {
       position: relative;
+      width: 120px;
+      margin-right: 10px;
       &_warning {
         position: absolute;
         left: 0;
@@ -102,6 +105,7 @@
   &_icons {
     display: flex;
     column-gap: 6px;
+    margin-left: 10px;
     width: 80px;
     &_icon {
       display: flex;

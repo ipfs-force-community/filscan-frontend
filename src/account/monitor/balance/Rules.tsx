@@ -305,7 +305,7 @@ export default observer((props: Props) => {
     if (!warnings) {
       onChange('save', {
         items: payload,
-        update: !!record?.hasOwnProperty('group_id'),
+        update: !!record?.hasOwnProperty('miner_id_or_all'),
       })
     }
   }
@@ -317,22 +317,29 @@ export default observer((props: Props) => {
     ]
   }, [tr])
 
-  const CategoryOptions = useMemo(() => {
+  const [CategoryOptions, CategoryMaps] = useMemo(() => {
     const keys = Object.keys(minersCategory)
     const minersOptions: any = {}
+    const minerMap: any = {}
     if (keys && Array.isArray(keys)) {
-      keys.map((key) => {
-        minersOptions[key] = minersCategory[key].map((v: any) => {
-          return {
+      keys.forEach((key) => {
+        const arrValue: Array<any> = []
+        const minerWeakmap = new Map()
+        minersCategory[key].forEach((v: any) => {
+          arrValue.push({
             ...v,
             label: tr(`${v?.type?.toLocaleLowerCase()}`),
             value: v.type,
-          }
+          })
+          minerWeakmap.set(v.type, v)
         })
+        minersOptions[key] = arrValue
+        minerMap[key] = minerWeakmap
       })
     }
-    return minersOptions
+    return [minersOptions, minerMap]
   }, [tr, minersCategory])
+
   return (
     <Modal
       title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
@@ -365,7 +372,8 @@ export default observer((props: Props) => {
     >
       <div>
         {rules.map((ruleItem: any, index: number) => {
-          const showIcon = index === rules.length - 1 && !record?.group_id
+          const showIcon =
+            index === rules.length - 1 && !record?.miner_id_or_all
           const deleteIcon = rules.length > 1 && index !== 0
 
           return (
@@ -413,9 +421,11 @@ export default observer((props: Props) => {
                 <>
                   <div className={styles.balance_rule}>
                     {ruleItem.rule.map((rule: any, ruleIndex: number) => {
-                      const showIcon =
-                        ruleIndex === ruleItem.rule.length - 1 ||
-                        !record?.hasOwnProperty('group_id')
+                      const showIcon = ruleIndex === ruleItem.rule.length - 1
+                      const balance =
+                        rule.balance ||
+                        CategoryMaps[ruleItem.miner_id]?.get(rule?.category)
+                          ?.balance
                       return (
                         <div key={ruleIndex}>
                           <div className={styles.balance_rule_main}>
@@ -519,9 +529,9 @@ export default observer((props: Props) => {
                             </div>
                           </div>
                           <div className={styles.balance_rule_des}>
-                            {rule?.balance &&
+                            {balance &&
                               tr('balance_rule_des', {
-                                value: formatFil(rule.balance, 'FIL'),
+                                value: formatFil(balance, 'FIL'),
                               })}
                           </div>
                         </div>

@@ -198,7 +198,6 @@ export default observer(() => {
           v.OrphanBlocks.forEach((orphanItem: any) => {
             if (type === 'cid' && orphanItem._id === searchCid.current) {
               showSearch = true
-              console.log('----333', orphanItem)
               searchHeight.current = Number(orphanItem.Epoch)
             }
           })

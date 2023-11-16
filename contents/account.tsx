@@ -1649,7 +1649,6 @@ export const account_expired = {
           const showText = record.is_default ? tr('default_group') : text
           return (
             <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-              {' '}
               {showText}
             </div>
           )
@@ -1747,6 +1746,14 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
       title: 'group_name',
       width: '100',
       fixed: 'left',
+      render: (text: string, record: any) => {
+        const showText = record.is_default ? tr('default_group') : text
+        return (
+          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+            {showText}
+          </div>
+        )
+      },
     },
 
     {
@@ -1776,11 +1783,10 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'examination',
       title: 'examination',
-      width: '260',
       render: (text: string, record: any) => {
         if (type === 'power') {
           return (
-            <div>
+            <div className="leading-7">
               <div>{tr('power_rules_1')}</div>
               <div>{tr('power_rules_2')}</div>
               <div>{tr('power_rules_3')}</div>
@@ -1788,7 +1794,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
           )
         }
         return (
-          <ul>
+          <ul className="list-none leading-7">
             {record.rules.map((rule: any, index: number) => {
               return (
                 <li key={index}>
@@ -1808,7 +1814,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'alarm',
       title: 'alarm',
-      width: '300',
       render: (text: any, record: any) => {
         const mailList = record.mail_alert
         const msgList = record.msg_alert
@@ -1820,7 +1825,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
           phone_warn: callList,
         }
         return (
-          <div className="flex flex-col gap-y-2">
+          <div className="flex list-none flex-col gap-y-2">
             {Object.keys(obj).map((key: string) => {
               const resList = obj[key]
               if (Array.isArray(resList)) {
@@ -1845,7 +1850,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'created_at',
       title: 'created_at',
-      width: '150',
       render: (text: string, record: any) => {
         return formatDateTime(text)
       },
@@ -1853,7 +1857,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'is_active',
       title: 'status',
-      width: '200',
       render: (text: boolean, record: any, index: number) => {
         return (
           <ActiveRules

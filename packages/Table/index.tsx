@@ -75,7 +75,7 @@ export default (props: Props) => {
       </MobileView>
       <BrowserView>
         <Table
-          tableLayout="fixed"
+          // tableLayout="fixed"
           bordered={false}
           className={`custom_table ${className} h-full w-full`}
           dataSource={[...data]}

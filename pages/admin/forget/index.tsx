@@ -148,7 +148,7 @@ export default observer(() => {
           })}
           <div className={styles.contain_have}>
             <span>{tr('have_account')}</span>
-            <Link href="/account/login">{tr('login')}</Link>
+            <Link href="/admin/login">{tr('login')}</Link>
           </div>
           <Form.Item className={styles.submit}>
             <Button htmlType="submit" className="primary_btn !w-full">
