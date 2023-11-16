@@ -19,7 +19,7 @@ export default observer(() => {
 
   if (!showName) {
     return (
-      <Link href="/account/login" as="/account/login" scroll={false}>
+      <Link href="/admin/login" as="/admin/login" scroll={false}>
         <span className="border_color main_bg_color primary_btn flex  h-[46px] items-center  justify-center !rounded-none border">
           {tr('login')}
         </span>

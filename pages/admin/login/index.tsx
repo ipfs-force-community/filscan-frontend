@@ -148,7 +148,7 @@ export default observer(() => {
                 >
                   {tr('remember_me')}
                 </Checkbox>
-                <Link href="/account/password">{tr('forgot_password')}</Link>
+                <Link href="/admin/password">{tr('forgot_password')}</Link>
               </div>
             </Form.Item>
           )}

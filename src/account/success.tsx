@@ -41,7 +41,7 @@ export default ({
       <div className="mt-5 flex items-center gap-x-5">
         {/* {type !== 'login' && (
           <Link
-            href={'/account/login'}
+            href={'/admin/login'}
             className='border border_color rounded-[5px] px-4 py-2'>
             {tr('go_login')}
           </Link>

@@ -164,7 +164,7 @@ export default () => {
               })}
               <div className="text_color !flex !gap-x-2">
                 <span>{tr('have_account')}</span>
-                <Link href="/account/login">{tr('login')}</Link>
+                <Link href="/admin/login">{tr('login')}</Link>
               </div>
               <Form.Item className="!w-full !text-white">
                 <Button

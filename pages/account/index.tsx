@@ -42,7 +42,7 @@ const Account: React.FC = () => {
 
   useEffect(() => {
     if (!userInfo.mail || !localStorage.getItem('token')) {
-      router.push('/account/login')
+      router.push('/admin/login')
       return
     } else {
       accountStore.getAccountMinersNumber()
