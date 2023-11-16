@@ -111,7 +111,7 @@ export default observer(() => {
 
   const renderContent = () => {
     return (
-      <div className={`main_contain ${styles.contain}`}>
+      <div className={`${styles.contain}`}>
         <ul className={styles.contain_header}>
           {logTabs?.map((log_item, index) => {
             return (

@@ -37,6 +37,8 @@
 }
 
 .contain_have {
+  display: flex;
+  column-gap: 8px;
   color: var(--font_des);
 }
 
