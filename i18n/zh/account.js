@@ -17,7 +17,7 @@ const account = {
   miners: '节点管理',
   monitor: '监控管理',
   overview_monitorBalance: '余额监控',
-  monitor_sector: '扇区监控',
+  monitor_sector: '到期监控',
   monitor_balance: '余额监控',
   monitor_power: '算力监控',
   personal: '账号信息',
@@ -211,7 +211,7 @@ const account = {
   sector_rule_title: '扇区到期时间',
   sector_rule_des: '可自定义,建议大于30',
   sector_ruler_placeholder: '请输入正整数',
-  sector_ruler_warningText: '请输入正确正整数',
+  sector_ruler_warningText: '请输入正整数',
   '<=': '小于等于',
   '>=': '大于等于',
   //余额监控

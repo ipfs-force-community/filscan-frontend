@@ -19,6 +19,10 @@ const EllipsisText: React.FC<Props> = ({ text, className }) => {
         const computedStyle = window.getComputedStyle(element)
         const paddingLeft = parseFloat(computedStyle.paddingLeft)
         const paddingRight = parseFloat(computedStyle.paddingRight)
+        console.log(
+          element.offsetWidth,
+          element.scrollWidth + paddingLeft + paddingRight,
+        )
         setIsOverflowing(
           element.offsetWidth <
             element.scrollWidth + paddingLeft + paddingRight ||

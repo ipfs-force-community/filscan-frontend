@@ -15,6 +15,7 @@ import {
 } from '@/utils'
 import ActiveRules from '@/src/account/monitor/ActiveRules'
 import classNames from 'classnames'
+import TextTooltip from '@/packages/textTooltip'
 
 export const logTabs = [
   {
@@ -406,16 +407,14 @@ export const overview = {
       width: 150,
       fixed: 'left',
       render: (text: string, record: any) => {
-        const miner_tag = record.tag
-
         return (
           <div className="flex items-center">
             <Link href={`/miner/${text}`} className="link_text">
               {text}
             </Link>
-            {miner_tag && (
-              <span className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                {miner_tag}
+            {record?.tag && (
+              <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                <TextTooltip text={record?.tag} className="whitespace-nowrap" />
               </span>
             )}
           </div>
@@ -568,9 +567,12 @@ export const account_lucky = {
                 {text}
               </Link>
               {record?.tag && (
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag}
-                </div>
+                <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                  <TextTooltip
+                    text={record?.tag}
+                    className="whitespace-nowrap"
+                  />
+                </span>
               )}
             </div>
           </>
@@ -639,9 +641,12 @@ export const account_lucky_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -689,9 +694,9 @@ export const account_balance = {
             {text}
           </Link>
           {record?.tag && (
-            <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-              {record.tag}
-            </div>
+            <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+              <TextTooltip text={record?.tag} className="whitespace-nowrap" />
+            </span>
           )}
         </div>
       ),
@@ -940,9 +945,12 @@ export const account_reward = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1017,9 +1025,12 @@ export const account_reward_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1081,9 +1092,12 @@ export const account_power = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1253,9 +1267,12 @@ export const account_power_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1354,9 +1371,12 @@ export const account_gas = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1502,9 +1522,12 @@ export const account_gas_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1739,8 +1762,11 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
           <div className="flex items-center gap-x-1">
             {text}
             {record.miner_tag && (
-              <span className="w-fit rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
-                {record.miner_tag}
+              <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                <TextTooltip
+                  text={record.miner_tag}
+                  className="whitespace-nowrap"
+                />
               </span>
             )}
           </div>

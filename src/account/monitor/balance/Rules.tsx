@@ -333,7 +333,6 @@ export default observer((props: Props) => {
     }
     return minersOptions
   }, [tr, minersCategory])
-
   return (
     <Modal
       title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
@@ -377,7 +376,7 @@ export default observer((props: Props) => {
               <div className={styles.balance_contain_header}>
                 <Header
                   disableAll={record?.group_id}
-                  selectGroup={ruleItem.group_id}
+                  selectGroup={String(ruleItem.group_id)}
                   selectMiner={ruleItem.miner_id}
                   isAllMiner={false}
                   classes={{
@@ -414,7 +413,9 @@ export default observer((props: Props) => {
                 <>
                   <div className={styles.balance_rule}>
                     {ruleItem.rule.map((rule: any, ruleIndex: number) => {
-                      const showIcon = ruleIndex === ruleItem.rule.length - 1
+                      const showIcon =
+                        ruleIndex === ruleItem.rule.length - 1 ||
+                        !record?.hasOwnProperty('group_id')
                       return (
                         <div key={ruleIndex}>
                           <div className={styles.balance_rule_main}>
