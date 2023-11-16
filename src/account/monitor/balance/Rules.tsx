@@ -376,7 +376,7 @@ export default observer((props: Props) => {
               <div className={styles.balance_contain_header}>
                 <Header
                   disableAll={record?.group_id}
-                  selectGroup={String(ruleItem.group_id)}
+                  selectGroup={ruleItem.group_id}
                   selectMiner={ruleItem.miner_id}
                   isAllMiner={false}
                   classes={{
