@@ -8,7 +8,7 @@ const defaultUser = {
   name: '',
   mail: '',
   last_login: 0,
-  superVip: false,
+  superVip: true,
 }
 
 class UserStore {
@@ -63,6 +63,7 @@ class UserStore {
     runInAction(() => {
       this.userInfo = {
         ...(userData?.data || {}),
+        superVip: true,
         last_login: userData?.data?.last_login_at || '',
         loading: false,
       }
@@ -98,6 +99,7 @@ class UserStore {
       } else {
         this.userInfo = {
           ...(user || {}),
+          superVip: true,
           last_login: user?.last_login_at || '',
           loading: false,
         }

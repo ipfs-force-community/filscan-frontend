@@ -31,7 +31,7 @@ import Member from '@/src/user/member'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
-  const { userInfo, setVipModal } = userStore
+  const { userInfo } = userStore
   const { superVip } = userInfo
   const { countMiners } = accountStore
   const { miners_count, loading } = countMiners
