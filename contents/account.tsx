@@ -441,7 +441,6 @@ export const overview = {
         const showText = record.is_default ? tr('default_group') : text
         return (
           <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-            {' '}
             {showText}
           </div>
         )
@@ -556,7 +555,7 @@ export const account_lucky = {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+          <div className="text_color text_color w-fit rounded-[5px] p-2 font-normal">
             {showText}
           </div>
         )
@@ -629,7 +628,7 @@ export const account_lucky_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit p-2 font-normal text-mobile_font">
+            <div className="text_color w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -720,8 +719,7 @@ export const account_balance = {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-            {' '}
+          <div className="text_color w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
             {showText}
           </div>
         )
@@ -931,7 +929,7 @@ export const account_reward = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
           )
@@ -1078,7 +1076,7 @@ export const account_power = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
           )
@@ -1357,7 +1355,7 @@ export const account_gas = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
           )
