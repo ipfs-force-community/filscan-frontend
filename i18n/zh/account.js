@@ -222,6 +222,8 @@ const account = {
   power_rules_1: '1. 扇区发生错误',
   power_rules_2: '2. 扇区主动终止',
   power_rules_3: '3. 扇区正常到期',
+  //活的
+  active: '邀请活动',
 }
 
 export default account

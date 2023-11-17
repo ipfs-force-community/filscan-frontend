@@ -176,8 +176,15 @@ export const account_manager: Array<MenuItem> = [
     href: 'personal',
   },
   {
+    label: 'active',
+    href: 'share_active',
+    icon: getSvgIcon('hot'),
+    key: 'active',
+  },
+  {
     label: 'logout',
     href: 'logout',
+    // titleIcon:'',
     icon: getSvgIcon('account_logout'),
     key: 'logout',
   },

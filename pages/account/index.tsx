@@ -59,7 +59,6 @@ const Account: React.FC = () => {
   }
 
   const handleChange = (openKeys: any, item: any) => {
-    console.log('---dee', openKeys, item)
     if (item.vip && !superVip) {
       userStore.setVipModal(true)
     }
@@ -130,9 +129,6 @@ const Account: React.FC = () => {
                 mode="inline"
                 className="custom_menu"
                 selectedKeys={[selectedKey]}
-                //onOpenChange={handleChange}
-                //inlineIndent={36}
-                // defaultOpenKeys={['data_details', 'monitor']}
               >
                 {account_manager.map(renderMenuItem)}
               </Menu>
