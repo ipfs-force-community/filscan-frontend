@@ -34,7 +34,7 @@ export default () => {
 
     if (result) {
       localStorage.setItem('token', result?.token)
-      router.push('/account/login')
+      router.push('/admin/login')
       //userInfo.setUserInfo({...result})
       localStorage.setItem('token', result.token)
       localStorage.setItem('expired_at', result.expired_at) //过期时间
@@ -155,7 +155,7 @@ export default () => {
           })}
           <div className="text_color !flex !gap-x-2">
             <span>{tr('have_account')}</span>
-            <Link href="/account/login">{tr('login')}</Link>
+            <Link href="/admin/login">{tr('login')}</Link>
           </div>
           <Form.Item className="!w-full !text-white">
             <Button

@@ -51,7 +51,7 @@ export default () => {
       })
       localStorage.removeItem('token')
       userStore.setUserInfo()
-      router.push('/account/login')
+      router.push('/admin/login')
     }
     setLoading(false)
   }

@@ -235,7 +235,7 @@ export default observer((props: Props) => {
     if (!warnings) {
       onChange('save', {
         items: payload,
-        update: !!record?.hasOwnProperty('group_id'),
+        update: !!record?.hasOwnProperty('miner_id_or_all'),
       })
     }
   }
@@ -268,7 +268,7 @@ export default observer((props: Props) => {
       title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
       destroyOnClose={true}
       closeIcon={false}
-      width={630}
+      width={560}
       wrapClassName="custom_modal custom_left_modal"
       open={showModal}
       onOk={handleSave}
@@ -293,7 +293,9 @@ export default observer((props: Props) => {
     >
       <div>
         {rules.map((ruleItem: any, index: number) => {
-          const showIcon = index === rules.length - 1
+          const showIcon =
+            index === rules.length - 1 &&
+            !record?.hasOwnProperty('miner_id_or_all')
           const deleteIcon = rules.length > 1 && index !== 0
           return (
             <div key={index} className={styles.sector_contain}>

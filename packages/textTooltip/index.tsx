@@ -35,7 +35,7 @@ const EllipsisText: React.FC<Props> = ({ text, className }) => {
     <Tooltip title={isOverflowing ? text : ''}>
       <div
         ref={textRef}
-        className={`cursor-pointer overflow-hidden text-ellipsis ${className}`}
+        className={`cursor-default overflow-hidden text-ellipsis ${className}`}
       >
         {text}
       </div>

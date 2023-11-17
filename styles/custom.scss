@@ -44,6 +44,7 @@
 
 .custom_form {
   .ant-form-item {
+    margin-bottom: 10px;
     &-label {
       color: var(--font-color);
       label {
@@ -136,6 +137,11 @@
 //switch
 .custom_switch {
   background-color: var(--cw-bgColor);
+  min-width: 40px !important;
+  width: 40px;
+  .ant-switch-inner {
+    width: 36px;
+  }
   .ant-switch-handle {
     &::before {
       background-color: var(--bgColor);
@@ -148,50 +154,51 @@
 
 //table
 .custom_table {
-  width: 100%;
   .ant-table {
-    background-color: transparent !important;
+    background-color: var(--bgColor);
+    color: var(--font-color);
     .ant-table-content {
-      background-color: var(--bgColor);
       .ant-table-thead {
-        .ant-table-cell {
-          background-color: var(--bgColor);
-          border-bottom: none;
-          font-size: px-to-rem(12px);
-          font-family:
-            PingFangSC-Medium,
-            PingFang SC;
-          font-weight: 500;
+        font-family:
+          PingFangSC-Medium,
+          PingFang SC;
+        font-weight: 500;
+        color: var(--font_des);
+        .ant-table-column-sorter {
           color: var(--font_des);
-          padding: 10px;
+        }
+        .ant-table-cell {
+          color: var(--font_des);
+          background-color: var(--bgColor);
+          border-bottom: 1px solid var(--border-color);
           &::before {
             display: none;
-          }
-          .ant-table-column-sorters {
-            .ant-table-column-sorter {
-              .ant-table-column-sorter-inner {
-                .ant-table-column-sorter-up,
-                .ant-table-column-sorter-down {
-                  font-size: 10px !important;
-                }
-              }
-              color: var(--font_des);
-            }
-            justify-content: flex-start;
-            .ant-table-column-title {
-              width: fit-content;
-              flex: none;
-            }
           }
         }
       }
       .ant-table-tbody {
+        font-family: DINPro-Medium, DINPro;
+        font-weight: 500;
         .ant-table-cell-fix-left,
         .ant-table-cell-fix-right {
           background-color: var(--bgColor);
+          color: var(--font-color);
+        }
+        .custom_table_row {
+          &:last-child {
+            td {
+              border-bottom: 1px solid transparent;
+            }
+          }
+          .ant-table-column-sort {
+            background-color: transparent;
+          }
+          td {
+            border-bottom: 1px solid var(--border-color);
+          }
           &:hover {
-            .ant-table-cell {
-              background-color: var(--table-hove) !important;
+            td {
+              background-color: var(--table-hover) !important;
             }
           }
         }
@@ -206,39 +213,6 @@
           &:hover {
             .ant-table-cell {
               background-color: var(--table-hove) !important;
-            }
-          }
-        }
-        .ant-table-cell-row-hover {
-          background-color: var(--table-hove) !important;
-        }
-        .custom_table_row {
-          &:hover {
-            .ant-table-cell {
-              background-color: var(--table-hover) !important;
-            }
-            .ant-table-column-sort {
-              background-color: var(--table-hover) !important ;
-            }
-          }
-
-          .ant-table-column-sort {
-            background-color: transparent;
-          }
-          .ant-table-cell {
-            height: 58px;
-            font-family: DINPro-Medium, DINPro;
-            font-weight: 500;
-            color: var(--font-color);
-            padding: 10px;
-            border-bottom: 1px solid var(--border-color);
-            &:hover {
-              background-color: var(--table-hover) !important;
-            }
-          }
-          &:last-child {
-            .ant-table-cell {
-              border-bottom: none;
             }
           }
         }
@@ -263,7 +237,7 @@
   }
 }
 
-//custom_table_tooltip
+//tooltip
 .ant-tooltip {
   .ant-tooltip-arrow {
     &::after {
@@ -388,15 +362,15 @@
       align-items: center;
       line-height: 28px;
       font-size: 12px;
-      font-family: DINPro-Medium, DINPro;
-      font-weight: 500;
+      // font-family: DINPro-Medium, DINPro;
+      // font-weight: 500;
       color: var(--font-color);
     }
     .ant-select-selection-search-input {
       height: 100% !important;
       font-size: 12px;
-      font-family: DINPro-Medium, DINPro;
-      font-weight: 500;
+      // font-family: DINPro-Medium, DINPro;
+      // font-weight: 500;
       color: var(--font-color);
       cursor: pointer;
     }

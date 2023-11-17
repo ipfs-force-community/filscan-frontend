@@ -41,4 +41,5 @@ export interface MenuItem {
   href?: string
   group?: string
   children?: Array<MenuItem>
+  vip?: boolean
 }

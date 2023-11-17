@@ -78,7 +78,7 @@ export default () => {
           {logTabs?.map((log_item, index) => {
             return (
               <Link
-                href={`/account/login?type=${log_item.dataIndex}`}
+                href={`/admin/login?type=${log_item.dataIndex}`}
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
@@ -154,7 +154,7 @@ export default () => {
               >
                 {tr('remember_me')}
               </Checkbox>
-              <Link href="/account/password">{tr('forgot_password')}</Link>
+              <Link href="/admin/password">{tr('forgot_password')}</Link>
             </div>
           </Form.Item>
           <Form.Item className="!mt-6">
@@ -165,7 +165,7 @@ export default () => {
         </Form>
         <div className="flex gap-x-2">
           <span>{tr('no_account')}</span>
-          <Link href={'/account/register'} className="text-primary">
+          <Link href={'/admin/register'} className="text-primary">
             {tr('go_register')}
           </Link>
         </div>

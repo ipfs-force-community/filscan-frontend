@@ -15,6 +15,7 @@ import {
 } from '@/utils'
 import ActiveRules from '@/src/account/monitor/ActiveRules'
 import classNames from 'classnames'
+import TextTooltip from '@/packages/textTooltip'
 
 export const logTabs = [
   {
@@ -146,6 +147,7 @@ export const account_manager: Array<MenuItem> = [
     icon: getSvgIcon('monitor'),
     href: 'monitorBalance',
     key: 'monitor',
+    vip: true,
     children: [
       {
         label: 'monitor_balance', //余额监控
@@ -406,16 +408,14 @@ export const overview = {
       width: 150,
       fixed: 'left',
       render: (text: string, record: any) => {
-        const miner_tag = record.tag
-
         return (
           <div className="flex items-center">
             <Link href={`/miner/${text}`} className="link_text">
               {text}
             </Link>
-            {miner_tag && (
-              <span className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                {miner_tag}
+            {record?.tag && (
+              <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                <TextTooltip text={record?.tag} className="whitespace-nowrap" />
               </span>
             )}
           </div>
@@ -568,9 +568,12 @@ export const account_lucky = {
                 {text}
               </Link>
               {record?.tag && (
-                <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                  {record.tag}
-                </div>
+                <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                  <TextTooltip
+                    text={record?.tag}
+                    className="whitespace-nowrap"
+                  />
+                </span>
               )}
             </div>
           </>
@@ -619,7 +622,7 @@ export const account_lucky_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -639,9 +642,12 @@ export const account_lucky_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -689,9 +695,9 @@ export const account_balance = {
             {text}
           </Link>
           {record?.tag && (
-            <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-              {record.tag}
-            </div>
+            <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+              <TextTooltip text={record?.tag} className="whitespace-nowrap" />
+            </span>
           )}
         </div>
       ),
@@ -940,9 +946,12 @@ export const account_reward = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -997,7 +1006,7 @@ export const account_reward_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1017,9 +1026,12 @@ export const account_reward_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1081,9 +1093,12 @@ export const account_power = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1233,7 +1248,7 @@ export const account_power_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1253,9 +1268,12 @@ export const account_power_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1354,9 +1372,12 @@ export const account_gas = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1482,7 +1503,7 @@ export const account_gas_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1502,9 +1523,12 @@ export const account_gas_mobile = {
                   {text}
                 </Link>
                 {record?.tag && (
-                  <div className="bg-bg_color_5 ml-[4px] flex items-center justify-center rounded-[5px] px-[8px] py-[6px] font-normal text-font_des">
-                    {record.tag}
-                  </div>
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
                 )}
               </div>
             </>
@@ -1626,7 +1650,6 @@ export const account_expired = {
           const showText = record.is_default ? tr('default_group') : text
           return (
             <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-              {' '}
               {showText}
             </div>
           )
@@ -1724,6 +1747,14 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
       title: 'group_name',
       width: '100',
       fixed: 'left',
+      render: (text: string, record: any) => {
+        const showText = record.is_default ? tr('default_group') : text
+        return (
+          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+            {showText}
+          </div>
+        )
+      },
     },
 
     {
@@ -1739,8 +1770,11 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
           <div className="flex items-center gap-x-1">
             {text}
             {record.miner_tag && (
-              <span className="w-fit rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
-                {record.miner_tag}
+              <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                <TextTooltip
+                  text={record.miner_tag}
+                  className="whitespace-nowrap"
+                />
               </span>
             )}
           </div>
@@ -1750,11 +1784,10 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'examination',
       title: 'examination',
-      width: '260',
       render: (text: string, record: any) => {
         if (type === 'power') {
           return (
-            <div>
+            <div className="leading-7">
               <div>{tr('power_rules_1')}</div>
               <div>{tr('power_rules_2')}</div>
               <div>{tr('power_rules_3')}</div>
@@ -1762,7 +1795,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
           )
         }
         return (
-          <ul>
+          <ul className="list-none leading-7">
             {record.rules.map((rule: any, index: number) => {
               return (
                 <li key={index}>
@@ -1782,7 +1815,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'alarm',
       title: 'alarm',
-      width: '300',
       render: (text: any, record: any) => {
         const mailList = record.mail_alert
         const msgList = record.msg_alert
@@ -1794,7 +1826,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
           phone_warn: callList,
         }
         return (
-          <div className="flex flex-col gap-y-2">
+          <div className="flex list-none flex-col gap-y-2">
             {Object.keys(obj).map((key: string) => {
               const resList = obj[key]
               if (Array.isArray(resList)) {
@@ -1819,7 +1851,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'created_at',
       title: 'created_at',
-      width: '150',
       render: (text: string, record: any) => {
         return formatDateTime(text)
       },
@@ -1827,7 +1858,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
     {
       dataIndex: 'is_active',
       title: 'status',
-      width: '200',
       render: (text: boolean, record: any, index: number) => {
         return (
           <ActiveRules

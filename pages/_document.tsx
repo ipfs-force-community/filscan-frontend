@@ -28,6 +28,10 @@ const MyDocument = () => (
         rel="icon"
         href="https://filscan-v2.oss-accelerate.aliyuncs.com/client/logo.ico"
       />
+      <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+      ></link>
       <Script
         src="https://hm.baidu.com/hm.js?db68ddd1d28effdabb6dfc9f07258667"
         strategy="lazyOnload"

@@ -46,7 +46,7 @@ async function fetchData<T>(
       })
       if (response.status === 401) {
         //message.warning('please login ');
-        // Router.push('/account/login');
+        // Router.push('/admin/login');
         return {
           result: null,
           error: 'Invalid credentials',

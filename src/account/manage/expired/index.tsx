@@ -94,7 +94,7 @@ export default observer((props: Props) => {
                   {
                     key: index,
                     label: (
-                      <ul className="flex pl-7 font-semibold">
+                      <ul className="flex pl-7">
                         {account_expired?.headerList.map((item: any) => {
                           const { dataIndex, width, title, render } = item
                           const value = sector_item[dataIndex]

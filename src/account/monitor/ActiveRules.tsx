@@ -42,7 +42,11 @@ export default ({
           className="custom_switch"
           checked={!!text}
           onChange={() => {
-            setShow(true)
+            if (title === 'isActive' && !text) {
+              onChange()
+            } else {
+              setShow(true)
+            }
           }}
         />
       )}

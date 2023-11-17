@@ -24,11 +24,15 @@ import accountStore from '@/store/modules/account'
 import userStore from '@/store/modules/user'
 import { Menu } from 'antd'
 import { observer } from 'mobx-react'
+import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
+import style from './index.module.scss'
+import Member from '@/src/user/member'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
-  const { userInfo } = userStore
+  const { userInfo, setVipModal } = userStore
+  const { superVip } = userInfo
   const { countMiners } = accountStore
   const { miners_count, loading } = countMiners
   const { hash, hashParams } = useHash()
@@ -42,7 +46,7 @@ const Account: React.FC = () => {
 
   useEffect(() => {
     if (!userInfo.mail || !localStorage.getItem('token')) {
-      router.push('/account/login')
+      router.push('/admin/login')
       return
     } else {
       accountStore.getAccountMinersNumber()
@@ -54,14 +58,37 @@ const Account: React.FC = () => {
     return <Loading />
   }
 
+  const handleChange = (openKeys: any, item: any) => {
+    console.log('---dee', openKeys, item)
+    if (item.vip && !superVip) {
+      userStore.setVipModal(true)
+    }
+  }
+
   const renderMenuItem = (item: any) => {
     if (item.label === 'logout') {
       return null
     }
     if (item.children) {
       return (
-        <Menu.SubMenu key={item.key} icon={item.icon} title={tr(item.label)}>
-          {item.children.map(renderMenuItem)}
+        <Menu.SubMenu
+          key={item.key}
+          icon={item.icon}
+          title={
+            <span className={style.submenu_title}>
+              {tr(item.label)}
+              {item.vip && (
+                <span className={style.submenu_title_vip}>
+                  <Vip />
+                </span>
+              )}
+            </span>
+          }
+          onTitleClick={({ key }) => {
+            handleChange(key, item)
+          }}
+        >
+          {item.vip && !superVip ? <></> : item.children.map(renderMenuItem)}
         </Menu.SubMenu>
       )
     }
@@ -103,6 +130,8 @@ const Account: React.FC = () => {
                 mode="inline"
                 className="custom_menu"
                 selectedKeys={[selectedKey]}
+                //onOpenChange={handleChange}
+                //inlineIndent={36}
                 // defaultOpenKeys={['data_details', 'monitor']}
               >
                 {account_manager.map(renderMenuItem)}
@@ -136,6 +165,7 @@ const Account: React.FC = () => {
           )}
         </div>
       </MobileView>
+      <Member />
     </>
   )
 }

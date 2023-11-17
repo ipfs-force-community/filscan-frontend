@@ -1,0 +1,221 @@
+.member {
+  position: relative;
+  width: fit-content;
+  padding: 50px 50px 30px 50px;
+  background-image: url('../../../assets/images/member/memberBg.png');
+  background-size: cover;
+  border-radius: 12px;
+  &_header {
+    position: relative;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #6d3f1a;
+    margin-bottom: 10px;
+    &_close {
+      cursor: pointer;
+      position: absolute;
+      right: -10px;
+      top: 10px;
+      font-size: 12px;
+    }
+  }
+  &_content {
+    margin-top: 60px;
+    &_title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 4px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #6d3f1a;
+    }
+    &_main {
+      display: flex;
+      column-gap: 30px;
+    }
+  }
+
+  &_item {
+    position: relative;
+    width: 373px;
+    margin-top: 30px;
+    background: rgba(226, 186, 120, 0.1);
+    border-radius: 12px;
+    border: 1px solid #ffffff;
+    &_icon {
+      position: absolute;
+      right: 0px;
+      color: #f5c684;
+    }
+    &_card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 96px;
+      background: linear-gradient(308deg, #f2c37d 0%, #ffe9c3 100%);
+      border-radius: 12px;
+      border: 1px solid;
+      padding: 0px 30px;
+      border-color: rgba(243, 215, 183, 1) rgba(221, 176, 127, 1)
+        rgba(221, 176, 127, 1) rgba(243, 215, 183, 1);
+    }
+    &_list {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 30px 0px 30px 40px;
+      column-gap: 30px;
+      list-style: none;
+    }
+    &_li {
+      width: calc(50% - 15px);
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
+      height: 32px;
+    }
+    &_value {
+      font-size: 16px;
+      font-family: DINPro-Medium;
+      font-weight: bold;
+    }
+    &_discount {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      font-size: 10px;
+      color: #ffffff;
+      font-weight: 200;
+      width: fit-content;
+      border-radius: 3px;
+      height: 16px;
+      background: linear-gradient(105deg, #f55520 0%, #e73b3b 100%);
+    }
+    &_priceValue {
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
+    }
+    &_priceItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 20px;
+      width: 100%;
+      height: 42px;
+      color: #a56b3b;
+      background: rgba(236, 187, 107, 0.2);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+  }
+  &_item1 {
+    background: rgba(119, 139, 241, 0.1);
+    color: #3046b6;
+    .member_item_icon {
+      color: rgba(177, 188, 240, 1);
+    }
+    .member_item_card {
+      color: #faefff;
+      background: linear-gradient(310deg, #0f1833 0%, #535d8c 100%);
+      border-color: rgba(148, 250, 255, 0.8) rgba(255, 148, 174, 0.8)
+        rgba(255, 148, 174, 0.8) rgba(148, 250, 255, 0.8);
+    }
+    .member_item_priceItem {
+      color: #3046b6;
+      background: rgba(119, 139, 241, 0.1);
+    }
+  }
+  &_itemMain {
+    padding: 30px;
+  }
+  &_btns {
+    //     position: fixed;
+    //     width: 100%;
+    //     height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+  }
+
+  &_btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 359px;
+    height: 36px;
+    color: #6d3f1a;
+    border-radius: 5px;
+    border: 1px solid #f0f1f3;
+  }
+  &_btnShare {
+    background: linear-gradient(283deg, #f2c37d 0%, #ffe9c3 100%);
+    margin: 20px 0px;
+  }
+}
+.content {
+  display: flex;
+  column-gap: 30px;
+  margin-top: 30px;
+  &_card {
+    padding: 30px;
+    min-width: 238px;
+    background: linear-gradient(315deg, #f2c37d 0%, #fff2da 100%);
+    border-radius: 12px;
+    border: 1px solid;
+    border-color: rgba(243, 215, 183, 1) rgba(221, 176, 127, 1)
+      rgba(221, 176, 127, 1) rgba(243, 215, 183, 1);
+    font-family:
+      PingFangSC-Regular,
+      PingFang SC;
+    font-weight: 400;
+    font-size: 14px;
+    color: #6d3f1a;
+    &_icon {
+      display: flex;
+      justify-content: center;
+      svg {
+        width: 54px;
+        height: 54px;
+      }
+    }
+    &_title {
+      font-weight: 500;
+      color: #6d3f1a;
+      text-align: center;
+      margin: 20px 0px;
+    }
+  }
+  &_newCard {
+    flex: 1;
+
+    &_main {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 40px;
+    }
+    &_item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 6px;
+    }
+    &_text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 6px;
+      font-weight: 500;
+      width: 100%;
+      margin-top: 25px;
+      text-align: center;
+      height: 36px;
+      color: #6d3f1a;
+      background: rgba(255, 242, 218, 0.6);
+      border-radius: 5px;
+    }
+  }
+}

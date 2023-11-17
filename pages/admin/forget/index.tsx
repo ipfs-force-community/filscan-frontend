@@ -11,6 +11,7 @@ import { isEmail, validatePassword } from '@/utils'
 import { observer } from 'mobx-react'
 import messageManager from '@/packages/message'
 import Image from 'next/image'
+import { BrowserView, MobileView } from '@/components/device-detect'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
@@ -46,7 +47,7 @@ export default observer(() => {
         newRules.push(
           newRules.push(() => ({
             async validator(_: any, value: any) {
-              if (isEmail(value)) {
+              if (value && isEmail(value)) {
                 return Promise.resolve()
               }
               return Promise.reject(new Error(tr('email_rules')))
@@ -68,7 +69,7 @@ export default observer(() => {
               if (value) {
                 return Promise.resolve()
               }
-              return Promise.reject(new Error(tr('email_rules')))
+              return Promise.reject(new Error(tr('code_rules')))
             },
           })),
         )
@@ -131,8 +132,8 @@ export default observer(() => {
     )
   }
 
-  return (
-    <User>
+  const renderContent = () => {
+    return (
       <div className={styles.contain}>
         <div className={styles.contain_header}>{tr('forgot_password')}</div>
         <Form
@@ -148,7 +149,7 @@ export default observer(() => {
           })}
           <div className={styles.contain_have}>
             <span>{tr('have_account')}</span>
-            <Link href="/account/login">{tr('login')}</Link>
+            <Link href="/admin/login">{tr('login')}</Link>
           </div>
           <Form.Item className={styles.submit}>
             <Button htmlType="submit" className="primary_btn !w-full">
@@ -157,6 +158,14 @@ export default observer(() => {
           </Form.Item>
         </Form>
       </div>
-    </User>
+    )
+  }
+  return (
+    <>
+      <BrowserView>
+        <User>{renderContent()}</User>
+      </BrowserView>
+      <MobileView>{renderContent()}</MobileView>
+    </>
   )
 })
