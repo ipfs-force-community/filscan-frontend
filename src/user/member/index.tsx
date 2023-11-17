@@ -1,17 +1,15 @@
-import { Button, Modal } from 'antd'
+import { Modal } from 'antd'
 import style from './index.module.scss'
 import { Translation } from '@/components/hooks/Translation'
-import { member_list_1, member_list_2 } from '@/contents/user'
+import { member_list_1, member_list_2, member_main } from '@/contents/user'
 import LeftIcon from '@/assets/images/member/left.svg'
+import RightIcon from '@/assets/images/member/right.svg'
+import { getSvgIcon } from '@/svgsIcon'
+import { observer } from 'mobx-react'
+import userStore from '@/store/modules/user'
 
-interface Props {
-  showModal: boolean
-  record?: Record<string, any>
-  onChange: (type: string, value: any) => void
-}
-
-export default (props: Props) => {
-  const { showModal, onChange } = props
+export default observer(() => {
+  const { vipModal } = userStore
   const { tr } = Translation({ ns: 'user' })
 
   return (
@@ -21,29 +19,23 @@ export default (props: Props) => {
       destroyOnClose={true}
       closeIcon={false}
       wrapClassName="custom_modal noPaddingModal"
-      open={showModal}
-      onOk={() => onChange('cancel', false)}
-      onCancel={() => onChange('cancel', false)}
+      open={vipModal}
+      onOk={() => userStore.setVipModal(false)}
+      onCancel={() => userStore.setVipModal(false)}
       footer={null}
-      //       footer={[
-      //         <Button
-      //           className="cancel_btn"
-      //           key="cancel_btn"
-      //           onClick={() => onChange('cancel', false)}
-      //         >
-      //           {tr('cancel')}
-      //         </Button>,
-      //         <Button
-      //           className="primary_btn"
-      //           key="primary_btn"
-      //           onClick={() => onChange('cancel', false)}
-      //         >
-      //           {tr('confirm')}
-      //         </Button>,
-      //       ]}
     >
       <div className={style.member}>
-        <div className={style.member_header}>{tr('member_header')}</div>
+        <div className={style.member_header}>
+          {tr('member_header')}{' '}
+          <span
+            className={style.member_header_close}
+            onClick={() => {
+              userStore.setVipModal(false)
+            }}
+          >
+            X
+          </span>
+        </div>
         <div className={style.content}>
           {member_list_1.map((item: any) => {
             return (
@@ -75,13 +67,80 @@ export default (props: Props) => {
                 <div className={style.content_newCard_text}>
                   <LeftIcon />
                   {tr(item.content)}
-                  <LeftIcon />
+                  <RightIcon />
                 </div>
               </div>
             )
           })}
         </div>
+        <div className={style.member_content}>
+          <div className={style.member_content_title}>
+            <LeftIcon />
+            {tr('member_content_title')}
+            <RightIcon />
+          </div>
+          <div className={style.member_content_main}>
+            {member_main.map((item: any, index: number) => {
+              return (
+                <div
+                  key={index}
+                  className={`${style.member_item} ${
+                    style[`member_item${index}`]
+                  }`}
+                >
+                  <span className={style.member_item_icon}>
+                    {getSvgIcon('memberBg')}
+                  </span>
+                  <div className={style.member_itemMain}>
+                    <div className={`${style.member_item_card}`}>
+                      {tr(item.title)}
+                      {item.icon}
+                    </div>
+                    <ul className={style.member_item_list}>
+                      {item.list.map((v: any) => {
+                        return (
+                          <li key={v.title} className={style.member_item_li}>
+                            {v.icon}
+                            {tr(v.title)}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                    <ul className={style.member_item_price}>
+                      {item.priceList.map((priceItem: any, index: number) => {
+                        return (
+                          <li
+                            key={index}
+                            className={style.member_item_priceItem}
+                          >
+                            <span>{tr(priceItem.title)}</span>
+                            <span className={style.member_item_priceValue}>
+                              {priceItem.discount && (
+                                <span className={style.member_item_discount}>
+                                  {tr(priceItem.discount)}
+                                </span>
+                              )}
+                              <span className={style.member_item_value}>
+                                {priceItem.price}
+                              </span>
+                            </span>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className={style.member_btns}>
+          <div className={`${style.member_btn} ${style.member_btnShare}`}>
+            {tr('share_friend')}
+          </div>
+          <div className={style.member_btn}>{tr('share_turn')}</div>
+        </div>
       </div>
     </Modal>
   )
-}
+})

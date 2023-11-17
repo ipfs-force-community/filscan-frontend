@@ -147,6 +147,7 @@ export const account_manager: Array<MenuItem> = [
     icon: getSvgIcon('monitor'),
     href: 'monitorBalance',
     key: 'monitor',
+    vip: true,
     children: [
       {
         label: 'monitor_balance', //余额监控
@@ -621,7 +622,7 @@ export const account_lucky_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1005,7 +1006,7 @@ export const account_reward_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1247,7 +1248,7 @@ export const account_power_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1502,7 +1503,7 @@ export const account_gas_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text-mobile_font w-fit p-2 font-normal">
+            <div className="w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )

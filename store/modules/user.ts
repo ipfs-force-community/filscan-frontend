@@ -8,21 +8,31 @@ const defaultUser = {
   name: '',
   mail: '',
   last_login: 0,
+  superVip: false,
 }
 
 class UserStore {
   userInfo: Record<string, any>
   verifyCode: string
+  vipModal: boolean
   constructor() {
     this.userInfo = {
       ...defaultUser,
       loading: true,
     }
     this.verifyCode = ''
+    this.vipModal = false
     makeObservable(this, {
       userInfo: observable,
+      vipModal: observable,
     })
     this.getUserInfo()
+  }
+
+  setVipModal(isShow: boolean) {
+    runInAction(() => {
+      this.vipModal = isShow
+    })
   }
 
   //验证码登录，获取验证码
@@ -35,7 +45,6 @@ class UserStore {
   }
 
   //重置密码
-
   async resetPassword(payload: any) {
     const userData: RequestResult = await axiosServer(resetPassword, {
       ...payload,

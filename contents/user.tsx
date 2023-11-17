@@ -7,6 +7,11 @@ import PhoneIcon from '@/assets/images/member/phone.svg'
 import PowerWarnIcon from '@/assets/images/member/power.svg'
 import BalanceWarnIcon from '@/assets/images/member/balance.svg'
 import SectorWarnIcon from '@/assets/images/member/sector.svg'
+import Companies from '@/assets/images/member/companies.svg'
+import CompaniesPro from '@/assets/images/member/companiesPro.svg'
+import CompaniesV from '@/assets/images/member/companiesV.png'
+import CompaniesVPro from '@/assets/images/member/companiesVPro.png'
+import Image from 'next/image'
 
 export const logTabs = [
   {
@@ -180,5 +185,49 @@ export const member_list_2 = [
       },
     ],
     content: 'warn_text',
+  },
+]
+
+export const member_main = [
+  {
+    title: 'companies',
+    icon: <Image src={CompaniesV} alt="" width={106} />,
+    list: [
+      { title: 'companies_1', icon: <Companies /> },
+      { title: 'companies_2', icon: <Companies /> },
+      { title: 'companies_3', icon: <Companies /> },
+      { title: 'companies_4', icon: <Companies /> },
+      { title: 'companies_5', icon: <Companies /> },
+    ],
+    priceList: [
+      { title: 'monthly', price: '169U' },
+      {
+        title: 'quarter',
+        price: '439U',
+        discount: 'quarter_discount',
+      },
+      { title: 'year', price: '1599U', discount: 'year_discount' },
+    ],
+  },
+  {
+    title: 'companiesPro',
+    icon: <Image src={CompaniesVPro} alt="" width={106} />,
+    list: [
+      { title: 'companies_1', icon: <CompaniesPro /> },
+      { title: 'companies_2', icon: <CompaniesPro /> },
+      { title: 'companies_3', icon: <CompaniesPro /> },
+      { title: 'companies_4', icon: <CompaniesPro /> },
+      { title: 'companies_6', icon: <CompaniesPro /> },
+      { title: 'companies_5', icon: <CompaniesPro /> },
+    ],
+    priceList: [
+      { title: 'monthly', price: '169U' },
+      {
+        title: 'quarter',
+        price: '439U',
+        discount: 'quarter_discount',
+      },
+      { title: 'year', price: '1599U', discount: 'year_discount' },
+    ],
   },
 ]

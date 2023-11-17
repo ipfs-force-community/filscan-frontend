@@ -20,6 +20,22 @@ const user = {
   warn_phone: '电话告警',
   data_text: '重点信息一站式监控',
   warn_text: '告警渠道多样，灵活配置',
+  member_content_title: '会员等级',
+  companies: '企业会员',
+  companiesPro: '企业Pro版',
+  companies_1: '30个节点上限',
+  companies_2: '算力监控',
+  companies_3: '余额监控',
+  companies_4: '扇区监控',
+  companies_5: '更多（敬请期待）',
+  companies_6: '技术服务支持',
+  monthly: '月度会员',
+  quarter: '季度会员',
+  year: '年度会员',
+  quarter_discount: '低于8.8折',
+  year_discount: '低于8.0折',
+  share_friend: '邀请朋友，赠送一个月黄金会员',
+  share_turn: '即刻开启，最大化减少损失',
 }
 
 export default user
