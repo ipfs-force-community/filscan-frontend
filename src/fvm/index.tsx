@@ -20,7 +20,6 @@ function Share({ data, title }: { data: any; title: string }) {
       useCORS: true,
     }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png')
-      console.log(imgData)
       const link = document.createElement('a')
       link.href = imgData
       link.download = `filscan-fvm.png`

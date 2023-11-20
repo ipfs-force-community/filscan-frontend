@@ -732,13 +732,16 @@ export const message_detail = {
                     <span className="flex items-center gap-x-2">
                       <span className="text_des">{tr('from_ath')}</span>
                       <span className="flex items-center gap-x-2">
-                        <AccountLink value={item.from} />
+                        <AccountLink
+                          value={item.from}
+                          tagText={item.from_tag}
+                        />
                       </span>
                     </span>
                     <span className="flex items-center gap-x-2 ">
                       <span className="text_des">{tr('to_ath')}</span>{' '}
                       <span className="flex items-center gap-x-2">
-                        <AccountLink value={item.to} />
+                        <AccountLink value={item.to} tagText={item.to_tag} />
                       </span>
                     </span>
                     <span className="flex items-center gap-x-2 font-DINPro-Medium ">
@@ -762,7 +765,11 @@ export const message_detail = {
       type: ['message_basic'],
       render: (text: string, record: any) => (
         <span className="link-row flex items-center gap-x-2">
-          <AccountLink value={text} unit={0} tagText={record.form_tag} />
+          <AccountLink
+            value={text}
+            unit={0}
+            tagText={record?.message_basic?.from_tag}
+          />
         </span>
       ),
     },
@@ -773,7 +780,11 @@ export const message_detail = {
       render: (text: string, record: any) => {
         return (
           <span className="link-row flex items-center gap-x-2">
-            <AccountLink value={text} unit={0} tagText={record.to_tag} />
+            <AccountLink
+              value={text}
+              unit={0}
+              tagText={record?.message_basic?.to_tag}
+            />
           </span>
         )
       },
@@ -1704,7 +1715,7 @@ export const message_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <span className="flex items-center gap-x-2">
-          <AccountLink value={text} />
+          <AccountLink value={text} tagText={record.from_tag} />
           {fromList?.domains && fromList?.domains[text] && (
             <Link
               href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -1724,7 +1735,7 @@ export const message_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <div className="flex items-center gap-x-2">
-          <AccountLink value={text} />
+          <AccountLink value={text} tagText={record.to_tag} />
           {toList?.domains && toList?.domains[text] && (
             <Link
               href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
@@ -1828,7 +1839,7 @@ export const trance_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <span className="flex items-center gap-x-2">
-          <AccountLink value={text} />
+          <AccountLink value={text} tagText={record.from_tag} />
           {fromList?.domains && fromList?.domains[text] && (
             <Link
               href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -1848,7 +1859,7 @@ export const trance_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <div className="flex items-center gap-x-2">
-          <AccountLink value={text} />
+          <AccountLink value={text} tagText={record.to_tag} />
           {toList?.domains && toList?.domains[text] && (
             <Link
               href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
@@ -1900,7 +1911,7 @@ export const ercToken_list = (fromList: any, toList: any) => {
         if (!text) return '--'
         return (
           <span className="flex items-center gap-x-2">
-            <AccountLink value={text} />
+            <AccountLink value={text} tagText={record.from_tag} />
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -1920,7 +1931,7 @@ export const ercToken_list = (fromList: any, toList: any) => {
         if (!text) return '--'
         return (
           <div className="flex items-center gap-x-2">
-            <AccountLink value={text} />
+            <AccountLink value={text} tagText={record.to_tag} />
             {toList?.domains && toList?.domains[text] && (
               <Link
                 href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}

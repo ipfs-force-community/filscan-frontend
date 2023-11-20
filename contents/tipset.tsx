@@ -489,7 +489,7 @@ export const transfer_list = {
       title: 'from',
       render: (text: string, record: any) => (
         <span className="flex items-center gap-x-1">
-          <AccountLink value={text} />
+          <AccountLink value={text} tagText={record.from_tag} />
         </span>
       ),
       //   render: (text: string) => (
@@ -503,7 +503,7 @@ export const transfer_list = {
       title: 'to',
       render: (text: string, record: any) => (
         <span className="flex items-center gap-x-1">
-          <AccountLink value={text} />
+          <AccountLink value={text} tagText={record.to_tag} />
         </span>
       ),
       // render: (text: string) => {

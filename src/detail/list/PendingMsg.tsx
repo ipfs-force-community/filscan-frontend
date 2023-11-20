@@ -27,7 +27,6 @@ export default (props: Props) => {
 
   }
 
-  console.log('---999933',data?.total)
   if (!data?.total) {
     return null
   }
