@@ -1,6 +1,6 @@
+import AccountLink from '@/components/accountLink'
 import { Translation } from '@/components/hooks/Translation'
 import { getSvgIcon } from '@/svgsIcon'
-import { get_account_type } from '@/utils'
 import { useMemo, useState } from 'react'
 
 export default ({
@@ -28,7 +28,7 @@ export default ({
             className="flex w-full items-center justify-end gap-x-1"
             key={index}
           >
-            {get_account_type(item, unit)}
+            <AccountLink value={item} unit={unit} />
           </li>
         )
       })}

@@ -57,7 +57,7 @@ const statistic = {
 
   //chartsnav
   cc_dc_power: 'CC/DC算力走势',
-  static_overview: '图表统计',
+  static_overview: '数据统计',
   contract_trend: '合约交易',
 
   //charts

@@ -5,7 +5,6 @@ import {
   formatFil,
   formatFilNum,
   formatNumber,
-  get_account_type,
   isIndent,
   unitConversion,
 } from '@/utils'
@@ -18,6 +17,7 @@ import CopySvgMobile from '@/assets/images/icon-copy.svg'
 import Image from '@/packages/image'
 import DropDown from '@/packages/customDrop'
 import ShowText from '@/packages/showText'
+import AccountLink from '@/components/accountLink'
 
 //储存池概览 账户余额 & 有效算力
 export const account_balance = {
@@ -531,7 +531,7 @@ export const message_detail = {
       width: '30%',
       render: (text: string, record: any) => (
         <span className="flex items-center gap-x-2">
-          {get_account_type(text)}
+          <AccountLink value={text} />
         </span>
       ),
     },
@@ -541,7 +541,7 @@ export const message_detail = {
       width: '30%',
       render: (text: string, record: any) => (
         <span className="flex items-center gap-x-2">
-          {get_account_type(text)}
+          <AccountLink value={text} />
         </span>
       ),
     },
@@ -732,13 +732,13 @@ export const message_detail = {
                     <span className="flex items-center gap-x-2">
                       <span className="text_des">{tr('from_ath')}</span>
                       <span className="flex items-center gap-x-2">
-                        {get_account_type(item.from)}
+                        <AccountLink value={item.from} />
                       </span>
                     </span>
                     <span className="flex items-center gap-x-2 ">
                       <span className="text_des">{tr('to_ath')}</span>{' '}
                       <span className="flex items-center gap-x-2">
-                        {get_account_type(item.to)}
+                        <AccountLink value={item.to} />
                       </span>
                     </span>
                     <span className="flex items-center gap-x-2 font-DINPro-Medium ">
@@ -762,7 +762,7 @@ export const message_detail = {
       type: ['message_basic'],
       render: (text: string, record: any) => (
         <span className="link-row flex items-center gap-x-2">
-          {get_account_type(text, 0)}
+          <AccountLink value={text} unit={0} tagText={record.form_tag} />
         </span>
       ),
     },
@@ -773,7 +773,7 @@ export const message_detail = {
       render: (text: string, record: any) => {
         return (
           <span className="link-row flex items-center gap-x-2">
-            {get_account_type(text, 0)}
+            <AccountLink value={text} unit={0} tagText={record.to_tag} />
           </span>
         )
       },
@@ -797,13 +797,19 @@ export const message_detail = {
                         <span className="flex items-center gap-x-2">
                           <span className="text_des">{tr('from_ath')}</span>
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.from)}
+                            <AccountLink
+                              value={item.from}
+                              tagText={item.from_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 ">
                           <span className="text_des">{tr('to_ath')}</span>{' '}
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.to)}
+                            <AccountLink
+                              value={item.to}
+                              tagText={item.to_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 font-DINPro-Medium ">
@@ -824,13 +830,19 @@ export const message_detail = {
                         <span className="flex items-center gap-x-2">
                           <span className="text_des">{tr('from_ath')}</span>
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.from)}
+                            <AccountLink
+                              value={item.from}
+                              tagText={item.from_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 ">
                           <span className="text_des">{tr('to_ath')}</span>{' '}
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.to)}
+                            <AccountLink
+                              value={item.to}
+                              tagText={item.to_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 font-DINPro-Medium ">
@@ -869,13 +881,19 @@ export const message_detail = {
                         <span className="flex items-center gap-x-2">
                           <span className="text_des">{tr('from_ath')}</span>
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.from)}
+                            <AccountLink
+                              value={item.from}
+                              tagText={item.from_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 ">
                           <span className="text_des">{tr('to_ath')}</span>{' '}
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.to)}
+                            <AccountLink
+                              value={item.from}
+                              tagText={item.to_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 font-DINPro-Medium ">
@@ -894,13 +912,19 @@ export const message_detail = {
                         <span className="flex items-center gap-x-2">
                           <span className="text_des">{tr('from_ath')}</span>
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.from)}
+                            <AccountLink
+                              value={item.from}
+                              tagText={item.from_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 ">
                           <span className="text_des">{tr('to_ath')}</span>{' '}
                           <span className="flex items-center gap-x-2">
-                            {get_account_type(item.to)}
+                            <AccountLink
+                              value={item.from}
+                              tagText={item.to_tag}
+                            />
                           </span>
                         </span>
                         <span className="flex items-center gap-x-2 font-DINPro-Medium ">
@@ -1680,7 +1704,7 @@ export const message_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <span className="flex items-center gap-x-2">
-          {get_account_type(text)}
+          <AccountLink value={text} />
           {fromList?.domains && fromList?.domains[text] && (
             <Link
               href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -1700,7 +1724,7 @@ export const message_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <div className="flex items-center gap-x-2">
-          {get_account_type(text)}
+          <AccountLink value={text} />
           {toList?.domains && toList?.domains[text] && (
             <Link
               href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
@@ -1804,7 +1828,7 @@ export const trance_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <span className="flex items-center gap-x-2">
-          {get_account_type(text)}
+          <AccountLink value={text} />
           {fromList?.domains && fromList?.domains[text] && (
             <Link
               href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -1824,7 +1848,7 @@ export const trance_list = (fromList: any, toList: any) => [
       if (!text) return '--'
       return (
         <div className="flex items-center gap-x-2">
-          {get_account_type(text)}
+          <AccountLink value={text} />
           {toList?.domains && toList?.domains[text] && (
             <Link
               href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
@@ -1869,25 +1893,6 @@ export const trance_list = (fromList: any, toList: any) => [
 export const ercToken_list = (fromList: any, toList: any) => {
   return [
     {
-      dataIndex: 'time',
-      title: 'time',
-      width: '15%',
-      render: (text: string | number) => formatDateTime(text),
-    },
-    {
-      dataIndex: 'cid',
-      title: 'cid',
-      width: '10%',
-      render: (text: string) =>
-        text ? (
-          <Link className="link" href={`/message/${text}`}>
-            {isIndent(text)}
-          </Link>
-        ) : (
-          '--'
-        ),
-    },
-    {
       dataIndex: 'from',
       title: 'from',
       width: '15%',
@@ -1895,7 +1900,7 @@ export const ercToken_list = (fromList: any, toList: any) => {
         if (!text) return '--'
         return (
           <span className="flex items-center gap-x-2">
-            {get_account_type(text)}
+            <AccountLink value={text} />
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -1915,7 +1920,7 @@ export const ercToken_list = (fromList: any, toList: any) => {
         if (!text) return '--'
         return (
           <div className="flex items-center gap-x-2">
-            {get_account_type(text)}
+            <AccountLink value={text} />
             {toList?.domains && toList?.domains[text] && (
               <Link
                 href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}
@@ -2139,7 +2144,7 @@ export const cid_list = {
         if (!text) return '--'
         return (
           <span className="flex items-center gap-x-2">
-            {get_account_type(text)}
+            <AccountLink value={text} />
             {fromList?.domains && fromList?.domains[text] && (
               <Link
                 href={`/domain/${fromList.domains[text]}?provider=${fromList.provider}`}
@@ -2158,7 +2163,8 @@ export const cid_list = {
         if (!text) return '--'
         return (
           <div className="flex items-center gap-x-2">
-            {get_account_type(text, 0)}
+            <AccountLink value={text} unit={0} />
+
             {toList?.domains && toList?.domains[text] && (
               <Link
                 href={`/domain/${toList.domains[text]}?provider=${toList.provider}`}

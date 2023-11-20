@@ -238,7 +238,11 @@ const detail = {
   parent_base_fee:'父基础费率',
   ticket_value: '票值',
   state_root: '根',
-  total_balance_tip:'可用余额 + 扇区质押 + 预质押 + 锁仓奖励'
+  total_balance_tip: '可用余额 + 扇区质押 + 预质押 + 锁仓奖励',
+  
+  //pendingMsg 
+  pending_title:'待处理消息',
+  pending_total:'共 {{value}} 条消息待处理'
 
 }
 export default detail

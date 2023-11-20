@@ -2,7 +2,7 @@
 
 import Copy from '@/components/copy'
 import { Translation } from '@/components/hooks/Translation'
-import { TransMethod, apiUrl, tokenName } from '@/contents/apiUrl'
+import { TransMethod, apiUrl, pendingMsg, tokenName } from '@/contents/apiUrl'
 import { address_detail, address_tabs } from '@/contents/detail'
 import Content from '@/packages/content'
 import Segmented from '@/packages/segmented'
@@ -20,6 +20,7 @@ import Image from '@/packages/image'
 import Link from 'next/link'
 import { getSvgIcon } from '@/svgsIcon'
 import Loading from '@/components/loading'
+import PendingMsg from '@/src/detail/list/PendingMsg'
 /** @format */
 export default () => {
   const router = useRouter()
@@ -34,7 +35,7 @@ export default () => {
   const [methodOptions, setMethodOptions] = useState([])
   const [transOptions, setTransOptions] = useState([])
   const [tokenOptions, setTokenOptions] = useState([])
-
+  const [pendingData, setPendingData] = useState({})
   const [actorId, setActorId] = useState('')
   const [loading, setLoading] = useState(false)
   const [domains, setDomains] = useState<any>({})
@@ -126,6 +127,12 @@ export default () => {
     if (baseResult?.account_basic?.account_id) {
       // 已被验证合约
       loadVerify(baseResult?.account_basic?.account_id)
+      //获取pendding消息
+
+      loadPending(
+        baseResult?.account_basic?.account_id,
+        baseResult?.account_basic?.account_address,
+      )
     }
     if (typeof address === 'string') {
       // 增加代币列表
@@ -143,10 +150,35 @@ export default () => {
 
   //合约
   const loadVerify = async (id: string) => {
-    const result = await axiosData(apiUrl.contract_verify_des, {
-      input_address: id,
-    })
+    const result = await axiosData(
+      apiUrl.contract_verify_des,
+      {
+        input_address: id,
+      },
+      { isCancel: false },
+    )
     setVerifyData({ ...result })
+  }
+
+  //pending
+  const loadPending = async (account_id: string, account_address?: string) => {
+    const result = await axiosData(
+      pendingMsg,
+      {
+        account_id,
+        account_address,
+      },
+      { isCancel: false },
+    )
+
+    const data: Array<any> = []
+    result?.messages_pool_list?.forEach((v: any) => {
+      data.push({ ...v.message_basic, exit_code: 'Pending' })
+    })
+    setPendingData({
+      dataSource: data,
+      total: result?.total_count,
+    })
   }
 
   const loadERC20TokenList = async (id: string) => {
@@ -251,6 +283,8 @@ export default () => {
     return <Loading />
   }
 
+  console.log('-pendingData--444', pendingData)
+
   return (
     <div className={classNames(styles.address, 'main_contain')}>
       <div
@@ -342,6 +376,7 @@ export default () => {
         interval={interval}
         list={address_detail.account_change.list}
       />
+      <PendingMsg data={pendingData} />
       <List
         tabList={tabsList}
         defaultActive="traces_list"

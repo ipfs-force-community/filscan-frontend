@@ -204,18 +204,6 @@ export const contract_balance = {
   ],
 }
 
-//合约余额走势
-export const contract_balance = {
-  list: [
-    {
-      title: 'contract_total_balance',
-      dataIndex: 'contract_total_balance',
-      type: 'line',
-      color: '#1C6AFD',
-    },
-  ],
-};
-
 // 区块奖励走势
 export const block_rewards = {
   list: [
