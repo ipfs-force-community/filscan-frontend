@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo } from 'react'
 import { Translation } from '@/components/hooks/Translation'
-import { account_manager, account_power_mobile } from '@/contents/account'
+import { account_manager } from '@/contents/account'
 import { useHash } from '@/components/hooks/useHash'
 import Overview from '@/src/account/overview'
 import Miners from '@/src/account/miners'
@@ -27,7 +27,8 @@ import { observer } from 'mobx-react'
 import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
-import Member from '@/src/user/member'
+import Member from '@/src/account/member'
+import Active from '@/src/account/active'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
@@ -114,6 +115,7 @@ const Account: React.FC = () => {
     monitorSector: <MonitorSector />,
     monitorPower: <MonitorPower />,
     personal: <Personal />,
+    active: <Active />,
   }
 
   return (

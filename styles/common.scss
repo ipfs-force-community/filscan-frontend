@@ -303,6 +303,19 @@
   background: linear-gradient(315deg, #1764ff 0%, #4093ed 100%) !important;
   color: #fff !important;
 }
+
+.active_btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  padding: 6px 15px;
+  min-width: 80px;
+  min-height: 32px;
+  width: fit-content;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #a0fbc0 0%, #23d1e1 29%, #1c6afd 100%);
+  color: #fff !important;
+}
 .primary_default {
   padding: 4px 15px;
 }
