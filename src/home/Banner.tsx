@@ -1,15 +1,28 @@
+<<<<<<< HEAD
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Carousel, Image } from 'antd'
 import { useEffect, useRef, useState } from 'react'
 import useAxiosData from '@/store/useAxiosData'
 import { apiUrl } from '@/contents/apiUrl'
 import { useFilscanStore } from '@/store/FilscanStore'
+=======
+import { LeftOutlined, RightOutlined } from "@ant-design/icons"
+import { Carousel } from "antd"
+import { useEffect, useRef, useState } from "react"
+import { Image } from 'antd'
+import useAxiosData from "@/store/useAxiosData"
+import { apiUrl } from "@/contents/apiUrl"
+import { useFilscanStore } from "@/store/FilscanStore"
+import style from './style.module.scss'
+>>>>>>> 62914f97 (feat: update banner & fvm save img)
 
 function Banner() {
   const { axiosData } = useAxiosData()
   const { theme, lang } = useFilscanStore()
   const carousel = useRef<any>(null)
   const [data, setData] = useState([])
+  const [autoplay, setAutoplay] = useState(true);
+  const [current,setCurrent] = useState<Number>(0)
 
   useEffect(() => {
     loadBanner()
@@ -27,57 +40,34 @@ function Banner() {
     return null
   }
 
-  return (
-    <div className="group relative h-full w-full overflow-hidden">
-      {/* <span
-      className="hidden group-hover:flex absolute z-10 top-1/2 cursor-pointer w-5 h-5  items-center justify-center rounded-full bg-tipColor"
-      onClick={() => {
-        if (carousel.current) {
-          carousel?.current?.prev()
-        }
+  const handleSlideChange = (currentSlide: number) => {
+    setCurrent(currentSlide)
+  };
 
-      }}>
-      <LeftOutlined rev={undefined} className="text-white text-xs" />
-    </span> */}
+  return <div className="group relative overflow-hidden w-full h-full">
 
-      <Carousel
-        autoplay={true}
-        autoplaySpeed={5000}
-        ref={carousel}
-        infinite={true}
-      >
-        {[...data]?.map((item: any, index) => {
-          return (
-            <div
-              key={index}
-              onClick={() => {
-                if (item.link) {
-                  window.open(item.link)
-                }
-              }}
-            >
-              <Image
-                preview={false}
-                src={item.url}
-                alt=""
-                width="100%"
-                className="carousel-image cursor-pointer rounded-2xl object-cover"
-              />
-            </div>
-          )
-        })}
-      </Carousel>
-      {/* <span
-      className="hidden group-hover:flex absolute z-10 top-1/2 right-0  w-5 h-5 items-center justify-center rounded-full bg-tipColor cursor-pointer"
-      onClick={() => {
-        if (carousel.current) {
-          carousel?.current?.next()
-        }
-      }}>
-      <RightOutlined rev={undefined} className="text-white text-xs"/>
-    </span> */}
-    </div>
-  )
+    <Carousel autoplay={autoplay} ref={carousel} autoplaySpeed={5000} infinite={true} beforeChange={handleSlideChange} dots={false}>
+      {[...data]?.map((item: any,index) => {
+        return <div key={ index} onClick={() => {
+          if (item.link) {
+            window.open(item.link)
+          }
+        }}>
+          <Image preview={false} src={item.url} alt='' width='100%' className="rounded-2xl cursor-pointer object-cover carousel-image"/>
+        </div>
+      })}
+
+    </Carousel>
+    <ul className={ style.dots}>
+      {[...data]?.map((v,index:number) => {
+        return <li key={index} className={`${style.dots_li} ${Number(current) === index ? style.dots_active : ""}`} onClick={() => {
+          carousel?.current?.next();
+          setAutoplay(false)
+        }}></li>
+      })}
+
+    </ul>
+  </div>
 }
 
 export default Banner

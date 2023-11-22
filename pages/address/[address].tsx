@@ -283,8 +283,6 @@ export default () => {
     return <Loading />
   }
 
-  console.log('-pendingData--444', pendingData)
-
   return (
     <div className={classNames(styles.address, 'main_contain')}>
       <div
