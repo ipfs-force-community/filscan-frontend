@@ -431,33 +431,55 @@ export const chartsNav: Array<Menu_Info> = [
     key: 'fevm',
     preIcon: 'fevm',
     title: 'FEVM',
+    children: [
+      {
+        key: 'fevm_trend',
+        title: 'contract_trend',
+      },
+      {
+        key: 'fevm_con',
+        title: 'contract_con',
+      },
+      {
+        key: 'fevm_addr',
+        title: 'contract_addr',
+      },
+      {
+        key: 'fevm_gas',
+        title: 'contract_gas',
+      },
+      {
+        key: 'fevm_balance',
+        title: 'contract_balance',
+      },
+    ],
   },
   {
-    key: 'BlockChain',
+    key: 'blockChain',
     preIcon: 'block_chain',
     title: 'BlockChain',
-    // children: [
-    //   {
-    //     key: 'power',
-    //     title: 'power',
-    //   },
-    //   {
-    //     key: 'cc_dc_power',
-    //     title:'cc_dc_power',
-    //   },
-    //   {
-    //     key: 'block_trend',
-    //     title:'block_trend',
-    //   },
-    //   {
-    //     key: 'block_reward_per',
-    //     title:'block_reward_per_TiB',
-    //   },
-    //   {
-    //     key: 'active_nodes',
-    //     title:'active_nodes',
-    //   }
-    // ]
+    children: [
+      {
+        key: 'blockChain_power',
+        title: 'power',
+      },
+      {
+        key: 'blockChain_cc_dc_power',
+        title: 'cc_dc_power',
+      },
+      {
+        key: 'blockChain_trend',
+        title: 'block_trend',
+      },
+      {
+        key: 'blockChain_reward_per',
+        title: 'block_reward_per_TiB',
+      },
+      {
+        key: 'blockChain_nodes',
+        title: 'active_nodes',
+      },
+    ],
   },
   {
     key: 'fil_overview',

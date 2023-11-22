@@ -1,7 +1,16 @@
+.static-menu{
+  width: 209px;
+  // position: fixed;
+}
+.tab-content{
+  //width: calc(100% - 209px);
+  //padding-left: 220px;
+
+}
+
 @media screen and (max-width: 1000px) {
   .statistics-charts {
     padding: 0px 12px 20px;
-
     .content {
       display: flex;
       flex-direction: column;
