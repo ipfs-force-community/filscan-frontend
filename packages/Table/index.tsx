@@ -149,7 +149,7 @@ const mobileContent = new Map([
                     <div className={styles['mobile-table-card-item-label']}>
                       {showTitle}
                     </div>
-                    <div className={styles['mobile-table-card-item-value']}>
+                    <div className={classNames(styles['mobile-table-card-item-value'], dataSource?.is_active ? '' : 'inactive')}>
                       {showValue}
                     </div>
                   </div>

@@ -1,18 +1,46 @@
- .power{
-    &_table{
-    padding: 15px;
-    border: 1px solid var(--border-color);
+@import "mixins";
+
+.power{
+  @include mobile {
+    padding: 12px;
+  }
+  &_table{
+    @include desktop {
+      padding: 15px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bgColor);
+      box-shadow: 0px 2px 30px -2px var(--card-shadow);
+    }
+    @include mobile {
+      background-color: var(--main-bg-color);
+    }
     border-radius: 5px;
     overflow: auto;
-    overflow: hidden;
-    background-color: var(--bgColor);
-    box-shadow: 0px 2px 30px -2px var(--card-shadow);     
+    overflow: hidden;   
+    :global .inactive,
+    :global .inactive .text_des {
+      color: var(--mobile-des-color) !important;
+    }
   }
   &_title{
     font-size: 16px;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  margin-bottom: 20px;
-  margin-top: 4px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    margin-bottom: 20px;
+    @include mobile {
+      margin-bottom: 10px;
+    }
+    margin-top: 4px;
+  }
+  .tip {
+    border-radius: 3px;
+    margin-left: 4px;
+    padding-left: 7px;
+    padding-right: 7px;
+    color: #EF7F1A;
+    background-color: rgba(239, 127, 26, 0.05);
+    font-family: PingFangSC, PingFang SC;
+    font-size: 11px;
+    font-weight: 400;
   }
  }

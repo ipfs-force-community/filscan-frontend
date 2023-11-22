@@ -1831,7 +1831,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
               const resList = obj[key]
               if (Array.isArray(resList)) {
                 return (
-                  <div key={key} className="flex font-normal">
+                  <div key={key} className="flex flex-wrap font-normal">
                     <div className="text_des" style={{ width: '70px' }}>
                       {tr(key)}:
                     </div>

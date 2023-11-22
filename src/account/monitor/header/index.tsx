@@ -6,6 +6,7 @@ import { Translation } from '@/components/hooks/Translation'
 import { useMemo, useRef, useState } from 'react'
 import { Button } from 'antd'
 import { getSvgIcon } from '@/svgsIcon'
+import useWindow from '@/components/hooks/useWindown'
 
 interface Props {
   selectGroup: string
@@ -33,6 +34,7 @@ export default observer((props: Props) => {
   } = props
   const { groupMiners } = accountStore
   const { tr } = Translation({ ns: 'account' })
+  const { isMobile } = useWindow()
   const [selectItem, setSelectItem] = useState<Record<string, any>>({})
   const [selectMinerItem, setSelectMinerItem] = useState<Record<string, any>>(
     {},
@@ -173,7 +175,7 @@ export default observer((props: Props) => {
             }}
           />
         )}
-        {reset && (
+        {!isMobile && reset && (
           <Button
             className="cancel_btn !min-w-fit gap-x-1 !px-2"
             onClick={() => {
@@ -185,7 +187,7 @@ export default observer((props: Props) => {
           </Button>
         )}
       </div>
-      {addRule && (
+      {!isMobile && addRule && (
         <Button
           className="primary_btn"
           onClick={() => handleChange('addRules', true)}

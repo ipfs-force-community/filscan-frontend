@@ -7,9 +7,13 @@ import styles from './index.module.scss'
 import Rules from './Rules'
 import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
+import classNames from 'classnames'
+import useWindow from '@/components/hooks/useWindown'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' })
+  const { isMobile } = useWindow()
   const { rules } = monitorStore
   const [showRules, setShowRules] = useState(false)
   const [selectGroup, setSelectGroup] = useState('all')
@@ -92,10 +96,20 @@ export default observer(() => {
   }
 
   const columns = useMemo(() => {
-    return monitor_list(tr, handleChangeRule).map((v) => {
+    let list = monitor_list(tr, handleChangeRule)
+    if (isMobile) {
+      list = list.slice(0, list.length - 1)
+    }
+    return list.map((v) => {
+      if (isMobile && v.dataIndex === 'group_name') {
+        return { ...v, title: tr(v.title), render: (text: string, record: any) => {
+          const showText = record.is_default ? tr('default_group') : text
+          return showText
+        }}
+      }
       return { ...v, title: tr(v.title) }
     })
-  }, [tr])
+  }, [tr, isMobile])
 
   const saveRules = async (payload: Record<string, any>) => {
     const result = await monitorStore.saveUserRules(payload)
@@ -108,7 +122,12 @@ export default observer(() => {
 
   return (
     <div className={styles.balance}>
-      <div className={styles.balance_title}>{tr('monitor_balance')}</div>
+       <div className={classNames('flex', styles.balance_title)}>
+          {tr('monitor_balance')}
+          {
+            isMobile && (<div className={styles.tip}><ExclamationCircleOutlined className='mr-[2px]' />{tr('monitor_mobile_edit_tip')}</div>)
+          }
+      </div>
       <Header
         onChange={handleChange}
         selectGroup={selectGroup}
@@ -117,9 +136,9 @@ export default observer(() => {
         reset={true}
         addRule={true}
       />
-      <div className={styles.balance_table}>
-        <Table data={[...rules]} columns={columns} loading={false} />
-      </div>
+        <div className={styles.balance_table}>
+          <Table data={[...rules]} columns={columns} loading={false} />
+        </div>
       <Rules showModal={showRules} onChange={handleChange} record={record} />
     </div>
   )
