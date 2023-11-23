@@ -83,6 +83,7 @@ export default () => {
         <MHeader data={{ ...fil, ...finalHeight }} />
       </MobileView>
       <BrowserView>
+<<<<<<< HEAD
         <div
           className={`${
             show ? ' header-fade-in visible fixed top-0 ' : 'absolute top-0'
@@ -92,6 +93,11 @@ export default () => {
         >
           <div className="custom_header flex h-[45px] w-full items-center justify-between text-xs">
             <ul className="flex list-none gap-x-5">
+=======
+        <div className={`${show ? ' header-fade-in visible fixed top-0 ':'absolute top-0'} ${lastScrollTop> 100 ? 'header-fade-in':''} top-0  z-50 w-full h-[110px] main_bg_color` }>
+          <div className='flex justify-between items-center text-xs w-full h-[45px] custom_header'>
+            <ul className='flex gap-x-5 list-none'>
+>>>>>>> 3685f782 (feat: update css)
               {header_top.left.map((item) => {
                 const { title, dataIndex, render } = item
                 const data = { ...fil, ...finalHeight }

@@ -23,10 +23,6 @@ export default (props: Props) => {
     });
   }, [theme, tr]);
 
-  const handleChange = () => {
-
-  }
-
   if (!data?.total) {
     return null
   }
@@ -39,7 +35,7 @@ export default (props: Props) => {
         {tr('pending_title')}
       </span>
     </div>
-    <div className="card_shadow p-5 min-h-[300px] border border_color rounded-xl">
+    <div className="card_shadow p-5 min-h-[200px] border border_color rounded-xl">
       <div className="text_des text-xs mb-4">
         {tr('pending_total', { value: formatNumber(data?.total) })}
       </div>
@@ -49,7 +45,7 @@ export default (props: Props) => {
         total={data?.total}
         columns={columns}
         loading={false}
-        onChange={handleChange}
-      /></div></>
+      /></div>
+  </>
 
 }
