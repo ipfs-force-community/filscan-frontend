@@ -1,10 +1,12 @@
-import { BrowserView } from "@/components/device-detect"
+import { BrowserView, MobileView } from "@/components/device-detect"
 import { Translation } from "@/components/hooks/Translation"
 import { message_list } from "@/contents/detail"
 import Table from "@/packages/Table"
 import { useFilscanStore } from "@/store/FilscanStore"
 import { formatNumber } from "@/utils"
+import classNames from "classnames"
 import { useMemo } from "react"
+import styles from './index.module.scss'
 
 interface Props {
               data: {
@@ -35,17 +37,27 @@ export default (props: Props) => {
         {tr('pending_title')}
       </span>
     </div>
-    <div className="card_shadow p-5 min-h-[200px] border border_color rounded-xl">
-      <div className="text_des text-xs mb-4">
+    <MobileView>
+      <div className="text_des text-xs">
         {tr('pending_total', { value: formatNumber(data?.total) })}
       </div>
+    </MobileView>
+
+    <div className={classNames('card_shadow p-5 mt-7 min-h-[150px] border border_color rounded-xl', styles.table, styles.reset)}>
+      <BrowserView>
+        <div className="text_des text-xs mb-4">
+          {tr('pending_total', { value: formatNumber(data?.total) })}
+        </div>
+      </BrowserView>
       <Table
+        className={ styles['padding-table']}
         limit={5}
         data={data?.dataSource ||[]}
         total={data?.total}
         columns={columns}
         loading={false}
-      /></div>
+      />
+    </div>
   </>
 
 }

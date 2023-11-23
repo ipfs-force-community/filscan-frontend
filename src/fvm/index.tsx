@@ -54,7 +54,7 @@ function Share({ data, title }: { data: any; title: string }) {
       </Button>
       <Modal
         open={open}
-        width={750}
+        width={765}
         closeIcon={false}
         footer={null}
         wrapClassName="noPaddingModal"
@@ -68,7 +68,7 @@ function Share({ data, title }: { data: any; title: string }) {
               <Image
                 className={style['shareFvmContent-bg']}
                 src={fvmBg}
-                width={750}
+                width={765}
                 alt=""
               />
               <div className={style['shareFvmContent-header']}>

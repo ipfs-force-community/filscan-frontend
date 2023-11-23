@@ -1,7 +1,8 @@
 .shareFvmContent{
               position: relative;
               width: 100%;
-              height: max-content;
+              height:650px;
+              overflow:auto;
               background-color: #020A1A;
               padding-bottom: 20px;
              &-bg{
@@ -95,8 +96,8 @@
 }
 
 .shareFvm{
-      position: relative;
-   overflow: hidden;
+    position: relative;
+    overflow: hidden;
     &-save{
     position: absolute;
     bottom: 0px;
