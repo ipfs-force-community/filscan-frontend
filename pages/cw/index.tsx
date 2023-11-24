@@ -20,15 +20,14 @@ import Search from '@/src/cw/Search'
 import { getSvgIcon } from '@/svgsIcon'
 import { useRouter } from 'next/router'
 
-const calcHeight = 100
-
 const baseYAxis = 30
+const calcHeight = 100
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' })
   const { theme } = useFilscanStore()
   const router = useRouter()
-  //  const [drawData, setDrawData] = useState<Array<any>>([]);
+  // const [drawData, setDrawData] = useState<Array<any>>([]);
 
   const [chartLoading, setChartLoading] = useState(true)
   const chartContainerRef = useRef<HTMLDivElement>(null)
@@ -105,13 +104,6 @@ export default observer(() => {
   useEffect(() => {
     if (finalHeight && !finalCurrentHeight.current) {
       finalCurrentHeight.current = finalHeight
-      init()
-    }
-  }, [finalHeight])
-
-  useEffect(() => {
-    if (finalHeight && !finalCurrentHeight.current) {
-      finalCurrentHeight.current = finalHeight + 1
       init()
     }
   }, [finalHeight])
@@ -198,20 +190,6 @@ export default observer(() => {
               searchHeight.current = Number(orphanItem.Epoch)
             }
           })
-          calcData.push(v)
-        } else if (v?.OrphanBlocks?.length > 0) {
-          calcData.push(v)
-        }
-        if (!showSearch && v?.OrphanBlocks?.length > 0) {
-          v.OrphanBlocks.forEach((orphanItem: any) => {
-            if (type === 'cid' && orphanItem._id === searchCid.current) {
-              showSearch = true
-              searchHeight.current = Number(orphanItem.Epoch)
-            }
-          })
-          calcData.push(v)
-        } else if (v?.OrphanBlocks?.length > 0) {
-          calcData.push(v)
         }
       })
       if (type === 'cid' && calcData.length > 0) {
@@ -237,8 +215,6 @@ export default observer(() => {
     if (drawData?.current && bhm?.current && blockHeightList?.current) {
       drawChart(drawData.current, bhm.current, blockHeightList.current)
     }
-    setChartLoading(false)
-    //setDrawData(height ? [...drawData, ...newData] : newData)
   }
 
   const drawChart = (
@@ -315,6 +291,7 @@ export default observer(() => {
           draw: (chart: any, layer: any, s: any) => {
             let d3 = chart.d3
             let emitter = chart.emitter
+
             let stageWrap = layer.safeSelect('g.stage-wrap')
             let axisYWrap = layer.safeSelect('g.ay-wrap')
             let axisXWrap = layer.safeSelect('g.ax-wrap')
@@ -450,7 +427,7 @@ export default observer(() => {
                 const self = this // 👈️ closure of this
 
                 let bhEle: any = d3.select(self)
-                let groupList = bhm[blh]
+                let groupList = bhm[blh] || []
                 let groupWidth = getGroupListWidth(groupList, blockWidth, ph)
                 let gx = (stageWidth - groupWidth) / 2
                 bhEle
@@ -512,7 +489,8 @@ export default observer(() => {
                           d.x = wrapX
                           d.y = wrapY
                           bh.attr('transform', `translate(${wrapX}, ${wrapY})`)
-                          bh.attr('cursor', 'pointer')
+                          bh.attr('cursor', `pointer`)
+
                           // bh.safeSelect("ellipse")
                           //   .attrs({
                           //     rx: ellipseRX,
@@ -603,6 +581,10 @@ export default observer(() => {
                                 let emitData: any = {
                                   type: 'item',
                                   data: null,
+                                }
+                                if (shouldShow) {
+                                  emitData.data = d
+                                  emitData.event = d3Event
                                 }
                                 emitter.emit('showTooltip', emitData)
                                 timeHandle = null
@@ -834,7 +816,6 @@ export default observer(() => {
                   getBlocks(endHeight.current - calcHeight, 'up')
                 } else if (direction === 'down' && transformY.current > 30) {
                   // getBlocks(endHeight.current + calcHeight,'down')
-                  getBlocks(endHeight.current - 100)
                 }
               }
               if (transformY.current >= 10) {

@@ -40,7 +40,7 @@ class chart {
     //console.log(selector, options)
     //this.bind(['onMousemove'])
     this.d3 = d3
-    this.selector = selector;
+    this.selector = selector
     this.defaultOptions = defaultOptions
     this.emitter = new emitter()
     this.container = d3.select(selector)
@@ -59,15 +59,12 @@ class chart {
     this.__showTooltip = debounce(showTooltip, 20)
     this.init()
     options && this.drawChart()
-
   }
   setGrid() {
     let {
       containerWidth: cw,
       containerHeight: ch,
-      options: {
-        grid
-      },
+      options: { grid },
     } = this
 
     this.gridLeft = maybePercentValue(grid.left, cw)
@@ -89,12 +86,8 @@ class chart {
   drawLabel() {
     let chart = this
     let {
-      options: {
-        label = []
-      },
-      sections: {
-        labels: labelGroup
-      }
+      options: { label = [] },
+      sections: { labels: labelGroup },
     } = chart
     if (isObject(label)) {
       label = [label]
@@ -103,43 +96,41 @@ class chart {
       labelGroup.html('')
       return
     }
-    labelGroup.selectAll('g.lc-label-g')
+    labelGroup
+      .selectAll('g.lc-label-g')
       .data(label)
       .join('g.lc-label-g')
       .each(function (d, i) {
-        let layer = d3.select(this)
-          .classed(`lc-label-g-${i}`, true)
+        let layer = d3.select(this).classed(`lc-label-g-${i}`, true)
         drawLabel(chart, layer, d, i)
       })
   }
   drawSeries() {
     let chart = this
     let {
-      options: {
-        series
-      },
-      sections: {
-        series: seriesGroup
-      }
+      options: { series },
+      sections: { series: seriesGroup },
     } = chart
 
-    seriesGroup.selectAll('g.lc-layer')
+    seriesGroup
+      .selectAll('g.lc-layer')
       .data(series)
       .join(
-        enter => {
+        (enter) => {
           return enter.append('g.lc-layer')
         },
-        update => {
+        (update) => {
           return update.attr('lc-updated', 1)
         },
-        exit => {
+        (exit) => {
           exit.each(function (d, i) {
-            if (d.type === 'line') { // line chart may has plot with not in series layer
+            if (d.type === 'line') {
+              // line chart may has plot with not in series layer
               d3.select(`.lc-plot-group-${i}`).remove()
             }
             d3.select(this).remove()
           })
-        }
+        },
       )
       .each(function (s, i) {
         let layer = d3.select(this)
@@ -148,7 +139,8 @@ class chart {
         let classStr = `lc-${s.type}-layer-${i}`
         if (layer.attr('lc-updated')) {
           if (!layer.classed(classStr)) {
-            if (layer.classed(`lc-line-layer-${i}`)) { // line chart may has plot in plot group
+            if (layer.classed(`lc-line-layer-${i}`)) {
+              // line chart may has plot in plot group
               d3.select(`.lc-plot-group-${i}`).remove()
             }
 
@@ -163,84 +155,79 @@ class chart {
         }
 
         switch (s.type) {
-        case 'line':
-          drawLine(chart, layer, s, i)
-          break
-        case 'bar':
-          drawBar(chart, layer, s, i)
-          break
-        case 'pie':
-          drawPie(chart, layer, s, i)
-          break
-        case 'point':
-          drawPoint(chart, layer, s, i)
-          break
-        case 'custom':
-          drawCustom(chart, layer, s, i)
-          break
-        case 'treemap':
-          drawTreemap(chart, layer, s, i)
-          break
-        case 'radar':
-          drawRadar(chart, layer, s, i)
-          break
-        default:
+          case 'line':
+            drawLine(chart, layer, s, i)
+            break
+          case 'bar':
+            drawBar(chart, layer, s, i)
+            break
+          case 'pie':
+            drawPie(chart, layer, s, i)
+            break
+          case 'point':
+            drawPoint(chart, layer, s, i)
+            break
+          case 'custom':
+            drawCustom(chart, layer, s, i)
+            break
+          case 'treemap':
+            drawTreemap(chart, layer, s, i)
+            break
+          case 'radar':
+            drawRadar(chart, layer, s, i)
+            break
+          default:
         }
-
       })
-
   }
   resize() {
     this.figureGeometry()
     this.drawChart()
   }
   figureGeometry() {
-    let {
-      width,
-      height
-    } = getBoundingRect(this.container.node())
-    let cw = this.containerWidth = width
-    let ch = this.containerHeight = height
+    let { width, height } = getBoundingRect(this.container.node())
+    let cw = (this.containerWidth = width)
+    let ch = (this.containerHeight = height)
     this.containerCenter = [cw / 2, ch / 2]
     this.paper.attrs({ width: cw, height: ch })
   }
   calculateStackData() {
     let {
-      options: {
-        series = []
-      }
+      options: { series = [] },
     } = this
     let types = ['line', 'bar']
-    types.forEach(type => {
-      let chartsByType = series.filter(s => s.type === type)
-      let chartsByStack = chartsByType.filter(s => !!s.stack)
+    types.forEach((type) => {
+      let chartsByType = series.filter((s) => s.type === type)
+      let chartsByStack = chartsByType.filter((s) => !!s.stack)
       if (!chartsByStack.length) return
 
       let stackGroups = groupBy(chartsByStack, 'stack')
-      Object.keys(stackGroups)
-        .forEach(k => {
-          let group = stackGroups[k]
-          let stackedData = []
-          group.forEach((item, idx) => {
-            if (stackedData.length === 0) {
-              stackedData = Array.from({ length: item.data.length }).map(() => 0)
-            }
-            let itemStackData = Array.from({ length: item.data.length }).map(() => [])
-            item.data.forEach((d, i) => {
-              d = isSet(d) ? (isSet(d.value) ? d.value : d) : 0
-              let isd = itemStackData[i]
-              isd[0] = stackedData[i]
-              isd[1] = stackedData[i] + d
-            })
-            item.stackData = itemStackData
-            stackedData = itemStackData.map(item => item[1])
+      Object.keys(stackGroups).forEach((k) => {
+        let group = stackGroups[k]
+        let stackedData = []
+        group.forEach((item, idx) => {
+          if (stackedData.length === 0) {
+            stackedData = Array.from({ length: item.data.length }).map(() => 0)
+          }
+          let itemStackData = Array.from({ length: item.data.length }).map(
+            () => [],
+          )
+          item.data.forEach((d, i) => {
+            d = isSet(d) ? (isSet(d.value) ? d.value : d) : 0
+            let isd = itemStackData[i]
+            isd[0] = stackedData[i]
+            isd[1] = stackedData[i] + d
           })
+          item.stackData = itemStackData
+          stackedData = itemStackData.map((item) => item[1])
         })
+      })
     })
 
     // set bar index
-    let barSeries = series.filter(s => s.type === 'bar')
-    let sgx = -1, stackName
+    let barSeries = series.filter((s) => s.type === 'bar')
+    let sgx = -1,
+      stackName
     for (let i = 0, l = barSeries.length; i < l; i++) {
       let s = barSeries[i]
       if (!isSet(s.stack) || s.stack === '') {
@@ -251,21 +238,18 @@ class chart {
       }
       s.stackGroupIndex = sgx
     }
-    barSeries.forEach(s => {
+    barSeries.forEach((s) => {
       s.stackGroupLength = sgx + 1
     })
   }
   calculateBarOffset() {
     let {
-      options: {
-        series,
-        barStyle: barOptionStyle
-      },
+      options: { series, barStyle: barOptionStyle },
       scaleY,
       scaleX,
     } = this
 
-    let barSeries = series.filter(s => s.type === 'bar')
+    let barSeries = series.filter((s) => s.type === 'bar')
     if (!barSeries.length) return
 
     let scaleCategory, bandWidth
@@ -279,10 +263,18 @@ class chart {
       return
     }
     bandWidth = scaleCategory.bandwidth()
-    let b, barStyle, groupIdx = -1, expectedBarWidth, groupLength, barWidth, barMinWidth, barMaxWidth, cache = []
+    let b,
+      barStyle,
+      groupIdx = -1,
+      expectedBarWidth,
+      groupLength,
+      barWidth,
+      barMinWidth,
+      barMaxWidth,
+      cache = []
     groupLength = barSeries[0]['stackGroupLength']
-    expectedBarWidth = Math.max(1, (bandWidth / groupLength) - 8)
-    barStyle = extend({}, defaultOptions.barStyle, (barOptionStyle || {}))
+    expectedBarWidth = Math.max(1, bandWidth / groupLength - 8)
+    barStyle = extend({}, defaultOptions.barStyle, barOptionStyle || {})
 
     for (let i = 0, l = barSeries.length; i < l; i++) {
       b = barSeries[i]
@@ -291,15 +283,22 @@ class chart {
           cache.push(b.barWidth)
         } else {
           barMinWidth = b.barMinWidth || 0
-          barMaxWidth = Math.min(b.barMaxWidth || expectedBarWidth, barStyle.barMaxWidth)
-          barWidth = Math.min(Math.max(barMinWidth, expectedBarWidth), barMaxWidth)
+          barMaxWidth = Math.min(
+            b.barMaxWidth || expectedBarWidth,
+            barStyle.barMaxWidth,
+          )
+          barWidth = Math.min(
+            Math.max(barMinWidth, expectedBarWidth),
+            barMaxWidth,
+          )
           cache.push(barWidth)
         }
         groupIdx++
       }
     }
     let space = Math.max(0, bandWidth - cache.reduce((a, b) => a + b))
-    let padding = 1, remainSpace
+    let padding = 1,
+      remainSpace
     while (space - padding * cache.length > 0) {
       padding += 1
       if (padding >= barStyle.interval) {
@@ -308,20 +307,19 @@ class chart {
     }
     remainSpace = Math.max(0, space - padding * (cache.length - 1)) / 2
 
-    barSeries.forEach(b => {
+    barSeries.forEach((b) => {
       let gIdx = b.stackGroupIndex
-      b._barOffset = remainSpace + padding * gIdx + cache.slice(0, gIdx).reduce((a, b) => a + b, 0)
+      b._barOffset =
+        remainSpace +
+        padding * gIdx +
+        cache.slice(0, gIdx).reduce((a, b) => a + b, 0)
       b._barWidth = cache[gIdx]
     })
     //console.log(barSeries, expectedBarWidth)
   }
   calculateMaxValue() {
     let {
-      options: {
-        xAxis,
-        yAxis,
-        series,
-      }
+      options: { xAxis, yAxis, series },
     } = this
     if (xAxis.type === 'value' && xAxis.max) {
       this.maxValue = xAxis.max
@@ -333,14 +331,16 @@ class chart {
       this.maxValueFixed = true
       return
     }
-    let sArray = series.filter(s => s.type === 'bar' || s.type === 'line' || s.type === 'point')
+    let sArray = series.filter(
+      (s) => s.type === 'bar' || s.type === 'line' || s.type === 'point',
+    )
     let maxValue = 0
-    sArray.forEach(s => {
+    sArray.forEach((s) => {
       let d = s.data || []
       if (s.stackData) {
-        d = s.stackData.map(item => item[1])
+        d = s.stackData.map((item) => item[1])
       }
-      d = d.map(item => item && item.value ? item.value : item)
+      d = d.map((item) => (item && item.value ? item.value : item))
       let max = Math.max.apply(this, d)
       maxValue = Math.max(maxValue, max)
     })
@@ -352,7 +352,9 @@ class chart {
     if (!options) return
 
     this.preOptions = this.options
-    this.options = replace ? deepExtend(defaultOptions(), options) : deepExtend(this.preOptions, options)
+    this.options = replace
+      ? deepExtend(defaultOptions(), options)
+      : deepExtend(this.preOptions, options)
 
     this.figureGeometry()
     this.calculateStackData()
@@ -362,19 +364,10 @@ class chart {
   init() {
     if (!this.container) return
     if (this.container.empty && this.container.empty()) return
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> aa71b435 (feat: cw interface & contract balance)
-     const svgElement =this.selector.querySelector('svg.lc-root');
-      if (svgElement) {
-        svgElement.remove();
-      }
-<<<<<<< HEAD
-=======
->>>>>>> e874ae6d (feat: update cw)
-=======
->>>>>>> aa71b435 (feat: cw interface & contract balance)
+    const svgElement = this.selector.querySelector('svg.lc-root')
+    if (svgElement) {
+      svgElement.remove()
+    }
     let chart = this
 
     this.highlightIndex = null
@@ -384,11 +377,9 @@ class chart {
     this.calculateStackData()
     this.calculateMaxValue()
 
-    this.paper
-      .on('mousemove', function () {
-
-        chart.__onMousemove()
-      })
+    this.paper.on('mousemove', function () {
+      chart.__onMousemove()
+    })
 
     this.sections.desc = this.paper.append('desc')
     this.sections.defs = this.paper.append('defs')
@@ -397,17 +388,24 @@ class chart {
 
     this.sections.scrollXView = this.paper.append('g.lc-scroll-x-view')
     this.sections.axisX = this.sections.scrollXView.append('g.lc-axis-x')
-    this.sections.shadowPointer = this.sections.scrollXView.append('rect.lc-shadow-pointer')
+    this.sections.shadowPointer = this.sections.scrollXView.append(
+      'rect.lc-shadow-pointer',
+    )
     this.sections.series = this.sections.scrollXView.append('g.lc-series')
-    this.sections.linePointer = this.sections.scrollXView.append('line.lc-line-pointer')
-    this.sections.plotGroup = this.sections.scrollXView.append('g.lc-plot-group')
+    this.sections.linePointer = this.sections.scrollXView.append(
+      'line.lc-line-pointer',
+    )
+    this.sections.plotGroup =
+      this.sections.scrollXView.append('g.lc-plot-group')
 
     this.sections.legend = this.paper.append('g.lc-legend')
     this.sections.labels = this.paper.append('g.lc-labels')
     this.sections.title = this.paper.append('text.lc-title')
     this.sections.subtitle = this.paper.append('text.lc-subtitle')
 
-    this.sections.tooltip = d3.select(document.body).safeSelect('div.lc-tooltip')
+    this.sections.tooltip = d3
+      .select(document.body)
+      .safeSelect('div.lc-tooltip')
     this.sections.tooltip.styles({
       position: 'absolute',
       left: '-999999px',
@@ -424,7 +422,6 @@ class chart {
     })
 
     this.emitter.on('showTooltip', this.__showTooltip)
-
   }
   __showTooltip(...args) {
     drawTooltip(this, ...args)
@@ -455,12 +452,12 @@ class chart {
     }
     if (!scaleCategory) return
 
-    let {
-      offsetX: x,
-      offsetY: y,
-    } = d3.event
+    let { offsetX: x, offsetY: y } = d3.event
 
-    let gridBound = [[gridLeft, gridTop], [cw - gridRight, ch - gridBottom]]
+    let gridBound = [
+      [gridLeft, gridTop],
+      [cw - gridRight, ch - gridBottom],
+    ]
     let bandWidth = scaleCategory.bandwidth()
 
     if (isInBound(gridBound, x, y)) {
@@ -483,7 +480,7 @@ class chart {
       emitter.emit('showTooltip', {
         type: 'axisPointer',
         activeIndex: i,
-        event: d3.event
+        event: d3.event,
       })
     } else {
       if (activeCategroryIndex !== null) {
@@ -491,7 +488,7 @@ class chart {
         emitter.emit('axisChange', null)
         emitter.emit('showTooltip', {
           type: 'axisPointer',
-          activeIndex: null
+          activeIndex: null,
         })
       }
     }
@@ -500,9 +497,7 @@ class chart {
     try {
       this.emitter = null
       this.sections.tooltip.remove()
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }
   // bind(names) {
   //   if (isArray(names)) {

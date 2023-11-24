@@ -432,7 +432,6 @@
     border: 1px solid red !important;
   }
 }
-<<<<<<< HEAD
 
 .no_border_select {
   border-color: transparent !important;
@@ -443,15 +442,7 @@
   }
   .ant-select-selector {
     cursor: pointer;
-=======
-.scale_modal{
-    .ant-modal-content{
-        //transform: scale(0.25);
-    }
-}
->>>>>>> 62914f97 (feat: update banner & fvm save img)
-
-    border: 1px solid transparent !important;
+    border: 1px solid transparent;
     background-color: var(--bgDesColor) !important;
     // .ant-select-selection-search-input {
     //      height:42px !important;
