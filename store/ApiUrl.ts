@@ -10,7 +10,7 @@ export const login = proUrl + '/Login'
 export const userInfo = proUrl + '/UserInfo'
 export const verifyCode = proUrl + '/SendVerificationCode'
 export const resetPassword = proUrl + '/ResetPasswordByCode'
-
+export const inviteCode = proUrl + '/UserInviteCode'
 //节点管家
 export const countMiners = proUrl + '/CountUserMiners'
 export const UserGroups = proUrl + '/GetUserGroups'

@@ -1,5 +1,11 @@
 import { RequestResult, axiosServer } from '@/store/axiosServer'
-import { login, resetPassword, userInfo, verifyCode } from '@/store/ApiUrl'
+import {
+  inviteCode,
+  login,
+  resetPassword,
+  userInfo,
+  verifyCode,
+} from '@/store/ApiUrl'
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
 import router from 'next/router'
@@ -9,6 +15,7 @@ const defaultUser = {
   mail: '',
   last_login: 0,
   superVip: true,
+  inviteCode: '',
 }
 
 class UserStore {
@@ -60,6 +67,9 @@ class UserStore {
   //获取用户登录信息
   async getUserInfo() {
     const userData: RequestResult = await axiosServer(userInfo)
+    if (!userData.error) {
+      this.getUserCode()
+    }
     runInAction(() => {
       this.userInfo = {
         ...(userData?.data || {}),
@@ -70,6 +80,16 @@ class UserStore {
     })
   }
 
+  //获取我的邀请码
+  async getUserCode() {
+    const userData: RequestResult = await axiosServer(inviteCode)
+    runInAction(() => {
+      this.userInfo = {
+        ...(this.userInfo || {}),
+        inviteCode: userData.data.invite_code,
+      }
+    })
+  }
   async loginUserInfo(payload: Record<string, any>) {
     const userData: any = await axiosServer(login, payload)
     if (userData?.data?.code) {

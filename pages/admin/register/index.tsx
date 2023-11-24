@@ -25,6 +25,7 @@ export default observer(() => {
       mail: data.email,
       password: data.new_password,
       new_password: data.new_password,
+      invite_code: data.invite,
       token: verifyCode || localStorage.getItem('send_code'),
     }
     userStore.loginUserInfo(payload)

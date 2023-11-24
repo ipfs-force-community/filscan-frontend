@@ -4,7 +4,10 @@ import Detail from './detail'
 import { active_member } from '@/contents/account'
 import Copy from '@/components/copy'
 import Share from './Share'
-export default () => {
+import { observer } from 'mobx-react-lite'
+import userStore from '@/store/modules/user'
+export default observer(() => {
+  const { userInfo } = userStore
   const { tr } = Translation({ ns: 'account' })
   const code = 'test1123'
   return (
@@ -36,11 +39,13 @@ export default () => {
           <span className={style.active_des}>{tr('invite_code')}</span>
 
           <span className={style.active_value}>
-            {code} <Copy text={code} />
+            {userInfo?.inviteCode} <Copy text={code} />
           </span>
         </div>
         <Share />
       </div>
     </div>
   )
-}
+})
+
+//xdympqfl
