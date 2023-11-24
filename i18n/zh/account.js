@@ -180,6 +180,7 @@ const account = {
   status: '状态',
   rules_more: '单个弹框最多添加10组规则，如还需添加请保存后再继续',
   warn_more: '最多支持添加3个',
+  monitor_mobile_edit_tip: '监控增删改操作请前往PC端完成',
   //告警方式
   warn_title: '告警方式',
   warn_title_des: '告警方式可根据实际情况选择一种或组合',

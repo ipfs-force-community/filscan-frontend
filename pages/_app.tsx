@@ -2,6 +2,7 @@
 import '@/styles/globals.css'
 import '@/styles/common.scss'
 import '@/styles/custom.scss'
+import '@/styles/_mixins.scss'
 import { ConfigProvider, theme } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import enUS from 'antd/lib/locale/en_US'

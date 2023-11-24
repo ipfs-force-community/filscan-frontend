@@ -148,6 +148,8 @@ export default observer((props: Props) => {
       const emailList = rule?.warnList?.email_warn || []
       const messageList = rule?.warnList?.message_warn || []
       const phoneList = rule?.warnList?.phone_warn || []
+      const rulesList: Array<any> = []
+
       if (!rule.group_id) {
         warnings = true
         other_rules[`${ruleIndex}`] = {
@@ -202,7 +204,6 @@ export default observer((props: Props) => {
           content: tr(warn_text),
         })
       }
-      const rulesList: Array<any> = []
 
       const obj = {
         monitor_type: 'ExpireSectorMonitor',

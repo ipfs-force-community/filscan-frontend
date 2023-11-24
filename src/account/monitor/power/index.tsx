@@ -7,9 +7,13 @@ import styles from './index.module.scss'
 import monitorStore from '@/store/modules/account/monitor'
 import { observer } from 'mobx-react'
 import Rules from './Rules'
+import classNames from 'classnames'
+import useWindow from '@/components/hooks/useWindown'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' })
+  const { isMobile } = useWindow()
   const { rules } = monitorStore
 
   const [selectGroup, setSelectGroup] = useState('all')
@@ -79,14 +83,29 @@ export default observer(() => {
   }
 
   const columns = useMemo(() => {
-    return monitor_list(tr, handleChangeRule, 'power').map((v) => {
+    let list = monitor_list(tr, handleChangeRule, 'power')
+    if (isMobile) {
+      list = list.slice(0, list.length - 1)
+    }
+    return list.map((v) => {
+      if (isMobile && v.dataIndex === 'group_name') {
+        return { ...v, title: tr(v.title), render: (text: string, record: any) => {
+          const showText = record.is_default ? tr('default_group') : text
+          return showText
+        }}
+      }
       return { ...v, title: tr(v.title) }
     })
-  }, [tr])
+  }, [tr, isMobile])
 
   return (
     <div className={styles.power}>
-      <div className={styles.power_title}>{tr('monitor_power')}</div>
+      <div className={classNames('flex', styles.power_title)}>
+        {tr('monitor_power')}
+        {
+            isMobile && (<div className={styles.tip}><ExclamationCircleOutlined className='mr-[2px]' />{tr('monitor_mobile_edit_tip')}</div>)
+          }
+      </div>
       <Header
         onChange={handleChange}
         selectGroup={selectGroup}

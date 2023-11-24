@@ -1,11 +1,25 @@
-.header{
+@import 'mixins';
+
+.header {
   margin-bottom: 16px;
+  @include mobile {
+    margin-bottom: 10px;
+  }
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   &_left{
     flex:1;
     display: flex;
     column-gap: 10px;
+    @include mobile {
+      flex-wrap: wrap;
+      row-gap: 10px;
+      justify-content: space-between;
+      :global .ant-select {
+        flex: 1;
+      }
+    }
   }
 }
