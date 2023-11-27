@@ -15,7 +15,6 @@ export default () => {
   const renderChild = (children: Array<any>, num: number) => {
     return (
       <ul
-        style={{ padding: '16px' }}
         key={num}
         className="select_shadow main_bg_color border_color absolute inset-y-full z-50 -ml-8 hidden  h-fit w-max list-none rounded-[5px] border  px-4  group-hover:block"
       >

@@ -1790,9 +1790,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
               if (Array.isArray(resList)) {
                 return (
                   <div key={key} className="flex flex-wrap font-normal">
-                    <div className="text_des" style={{ width: '70px' }}>
-                      {tr(key)}:
-                    </div>
+                    <div className="text_des mr-2 w-fit">{tr(key)}:</div>
                     <div className="">
                       {resList.map((warn: string, index: number) => {
                         return <li key={index}>{warn}</li>
@@ -2042,8 +2040,8 @@ export const active_member_share = [
     title: 'warn_balance',
   },
   {
-    icon: <Companies />,
-    des: 'companies_5',
+    icon: getSvgIcon('monitor'),
+    title: 'companies_5',
   },
 ]
 

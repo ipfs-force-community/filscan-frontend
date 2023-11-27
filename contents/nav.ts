@@ -83,7 +83,16 @@ const navMenu: Array<Menu_Info | any> = [
     key: 'fvm',
     // sufIcon: "hot",
     color: '#F44C30',
-    link: '/fvm',
+    children: [
+      {
+        key: 'fvm_all',
+        link: '/fvm',
+      },
+      {
+        key: 'active',
+        link: '/active',
+      },
+    ],
   },
   {
     key: 'develop',

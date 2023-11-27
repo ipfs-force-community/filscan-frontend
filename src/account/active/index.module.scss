@@ -138,7 +138,10 @@
 
 .share {
   background-color: var(--bgColor);
+  width: 416px;
+  height: fit-content;
   &_top {
+    position: relative;
     width: 416px;
     height: 580px;
     background-image: url('../../../assets/images/member/share_1.png');
@@ -149,6 +152,26 @@
     height: 146px;
     background-image: url('../../../assets/images/member/share_2.png');
     background-size: contain;
+  }
+  &_content {
+    position: absolute;
+    top: 150px;
+    padding: 28px 20px;
+    font-size: 20px;
+    color: #ffffff;
+    font-family:
+      PingFangSC,
+      PingFang SC;
+    font-weight: 400;
+    background: linear-gradient(180deg, #9ec3ff 0%, #3e92ff 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(7px);
+    &_item {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+    }
   }
 }
 

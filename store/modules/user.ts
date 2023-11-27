@@ -17,6 +17,8 @@ const defaultUser = {
   last_login: 0,
   superVip: true,
   inviteCode: '',
+  membership_type: '',
+  expired_time: '',
 }
 
 class UserStore {
@@ -75,10 +77,11 @@ class UserStore {
       this.getUserCode()
       this.getInviteList()
     }
+
     runInAction(() => {
       this.userInfo = {
         ...(userData?.data || {}),
-        superVip: true,
+        superVip: userData?.data?.membership_type?.startsWith('Enterprise'),
         last_login: userData?.data?.last_login_at || '',
         loading: false,
       }

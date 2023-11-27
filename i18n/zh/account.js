@@ -16,7 +16,6 @@ const account = {
   data_details: '数据详情',
   miners: '节点管理',
   monitor: '监控管理',
-  overview_monitorBalance: '余额监控',
   monitor_sector: '到期监控',
   monitor_balance: '余额监控',
   monitor_power: '算力监控',
@@ -198,7 +197,7 @@ const account = {
 
   //监控
   ExpireSectorMonitor: '扇区到期时间',
-  edit_status: '修改规则状态',
+  edit_status: '关闭规则',
   edit_status_content: '您确定关闭此监控吗？关闭后将无法及时收到相关告警',
   delete_rule: '删除规则',
   delete_rule_content: '您确定删除此监控吗?',
