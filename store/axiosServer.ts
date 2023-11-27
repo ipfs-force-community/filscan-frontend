@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-
+import router from 'next/router'
 type RequestConfig = {
   retryCount?: number
   timeout?: number
@@ -17,6 +17,7 @@ export const axiosServer = async <T>(
 ): Promise<RequestResult> => {
   const { retryCount = 3, timeout } = requestConfig
   let cancelTokenSource = axios.CancelToken.source()
+  const asPath = router.router?.asPath
 
   const cancelPreviousRequests = () => {
     cancelTokenSource.cancel('Request cancelled due to route change')
@@ -62,22 +63,33 @@ export const axiosServer = async <T>(
   }
 
   // Cancel previous requests when route changes
-  const handleRouteChange = () => {
-    cancelPreviousRequests()
+  const handleRouteChange = (e: any) => {
+    if (e !== asPath) {
+      cancelPreviousRequests()
+      router.router?.events.off('hashChangeStart', handleRouteChange)
+      router.router?.events.off('beforeHistoryChange', handleRouteChange)
+    }
   }
 
   // Listen for route change events
   if (typeof window !== 'undefined') {
     // Listen for route change events
-    window.addEventListener('popstate', handleRouteChange)
+    // https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event
+    // window.addEventListener('popstate', handleRouteChange)
+    // https://nextjs.org/docs/pages/api-reference/functions/use-router
+    router.router?.events.on('hashChangeStart', handleRouteChange)
+    router.router?.events.on('beforeHistoryChange', handleRouteChange)
+  } else {
   }
+
   try {
     const result = await request(retryCount)
     return result
   } finally {
     // Remove the route change event listener
     if (typeof window !== 'undefined') {
-      window.removeEventListener('popstate', handleRouteChange)
+      router.router?.events.off('hashChangeStart', handleRouteChange)
+      router.router?.events.off('beforeHistoryChange', handleRouteChange)
     }
   }
 }
