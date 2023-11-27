@@ -1,6 +1,7 @@
 import { RequestResult, axiosServer } from '@/store/axiosServer'
 import {
   inviteCode,
+  inviteList,
   login,
   resetPassword,
   userInfo,
@@ -22,6 +23,7 @@ class UserStore {
   userInfo: Record<string, any>
   verifyCode: string
   vipModal: boolean
+  recordList: Array<any>
   constructor() {
     this.userInfo = {
       ...defaultUser,
@@ -29,9 +31,11 @@ class UserStore {
     }
     this.verifyCode = ''
     this.vipModal = false
+    this.recordList = []
     makeObservable(this, {
       userInfo: observable,
       vipModal: observable,
+      recordList: observable,
     })
     this.getUserInfo()
   }
@@ -69,6 +73,7 @@ class UserStore {
     const userData: RequestResult = await axiosServer(userInfo)
     if (!userData.error) {
       this.getUserCode()
+      this.getInviteList()
     }
     runInAction(() => {
       this.userInfo = {
@@ -88,6 +93,14 @@ class UserStore {
         ...(this.userInfo || {}),
         inviteCode: userData.data.invite_code,
       }
+    })
+  }
+  //邀请记录
+
+  async getInviteList() {
+    const list: RequestResult = await axiosServer(inviteList)
+    runInAction(() => {
+      this.recordList = list?.data?.items || []
     })
   }
   async loginUserInfo(payload: Record<string, any>) {

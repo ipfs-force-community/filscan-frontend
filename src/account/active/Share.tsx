@@ -9,34 +9,28 @@ export default () => {
 
   return (
     <div className={style.detail}>
-      <Button className="active_btn" onClick={() => setShow(true)}>
-        {tr('active_share')}
-      </Button>
+      <div className={style.send}>
+        <Button className="active_btn" onClick={() => setShow(true)}>
+          {tr('active_share')}
+        </Button>
+        <span className={style.send_icon}>{tr('send_member')}</span>
+      </div>
       <Modal
         destroyOnClose={true}
-        width={700}
+        width={416}
         closeIcon={false}
-        wrapClassName="custom_modal"
+        wrapClassName="custom_modal noPaddingModal"
         open={show}
         footer={null}
         onCancel={() => {
           setShow(false)
         }}
       >
-        <div>
-          <div className={style.detail_header}>
-            {tr('rule_detail')}
-            <span
-              className={style.detail_header_close}
-              onClick={() => {
-                setShow(false)
-              }}
-            >
-              X
-            </span>
+        <div className={style.share}>
+          <div className={style.share_top}>
+            <div>{tr('account_title')}</div>
           </div>
-          <p>{tr('rule_content')}</p>
-          <div></div>
+          <div className={style.share_bottom}></div>
         </div>
       </Modal>
     </div>

@@ -2,6 +2,8 @@ import { Translation } from '@/components/hooks/Translation'
 import { Modal } from 'antd'
 import { useState } from 'react'
 import style from './index.module.scss'
+import { active_member_detail } from '@/contents/account'
+import { getSvgIcon } from '@/svgsIcon'
 
 export default () => {
   const { tr } = Translation({ ns: 'account' })
@@ -14,7 +16,7 @@ export default () => {
       </span>
       <Modal
         destroyOnClose={true}
-        width={700}
+        width={400}
         closeIcon={false}
         wrapClassName="custom_modal"
         open={show}
@@ -25,7 +27,7 @@ export default () => {
       >
         <div>
           <div className={style.detail_header}>
-            {tr('rule_detail')}
+            {tr('active_rule_detail')}
             <span
               className={style.detail_header_close}
               onClick={() => {
@@ -36,7 +38,25 @@ export default () => {
             </span>
           </div>
           <p>{tr('rule_content')}</p>
-          <div></div>
+          <div className={style.detail_content}>
+            <span className={style.detail_content_icon}>
+              {getSvgIcon('memberBg')}
+            </span>
+            <div className={style.detail_content_title}>
+              {tr('active_member')}:
+            </div>
+            <ul className={style.detail_ul}>
+              {active_member_detail.map((v, index) => {
+                return (
+                  <li key={index} className={style.detail_content_item}>
+                    {v.icon}
+                    {tr(v.des)}{' '}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <p className={style.detail_expired}>{tr('active_expired')}</p>
         </div>
       </Modal>
     </div>
