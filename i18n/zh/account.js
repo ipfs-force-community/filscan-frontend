@@ -256,6 +256,7 @@ const account = {
   year_discount: '低于8.0折',
   share_friend: '邀请朋友，赠送一个月黄金会员',
   share_turn: '即刻开启，最大化减少损失',
+  tg_title: '添加商务TG开通',
   //活动
   success_member: '已成功注册',
   error_member: '未绑定节点',

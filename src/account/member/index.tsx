@@ -7,6 +7,7 @@ import RightIcon from '@/assets/images/member/right.svg'
 import { getSvgIcon } from '@/svgsIcon'
 import { observer } from 'mobx-react'
 import userStore from '@/store/modules/user'
+import AddTG from './addTg'
 
 export default observer(() => {
   const { vipModal } = userStore
@@ -135,9 +136,10 @@ export default observer(() => {
           </div>
         </div>
         <div className={style.member_btns}>
-          <div className={`${style.member_btn} ${style.member_btnShare}`}>
+          <AddTG />
+          {/* <div className={`${style.member_btn} ${style.member_btnShare}`}>
             {tr('share_friend')}
-          </div>
+          </div> */}
           <div className={style.member_btn}>{tr('share_turn')}</div>
         </div>
       </div>
