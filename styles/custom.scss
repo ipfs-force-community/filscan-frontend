@@ -684,6 +684,11 @@
   }
 }
 
+.noTopModal {
+  .ant-modal {
+    top: 0px !important;
+  }
+}
 .custom_modal {
   width: 100%;
 }

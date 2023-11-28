@@ -60,7 +60,6 @@ const Account: React.FC = () => {
   }
 
   const handleChange = (openKeys: any, item: any) => {
-    console.log('----3', superVip, item)
     if (item.vip && !superVip) {
       userStore.setVipModal(true)
     }

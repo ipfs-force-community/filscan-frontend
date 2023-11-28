@@ -267,6 +267,7 @@ const account = {
   send_member: '送会员',
   invite_code: '邀请码',
   active_share: '去邀请',
+  active_member_warn: '短信 、电话告警',
   active: '邀请活动',
   active_rule: '活动规则',
   active_detail: '详情',
@@ -282,6 +283,12 @@ const account = {
   active_2_des: '好友注册成功，并成功添加有效节点，累计登录3天',
   active_3: '邀请2个有效好友',
   active_3_des: '邀请2个有效好友，成功领取奖励',
+  active_target_1: '节点信息 一网打尽',
+  active_target_2: '异常告警 快人一步',
+  scan_code: '立即扫码体验',
+  active_des: '活动解释权归FILSCAN所有',
+  active_gift: '新人赠送7天企业版体验权益',
+  active_save: '保存本地',
 }
 
 export default account

@@ -302,6 +302,7 @@ export default observer((props: Props) => {
                   disableAll={record?.group_id}
                   selectGroup={ruleItem.group_id}
                   selectMiner={ruleItem.miner_id}
+                  showTagLabel={true}
                   classes={{
                     group: otherRules[`${index}`]?.group
                       ? 'custom_select_warn'

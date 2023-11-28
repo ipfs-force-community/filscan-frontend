@@ -1,5 +1,6 @@
 const account = {
   date: 'Date',
+  day: 'Day',
   confirm: 'Confirm',
   cancel: 'Cancel',
   go_home: 'Back to Homepage',
@@ -176,30 +177,33 @@ const account = {
   examination: 'Rules',
   alarm: 'Alarm Modes',
   status: 'State',
-  rules_more: '单个弹框最多添加10组规则，如还需添加请保存后再继续',
-  warn_more: '最多支持添加3个',
-  monitor_mobile_edit_tip: '监控增删改操作请前往PC端完成',
+  rules_more:
+    'A single dialog box can have a maximum of 10 rule sets. If you need to add more, please save your changes and continue',
+  warn_more: 'Maximum support for adding 3',
+  monitor_mobile_edit_tip:
+    'Please go to the PC version for monitoring operations such as adding, deleting, and modifying',
   //告警方式
   warn_title: 'Alarm Modes',
   warn_title_des:
     'You can choose one or a combination of alarm methods based on the actual situation',
   email_warn: 'Email Notification',
   email_warn_placeholder: 'Please provide the alert email address  ',
-  email_warn_warning: '请输入正确邮箱地址',
+  email_warn_warning: 'Please enter a valid email address',
   email_warn_des:
     'The registered email address for the current account will be automatically sent, so there is no need to submit it again',
   message_warn: 'SMS Notification',
   message_warn_placeholder: 'Please provide the receiving phone number ',
-  message_warn_warning: '请输入正确的接收号码',
+  message_warn_warning: 'Please enter a valid recipient number',
 
   phone_warn: 'Phone Call Notification',
   phone_warn_placeholder: 'Please provide the receiving phone number ',
-  phone_warn_warning: '请输入正确的接收号码',
+  phone_warn_warning: 'Please enter a valid recipient number',
 
   //监控
   ExpireSectorMonitor: 'Sector Expiry Date',
   edit_status: 'Close Rule',
-  edit_status_content: '您确定关闭此监控吗？关闭后将无法及时收到相关告警',
+  edit_status_content:
+    'Do you confirm the disabled of this monitoring? Once disabled, you will not receive timely alerts for relevant issues',
   delete_rule: 'Delete Rule',
   delete_rule_content: 'Do you confirm the deletion of this monitoring?',
 
@@ -208,19 +212,19 @@ const account = {
   edit_rules: 'Modify Rules',
   rule_detail: 'Rule Details',
   edit_write_warn: 'Alarm Modes',
-  sector_rule_title: '扇区到期时间',
+  sector_rule_title: 'Sector Expiry Date',
   sector_rule_des: 'Customizable; Recommended to be greater than 30.',
   sector_ruler_placeholder: 'Please enter a positive integer',
   sector_ruler_warningText: 'Please enter a positive integer',
-  '<=': 'less than or equal to',
-  '>=': '大于等于',
+  '<=': 'Less than or equal to',
+  '>=': 'Greater than or equal to',
   //余额监控
   balance_category_placeholder: 'select a balance category',
   balance_rule_des: 'current {{value}} FIL',
   //算力监控
-  power_rules_1: '1. 扇区发生错误',
-  power_rules_2: '2. 扇区主动终止',
-  power_rules_3: '3. 扇区正常到期',
+  power_rules_1: '1. Sector encountered an error',
+  power_rules_2: '2. Sector terminated voluntarily',
+  power_rules_3: '3. Sector expired normally',
 }
 
 export default account

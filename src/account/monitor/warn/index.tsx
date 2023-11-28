@@ -78,6 +78,8 @@ export default (props: Props) => {
               newWarn[warnKey][index].warning = false
             }
           }
+        } else {
+          newWarn[warnKey][index].warning = false
         }
         newWarn[warnKey][index].inputValue = value
         break

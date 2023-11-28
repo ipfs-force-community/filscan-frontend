@@ -1,5 +1,6 @@
 const account = {
   date: '날짜',
+  day: '일',
   confirm: 'Confirm',
   cancel: 'Cancel',
   go_home: '홈으로',
@@ -28,6 +29,9 @@ const account = {
   all_tags: 'All Tags',
   edit: '편집하다',
   miner_add: '추가하다',
+  select_group: '그룹을 선택하세요',
+  select_miner: '채굴자를 선택해 주세요',
+  select_miner_tag: '请选择标签',
   //个人账户
   register_success: '축하합니다! 회원 가입이 성공적으로 완료되었습니다',
   register_btn: '활성화하다',
@@ -36,7 +40,7 @@ const account = {
   miner_add: '添加',
   edit_write: '수정',
   edit_delete: '삭제',
-  created_at: '创建时间',
+  created_at: 'Create Time',
 
   //数据概览
   overview_power: '해시파워 개요',
@@ -172,21 +176,23 @@ const account = {
   examination: '규칙',
   alarm: '알람 모드',
   status: '상태',
-  rules_more: '单个弹框最多添加10组规则，如还需添加请保存后再继续',
-  warn_more: '最多支持添加3个',
-  monitor_mobile_edit_tip: '监控增删改操作请前往PC端完成',
+  rules_more:
+    '단일 대화 상자에는 최대 10개의 규칙 세트를 추가할 수 있습니다. 더 추가해야하는 경우 변경 내용을 저장한 후 계속하십시오',
+  warn_more: '최대 3개까지 추가할 수 있습니다',
+  monitor_mobile_edit_tip:
+    '모니터링 추가, 삭제 및 수정과 같은 작업은 PC 버전에서 진행해 주세요',
   //告警方式
   warn_title: '알람 모드',
   warn_title_des:
     ' 실제 상황에 따라 하나 또는 여러 가지의 경보 방법을 선택할 수 있습니다',
   email_warn: '이메일 알림',
-  email_warn_placeholder: '알림 이메일 주소를 입력해주세요',
+  email_warn_placeholder: '올바른 이메일 주소를 입력해주세요',
   email_warn_warning: '알림 이메일 주소를 입력해주세요',
   email_warn_des:
     '현재 계정에 등록된 이메일 주소는 자동으로 전송되므로 다시 제출할 필요가 없습니다',
   message_warn: '문자 메시지 알림',
   message_warn_placeholder: '통지를 받을 전화번호를 입력해주세요',
-  message_warn_warning: '통지를 받을 전화번호를 입력해주세요',
+  message_warn_warning: '올바른 수신 번호를 입력해주세요',
 
   phone_warn: ' 전화 알림',
   phone_warn_placeholder: '통지를 받을 전화번호를 입력해주세요',
@@ -195,28 +201,29 @@ const account = {
   //监控
   ExpireSectorMonitor: '섹터 만료일',
   edit_status: '규칙 닫기',
-  edit_status_content: '您确定关闭此监控吗？关闭后将无法及时收到相关告警',
+  edit_status_content:
+    '이 모니터링을 비활성화하시겠습니까? 비활성화되면 관련된 경고를 즉시 받을 수 없게 됩니다.',
   delete_rule: '규칙 삭제',
   delete_rule_content: '이 모니터링을 삭제하시겠습니까?',
 
   //扇区监控
   reset_button: '초기화',
   edit_rules: '규칙 수정',
-  rule_detail: '规则详情',
+  rule_detail: '규칙 세부정보',
   edit_write_warn: '알람 모드',
   sector_rule_title: '섹터 만료일',
   sector_rule_des: ' 사용자 정의 가능; 30보다 큰 값이 권장됩니다',
   sector_ruler_placeholder: '양의 정수를 입력해주세요',
   sector_ruler_warningText: '양의 정수를 입력해주세요',
   '<=': '이하',
-  '>=': '大于等于',
+  '>=': '이상',
   //余额监控
-  balance_category_placeholder: '请选择余额类目',
+  balance_category_placeholder: ' 잔액 카테고리',
   balance_rule_des: '현재의 {{value}} FIL',
   //算力监控
-  power_rules_1: '1. 扇区发生错误',
-  power_rules_2: '2. 扇区主动终止',
-  power_rules_3: '3. 扇区正常到期',
+  power_rules_1: '1. 섹터에 오류가 발생했습니다',
+  power_rules_2: '2. 섹터가 자발적으로 종료되었습니다',
+  power_rules_3: '3. 섹터가 정상적으로 만료되었습니다',
 }
 
 export default account

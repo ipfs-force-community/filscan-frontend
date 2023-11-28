@@ -24,6 +24,10 @@ import PhoneIcon from '@/assets/images/member/phone.svg'
 import PowerWarnIcon from '@/assets/images/member/power.svg'
 import BalanceWarnIcon from '@/assets/images/member/balance.svg'
 import SectorWarnIcon from '@/assets/images/member/sector.svg'
+import ActivePower from '@/assets/images/member/activePower.svg'
+import ActiveBalance from '@/assets/images/member/activeBalance.svg'
+import ActiveSector from '@/assets/images/member/activeSector.svg'
+import ActiveWarn from '@/assets/images/member/activeWarn.svg'
 import Companies from '@/assets/images/member/companies.svg'
 import CompaniesPro from '@/assets/images/member/companiesPro.svg'
 import CompaniesV from '@/assets/images/member/companiesV.png'
@@ -2026,20 +2030,20 @@ export const active_member_detail = [
 ]
 export const active_member_share = [
   {
-    icon: <PowerWarnIcon />,
+    icon: <ActivePower />,
     title: 'warn_power',
   },
   {
-    icon: <SectorWarnIcon />,
+    icon: <ActiveSector />,
     title: 'warn_sector',
   },
   {
-    icon: <BalanceWarnIcon />,
+    icon: <ActiveBalance />,
     title: 'warn_balance',
   },
   {
-    icon: getSvgIcon('monitor'),
-    title: 'companies_5',
+    icon: <ActiveWarn />,
+    title: 'active_member_warn',
   },
 ]
 

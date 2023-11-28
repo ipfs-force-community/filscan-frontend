@@ -18,7 +18,6 @@ const defaultUser = {
   mail: '',
   last_login: 0,
   superVip: false,
-  inviteCode: '',
   membership_type: '',
   expired_time: '',
 }
@@ -29,6 +28,7 @@ class UserStore {
   vipModal: boolean
   recordList: Array<any>
   showMemberWarn: boolean
+  inviteCode: string
   constructor() {
     this.userInfo = {
       ...defaultUser,
@@ -38,6 +38,7 @@ class UserStore {
     this.vipModal = false
     this.recordList = []
     this.showMemberWarn = false
+    this.inviteCode = ''
     makeObservable(this, {
       userInfo: observable,
       vipModal: observable,
@@ -119,10 +120,7 @@ class UserStore {
   async getUserCode() {
     const userData: RequestResult = await axiosServer(inviteCode)
     runInAction(() => {
-      this.userInfo = {
-        ...(this.userInfo || {}),
-        inviteCode: userData.data.invite_code,
-      }
+      this.inviteCode = userData?.data?.invite_code || ''
     })
   }
   //邀请记录

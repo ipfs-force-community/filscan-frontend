@@ -348,7 +348,7 @@ export default observer((props: Props) => {
     <Modal
       title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
       destroyOnClose={true}
-      width={800}
+      width={900}
       closeIcon={false}
       wrapClassName="custom_left_modal"
       open={showModal}
@@ -390,6 +390,7 @@ export default observer((props: Props) => {
                   selectGroup={ruleItem.group_id}
                   selectMiner={ruleItem.miner_id}
                   isAllMiner={false}
+                  showTagLabel={true}
                   classes={{
                     group: otherRules[`${index}`]?.group
                       ? 'custom_select_warn'

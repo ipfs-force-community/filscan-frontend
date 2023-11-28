@@ -9,7 +9,7 @@ import userStore from '@/store/modules/user'
 import Table from '@/packages/Table'
 import { useMemo } from 'react'
 export default observer(() => {
-  const { userInfo, recordList } = userStore
+  const { inviteCode, recordList } = userStore
   const { tr } = Translation({ ns: 'account' })
   const columns = useMemo(() => {
     return active_member_list(tr).map((v) => {
@@ -44,12 +44,11 @@ export default observer(() => {
       <div className={style.active_share}>
         <div className={style.active_share_item}>
           <span className={style.active_des}>{tr('invite_code')}</span>
-
           <span className={style.active_value}>
-            {userInfo?.inviteCode} <Copy text={userInfo?.inviteCode} />
+            {inviteCode} <Copy text={inviteCode} />
           </span>
         </div>
-        <Share />
+        <Share inviteCode={inviteCode} />
       </div>
       <div className="card_shadow border_color  mt-4 rounded-xl	border p-5">
         <Table
