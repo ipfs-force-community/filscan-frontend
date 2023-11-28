@@ -18,6 +18,7 @@ import Copy from '@/components/copy'
 import useAxiosData from '@/store/useAxiosData'
 import AccountDetail from '@/src/detail/accountDetail'
 import CopySvgMobile from '@/assets/images/icon-copy.svg'
+import PendingMsg from '@/src/detail/list/PendingMsg'
 
 export default () => {
   const router = useRouter()
@@ -156,13 +157,15 @@ export default () => {
         <PowerChange accountId={miner} type={'miner'} />
       </div>
       <AccountDetail data={data} type={'miner'} />
-      <div>
-        <List
-          tabList={newTabList}
-          defaultActive="message_list"
-          accountId={miner}
-        />
-      </div>
+      <PendingMsg
+        account_id={data?.account_basic?.account_id}
+        account_address={data?.account_basic?.account_address}
+      />
+      <List
+        tabList={newTabList}
+        defaultActive="message_list"
+        accountId={miner}
+      />
     </div>
   )
 }

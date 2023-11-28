@@ -2,7 +2,7 @@
 
 import Copy from '@/components/copy'
 import { Translation } from '@/components/hooks/Translation'
-import { TransMethod, apiUrl, pendingMsg, tokenName } from '@/contents/apiUrl'
+import { TransMethod, apiUrl, tokenName } from '@/contents/apiUrl'
 import { address_detail, address_tabs } from '@/contents/detail'
 import Content from '@/packages/content'
 import Segmented from '@/packages/segmented'
@@ -127,12 +127,6 @@ export default () => {
     if (baseResult?.account_basic?.account_id) {
       // 已被验证合约
       loadVerify(baseResult?.account_basic?.account_id)
-      //获取pendding消息
-
-      loadPending(
-        baseResult?.account_basic?.account_id,
-        baseResult?.account_basic?.account_address,
-      )
     }
     if (typeof address === 'string') {
       // 增加代币列表
@@ -158,27 +152,6 @@ export default () => {
       { isCancel: false },
     )
     setVerifyData({ ...result })
-  }
-
-  //pending
-  const loadPending = async (account_id: string, account_address?: string) => {
-    const result = await axiosData(
-      pendingMsg,
-      {
-        account_id,
-        account_address,
-      },
-      { isCancel: false },
-    )
-
-    const data: Array<any> = []
-    result?.messages_pool_list?.forEach((v: any) => {
-      data.push({ ...v.message_basic, exit_code: 'Pending' })
-    })
-    setPendingData({
-      dataSource: data,
-      total: result?.total_count,
-    })
   }
 
   const loadERC20TokenList = async (id: string) => {
@@ -374,7 +347,10 @@ export default () => {
         interval={interval}
         list={address_detail.account_change.list}
       />
-      <PendingMsg data={pendingData} />
+      <PendingMsg
+        account_id={data?.account_basic?.account_id}
+        account_address={data?.account_basic?.account_address}
+      />
       <List
         tabList={tabsList}
         defaultActive="traces_list"
