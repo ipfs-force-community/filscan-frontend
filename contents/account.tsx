@@ -1,7 +1,6 @@
 /** @format */
 
 import { getSvgIcon } from '@/svgsIcon'
-import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
 import { MenuItem } from './type'
 import Link from 'next/link'
 import TagInput from '@/packages/tagInput'
@@ -1777,7 +1776,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
         const mailList = record.mail_alert
         const msgList = record.msg_alert
         const callList = record.call_alert
-
         const obj: Record<string, any> = {
           email_warn: mailList,
           message_warn: msgList,

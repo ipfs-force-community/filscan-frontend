@@ -12,6 +12,9 @@ export const verifyCode = proUrl + '/SendVerificationCode'
 export const resetPassword = proUrl + '/ResetPasswordByCode'
 export const inviteCode = proUrl + '/UserInviteCode'
 export const inviteList = proUrl + '/UserInviteRecord'
+
+//活动
+export const eventsList = mainUrl + '/GetEventsList'
 //节点管家
 export const countMiners = proUrl + '/CountUserMiners'
 export const UserGroups = proUrl + '/GetUserGroups'
