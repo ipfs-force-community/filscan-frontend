@@ -50,7 +50,7 @@ export default () => {
         content: 'Update successful',
       })
       localStorage.removeItem('token')
-      userStore.setUserInfo()
+      userStore.clearUserInfo()
       router.push('/admin/login')
     }
     setLoading(false)
