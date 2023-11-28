@@ -15,6 +15,7 @@ import { Item } from './type'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import CopySvgMobile from '@/assets/images/icon-copy.svg'
 import AccountLink from '@/components/accountLink'
+import TimeDisplay from '@/components/TimeDisplay'
 
 //消息列表
 export const message_list = {
@@ -288,8 +289,10 @@ export const pool_list = {
       dataIndex: 'block_time',
       title: 'block_time',
       width: '15%',
-      render: (text: string | number) =>
-        formatDateTime(text, 'YYYY-MM-DD HH:mm'),
+      render: (text: string | number) => {
+        return <TimeDisplay timestamp={Number(text) * 1000} />
+      },
+      //formatDateTime(text, 'YYYY-MM-DD HH:mm'),
     },
     {
       dataIndex: 'from',

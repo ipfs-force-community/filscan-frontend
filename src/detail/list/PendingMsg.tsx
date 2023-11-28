@@ -67,10 +67,9 @@ export default (props: Props) => {
           {tr('pending_total', { value: formatNumber(pendingData?.total) })}
         </div>
       </MobileView>
-
       <div
         className={classNames(
-          'card_shadow border_color mt-7 min-h-[150px] rounded-xl border p-5',
+          'card_shadow border_color  min-h-[150px] rounded-xl border p-5',
           styles.table,
           styles.reset,
         )}
