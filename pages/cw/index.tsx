@@ -190,17 +190,6 @@ export default observer(() => {
               searchHeight.current = Number(orphanItem.Epoch)
             }
           })
-          calcData.push(v)
-        } else if (v?.OrphanBlocks?.length > 0) {
-          calcData.push(v)
-        }
-        if (!showSearch && v?.OrphanBlocks?.length > 0) {
-          v.OrphanBlocks.forEach((orphanItem: any) => {
-            if (type === 'cid' && orphanItem._id === searchCid.current) {
-              showSearch = true
-              searchHeight.current = Number(orphanItem.Epoch)
-            }
-          })
         }
       })
       if (type === 'cid' && calcData.length > 0) {
@@ -302,6 +291,7 @@ export default observer(() => {
           draw: (chart: any, layer: any, s: any) => {
             let d3 = chart.d3
             let emitter = chart.emitter
+
             let stageWrap = layer.safeSelect('g.stage-wrap')
             let axisYWrap = layer.safeSelect('g.ay-wrap')
             let axisXWrap = layer.safeSelect('g.ax-wrap')
@@ -499,7 +489,8 @@ export default observer(() => {
                           d.x = wrapX
                           d.y = wrapY
                           bh.attr('transform', `translate(${wrapX}, ${wrapY})`)
-                          bh.attr('cursor', 'pointer')
+                          bh.attr('cursor', `pointer`)
+
                           // bh.safeSelect("ellipse")
                           //   .attrs({
                           //     rx: ellipseRX,

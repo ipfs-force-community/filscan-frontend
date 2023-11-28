@@ -232,8 +232,11 @@ const detail = {
   ticket_value: '티켓 값',
   state_root: '스테이트 루트',
   message_count: '메시지 개수',
-  blk_cids_message:'메시지 차단',
-
+  blk_cids_message: '메시지 차단',
+  
+    //pendingMsg 
+  pending_title:'대기 중인 메시지',
+  pending_total:'Total of {{value}} messages to be processed'
 
 }
 export default detail

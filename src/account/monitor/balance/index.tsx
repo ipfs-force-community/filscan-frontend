@@ -102,10 +102,14 @@ export default observer(() => {
     }
     return list.map((v) => {
       if (isMobile && v.dataIndex === 'group_name') {
-        return { ...v, title: tr(v.title), render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group') : text
-          return showText
-        }}
+        return {
+          ...v,
+          title: tr(v.title),
+          render: (text: string, record: any) => {
+            const showText = record.is_default ? tr('default_group') : text
+            return showText
+          },
+        }
       }
       return { ...v, title: tr(v.title) }
     })
@@ -122,11 +126,14 @@ export default observer(() => {
 
   return (
     <div className={styles.balance}>
-       <div className={classNames('flex', styles.balance_title)}>
-          {tr('monitor_balance')}
-          {
-            isMobile && (<div className={styles.tip}><ExclamationCircleOutlined className='mr-[2px]' />{tr('monitor_mobile_edit_tip')}</div>)
-          }
+      <div className={classNames('flex', styles.balance_title)}>
+        {tr('monitor_balance')}
+        {isMobile && (
+          <div className={styles.tip}>
+            <ExclamationCircleOutlined className="mr-[2px]" />
+            {tr('monitor_mobile_edit_tip')}
+          </div>
+        )}
       </div>
       <Header
         onChange={handleChange}
@@ -136,9 +143,9 @@ export default observer(() => {
         reset={true}
         addRule={true}
       />
-        <div className={styles.balance_table}>
-          <Table data={[...rules]} columns={columns} loading={false} />
-        </div>
+      <div className={styles.balance_table}>
+        <Table data={[...rules]} columns={columns} loading={false} />
+      </div>
       <Rules showModal={showRules} onChange={handleChange} record={record} />
     </div>
   )

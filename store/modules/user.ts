@@ -1,5 +1,12 @@
 import { RequestResult, axiosServer } from '@/store/axiosServer'
-import { login, resetPassword, userInfo, verifyCode } from '@/store/ApiUrl'
+import {
+  inviteCode,
+  inviteList,
+  login,
+  resetPassword,
+  userInfo,
+  verifyCode,
+} from '@/store/ApiUrl'
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
 import router from 'next/router'
@@ -8,13 +15,17 @@ const defaultUser = {
   name: '',
   mail: '',
   last_login: 0,
-  superVip: false,
+  superVip: true,
+  inviteCode: '',
+  membership_type: '',
+  expired_time: '',
 }
 
 class UserStore {
   userInfo: Record<string, any>
   verifyCode: string
   vipModal: boolean
+  recordList: Array<any>
   constructor() {
     this.userInfo = {
       ...defaultUser,
@@ -22,9 +33,11 @@ class UserStore {
     }
     this.verifyCode = ''
     this.vipModal = false
+    this.recordList = []
     makeObservable(this, {
       userInfo: observable,
       vipModal: observable,
+      recordList: observable,
     })
     this.getUserInfo()
   }
@@ -60,15 +73,39 @@ class UserStore {
   //获取用户登录信息
   async getUserInfo() {
     const userData: RequestResult = await axiosServer(userInfo)
+    if (!userData.error) {
+      this.getUserCode()
+      this.getInviteList()
+    }
+
     runInAction(() => {
       this.userInfo = {
         ...(userData?.data || {}),
+        superVip: userData?.data?.membership_type?.startsWith('Enterprise'),
         last_login: userData?.data?.last_login_at || '',
         loading: false,
       }
     })
   }
 
+  //获取我的邀请码
+  async getUserCode() {
+    const userData: RequestResult = await axiosServer(inviteCode)
+    runInAction(() => {
+      this.userInfo = {
+        ...(this.userInfo || {}),
+        inviteCode: userData.data.invite_code,
+      }
+    })
+  }
+  //邀请记录
+
+  async getInviteList() {
+    const list: RequestResult = await axiosServer(inviteList)
+    runInAction(() => {
+      this.recordList = list?.data?.items || []
+    })
+  }
   async loginUserInfo(payload: Record<string, any>) {
     const userData: any = await axiosServer(login, payload)
     if (userData?.data?.code) {
@@ -98,6 +135,7 @@ class UserStore {
       } else {
         this.userInfo = {
           ...(user || {}),
+          superVip: true,
           last_login: user?.last_login_at || '',
           loading: false,
         }

@@ -236,7 +236,11 @@ const detail = {
   parent_base_fee:'Parent Basefee',
   ticket_value: 'Ticket',
   state_root: 'State Root',
-  message_count:'Message Count',
+  message_count: 'Message Count',
+  
+    //pendingMsg 
+  pending_title:'Pending Messages',
+  pending_total:'Total of {{value}} messages to be processed'
 
 }
 export default detail

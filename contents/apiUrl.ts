@@ -55,6 +55,7 @@ export const cwUrl = mainUrl + '/TipsetStateTree'
 
 export const metaOther = mainUrl + '/BannerIndicator'
 export const tokenName = mainUrl + '/ERC20AddrTransfersTokenTypes'
+export const pendingMsg=mainUrl+'/PendingMsgByAccount'
 
 export const apiUrl: API | any = {
   fvm_hot: mainUrl + '/GetFEvmHotItems',

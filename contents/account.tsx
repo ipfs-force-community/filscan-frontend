@@ -1,7 +1,6 @@
 /** @format */
 
 import { getSvgIcon } from '@/svgsIcon'
-import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
 import { MenuItem } from './type'
 import Link from 'next/link'
 import TagInput from '@/packages/tagInput'
@@ -16,93 +15,24 @@ import {
 import ActiveRules from '@/src/account/monitor/ActiveRules'
 import classNames from 'classnames'
 import TextTooltip from '@/packages/textTooltip'
-
-export const logTabs = [
-  {
-    title: 'password_login',
-    dataIndex: 'password',
-  },
-  {
-    title: 'verification_code',
-    dataIndex: 'code',
-  },
-]
-
-export const login_list = (type?: string) => {
-  const arr = [
-    {
-      label: 'email',
-      name: 'email',
-      prefix: <MailOutlined className="site-form-item-icon" />,
-      placeholder: 'email_placeholder',
-      rules: [{ required: true, message: 'Email is required' }],
-    },
-  ]
-  if (type === 'code') {
-    return [
-      ...arr,
-      {
-        label: 'code',
-        name: 'code',
-        placeholder: 'code_placeholder',
-        prefix: <LockOutlined className="site-form-item-icon" />,
-        rules: [{ required: true, message: 'Code is required' }],
-      },
-    ]
-  }
-
-  return [
-    ...arr,
-    {
-      label: 'password',
-      name: 'password',
-      placeholder: 'password_placeholder',
-      prefix: <LockOutlined className="site-form-item-icon" />,
-      rules: [{ required: true, message: 'Password is required' }],
-    },
-  ]
-}
-
-export const registerList = [
-  {
-    label: 'email',
-    name: 'email',
-    prefix: <UserOutlined className="site-form-item-icon" />,
-    placeholder: 'email_placeholder',
-    rules: [
-      // {
-      //   required: true,
-      //   message: 'email_required',
-      // },
-      {
-        type: 'email',
-        required: true,
-        message: 'email_rules',
-      },
-    ],
-  },
-  {
-    label: 'code',
-    name: 'code',
-    placeholder: 'code_placeholder',
-    prefix: <LockOutlined className="site-form-item-icon" />,
-    rules: [{ required: true, message: 'Code is required' }],
-  },
-  {
-    label: 'password',
-    name: 'new_password',
-    placeholder: 'new_password',
-    prefix: <LockOutlined className="site-form-item-icon" />,
-    rules: [{ required: true, message: 'Password is required' }],
-  },
-  {
-    label: 'password',
-    name: 'confirm_password',
-    placeholder: 'confirm_password',
-    prefix: <LockOutlined className="site-form-item-icon" />,
-    rules: [{ required: true, message: 'Confirm assword is required' }],
-  },
-]
+import PowerIcon from '@/assets/images/member/memberPower.svg'
+import BalanceIcon from '@/assets/images/member/memberBalance.svg'
+import SectorIcon from '@/assets/images/member/memberSector.svg'
+import EmailIcon from '@/assets/images/member/email.svg'
+import MsgIcon from '@/assets/images/member/msg.svg'
+import PhoneIcon from '@/assets/images/member/phone.svg'
+import PowerWarnIcon from '@/assets/images/member/power.svg'
+import BalanceWarnIcon from '@/assets/images/member/balance.svg'
+import SectorWarnIcon from '@/assets/images/member/sector.svg'
+import Companies from '@/assets/images/member/companies.svg'
+import CompaniesPro from '@/assets/images/member/companiesPro.svg'
+import CompaniesV from '@/assets/images/member/companiesV.png'
+import CompaniesVPro from '@/assets/images/member/companiesVPro.png'
+import active1 from '@/assets/images/member/active1.png'
+import active2 from '@/assets/images/member/active2.png'
+import active3 from '@/assets/images/member/active3.png'
+import step from '@/assets/images/step.png'
+import Image from 'next/image'
 
 export const account_manager: Array<MenuItem> = [
   {
@@ -176,8 +106,15 @@ export const account_manager: Array<MenuItem> = [
     href: 'personal',
   },
   {
+    label: 'active',
+    href: 'share_active',
+    icon: getSvgIcon('member_active'),
+    key: 'active',
+  },
+  {
     label: 'logout',
     href: 'logout',
+    // titleIcon:'',
     icon: getSvgIcon('account_logout'),
     key: 'logout',
   },
@@ -434,7 +371,6 @@ export const overview = {
         const showText = record.is_default ? tr('default_group') : text
         return (
           <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-            {' '}
             {showText}
           </div>
         )
@@ -549,7 +485,7 @@ export const account_lucky = {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+          <div className="text_color text_color w-fit rounded-[5px] p-2 font-normal">
             {showText}
           </div>
         )
@@ -622,7 +558,7 @@ export const account_lucky_mobile = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit p-2 font-normal text-mobile_font">
+            <div className="text_color w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -713,8 +649,7 @@ export const account_balance = {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-            {' '}
+          <div className="text_color w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
             {showText}
           </div>
         )
@@ -924,7 +859,7 @@ export const account_reward = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
           )
@@ -1071,7 +1006,7 @@ export const account_power = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
           )
@@ -1350,7 +1285,7 @@ export const account_gas = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] p-2 font-normal text-font">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
           )
@@ -1734,11 +1669,33 @@ export const account_miners = {
   ],
 }
 
+function renderFil(
+  text: string | number,
+  changeText?: number | string,
+  flag: string = '',
+  className?: string,
+  unit: string = 'FIL',
+) {
+  const textValue = formatFil(text, unit, 4, true)
+  return (
+    <span className="flex flex-col">
+      <span className={`${Number(text) ? '' : 'text_des_unit'}`}>
+        {textValue}
+      </span>
+      {changeText !== undefined && (
+        <span className={`${changeText ? className : 'text_des_unit'}`}>
+          {flag + ' '}
+          {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
+        </span>
+      )}
+    </span>
+  )
+}
+
 const monitorUnit: Record<string, string> = {
   ExpireSectorMonitor: 'day',
   BalanceMonitor: 'FIL',
 }
-
 //监控columns
 export const monitor_list = (tr: any, onChange: any, type?: string) => {
   return [
@@ -1819,7 +1776,6 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
         const mailList = record.mail_alert
         const msgList = record.msg_alert
         const callList = record.call_alert
-
         const obj: Record<string, any> = {
           email_warn: mailList,
           message_warn: msgList,
@@ -1832,9 +1788,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
               if (Array.isArray(resList)) {
                 return (
                   <div key={key} className="flex flex-wrap font-normal">
-                    <div className="text_des" style={{ width: '70px' }}>
-                      {tr(key)}:
-                    </div>
+                    <div className="text_des mr-2 w-fit">{tr(key)}:</div>
                     <div className="">
                       {resList.map((warn: string, index: number) => {
                         return <li key={index}>{warn}</li>
@@ -1926,25 +1880,213 @@ export const defaultWarn: any = {
     checked: false,
   },
 }
-function renderFil(
-  text: string | number,
-  changeText?: number | string,
-  flag: string = '',
-  className?: string,
-  unit: string = 'FIL',
-) {
-  const textValue = formatFil(text, unit, 4, true)
-  return (
-    <span className="flex flex-col">
-      <span className={`${Number(text) ? '' : 'text_des_unit'}`}>
-        {textValue}
-      </span>
-      {changeText !== undefined && (
-        <span className={`${changeText ? className : 'text_des_unit'}`}>
-          {flag + ' '}
-          {formatFil(Math.abs(Number(changeText)), unit, 4, true)}
-        </span>
-      )}
-    </span>
-  )
+
+//会员
+export const member_list_1 = [
+  {
+    icon: <PowerIcon />,
+    title: 'power_title',
+    value: 'power_text',
+  },
+  {
+    icon: <BalanceIcon />,
+    title: 'balance_title',
+    value: 'balance_text',
+  },
+  {
+    icon: <SectorIcon />,
+    title: 'sector_title',
+    value: 'sector_text',
+  },
+]
+
+export const member_list_2 = [
+  {
+    title: [
+      {
+        icon: <PowerWarnIcon />,
+        title: 'warn_power',
+      },
+      {
+        icon: <BalanceWarnIcon />,
+        title: 'warn_balance',
+      },
+      {
+        icon: <SectorWarnIcon />,
+        title: 'warn_sector',
+      },
+    ],
+    content: 'data_text',
+  },
+  {
+    title: [
+      {
+        icon: <EmailIcon />,
+        title: 'warn_email',
+      },
+      {
+        icon: <MsgIcon />,
+        title: 'warn_msg',
+      },
+      {
+        icon: <PhoneIcon />,
+        title: 'warn_phone',
+      },
+    ],
+    content: 'warn_text',
+  },
+]
+
+export const member_main = [
+  {
+    title: 'companies',
+    icon: <Image src={CompaniesV} alt="" width={106} />,
+    list: [
+      { title: 'companies_1', icon: <Companies /> },
+      { title: 'companies_2', icon: <Companies /> },
+      { title: 'companies_3', icon: <Companies /> },
+      { title: 'companies_4', icon: <Companies /> },
+      { title: 'companies_5', icon: <Companies /> },
+    ],
+    priceList: [
+      { title: 'monthly', price: '169U' },
+      {
+        title: 'quarter',
+        price: '439U',
+        discount: 'quarter_discount',
+      },
+      { title: 'year', price: '1599U', discount: 'year_discount' },
+    ],
+  },
+  {
+    title: 'companiesPro',
+    icon: <Image src={CompaniesVPro} alt="" width={106} />,
+    list: [
+      { title: 'companies_1', icon: <CompaniesPro /> },
+      { title: 'companies_2', icon: <CompaniesPro /> },
+      { title: 'companies_3', icon: <CompaniesPro /> },
+      { title: 'companies_4', icon: <CompaniesPro /> },
+      { title: 'companies_6', icon: <CompaniesPro /> },
+      { title: 'companies_5', icon: <CompaniesPro /> },
+    ],
+    priceList: [
+      { title: 'monthly', price: '169U' },
+      {
+        title: 'quarter',
+        price: '439U',
+        discount: 'quarter_discount',
+      },
+      { title: 'year', price: '1599U', discount: 'year_discount' },
+    ],
+  },
+]
+
+//活动
+export const active_member = [
+  {
+    title: 'active_1',
+    icon: <Image src={active1} alt="" width={58} />,
+    des: 'active_1_des',
+  },
+  {
+    title: '',
+    icon: <Image src={step} alt="" width={98} />,
+    des: '',
+  },
+  {
+    title: 'active_2',
+    icon: <Image src={active2} alt="" width={58} />,
+    des: 'active_2_des',
+  },
+  {
+    title: '',
+    icon: <Image src={step} alt="" width={98} />,
+    des: '',
+  },
+  {
+    title: 'active_3',
+    icon: <Image src={active3} alt="" width={58} />,
+    des: 'active_3_des',
+  },
+]
+
+export const active_member_detail = [
+  {
+    icon: <Companies />,
+    des: 'companies_1',
+  },
+  {
+    icon: <Companies />,
+    des: 'active_member_1',
+  },
+  {
+    icon: <Companies />,
+    des: 'companies_5',
+  },
+]
+export const active_member_share = [
+  {
+    icon: <PowerWarnIcon />,
+    title: 'warn_power',
+  },
+  {
+    icon: <SectorWarnIcon />,
+    title: 'warn_sector',
+  },
+  {
+    icon: <BalanceWarnIcon />,
+    title: 'warn_balance',
+  },
+  {
+    icon: getSvgIcon('monitor'),
+    title: 'companies_5',
+  },
+]
+
+export const active_member_list = (tr: any) => {
+  return [
+    {
+      title: 'date',
+      dataIndex: 'register_time',
+      render: (text: string) => formatDateTime(text),
+    },
+    {
+      title: 'invitees',
+      dataIndex: 'user_email',
+    },
+
+    {
+      title: 'status',
+      dataIndex: 'is_valid',
+      render: (text: boolean) => {
+        return (
+          <ul className="list-none text-sm ">
+            <li className="text_green flex items-center gap-x-2">
+              {getSvgIcon('successIcon')}
+              {tr('success_member')}
+            </li>
+            {text && (
+              <li className="text_green flex items-center gap-x-2">
+                {getSvgIcon('successIcon')}
+                {tr('success_miners')}
+              </li>
+            )}
+            {!text && (
+              <li className="text_red flex items-center gap-x-2">
+                {getSvgIcon('errorIcon')}
+                {tr('error_member')}
+              </li>
+            )}
+          </ul>
+        )
+      },
+    },
+    {
+      title: 'is_valid',
+      dataIndex: 'is_valid',
+      render: (text: boolean) => {
+        return text ? tr('success_active') : tr('error_active')
+      },
+    },
+  ]
 }

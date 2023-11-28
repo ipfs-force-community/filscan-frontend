@@ -3,12 +3,7 @@ import { apiUrl } from '@/contents/apiUrl'
 import { deal_list } from '@/contents/detail'
 import Content from '@/packages/content'
 import useAxiosData from '@/store/useAxiosData'
-import {
-  formatDateTime,
-  formatFilNum,
-  get_account_type,
-  unitConversion,
-} from '@/utils'
+import { formatDateTime, formatFilNum, unitConversion } from '@/utils'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import DealMiner from '@/assets/images/dealMiner.svg'
@@ -19,6 +14,7 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import Copy from '@/components/copy'
 import CopySvgMobile from '@/assets/images/icon-copy.svg'
+import AccountLink from '@/components/accountLink'
 
 export default () => {
   const router = useRouter()
@@ -52,7 +48,7 @@ export default () => {
                 <DealClient width={36} height={36} />
                 {data?.client_id && (
                   <span className="flex items-center gap-x-1">
-                    {get_account_type(data.client_id)}
+                    <AccountLink value={data.client_id} />
                   </span>
                 )}
               </div>
@@ -69,7 +65,6 @@ export default () => {
                 <span>
                   {tr(deal_list.content?.cash)}:
                   <span className="text_color font-DINPro-Medium">
-                    {' '}
                     {data?.storage_price_per_epoch &&
                       formatFilNum(data?.storage_price_per_epoch)}
                   </span>
@@ -80,8 +75,7 @@ export default () => {
                 <DealMiner width={36} height={36} />
                 {data?.provider_id && (
                   <span className="flex items-center gap-x-1">
-                    {' '}
-                    {get_account_type(data.provider_id)}
+                    <AccountLink value={data.provider_id} />
                   </span>
                 )}
               </div>

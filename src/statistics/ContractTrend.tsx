@@ -7,7 +7,6 @@ import { useFilscanStore } from '@/store/FilscanStore'
 import { formatDateTime } from '@/utils'
 import { getColor, get_xAxis } from '@/utils/echarts'
 import GoMobileIcon from '@/assets/images/icon-right-white.svg'
-import GoIcon from '@/assets/images/black_go.svg'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import useObserver from '@/components/hooks/useObserver'
@@ -209,7 +208,7 @@ export default (props: Props) => {
       <div
         className={classNames(
           `mb-2.5 flex min-h-[36px] flex-wrap items-center justify-between ${
-            lang === 'en' ? 'h-[60px]' : ''
+            lang === 'en' && origin === 'home' ? 'h-[60px]' : ''
           }`,
           styles['title-wrap'],
         )}
@@ -246,15 +245,6 @@ export default (props: Props) => {
                   <GoMobileIcon width={28} height={28} />
                 </Link>
               </MobileView>
-              {/* <BrowserView>
-                <Link href={`/statistics/charts#fevm`}>
-                  <GoIcon
-                    className='cursor-pointer mr-2.5'
-                    width={18}
-                    height={18}
-                  />
-                </Link>
-              </BrowserView> */}
             </>
           )}
         </div>

@@ -11,6 +11,7 @@ import { observer } from 'mobx-react'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
 import messageManager from '@/packages/message'
+import { cloneDeep } from 'lodash'
 interface Props {
   showModal: boolean
   record?: Record<string, any>
@@ -32,7 +33,7 @@ const defaultRules = {
   miner_id: undefined,
   rule: [
     {
-      ...defaultRuleItem,
+      ...cloneDeep(defaultRuleItem),
     },
   ],
 }
@@ -41,7 +42,9 @@ export default observer((props: Props) => {
   const { showModal, record, onChange } = props
   const { tr } = Translation({ ns: 'account' })
   const { minersCategory, saveLoading } = monitorStore
-  const [rules, setRules] = useState<any>([{ ...defaultRules }])
+  const [rules, setRules] = useState<any>([
+    { ...(cloneDeep(defaultRules) || {}) },
+  ])
   const [otherRules, setOtherRules] = useState<Record<string, any>>({})
 
   useEffect(() => {
@@ -114,7 +117,7 @@ export default observer((props: Props) => {
       //添加
       setRules([
         {
-          ...defaultRules,
+          ...cloneDeep(defaultRules),
         },
       ])
     }
@@ -178,7 +181,8 @@ export default observer((props: Props) => {
     const newRules: any = [...rules]
     if (keyType === 'add') {
       if (type === 'ruleItem') {
-        newRules[index].rule.push({ ...defaultRuleItem })
+        const defaultItem = cloneDeep(defaultRuleItem)
+        newRules[index].rule.push({ ...defaultItem })
       } else if (type === 'rule') {
         if (newRules.length >= 10) {
           return messageManager.showMessage({
@@ -186,7 +190,8 @@ export default observer((props: Props) => {
             content: tr('rules_more'),
           })
         }
-        newRules.push({ ...defaultRules })
+        const defaultRule = cloneDeep(defaultRules)
+        newRules.push({ ...defaultRule })
       }
     } else if (keyType === 'delete') {
       if (type === 'ruleItem') {
@@ -339,7 +344,6 @@ export default observer((props: Props) => {
     }
     return [minersOptions, minerMap]
   }, [tr, minersCategory])
-
   return (
     <Modal
       title={`${tr(record?.group_id ? 'edit_rules' : 'add_rules')}`}
@@ -375,7 +379,6 @@ export default observer((props: Props) => {
           const showIcon =
             index === rules.length - 1 && !record?.miner_id_or_all
           const deleteIcon = rules.length > 1 && index !== 0
-
           return (
             <div key={index} className={styles.balance_contain}>
               <div className={styles.balance_contain_title}>

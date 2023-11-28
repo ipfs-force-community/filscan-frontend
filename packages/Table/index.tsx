@@ -58,7 +58,7 @@ export default (props: Props) => {
             <Pagination
               current={cur}
               total={total}
-              pageSize={pageLimit}
+              pageSize={showLimit}
               showQuickJumper={false}
               showSizeChanger={false}
               hideOnSinglePage={true}
@@ -102,7 +102,7 @@ export default (props: Props) => {
                   position: ['bottomRight'],
                   current: current,
                   showQuickJumper: true,
-                  pageSize: pageLimit,
+                  pageSize: showLimit,
                   showSizeChanger: false,
                   total,
                 }
@@ -149,7 +149,12 @@ const mobileContent = new Map([
                     <div className={styles['mobile-table-card-item-label']}>
                       {showTitle}
                     </div>
-                    <div className={classNames(styles['mobile-table-card-item-value'], dataSource?.is_active ? '' : 'inactive')}>
+                    <div
+                      className={classNames(
+                        styles['mobile-table-card-item-value'],
+                        dataSource?.is_active ? '' : 'inactive',
+                      )}
+                    >
                       {showValue}
                     </div>
                   </div>

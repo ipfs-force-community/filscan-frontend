@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo } from 'react'
 import { Translation } from '@/components/hooks/Translation'
-import { account_manager, account_power_mobile } from '@/contents/account'
+import { account_manager } from '@/contents/account'
 import { useHash } from '@/components/hooks/useHash'
 import Overview from '@/src/account/overview'
 import Miners from '@/src/account/miners'
@@ -27,11 +27,12 @@ import { observer } from 'mobx-react'
 import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
-import Member from '@/src/user/member'
+import Member from '@/src/account/member'
+import Active from '@/src/account/active'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
-  const { userInfo, setVipModal } = userStore
+  const { userInfo } = userStore
   const { superVip } = userInfo
   const { countMiners } = accountStore
   const { miners_count, loading } = countMiners
@@ -59,7 +60,6 @@ const Account: React.FC = () => {
   }
 
   const handleChange = (openKeys: any, item: any) => {
-    console.log('---dee', openKeys, item)
     if (item.vip && !superVip) {
       userStore.setVipModal(true)
     }
@@ -115,6 +115,7 @@ const Account: React.FC = () => {
     monitorSector: <MonitorSector />,
     monitorPower: <MonitorPower />,
     personal: <Personal />,
+    active: <Active />,
   }
 
   return (
@@ -130,9 +131,6 @@ const Account: React.FC = () => {
                 mode="inline"
                 className="custom_menu"
                 selectedKeys={[selectedKey]}
-                //onOpenChange={handleChange}
-                //inlineIndent={36}
-                // defaultOpenKeys={['data_details', 'monitor']}
               >
                 {account_manager.map(renderMenuItem)}
               </Menu>

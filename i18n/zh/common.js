@@ -65,5 +65,8 @@ const common = {
   footer_des1: 'Filscan 是 Filecoin 区块链浏览器及其数据服务平台',
   footer_des2:
     '提供基于 Filecoin 的各类数据查询、可视化图表以及FVM生态数据统计分析的一站式数据服务',
+
+  active: '活动',
+  active_time: '活动期限',
 }
 export default common

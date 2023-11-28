@@ -1,7 +1,7 @@
 import { Modal } from 'antd'
 import style from './index.module.scss'
 import { Translation } from '@/components/hooks/Translation'
-import { member_list_1, member_list_2, member_main } from '@/contents/user'
+import { member_list_1, member_list_2, member_main } from '@/contents/account'
 import LeftIcon from '@/assets/images/member/left.svg'
 import RightIcon from '@/assets/images/member/right.svg'
 import { getSvgIcon } from '@/svgsIcon'
@@ -10,7 +10,7 @@ import userStore from '@/store/modules/user'
 
 export default observer(() => {
   const { vipModal } = userStore
-  const { tr } = Translation({ ns: 'user' })
+  const { tr } = Translation({ ns: 'account' })
 
   return (
     <Modal
@@ -26,7 +26,7 @@ export default observer(() => {
     >
       <div className={style.member}>
         <div className={style.member_header}>
-          {tr('member_header')}{' '}
+          {tr('member_header')}
           <span
             className={style.member_header_close}
             onClick={() => {

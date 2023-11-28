@@ -88,7 +88,7 @@ export default () => {
             show ? ' header-fade-in visible fixed top-0 ' : 'absolute top-0'
           } ${
             lastScrollTop > 100 ? 'header-fade-in' : ''
-          }  main_bg_color z-50 h-[110px] w-full`}
+          } main_bg_color  top-0 z-50 h-[110px] w-full`}
         >
           <div className="custom_header flex h-[45px] w-full items-center justify-between text-xs">
             <ul className="flex list-none gap-x-5">

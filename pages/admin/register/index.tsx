@@ -6,7 +6,6 @@ import SendCode from '@/src/account/sendCode'
 import userStore from '@/store/modules/user'
 import { Button, Form, Input } from 'antd'
 import { login_list } from '@/contents/user'
-import errorIcon from '@/assets/images/error.svg'
 import { isEmail, validatePassword } from '@/utils'
 import { observer } from 'mobx-react'
 import messageManager from '@/packages/message'
@@ -25,6 +24,7 @@ export default observer(() => {
       mail: data.email,
       password: data.new_password,
       new_password: data.new_password,
+      invite_code: data.invite,
       token: verifyCode || localStorage.getItem('send_code'),
     }
     userStore.loginUserInfo(payload)

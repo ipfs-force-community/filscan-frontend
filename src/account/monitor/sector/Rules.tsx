@@ -11,6 +11,7 @@ import Warn from '@/src/account/monitor/warn'
 import { defaultWarn } from '@/contents/account'
 import { getSvgIcon } from '@/svgsIcon'
 import messageManager from '@/packages/message'
+import { cloneDeep } from 'lodash'
 interface Props {
   showModal: boolean
   record?: Record<string, any>
@@ -35,7 +36,7 @@ export default observer((props: Props) => {
   const { showModal, onChange, record } = props
   const { saveLoading } = monitorStore
   const { tr } = Translation({ ns: 'account' })
-  const [rules, setRules] = useState<any>([{ ...defaultRules }])
+  const [rules, setRules] = useState<any>([{ ...cloneDeep(defaultRules) }])
   const [otherRules, setOtherRules] = useState<Record<string, any>>({})
   useEffect(() => {
     if (record && Object.keys(record).length > 0) {
@@ -102,7 +103,7 @@ export default observer((props: Props) => {
       //添加
       setRules([
         {
-          ...defaultRules,
+          ...cloneDeep(defaultRules),
         },
       ])
     }
@@ -219,14 +220,7 @@ export default observer((props: Props) => {
         call_alert: phoneList[0]?.checked
           ? phoneList?.map((v: any) => v.inputValue).join(',')
           : '',
-        rules: rule?.rule.map((v: any) => {
-          return {
-            account_type: '',
-            account_addr: '',
-            operator: v.operator,
-            operand: v.operand,
-          }
-        }),
+        rules: rulesList,
       }
       payload.push(obj)
     })
@@ -253,7 +247,7 @@ export default observer((props: Props) => {
           content: tr('rules_more'),
         })
       }
-      newRules.push({ ...defaultRules })
+      newRules.push({ ...cloneDeep(defaultRules) })
     }
     setRules(newRules)
   }

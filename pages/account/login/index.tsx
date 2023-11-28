@@ -6,20 +6,19 @@ import { Button, Checkbox, Form, Input } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 import SendCode from '@/src/account/sendCode'
 import { proApi } from '@/contents/apiUrl'
+import UserStore from '@/store/modules/user'
 import { useHash } from '@/components/hooks/useHash'
 import useAxiosData from '@/store/useAxiosData'
 import Link from 'next/link'
 import messageManager from '@/packages/message'
 import { useRouter } from 'next/router'
 import Banner from '@/src/account/Banner'
-import userStore from '@/store/modules/user'
-import { BrowserView, MobileView } from '@/components/device-detect'
 
 export default () => {
   const [form] = Form.useForm()
   const { tr } = Translation({ ns: 'common' })
   const { hashParams } = useHash()
-  const { userInfo } = userStore
+  const { userInfo } = UserStore
   const { axiosData } = useAxiosData()
   const router = useRouter()
   const [token, setToken] = useState('')
@@ -32,15 +31,22 @@ export default () => {
       mail: data.email,
       token: token || localStorage.getItem('send_code'),
     })
+    // if (result?.code === 1) {
+    //   //未注册
+    //   messageManager.showMessage({
+    //     type: 'error',
+    //     content: 'invalid mail or password',
+    //     icon: <Image src={errorIcon} width={14} height={14} alt='error' />,
+    //   });
+    // }
     if (result?.token) {
       localStorage.setItem('token', result.token)
       localStorage.setItem('expired_at', result.expired_at) //过期时间
-      userStore.setUserInfo({
+      userInfo.setUserInfo({
         last_login: result?.expired_at || '',
         mail: data?.email || result?.mail,
         name: result?.name,
       })
-      localStorage.setItem('token', result?.token)
       messageManager.showMessage({
         type: 'success',
         content: 'login successful',
@@ -70,15 +76,13 @@ export default () => {
   }, [hashParams.type])
   return (
     <>
-      <BrowserView>
-        <Banner />
-      </BrowserView>
+      <Banner />
       <div className="main_contain !mb-10 !mt-8 !w-1/2 !min-w-[404px]">
         <ul className="flex list-none gap-x-6">
           {logTabs?.map((log_item, index) => {
             return (
               <Link
-                href={`/admin/login?type=${log_item.dataIndex}`}
+                href={`/account/login?type=${log_item.dataIndex}`}
                 key={index}
                 scroll={false}
                 id={log_item.dataIndex}
@@ -154,7 +158,7 @@ export default () => {
               >
                 {tr('remember_me')}
               </Checkbox>
-              <Link href="/admin/password">{tr('forgot_password')}</Link>
+              <Link href="/account/password">{tr('forgot_password')}</Link>
             </div>
           </Form.Item>
           <Form.Item className="!mt-6">
@@ -165,7 +169,7 @@ export default () => {
         </Form>
         <div className="flex gap-x-2">
           <span>{tr('no_account')}</span>
-          <Link href={'/admin/register'} className="text-primary">
+          <Link href={'/account/register'} className="text-primary">
             {tr('go_register')}
           </Link>
         </div>

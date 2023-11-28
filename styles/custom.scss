@@ -442,8 +442,7 @@
   }
   .ant-select-selector {
     cursor: pointer;
-
-    border: 1px solid transparent !important;
+    border: 1px solid transparent;
     background-color: var(--bgDesColor) !important;
     // .ant-select-selection-search-input {
     //      height:42px !important;
@@ -681,6 +680,7 @@
 .noPaddingModal {
   .ant-modal-content {
     padding: 0px !important;
+    background-color: transparent !important;
   }
 }
 

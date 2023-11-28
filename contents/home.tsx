@@ -501,6 +501,72 @@ export const meta_list = [
     },
   }, //近24h产出效率，单位FIL/TiB
   {
+    title: 'quality_power_Cc',
+    dataIndex: 'Cc',
+    render: (text: string | number) => {
+      const [textValue, unit] = unitConversion(text, 2).split(' ')
+      return (
+        <span>
+          <span>{textValue + ' '}</span>
+          <span className="unit">{unit}</span>
+        </span>
+      )
+    },
+  },
+  {
+    title: 'quality_power_Dc',
+    dataIndex: 'Dc',
+    render: (text: string | number) => {
+      const [textValue, unit] = unitConversion(text, 2).split(' ')
+      return (
+        <span>
+          <span>{textValue + ' '}</span>
+          <span className="unit">{unit}</span>
+        </span>
+      )
+    },
+  },
+  {
+    title: 'proportion_32G',
+    dataIndex: 'proportion_32G',
+    render: (text: string | number) => {
+      if (!text) return '--'
+      const newText = Number(Number(text) * 100).toFixed(2)
+      return newText + '%'
+    },
+  },
+  {
+    title: 'proportion_64G',
+    dataIndex: 'proportion_64G',
+    render: (text: string | number, record: any) => {
+      if (!text) return '--'
+      const text_32 = record.proportion_32G || 0
+      const newText = Number(Number(text_32) * 100).toFixed(2)
+      const lastText = (100 - Number(newText)).toFixed(2)
+      return lastText + '%'
+    },
+  },
+  {
+    title: 'gas_24',
+    dataIndex: 'sum',
+    tipContent: [
+      {
+        title: 'contract_gas',
+        dataIndex: 'contract_gas',
+        render: (text: string | number) => formatFilNum(text, false, false, 2),
+      },
+    ],
+    render: (v: any) => {
+      const [show, unit] = formatFilNum(v, false, false, 4).split(' ')
+      return (
+        <>
+          <span>{show}</span>
+          <span className="unit ml-1	text-xs">{unit}</span>
+        </>
+      )
+    },
+  }, //近24h产出效率，单位FIL/TiB
+  {
     title: 'total_contract',
     dataIndex: 'total_contract',
     tip: 'total_contract/24h_contract_tip',
@@ -611,6 +677,39 @@ export const meta_list = [
     render: (v: number | string, record: any) => {
       if (!v) return '--'
       return formatFilNum(v)
+    },
+  },
+  {
+    title: 'quality_power_Dc',
+    dataIndex: 'Dc',
+    render: (text: string | number) => {
+      const [textValue, unit] = unitConversion(text, 2).split(' ')
+      return (
+        <span>
+          <span>{textValue + ' '}</span>
+          <span className="unit">{unit}</span>
+        </span>
+      )
+    },
+  },
+  {
+    title: 'proportion_32G',
+    dataIndex: 'proportion_32G',
+    render: (text: string | number) => {
+      if (!text) return '--'
+      const newText = Number(Number(text) * 100).toFixed(2)
+      return newText + '%'
+    },
+  },
+  {
+    title: 'proportion_64G',
+    dataIndex: 'proportion_64G',
+    render: (text: string | number, record: any) => {
+      if (!text) return '--'
+      const text_32 = record.proportion_32G || 0
+      const newText = Number(Number(text_32) * 100).toFixed(2)
+      const lastText = (100 - Number(newText)).toFixed(2)
+      return lastText + '%'
     },
   },
 ]
