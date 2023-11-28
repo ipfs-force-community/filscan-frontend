@@ -56,7 +56,7 @@ export default ({
             showGroup ? 'block' : 'hidden'
           } z-10 w-full`}
         >
-          {options.map((item) => {
+          {options?.map((item) => {
             return (
               <li
                 onClick={() => {

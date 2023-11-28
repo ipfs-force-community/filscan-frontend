@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 .balance {
   @include mobile {
@@ -86,13 +86,14 @@
     }
     &_select {
       flex: 1;
+      min-width: 200px;
       margin-right: 10px;
       .ant-select-selection-item {
         color: var(--font_des);
       }
     }
     &_input {
-      min-width: 100px;
+      min-width: 150px;
     }
     &_text {
       color: var(--font_des);
@@ -105,7 +106,7 @@
     }
     &_content {
       position: relative;
-      width: 120px;
+      min-width: 120px;
       margin-right: 10px;
       &_warning {
         position: absolute;
@@ -149,9 +150,11 @@
     margin-left: 4px;
     padding-left: 7px;
     padding-right: 7px;
-    color: #EF7F1A;
+    color: #ef7f1a;
     background-color: rgba(239, 127, 26, 0.05);
-    font-family: PingFangSC, PingFang SC;
+    font-family:
+      PingFangSC,
+      PingFang SC;
     font-size: 11px;
     font-weight: 400;
   }

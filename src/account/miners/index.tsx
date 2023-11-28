@@ -9,6 +9,8 @@ import Groups from './Groups'
 import MinerAdd from './Add'
 import { observer } from 'mobx-react'
 import accountStore from '@/store/modules/account'
+import userStore from '@/store/modules/user'
+import Vip from '@/assets/images/member/vip.svg'
 
 export default observer(() => {
   const { hashParams } = useHash()
@@ -76,12 +78,27 @@ export default observer(() => {
   return (
     <>
       <p className="mb-5 flex w-full justify-between align-baseline	">
-        <span className="font-PingFang text-lg	 font-semibold">
-          {tr('miners')}
-          <span className="text_des ml-2 font-DIN text-sm">
-            {miners_count}/{max_miners_count}
+        <div className="flex items-center gap-x-2 ">
+          <span className="font-PingFang text-lg font-semibold">
+            {tr('miners')}
+            <span className="text_des ml-2 font-DIN text-sm">
+              {miners_count}/
+              {max_miners_count > 100 ? '100+' : max_miners_count}
+            </span>
           </span>
-        </span>
+          {miners_count >= max_miners_count && (
+            <span
+              className="flex cursor-pointer items-center gap-x-1 text-xs font-normal text-warnColor"
+              onClick={() => {
+                userStore.setVipModal(true)
+              }}
+            >
+              <Vip />
+              {tr('member_miner_warn')}
+            </span>
+          )}
+        </div>
+
         <div className="flex items-center gap-x-2.5">
           <Link
             href={`/account#miners?type=group_add`}

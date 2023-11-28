@@ -124,10 +124,7 @@ const Account: React.FC = () => {
       <BrowserView>
         <div className="main_contain !py-6 ">
           {showMemberWarn && (
-            <div
-              className="mb-5 flex w-full items-center justify-center"
-              style={{ color: '#A56B3B' }}
-            >
+            <div className="mb-5 flex w-full items-center justify-center text-warnColor">
               <span
                 className="cursor-pointer"
                 onClick={() => {

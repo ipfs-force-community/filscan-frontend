@@ -45,6 +45,7 @@ const config: Config = {
       //
       colors: {
         // 亮色模式颜色配置
+        warnColor: '#A56B3B',
         bgColor: '#FFFFFF',
         bgDesColor: '#F6F6F6',
         bg_color_5: 'rgba(0,0,0,0.05)',

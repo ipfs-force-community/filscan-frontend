@@ -201,18 +201,18 @@ const account = {
 
   //扇区监控
   reset_button: '초기화',
-  edit_rules: '修改规则',
+  edit_rules: '규칙 수정',
   rule_detail: '规则详情',
-  edit_write_warn: '告警方式',
+  edit_write_warn: '알람 모드',
   sector_rule_title: '섹터 만료일',
   sector_rule_des: ' 사용자 정의 가능; 30보다 큰 값이 권장됩니다',
-  sector_ruler_placeholder: '请输入正整数',
-  sector_ruler_warningText: '请输入正整数',
+  sector_ruler_placeholder: '양의 정수를 입력해주세요',
+  sector_ruler_warningText: '양의 정수를 입력해주세요',
   '<=': '이하',
   '>=': '大于等于',
   //余额监控
   balance_category_placeholder: '请选择余额类目',
-  balance_rule_des: '当前 {{value}} FIL',
+  balance_rule_des: '현재의 {{value}} FIL',
   //算力监控
   power_rules_1: '1. 扇区发生错误',
   power_rules_2: '2. 扇区主动终止',

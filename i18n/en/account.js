@@ -39,7 +39,7 @@ const account = {
   miner_add: 'Add',
   edit_write: 'Modify',
   edit_delete: 'Delete',
-  created_at: '创建时间',
+  created_at: 'Create Time',
 
   //数据概览 Data Overview
   overview_power: 'Power Overview',
@@ -205,18 +205,18 @@ const account = {
 
   //扇区监控
   reset_button: 'Reset',
-  edit_rules: '修改规则',
+  edit_rules: 'Modify Rules',
   rule_detail: 'Rule Details',
-  edit_write_warn: '告警方式',
+  edit_write_warn: 'Alarm Modes',
   sector_rule_title: '扇区到期时间',
   sector_rule_des: 'Customizable; Recommended to be greater than 30.',
-  sector_ruler_placeholder: '请输入正整数',
-  sector_ruler_warningText: '请输入正整数',
+  sector_ruler_placeholder: 'Please enter a positive integer',
+  sector_ruler_warningText: 'Please enter a positive integer',
   '<=': 'less than or equal to',
   '>=': '大于等于',
   //余额监控
   balance_category_placeholder: 'select a balance category',
-  balance_rule_des: '当前 {{value}} FIL',
+  balance_rule_des: 'current {{value}} FIL',
   //算力监控
   power_rules_1: '1. 扇区发生错误',
   power_rules_2: '2. 扇区主动终止',
