@@ -47,7 +47,7 @@ export default observer(() => {
                 onClick={() => {
                   //logout
                   localStorage.removeItem('token')
-                  userStore.setUserInfo()
+                  userStore.clearUserInfo()
                   router.reload()
                 }}
                 className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"

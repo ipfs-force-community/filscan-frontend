@@ -218,7 +218,7 @@ const Groups = () => {
           collapsible="header"
           expandIconPosition="end"
         >
-          {data.map((groupItem: any, dataIndex: number) => (
+          {data?.map((groupItem: any, dataIndex: number) => (
             <Collapse.Panel
               header={GroupItemHeader(groupItem)}
               key={groupItem.group_id}

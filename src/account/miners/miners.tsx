@@ -9,7 +9,7 @@ import Link from 'next/link'
 import GroupAdd from './GroupAdd'
 import { MinerNum, groupsItem } from '../type'
 import useAxiosData from '@/store/useAxiosData'
-//import { GroupsStoreContext, useMinerStore } from '../content';
+import Vip from '@/assets/images/member/vip.svg'
 import Groups from './Groups'
 import accountStore from '@/store/modules/account'
 
@@ -97,17 +97,6 @@ export default () => {
   }
 
   return (
-    // <GroupsStoreContext.Provider
-    //   value={{
-    //     groups,
-    //     setMinerNum: (mineNum) => {
-    //       setMinerNum(mineNum);
-    //       setAllNum(mineNum)
-    //     },
-    //     setGroups: (groupsArr: Array<groupsItem>) => {
-    //       calcGroups(groupsArr);
-    //     },
-    //   }}>
     <>
       <p className="mb-5 flex w-full justify-between align-baseline	">
         <span className="font-PingFang text-lg	 font-semibold">
@@ -115,6 +104,12 @@ export default () => {
           <span className="text_des ml-2 font-DIN text-sm">
             {miners_count}/{max_miners_count}
           </span>
+          {miners_count >= max_miners_count && (
+            <span>
+              <Vip />
+              {tr('member_miner_warn')}
+            </span>
+          )}
         </span>
         <div className="flex items-center gap-x-2.5">
           <Link
@@ -141,6 +136,5 @@ export default () => {
       </p>
       {renderChildren()}
     </>
-    // </GroupsStoreContext.Provider>
   )
 }

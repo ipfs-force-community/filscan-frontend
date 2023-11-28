@@ -10,12 +10,14 @@ import {
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
 import router from 'next/router'
+import { use } from 'react'
+import { formatTime } from '@/utils'
 
 const defaultUser = {
   name: '',
   mail: '',
   last_login: 0,
-  superVip: true,
+  superVip: false,
   inviteCode: '',
   membership_type: '',
   expired_time: '',
@@ -26,6 +28,7 @@ class UserStore {
   verifyCode: string
   vipModal: boolean
   recordList: Array<any>
+  showMemberWarn: boolean
   constructor() {
     this.userInfo = {
       ...defaultUser,
@@ -34,12 +37,20 @@ class UserStore {
     this.verifyCode = ''
     this.vipModal = false
     this.recordList = []
+    this.showMemberWarn = false
     makeObservable(this, {
       userInfo: observable,
       vipModal: observable,
       recordList: observable,
+      showMemberWarn: observable,
     })
     this.getUserInfo()
+  }
+
+  setMemberWarn(isShow: boolean) {
+    runInAction(() => {
+      this.showMemberWarn = isShow
+    })
   }
 
   setVipModal(isShow: boolean) {
@@ -78,14 +89,30 @@ class UserStore {
       this.getInviteList()
     }
 
-    runInAction(() => {
-      this.userInfo = {
-        ...(userData?.data || {}),
-        superVip: userData?.data?.membership_type?.startsWith('Enterprise'),
-        last_login: userData?.data?.last_login_at || '',
-        loading: false,
-      }
-    })
+    if (!userData.error) {
+      runInAction(() => {
+        const superVip =
+          userData?.data?.membership_type?.startsWith('Enterprise')
+        if (
+          superVip &&
+          userData.data.expired_time &&
+          formatTime(userData.data.expired_time * 1000).days > -15 &&
+          formatTime(userData.data.expired_time * 1000).days < 0
+        ) {
+          //会员还有不超过15天到期
+          this.showMemberWarn = true
+        }
+        this.userInfo = {
+          ...(userData?.data || {}),
+          superVip:
+            superVip && formatTime(userData.data.expired_time * 1000).days < 0,
+          last_login: userData?.data?.last_login_at || '',
+          loading: false,
+        }
+      })
+    } else {
+      this.clearUserInfo()
+    }
   }
 
   //获取我的邀请码
@@ -125,20 +152,12 @@ class UserStore {
     }
   }
 
-  setUserInfo(user?: any) {
+  //退出登录
+  clearUserInfo() {
     runInAction(() => {
-      if (!user) {
-        this.userInfo = {
-          ...defaultUser,
-          loading: false,
-        }
-      } else {
-        this.userInfo = {
-          ...(user || {}),
-          superVip: true,
-          last_login: user?.last_login_at || '',
-          loading: false,
-        }
+      this.userInfo = {
+        ...defaultUser,
+        loading: false,
       }
     })
   }

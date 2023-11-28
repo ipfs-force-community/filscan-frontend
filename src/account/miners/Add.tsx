@@ -58,7 +58,8 @@ export default ({
     if (addMiners.length > Number(minersNum?.max_miners_count)) {
       return messageManager.showMessage({
         type: 'error',
-        content: '添加节点已达上限，请删除部分节点后添加新',
+        content: '',
+        //content: '添加节点已达上限，请删除部分节点后添加新',
         icon: <ErrorIcon width={18} height={18} />,
         suffix: (
           <span

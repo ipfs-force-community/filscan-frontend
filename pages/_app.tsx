@@ -72,14 +72,6 @@ function App({ Component, pageProps, isMobile }: any) {
     i18n.changeLanguage(lang_Local) // 更改i18n语言
     if (lang_Local) setLang(lang_Local)
     setLoading(false)
-    if (localStorage?.getItem('userInfo')) {
-      const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '')
-      if (lastUser) {
-        //setUserInfo(lastUser);
-      }
-    }
-    // loadUser();
-
     if (typeof window !== undefined) {
       window.addEventListener('resize', onResize)
       return () => {

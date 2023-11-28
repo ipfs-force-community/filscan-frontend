@@ -223,6 +223,8 @@ const account = {
   power_rules_3: '3. 扇区正常到期',
   //会员
   //会员
+  member_miner_warn: '当前节点个数已达上限，升级会员畅享',
+  member_warn: '您的会员权益即将到期，请及时续费，以免影响正常使用',
   member_header: '如果你担心或碰到过以下问题',
   power_title: '算力掉落',
   power_text: '扇区大批出错，致使算力锐减却无法及时获知，导致出块奖励损失惨重',

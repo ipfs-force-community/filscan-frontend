@@ -32,7 +32,7 @@ import Active from '@/src/account/active'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
-  const { userInfo } = userStore
+  const { userInfo, showMemberWarn } = userStore
   const { superVip } = userInfo
   const { countMiners } = accountStore
   const { miners_count, loading } = countMiners
@@ -60,6 +60,7 @@ const Account: React.FC = () => {
   }
 
   const handleChange = (openKeys: any, item: any) => {
+    console.log('----3', superVip, item)
     if (item.vip && !superVip) {
       userStore.setVipModal(true)
     }
@@ -122,6 +123,31 @@ const Account: React.FC = () => {
     <>
       <BrowserView>
         <div className="main_contain !py-6 ">
+          {showMemberWarn && (
+            <div
+              className="mb-5 flex w-full items-center justify-center"
+              style={{ color: '#A56B3B' }}
+            >
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  userStore.setVipModal(true)
+                }}
+              >
+                <i className="ri-error-warning-line mr-1"></i>
+                {tr('member_warn')}
+              </span>
+
+              <span
+                className="ml-4 cursor-pointer"
+                onClick={() => {
+                  userStore.setMemberWarn(false)
+                }}
+              >
+                <i className="ri-close-line"></i>
+              </span>
+            </div>
+          )}
           <div className="card_shadow border_color flex h-full w-full rounded-xl border ">
             <div className="border_color w-[210px] border-r  py-10">
               <div className="mb-10 w-full px-5 font-PingFang text-lg font-semibold	">
