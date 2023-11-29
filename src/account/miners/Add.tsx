@@ -105,13 +105,6 @@ export default ({
           content: 'Add Miner successfully',
         })
         router.push('/account#miners')
-      } else {
-        if (data && data?.code) {
-          messageManager.showMessage({
-            type: 'error',
-            content: data?.message || '',
-          })
-        }
       }
     } else {
       messageManager.showMessage({

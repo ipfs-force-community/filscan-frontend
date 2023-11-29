@@ -10,6 +10,7 @@ import {
 import { RequestResult, axiosServer } from '@/store/axiosServer'
 import { makeObservable, observable, runInAction } from 'mobx'
 import { GroupInfoList } from './type'
+import messageManager from '@/packages/message'
 
 class AccountStore {
   countMiners = {
@@ -84,6 +85,10 @@ class AccountStore {
           error: null,
         }
       } else {
+        messageManager.showMessage({
+          type: 'error',
+          content: result?.data?.message || '',
+        })
         return {
           ...result.data,
           error: 'error saving',

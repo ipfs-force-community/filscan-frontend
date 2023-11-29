@@ -27,7 +27,6 @@ import { observer } from 'mobx-react'
 import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
-import Member from '@/src/account/member'
 import Active from '@/src/account/active'
 
 const Account: React.FC = () => {
@@ -185,7 +184,6 @@ const Account: React.FC = () => {
           )}
         </div>
       </MobileView>
-      <Member />
     </>
   )
 }

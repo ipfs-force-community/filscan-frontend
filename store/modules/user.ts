@@ -77,10 +77,10 @@ class UserStore {
       return false
     }
     if (!userData.error) {
-      Router.push('/admin/login')
-      // if (!(typeof window === undefined)) {
-      //   window?.history?.pushState(null, '', '/admin/login')
-      // }
+      if (typeof window !== 'undefined') {
+        // 使用 router 进行路由导航等操作
+        Router.push('/admin/login')
+      }
     }
   }
 
@@ -143,10 +143,10 @@ class UserStore {
     }
     if (!userData.error && !userData?.data?.code) {
       localStorage.setItem('token', userData.data?.token)
-      Router.push('/account#overview')
-      // if (!(typeof window === undefined)) {
-      //   window?.history?.pushState(null, '', '/account#overview')
-      // }
+      if (typeof window !== 'undefined') {
+        // 使用 router 进行路由导航等操作
+        Router.push('/account#overview')
+      }
       this.getUserInfo()
       messageManager.showMessage({
         type: 'success',
@@ -163,10 +163,10 @@ class UserStore {
         loading: false,
       }
     })
-    Router.push('/admin/login')
-    // if (!(typeof window === undefined)) {
-    //   window?.history?.pushState(null, '', '/admin/login')
-    // }
+    if (typeof window !== 'undefined') {
+      // 使用 router 进行路由导航等操作
+      Router.push('/admin/login')
+    }
   }
 }
 

@@ -57,13 +57,20 @@ const Groups = () => {
     setDeleteLoading(true)
     const { minerIndex, groupItem } = modalItem
     groupItem.miners_info.splice(minerIndex, 1)
-    await accountStore.saveGroups({ ...groupItem })
+    const result = await accountStore.saveGroups({ ...groupItem })
+    if (!result.error) {
+      messageManager.showMessage({
+        type: 'success',
+        content: 'delete miner successfully',
+      })
+    }
     setDeleteLoading(false)
   }
 
   const handleDelGroup = async (id: string | number) => {
     setDeleteLoading(true)
     await accountStore.delGroups(Number(id))
+
     setDeleteLoading(false)
   }
 

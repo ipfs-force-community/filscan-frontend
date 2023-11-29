@@ -25,6 +25,7 @@ import { SEO } from '@/contents/common'
 import Script from 'next/script'
 import { Provider } from 'mobx-react'
 import * as mobxStores from '@/store'
+import Member from '@/src/account/member'
 
 const antdTheme = theme
 App.getInitialProps = async (context: any) => {
@@ -175,6 +176,7 @@ function App({ Component, pageProps, isMobile }: any) {
                       )}
                     >
                       <Component {...pageProps} />
+                      <Member />
                     </div>
                     <Footer />
                   </div>

@@ -290,6 +290,8 @@ const account = {
   active_des: '活动解释权归FILSCAN所有',
   active_gift: '新人赠送7天企业版体验权益',
   active_save: '保存本地',
+  copy_tg: '复制ID',
+  recommend:'推荐'
 }
 
 export default account
