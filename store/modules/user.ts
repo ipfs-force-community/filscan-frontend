@@ -9,7 +9,7 @@ import {
 } from '@/store/ApiUrl'
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
-// import router from 'next/router'
+import Router from 'next/router'
 import { formatTime } from '@/utils'
 
 const defaultUser = {
@@ -77,10 +77,10 @@ class UserStore {
       return false
     }
     if (!userData.error) {
-      // router.push('/admin/login')
-      if (!(typeof window === undefined)) {
-        window.history.pushState(null, '', '/admin/login')
-      }
+      Router.push('/admin/login')
+      // if (!(typeof window === undefined)) {
+      //   window?.history?.pushState(null, '', '/admin/login')
+      // }
     }
   }
 
@@ -143,10 +143,10 @@ class UserStore {
     }
     if (!userData.error && !userData?.data?.code) {
       localStorage.setItem('token', userData.data?.token)
-      // router.push('/account#overview')
-      if (!(typeof window === undefined)) {
-        window.history.pushState(null, '', '/account#overview')
-      }
+      Router.push('/account#overview')
+      // if (!(typeof window === undefined)) {
+      //   window?.history?.pushState(null, '', '/account#overview')
+      // }
       this.getUserInfo()
       messageManager.showMessage({
         type: 'success',
@@ -163,9 +163,10 @@ class UserStore {
         loading: false,
       }
     })
-    if (!(typeof window === undefined)) {
-      window.history.pushState(null, '', '/admin/login')
-    }
+    Router.push('/admin/login')
+    // if (!(typeof window === undefined)) {
+    //   window?.history?.pushState(null, '', '/admin/login')
+    // }
   }
 }
 
