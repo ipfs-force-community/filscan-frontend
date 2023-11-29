@@ -111,7 +111,7 @@ export const account_manager: Array<MenuItem> = [
   },
   {
     label: 'active',
-    href: 'share_active',
+    href: 'active',
     icon: getSvgIcon('member_active'),
     key: 'active',
   },

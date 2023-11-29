@@ -10,7 +10,6 @@ import {
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
 import router from 'next/router'
-import { use } from 'react'
 import { formatTime } from '@/utils'
 
 const defaultUser = {
@@ -141,12 +140,12 @@ class UserStore {
     }
     if (!userData.error && !userData?.data?.code) {
       localStorage.setItem('token', userData.data?.token)
+      router.push('/account#overview')
       this.getUserInfo()
       messageManager.showMessage({
         type: 'success',
         content: 'login successful',
       })
-      router.push('/account#overview')
     }
   }
 
@@ -158,6 +157,7 @@ class UserStore {
         loading: false,
       }
     })
+    router.push('/admin/login')
   }
 }
 

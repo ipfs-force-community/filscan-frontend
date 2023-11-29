@@ -1,8 +1,10 @@
 import { formatDateTime, formatTime } from '@/utils'
 import React, { useEffect, useState } from 'react'
+import { Translation } from '../hooks/Translation'
 
 const TimeDisplay = ({ timestamp }: { timestamp: number }) => {
   const [currentTime, setCurrentTime] = useState('')
+  const { tr } = Translation({ ns: 'common' })
 
   useEffect(() => {
     const updateCurrentTime = () => {
@@ -10,7 +12,7 @@ const TimeDisplay = ({ timestamp }: { timestamp: number }) => {
       const diff = Math.floor((now - timestamp) / 1000) // 计算时间差，单位为秒
       if (diff < 60) {
         // 如果时间差小于60秒，使用滚动形式展示
-        setCurrentTime(`${diff} 秒前`)
+        setCurrentTime(`${diff} ${tr('time_display')}`)
       } else {
         // 否则直接展示具体时间，精确到秒
         setCurrentTime(formatDateTime(Number(timestamp / 1000)))

@@ -28,6 +28,7 @@ const common = {
   fvm_share: '친구들과 공유',
   account_banner_bg: '노드 관리자에 오신 것을 환영합니다',
   account_banner_main: '노드 관리 도우미',
+  time_display: '초 전',
 
   //messages
   no_account:
