@@ -1,6 +1,6 @@
 import { Translation } from '@/components/hooks/Translation'
 import { Button, Modal } from 'antd'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from './index.module.scss'
 import { active_member_share } from '@/contents/account'
 import QRCodePage from '@/components/QR'
@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas'
 
 export default ({ inviteCode }: { inviteCode: string }) => {
   const { tr } = Translation({ ns: 'account' })
+
   const [show, setShow] = useState(false)
   const shareRef = useRef<HTMLDivElement>(null)
   const handleSave = () => {
@@ -16,6 +17,7 @@ export default ({ inviteCode }: { inviteCode: string }) => {
       if (shareRef.current) {
         html2canvas(shareRef?.current, {
           useCORS: true,
+          allowTaint: false, //允许跨域图片,
           backgroundColor: 'transparent',
         }).then((canvas) => {
           const imgData = canvas.toDataURL('image/png')
@@ -121,7 +123,6 @@ export default ({ inviteCode }: { inviteCode: string }) => {
           <div className={style.activeShare_save} onClick={handleSave}>
             {tr('active_save')}
           </div>
-          <div id="export-img" className="my-image"></div>
         </div>
       </Modal>
     </div>

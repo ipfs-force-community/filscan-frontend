@@ -271,24 +271,27 @@
     background: linear-gradient(118deg, #fffbba 0%, #aaffbe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
   }
   &_invite {
+    display: flex;
     margin-top: 20px;
     font-size: 22px;
     padding-left: 20px;
     color: rgba(158, 195, 255, 0.6);
     &_content {
-      display: inline-block;
+      display: flex;
       list-style: none;
       margin-left: 10px;
     }
     &_item {
-      margin-right: 5px;
-      display: inline-block;
-      width: 34px;
-      line-height: 34px;
-      text-align: center;
-      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
       color: #fff;
       border-radius: 7px;
       color: #ffffff;
