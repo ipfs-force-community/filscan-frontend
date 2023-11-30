@@ -3,14 +3,15 @@
 import { apiUrl } from '@/contents/apiUrl'
 import { Translation } from '@/components/hooks/Translation'
 import Table from '@/packages/Table'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatNumber, pageLimit } from '@/utils'
 import { useEffect, useMemo, useState } from 'react'
 import useAxiosData from '@/store/useAxiosData'
 import { token_Dex_columns } from '@/contents/contract'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default ({ id }: { id?: string | string[] }) => {
-  const { theme, lang } = useFilscanStore()
+export default observer(({ id }: { id?: string | string[] }) => {
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'contract' })
   const { axiosData, loading } = useAxiosData()
   const [data, setData] = useState({
@@ -68,4 +69,4 @@ export default ({ id }: { id?: string | string[] }) => {
       </div>
     </>
   )
-}
+})

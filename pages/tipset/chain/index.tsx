@@ -1,7 +1,6 @@
 import { Translation } from '@/components/hooks/Translation'
 import { apiUrl } from '@/contents/apiUrl'
 import { chain_list } from '@/contents/tipset'
-import { useFilscanStore } from '@/store/FilscanStore'
 import useAxiosData from '@/store/useAxiosData'
 import { formatDateTime, formatFilNum, pageLimit } from '@/utils'
 import { Pagination } from 'antd'
@@ -9,15 +8,16 @@ import { useEffect, useMemo, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { BrowserView, MobileView } from '@/components/device-detect'
-import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { get } from 'lodash'
 import { useRouter } from 'next/router'
 import Loading from '@/components/loading'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'tipset' })
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const router = useRouter()
   const { cid, height } = router.query
   const { axiosData, loading } = useAxiosData()
@@ -213,4 +213,4 @@ export default () => {
       </div>
     </div>
   )
-}
+})

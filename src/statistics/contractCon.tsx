@@ -3,7 +3,6 @@ import { ContractCntTrend } from '@/contents/apiUrl'
 import EChart from '@/components/echarts'
 import { Translation } from '@/components/hooks/Translation'
 import { contract_con, timeList } from '@/contents/statistic'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatDateTime } from '@/utils'
 import { getColor, get_xAxis } from '@/utils/echarts'
 import { useEffect, useMemo, useState } from 'react'
@@ -13,14 +12,16 @@ import { BrowserView, MobileView } from '@/components/device-detect'
 import useAxiosData from '@/store/useAxiosData'
 import Select from '@/packages/select'
 import useWindow from '@/components/hooks/useWindown'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 interface Props {
   origin?: string
   className?: string
 }
 
-export default (props: Props) => {
+export default observer((props: Props) => {
   const { origin, className } = props
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const { axiosData } = useAxiosData()
   const [noShow, setNoShow] = useState<Record<string, boolean>>({})
@@ -222,4 +223,4 @@ export default (props: Props) => {
       </div>
     </div>
   )
-}
+})

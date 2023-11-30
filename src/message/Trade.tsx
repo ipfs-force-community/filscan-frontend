@@ -2,14 +2,15 @@ import { Translation } from '@/components/hooks/Translation'
 import { apiUrl } from '@/contents/apiUrl'
 import { message_detail } from '@/contents/detail'
 import Table from '@/packages/Table'
-import { useFilscanStore } from '@/store/FilscanStore'
 import useAxiosData from '@/store/useAxiosData'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './Trade.module.scss'
-export default ({ cid }: { cid?: string | string[] }) => {
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+export default observer(({ cid }: { cid?: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' })
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { axiosData } = useAxiosData()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
@@ -40,4 +41,4 @@ export default ({ cid }: { cid?: string | string[] }) => {
       <Table data={data} columns={columns} loading={loading} />
     </div>
   )
-}
+})

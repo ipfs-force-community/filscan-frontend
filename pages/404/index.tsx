@@ -12,14 +12,15 @@ import Link from 'next/link'
 import Loading from '@/components/loading'
 import classNames from 'classnames'
 import styles from './index.module.scss'
-import { useFilscanStore } from '@/store/FilscanStore'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
   const router = useRouter()
   let searchValue = router.asPath?.split('=')[1]
   const [show404, setShow_404] = useState(false)
   const { axiosData } = useAxiosData()
-  const { theme } = useFilscanStore()
+  const { theme } = filscanStore
 
   useEffect(() => {
     searchValue = router.asPath?.split('=')[1]
@@ -99,4 +100,4 @@ export default () => {
       </Link>
     </div>
   )
-}
+})

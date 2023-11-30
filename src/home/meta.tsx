@@ -3,7 +3,7 @@
 import { EvmContractSummary, apiUrl } from '@/contents/apiUrl'
 import { Translation } from '@/components/hooks/Translation'
 import { home_meta } from '@/contents/home'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './style.module.scss'
 import classNames from 'classnames'
 import useAxiosData from '@/store/useAxiosData'

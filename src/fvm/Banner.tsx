@@ -1,13 +1,13 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Carousel, Image } from 'antd'
 import { useEffect, useRef, useState } from 'react'
 import useAxiosData from '@/store/useAxiosData'
 import { apiUrl } from '@/contents/apiUrl'
-import { useFilscanStore } from '@/store/FilscanStore'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 function Banner() {
   const { axiosData } = useAxiosData()
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const carousel = useRef<any>(null)
   const [data, setData] = useState([])
 
@@ -60,4 +60,4 @@ function Banner() {
   )
 }
 
-export default Banner
+export default observer(Banner)

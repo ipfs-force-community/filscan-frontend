@@ -14,76 +14,128 @@ import DCCTrend from '@/src/statistics/DCCTrend'
 import classNames from 'classnames'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import Meta from '@/src/statistics/Meta'
+
 import styles from './index.module.scss'
 import ContractTrend from '@/src/statistics/ContractTrend'
 import ContractGas from '@/src/statistics/contractGas'
 import ContractAddr from '@/src/statistics/contractAddr'
 import ContractCon from '@/src/statistics/contractCon'
 import ContractBalance from '@/src/statistics/ContractBanlace'
-import { Anchor, Col, Row } from 'antd'
-import { useMemo, useRef } from 'react'
-import { AnchorLinkItemProps } from 'antd/es/anchor/Anchor'
-import filscanStore from '@/store/modules/filscan'
 import { observer } from 'mobx-react'
+import filscanStore from '@/store/modules/filscan'
+import { useEffect } from 'react'
 
 export default observer(() => {
+  const { tr } = Translation({ ns: 'static' })
   const { hash } = useHash()
   const { headerShow } = filscanStore
-  console.log('----33', headerShow)
-  const { tr } = Translation({ ns: 'static' })
-  const rightRef = useRef<HTMLDivElement>(null)
-  const items: any = useMemo(() => {
-    const newItems: Array<null> = []
-    chartsNav.forEach((item: any) => {
-      const obj: any = {
-        key: item.key,
-        href: `#${item.key}`,
-        title: (
-          <span className={styles['statistics-author-title']}>
-            {item.preIcon && getSvgIcon(item.preIcon)}
-            {tr(item?.title)}
-          </span>
-        ),
-      }
-      if (item.children) {
-        obj.children = item?.children?.map((v: any) => {
-          return {
-            key: v.key,
-            href: `#${v.key}`,
-            title: tr(v?.title),
-          }
-        })
-      }
-      newItems.push(obj)
-    })
-    return newItems
-  }, [tr])
+
+  useEffect(() => {
+    // if (hash === 'fevm_trend') {
+    //   window?.scrollTo(0)
+    // }
+  }, [hash])
+
+  const renderNavChildren = (itemChildren: Array<Menu_Info>) => {
+    return (
+      <ul className="flex w-full flex-col">
+        {itemChildren.map((child: Menu_Info) => {
+          return (
+            <Link
+              key={child.key}
+              href={`/statistics/charts#${child.key}`}
+              className={`text_des text_color flex w-full items-center gap-x-2 rounded-[5px] p-2 pl-10 hover:!text-primary ${
+                hash === child.key ? 'bg-bg_hover !text-primary' : ''
+              }`}
+            >
+              {tr(child?.title || child.key)}
+            </Link>
+          )
+        })}
+      </ul>
+    )
+  }
   return (
-    <div className={`main_contain ${styles['statistics-charts']}`}>
-      <div className={styles['statistics-charts-main']}>
-        <div
-          className={`${styles['statistics-charts-left']} ${
-            headerShow ? '' : ''
-          }`}
-        >
-          <div className={styles['statistics-charts-title']}>
-            <span>{tr('static_overview')}</span>
+    <div
+      className={classNames(
+        styles['statistics-charts'],
+        'main_contain !overflow-auto',
+      )}
+    >
+      <div className={classNames('flex gap-x-5', styles.content)}>
+        <BrowserView>
+          <div
+            className={`${styles['static-menu']}`}
+            style={{ top: headerShow ? '140px' : '0px' }}
+          >
+            <div className="mx-2.5 mb-2.5 flex h-10 flex-col justify-center gap-y-2.5 text-lg font-medium">
+              <span>{tr('static_overview')}</span>
+            </div>
+            <ul className="card_shadow border_color flex h-fit cursor-pointer flex-col rounded-xl border py-4">
+              {chartsNav.map((item) => {
+                const { preIcon, title, key } = item
+                return (
+                  <div
+                    key={item.key}
+                    className="relative flex w-full flex-col items-center px-4 font-DINPro-Medium"
+                  >
+                    <Link
+                      key={item.key}
+                      href={`/statistics/charts#${item.key}`}
+                      scroll={false}
+                      className={`text_color flex h-10 w-full items-center gap-x-2 rounded-[5px] px-2.5 hover:bg-bg_hover ${
+                        hash === item.key ? 'bg-bg_hover text-primary' : ''
+                      }`}
+                    >
+                      {preIcon && getSvgIcon(preIcon)}
+                      {tr(title || key)}
+                    </Link>
+                    {item.children && renderNavChildren(item.children)}
+                  </div>
+                )
+              })}
+            </ul>
           </div>
-          <Anchor
-            items={items}
-            className={`custom_anchor ${headerShow ? '' : ''}`}
-            showInkInFixed={false}
-            // getContainer={() => {
-            //   if (rightRef.current) {
-            //     return rightRef.current
-            //   }
-            //   return window
-            // }}
-          />
-        </div>
-        <div className={styles['statistics-charts-right']} ref={rightRef}>
+        </BrowserView>
+
+        <MobileView>
+          <div className={styles['nav-wrap']}>
+            {chartsNav.map((value, index) => {
+              return (
+                <Link
+                  className={
+                    hash === value.key || (hash === '' && index == 0)
+                      ? styles.active
+                      : ''
+                  }
+                  key={value.key}
+                  href={`/statistics/charts#${value.key}`}
+                >
+                  {tr(value.title || value.key)}
+                </Link>
+              )
+            })}
+          </div>
+        </MobileView>
+
+        <div
+          className={classNames(
+            'flex flex-1 flex-col gap-y-6',
+            styles['tab-content'],
+          )}
+        >
+          {!hash && <Meta />}
           {hash === 'networks' && <Meta />}
-          {hash.startsWith('fevm') && (
+          {hash === 'fevm' && (
+            <>
+              <ContractTrend />
+              <ContractCon />
+              <ContractAddr />
+              <ContractGas />
+              <ContractBalance />
+            </>
+          )}
+          {hash.includes('fevm') && (
             <>
               <div id="fevm_trend">
                 <ContractTrend />
@@ -102,7 +154,7 @@ export default observer(() => {
               </div>
             </>
           )}
-          {hash.startsWith('blockChain') && (
+          {hash.includes('blockChain') && (
             <>
               <div id="blockChain_power">
                 <PowerTrend />
@@ -119,6 +171,12 @@ export default observer(() => {
               <div id="blockChain_nodes">
                 <ActiveNodeTrend />
               </div>
+            </>
+          )}
+          {hash === 'fil_overview' && (
+            <>
+              <FilChart />
+              <Charts />
             </>
           )}
         </div>

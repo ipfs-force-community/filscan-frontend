@@ -5,6 +5,16 @@
     column-gap: 6px;
   }
 }
+.static_anchor {
+  position: relative;
+  margin-top: 50px;
+  &-title {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px 0px 20px 0px;
+  }
+}
 .statistics-charts {
   &-title {
     font-size: 18px;
@@ -32,11 +42,12 @@
 
 .static-menu {
   width: 209px;
-  //position: fixed;
+  position: fixed;
+  // top: 124px;
 }
 .tab-content {
-  // width: calc(100% - 209px);
-  // padding-left: 220px;
+  width: calc(100% - 209px);
+  padding-left: 220px;
 }
 
 @media screen and (max-width: 1000px) {

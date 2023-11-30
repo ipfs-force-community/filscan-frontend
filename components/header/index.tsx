@@ -3,9 +3,9 @@
 import { header_top, langOptions, networkOptions } from '@/contents/common'
 import { Translation } from '@/components/hooks/Translation'
 import codeImg from '@/assets/images/code.png'
+import filscanStore from '@/store/modules/filscan'
 import Account from './Account'
 import Nav from './Nav'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { useEffect, useState } from 'react'
 import Select from '@/packages/select'
 import { useRouter } from 'next/router'
@@ -20,28 +20,24 @@ import useInterval from '../hooks/useInterval'
 import cwStore from '@/store/modules/Cw'
 import Image from 'next/image'
 import { observer } from 'mobx-react'
-import filscanStore from '@/store/modules/filscan'
+
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
-  const { theme, lang, setTheme, setLang } = useFilscanStore()
+  const { headerShow, theme, lang } = filscanStore
   const router = useRouter()
   const { axiosData } = useAxiosData()
   const [fil, setFilData] = useState<Record<string, string | number>>({})
   const [finalHeight, setFinalHeight] = useState<
     Record<string, string | number>
   >({})
-
-  const [show, setShow] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const st = window.pageYOffset || document.documentElement.scrollTop
       if (st > lastScrollTop) {
-        setShow(false)
         filscanStore.setHeaderShow(false)
       } else {
-        setShow(true)
         filscanStore.setHeaderShow(true)
       }
       setLastScrollTop(st <= 0 ? 0 : st)
@@ -65,7 +61,7 @@ export default observer(() => {
   const handleLangChange = (value: string) => {
     localStorage.setItem('lang', value)
     i18n.changeLanguage(lang) // 更改i18n语言
-    setLang(value)
+    filscanStore.setLang(value)
     router.push(router.asPath, router.asPath, { locale: value })
   }
 
@@ -87,7 +83,9 @@ export default observer(() => {
       <BrowserView>
         <div
           className={`${
-            show ? ' header-fade-in visible fixed top-0 ' : 'absolute top-0'
+            headerShow
+              ? ' header-fade-in visible fixed top-0 '
+              : 'absolute top-0'
           } ${
             lastScrollTop > 100 ? 'header-fade-in' : ''
           } main_bg_color  top-0 z-50 h-[110px] w-full`}
@@ -179,7 +177,7 @@ export default observer(() => {
                     'theme',
                     theme === 'dark' ? 'light' : 'dark',
                   )
-                  setTheme(theme === 'dark' ? 'light' : 'dark')
+                  filscanStore.setTheme(theme === 'dark' ? 'light' : 'dark')
                 }}
               >
                 {getSvgIcon(theme === 'dark' ? 'sun' : 'moon')}

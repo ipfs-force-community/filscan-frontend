@@ -10,12 +10,14 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import useWindow from '@/components/hooks/useWindown'
 import Tooltip from '@/packages/tooltip'
-import { useFilscanStore } from '@/store/FilscanStore'
-export default () => {
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+
+export default observer(() => {
   const { tr } = Translation({ ns: 'contract' })
   const { isMobile } = useWindow()
   const { data: TokenData, loading } = useAxiosData(apiUrl.contract_ERC20List)
-  const { lang } = useFilscanStore() // 使用你的 store 获取 lang 状态
+  const { lang } = filscanStore
 
   const columns = useMemo(() => {
     return contract_token.columns(tr).map((v) => {
@@ -76,4 +78,4 @@ export default () => {
       </div>
     </div>
   )
-}
+})

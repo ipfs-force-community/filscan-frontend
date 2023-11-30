@@ -7,16 +7,17 @@ import Image from 'next/image'
 import searchLight from '@/assets/images/search_light.png'
 import searchDark from '@/assets/images/search_dark.png'
 import { useMemo } from 'react'
-import { useFilscanStore } from '@/store/FilscanStore'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
   const router = useRouter()
   const { search } = router.query
   const { t } = useTranslation()
   const tr = (label: string): string => {
     return t(label, { ns: 'home' })
   }
-  const { theme } = useFilscanStore()
+  const { theme } = filscanStore
 
   const showImage = useMemo(() => {
     return theme === 'light' ? searchLight : searchDark
@@ -39,4 +40,4 @@ export default () => {
       </Link>
     </div>
   )
-}
+})

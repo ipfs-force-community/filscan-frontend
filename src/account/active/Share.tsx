@@ -1,19 +1,21 @@
 import { Translation } from '@/components/hooks/Translation'
 import { Button, Modal } from 'antd'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import style from './index.module.scss'
 import { active_member_share } from '@/contents/account'
 import QRCodePage from '@/components/QR'
-import { useFilscanStore } from '@/store/FilscanStore'
 import html2canvas from 'html2canvas'
 import ActiveZh from '@/assets/images/member/ActiveZh.png'
 import ActiveEn from '@/assets/images/member/activeEn.png'
 import ActiveKr from '@/assets/images/member/activeKr.png'
 import gift from '@/assets/images/member/gift.png'
 import Image from 'next/image'
-export default ({ inviteCode }: { inviteCode: string }) => {
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+
+export default observer(({ inviteCode }: { inviteCode: string }) => {
   const { tr } = Translation({ ns: 'account' })
-  const { lang } = useFilscanStore() // 使用你的 store 获取 lang 状态
+  const { lang } = filscanStore // 使用你的 store 获取 lang 状态
   const [show, setShow] = useState(false)
   const shareRef = useRef<HTMLDivElement>(null)
   const handleSave = () => {
@@ -147,4 +149,4 @@ export default ({ inviteCode }: { inviteCode: string }) => {
       </Modal>
     </div>
   )
-}
+})

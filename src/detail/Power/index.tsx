@@ -3,15 +3,16 @@
 import { Translation } from '@/components/hooks/Translation'
 import { power_list } from '@/contents/detail'
 import SkeletonScreen from '@/packages/skeleton'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatNumber, getShowData } from '@/utils'
 import { useMemo } from 'react'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import styles from './style.module.scss'
 import classNames from 'classnames'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default ({ data }: { data: any }) => {
-  const { theme, lang } = useFilscanStore()
+export default observer(({ data }: { data: any }) => {
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'detail' })
 
   const loading = useMemo(() => {
@@ -141,4 +142,4 @@ export default ({ data }: { data: any }) => {
       </div>
     </div>
   )
-}
+})

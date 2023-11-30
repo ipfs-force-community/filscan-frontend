@@ -3,7 +3,6 @@ import { apiUrl } from '@/contents/apiUrl'
 import EChart from '@/components/echarts'
 import { Translation } from '@/components/hooks/Translation'
 import { block_rewards_per, timeList } from '@/contents/statistic'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatDateTime, formatFil, formatFilNum } from '@/utils'
 import { getColor, get_xAxis, seriesChangeArea } from '@/utils/echarts'
 import { useEffect, useMemo, useState } from 'react'
@@ -12,15 +11,17 @@ import classNames from 'classnames'
 import useAxiosData from '@/store/useAxiosData'
 import Segmented from '@/packages/segmented'
 import useWindow from '@/components/hooks/useWindown'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 interface Props {
   origin?: string
   className?: string
 }
 
-export default (props: Props) => {
+export default observer((props: Props) => {
   const { className } = props
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const { axiosData } = useAxiosData()
   const [options, setOptions] = useState<any>({})
@@ -219,4 +220,4 @@ export default (props: Props) => {
       </div>
     </div>
   )
-}
+})

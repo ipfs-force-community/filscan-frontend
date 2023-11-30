@@ -2,15 +2,17 @@
 import EChart from '@/components/echarts'
 import { Translation } from '@/components/hooks/Translation'
 import { fil_charts } from '@/contents/statistic'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { getColor } from '@/utils/echarts'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './Charts.module.scss'
 import useWindow from '@/components/hooks/useWindown'
 import { BrowserView, MobileView } from '@/components/device-detect'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+
 function Overview() {
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const [legendData, setLegendData] = useState<any>({})
   const [data, setData] = useState<any>({})
@@ -251,4 +253,4 @@ function Overview() {
     </div>
   )
 }
-export default Overview
+export default observer(Overview)

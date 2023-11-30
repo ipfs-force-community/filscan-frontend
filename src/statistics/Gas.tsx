@@ -1,15 +1,14 @@
 /** @format */
 import { useState, useMemo, useEffect } from 'react'
-import BigNumber from 'bignumber.js'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { Translation } from '@/components/hooks/Translation'
 import { getColor, get_xAxis, seriesArea } from '@/utils/echarts'
 import EChart from '@/components/echarts'
-import fetchData from '@/store/server'
 import { apiUrl } from '@/contents/apiUrl'
 import { formatFil, formatFilNum, formatNumber } from '@/utils'
 import useAxiosData from '@/store/useAxiosData'
 import useWindow from '@/components/hooks/useWindown'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 interface Props {
   active?: string
@@ -26,7 +25,7 @@ const showData: any = [
 ]
 
 function Gas(props: Props) {
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const { active = '24h', className = '' } = props
   const [value, setValue] = useState(active)
@@ -196,4 +195,4 @@ function Gas(props: Props) {
   )
 }
 
-export default Gas
+export default observer(Gas)

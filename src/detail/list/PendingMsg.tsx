@@ -2,23 +2,25 @@ import { BrowserView, MobileView } from '@/components/device-detect'
 import { Translation } from '@/components/hooks/Translation'
 import { message_list } from '@/contents/detail'
 import Table from '@/packages/Table'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatNumber } from '@/utils'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './index.module.scss'
 import { pendingMsg } from '@/contents/apiUrl'
 import useAxiosData from '@/store/useAxiosData'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 interface Props {
   account_id: string
   account_address: string
 }
-export default (props: Props) => {
+export default observer((props: Props) => {
   const { account_id, account_address } = props
   const { tr } = Translation({ ns: 'detail' })
   const { axiosData } = useAxiosData()
   const [pendingData, setPendingData] = useState<any>({})
+  const { theme, lang } = filscanStore
 
   useEffect(() => {
     if (account_id || account_address) {
@@ -48,8 +50,6 @@ export default (props: Props) => {
       total: result?.total_count,
     })
   }
-  const { theme, lang } = useFilscanStore()
-
   const columns = useMemo(() => {
     return message_list({}, {}).map((v) => {
       return { ...v, title: tr(v.title) }
@@ -90,4 +90,4 @@ export default (props: Props) => {
       </div>
     </>
   )
-}
+})
