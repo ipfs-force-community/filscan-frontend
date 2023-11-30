@@ -189,11 +189,11 @@
       &_text {
         font-size: 16px;
         font-weight: 500;
-        color: #ffffff;
+        color: #ff0e54;
         line-height: 40px;
-        background: linear-gradient(276deg, #ff0e54 0%, #ff6d31 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        // background: linear-gradient(276deg, #ff0e54 0%, #ff6d31 100%);
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
       }
     }
   }
@@ -263,19 +263,22 @@
     }
   }
   &_target {
-    margin-top: 45px;
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    color: #ffffff;
-    background: linear-gradient(118deg, #fffbba 0%, #aaffbe 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 35px 0px 35px 0px;
+    &_image {
+      width: 90%;
+    }
+    // font-size: 40px;
+    // font-weight: bold;
+    // color: #ffffff;
+    // background: linear-gradient(118deg, #fffbba 0%, #aaffbe 100%);
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
   }
   &_invite {
     display: flex;
-    margin-top: 20px;
     font-size: 22px;
     padding-left: 20px;
     color: rgba(158, 195, 255, 0.6);
@@ -288,10 +291,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 5px;;
+      margin-right: 5px;
       width: 40px;
       height: 40px;
-      font-size: 20px;
+      text-align: center;
       color: #fff;
       border-radius: 7px;
       color: #ffffff;

@@ -1,36 +1,47 @@
 import { Translation } from '@/components/hooks/Translation'
 import { Button, Modal } from 'antd'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import style from './index.module.scss'
 import { active_member_share } from '@/contents/account'
 import QRCodePage from '@/components/QR'
-import { getSvgIcon } from '@/svgsIcon'
+import { useFilscanStore } from '@/store/FilscanStore'
 import html2canvas from 'html2canvas'
-
+import ActiveZh from '@/assets/images/member/ActiveZh.png'
+import ActiveEn from '@/assets/images/member/activeEn.png'
+import ActiveKr from '@/assets/images/member/activeKr.png'
+import gift from '@/assets/images/member/gift.png'
+import Image from 'next/image'
 export default ({ inviteCode }: { inviteCode: string }) => {
   const { tr } = Translation({ ns: 'account' })
-
+  const { lang } = useFilscanStore() // 使用你的 store 获取 lang 状态
   const [show, setShow] = useState(false)
   const shareRef = useRef<HTMLDivElement>(null)
   const handleSave = () => {
-    setTimeout(() => {
-      if (shareRef.current) {
-        html2canvas(shareRef?.current, {
-          useCORS: true,
-          allowTaint: false, //允许跨域图片,
-          backgroundColor: 'transparent',
-        }).then((canvas) => {
-          const imgData = canvas.toDataURL('image/png')
-          const link = document.createElement('a')
-          link.href = imgData
-          link.download = `filscan-active.png`
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-        })
-      }
-    }, 3000)
+    if (shareRef.current) {
+      html2canvas(shareRef?.current, {
+        useCORS: true,
+        allowTaint: false, //允许跨域图片,
+        backgroundColor: 'transparent',
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png')
+        const link = document.createElement('a')
+        link.href = imgData
+        link.download = `filscan-active.png`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      })
+    }
   }
+
+  const imgSrc = useMemo(() => {
+    if (lang === 'zh') {
+      return ActiveZh
+    } else if (lang === 'kr') {
+      return ActiveKr
+    }
+    return ActiveEn
+  }, [lang])
 
   return (
     <div className={style.detail}>
@@ -84,26 +95,34 @@ export default ({ inviteCode }: { inviteCode: string }) => {
                 </div>
               </div>
               <div className={style.share_target}>
-                <div>{tr('active_target_1')}</div>
-                <div>{tr('active_target_2')}</div>
+                <Image
+                  src={imgSrc}
+                  alt=""
+                  className={style.share_target_image}
+                />
+                {/* <div>{tr('active_target_1')}</div>
+                <div>{tr('active_target_2')}</div> */}
               </div>
               <div className={style.share_invite}>
                 <span>{tr('invite_code')}</span>
-                <ul className={style.share_invite_content}>
-                  {inviteCode?.split('')?.map((v) => {
+                <div className={style.share_invite_content}>
+                  {inviteCode?.split('')?.map((v, index: number) => {
                     return (
-                      <li key={v} className={style.share_invite_item}>
+                      <div key={index} className={style.share_invite_item}>
                         {v}
-                      </li>
+                      </div>
                     )
                   })}
-                </ul>
+                </div>
               </div>
             </div>
             <div className={style.share_bottom}>
-              <QRCodePage
-                link={`${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
-              />
+              <div>
+                <QRCodePage
+                  link={`${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
+                />
+              </div>
+
               <div>
                 <div className={style.share_bottom_title}>
                   {tr('scan_code')}
@@ -111,7 +130,8 @@ export default ({ inviteCode }: { inviteCode: string }) => {
                 <div className={style.share_bottom_des}>{tr('active_des')}</div>
                 <div className={style.share_bottom_gift}>
                   <span className={style.share_bottom_icon}>
-                    {getSvgIcon('member_active')}
+                    <Image src={gift} alt="" />
+                    {/* {getSvgIcon('member_active')} */}
                   </span>
                   <span className={style.share_bottom_gift_text}>
                     {tr('active_gift')}

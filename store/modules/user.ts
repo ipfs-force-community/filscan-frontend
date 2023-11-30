@@ -91,7 +91,6 @@ class UserStore {
       this.getUserCode()
       this.getInviteList()
     }
-
     if (!userData.error) {
       runInAction(() => {
         const superVip =
@@ -114,7 +113,12 @@ class UserStore {
         }
       })
     } else {
-      this.clearUserInfo()
+      runInAction(() => {
+        this.userInfo = {
+          ...defaultUser,
+          loading: false,
+        }
+      })
     }
   }
 
