@@ -129,8 +129,8 @@ class UserStore {
       this.inviteCode = userData?.data?.invite_code || ''
     })
   }
-  //邀请记录
 
+  //邀请记录
   async getInviteList() {
     const list: RequestResult = await axiosServer(inviteList)
     runInAction(() => {

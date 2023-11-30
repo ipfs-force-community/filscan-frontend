@@ -1,13 +1,17 @@
 import { makeObservable, observable } from 'mobx'
 
 class FilscanStore {
-  theme = 'light'
-  lang = 'zh'
-
+  theme: string
+  lang: string
+  headerShow: boolean
   constructor() {
+    this.headerShow = true
+    this.lang = 'zh'
+    this.theme = 'light'
     makeObservable(this, {
       theme: observable,
       lang: observable,
+      headerShow: observable,
     })
   }
 
@@ -16,6 +20,10 @@ class FilscanStore {
   }
   setLang(lang: string) {
     this.lang = lang
+  }
+
+  setHeaderShow(show: boolean) {
+    this.headerShow = show
   }
 }
 

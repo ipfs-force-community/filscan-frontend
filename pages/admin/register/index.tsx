@@ -39,6 +39,8 @@ export default observer(() => {
     }
   }, [])
 
+  console.log('----33', verifyCode)
+
   const onFinish = async () => {
     const data = form.getFieldsValue()
     const payload = {

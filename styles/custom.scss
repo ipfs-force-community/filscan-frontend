@@ -792,3 +792,37 @@ input:-webkit-autofill {
     margin: auto;
   }
 }
+
+//anchor
+.custom_anchor {
+  .ant-anchor {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bgColor);
+    &::before {
+      display: none;
+    }
+    .ant-anchor-ink-visible {
+      display: none !important;
+    }
+    .ant-anchor-link {
+      padding-inline: 0px;
+      .ant-anchor-link {
+        .ant-anchor-link-title {
+          padding: 0px 20px;
+        }
+      }
+      .ant-anchor-link-title {
+        display: flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 0px 10px;
+        &:hover {
+          background-color: var(--bg_hover);
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}

@@ -19,9 +19,9 @@ import TimerHtml from '../TimerHtml'
 import useInterval from '../hooks/useInterval'
 import cwStore from '@/store/modules/Cw'
 import Image from 'next/image'
-// import Skeleton from '@/packages/skeleton';
-
-export default () => {
+import { observer } from 'mobx-react'
+import filscanStore from '@/store/modules/filscan'
+export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
   const { theme, lang, setTheme, setLang } = useFilscanStore()
   const router = useRouter()
@@ -39,8 +39,10 @@ export default () => {
       const st = window.pageYOffset || document.documentElement.scrollTop
       if (st > lastScrollTop) {
         setShow(false)
+        filscanStore.setHeaderShow(false)
       } else {
         setShow(true)
+        filscanStore.setHeaderShow(true)
       }
       setLastScrollTop(st <= 0 ? 0 : st)
     }
@@ -191,4 +193,4 @@ export default () => {
       </BrowserView>
     </>
   )
-}
+})

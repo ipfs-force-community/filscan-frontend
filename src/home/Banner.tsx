@@ -30,8 +30,8 @@ function Banner() {
     return null
   }
 
-  const handleSlideChange = (currentSlide: number) => {
-    setCurrent(currentSlide)
+  const handleSlideChange = (currentSlide: number, next: number) => {
+    setCurrent(next)
   }
 
   return (
@@ -74,7 +74,7 @@ function Banner() {
                 Number(current) === index ? style.dots_active : ''
               }`}
               onClick={() => {
-                carousel?.current?.next()
+                carousel?.current?.goTo(index)
                 setAutoplay(false)
               }}
             ></li>

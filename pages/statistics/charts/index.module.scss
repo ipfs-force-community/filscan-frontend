@@ -1,4 +1,33 @@
+.statistics-author {
+  &-title {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+}
 .statistics-charts {
+  &-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px 0px 20px 0px;
+  }
+  &-main {
+    display: flex;
+    column-gap: 20px;
+  }
+  &-left {
+    width: 209px;
+    // height: fit-content;
+    // border-radius: 12px;
+    // padding: 20px;
+    // border: 1px solid var(--border-color);
+    // background-color: var(--bgColor);
+    // box-shadow: 0px 2px 30px -2px var(--card-shadow);
+  }
+  &-right {
+    flex: 1;
+    margin-top: 5px;
+  }
 }
 
 .static-menu {

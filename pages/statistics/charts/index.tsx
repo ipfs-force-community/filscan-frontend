@@ -20,19 +20,30 @@ import ContractGas from '@/src/statistics/contractGas'
 import ContractAddr from '@/src/statistics/contractAddr'
 import ContractCon from '@/src/statistics/contractCon'
 import ContractBalance from '@/src/statistics/ContractBanlace'
-import { Anchor } from 'antd'
-import { useMemo } from 'react'
+import { Anchor, Col, Row } from 'antd'
+import { useMemo, useRef } from 'react'
 import { AnchorLinkItemProps } from 'antd/es/anchor/Anchor'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
+  const { hash } = useHash()
+  const { headerShow } = filscanStore
+  console.log('----33', headerShow)
   const { tr } = Translation({ ns: 'static' })
+  const rightRef = useRef<HTMLDivElement>(null)
   const items: any = useMemo(() => {
     const newItems: Array<null> = []
     chartsNav.forEach((item: any) => {
       const obj: any = {
         key: item.key,
         href: `#${item.key}`,
-        title: tr(item?.title),
+        title: (
+          <span className={styles['statistics-author-title']}>
+            {item.preIcon && getSvgIcon(item.preIcon)}
+            {tr(item?.title)}
+          </span>
+        ),
       }
       if (item.children) {
         obj.children = item?.children?.map((v: any) => {
@@ -48,11 +59,70 @@ export default () => {
     return newItems
   }, [tr])
   return (
-    <div className={styles['statistics-charts']}>
-      <div className={styles['statistics-charts_left']}>
-        <Anchor items={items} />
+    <div className={`main_contain ${styles['statistics-charts']}`}>
+      <div className={styles['statistics-charts-main']}>
+        <div
+          className={`${styles['statistics-charts-left']} ${
+            headerShow ? '' : ''
+          }`}
+        >
+          <div className={styles['statistics-charts-title']}>
+            <span>{tr('static_overview')}</span>
+          </div>
+          <Anchor
+            items={items}
+            className={`custom_anchor ${headerShow ? '' : ''}`}
+            showInkInFixed={false}
+            // getContainer={() => {
+            //   if (rightRef.current) {
+            //     return rightRef.current
+            //   }
+            //   return window
+            // }}
+          />
+        </div>
+        <div className={styles['statistics-charts-right']} ref={rightRef}>
+          {hash === 'networks' && <Meta />}
+          {hash.startsWith('fevm') && (
+            <>
+              <div id="fevm_trend">
+                <ContractTrend />
+              </div>
+              <div id="fevm_con">
+                <ContractCon />
+              </div>
+              <div id="fevm_addr">
+                <ContractAddr />
+              </div>
+              <div id="fevm_gas">
+                <ContractGas />
+              </div>
+              <div id="fevm_balance">
+                <ContractBalance />
+              </div>
+            </>
+          )}
+          {hash.startsWith('blockChain') && (
+            <>
+              <div id="blockChain_power">
+                <PowerTrend />
+              </div>
+              <div id="blockChain_cc_dc_power">
+                <DCCTrend />
+              </div>
+              <div id="blockChain_trend">
+                <BlockRewardTrend />
+              </div>
+              <div id="blockChain_reward_per">
+                <BlockRewardPer />
+              </div>
+              <div id="blockChain_nodes">
+                <ActiveNodeTrend />
+              </div>
+            </>
+          )}
+        </div>
       </div>
-      <div className={styles['statistics-charts_right']}></div>
     </div>
   )
-}
+})
