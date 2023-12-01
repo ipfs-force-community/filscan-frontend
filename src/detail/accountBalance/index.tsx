@@ -206,7 +206,7 @@ export default observer(
                     </span>
                   </Tooltip>
                 </span>
-                <span className="font-HarmonyOS_Medium ml-5 text-sm  font-medium">
+                <span className="ml-5 font-HarmonyOS_Medium text-sm  font-medium">
                   {loading ? (
                     <SkeletonScreen />
                   ) : value ? (

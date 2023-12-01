@@ -102,7 +102,7 @@ export default (props: ContentProps) => {
               <div
                 style={{ maxWidth: 'calc(100% - 120px)' }}
                 className={classNames(
-                  `font-HarmonyOS_Medium flex-grow items-baseline overflow-auto `,
+                  `flex-grow items-baseline overflow-auto font-HarmonyOS_Medium `,
                   columns !== 1 ? 'flex justify-end' : '',
                 )}
               >

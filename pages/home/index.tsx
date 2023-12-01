@@ -46,7 +46,7 @@ function Home(props: any) {
             >
               <BrowserView>
                 <div
-                  className={`font-HarmonyOS flex justify-between p-5 text-xs`}
+                  className={`flex justify-between p-5 font-HarmonyOS text-xs`}
                 >
                   {tr('base_gas')}
                   <Link href={`/statistics/gas/`}>

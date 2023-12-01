@@ -32,12 +32,12 @@ export default () => {
 
   return (
     <div className="main_contain">
-      <div className="font-HarmonyOS_Bold flex items-center gap-x-2 text-lg">
+      <div className="flex items-center gap-x-2 font-HarmonyOS_Bold text-lg">
         <span>{tr('Result_for')}:</span>
         <span>{address}</span>
       </div>
       <div className="card_shadow border_color mt-5 rounded-[12px] border p-5">
-        <div className="font-HarmonyOS_Medium ml-2.5 text-base">
+        <div className="ml-2.5 font-HarmonyOS_Medium text-base">
           {' '}
           {tr('allDomains', { value: data?.domains?.length })}
         </div>

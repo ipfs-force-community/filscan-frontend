@@ -261,7 +261,7 @@ const account = {
   year: '연간 멤버십',
   quarter_discount: '12% 미만 할인',
   year_discount: '20% 미만 할인',
-  share_friend: '친구 초대, 1개월 골드 멤버십 선물하기',
+  share_friend: '친구를 초대하여 한 달간의 기업 멤버십을 선물하세요',
   share_turn: '지금 시작하고 손실을 최소화하세요',
   tg_title: '비즈니스 TG 추가로 활성화',
 }

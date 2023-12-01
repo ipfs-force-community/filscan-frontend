@@ -214,7 +214,7 @@ function Overview({ className }: { className?: string }) {
           <div key={dataItem.title} className={`h-full w-full ${className} `}>
             <div
               className={classNames(
-                'font-HarmonyOS mb-4 flex h-9 w-fit items-center pl-2.5 text-lg font-semibold',
+                'mb-4 flex h-9 w-fit items-center pl-2.5 font-HarmonyOS text-lg font-semibold',
                 styles.title,
               )}
             >

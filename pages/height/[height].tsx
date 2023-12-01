@@ -33,7 +33,7 @@ export default () => {
 
   return (
     <div className={classNames(styles.height, 'main_contain')}>
-      <div className="font-HarmonyOS mx-2.5 text-lg font-semibold">
+      <div className="mx-2.5 font-HarmonyOS text-lg font-semibold">
         {tr('height')}
         {height && <span className="ml-1"> #{height}</span>}
       </div>

@@ -116,7 +116,7 @@ function Meta() {
 
                 <div
                   className={classNames(
-                    'text_des font-HarmonyOS mt-1 flex items-center gap-x-1 text-xs',
+                    'text_des mt-1 flex items-center gap-x-1 font-HarmonyOS text-xs',
                     styles.title,
                   )}
                 >
@@ -139,7 +139,7 @@ function Meta() {
               </div>
               <div
                 className={classNames(
-                  'text_des font-HarmonyOS mt-1 flex items-center gap-x-1 text-xs',
+                  'text_des mt-1 flex items-center gap-x-1 font-HarmonyOS text-xs',
                   styles.title,
                 )}
               >

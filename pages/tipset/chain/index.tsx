@@ -66,7 +66,7 @@ export default observer(() => {
     <div className={classNames(styles['chain-list'], 'main_contain')}>
       <div
         className={classNames(
-          'font-HarmonyOS mx-2.5 text-lg font-semibold',
+          'mx-2.5 font-HarmonyOS text-lg font-semibold',
           styles.title,
         )}
       >

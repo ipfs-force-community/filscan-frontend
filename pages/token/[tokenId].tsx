@@ -54,7 +54,7 @@ export default () => {
     <div className={classNames('main_contain', styles.wrap)}>
       <div
         className={classNames(
-          'font-HarmonyOS_Bold mb-4 flex items-center justify-between gap-x-1 px-2.5 text-xl',
+          'mb-4 flex items-center justify-between gap-x-1 px-2.5 font-HarmonyOS_Bold text-xl',
           styles.token,
         )}
       >

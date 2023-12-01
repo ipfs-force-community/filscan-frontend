@@ -63,7 +63,7 @@ export default () => {
                 key={item.dataIndex}
               >
                 <span className="flex w-fit flex-col ">
-                  <span className="text_des font-HarmonyOS mb-2.5 text-sm">
+                  <span className="text_des mb-2.5 font-HarmonyOS text-sm">
                     {tr(title)}
                   </span>
                   <span className="font-HarmonyOS_Bold text-xl">

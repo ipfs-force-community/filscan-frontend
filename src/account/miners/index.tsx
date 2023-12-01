@@ -81,7 +81,7 @@ export default observer(() => {
         <div className="flex items-center gap-x-2 ">
           <span className="font-HarmonyOS text-lg font-semibold">
             {tr('miners')}
-            <span className="text_des font-HarmonyOS ml-2 text-sm">
+            <span className="text_des ml-2 font-HarmonyOS text-sm">
               {miners_count}/
               {max_miners_count > 100 ? '100+' : max_miners_count}
             </span>

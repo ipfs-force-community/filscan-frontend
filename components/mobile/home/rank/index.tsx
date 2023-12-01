@@ -111,7 +111,7 @@ const Rank = () => {
           onClick={() => {
             router.push('/rank#growth')
           }}
-          className="text-mobile-text-warning font-HarmonyOS_Medium flex h-[45px] items-center justify-center text-[13px]"
+          className="text-mobile-text-warning flex h-[45px] items-center justify-center font-HarmonyOS_Medium text-[13px]"
         >
           {t('see_more')}
         </div>

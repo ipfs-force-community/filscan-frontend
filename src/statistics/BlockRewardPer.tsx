@@ -196,7 +196,7 @@ export default observer((props: Props) => {
           styles['title-wrap'],
         )}
       >
-        <div className="font-HarmonyOS w-fit min-w-[120px] text-lg font-semibold ">
+        <div className="w-fit min-w-[120px] font-HarmonyOS text-lg font-semibold ">
           {tr('block_reward_per_TiB')}
         </div>
         <Segmented

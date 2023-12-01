@@ -82,7 +82,7 @@ export default observer(() => {
                 return (
                   <div
                     key={item.key}
-                    className="font-HarmonyOS_Medium relative flex w-full flex-col items-center px-4"
+                    className="relative flex w-full flex-col items-center px-4 font-HarmonyOS_Medium"
                   >
                     <Link
                       key={item.key}

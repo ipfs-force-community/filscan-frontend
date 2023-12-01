@@ -106,7 +106,7 @@ function Overview() {
     <div>
       <div
         className={classNames(
-          'font-HarmonyOS mb-4 flex h-9 w-fit items-center pl-2.5 text-lg font-semibold',
+          'mb-4 flex h-9 w-fit items-center pl-2.5 font-HarmonyOS text-lg font-semibold',
           styles.title,
         )}
       >
@@ -173,7 +173,7 @@ function Overview() {
           </ul>
         </div>
         <BrowserView>
-          <div className="text_des font-HarmonyOS_Medium p-10 text-xs">
+          <div className="text_des p-10 font-HarmonyOS_Medium text-xs">
             <ul className="border_color rounded-[5px] border">
               {fil_charts.content.map((v, index) => {
                 return (

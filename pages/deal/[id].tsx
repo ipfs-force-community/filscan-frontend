@@ -53,7 +53,7 @@ export default () => {
                 )}
               </div>
               <div className="border-color flex h-[114px] w-[383px] flex-col items-center justify-center gap-y-4 rounded-[5px] border py-2.5 ">
-                <span className="text_color font-HarmonyOS_Medium flex items-center gap-x-1">
+                <span className="text_color flex items-center gap-x-1 font-HarmonyOS_Medium">
                   <Cloud width={14} height={14} />
                   {data?.piece_size && unitConversion(data.piece_size)}
                 </span>
@@ -113,7 +113,7 @@ export default () => {
               `border-color flex h-[114px] flex-col items-center justify-center gap-y-4 rounded-[5px] border py-2.5`,
             )}
           >
-            <span className="text_color font-HarmonyOS_Medium flex items-center gap-x-1">
+            <span className="text_color flex items-center gap-x-1 font-HarmonyOS_Medium">
               <Cloud width={14} height={14} />
               {data?.piece_size && unitConversion(data.piece_size)}
             </span>
