@@ -19,12 +19,12 @@
         }
       }
     }
-    .message-content-value{
+    .message-content-value {
       width: 100%;
       word-break: break-all;
-      font-family: DINPro-Medium;
-      :global{
-        .pre{
+      font-family: HarmonyOS_Medium;
+      :global {
+        .pre {
           word-break: break-all;
         }
       }
@@ -35,7 +35,7 @@
         color: var(--mobile-des-color);
         font-weight: 400;
         font-size: 15px;
-        font-family: PingFangSC-Regular, PingFang SC;
+        font-family: HarmonyOS_Regular;
       }
     }
   }

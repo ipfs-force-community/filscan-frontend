@@ -106,7 +106,7 @@ function Overview() {
     <div>
       <div
         className={classNames(
-          'mb-4 flex h-9 w-fit items-center pl-2.5 font-PingFang text-lg font-semibold',
+          'font-HarmonyOS mb-4 flex h-9 w-fit items-center pl-2.5 text-lg font-semibold',
           styles.title,
         )}
       >
@@ -173,7 +173,7 @@ function Overview() {
           </ul>
         </div>
         <BrowserView>
-          <div className="text_des p-10 font-DINPro-Medium text-xs">
+          <div className="text_des font-HarmonyOS_Medium p-10 text-xs">
             <ul className="border_color rounded-[5px] border">
               {fil_charts.content.map((v, index) => {
                 return (
@@ -225,7 +225,7 @@ function Overview() {
                     >
                       {tr('Allocation')}:
                     </span>
-                    <span className="font-DINPro-Medium  text-black">
+                    <span className="font-HarmonyOS_Medium  text-black">
                       {tr(v.label)}
                     </span>
                   </div>
@@ -233,7 +233,7 @@ function Overview() {
                     <span className={classNames('min-w-[100px]', styles.label)}>
                       {tr('value')}:
                     </span>
-                    <span className="font-DINPro-Medium  text-black">
+                    <span className="font-HarmonyOS_Medium  text-black">
                       {index === 0 ? tr(v.value) : v.value}
                     </span>
                   </div>
@@ -241,7 +241,7 @@ function Overview() {
                     <span className={classNames('min-w-[100px]', styles.label)}>
                       {tr('description')}:
                     </span>
-                    <span className="font-DINPro-Medium  text-black">
+                    <span className="font-HarmonyOS_Medium  text-black">
                       {tr(v.description)}
                     </span>
                   </div>

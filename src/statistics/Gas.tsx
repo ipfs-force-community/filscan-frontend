@@ -47,7 +47,7 @@ function Gas(props: Props) {
         type: 'value',
         //scale: true,
         axisLabel: {
-          fontFamily: 'DINPro',
+          fontFamily: 'HarmonyOS_Regular',
           fontSize: 14,
           color: isMobile ? color.mobileLabelColor : color.labelColor,
           formatter(v: any) {

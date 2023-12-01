@@ -24,9 +24,7 @@
   }
   &_title {
     font-size: 16px;
-    font-family:
-      PingFangSC-Semibold,
-      PingFang SC;
+    font-family: PingFangSC-Semibold;
     font-weight: 600;
     margin-top: 4px;
     @include desktop {
@@ -46,9 +44,7 @@
     }
     &_title {
       font-size: 14px;
-      font-family:
-        PingFangSC-Medium,
-        PingFang SC;
+      font-family: HarmonyOS_Medium;
       font-weight: 500;
       margin-bottom: 20px;
     }
@@ -152,9 +148,7 @@
     padding-right: 7px;
     color: #ef7f1a;
     background-color: rgba(239, 127, 26, 0.05);
-    font-family:
-      PingFangSC,
-      PingFang SC;
+    font-family: PingFangSC;
     font-size: 11px;
     font-weight: 400;
   }

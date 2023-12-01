@@ -79,9 +79,9 @@ export default observer(() => {
     <>
       <p className="mb-5 flex w-full justify-between align-baseline	">
         <div className="flex items-center gap-x-2 ">
-          <span className="font-PingFang text-lg font-semibold">
+          <span className="font-HarmonyOS text-lg font-semibold">
             {tr('miners')}
-            <span className="text_des ml-2 font-DIN text-sm">
+            <span className="text_des font-HarmonyOS ml-2 text-sm">
               {miners_count}/
               {max_miners_count > 100 ? '100+' : max_miners_count}
             </span>

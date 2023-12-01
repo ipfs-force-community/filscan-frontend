@@ -240,7 +240,8 @@ const account = {
   warn_phone: '电话告警',
   data_text: '重点信息一站式监控',
   warn_text: '告警渠道多样，灵活配置',
-  member_content_title: '会员等级',
+  member_warn_title: '添加监控,异人告警快人一步',
+  member_content_title: '加入会员,即可开启',
   companies: '企业会员',
   companiesPro: '企业Pro版',
   companies_1: '30个节点上限',
@@ -291,7 +292,7 @@ const account = {
   active_gift: '新人赠送7天企业版体验权益',
   active_save: '保存本地',
   copy_tg: '复制ID',
-  recommend:'推荐'
+  recommend: '推荐',
 }
 
 export default account

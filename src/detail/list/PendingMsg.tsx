@@ -58,7 +58,7 @@ export default observer((props: Props) => {
   return (
     <>
       <div className="mx-2.5 mb-2.5 mt-5 flex items-center justify-between">
-        <span className="DINPro-Medium text-lg  font-medium">
+        <span className="HarmonyOS_Medium text-lg  font-medium">
           {tr('pending_title')}
         </span>
       </div>

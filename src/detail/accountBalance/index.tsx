@@ -151,7 +151,7 @@ export default observer(
           </span>
           <span
             className={classNames(
-              'text_clip font-DINPro-Bold text-xl',
+              'text_clip font-HarmonyOS_Bold text-xl',
               styles['title-value'],
             )}
           >
@@ -206,7 +206,7 @@ export default observer(
                     </span>
                   </Tooltip>
                 </span>
-                <span className="ml-5 font-DINPro-Medium text-sm  font-medium">
+                <span className="font-HarmonyOS_Medium ml-5 text-sm  font-medium">
                   {loading ? (
                     <SkeletonScreen />
                   ) : value ? (

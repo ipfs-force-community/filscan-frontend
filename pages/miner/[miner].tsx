@@ -100,7 +100,7 @@ export default () => {
     <div className={classNames(styles.miner, 'main_contain')}>
       <div
         className={classNames(
-          'DINPro-Medium mb-2.5 flex items-center text-lg font-medium',
+          'HarmonyOS_Medium mb-2.5 flex items-center text-lg font-medium',
           styles['title-wrap'],
         )}
       >

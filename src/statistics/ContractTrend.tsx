@@ -217,7 +217,7 @@ export default observer((props: Props) => {
         <div className="flex flex-1 flex-row flex-wrap items-center">
           <div
             className={classNames(
-              'w-fit min-w-[120px] pl-2.5 font-PingFang text-lg font-semibold',
+              'font-HarmonyOS w-fit min-w-[120px] pl-2.5 text-lg font-semibold',
               styles.title,
             )}
           >

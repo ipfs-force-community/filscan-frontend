@@ -3,21 +3,41 @@
 }
 
 @font-face {
-  font-family: 'DINPro'; /* Project id 1544881 */
-  src: url('../assets/font/din/DINPro-Regular.otf');
-  font-display: auto;
-}
-@font-face {
-  font-family: 'DINPro-Bold'; /* Project id 1544881 */
-  src: url('../assets/font/din/DINPro-Bold.otf');
+  font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
+  src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf');
   font-display: auto;
 }
 
+//HarmonyOS_Medium
 @font-face {
-  font-family: 'DINPro-Medium'; /* Project id 1544881 */
-  src: url('../assets/font/din/DINPro-Medium.otf');
+  font-family: 'HarmonyOS_Medium'; /* Project id 1544881 */
+  src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf');
   font-display: auto;
 }
+
+//HarmonyOS_Medium
+@font-face {
+  font-family: 'HarmonyOS_Bold'; /* Project id 1544881 */
+  src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf');
+  font-display: auto;
+}
+
+// @font-face {
+//   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
+//   src: url('../assets/font/din/HarmonyOS_Regular-Regular.otf');
+//   font-display: auto;
+// }
+// @font-face {
+//   font-family: 'HarmonyOS_Bold'; /* Project id 1544881 */
+//   src: url('../assets/font/din/HarmonyOS_Bold.otf');
+//   font-display: auto;
+// }
+
+// @font-face {
+//   font-family: 'HarmonyOS_Medium'; /* Project id 1544881 */
+//   src: url('../assets/font/din/HarmonyOS_Medium.otf');
+//   font-display: auto;
+// }
 
 //layout
 .custom_header {
@@ -159,10 +179,7 @@
     color: var(--font-color);
     .ant-table-content {
       .ant-table-thead {
-        font-family:
-          PingFangSC-Medium,
-          PingFang SC;
-        font-weight: 500;
+        font-family: HarmonyOS_Medium;
         color: var(--font_des);
         .ant-table-column-sorter {
           color: var(--font_des);
@@ -183,8 +200,6 @@
         }
       }
       .ant-table-tbody {
-        font-family: DINPro-Medium, DINPro;
-        font-weight: 500;
         .ant-table-cell-fix-left,
         .ant-table-cell-fix-right {
           background-color: var(--bgColor);
@@ -559,7 +574,7 @@
   height: inherit;
   .ant-picker-input {
     font-size: 12px;
-    font-family: DINPro-Medium, DINPro;
+    font-family: HarmonyOS_Medium, HarmonyOS_Regular;
     font-weight: 500;
     color: #000000;
   }
@@ -705,9 +720,7 @@
     width: fit-content !important;
     top: 25%;
     font-size: 14px;
-    font-family:
-      PingFangSC-Regular,
-      PingFang SC;
+    font-family: HarmonyOS_Regular;
     font-weight: 400;
     color: #000000;
   }

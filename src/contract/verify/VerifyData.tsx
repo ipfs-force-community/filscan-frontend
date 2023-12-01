@@ -46,7 +46,7 @@ export default ({ data }: { data: any }) => {
                   className="flex h-9 items-center text-sm"
                 >
                   <span className="text_des w-28 ">{tr(item.title)}:</span>
-                  <span className="font-DINPro-Medium">{String(value)}</span>
+                  <span className="font-HarmonyOS_Medium">{String(value)}</span>
                 </li>
               )
             })}

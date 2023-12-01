@@ -261,7 +261,7 @@ export default () => {
       <div
         className={classNames(
           styles['address-row'],
-          'DINPro-Medium mb-2.5 ml-2.5 flex items-center text-lg font-medium',
+          'HarmonyOS_Medium mb-2.5 ml-2.5 flex items-center text-lg font-medium',
         )}
       >
         <span className={styles.label}>{tr('account_title')}:</span>
@@ -329,7 +329,7 @@ export default () => {
             className="mx-2.5 mb-2.5 mt-5 flex items-center justify-between"
             key="detail_account_change"
           >
-            <span className="DINPro-Medium text-lg  font-medium">
+            <span className="HarmonyOS_Medium text-lg  font-medium">
               {tr('account_change')}
             </span>
             <Segmented

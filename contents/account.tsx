@@ -178,7 +178,7 @@ export const overview = {
                   {changeText ? flag + unitConversion(changeText, 2) : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip font-HarmonyOS_Bold flex items-baseline gap-x-1 text-xl font-semibold">
                 {textValue}
                 <span className="text_color text-sm">{unit}</span>
               </span>
@@ -212,7 +212,7 @@ export const overview = {
                   {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span> */}
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip font-HarmonyOS_Bold flex items-baseline gap-x-1 text-xl font-semibold">
                 {/* {flag}
                 {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
@@ -250,7 +250,7 @@ export const overview = {
                     : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip font-HarmonyOS_Bold flex items-baseline gap-x-1 text-xl font-semibold">
                 {textValue}
                 <span className="text-sm">{unit}</span>
               </span>
@@ -286,7 +286,7 @@ export const overview = {
                     : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip font-HarmonyOS_Bold flex items-baseline gap-x-1 text-xl font-semibold">
                 {textValue}
                 <span className="text-sm">{unit}</span>
               </span>
@@ -320,7 +320,7 @@ export const overview = {
                     : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip font-HarmonyOS_Bold flex items-baseline gap-x-1 text-xl font-semibold">
                 {textValue}
                 <span className="text-sm">{unit}</span>
               </span>

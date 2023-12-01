@@ -58,7 +58,7 @@ export default () => {
 
   return (
     <>
-      <p className="font-PingFang text-lg	 font-semibold">{tr('personal')}</p>
+      <p className="font-HarmonyOS text-lg	 font-semibold">{tr('personal')}</p>
       <div className="card_shadow border_color mt-8 rounded-xl border p-5">
         <div className="flex justify-between">
           <div className="flex items-center gap-x-2">
@@ -75,7 +75,7 @@ export default () => {
                     onBlur={handleSaveName}
                   />
                 ) : (
-                  <span className="font-PingFang text-xl font-semibold ">
+                  <span className="font-HarmonyOS text-xl font-semibold ">
                     {name || userInfo.name}
                   </span>
                 )}
@@ -99,7 +99,7 @@ export default () => {
         </div>
       </div>
       <div className="card_shadow border_color mt-5 rounded-xl border p-5">
-        <p className="font-PingFang text-lg	 font-semibold">
+        <p className="font-HarmonyOS text-lg	 font-semibold">
           {tr('personal_setting')}
         </p>
 

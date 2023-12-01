@@ -114,7 +114,7 @@ export default observer(() => {
         )}
       >
         <div className="mx-2.5">
-          <div className="font-PingFang text-lg font-semibold ">
+          <div className="font-HarmonyOS text-lg font-semibold ">
             {tr('address_list')}
           </div>
           <div className="text_des text-xs">

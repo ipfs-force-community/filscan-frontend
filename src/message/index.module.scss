@@ -25,7 +25,6 @@
           display: block;
           .copy {
             padding-left: 5px;
-  
           }
         }
         .card_shadow {
@@ -41,7 +40,7 @@
             word-break: break-all;
             font-weight: 500;
             font-size: 15px;
-            font-family: DINPro-Medium, DINPro;
+            font-family: HarmonyOS_Medium, HarmonyOS_Regular;
             line-height: 14px;
 
             .code {
@@ -61,7 +60,7 @@
       color: var(--mobile-title-color);
       font-weight: 500;
       font-size: 16px;
-      font-family: PingFangSC-Medium, PingFang SC;
+      font-family: HarmonyOS_Medium;
       line-height: 16px;
     }
     .card {
@@ -80,14 +79,14 @@
           color: var(--mobile-des-color);
           font-weight: 400;
           font-size: 15px;
-          font-family: PingFangSC-Regular, PingFang SC;
+          font-family: HarmonyOS_Regular;
           line-height: 16px;
         }
         .card-item-value {
           color: var(--mobile-title-color);
           font-weight: 500;
           font-size: 15px;
-          font-family: DINPro-Medium;
+          font-family: HarmonyOS_Medium;
           line-height: 16px;
           :global {
             .text {

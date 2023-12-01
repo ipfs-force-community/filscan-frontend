@@ -23,7 +23,7 @@ export default ({
   return (
     <div className="main_bg_color m-auto mt-5 flex flex-col items-center rounded-[5px] px-5 pb-5 pt-12">
       <Success width={80} height={80} />
-      <span className="mt-5 font-PingFang text-lg font-semibold">
+      <span className="font-HarmonyOS mt-5 text-lg font-semibold">
         {tr('welcome')}
       </span>
       <div className="text_des mt-5 flex flex-col items-center gap-y-1 text-xs">

@@ -34,7 +34,7 @@ export default () => {
   }
   return (
     <div className={classNames(styles.deal, 'main_contain')}>
-      <div className="font-PingFang text-lg font-semibold">
+      <div className="font-HarmonyOS text-lg font-semibold">
         {tr('deal_details')}
       </div>
       <div className="card_shadow border_color text_xs mt-4 rounded-xl border p-5">
@@ -53,7 +53,7 @@ export default () => {
                 )}
               </div>
               <div className="border-color flex h-[114px] w-[383px] flex-col items-center justify-center gap-y-4 rounded-[5px] border py-2.5 ">
-                <span className="text_color flex items-center gap-x-1 font-DINPro-Medium">
+                <span className="text_color font-HarmonyOS_Medium flex items-center gap-x-1">
                   <Cloud width={14} height={14} />
                   {data?.piece_size && unitConversion(data.piece_size)}
                 </span>
@@ -64,7 +64,7 @@ export default () => {
                 </span>
                 <span>
                   {tr(deal_list.content?.cash)}:
-                  <span className="text_color font-DINPro-Medium">
+                  <span className="text_color font-HarmonyOS_Medium">
                     {data?.storage_price_per_epoch &&
                       formatFilNum(data?.storage_price_per_epoch)}
                   </span>
@@ -113,7 +113,7 @@ export default () => {
               `border-color flex h-[114px] flex-col items-center justify-center gap-y-4 rounded-[5px] border py-2.5`,
             )}
           >
-            <span className="text_color flex items-center gap-x-1 font-DINPro-Medium">
+            <span className="text_color font-HarmonyOS_Medium flex items-center gap-x-1">
               <Cloud width={14} height={14} />
               {data?.piece_size && unitConversion(data.piece_size)}
             </span>
@@ -126,7 +126,7 @@ export default () => {
               <span className={styles.cash}>
                 {tr(deal_list.content?.cash)}:
               </span>
-              <span className="text_color font-DINPro-Medium">
+              <span className="text_color font-HarmonyOS_Medium">
                 {data?.storage_price_per_epoch &&
                   formatFilNum(data?.storage_price_per_epoch)}
               </span>

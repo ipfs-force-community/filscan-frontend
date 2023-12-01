@@ -32,12 +32,12 @@ export default (props: any) => {
   return (
     <div className="main_contain">
       <MobileView>
-        <div className="DINPro-Medium m-2.5 !mx-2.5 flex items-center text-lg font-medium">
+        <div className="HarmonyOS_Medium m-2.5 !mx-2.5 flex items-center text-lg font-medium">
           <span>{tr('peer_detail')}</span>
         </div>
       </MobileView>
       <BrowserView>
-        <div className="DINPro-Medium !mx-2.5 mb-2.5 flex items-center text-lg font-medium">
+        <div className="HarmonyOS_Medium !mx-2.5 mb-2.5 flex items-center text-lg font-medium">
           <span>{tr('peer_detail')}</span>
         </div>
       </BrowserView>

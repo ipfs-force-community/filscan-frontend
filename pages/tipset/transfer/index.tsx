@@ -80,7 +80,7 @@ export default observer(() => {
     <div className={classNames(styles['transfer-list'], 'main_contain')}>
       <div className="flex items-center justify-between">
         <div className="mx-2.5">
-          <div className="font-PingFang text-lg font-semibold">
+          <div className="font-HarmonyOS text-lg font-semibold">
             {tr('transfer_list')}
           </div>
           <div className="text_des text-xs">

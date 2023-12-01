@@ -163,7 +163,7 @@ export default observer(({ origin }: { origin?: string }) => {
       <MobileView>
         <div
           className={classNames(
-            'font-PingFang text-lg font-semibold',
+            'font-HarmonyOS text-lg font-semibold',
             styles.title,
           )}
         >
@@ -182,7 +182,7 @@ export default observer(({ origin }: { origin?: string }) => {
       </MobileView>
       <BrowserView>
         <div className={`flex h-[30px] items-center justify-between`}>
-          <div className="pl-2.5 font-PingFang text-lg	font-semibold">
+          <div className="font-HarmonyOS pl-2.5 text-lg	font-semibold">
             {tr('contract_rank')}
             {origin !== 'home' && (
               <span className="text_des ml-2 text-xs font-normal">

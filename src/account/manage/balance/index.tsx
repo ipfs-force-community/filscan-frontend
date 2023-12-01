@@ -38,7 +38,7 @@ export default observer((props: Props) => {
     <div className="overflow-auto">
       <div className="flex items-center justify-between">
         <div className="flex  flex-col">
-          <span className="w-full font-PingFang text-lg font-semibold	">
+          <span className="font-HarmonyOS w-full text-lg font-semibold	">
             {tr(selectedKey)}
           </span>
           <span className="text_des text-xs">

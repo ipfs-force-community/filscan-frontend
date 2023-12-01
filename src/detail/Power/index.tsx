@@ -51,7 +51,7 @@ export default observer(({ data }: { data: any }) => {
                 </span>
                 <>
                   <BrowserView>
-                    <span className="text_clip font-DINPro-Bold text-xl">
+                    <span className="text_clip font-HarmonyOS_Bold text-xl">
                       {loading ? <SkeletonScreen /> : value}
                     </span>
                   </BrowserView>
@@ -89,7 +89,7 @@ export default observer(({ data }: { data: any }) => {
               >
                 {tr(title)}
               </span>
-              <span className="font-DINPro-Medium text-sm font-medium">
+              <span className="font-HarmonyOS_Medium text-sm font-medium">
                 {loading ? <SkeletonScreen /> : value}
               </span>
             </li>
@@ -100,7 +100,7 @@ export default observer(({ data }: { data: any }) => {
         className={classNames(styles.status, 'mt-6 flex w-full items-center')}
       >
         <span className="text_des w-28 text-sm">{tr('sector_status')}</span>
-        <span className="font-DINPro-Medium text-sm font-medium">
+        <span className="font-HarmonyOS_Medium text-sm font-medium">
           {loading ? (
             <SkeletonScreen />
           ) : (
@@ -118,7 +118,7 @@ export default observer(({ data }: { data: any }) => {
                   <li key={dataIndex} className="flex items-center gap-x-1">
                     <span
                       className={classNames(
-                        'font-DINPro-Medium text-sm font-medium',
+                        'font-HarmonyOS_Medium text-sm font-medium',
                         styles['sector-status-value'],
                       )}
                       style={{ color: color }}

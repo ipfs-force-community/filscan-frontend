@@ -66,7 +66,7 @@ export default observer(() => {
     <div className={classNames(styles['chain-list'], 'main_contain')}>
       <div
         className={classNames(
-          'mx-2.5 font-PingFang text-lg font-semibold',
+          'font-HarmonyOS mx-2.5 text-lg font-semibold',
           styles.title,
         )}
       >
@@ -168,7 +168,7 @@ export default observer(() => {
                           <li
                             style={{ width: itemHeader.width }}
                             key={dataIndex}
-                            className="font-DINPro-Medium"
+                            className="font-HarmonyOS_Medium"
                           >
                             {renderValue}
                           </li>

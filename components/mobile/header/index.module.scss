@@ -20,7 +20,7 @@
           align-items: center;
           margin-left: 12px;
           font-size: 12px;
-          font-family: "DINPro-Medium";
+          font-family: 'HarmonyOS_Medium';
           column-gap: 4px;
           & > :first-child {
             width: fit-content;
@@ -31,13 +31,13 @@
             height: 12px;
           }
 
-          &>:first-child{
+          & > :first-child {
             width: 23px;
             height: unset;
 
             aspect-ratio: 1.0968;
           }
-          &>:last-child {
+          & > :last-child {
             width: unset;
             height: 12px;
 
@@ -71,7 +71,9 @@
       height: 0px;
       background: #00000099;
       opacity: 0;
-      transition: min-height 0.3s, opacity 0.3s;
+      transition:
+        min-height 0.3s,
+        opacity 0.3s;
     }
     .body.active {
       min-height: 100%;

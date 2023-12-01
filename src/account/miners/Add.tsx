@@ -116,7 +116,7 @@ export default ({
   return (
     <>
       <Breadcrumb items={routerItems} />
-      <div className="mb-10 mt-8 font-PingFang text-lg font-semibold">
+      <div className="font-HarmonyOS mb-10 mt-8 text-lg font-semibold">
         {tr('miners_add')}
       </div>
       <div className="border_color card_shadow flex flex-1 flex-col	rounded-xl px-5 py-7">

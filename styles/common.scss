@@ -144,7 +144,7 @@
   //   var(--font-color) 100%
   // );
   // -webkit-background-clip: text;
-  // //font-family: DINPro-Bold, DINPro;
+  // //font-family: HarmonyOS_Bold, HarmonyOS_Regular;
   // -webkit-text-fill-color: transparent;
 }
 /*子元素不渐变*/
@@ -228,7 +228,7 @@
   color: var(--bgColor);
   font-weight: bold;
   font-size: px-to-rem(11px);
-  font-family: DINPro-Bold;
+  font-family: HarmonyOS_Bold;
 
   &::before {
     display: block;
@@ -245,7 +245,7 @@
 .link_text {
   color: #1c6afd;
   font-weight: 500;
-  font-family: DINPro-Medium, DINPro;
+  font-family: HarmonyOS_Medium, HarmonyOS_Regular;
   cursor: pointer;
   &:hover {
     color: #1c6afd;

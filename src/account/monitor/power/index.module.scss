@@ -1,10 +1,10 @@
-@import "mixins";
+@import 'mixins';
 
-.power{
+.power {
   @include mobile {
     padding: 12px;
   }
-  &_table{
+  &_table {
     @include desktop {
       padding: 15px;
       border: 1px solid var(--border-color);
@@ -16,15 +16,15 @@
     }
     border-radius: 5px;
     overflow: auto;
-    overflow: hidden;   
+    overflow: hidden;
     :global .inactive,
     :global .inactive .text_des {
       color: var(--mobile-des-color) !important;
     }
   }
-  &_title{
+  &_title {
     font-size: 16px;
-    font-family: PingFangSC-Semibold, PingFang SC;
+    font-family: PingFangSC-Semibold;
     font-weight: 600;
     margin-bottom: 20px;
     @include mobile {
@@ -37,10 +37,10 @@
     margin-left: 4px;
     padding-left: 7px;
     padding-right: 7px;
-    color: #EF7F1A;
+    color: #ef7f1a;
     background-color: rgba(239, 127, 26, 0.05);
-    font-family: PingFangSC, PingFang SC;
+    font-family: PingFangSC;
     font-size: 11px;
     font-weight: 400;
   }
- }
+}

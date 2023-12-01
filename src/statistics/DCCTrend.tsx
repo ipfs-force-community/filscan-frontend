@@ -193,7 +193,7 @@ export default observer((props: Props) => {
       >
         <div
           className={classNames(
-            'w-fit min-w-[120px] font-PingFang text-lg font-semibold ',
+            'font-HarmonyOS w-fit min-w-[120px] text-lg font-semibold ',
             styles.title,
           )}
         >

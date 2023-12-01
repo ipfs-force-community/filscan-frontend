@@ -74,7 +74,7 @@ export default observer(() => {
           <></>
         )}
         <BrowserView>
-          <h3 className="mb-4 font-DINPro-Medium text-lg">
+          <h3 className="font-HarmonyOS_Medium mb-4 text-lg">
             Filecoin Ecosystem Overview
           </h3>
         </BrowserView>

@@ -185,7 +185,7 @@ export default ({ cid }: { cid: string | string[] }) => {
       >
         <span
           className={classNames(
-            'font-DINPro-Bold text-lg font-semibold',
+            'font-HarmonyOS_Bold text-lg font-semibold',
             styles['top-title'],
           )}
         >

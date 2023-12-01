@@ -33,6 +33,10 @@ const common = {
   no_account: '该邮箱未注册,请先注册',
 
   //登录注册
+  active_top_1: '节点信息',
+  active_top_2: '一网打尽',
+  active_bottom_1: '异常告警',
+  active_bottom_2: '快人一步',
   register: '邮箱注册',
   password_login: '密码登录',
   reset_password: '重置密码',

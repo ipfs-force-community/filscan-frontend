@@ -64,7 +64,7 @@ export default () => {
     <div className="main_contain">
       <div
         className={classNames(
-          'mx-2.5 font-PingFang text-lg font-semibold',
+          'font-HarmonyOS mx-2.5 text-lg font-semibold',
           styles.title,
         )}
       >

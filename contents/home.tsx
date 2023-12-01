@@ -32,7 +32,7 @@ export const home_meta = [
         <>
           <span>{textValue}</span>
           <span className="unit ml-1 inline text-xs">{unit}</span>
-          <span className={`${className} ml-1 font-DINPro-Medium text-xs`}>
+          <span className={`${className} font-HarmonyOS_Medium ml-1 text-xs`}>
             {`${flag}${unitConversion(Math.abs(changeText), 2)}`}
           </span>
         </>
@@ -119,7 +119,7 @@ export const home_meta = [
           {formatNumber(v, 2)}
           {changeText && (
             <span
-              className={`${className} font-DINPro-Medium text-xs font-medium`}
+              className={`${className} font-HarmonyOS_Medium text-xs font-medium`}
             >
               {flag}
               {changeText}
@@ -147,7 +147,7 @@ export const home_meta = [
           {formatNumber(v, 2)}
           {changeText && (
             <span
-              className={`${className} font-DINPro-Medium text-xs font-medium`}
+              className={`${className} font-HarmonyOS_Medium text-xs font-medium`}
             >
               {flag}
               {changeText}
@@ -175,7 +175,7 @@ export const home_meta = [
           {formatNumber(v, 2)}
           {changeText && (
             <span
-              className={`${className} font-DINPro-Medium  text-xs font-medium`}
+              className={`${className} font-HarmonyOS_Medium  text-xs font-medium`}
             >
               {flag} {changeText}
             </span>
@@ -578,7 +578,7 @@ export const meta_list = [
       return (
         <span className="flex items-baseline gap-x-1">
           {formatNumber(v, 2)}
-          {/* {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>} */}
+          {/* {changeText && <span className={`${className} font-medium font-HarmonyOS_Medium text-xs`}>{flag}{ changeText}</span>} */}
         </span>
       )
     },
@@ -600,7 +600,7 @@ export const meta_list = [
         <span className="flex items-baseline gap-x-1">
           {flag}
           {Math.abs(changeText)}
-          {/* {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{ changeText}</span>} */}
+          {/* {changeText && <span className={`${className} font-medium font-HarmonyOS_Medium text-xs`}>{flag}{ changeText}</span>} */}
         </span>
       )
     },
@@ -615,7 +615,7 @@ export const meta_list = [
       return (
         <span className="flex items-baseline gap-x-1">
           {formatNumber(v, 2)}
-          {/* {changeText && <span className={`${className} font-medium font-DINPro-Medium text-xs`}>{flag}{changeText}</span>} */}
+          {/* {changeText && <span className={`${className} font-medium font-HarmonyOS_Medium text-xs`}>{flag}{changeText}</span>} */}
         </span>
       )
     },

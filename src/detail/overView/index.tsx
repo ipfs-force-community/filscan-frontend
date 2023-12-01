@@ -110,7 +110,7 @@ export default ({
                   `${tr(title)} :`
                 )}
               </span>
-              <span className="ml-1 font-DINPro-Medium text-sm font-medium">
+              <span className="font-HarmonyOS_Medium ml-1 text-sm font-medium">
                 {loading ? <SkeletonScreen /> : value}
               </span>
             </li>

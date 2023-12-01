@@ -1,87 +1,87 @@
-@media screen and (max-width: 1000px){
-    .chain-list{
-        padding-inline: 12px;
-        padding-block: 20px 12px;
-        .title {
-            margin: unset;
-            line-height: unset;
-        }
-        .content {
-            margin-top: 15px;
-        }
-        :global{
-            .card_shadow{
-                overflow:hidden;
-                padding: 0;
-                border-color:transparent;
-                background-color:transparent;
-                box-shadow:none;
-            }
-            .h-full{
-                height: auto;
-            }
-            .border{
-                border-width: 0;
-                border-radius: 6px;
-            }
-        }
-        .ant-pagination{
-            justify-content: flex-end;
-        }
+@media screen and (max-width: 1000px) {
+  .chain-list {
+    padding-inline: 12px;
+    padding-block: 20px 12px;
+    .title {
+      margin: unset;
+      line-height: unset;
     }
-    .block-list{
-        .block-item{
-            margin-bottom: 10px;
-            border: 1px solid var(--mobile-divide-line);
-            border-radius: 6px;
-            background: var(--mobile-bg-color);
-            &:last-child{
-                margin-bottom: 0;
-            }
-            .height{
-                display: flex;
-                align-items: center;
-                padding: 17px 12px;
-                border-bottom: 1px solid var(--mobile-divide-line);
-                .label{
-                    margin-right: 15px;
-                    color: var(--mobile-text-minor);
-                    font-weight: 400;
-                    font-size: 16px;
-                    font-family: PingFangSC-Regular, PingFang SC;
-                    line-height: 15px;
-                }
-                .link{
-                    margin-right: 8px;
-                    color: var(--mobile-link-color);
-                    font-weight: 500;
-                    font-size: 18px;
-                    font-family: DINPro-Medium, DINPro;
-                    line-height: 18px;
-                }
-                .time{
-                    padding-top: 5px;
-                    color: var(--mobile-des-color);
-                    font-weight: 500;
-                    font-size: 12px;
-                    font-family: DINPro-Medium, DINPro;
-                    line-height: 12px;
-                }
-            }
-            .rewards{
-                padding: 5px 0;
-                .reward-item{
-                    display: flex;
-                    align-content: center;
-                    justify-content: space-between;
-                    padding: 12px;
-                    color: var( --mobile-title-color);
-                    font-weight: 500;
-                    font-size: 14px;
-                    font-family: DINPro-Medium, DINPro;
-                    line-height: 14px;
-                }
-            }
-        }
+    .content {
+      margin-top: 15px;
     }
+    :global {
+      .card_shadow {
+        overflow: hidden;
+        padding: 0;
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+      }
+      .h-full {
+        height: auto;
+      }
+      .border {
+        border-width: 0;
+        border-radius: 6px;
+      }
+    }
+    .ant-pagination {
+      justify-content: flex-end;
+    }
+  }
+  .block-list {
+    .block-item {
+      margin-bottom: 10px;
+      border: 1px solid var(--mobile-divide-line);
+      border-radius: 6px;
+      background: var(--mobile-bg-color);
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .height {
+        display: flex;
+        align-items: center;
+        padding: 17px 12px;
+        border-bottom: 1px solid var(--mobile-divide-line);
+        .label {
+          margin-right: 15px;
+          color: var(--mobile-text-minor);
+          font-weight: 400;
+          font-size: 16px;
+          font-family: HarmonyOS_Regular;
+          line-height: 15px;
+        }
+        .link {
+          margin-right: 8px;
+          color: var(--mobile-link-color);
+          font-weight: 500;
+          font-size: 18px;
+          font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+          line-height: 18px;
+        }
+        .time {
+          padding-top: 5px;
+          color: var(--mobile-des-color);
+          font-weight: 500;
+          font-size: 12px;
+          font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+          line-height: 12px;
+        }
+      }
+      .rewards {
+        padding: 5px 0;
+        .reward-item {
+          display: flex;
+          align-content: center;
+          justify-content: space-between;
+          padding: 12px;
+          color: var(--mobile-title-color);
+          font-weight: 500;
+          font-size: 14px;
+          font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+          line-height: 14px;
+        }
+      }
+    }
+  }
 }

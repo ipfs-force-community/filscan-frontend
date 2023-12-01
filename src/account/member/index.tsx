@@ -51,6 +51,9 @@ export default observer(() => {
               )
             })}
           </div>
+          <div className={style.member_content_title}>
+            {tr('member_warn_title')}
+          </div>
           <div className={style.content}>
             {member_list_2.map((item: any, index: number) => {
               return (
@@ -80,11 +83,11 @@ export default observer(() => {
               )
             })}
           </div>
-          <div className={style.member_content}>
-            <div className={style.member_content_title}>
-              <LeftIcon />
+          <div className={`${style.member_content}`}>
+            <div className={`${style.member_content_title}`}>
+              {/* <LeftIcon /> */}
               {tr('member_content_title')}
-              <RightIcon />
+              {/* <RightIcon /> */}
             </div>
             <div className={style.member_content_main}>
               {member_main.map((item: any, index: number) => {
@@ -99,42 +102,56 @@ export default observer(() => {
                       {getSvgIcon('memberBg')}
                     </span>
                     <div className={style.member_itemMain}>
-                      <div className={`${style.member_item_card}`}>
-                        {tr(item.title)}
-                        {item.icon}
-                      </div>
-                      <ul className={style.member_item_list}>
-                        {item.list.map((v: any) => {
-                          return (
-                            <li key={v.title} className={style.member_item_li}>
-                              {v.icon}
-                              {tr(v.title)}
-                            </li>
-                          )
-                        })}
-                      </ul>
-                      <ul className={style.member_item_price}>
-                        {item.priceList.map((priceItem: any, index: number) => {
-                          return (
-                            <li
-                              key={index}
-                              className={style.member_item_priceItem}
-                            >
-                              <span>{tr(priceItem.title)}</span>
-                              <span className={style.member_item_priceValue}>
-                                {priceItem.discount && (
-                                  <span className={style.member_item_discount}>
-                                    {tr(priceItem.discount)}
+                      <div
+                        className={style.member_itemMain_card}
+                        // style={{ position: 'absolute' }}
+                      >
+                        <div className={`${style.member_item_card}`}>
+                          {tr(item.title)}
+                          {item.icon}
+                        </div>
+                        <ul className={style.member_item_list}>
+                          {item.list.map((v: any) => {
+                            return (
+                              <li
+                                key={v.title}
+                                className={style.member_item_li}
+                              >
+                                {v.icon}
+                                {tr(v.title)}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                        <ul className={style.member_item_price}>
+                          {item.priceList.map(
+                            (priceItem: any, index: number) => {
+                              return (
+                                <li
+                                  key={index}
+                                  className={style.member_item_priceItem}
+                                >
+                                  <span>{tr(priceItem.title)}</span>
+                                  <span
+                                    className={style.member_item_priceValue}
+                                  >
+                                    {priceItem.discount && (
+                                      <span
+                                        className={style.member_item_discount}
+                                      >
+                                        {tr(priceItem.discount)}
+                                      </span>
+                                    )}
+                                    <span className={style.member_item_value}>
+                                      {priceItem.price}
+                                    </span>
                                   </span>
-                                )}
-                                <span className={style.member_item_value}>
-                                  {priceItem.price}
-                                </span>
-                              </span>
-                            </li>
-                          )
-                        })}
-                      </ul>
+                                </li>
+                              )
+                            },
+                          )}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 )

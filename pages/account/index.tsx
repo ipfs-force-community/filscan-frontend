@@ -145,7 +145,7 @@ const Account: React.FC = () => {
           )}
           <div className="card_shadow border_color flex h-full w-full rounded-xl border ">
             <div className="border_color w-[210px] border-r  py-10">
-              <div className="mb-10 w-full px-5 font-PingFang text-lg font-semibold	">
+              <div className="font-HarmonyOS mb-10 w-full px-5 text-lg font-semibold	">
                 {tr('account_title')}
               </div>
               <Menu

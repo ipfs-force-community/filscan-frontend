@@ -34,7 +34,7 @@ class UserStore {
       loading: true,
     }
     this.verifyCode = ''
-    this.vipModal = false
+    this.vipModal = true
     this.recordList = []
     this.showMemberWarn = false
     this.inviteCode = ''
