@@ -31,9 +31,17 @@ export default observer(() => {
   const { headerShow } = filscanStore
 
   useEffect(() => {
-    // if (hash === 'fevm_trend') {
-    //   window?.scrollTo(0)
-    // }
+    const hashArr = [
+      'networks',
+      'fevm',
+      'fevm_trend',
+      'blockChain',
+      'blockChain_power',
+      'fil_overview',
+    ]
+    if (hashArr.includes(hash) && typeof window !== 'undefined') {
+      window?.scrollTo(0, 0)
+    }
   }, [hash])
 
   const renderNavChildren = (itemChildren: Array<Menu_Info>) => {
@@ -44,7 +52,7 @@ export default observer(() => {
             <Link
               key={child.key}
               href={`/statistics/charts#${child.key}`}
-              className={`text_des text_color flex w-full items-center gap-x-2 rounded-[5px] p-2 pl-10 hover:!text-primary ${
+              className={`text_des text_color  flex w-full items-center gap-x-2 rounded-[5px] p-1.5 pl-10 text-sm hover:!text-primary ${
                 hash === child.key ? 'bg-bg_hover !text-primary' : ''
               }`}
             >
@@ -64,11 +72,8 @@ export default observer(() => {
     >
       <div className={classNames('flex gap-x-5', styles.content)}>
         <BrowserView>
-          <div
-            className={`${styles['static-menu']}`}
-            style={{ top: headerShow ? '140px' : '0px' }}
-          >
-            <div className="mx-2.5 mb-2.5 flex h-10 flex-col justify-center gap-y-2.5 text-lg font-medium">
+          <div className={`${styles['static-menu']}`}>
+            <div className="mx-2.5 mb-2 flex h-10 flex-col justify-center text-lg font-medium">
               <span>{tr('static_overview')}</span>
             </div>
             <ul className="card_shadow border_color flex h-fit cursor-pointer flex-col rounded-xl border py-4">
@@ -82,8 +87,7 @@ export default observer(() => {
                     <Link
                       key={item.key}
                       href={`/statistics/charts#${item.key}`}
-                      scroll={false}
-                      className={`text_color flex h-10 w-full items-center gap-x-2 rounded-[5px] px-2.5 hover:bg-bg_hover ${
+                      className={`text_color flex h-8 w-full items-center gap-x-2 rounded-[5px] px-2.5  hover:text-primary ${
                         hash === item.key ? 'bg-bg_hover text-primary' : ''
                       }`}
                     >
@@ -97,7 +101,6 @@ export default observer(() => {
             </ul>
           </div>
         </BrowserView>
-
         <MobileView>
           <div className={styles['nav-wrap']}>
             {chartsNav.map((value, index) => {
@@ -119,59 +122,68 @@ export default observer(() => {
         </MobileView>
 
         <div
-          className={classNames(
-            'flex flex-1 flex-col gap-y-6',
-            styles['tab-content'],
-          )}
+          className={classNames('flex flex-1 flex-col', styles['tab-content'])}
         >
           {!hash && <Meta />}
           {hash === 'networks' && <Meta />}
           {hash === 'fevm' && (
-            <>
+            <div>
               <ContractTrend />
               <ContractCon />
               <ContractAddr />
               <ContractGas />
               <ContractBalance />
-            </>
+            </div>
           )}
-          {hash.includes('fevm') && (
-            <>
+          {hash.startsWith('fevm') && (
+            <div>
               <div id="fevm_trend">
                 <ContractTrend />
               </div>
-              <div id="fevm_con">
+              <div id="fevm_con" className={styles['statistics-target']}>
                 <ContractCon />
               </div>
-              <div id="fevm_addr">
+              <div id="fevm_addr" className={styles['statistics-target']}>
                 <ContractAddr />
               </div>
-              <div id="fevm_gas">
+              <div id="fevm_gas" className={styles['statistics-target']}>
                 <ContractGas />
               </div>
-              <div id="fevm_balance">
+              <div id="fevm_balance" className={styles['statistics-target']}>
                 <ContractBalance />
               </div>
-            </>
+            </div>
           )}
-          {hash.includes('blockChain') && (
-            <>
+          {hash.startsWith('blockChain') && (
+            <div>
               <div id="blockChain_power">
                 <PowerTrend />
               </div>
-              <div id="blockChain_cc_dc_power">
+              <div
+                id="blockChain_cc_dc_power"
+                className={styles['statistics-target']}
+              >
                 <DCCTrend />
               </div>
-              <div id="blockChain_trend">
+              <div
+                id="blockChain_trend"
+                className={styles['statistics-target']}
+              >
                 <BlockRewardTrend />
               </div>
-              <div id="blockChain_reward_per">
+              <div
+                id="blockChain_reward_per"
+                className={styles['statistics-target']}
+              >
                 <BlockRewardPer />
               </div>
-              <div id="blockChain_nodes">
+              <div
+                id="blockChain_nodes"
+                className={styles['statistics-target']}
+              >
                 <ActiveNodeTrend />
               </div>
-            </>
+            </div>
           )}
           {hash === 'fil_overview' && (
             <>

@@ -23,7 +23,7 @@ const navMenu: Array<Menu_Info | any> = [
         link: '/tipset/transfer/',
       },
       { key: 'statistics_gas', link: '/statistics/gas' },
-      { key: 'statistics_charts', link: '/statistics/charts' },
+      { key: 'statistics_charts', link: '/statistics/charts#networks' },
       {
         key: 'cw',
         link: '/cw',

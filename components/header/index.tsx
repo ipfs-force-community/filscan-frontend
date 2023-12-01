@@ -6,7 +6,7 @@ import codeImg from '@/assets/images/code.png'
 import filscanStore from '@/store/modules/filscan'
 import Account from './Account'
 import Nav from './Nav'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Select from '@/packages/select'
 import { useRouter } from 'next/router'
 import { getSvgIcon } from '@/svgsIcon'
@@ -75,6 +75,23 @@ export default observer(() => {
 
   const apiFlag = process?.env?.NET_WORK
   // px-24
+
+  const headerFade = useMemo(() => {
+    let clsStr = ''
+    if (router.asPath.startsWith('/statistics/charts/')) {
+      clsStr = 'fixed top-0'
+      return clsStr
+    }
+    if (headerShow) {
+      clsStr = 'header-fade-in visible fixed top-0 '
+    } else {
+      clsStr = 'absolute top-0'
+    }
+    if (lastScrollTop > 100) {
+      clsStr = clsStr + 'header-fade-in '
+    }
+    return clsStr
+  }, [headerShow, lastScrollTop, router])
   return (
     <>
       <MobileView>
@@ -82,13 +99,7 @@ export default observer(() => {
       </MobileView>
       <BrowserView>
         <div
-          className={`${
-            headerShow
-              ? ' header-fade-in visible fixed top-0 '
-              : 'absolute top-0'
-          } ${
-            lastScrollTop > 100 ? 'header-fade-in' : ''
-          } main_bg_color  top-0 z-50 h-[110px] w-full`}
+          className={`${headerFade} main_bg_color  top-0 z-50 h-[110px] w-full`}
         >
           <div className="custom_header flex h-[45px] w-full items-center justify-between text-xs">
             <ul className="flex list-none gap-x-5">
