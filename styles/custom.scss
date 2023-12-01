@@ -175,6 +175,12 @@
             display: none;
           }
         }
+        .ant-table-column-sorters {
+          justify-content: flex-start !important;
+          .ant-table-column-title {
+            flex: none !important;
+          }
+        }
       }
       .ant-table-tbody {
         font-family: DINPro-Medium, DINPro;
