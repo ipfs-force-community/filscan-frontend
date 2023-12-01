@@ -67,11 +67,11 @@ export const connect_account = () => {
   })
 }
 
-import { createContext } from 'react'
+// import { createContext } from 'react'
 
-const WalletState: any = createContext({
-  wallet: '',
-  account: 'zh-CN',
-})
+// const WalletState: any = createContext({
+//   wallet: '',
+//   account: 'zh-CN',
+// })
 
-export default WalletState
+// export default WalletState

@@ -1,4 +1,5 @@
-import { makeObservable, observable } from 'mobx'
+import { makeObservable, observable, runInAction } from 'mobx'
+import { Router } from 'next/router'
 
 class FilscanStore {
   theme: string
@@ -16,14 +17,20 @@ class FilscanStore {
   }
 
   setTheme(theme: string) {
-    this.theme = theme
+    runInAction(() => {
+      this.theme = theme
+    })
   }
   setLang(lang: string) {
-    this.lang = lang
+    runInAction(() => {
+      this.lang = lang
+    })
   }
 
   setHeaderShow(show: boolean) {
-    this.headerShow = show
+    runInAction(() => {
+      this.headerShow = show
+    })
   }
 }
 

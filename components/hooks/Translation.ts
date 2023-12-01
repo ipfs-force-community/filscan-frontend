@@ -11,7 +11,6 @@ export const Translation = (props: TranslationProps) => {
   const { lang } = filscanStore
   const { t, i18n } = useTranslation(ns)
   // 当 lang 状态改变时，重新设置语言
-
   useEffect(() => {
     i18n.changeLanguage(lang)
   }, [lang])

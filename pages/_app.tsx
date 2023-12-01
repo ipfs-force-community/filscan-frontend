@@ -6,7 +6,7 @@ import '@/styles/_mixins.scss'
 import { ConfigProvider, theme } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import enUS from 'antd/lib/locale/en_US'
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import HeaderMain from '@/components/header'
 import ErrorBoundary from '@/components/Bounday'
 import { NextSeo } from 'next-seo'
@@ -17,7 +17,6 @@ import classNames from 'classnames'
 import Search from '@/components/mobile/search'
 import styles from './_app.module.scss'
 import { DeviceContext } from '@/store/DeviceContext'
-import WalletState from '@/store/wallet'
 import i18n from '@/i18n'
 import Ap from 'next/app'
 import { SEO } from '@/contents/common'
@@ -53,6 +52,9 @@ function App({ Component, pageProps, isMobile }: any) {
     account: '',
   })
 
+  useEffect(() => {
+    loadTheme(theme)
+  }, [theme])
   useEffect(() => {
     const theme_Local = localStorage.getItem('theme')
     let lang_Local = localStorage.getItem('lang')
@@ -140,45 +142,33 @@ function App({ Component, pageProps, isMobile }: any) {
       <Provider {...mobxStores}>
         <ErrorBoundary>
           <DeviceContext.Provider value={{ isMobile }}>
-            {/* <FilscanStoreContext.Provider
-              value={{
-                theme,
-                setTheme: (value: any) => {
-                  loadTheme(value)
-                  setTheme(value)
-                },
-                lang,
-                setLang,
-              }}
-            > */}
-            <WalletState.Provider
+            {/* <WalletState.Provider
               value={{
                 wallet,
                 setWallet: (walletItem: any) => {
                   setWallet(walletItem)
                 },
               }}
-            >
-              <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-                <div className={classNames(`container_body text-sm ${theme}`)}>
-                  <HeaderMain />
-                  <MobileView>
-                    <Search className={styles['search']} />
-                  </MobileView>
-                  <div
-                    className={classNames(
-                      styles.home,
-                      styles.component,
-                      'chart-wrapper',
-                    )}
-                  >
-                    <Component {...pageProps} />
-                    <Member />
-                  </div>
-                  <Footer />
+            > */}
+            <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+              <div className={classNames(`container_body text-sm ${theme}`)}>
+                <HeaderMain />
+                <MobileView>
+                  <Search className={styles['search']} />
+                </MobileView>
+                <div
+                  className={classNames(
+                    styles.home,
+                    styles.component,
+                    'chart-wrapper',
+                  )}
+                >
+                  <Component {...pageProps} />
+                  <Member />
                 </div>
-              </ConfigProvider>
-            </WalletState.Provider>
+                <Footer />
+              </div>
+            </ConfigProvider>
           </DeviceContext.Provider>
         </ErrorBoundary>
       </Provider>
@@ -186,4 +176,4 @@ function App({ Component, pageProps, isMobile }: any) {
   )
 }
 
-export default observer(withRouter(App))
+export default withRouter(observer(App))

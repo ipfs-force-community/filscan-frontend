@@ -1724,8 +1724,8 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
       width: '200',
       fixed: 'left',
       render: (text: string, record: any) => {
-        if (type === 'power') {
-          return 'ALL'
+        if (text === '') {
+          return 'All'
         }
         return (
           <div className="flex items-center gap-x-1">

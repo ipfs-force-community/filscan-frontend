@@ -210,7 +210,7 @@ export default observer((props: Props) => {
         monitor_type: 'ExpireSectorMonitor',
         user_id: 27,
         group_id_or_all: rule.group_id === 'all' ? -1 : Number(rule.group_id),
-        miner_or_all: rule.miner_id,
+        miner_or_all: rule.miner_id === 'all' ? '' : rule.miner_id,
         mail_alert: emailList[0]?.checked
           ? emailList?.map((v: any) => v.inputValue).join(',')
           : '',

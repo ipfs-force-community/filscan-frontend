@@ -66,7 +66,6 @@ export default observer(() => {
                 key={index}
                 onClick={() => {
                   //vip
-                  console.log('----44', superVip)
                   if (!superVip) {
                     userStore.setVipModal(true)
                   } else {

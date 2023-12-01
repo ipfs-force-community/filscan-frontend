@@ -57,7 +57,6 @@ export default observer(() => {
   const mail = Form.useWatch('email', form)
 
   const renderChildren = (item: any) => {
-    console.log('----33', item)
     let content
     const newRules: any = []
     switch (item.name) {

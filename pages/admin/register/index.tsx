@@ -38,9 +38,6 @@ export default observer(() => {
       window.removeEventListener('keydown', handleClick)
     }
   }, [])
-
-  console.log('----33', verifyCode)
-
   const onFinish = async () => {
     const data = form.getFieldsValue()
     const payload = {

@@ -142,6 +142,7 @@ export default observer((props: Props) => {
     }
     onChange(type, value)
   }
+
   return (
     <div className={style.header}>
       <div className={style.header_left}>
