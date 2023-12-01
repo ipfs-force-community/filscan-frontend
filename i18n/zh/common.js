@@ -53,7 +53,7 @@ const common = {
   no_account: '还没有账号?',
   have_account: '已有账号?',
   go_register: '立即注册',
-  new_password: '设置密码，8-20个字符，需同时包含数字、字母及特殊字符',
+  new_password: '密码，8-20个字符，需同时包含数字、字母及特殊字符',
   confirm_password: '确认密码',
   agreement: '注册即代表同意《协议》、《隐私政策》',
 

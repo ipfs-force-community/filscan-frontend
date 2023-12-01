@@ -224,6 +224,46 @@ const account = {
   power_rules_1: '1. 섹터에 오류가 발생했습니다',
   power_rules_2: '2. 섹터가 자발적으로 종료되었습니다',
   power_rules_3: '3. 섹터가 정상적으로 만료되었습니다',
+  //会员
+  member_miner_warn:
+    '현재 노드 개수가 한도에 도달했습니다. 멤버십을 업그레이드하여 더 많은 혜택을 누려보세요.',
+  member_warn:
+    '회원님의 멤버십 혜택이 곧 만료될 예정입니다. 정상적인 이용을 위해 적시에 갱신해 주세요.',
+  member_header: '다음과 같은 문제에 대해 걱정되거나 경험한 적이 있다면:',
+  power_title: '컴퓨팅 파워 하락',
+  power_text:
+    '대량의 섹터 오류로 인해 컴퓨팅 파워가 급격히 감소하며, 채굴 보상 손실이 심각해질 수 있습니다. 그러나 이를 적시에 알 수 없습니다.',
+  balance_title: '계정 잔액 부족',
+  balance_text:
+    '계정 잔액이 부족하지만 적시에 정보를 얻을 수 없어 섹터 봉인 또는 유지에 실패할 수 있습니다.',
+  sector_title: '섹터 만료',
+  sector_text:
+    '섹터가 만료되면 컴퓨팅 파워도 함께 감소합니다. 더 일찍 갱신해야 한다는 것을 깨닫게 되었습니다. 알림이 있었다면 좋았을텐데요.',
+  warn_power: '컴퓨팅 파워 모니터링',
+  warn_balance: '잔액 모니터링',
+  warn_sector: '섹터 모니터링',
+  warn_email: '이메일 알림',
+  warn_msg: '문자 메시지 알림',
+  warn_phone: '전화 알림',
+  data_text: '중요 정보 통합 모니터링',
+  warn_text: '다양한 경고 채널과 유연한 구성',
+  member_content_title: '멤버십 레벨',
+  companies: '기업 멤버십',
+  companiesPro: '기업 Pro 에디션',
+  companies_1: '30개 노드 한도',
+  companies_2: '컴퓨팅 파워 모니터링',
+  companies_3: '잔액 모니터링',
+  companies_4: '섹터 모니터링',
+  companies_5: '기타 (곧 제공 예정)',
+  companies_6: '기술 지원',
+  monthly: '월간 멤버십',
+  quarter: '분기별 멤버십',
+  year: '연간 멤버십',
+  quarter_discount: '8.8% 이하 할인',
+  year_discount: '8.0% 이하 할인',
+  share_friend: '친구 초대, 1개월 골드 멤버십 선물하기',
+  share_turn: '지금 시작하고 손실을 최소화하세요',
+  tg_title: '비즈니스 TG 추가로 활성화',
 }
 
 export default account

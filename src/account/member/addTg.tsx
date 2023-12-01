@@ -2,7 +2,6 @@ import { Modal, message } from 'antd'
 import { useState } from 'react'
 import style from './index.module.scss'
 import { Translation } from '@/components/hooks/Translation'
-import Vip from '@/assets/images/member/vip.svg'
 import TGImage from '@/assets/images/tgCode.png'
 import copy from 'copy-to-clipboard'
 import Image from 'next/image'
@@ -18,11 +17,10 @@ export default () => {
   return (
     <>
       <div
-        className={`${style.member_btn} ${style.member_btnShare}`}
+        className={`${style.member_btn}  ${style.member_btn_recommend}`}
         onClick={() => setShow(true)}
       >
-        <Vip />
-        {tr('share_friend')}
+        {tr('share_turn')}
       </div>
       <Modal
         title={''}

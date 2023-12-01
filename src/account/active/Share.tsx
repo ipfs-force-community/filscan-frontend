@@ -13,11 +13,18 @@ import Image from 'next/image'
 import filscanStore from '@/store/modules/filscan'
 import { observer } from 'mobx-react'
 
-export default observer(({ inviteCode }: { inviteCode: string }) => {
+interface Props {
+  inviteCode: string
+  show: boolean
+  onChange: (value: boolean) => void
+}
+
+export default observer((props: Props) => {
+  const { inviteCode, show, onChange } = props
   const { tr } = Translation({ ns: 'account' })
   const { lang } = filscanStore // 使用你的 store 获取 lang 状态
-  const [show, setShow] = useState(false)
   const shareRef = useRef<HTMLDivElement>(null)
+
   const handleSave = () => {
     if (shareRef.current) {
       html2canvas(shareRef?.current, {
@@ -47,21 +54,15 @@ export default observer(({ inviteCode }: { inviteCode: string }) => {
 
   return (
     <div className={style.detail}>
-      <div className={style.send}>
-        <Button className="active_btn" onClick={() => setShow(true)}>
-          {tr('active_share')}
-        </Button>
-        <span className={style.send_icon}>{tr('send_member')}</span>
-      </div>
       <Modal
         destroyOnClose={true}
         closeIcon={false}
         wrapClassName="custom_modal noPaddingModal noTopModal"
         open={show}
-        width={416}
+        width={400}
         footer={null}
         onCancel={() => {
-          setShow(false)
+          onChange(false)
         }}
       >
         <div className={style.activeShare}>

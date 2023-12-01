@@ -41,7 +41,7 @@ const config: Config = {
         HarmonyOS_Bold: ['HarmonyOS_Bold'],
         HarmonyOS_Medium: ['HarmonyOS_Medium'],
       },
-      //
+
       colors: {
         // 亮色模式颜色配置
         warnColor: '#A56B3B',

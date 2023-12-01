@@ -7,10 +7,13 @@ import Share from './Share'
 import { observer } from 'mobx-react-lite'
 import userStore from '@/store/modules/user'
 import Table from '@/packages/Table'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { Button } from 'antd'
 export default observer(() => {
   const { inviteCode, recordList } = userStore
   const { tr } = Translation({ ns: 'account' })
+  const [show, setShow] = useState(false)
+
   const columns = useMemo(() => {
     return active_member_list(tr).map((v) => {
       return { ...v, title: tr(v.title) }
@@ -33,7 +36,7 @@ export default observer(() => {
                   !v.title ? style.active_content_otherItem : ''
                 }`}
               >
-                {v.icon}
+                <div className={style.active_content_item_image}>{v.icon}</div>
                 <div>{tr(v.title)}</div>
                 <div className={style.active_des}>{tr(v.des)}</div>
               </div>
@@ -48,7 +51,21 @@ export default observer(() => {
             {inviteCode} <Copy text={inviteCode} />
           </span>
         </div>
-        <Share inviteCode={inviteCode} />
+        <div>
+          <div className={style.send}>
+            <Button className="active_btn" onClick={() => setShow(true)}>
+              {tr('active_share')}
+            </Button>
+            <span className={style.send_icon}>{tr('send_member')}</span>
+          </div>
+          <Share
+            inviteCode={inviteCode}
+            show={show}
+            onChange={(value: boolean) => {
+              setShow(value)
+            }}
+          />
+        </div>
       </div>
       <div className="card_shadow border_color  mt-4 rounded-xl	border p-5">
         <Table

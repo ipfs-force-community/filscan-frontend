@@ -52,6 +52,7 @@
       right: 0px;
       color: #f5c684;
     }
+
     &_card {
       display: flex;
       align-items: center;
@@ -60,7 +61,7 @@
       background: linear-gradient(308deg, #f2c37d 0%, #ffe9c3 100%);
       border-radius: 12px;
       border: 1px solid;
-      padding: 0px 30px;
+      padding: 0px 20px;
       border-color: rgba(243, 215, 183, 1) rgba(221, 176, 127, 1)
         rgba(221, 176, 127, 1) rgba(243, 215, 183, 1);
     }
@@ -80,7 +81,7 @@
     }
     &_value {
       font-size: 16px;
-      font-family: HarmonyOS_Medium;
+      font-family: HarmonyOS_Regular-Medium;
       font-weight: bold;
     }
     &_discount {
@@ -119,6 +120,7 @@
   &_item1 {
     background: rgba(119, 139, 241, 0.1);
     color: #3046b6;
+    position: relative;
     .member_item_icon {
       color: rgba(177, 188, 240, 1);
     }
@@ -142,6 +144,23 @@
       position: absolute;
       width: calc(100% - 60px);
       left: 30px;
+      &_header {
+        position: relative;
+      }
+      &_icon {
+        position: absolute;
+        right: 20px;
+        z-index: 1;
+      }
+      &_iconBg {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 0;
+        height: inherit;
+        height: 96px;
+        border-radius: 12px;
+      }
     }
   }
   &_btns {
@@ -164,6 +183,7 @@
     border: 1px solid #f0f1f3;
     &_recommend {
       position: relative;
+      //border-color: #6d3f1a;
       &_icon {
         position: absolute;
         width: 30px;
@@ -174,8 +194,15 @@
     }
   }
   &_btnShare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 4px;
     background: linear-gradient(283deg, #f2c37d 0%, #ffe9c3 100%);
     margin-bottom: 10px;
+    // svg {
+    //   height: 14px !important;
+    // }
   }
 }
 .memberContent {
@@ -184,15 +211,16 @@
   height: 600px;
   &_btns {
     width: 100%;
-    height: 160px;
-    padding-top: 30px;
+    height: 190px;
+    padding-top: 60px;
     position: absolute;
     bottom: -112px;
+    z-index: 5;
     border-radius: 0px 0px 12px 12px;
     background: linear-gradient(
-      rgba(255, 255, 255, 0.05) 0%,
-      rgba(255, 255, 255, 0.7) 35%,
-      rgba(255, 255, 255, 1) 100%
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1) 35%,
+      rgba(255, 255, 255, 1)
     );
     &:first-child {
       margin-top: 30px;

@@ -4,22 +4,28 @@ import { Translation } from '@/components/hooks/Translation'
 import { member_list_1, member_list_2, member_main } from '@/contents/account'
 import LeftIcon from '@/assets/images/member/left.svg'
 import RightIcon from '@/assets/images/member/right.svg'
+import Vip from '@/assets/images/member/vip.svg'
 import { getSvgIcon } from '@/svgsIcon'
 import { observer } from 'mobx-react'
 import userStore from '@/store/modules/user'
+import iconBg from '@/assets/images/member/member_bg.png'
 import AddTG from './addTg'
+import Image from 'next/image'
+import Share from '../active/Share'
+import { useState } from 'react'
 
 export default observer(() => {
   const { vipModal } = userStore
   const { tr } = Translation({ ns: 'account' })
-
+  const { inviteCode } = userStore
+  const [show, setShow] = useState(false)
   return (
     <Modal
       title={``}
       width={880}
       destroyOnClose={true}
       closeIcon={false}
-      wrapClassName="custom_modal noPaddingModal"
+      wrapClassName="custom_modal noPaddingModal LagerModal"
       open={vipModal}
       onOk={() => userStore.setVipModal(false)}
       onCancel={() => userStore.setVipModal(false)}
@@ -101,14 +107,23 @@ export default observer(() => {
                     <span className={style.member_item_icon}>
                       {getSvgIcon('memberBg')}
                     </span>
+
                     <div className={style.member_itemMain}>
-                      <div
-                        className={style.member_itemMain_card}
-                        // style={{ position: 'absolute' }}
-                      >
-                        <div className={`${style.member_item_card}`}>
-                          {tr(item.title)}
-                          {item.icon}
+                      <div className={style.member_itemMain_card}>
+                        <div className={style.member_itemMain_card_header}>
+                          <div className={`${style.member_item_card}`}>
+                            {tr(item.title)}
+                            <span className={style.member_itemMain_card_icon}>
+                              {item.icon}
+                            </span>
+                          </div>
+                          {index === 1 && (
+                            <Image
+                              className={style.member_itemMain_card_iconBg}
+                              src={iconBg}
+                              alt=""
+                            />
+                          )}
                         </div>
                         <ul className={style.member_item_list}>
                           {item.list.map((v: any) => {
@@ -160,16 +175,23 @@ export default observer(() => {
           </div>
         </div>
         <div className={`${style.member_btns} ${style.memberContent_btns}`}>
-          <AddTG />
-          {/* <div className={`${style.member_btn} ${style.member_btnShare}`}>
+          <div
+            className={`${style.member_btn} ${style.member_btnShare}`}
+            onClick={() => {
+              setShow(true)
+            }}
+          >
+            <Vip />
             {tr('share_friend')}
-          </div> */}
-          <div className={`${style.member_btn} ${style.member_btn_recommend}`}>
-            {/* <span className={style.member_btn_recommend_icon}>
-              {tr('recommend')}
-            </span> */}
-            {tr('share_turn')}
           </div>
+          <Share
+            inviteCode={inviteCode}
+            show={show}
+            onChange={(value) => {
+              setShow(value)
+            }}
+          />
+          <AddTG />
         </div>
       </div>
     </Modal>

@@ -33,7 +33,11 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      row-gap: 4px;
       max-width: 230px;
+      &_image {
+        margin-bottom: 12px;
+      }
     }
   }
   &_share {

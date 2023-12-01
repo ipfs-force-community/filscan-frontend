@@ -91,6 +91,7 @@ export default observer(() => {
               <span className="flex items-center gap-x-2 px-4">
                 {item.icon}
                 {tr(item.label)}
+                {item.sufIcon}
               </span>
             </Link>
           )

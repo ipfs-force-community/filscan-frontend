@@ -225,6 +225,48 @@ const account = {
   power_rules_1: '1. Sector encountered an error',
   power_rules_2: '2. Sector terminated voluntarily',
   power_rules_3: '3. Sector expired normally',
+  //会员
+  member_miner_warn:
+    'The number of current nodes has reached the limit. Upgrade your membership to enjoy more benefits.',
+  member_warn:
+    'Your membership privileges are about to expire. Please renew in a timely manner to avoid any disruptions.',
+  member_header:
+    'If you are concerned or have encountered the following issues',
+  power_title: 'Drop In Power',
+  power_text:
+    'Due to a large number of sector errors, power sharply decreases without timely notification, resulting in significant loss of block rewards',
+  balance_title: 'Insufficient Account Balance',
+  balance_text:
+    'Insufficient account balance without timely information access leads to failed sector sealing or maintenance',
+  sector_title: 'Sector Expiration',
+  sector_text:
+    'When a sector expires, power also decreases. It is only then that we realize we should have renewed earlier. A reminder would have been helpful',
+  warn_power: 'Monitoring Power',
+  warn_balance: 'Monitoring Balance',
+  warn_sector: 'Monitoring Sectors',
+  warn_email: 'Email Alerts',
+  warn_msg: 'SMS Alerts',
+  warn_phone: 'Phone Call Alerts',
+  data_text: 'Comprehensive Monitoring Of Critical Information',
+  warn_text: 'Diverse Alert Channels With Flexible Configurations',
+  member_content_title: 'Membership Levels',
+  companies: 'Enterprise Membership',
+  companiesPro: 'Enterprise Pro',
+  companies_1: '30 Nodes Limit',
+  companies_2: 'Monitoring Power',
+  companies_3: 'Monitoring Balance',
+  companies_4: 'Monitoring Sectors',
+  companies_5: 'More (coming soon)',
+  companies_6: 'Technical support',
+  monthly: 'Monthly Membership',
+  quarter: 'Quarterly Membership',
+  year: 'Annual Membership',
+  quarter_discount: 'Less than 12% off',
+  year_discount: 'Less than 20% off',
+  share_friend:
+    'Invite Friends And Free one-month Enterprise Edition Membership',
+  share_turn: 'Start Now And Minimize Losses',
+  tg_title: 'Add Business TG For Activation',
 }
 
 export default account
