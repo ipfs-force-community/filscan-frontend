@@ -100,7 +100,7 @@ function Wallet() {
             <span
               className="border_color w-fit cursor-pointer rounded-[5px] border px-4 py-2"
               onClick={() => {
-                window.open(`https://filscan.io/address/${wallet.account}/`)
+                window.open(`https://filscan.io/address/${account}/`)
               }}
             >
               {`Connected - Web3 [${isIndent(account, 4)}]`}
