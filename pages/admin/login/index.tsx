@@ -5,7 +5,7 @@ import User from '@/src/user'
 import Link from 'next/link'
 import SendCode from '@/src/account/sendCode'
 import userStore from '@/store/modules/user'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { logTabs, login_list } from '@/contents/user'
 import { isEmail } from '@/utils'
@@ -22,6 +22,26 @@ export default observer(() => {
     }
     return 'password'
   }, [hashParams.type])
+
+  useEffect(() => {
+    const handleClick = async (e: any) => {
+      e.stopPropagation()
+      if (e.keyCode === 13) {
+        //按下enter 回车键
+        try {
+          const values = await form.validateFields()
+          console.log('Success:', values)
+          onFinish()
+        } catch (errorInfo) {
+          console.log('Failed:', errorInfo)
+        }
+      }
+    }
+    window.addEventListener('keydown', handleClick)
+    return () => {
+      window.removeEventListener('keydown', handleClick)
+    }
+  }, [])
 
   const onFinish = async () => {
     const data = form.getFieldsValue()

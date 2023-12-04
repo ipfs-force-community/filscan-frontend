@@ -7,17 +7,18 @@ import useUpdateQuery from '@/components/hooks/useUpdateQuery'
 import { pool_list } from '@/contents/tipset'
 import Table from '@/packages/Table'
 import Selects from '@/packages/selects'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatNumber, pageLimit } from '@/utils'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 import useAxiosData from '@/store/useAxiosData'
 import styles from './index.module.scss'
 import classNames from 'classnames'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'tipset' })
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const updateQuery = useUpdateQuery()
   const removeQueryParam = useRemoveQueryParam()
   const { axiosData, loading } = useAxiosData()
@@ -114,7 +115,7 @@ export default () => {
         )}
       >
         <div>
-          <div className="font-PingFang text-lg font-semibold">
+          <div className="font-HarmonyOS text-lg font-semibold">
             {tr('pool_list')}
           </div>
           <div className="text_des text-xs">
@@ -150,4 +151,4 @@ export default () => {
       </div>
     </div>
   )
-}
+})

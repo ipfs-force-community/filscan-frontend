@@ -3,21 +3,41 @@
 }
 
 @font-face {
-  font-family: 'DINPro'; /* Project id 1544881 */
-  src: url('../assets/font/din/DINPro-Regular.otf');
-  font-display: auto;
-}
-@font-face {
-  font-family: 'DINPro-Bold'; /* Project id 1544881 */
-  src: url('../assets/font/din/DINPro-Bold.otf');
+  font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
+  src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf');
   font-display: auto;
 }
 
+//HarmonyOS_Medium
 @font-face {
-  font-family: 'DINPro-Medium'; /* Project id 1544881 */
-  src: url('../assets/font/din/DINPro-Medium.otf');
+  font-family: 'HarmonyOS_Medium'; /* Project id 1544881 */
+  src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf');
   font-display: auto;
 }
+
+//HarmonyOS_Medium
+@font-face {
+  font-family: 'HarmonyOS_Bold'; /* Project id 1544881 */
+  src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf');
+  font-display: auto;
+}
+
+// @font-face {
+//   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
+//   src: url('../assets/font/din/HarmonyOS_Regular-Regular.otf');
+//   font-display: auto;
+// }
+// @font-face {
+//   font-family: 'HarmonyOS_Bold'; /* Project id 1544881 */
+//   src: url('../assets/font/din/HarmonyOS_Bold.otf');
+//   font-display: auto;
+// }
+
+// @font-face {
+//   font-family: 'HarmonyOS_Medium'; /* Project id 1544881 */
+//   src: url('../assets/font/din/HarmonyOS_Medium.otf');
+//   font-display: auto;
+// }
 
 //layout
 .custom_header {
@@ -159,10 +179,7 @@
     color: var(--font-color);
     .ant-table-content {
       .ant-table-thead {
-        font-family:
-          PingFangSC-Medium,
-          PingFang SC;
-        font-weight: 500;
+        font-family: HarmonyOS_Medium;
         color: var(--font_des);
         .ant-table-column-sorter {
           color: var(--font_des);
@@ -175,10 +192,14 @@
             display: none;
           }
         }
+        .ant-table-column-sorters {
+          justify-content: flex-start !important;
+          .ant-table-column-title {
+            flex: none !important;
+          }
+        }
       }
       .ant-table-tbody {
-        font-family: DINPro-Medium, DINPro;
-        font-weight: 500;
         .ant-table-cell-fix-left,
         .ant-table-cell-fix-right {
           background-color: var(--bgColor);
@@ -352,6 +373,7 @@
     cursor: pointer;
     padding: 3px 16px !important;
     height: 32px !important;
+    color: var(--font-color);
     border: 1px solid var(--border-color) !important;
     background-color: var(--bgDesColor) !important;
     .ant-select-selection-item {
@@ -362,15 +384,12 @@
       align-items: center;
       line-height: 28px;
       font-size: 12px;
-      // font-family: DINPro-Medium, DINPro;
-      // font-weight: 500;
-      color: var(--font-color);
+      color: var(--font-color) !important;
     }
     .ant-select-selection-search-input {
       height: 100% !important;
       font-size: 12px;
-      // font-family: DINPro-Medium, DINPro;
-      // font-weight: 500;
+
       color: var(--font-color);
       cursor: pointer;
     }
@@ -399,7 +418,6 @@
   box-shadow: 0px 1px 7px -1px var(--select-shadow) !important;
   .ant-select-item:not(.custom_options_item) {
     color: var(--font-color) !important;
-    margin-bottom: 4px;
     &:hover {
       color: var(--primary) !important;
       background-color: var(--bg_hover) !important;
@@ -415,17 +433,17 @@
       color: var(--primary) !important;
     }
   }
-  .custom_options_item {
-    .ant-select-item-option-content {
-      display: flex !important;
-      align-items: center;
-      column-gap: 8px;
-      cursor: pointer;
-      &:hover {
-        color: var(--primary);
-      }
-    }
-  }
+  // .custom_options_item {
+  //   .ant-select-item-option-content {
+  //     display: flex !important;
+  //     align-items: center;
+  //     column-gap: 8px;
+  //     cursor: pointer;
+  //     &:hover {
+  //       color: var(--primary);
+  //     }
+  //   }
+  // }
 }
 .custom_select_warn {
   .ant-select-selector {
@@ -556,7 +574,7 @@
   height: inherit;
   .ant-picker-input {
     font-size: 12px;
-    font-family: DINPro-Medium, DINPro;
+    font-family: HarmonyOS_Medium, HarmonyOS_Regular;
     font-weight: 500;
     color: #000000;
   }
@@ -684,6 +702,16 @@
   }
 }
 
+.noTopModal {
+  .ant-modal {
+    top: 0px !important;
+  }
+}
+.LagerModal {
+  .ant-modal {
+    top: 50px !important;
+  }
+}
 .custom_modal {
   width: 100%;
 }
@@ -697,9 +725,7 @@
     width: fit-content !important;
     top: 25%;
     font-size: 14px;
-    font-family:
-      PingFangSC-Regular,
-      PingFang SC;
+    font-family: HarmonyOS_Regular;
     font-weight: 400;
     color: #000000;
   }
@@ -785,5 +811,39 @@ input:-webkit-autofill {
   .carousel-image {
     width: calc(100% - 3px) !important;
     margin: auto;
+  }
+}
+
+//anchor
+.custom_anchor {
+  .ant-anchor {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bgColor);
+    &::before {
+      display: none;
+    }
+    .ant-anchor-ink-visible {
+      display: none !important;
+    }
+    .ant-anchor-link {
+      padding-inline: 0px;
+      .ant-anchor-link {
+        .ant-anchor-link-title {
+          padding: 0px 20px;
+        }
+      }
+      .ant-anchor-link-title {
+        display: flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 0px 10px;
+        &:hover {
+          background-color: var(--bg_hover);
+          border-radius: 5px;
+        }
+      }
+    }
   }
 }

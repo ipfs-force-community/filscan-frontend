@@ -4,8 +4,6 @@ import { apiUrl } from '@/contents/apiUrl'
 import { Translation } from '@/components/hooks/Translation'
 import Segmented from '@/packages/segmented'
 import SkeletonScreen from '@/packages/skeleton'
-import { useFilscanStore } from '@/store/FilscanStore'
-import fetchData from '@/store/server'
 import { getShowData } from '@/utils'
 import { useEffect, useState } from 'react'
 import styles from './style.module.scss'
@@ -112,7 +110,7 @@ export default ({
                   `${tr(title)} :`
                 )}
               </span>
-              <span className="ml-1 font-DINPro-Medium text-sm font-medium">
+              <span className="ml-1 font-HarmonyOS_Medium text-sm font-medium">
                 {loading ? <SkeletonScreen /> : value}
               </span>
             </li>

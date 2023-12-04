@@ -42,7 +42,7 @@ export default () => {
   }
   return (
     <div className={classNames(styles.cid, 'main_contain')}>
-      <div className="mx-2.5 font-PingFang text-lg font-semibold ">
+      <div className="mx-2.5 font-HarmonyOS text-lg font-semibold ">
         {tr('chain_cid_detail')}
       </div>
       <div className="card_shadow border_color text_xs mt-4 rounded-xl border p-5">

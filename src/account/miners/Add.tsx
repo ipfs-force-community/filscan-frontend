@@ -58,7 +58,8 @@ export default ({
     if (addMiners.length > Number(minersNum?.max_miners_count)) {
       return messageManager.showMessage({
         type: 'error',
-        content: '添加节点已达上限，请删除部分节点后添加新',
+        content: '',
+        //content: '添加节点已达上限，请删除部分节点后添加新',
         icon: <ErrorIcon width={18} height={18} />,
         suffix: (
           <span
@@ -104,13 +105,6 @@ export default ({
           content: 'Add Miner successfully',
         })
         router.push('/account#miners')
-      } else {
-        if (data && data?.code) {
-          messageManager.showMessage({
-            type: 'error',
-            content: data?.message || '',
-          })
-        }
       }
     } else {
       messageManager.showMessage({
@@ -122,7 +116,7 @@ export default ({
   return (
     <>
       <Breadcrumb items={routerItems} />
-      <div className="mb-10 mt-8 font-PingFang text-lg font-semibold">
+      <div className="mb-10 mt-8 font-HarmonyOS text-lg font-semibold">
         {tr('miners_add')}
       </div>
       <div className="border_color card_shadow flex flex-1 flex-col	rounded-xl px-5 py-7">

@@ -744,7 +744,7 @@ export const message_detail = {
                         <AccountLink value={item.to} tagText={item.to_tag} />
                       </span>
                     </span>
-                    <span className="flex items-center gap-x-2 font-DINPro-Medium ">
+                    <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
                       <span className="font_weight">For</span>
                       <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                       <span>{item?.token_name}</span>
@@ -823,7 +823,7 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="flex items-center gap-x-2 font-DINPro-Medium ">
+                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
                           <span className="font_weight">For</span>
                           <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                           <span>{item?.token_name}</span>
@@ -856,7 +856,7 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="flex items-center gap-x-2 font-DINPro-Medium ">
+                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
                           <span className="font_weight">For</span>
                           <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                           <span>{item?.token_name}</span>
@@ -907,12 +907,12 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="flex items-center gap-x-2 font-DINPro-Medium ">
+                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
                           <span className="font_weight">For</span>
                           <span>
                             {formatFilNum(item.value, false, false, 4) || '--'}
                           </span>
-                          <span className="text_des font-PingFang">
+                          <span className="text_des font-HarmonyOS">
                             ({tr(item.consume_type)})
                           </span>
                         </span>
@@ -938,12 +938,12 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="flex items-center gap-x-2 font-DINPro-Medium ">
+                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
                           <span className="font_weight">For</span>
                           <span>
                             {formatFilNum(item.value, false, false, 4) || '--'}
                           </span>
-                          <span className="text_des font-PingFang">
+                          <span className="text_des font-HarmonyOS">
                             ({tr(item.consume_type)})
                           </span>
                         </span>

@@ -1,17 +1,17 @@
-import { BrowserView, MobileView } from "../device-detect";
-import copySvgMobile from '@/assets/images/icon-copy.svg';
-import Copy from "../copy";
-import { account_link, isIndent } from "@/utils";
-import Tooltip from "@/packages/tooltip";
+import { BrowserView, MobileView } from '../device-detect'
+import copySvgMobile from '@/assets/images/icon-copy.svg'
+import Copy from '../copy'
+import { account_link, isIndent } from '@/utils'
+import Tooltip from '@/packages/tooltip'
 
 interface Props {
-  value: string,
+  value: string
   unit?: number
   tagText?: string
 }
 
-export default (props:Props) => {
-  const { value = '', unit = 6,tagText} = props;
+export default (props: Props) => {
+  const { value = '', unit = 6, tagText } = props
   // const { axiosData } = useAxiosData()
   // const router = useRouter()
 
@@ -33,30 +33,45 @@ export default (props:Props) => {
   return (
     <>
       <MobileView>
-        <span className='copy-row'>
-          { tagText ?<div className="cursor-pointer bg-bg_hover px-2 py-1 rounded-[5px] text-primary w-fit">{tagText }</div> : <span
-            className='w-28 text'
-            onClick={() => {
-              account_link(value);
-            }}>
-            {value}
-          </span>}
+        <span className="copy-row">
+          {tagText ? (
+            <div className="w-fit cursor-pointer rounded-[5px] bg-bg_hover px-2 py-1 text-primary">
+              {tagText}
+            </div>
+          ) : (
+            <span
+              className="text w-28"
+              onClick={() => {
+                account_link(value)
+              }}
+            >
+              {value}
+            </span>
+          )}
 
-          <Copy text={value} icon={copySvgMobile} className='copy'/>
+          <Copy text={value} icon={copySvgMobile} className="copy" />
         </span>
       </MobileView>
       <BrowserView>
-        {tagText ? <Tooltip context={value} icon={false}><div className="cursor-pointer bg-bg_hover px-2 py-1 rounded-[5px] text-primary">{tagText }</div></Tooltip>: <span
-          className='link_text'
-          onClick={() => {
-            account_link(value);
-          }}>
-          {isIndent(value,unit)}
-        </span> }
+        {tagText ? (
+          <Tooltip context={value} icon={false}>
+            <div className="cursor-pointer rounded-[5px] bg-bg_hover px-2 py-1 text-primary">
+              {tagText}
+            </div>
+          </Tooltip>
+        ) : (
+          <span
+            className="link_text"
+            onClick={() => {
+              account_link(value)
+            }}
+          >
+            {isIndent(value, unit)}
+          </span>
+        )}
 
-        {value && <Copy className='!w-[13px]' text={value} />}
+        {value && <Copy className="!w-[13px]" text={value} />}
       </BrowserView>
-
     </>
-  );
+  )
 }

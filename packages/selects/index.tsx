@@ -43,6 +43,7 @@ export default (props: Props) => {
       value={value}
       disabled={disabled}
       style={style}
+      size={'large'}
       className={`custom_select ${className}`}
       popupClassName={'custom_select_wrapper'}
       filterOption={(input, option: any) =>

@@ -2,18 +2,11 @@
 
 import { useHash } from '@/components/hooks/useHash'
 import { useEffect, useMemo, useState } from 'react'
-import {
-  getColumn,
-  getDefaultSort,
-  getMobileColumn,
-  mobileRankList,
-} from '@/contents/rank'
+import { getColumn, getDefaultSort, getMobileColumn } from '@/contents/rank'
 import Table from '@/packages/Table'
 import { apiUrl } from '@/contents/apiUrl'
 import Header from './header'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatFilNum, pageHomeLimit, pageLimit, unitConversion } from '@/utils'
-import { useTranslation } from 'react-i18next'
 import useAxiosData from '@/store/useAxiosData'
 import classNames from 'classnames'
 import styles from './index.module.scss'
@@ -22,6 +15,10 @@ import Tb from '@/packages/mobile/table'
 import useWindow from '@/components/hooks/useWindown'
 import { MinerPowerRank } from '@/store/homeData'
 import Progress from '@/packages/progress'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+import { Translation } from '@/components/hooks/Translation'
+
 const defaultFilter = {
   sector_size: 'all',
   interval: '24h',
@@ -31,15 +28,12 @@ const defaultData = {
   total: 0,
 }
 
-export default ({ origin }: { origin: string }) => {
+export default observer(({ origin }: { origin: string }) => {
   const { hash } = useHash()
   const { isMobile } = useWindow()
-  const { t } = useTranslation()
-  const tr = (label: string) => {
-    return t(label, { ns: 'rank' })
-  }
-  const { theme, lang } = useFilscanStore()
+  const { tr } = Translation({ ns: 'rank' })
 
+  const { theme, lang } = filscanStore
   const [active, setActive] = useState('growth')
   const [progress, setProgress] = useState<any>({})
   const [data, setData] = useState({ ...defaultData })
@@ -310,4 +304,4 @@ export default ({ origin }: { origin: string }) => {
       </div>
     </>
   )
-}
+})

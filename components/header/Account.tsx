@@ -13,6 +13,7 @@ import { observer } from 'mobx-react'
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' })
   const { userInfo } = userStore
+  const { superVip } = userInfo
   const { name, mail } = userInfo
   const router = useRouter()
   const showName = name || mail || ''
@@ -46,9 +47,31 @@ export default observer(() => {
                 key={index}
                 onClick={() => {
                   //logout
-                  localStorage.removeItem('token')
-                  userStore.setUserInfo()
+                  localStorage.removeItem(`mail`)
+                  localStorage.removeItem(`token-${mail}`)
+                  userStore.clearUserInfo()
                   router.reload()
+                }}
+                className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"
+              >
+                <span className="flex items-center gap-x-2 px-4">
+                  {item.icon}
+                  {tr(item.label)}
+                </span>
+              </li>
+            )
+          }
+          if (item.vip) {
+            return (
+              <li
+                key={index}
+                onClick={() => {
+                  //vip
+                  if (!superVip) {
+                    userStore.setVipModal(true)
+                  } else {
+                    router.push(`/account/#${item.href}`)
+                  }
                 }}
                 className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"
               >
@@ -69,6 +92,7 @@ export default observer(() => {
               <span className="flex items-center gap-x-2 px-4">
                 {item.icon}
                 {tr(item.label)}
+                {item.sufIcon}
               </span>
             </Link>
           )

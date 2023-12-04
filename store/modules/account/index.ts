@@ -4,12 +4,14 @@ import {
   UserGroups,
   countMiners,
   delGroup,
+  deleteMiners,
   saveGroup,
   saveMiner,
 } from '@/store/ApiUrl'
 import { RequestResult, axiosServer } from '@/store/axiosServer'
 import { makeObservable, observable, runInAction } from 'mobx'
 import { GroupInfoList } from './type'
+import messageManager from '@/packages/message'
 
 class AccountStore {
   countMiners = {
@@ -84,6 +86,10 @@ class AccountStore {
           error: null,
         }
       } else {
+        messageManager.showMessage({
+          type: 'error',
+          content: result?.data?.message || '',
+        })
         return {
           ...result.data,
           error: 'error saving',
@@ -91,11 +97,28 @@ class AccountStore {
       }
     }
   }
+
   //删除某个分组
   async delGroups(group_id: number) {
     const result: RequestResult = await axiosServer(delGroup, { group_id })
     if (!result.error) {
       this.getAccountGroup()
+    }
+  }
+  //删除某个分组内节点
+  async delMiners(miner_id: string) {
+    const result: RequestResult = await axiosServer(deleteMiners, { miner_id })
+    if (!result.error) {
+      this.getAccountGroup()
+      return messageManager.showMessage({
+        type: 'success',
+        content: 'delete miner successfully',
+      })
+    } else {
+      return messageManager.showMessage({
+        type: 'error',
+        content: 'delete miner error',
+      })
     }
   }
 }

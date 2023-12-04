@@ -36,15 +36,15 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily: {
-        PingFang: ['PingFang SC', 'sans-serif'],
+        HarmonyOS: ['HarmonyOS_Regular'],
         Barlow: ['Barlow'],
-        DIN: ['DINPro'],
-        'DINPro-Bold': ['DINPro-Bold'],
-        'DINPro-Medium': ['DINPro-Medium'],
+        HarmonyOS_Bold: ['HarmonyOS_Bold'],
+        HarmonyOS_Medium: ['HarmonyOS_Medium'],
       },
-      //
+
       colors: {
         // 亮色模式颜色配置
+        warnColor: '#A56B3B',
         bgColor: '#FFFFFF',
         bgDesColor: '#F6F6F6',
         bg_color_5: 'rgba(0,0,0,0.05)',

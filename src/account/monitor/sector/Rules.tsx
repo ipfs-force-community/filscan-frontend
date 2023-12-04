@@ -210,7 +210,7 @@ export default observer((props: Props) => {
         monitor_type: 'ExpireSectorMonitor',
         user_id: 27,
         group_id_or_all: rule.group_id === 'all' ? -1 : Number(rule.group_id),
-        miner_or_all: rule.miner_id,
+        miner_or_all: rule.miner_id === 'all' ? '' : rule.miner_id,
         mail_alert: emailList[0]?.checked
           ? emailList?.map((v: any) => v.inputValue).join(',')
           : '',
@@ -302,6 +302,7 @@ export default observer((props: Props) => {
                   disableAll={record?.group_id}
                   selectGroup={ruleItem.group_id}
                   selectMiner={ruleItem.miner_id}
+                  showTagLabel={true}
                   classes={{
                     group: otherRules[`${index}`]?.group
                       ? 'custom_select_warn'

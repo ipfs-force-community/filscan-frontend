@@ -94,7 +94,7 @@ export default observer(
         )}
         <div className="mt-10 flex items-center justify-between">
           <div className="flex  flex-col">
-            <span className="w-full font-PingFang text-lg font-semibold	">
+            <span className="w-full font-HarmonyOS text-lg font-semibold	">
               {miner}
             </span>
             <span className="text_des text-xs">

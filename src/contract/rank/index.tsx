@@ -4,7 +4,6 @@ import { apiUrl } from '@/contents/apiUrl'
 import { Translation } from '@/components/hooks/Translation'
 import { contract_rank, homeContractRank } from '@/contents/contract'
 import Table from '@/packages/Table'
-import { useFilscanStore } from '@/store/FilscanStore'
 import fetchData from '@/store/server'
 import { useEffect, useMemo, useState } from 'react'
 import VerifySvg from '@/assets/images/verify.svg'
@@ -25,13 +24,15 @@ import classNames from 'classnames'
 import CopySvgMobile from '@/assets/images/icon-copy.svg'
 
 import { cloneDeep } from 'lodash'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 const default_sort = {
   field: 'transfer_count',
   order: 'descend',
 }
-export default ({ origin }: { origin?: string }) => {
+export default observer(({ origin }: { origin?: string }) => {
   const { tr } = Translation({ ns: 'contract' })
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const [loading, setLoading] = useState(false)
   const [current, setCurrent] = useState(1)
   const [sort, setSort] = useState<any>({ ...default_sort })
@@ -162,7 +163,7 @@ export default ({ origin }: { origin?: string }) => {
       <MobileView>
         <div
           className={classNames(
-            'font-PingFang text-lg font-semibold',
+            'font-HarmonyOS text-lg font-semibold',
             styles.title,
           )}
         >
@@ -181,7 +182,7 @@ export default ({ origin }: { origin?: string }) => {
       </MobileView>
       <BrowserView>
         <div className={`flex h-[30px] items-center justify-between`}>
-          <div className="pl-2.5 font-PingFang text-lg	font-semibold">
+          <div className="pl-2.5 font-HarmonyOS text-lg	font-semibold">
             {tr('contract_rank')}
             {origin !== 'home' && (
               <span className="text_des ml-2 text-xs font-normal">
@@ -230,4 +231,4 @@ export default ({ origin }: { origin?: string }) => {
       </div>
     </>
   )
-}
+})

@@ -52,7 +52,7 @@ const Defi = () => {
                 textOverflow: 'ellipsis',
                 cursor: 'pointer',
               }}
-              className="font-DINPro-Medium"
+              className="font-HarmonyOS_Medium"
             >
               {value}
             </div>
@@ -66,7 +66,7 @@ const Defi = () => {
       key: 'tvl',
       align: 'right',
       render(value) {
-        return <div className="font-DINPro-Medium">{get$Number(value)}</div>
+        return <div className="font-HarmonyOS_Medium">{get$Number(value)}</div>
       },
     },
   ]
@@ -92,7 +92,7 @@ const Defi = () => {
           // onClick={() => {
           //   router.push('/contract/rank')
           // }}
-          className="text-mobile-text-warning flex h-[45px] items-center justify-center font-DINPro-Medium text-[13px]"
+          className="text-mobile-text-warning flex h-[45px] items-center justify-center font-HarmonyOS_Medium text-[13px]"
         >
           {t('see_more')}
         </Link>

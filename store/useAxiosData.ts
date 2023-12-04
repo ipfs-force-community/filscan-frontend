@@ -100,7 +100,6 @@ function useAxiosData<T>(
           })
 
           if (response.status === 401) {
-            Router.push('/admin/login')
             current[currentKey] = 100
             setData({
               result: null,

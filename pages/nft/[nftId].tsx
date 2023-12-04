@@ -38,11 +38,11 @@ export default () => {
     <div className={classNames(styles.nft, 'main_contain')}>
       <div
         className={classNames(
-          'flex items-center justify-between gap-x-1 px-2.5 font-DINPro-Bold text-xl',
+          'flex items-center justify-between gap-x-1 px-2.5 font-HarmonyOS_Bold text-xl',
           styles.token,
         )}
       >
-        <div className="mb-4 flex items-center gap-x-1 font-DINPro-Bold text-xl">
+        <div className="mb-4 flex items-center gap-x-1 font-HarmonyOS_Bold text-xl">
           {overviewData?.token_name && (
             <Image width={40} height={40} src={overviewData.logo} alt="" />
           )}

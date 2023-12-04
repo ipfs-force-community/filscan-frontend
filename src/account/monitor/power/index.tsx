@@ -27,6 +27,8 @@ export default observer(() => {
     switch (type) {
       case 'group':
         setSelectGroup(value)
+        loadRules({ group_id: value })
+
         break
       case 'save':
         saveRules(value)

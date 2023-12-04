@@ -17,9 +17,9 @@ interface Props {
   disableAll?: boolean
   reset?: boolean
   classes?: Record<string, any>
+  showTagLabel?: boolean
   onChange: (type: string, value: string | number | boolean) => void
 }
-
 export default observer((props: Props) => {
   const {
     onChange,
@@ -29,6 +29,7 @@ export default observer((props: Props) => {
     selectGroup,
     selectMiner,
     selectTag,
+    showTagLabel,
     addRule,
     classes,
   } = props
@@ -67,7 +68,9 @@ export default observer((props: Props) => {
         })
         miners.push({
           miner_tag: v.miner_tag,
-          label: String(v.miner_id),
+          label: showTagLabel
+            ? `${String(v.miner_id)}  ${v.miner_tag ? `(${v.miner_tag})` : ''}`
+            : String(v.miner_id),
           value: String(v.miner_id),
         })
         if (v.miner_tag) {
@@ -89,7 +92,7 @@ export default observer((props: Props) => {
       },
     ]
     return [newGroups.concat(newMinerGroups), allMiners, allTags]
-  }, [tr, groupMiners, isAllMiner])
+  }, [tr, groupMiners, isAllMiner, showTagLabel])
 
   const showTags = useMemo(() => {
     const newTags = [
@@ -139,6 +142,7 @@ export default observer((props: Props) => {
     }
     onChange(type, value)
   }
+
   return (
     <div className={style.header}>
       <div className={style.header_left}>

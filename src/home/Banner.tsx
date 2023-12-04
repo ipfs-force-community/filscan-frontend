@@ -1,14 +1,14 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Carousel, Image } from 'antd'
 import { useEffect, useRef, useState } from 'react'
 import useAxiosData from '@/store/useAxiosData'
 import { apiUrl } from '@/contents/apiUrl'
-import { useFilscanStore } from '@/store/FilscanStore'
 import style from './style.module.scss'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 function Banner() {
   const { axiosData } = useAxiosData()
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const carousel = useRef<any>(null)
   const [data, setData] = useState([])
   const [autoplay, setAutoplay] = useState(true)
@@ -30,8 +30,8 @@ function Banner() {
     return null
   }
 
-  const handleSlideChange = (currentSlide: number) => {
-    setCurrent(currentSlide)
+  const handleSlideChange = (currentSlide: number, next: number) => {
+    setCurrent(next)
   }
 
   return (
@@ -74,7 +74,7 @@ function Banner() {
                 Number(current) === index ? style.dots_active : ''
               }`}
               onClick={() => {
-                carousel?.current?.next()
+                carousel?.current?.goTo(index)
                 setAutoplay(false)
               }}
             ></li>
@@ -85,4 +85,4 @@ function Banner() {
   )
 }
 
-export default Banner
+export default observer(Banner)

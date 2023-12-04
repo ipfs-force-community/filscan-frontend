@@ -46,7 +46,7 @@ function Home(props: any) {
             >
               <BrowserView>
                 <div
-                  className={`flex justify-between p-5 font-PingFang text-xs`}
+                  className={`flex justify-between p-5 font-HarmonyOS text-xs`}
                 >
                   {tr('base_gas')}
                   <Link href={`/statistics/gas/`}>
@@ -86,7 +86,7 @@ function Home(props: any) {
                 <div
                   className={`flex h-[30px] items-center justify-between px-2.5`}
                 >
-                  <div className="font-PingFang text-lg font-semibold">
+                  <div className="font-HarmonyOS text-lg font-semibold">
                     {tr('defi_list')}
                   </div>
                   <Link href={`/fevm/defi`}>

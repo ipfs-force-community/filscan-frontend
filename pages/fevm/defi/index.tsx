@@ -63,10 +63,10 @@ export default () => {
                 key={item.dataIndex}
               >
                 <span className="flex w-fit flex-col ">
-                  <span className="text_des mb-2.5 font-DIN text-sm">
+                  <span className="text_des mb-2.5 font-HarmonyOS text-sm">
                     {tr(title)}
                   </span>
-                  <span className="font-DINPro-Bold text-xl">
+                  <span className="font-HarmonyOS_Bold text-xl">
                     {loading ? <Skeleton /> : showValue}
                   </span>
                 </span>
@@ -76,7 +76,7 @@ export default () => {
         </ul>
         <div className="mt-5">
           <span className="mx-2.5">
-            <span className="font-DINPro-Bold text-lg ">
+            <span className="font-HarmonyOS_Bold text-lg ">
               {' '}
               {tr('defi_overview')}
             </span>

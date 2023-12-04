@@ -28,10 +28,15 @@ const common = {
   account_banner_main: '您的节点管理好帮手',
   mobile_code_1: '扫描二维码',
   mobile_code_2: '体验手机浏览器',
+  time_display: '秒前',
   //messages
   no_account: '该邮箱未注册,请先注册',
 
   //登录注册
+  active_top_1: '节点信息',
+  active_top_2: '一网打尽',
+  active_bottom_1: '异常告警',
+  active_bottom_2: '快人一步',
   register: '邮箱注册',
   password_login: '密码登录',
   reset_password: '重置密码',
@@ -48,7 +53,7 @@ const common = {
   no_account: '还没有账号?',
   have_account: '已有账号?',
   go_register: '立即注册',
-  new_password: '设置密码，8-20个字符，需同时包含数字、字母及特殊字符',
+  new_password: '密码，8-20个字符，需同时包含数字、字母及特殊字符',
   confirm_password: '确认密码',
   agreement: '注册即代表同意《协议》、《隐私政策》',
 

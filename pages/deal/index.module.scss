@@ -13,7 +13,7 @@
         width: calc(100% + 2.5rem);
         height: 1px;
         background: var(--mobile-divide-line);
-        content: "";
+        content: '';
       }
     }
     .title {
@@ -21,7 +21,7 @@
       color: var(--mobile-title-color);
       font-weight: 500;
       font-size: 14px;
-      font-family: PingFangSC-Medium, PingFang SC;
+      font-family: HarmonyOS_Medium;
       line-height: 12px;
     }
     .card {
@@ -42,7 +42,7 @@
           color: var(--mobile-title-color);
           font-weight: 500;
           font-size: 16px;
-          font-family: PingFangSC-Medium, PingFang SC;
+          font-family: HarmonyOS_Medium;
           line-height: 16px;
         }
       }

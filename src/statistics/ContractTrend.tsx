@@ -3,7 +3,6 @@ import { EvmTxsHistory } from '@/contents/apiUrl'
 import EChart from '@/components/echarts'
 import { Translation } from '@/components/hooks/Translation'
 import { contract_trend, timeList } from '@/contents/statistic'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatDateTime } from '@/utils'
 import { getColor, get_xAxis } from '@/utils/echarts'
 import GoMobileIcon from '@/assets/images/icon-right-white.svg'
@@ -16,14 +15,16 @@ import { BrowserView, MobileView } from '@/components/device-detect'
 import useAxiosData from '@/store/useAxiosData'
 import Select from '@/packages/select'
 import useWindow from '@/components/hooks/useWindown'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 interface Props {
   origin?: string
   className?: string
 }
 
-export default (props: Props) => {
+export default observer((props: Props) => {
   const { origin, className } = props
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const ref = useObserver()
   const { axiosData } = useAxiosData()
@@ -216,7 +217,7 @@ export default (props: Props) => {
         <div className="flex flex-1 flex-row flex-wrap items-center">
           <div
             className={classNames(
-              'w-fit min-w-[120px] pl-2.5 font-PingFang text-lg font-semibold',
+              'w-fit min-w-[120px] pl-2.5 font-HarmonyOS text-lg font-semibold',
               styles.title,
             )}
           >
@@ -260,4 +261,4 @@ export default (props: Props) => {
       </div>
     </div>
   )
-}
+})

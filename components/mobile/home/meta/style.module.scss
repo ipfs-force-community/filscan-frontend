@@ -1,60 +1,60 @@
-.meta{
-    margin-bottom: 20px;
-    .cards{
-        display: grid;
+.meta {
+  margin-bottom: 20px;
+  .cards {
+    display: grid;
 
-        grid-template-columns: 1fr 1fr;
-        gap:10px;
-        .card{
-            padding: 10px;
-            border: 1px solid var(--mobile-divide-line);
-            border-radius: 6px;
-            background: var(--mobile-bg-color);
-            .card-top{
-                display: flex;
-                align-items: end;
-                margin-bottom: 7.5px;
-                .value{
-                    margin-right: 2px;
-                    color: var(--mobile-title-color);
-                    font-weight: bold;
-                    font-size: 18px;
-                    font-family: DINPro-Bold, DINPro;
-                    line-height: 16px;
-                }
-                .unit{
-                    color: var(--mobile-des-color);
-                    font-weight: 500;
-                    font-size: 12px;
-                    font-family: DINPro-Medium, DINPro;
-                    line-height: 12px;
-                }
-                .increase{
-                    margin-left: 5px;
-                    color: var(--mobile-down-color);
-                    font-weight: 500;
-                    font-size: 12px;
-                    font-family: DINPro-Medium, DINPro;
-                    line-height: 12px;
-                }
-                .reduce{
-                    margin-left: 5px;
-                    color: var(--mobile-up-color);
-                    font-weight: 500;
-                    font-size: 12px;
-                    font-family: DINPro-Medium, DINPro;
-                    line-height: 12px;
-                }
-            }
-            .card-bottom{
-                .label{
-                    color: var(--mobile-des-color);
-                    font-weight: 400;
-                    font-size: 12px;
-                    font-family: PingFangSC-Regular, PingFang SC;
-                    line-height: 12px;
-                }
-            }
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    .card {
+      padding: 10px;
+      border: 1px solid var(--mobile-divide-line);
+      border-radius: 6px;
+      background: var(--mobile-bg-color);
+      .card-top {
+        display: flex;
+        align-items: end;
+        margin-bottom: 7.5px;
+        .value {
+          margin-right: 2px;
+          color: var(--mobile-title-color);
+          font-weight: bold;
+          font-size: 18px;
+          font-family: HarmonyOS_Bold, HarmonyOS_Regular;
+          line-height: 16px;
         }
-    } 
+        .unit {
+          color: var(--mobile-des-color);
+          font-weight: 500;
+          font-size: 12px;
+          font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+          line-height: 12px;
+        }
+        .increase {
+          margin-left: 5px;
+          color: var(--mobile-down-color);
+          font-weight: 500;
+          font-size: 12px;
+          font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+          line-height: 12px;
+        }
+        .reduce {
+          margin-left: 5px;
+          color: var(--mobile-up-color);
+          font-weight: 500;
+          font-size: 12px;
+          font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+          line-height: 12px;
+        }
+      }
+      .card-bottom {
+        .label {
+          color: var(--mobile-des-color);
+          font-weight: 400;
+          font-size: 12px;
+          font-family: HarmonyOS_Regular;
+          line-height: 12px;
+        }
+      }
+    }
+  }
 }

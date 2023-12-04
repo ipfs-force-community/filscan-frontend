@@ -54,7 +54,7 @@ export default ({
       {header ? (
         header
       ) : (
-        <span className="des_bg_color border_color flex !h-8 w-full min-w-[82px] items-center justify-between gap-x-2 rounded-[5px] border px-2 font-PingFang  text-xs font-medium">
+        <span className="des_bg_color border_color flex !h-8 w-full min-w-[82px] items-center justify-between gap-x-2 rounded-[5px] border px-2 font-HarmonyOS  text-xs font-medium">
           {tr(showLabel)}
           {getSvgIcon('downIcon')}
         </span>

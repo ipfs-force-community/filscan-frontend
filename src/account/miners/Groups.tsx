@@ -53,17 +53,24 @@ const Groups = () => {
     }
   }
 
-  const handleDelMiner = async (modalItem: any) => {
+  const handleDelMiner = (modalItem: any) => {
     setDeleteLoading(true)
-    const { minerIndex, groupItem } = modalItem
-    groupItem.miners_info.splice(minerIndex, 1)
-    await accountStore.saveGroups({ ...groupItem })
+    // const { minerIndex, groupItem } = modalItem
+    // groupItem.miners_info.splice(minerIndex, 1)
+    accountStore.delMiners(modalItem.id)
+    // if (!result.error) {
+    //   messageManager.showMessage({
+    //     type: 'success',
+    //     content: 'delete miner successfully',
+    //   })
+    // }
     setDeleteLoading(false)
   }
 
   const handleDelGroup = async (id: string | number) => {
     setDeleteLoading(true)
     await accountStore.delGroups(Number(id))
+
     setDeleteLoading(false)
   }
 
@@ -218,7 +225,7 @@ const Groups = () => {
           collapsible="header"
           expandIconPosition="end"
         >
-          {data.map((groupItem: any, dataIndex: number) => (
+          {data?.map((groupItem: any, dataIndex: number) => (
             <Collapse.Panel
               header={GroupItemHeader(groupItem)}
               key={groupItem.group_id}

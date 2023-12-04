@@ -3,10 +3,10 @@
 import { header_top, langOptions, networkOptions } from '@/contents/common'
 import { Translation } from '@/components/hooks/Translation'
 import codeImg from '@/assets/images/code.png'
+import filscanStore from '@/store/modules/filscan'
 import Account from './Account'
 import Nav from './Nav'
-import { useFilscanStore } from '@/store/FilscanStore'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Select from '@/packages/select'
 import { useRouter } from 'next/router'
 import { getSvgIcon } from '@/svgsIcon'
@@ -19,28 +19,26 @@ import TimerHtml from '../TimerHtml'
 import useInterval from '../hooks/useInterval'
 import cwStore from '@/store/modules/Cw'
 import Image from 'next/image'
-// import Skeleton from '@/packages/skeleton';
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
-  const { theme, lang, setTheme, setLang } = useFilscanStore()
+  const { headerShow, theme, lang } = filscanStore
   const router = useRouter()
   const { axiosData } = useAxiosData()
   const [fil, setFilData] = useState<Record<string, string | number>>({})
   const [finalHeight, setFinalHeight] = useState<
     Record<string, string | number>
   >({})
-
-  const [show, setShow] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const st = window.pageYOffset || document.documentElement.scrollTop
       if (st > lastScrollTop) {
-        setShow(false)
+        filscanStore.setHeaderShow(false)
       } else {
-        setShow(true)
+        filscanStore.setHeaderShow(true)
       }
       setLastScrollTop(st <= 0 ? 0 : st)
     }
@@ -63,7 +61,7 @@ export default () => {
   const handleLangChange = (value: string) => {
     localStorage.setItem('lang', value)
     i18n.changeLanguage(lang) // 更改i18n语言
-    setLang(value)
+    filscanStore.setLang(value)
     router.push(router.asPath, router.asPath, { locale: value })
   }
 
@@ -77,6 +75,23 @@ export default () => {
 
   const apiFlag = process?.env?.NET_WORK
   // px-24
+
+  const headerFade = useMemo(() => {
+    let clsStr = ''
+    if (router.asPath.startsWith('/statistics/charts/')) {
+      clsStr = 'fixed top-0'
+      return clsStr
+    }
+    if (headerShow) {
+      clsStr = 'header-fade-in visible fixed top-0 '
+    } else {
+      clsStr = 'absolute top-0'
+    }
+    if (lastScrollTop > 100) {
+      clsStr = clsStr + 'header-fade-in '
+    }
+    return clsStr
+  }, [headerShow, lastScrollTop, router])
   return (
     <>
       <MobileView>
@@ -84,11 +99,7 @@ export default () => {
       </MobileView>
       <BrowserView>
         <div
-          className={`${
-            show ? ' header-fade-in visible fixed top-0 ' : 'absolute top-0'
-          } ${
-            lastScrollTop > 100 ? 'header-fade-in' : ''
-          } main_bg_color  top-0 z-50 h-[110px] w-full`}
+          className={`${headerFade} main_bg_color  top-0 z-50 h-[110px] w-full`}
         >
           <div className="custom_header flex h-[45px] w-full items-center justify-between text-xs">
             <ul className="flex list-none gap-x-5">
@@ -177,7 +188,7 @@ export default () => {
                     'theme',
                     theme === 'dark' ? 'light' : 'dark',
                   )
-                  setTheme(theme === 'dark' ? 'light' : 'dark')
+                  filscanStore.setTheme(theme === 'dark' ? 'light' : 'dark')
                 }}
               >
                 {getSvgIcon(theme === 'dark' ? 'sun' : 'moon')}
@@ -191,4 +202,4 @@ export default () => {
       </BrowserView>
     </>
   )
-}
+})

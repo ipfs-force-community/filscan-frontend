@@ -62,7 +62,7 @@ export default ({
       <BrowserView>
         <div className="mx-2.5 flex items-center justify-between">
           <div className={`flex w-full items-center gap-x-2.5`}>
-            <div className="font-PingFang text-lg font-semibold">
+            <div className="font-HarmonyOS text-lg font-semibold">
               {tr('rank_title')}
             </div>
             <div

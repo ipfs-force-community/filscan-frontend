@@ -1,5 +1,6 @@
 const account = {
   date: 'Date',
+  day: 'Day',
   confirm: 'Confirm',
   cancel: 'Cancel',
   go_home: 'Back to Homepage',
@@ -39,7 +40,7 @@ const account = {
   miner_add: 'Add',
   edit_write: 'Modify',
   edit_delete: 'Delete',
-  created_at: '创建时间',
+  created_at: 'Create Time',
 
   //数据概览 Data Overview
   overview_power: 'Power Overview',
@@ -176,51 +177,96 @@ const account = {
   examination: 'Rules',
   alarm: 'Alarm Modes',
   status: 'State',
-  rules_more: '单个弹框最多添加10组规则，如还需添加请保存后再继续',
-  warn_more: '最多支持添加3个',
-  monitor_mobile_edit_tip: '监控增删改操作请前往PC端完成',
+  rules_more:
+    'A single dialog box can have a maximum of 10 rule sets. If you need to add more, please save your changes and continue',
+  warn_more: 'Maximum support for adding 3',
+  monitor_mobile_edit_tip:
+    'Please go to the PC version for monitoring operations such as adding, deleting, and modifying',
   //告警方式
   warn_title: 'Alarm Modes',
   warn_title_des:
     'You can choose one or a combination of alarm methods based on the actual situation',
   email_warn: 'Email Notification',
   email_warn_placeholder: 'Please provide the alert email address  ',
-  email_warn_warning: '请输入正确邮箱地址',
+  email_warn_warning: 'Please enter a valid email address',
   email_warn_des:
     'The registered email address for the current account will be automatically sent, so there is no need to submit it again',
   message_warn: 'SMS Notification',
   message_warn_placeholder: 'Please provide the receiving phone number ',
-  message_warn_warning: '请输入正确的接收号码',
+  message_warn_warning: 'Please enter a valid recipient number',
 
   phone_warn: 'Phone Call Notification',
   phone_warn_placeholder: 'Please provide the receiving phone number ',
-  phone_warn_warning: '请输入正确的接收号码',
+  phone_warn_warning: 'Please enter a valid recipient number',
 
   //监控
   ExpireSectorMonitor: 'Sector Expiry Date',
   edit_status: 'Close Rule',
-  edit_status_content: '您确定关闭此监控吗？关闭后将无法及时收到相关告警',
+  edit_status_content:
+    'Do you confirm the disabled of this monitoring? Once disabled, you will not receive timely alerts for relevant issues',
   delete_rule: 'Delete Rule',
   delete_rule_content: 'Do you confirm the deletion of this monitoring?',
 
   //扇区监控
   reset_button: 'Reset',
-  edit_rules: '修改规则',
+  edit_rules: 'Modify Rules',
   rule_detail: 'Rule Details',
-  edit_write_warn: '告警方式',
-  sector_rule_title: '扇区到期时间',
+  edit_write_warn: 'Alarm Modes',
+  sector_rule_title: 'Sector Expiry Date',
   sector_rule_des: 'Customizable; Recommended to be greater than 30.',
-  sector_ruler_placeholder: '请输入正整数',
-  sector_ruler_warningText: '请输入正整数',
-  '<=': 'less than or equal to',
-  '>=': '大于等于',
+  sector_ruler_placeholder: 'Please enter a positive integer',
+  sector_ruler_warningText: 'Please enter a positive integer',
+  '<=': 'Less than or equal to',
+  '>=': 'Greater than or equal to',
   //余额监控
   balance_category_placeholder: 'select a balance category',
-  balance_rule_des: '当前 {{value}} FIL',
+  balance_rule_des: 'current {{value}} FIL',
   //算力监控
-  power_rules_1: '1. 扇区发生错误',
-  power_rules_2: '2. 扇区主动终止',
-  power_rules_3: '3. 扇区正常到期',
+  power_rules_1: '1. Sector encountered an error',
+  power_rules_2: '2. Sector terminated voluntarily',
+  power_rules_3: '3. Sector expired normally',
+  //会员
+  member_miner_warn:
+    'The number of current nodes has reached the limit. Upgrade your membership to enjoy more benefits.',
+  member_warn:
+    'Your membership privileges are about to expire. Please renew in a timely manner to avoid any disruptions.',
+  member_header:
+    'If you are concerned or have encountered the following issues',
+  power_title: 'Drop In Power',
+  power_text:
+    'Due to a large number of sector errors, power sharply decreases without timely notification, resulting in significant loss of block rewards',
+  balance_title: 'Insufficient Account Balance',
+  balance_text:
+    'Insufficient account balance without timely information access leads to failed sector sealing or maintenance',
+  sector_title: 'Sector Expiration',
+  sector_text:
+    'When a sector expires, power also decreases. It is only then that we realize we should have renewed earlier. A reminder would have been helpful',
+  warn_power: 'Monitoring Power',
+  warn_balance: 'Monitoring Balance',
+  warn_sector: 'Monitoring Sectors',
+  warn_email: 'Email Alerts',
+  warn_msg: 'SMS Alerts',
+  warn_phone: 'Phone Call Alerts',
+  data_text: 'Comprehensive Monitoring Of Critical Information',
+  warn_text: 'Diverse Alert Channels With Flexible Configurations',
+  member_warn_title: 'Add Monitoring, Stay Ahead With Alerts',
+  member_content_title: 'Membership Levels',
+  companies: 'Enterprise Membership',
+  companiesPro: 'Enterprise Pro',
+  companies_1: '30 Nodes Limit',
+  companies_2: 'Monitoring Power',
+  companies_3: 'Monitoring Balance',
+  companies_4: 'Monitoring Sectors',
+  companies_5: 'More (coming soon)',
+  companies_6: 'Technical support',
+  monthly: 'Monthly Membership',
+  quarter: 'Quarterly Membership',
+  year: 'Annual Membership',
+  quarter_discount: 'Less than 12% off',
+  year_discount: 'Less than 20% off',
+  share_friend: 'Invite And Free one-month Enterprise Edition Membership',
+  share_turn: 'Start Now And Minimize Losses',
+  tg_title: 'Add Business TG For Activation',
 }
 
 export default account

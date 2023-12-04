@@ -82,7 +82,7 @@ const ContractRank = () => {
           onClick={() => {
             router.push('/contract/rank')
           }}
-          className="text-mobile-text-warning flex h-[45px] items-center justify-center font-DINPro-Medium text-[13px]"
+          className="text-mobile-text-warning flex h-[45px] items-center justify-center font-HarmonyOS_Medium text-[13px]"
         >
           {t('see_more')}
         </div>

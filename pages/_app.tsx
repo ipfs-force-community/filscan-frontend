@@ -6,8 +6,7 @@ import '@/styles/_mixins.scss'
 import { ConfigProvider, theme } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import enUS from 'antd/lib/locale/en_US'
-import { Suspense, useEffect, useState } from 'react'
-import { FilscanStoreContext } from '@/store/FilscanStore'
+import { useEffect, useState } from 'react'
 import HeaderMain from '@/components/header'
 import ErrorBoundary from '@/components/Bounday'
 import { NextSeo } from 'next-seo'
@@ -18,15 +17,16 @@ import classNames from 'classnames'
 import Search from '@/components/mobile/search'
 import styles from './_app.module.scss'
 import { DeviceContext } from '@/store/DeviceContext'
-import WalletState from '@/store/wallet'
 import i18n from '@/i18n'
 import Ap from 'next/app'
 import { SEO } from '@/contents/common'
 import Script from 'next/script'
-import { Provider } from 'mobx-react'
+import { Provider, observer } from 'mobx-react'
 import * as mobxStores from '@/store'
-
+import Member from '@/src/account/member'
+import filscanStore from '@/store/modules/filscan'
 const antdTheme = theme
+
 App.getInitialProps = async (context: any) => {
   const initialProps = await Ap.getInitialProps(context)
   const regex = RegExp('Android|iPhone')
@@ -46,13 +46,15 @@ App.getInitialProps = async (context: any) => {
 function App({ Component, pageProps, isMobile }: any) {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
-  const [lang, setLang] = useState('zh')
-  const [theme, setTheme] = useState('light')
+  const { theme, lang } = filscanStore
   const [wallet, setWallet] = useState({
     wallet: '',
     account: '',
   })
 
+  useEffect(() => {
+    loadTheme(theme)
+  }, [theme])
   useEffect(() => {
     const theme_Local = localStorage.getItem('theme')
     let lang_Local = localStorage.getItem('lang')
@@ -68,18 +70,10 @@ function App({ Component, pageProps, isMobile }: any) {
       lang_Local = navigator.language.startsWith('zh') ? 'zh' : 'en'
     }
     loadTheme(theme_Local)
-    if (theme_Local) setTheme(theme_Local)
+    if (theme_Local) filscanStore.setTheme(theme_Local)
     i18n.changeLanguage(lang_Local) // 更改i18n语言
-    if (lang_Local) setLang(lang_Local)
+    if (lang_Local) filscanStore.setLang(lang_Local)
     setLoading(false)
-    if (localStorage?.getItem('userInfo')) {
-      const lastUser = JSON.parse(localStorage?.getItem('userInfo') || '')
-      if (lastUser) {
-        //setUserInfo(lastUser);
-      }
-    }
-    // loadUser();
-
     if (typeof window !== undefined) {
       window.addEventListener('resize', onResize)
       return () => {
@@ -148,47 +142,33 @@ function App({ Component, pageProps, isMobile }: any) {
       <Provider {...mobxStores}>
         <ErrorBoundary>
           <DeviceContext.Provider value={{ isMobile }}>
-            <FilscanStoreContext.Provider
+            {/* <WalletState.Provider
               value={{
-                theme,
-                setTheme: (value: any) => {
-                  loadTheme(value)
-                  setTheme(value)
+                wallet,
+                setWallet: (walletItem: any) => {
+                  setWallet(walletItem)
                 },
-                lang,
-                setLang,
               }}
-            >
-              <WalletState.Provider
-                value={{
-                  wallet,
-                  setWallet: (walletItem: any) => {
-                    setWallet(walletItem)
-                  },
-                }}
-              >
-                <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
-                  <div
-                    className={classNames(`container_body text-sm ${theme}`)}
-                  >
-                    <HeaderMain />
-                    <MobileView>
-                      <Search className={styles['search']} />
-                    </MobileView>
-                    <div
-                      className={classNames(
-                        styles.home,
-                        styles.component,
-                        'chart-wrapper',
-                      )}
-                    >
-                      <Component {...pageProps} />
-                    </div>
-                    <Footer />
-                  </div>
-                </ConfigProvider>
-              </WalletState.Provider>
-            </FilscanStoreContext.Provider>
+            > */}
+            <ConfigProvider locale={lang === 'zh' ? zhCN : enUS}>
+              <div className={classNames(`container_body text-sm ${theme}`)}>
+                <HeaderMain />
+                <MobileView>
+                  <Search className={styles['search']} />
+                </MobileView>
+                <div
+                  className={classNames(
+                    styles.home,
+                    styles.component,
+                    'chart-wrapper',
+                  )}
+                >
+                  <Component {...pageProps} />
+                  <Member />
+                </div>
+                <Footer />
+              </div>
+            </ConfigProvider>
           </DeviceContext.Provider>
         </ErrorBoundary>
       </Provider>
@@ -196,4 +176,4 @@ function App({ Component, pageProps, isMobile }: any) {
   )
 }
 
-export default withRouter(App)
+export default withRouter(observer(App))

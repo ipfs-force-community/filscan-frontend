@@ -27,12 +27,11 @@ import { observer } from 'mobx-react'
 import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
-import Member from '@/src/account/member'
 import Active from '@/src/account/active'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
-  const { userInfo } = userStore
+  const { userInfo, showMemberWarn } = userStore
   const { superVip } = userInfo
   const { countMiners } = accountStore
   const { miners_count, loading } = countMiners
@@ -46,7 +45,7 @@ const Account: React.FC = () => {
   }, [hash])
 
   useEffect(() => {
-    if (!userInfo.mail || !localStorage.getItem('token')) {
+    if (!userInfo.mail || !localStorage.getItem(`token-${userInfo.mail}`)) {
       router.push('/admin/login')
       return
     } else {
@@ -82,6 +81,7 @@ const Account: React.FC = () => {
                   <Vip />
                 </span>
               )}
+              {item.sufIcon}
             </span>
           }
           onTitleClick={({ key }) => {
@@ -96,7 +96,10 @@ const Account: React.FC = () => {
     return (
       <Menu.Item key={item.key} icon={item.icon}>
         <Link href={`/account#${item.key}`} scroll={false}>
-          {tr(item.label)}
+          <span className={style.submenu_title}>
+            {tr(item.label)}
+            {item.sufIcon}
+          </span>
         </Link>
       </Menu.Item>
     )
@@ -122,9 +125,31 @@ const Account: React.FC = () => {
     <>
       <BrowserView>
         <div className="main_contain !py-6 ">
+          {showMemberWarn && (
+            <div className="mb-5 flex w-full items-center justify-center text-warnColor">
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  userStore.setVipModal(true)
+                }}
+              >
+                <i className="ri-error-warning-line mr-1"></i>
+                {tr('member_warn')}
+              </span>
+
+              <span
+                className="ml-4 cursor-pointer"
+                onClick={() => {
+                  userStore.setMemberWarn(false)
+                }}
+              >
+                <i className="ri-close-line"></i>
+              </span>
+            </div>
+          )}
           <div className="card_shadow border_color flex h-full w-full rounded-xl border ">
             <div className="border_color w-[210px] border-r  py-10">
-              <div className="mb-10 w-full px-5 font-PingFang text-lg font-semibold	">
+              <div className="mb-10 w-full px-5 font-HarmonyOS text-lg font-semibold	">
                 {tr('account_title')}
               </div>
               <Menu
@@ -163,7 +188,6 @@ const Account: React.FC = () => {
           )}
         </div>
       </MobileView>
-      <Member />
     </>
   )
 }

@@ -58,7 +58,7 @@ export default () => {
             )}
             key={index}
           >
-            <div className="font-DINPro-Bold text-base font-medium">
+            <div className="font-HarmonyOS_Bold text-base font-medium">
               {renderDom}
             </div>
             {tip ? (

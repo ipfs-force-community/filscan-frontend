@@ -14,7 +14,8 @@ import LogoText from '@/assets/images/logoText.png'
 import { Translation } from '@/components/hooks/Translation'
 import Image from 'next/image'
 import { header_top } from '@/contents/common'
-import { useFilscanStore } from '@/store/FilscanStore'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 const rootSubmenuKeys = ['1', '2', '3', '4', '5']
 
@@ -24,11 +25,9 @@ const Header = (props: any) => {
   const [open, setOpen] = useState(false)
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectKeys, setSelectKeys] = useState<string[]>([])
-
   const [items, setItems] = useState<MenuItem[]>([])
   const router = useRouter()
-
-  const { lang, setLang } = useFilscanStore()
+  const { lang } = filscanStore
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'auto'
@@ -57,7 +56,7 @@ const Header = (props: any) => {
       const value = child.value
       if (child.type === 'lang') {
         localStorage.setItem('lang', value)
-        setLang(value)
+        filscanStore.setLang(value)
         router.push(router.asPath, router.asPath, { locale: value })
         return
       }
@@ -176,4 +175,4 @@ const Header = (props: any) => {
     </div>
   )
 }
-export default Header
+export default observer(Header)

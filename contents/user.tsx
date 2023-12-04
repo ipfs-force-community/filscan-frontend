@@ -53,14 +53,14 @@ export const login_list: Record<string, any> = {
       label: 'code',
       name: 'code',
       placeholder: 'code_placeholder',
-      prefix: <i className="ri-shield-check-lin custom_remix-icon" />,
+      prefix: <i className="ri-shield-check-line custom_remix-icon" />,
       rules: [{ required: true, message: 'Code is required' }],
     },
     {
       label: 'invite',
       name: 'invite',
       placeholder: 'invite_placeholder',
-      prefix: <i className="ri-mail-send-line custom_remix-icon"></i>,
+      prefix: <i className="ri-p2p-line custom_remix-icon"></i>,
       rules: [{ required: true, message: 'Password is required' }],
     },
   ],
@@ -127,8 +127,49 @@ export const login_list: Record<string, any> = {
       label: 'invite',
       name: 'invite',
       placeholder: 'invite_placeholder',
-      prefix: <i className="ri-mail-send-line custom_remix-icon"></i>,
+      prefix: <i className="ri-p2p-line custom_remix-icon"></i>,
       rules: [{ required: true, message: 'Password is required' }],
     },
   ],
 }
+
+export const personal_list = [
+  {
+    title: 'personal_1',
+    // title_des: 'personal_1_des',
+  },
+  {
+    title: 'personal_2',
+    // title_des: 'personal_1_des',
+  },
+  {
+    title: 'personal_3',
+    // title_des: 'personal_1_des',
+  },
+]
+
+export const personal_setting = [
+  // {
+  //   title: 'personal_name',
+  //   dataIndex: 'name',
+  //   placeholder: 'personal_name_holder',
+  // },
+  {
+    title: 'old_password',
+    placeholder: 'old_placeholder',
+    dataIndex: 'old_password',
+    rules: [{ required: true, message: 'old_placeholder is required' }],
+  },
+  {
+    title: 'new_password',
+    placeholder: 'new_placeholder',
+    dataIndex: 'new_password',
+    rules: [{ required: true, message: '${new_password} is required' }],
+  },
+  {
+    title: 'confirm_password',
+    dataIndex: 'confirm_password',
+    placeholder: 'confirm_password',
+    rules: [{ required: true, message: '${confirm_password} is required' }],
+  },
+]

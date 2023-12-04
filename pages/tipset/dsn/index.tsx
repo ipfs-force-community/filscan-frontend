@@ -7,7 +7,6 @@ import useRemoveQueryParam from '@/components/hooks/useRemoveQuery'
 import Search from '@/components/search'
 import { dsn_list } from '@/contents/tipset'
 import Table from '@/packages/Table'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatNumber, pageLimit } from '@/utils'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
@@ -15,10 +14,12 @@ import { SearchOutlined } from '@ant-design/icons'
 import useAxiosData from '@/store/useAxiosData'
 import styles from './index.module.scss'
 import classNames from 'classnames'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'tipset' })
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { axiosData, loading } = useAxiosData()
   const updateQuery = useUpdateQuery()
 
@@ -95,7 +96,7 @@ export default () => {
         )}
       >
         <div>
-          <div className="font-PingFang text-lg font-semibold">
+          <div className="font-HarmonyOS text-lg font-semibold">
             {tr('dsn_list')}
           </div>
           <div className="text_des text-xs">
@@ -127,4 +128,4 @@ export default () => {
       </div>
     </div>
   )
-}
+})

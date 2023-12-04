@@ -1,14 +1,11 @@
 import { Button, Modal } from 'antd'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from '@/packages/image'
 import style from './index.module.scss'
-import WalletStore, {
-  addNetwork,
-  connect_account,
-  getNetWork,
-} from '@/store/wallet'
+import { addNetwork, connect_account, getNetWork } from '@/store/wallet'
 import { LogoutOutlined } from '@ant-design/icons'
 import { isIndent } from '@/utils'
+import walletStore from '@/store/modules/wallet'
 
 const WalletList = [
   {
@@ -27,17 +24,16 @@ const WalletList = [
 
 function Wallet() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { wallet, setWallet } = useContext<any>(WalletStore)
-
+  const { wallet, account } = walletStore
   useEffect(() => {
     const objValue = JSON.parse(localStorage?.getItem('wallet') || '{}')
     const handleAccountsChanged = (accounts: any, other: any) => {
-      if (objValue?.account !== wallet?.account) {
+      if (objValue?.account !== account) {
         //退出登录
         localStorage.removeItem('wallet')
         window.location.reload()
       } else if (objValue?.account) {
-        setWallet(objValue)
+        walletStore.setWallet(objValue)
         localStorage.setItem('wallet', JSON.stringify(objValue))
       }
     }
@@ -84,13 +80,13 @@ function Wallet() {
       account,
     }
     localStorage.setItem('wallet', JSON.stringify(new_wallet))
-    setWallet(new_wallet)
+    walletStore.setWallet(new_wallet)
     setIsModalOpen(false)
   }
 
   const handleClickOut = () => {
     localStorage.removeItem('wallet')
-    setWallet({
+    walletStore.setWallet({
       wallet: '',
       account: '',
     })
@@ -98,16 +94,16 @@ function Wallet() {
 
   return (
     <>
-      {wallet.account ? (
+      {account ? (
         <div>
           <div className="mt-4 flex items-center gap-x-2 ">
             <span
               className="border_color w-fit cursor-pointer rounded-[5px] border px-4 py-2"
               onClick={() => {
-                window.open(`https://filscan.io/address/${wallet.account}/`)
+                window.open(`https://filscan.io/address/${account}/`)
               }}
             >
-              {`Connected - Web3 [${isIndent(wallet?.account, 4)}]`}
+              {`Connected - Web3 [${isIndent(account, 4)}]`}
             </span>
             <span
               className="border_color flex h-9 w-9 items-center justify-center rounded-[5px] border"

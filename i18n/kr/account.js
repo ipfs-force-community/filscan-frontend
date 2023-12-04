@@ -1,5 +1,6 @@
 const account = {
   date: '날짜',
+  day: '일',
   confirm: 'Confirm',
   cancel: 'Cancel',
   go_home: '홈으로',
@@ -28,6 +29,9 @@ const account = {
   all_tags: 'All Tags',
   edit: '편집하다',
   miner_add: '추가하다',
+  select_group: '그룹을 선택하세요',
+  select_miner: '채굴자를 선택해 주세요',
+  select_miner_tag: '请选择标签',
   //个人账户
   register_success: '축하합니다! 회원 가입이 성공적으로 완료되었습니다',
   register_btn: '활성화하다',
@@ -36,7 +40,7 @@ const account = {
   miner_add: '添加',
   edit_write: '수정',
   edit_delete: '삭제',
-  created_at: '创建时间',
+  created_at: 'Create Time',
 
   //数据概览
   overview_power: '해시파워 개요',
@@ -172,21 +176,23 @@ const account = {
   examination: '규칙',
   alarm: '알람 모드',
   status: '상태',
-  rules_more: '单个弹框最多添加10组规则，如还需添加请保存后再继续',
-  warn_more: '最多支持添加3个',
-  monitor_mobile_edit_tip: '监控增删改操作请前往PC端完成',
+  rules_more:
+    '단일 대화 상자에는 최대 10개의 규칙 세트를 추가할 수 있습니다. 더 추가해야하는 경우 변경 내용을 저장한 후 계속하십시오',
+  warn_more: '최대 3개까지 추가할 수 있습니다',
+  monitor_mobile_edit_tip:
+    '모니터링 추가, 삭제 및 수정과 같은 작업은 PC 버전에서 진행해 주세요',
   //告警方式
   warn_title: '알람 모드',
   warn_title_des:
     ' 실제 상황에 따라 하나 또는 여러 가지의 경보 방법을 선택할 수 있습니다',
   email_warn: '이메일 알림',
-  email_warn_placeholder: '알림 이메일 주소를 입력해주세요',
+  email_warn_placeholder: '올바른 이메일 주소를 입력해주세요',
   email_warn_warning: '알림 이메일 주소를 입력해주세요',
   email_warn_des:
     '현재 계정에 등록된 이메일 주소는 자동으로 전송되므로 다시 제출할 필요가 없습니다',
   message_warn: '문자 메시지 알림',
   message_warn_placeholder: '통지를 받을 전화번호를 입력해주세요',
-  message_warn_warning: '통지를 받을 전화번호를 입력해주세요',
+  message_warn_warning: '올바른 수신 번호를 입력해주세요',
 
   phone_warn: ' 전화 알림',
   phone_warn_placeholder: '통지를 받을 전화번호를 입력해주세요',
@@ -195,28 +201,70 @@ const account = {
   //监控
   ExpireSectorMonitor: '섹터 만료일',
   edit_status: '규칙 닫기',
-  edit_status_content: '您确定关闭此监控吗？关闭后将无法及时收到相关告警',
+  edit_status_content:
+    '이 모니터링을 비활성화하시겠습니까? 비활성화되면 관련된 경고를 즉시 받을 수 없게 됩니다.',
   delete_rule: '규칙 삭제',
   delete_rule_content: '이 모니터링을 삭제하시겠습니까?',
 
   //扇区监控
   reset_button: '초기화',
-  edit_rules: '修改规则',
-  rule_detail: '规则详情',
-  edit_write_warn: '告警方式',
+  edit_rules: '규칙 수정',
+  rule_detail: '규칙 세부정보',
+  edit_write_warn: '알람 모드',
   sector_rule_title: '섹터 만료일',
   sector_rule_des: ' 사용자 정의 가능; 30보다 큰 값이 권장됩니다',
-  sector_ruler_placeholder: '请输入正整数',
-  sector_ruler_warningText: '请输入正整数',
+  sector_ruler_placeholder: '양의 정수를 입력해주세요',
+  sector_ruler_warningText: '양의 정수를 입력해주세요',
   '<=': '이하',
-  '>=': '大于等于',
+  '>=': '이상',
   //余额监控
-  balance_category_placeholder: '请选择余额类目',
-  balance_rule_des: '当前 {{value}} FIL',
+  balance_category_placeholder: ' 잔액 카테고리',
+  balance_rule_des: '현재의 {{value}} FIL',
   //算力监控
-  power_rules_1: '1. 扇区发生错误',
-  power_rules_2: '2. 扇区主动终止',
-  power_rules_3: '3. 扇区正常到期',
+  power_rules_1: '1. 섹터에 오류가 발생했습니다',
+  power_rules_2: '2. 섹터가 자발적으로 종료되었습니다',
+  power_rules_3: '3. 섹터가 정상적으로 만료되었습니다',
+  //会员
+  member_miner_warn:
+    '현재 노드 개수가 한도에 도달했습니다. 멤버십을 업그레이드하여 더 많은 혜택을 누려보세요.',
+  member_warn:
+    '회원님의 멤버십 혜택이 곧 만료될 예정입니다. 정상적인 이용을 위해 적시에 갱신해 주세요.',
+  member_header: '다음과 같은 문제에 대해 걱정되거나 경험한 적이 있다면:',
+  power_title: '컴퓨팅 파워 하락',
+  power_text:
+    '대량의 섹터 오류로 인해 컴퓨팅 파워가 급격히 감소하며, 채굴 보상 손실이 심각해질 수 있습니다. 그러나 이를 적시에 알 수 없습니다.',
+  balance_title: '계정 잔액 부족',
+  balance_text:
+    '계정 잔액이 부족하지만 적시에 정보를 얻을 수 없어 섹터 봉인 또는 유지에 실패할 수 있습니다.',
+  sector_title: '섹터 만료',
+  sector_text:
+    '섹터가 만료되면 컴퓨팅 파워도 함께 감소합니다. 더 일찍 갱신해야 한다는 것을 깨닫게 되었습니다. 알림이 있었다면 좋았을텐데요.',
+  warn_power: '컴퓨팅 파워 모니터링',
+  warn_balance: '잔액 모니터링',
+  warn_sector: '섹터 모니터링',
+  warn_email: '이메일 알림',
+  warn_msg: '문자 메시지 알림',
+  warn_phone: '전화 알림',
+  data_text: '중요 정보 통합 모니터링',
+  warn_text: '다양한 경고 채널과 유연한 구성',
+  member_warn_title: '모니터링 추가, 경고로 빠르게 대응하기',
+  member_content_title: '멤버십 레벨',
+  companies: '기업 멤버십',
+  companiesPro: '기업 Pro 에디션',
+  companies_1: '30개 노드 한도',
+  companies_2: '컴퓨팅 파워 모니터링',
+  companies_3: '잔액 모니터링',
+  companies_4: '섹터 모니터링',
+  companies_5: '기타 (곧 제공 예정)',
+  companies_6: '기술 지원',
+  monthly: '월간 멤버십',
+  quarter: '분기별 멤버십',
+  year: '연간 멤버십',
+  quarter_discount: '12% 미만 할인',
+  year_discount: '20% 미만 할인',
+  share_friend: '친구를 초대하여 한 달간의 기업 멤버십을 선물하세요',
+  share_turn: '지금 시작하고 손실을 최소화하세요',
+  tg_title: '비즈니스 TG 추가로 활성화',
 }
 
 export default account

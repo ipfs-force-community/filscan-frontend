@@ -6,6 +6,7 @@ export interface Item {
   type?: string | Array<string>
   fixed?: string
   width?: string | number
+  sufIcon?: any
   render?: (
     text: any,
     record?: Record<string, any>,
@@ -39,6 +40,7 @@ export interface MenuItem {
   label: string
   icon?: string | JSX.Element
   href?: string
+  sufIcon?: any
   group?: string
   children?: Array<MenuItem>
   vip?: boolean

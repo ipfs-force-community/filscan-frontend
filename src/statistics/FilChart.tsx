@@ -1,7 +1,6 @@
 /** @format */
 import EChart from '@/components/echarts'
 import { useEffect, useMemo, useState } from 'react'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { Translation } from '@/components/hooks/Translation'
 import { getColor } from '@/utils/echarts'
 import useAxiosData from '@/store/useAxiosData'
@@ -13,8 +12,11 @@ import { BrowserView, MobileView } from '@/components/device-detect'
 import styles from './FilChart.module.scss'
 import classNames from 'classnames'
 import useWindow from '@/components/hooks/useWindown'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+
 function Overview({ className }: { className?: string }) {
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const { data: filData, loading } = useAxiosData(apiUrl.static_fil_chart, {})
   const [optionsA, setOptionA] = useState<any>({})
@@ -212,7 +214,7 @@ function Overview({ className }: { className?: string }) {
           <div key={dataItem.title} className={`h-full w-full ${className} `}>
             <div
               className={classNames(
-                'mb-4 flex h-9 w-fit items-center pl-2.5 font-PingFang text-lg font-semibold',
+                'mb-4 flex h-9 w-fit items-center pl-2.5 font-HarmonyOS text-lg font-semibold',
                 styles.title,
               )}
             >
@@ -296,4 +298,4 @@ function Overview({ className }: { className?: string }) {
     </div>
   )
 }
-export default Overview
+export default observer(Overview)

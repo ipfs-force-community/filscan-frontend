@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import leecharts from '@/src/cw/leecharts'
 import { cwUrl } from '@/contents/apiUrl'
@@ -12,20 +12,20 @@ import {
   dotString,
   getGroupListWidth,
 } from '@/src/cw/utils'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { Translation } from '@/components/hooks/Translation'
 import cwStore from '@/store/modules/Cw'
 import { observer } from 'mobx-react'
 import Search from '@/src/cw/Search'
 import { getSvgIcon } from '@/svgsIcon'
 import { useRouter } from 'next/router'
+import filscanStore from '@/store/modules/filscan'
 
 const baseYAxis = 30
 const calcHeight = 100
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' })
-  const { theme } = useFilscanStore()
+  const { theme } = filscanStore
   const router = useRouter()
   // const [drawData, setDrawData] = useState<Array<any>>([]);
 

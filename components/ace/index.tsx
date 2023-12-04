@@ -3,10 +3,11 @@ import 'ace-builds/src-noconflict/theme-github'
 import 'ace-builds/src-noconflict/theme-monokai'
 
 import { useMemo } from 'react'
-import { useFilscanStore } from '@/store/FilscanStore'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default (props: any) => {
-  const { theme, lang } = useFilscanStore()
+export default observer((props: any) => {
+  const { theme, lang } = filscanStore
   const showValue = useMemo(() => {
     return props.value || 'test value'
   }, [props.value])
@@ -39,4 +40,4 @@ export default (props: any) => {
       }}
     />
   )
-}
+})

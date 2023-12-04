@@ -10,11 +10,12 @@ import { Button, Select, Watermark } from 'antd'
 import useWindow from '@/components/hooks/useWindown'
 import TwitterIcon from '@/assets/images/twitter.svg'
 import NetworkIcon from '@/assets/images/network.svg'
-import { useFilscanStore } from '@/store/FilscanStore'
 import Share from '@/src/fvm'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default () => {
-  const { theme } = useFilscanStore()
+export default observer(() => {
+  const { theme } = filscanStore
   const { isMobile } = useWindow()
   const { tr } = Translation({ ns: 'fvm' })
   const { data, loading } = useAxiosData(apiUrl.fvm_category)
@@ -73,7 +74,7 @@ export default () => {
           <></>
         )}
         <BrowserView>
-          <h3 className="mb-4 font-DINPro-Medium text-lg">
+          <h3 className="mb-4 font-HarmonyOS_Medium text-lg">
             Filecoin Ecosystem Overview
           </h3>
         </BrowserView>
@@ -189,4 +190,4 @@ export default () => {
       </div>
     </>
   )
-}
+})

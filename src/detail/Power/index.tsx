@@ -3,15 +3,16 @@
 import { Translation } from '@/components/hooks/Translation'
 import { power_list } from '@/contents/detail'
 import SkeletonScreen from '@/packages/skeleton'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { formatNumber, getShowData } from '@/utils'
 import { useMemo } from 'react'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import styles from './style.module.scss'
 import classNames from 'classnames'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
-export default ({ data }: { data: any }) => {
-  const { theme, lang } = useFilscanStore()
+export default observer(({ data }: { data: any }) => {
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'detail' })
 
   const loading = useMemo(() => {
@@ -50,7 +51,7 @@ export default ({ data }: { data: any }) => {
                 </span>
                 <>
                   <BrowserView>
-                    <span className="text_clip font-DINPro-Bold text-xl">
+                    <span className="text_clip font-HarmonyOS_Bold text-xl">
                       {loading ? <SkeletonScreen /> : value}
                     </span>
                   </BrowserView>
@@ -88,7 +89,7 @@ export default ({ data }: { data: any }) => {
               >
                 {tr(title)}
               </span>
-              <span className="font-DINPro-Medium text-sm font-medium">
+              <span className="font-HarmonyOS_Medium text-sm font-medium">
                 {loading ? <SkeletonScreen /> : value}
               </span>
             </li>
@@ -99,7 +100,7 @@ export default ({ data }: { data: any }) => {
         className={classNames(styles.status, 'mt-6 flex w-full items-center')}
       >
         <span className="text_des w-28 text-sm">{tr('sector_status')}</span>
-        <span className="font-DINPro-Medium text-sm font-medium">
+        <span className="font-HarmonyOS_Medium text-sm font-medium">
           {loading ? (
             <SkeletonScreen />
           ) : (
@@ -117,7 +118,7 @@ export default ({ data }: { data: any }) => {
                   <li key={dataIndex} className="flex items-center gap-x-1">
                     <span
                       className={classNames(
-                        'font-DINPro-Medium text-sm font-medium',
+                        'font-HarmonyOS_Medium text-sm font-medium',
                         styles['sector-status-value'],
                       )}
                       style={{ color: color }}
@@ -141,4 +142,4 @@ export default ({ data }: { data: any }) => {
       </div>
     </div>
   )
-}
+})

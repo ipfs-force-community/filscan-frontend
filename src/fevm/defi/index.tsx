@@ -3,7 +3,6 @@
 import { apiUrl } from '@/contents/apiUrl'
 import { Translation } from '@/components/hooks/Translation'
 import Table from '@/packages/Table'
-import { useFilscanStore } from '@/store/FilscanStore'
 import fetchData from '@/store/server'
 import { useEffect, useMemo, useState } from 'react'
 import { homeDefiColumns, defi_list } from '@/contents/fevm'
@@ -13,6 +12,7 @@ import classNames from 'classnames'
 import useWindow from '@/components/hooks/useWindown'
 import Image from 'next/image'
 import TextTip from '@/packages/textTooltip'
+import filscanStore from '@/store/modules/filscan'
 
 const default_sort = {
   field: 'tvl',
@@ -20,7 +20,7 @@ const default_sort = {
 }
 export default ({ origin }: { origin?: string }) => {
   const { tr } = Translation({ ns: 'fevm' })
-  const { theme } = useFilscanStore()
+  const { theme } = filscanStore
   const [loading, setLoading] = useState(false)
   const [current, setCurrent] = useState(1)
   const [sort, setSort] = useState<any>({ ...default_sort })

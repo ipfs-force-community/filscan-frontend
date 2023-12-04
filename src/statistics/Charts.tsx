@@ -2,15 +2,17 @@
 import EChart from '@/components/echarts'
 import { Translation } from '@/components/hooks/Translation'
 import { fil_charts } from '@/contents/statistic'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { getColor } from '@/utils/echarts'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './Charts.module.scss'
 import useWindow from '@/components/hooks/useWindown'
 import { BrowserView, MobileView } from '@/components/device-detect'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+
 function Overview() {
-  const { theme, lang } = useFilscanStore()
+  const { theme, lang } = filscanStore
   const { tr } = Translation({ ns: 'static' })
   const [legendData, setLegendData] = useState<any>({})
   const [data, setData] = useState<any>({})
@@ -104,7 +106,7 @@ function Overview() {
     <div>
       <div
         className={classNames(
-          'mb-4 flex h-9 w-fit items-center pl-2.5 font-PingFang text-lg font-semibold',
+          'mb-4 flex h-9 w-fit items-center pl-2.5 font-HarmonyOS text-lg font-semibold',
           styles.title,
         )}
       >
@@ -171,7 +173,7 @@ function Overview() {
           </ul>
         </div>
         <BrowserView>
-          <div className="text_des p-10 font-DINPro-Medium text-xs">
+          <div className="text_des p-10 font-HarmonyOS_Medium text-xs">
             <ul className="border_color rounded-[5px] border">
               {fil_charts.content.map((v, index) => {
                 return (
@@ -223,7 +225,7 @@ function Overview() {
                     >
                       {tr('Allocation')}:
                     </span>
-                    <span className="font-DINPro-Medium  text-black">
+                    <span className="font-HarmonyOS_Medium  text-black">
                       {tr(v.label)}
                     </span>
                   </div>
@@ -231,7 +233,7 @@ function Overview() {
                     <span className={classNames('min-w-[100px]', styles.label)}>
                       {tr('value')}:
                     </span>
-                    <span className="font-DINPro-Medium  text-black">
+                    <span className="font-HarmonyOS_Medium  text-black">
                       {index === 0 ? tr(v.value) : v.value}
                     </span>
                   </div>
@@ -239,7 +241,7 @@ function Overview() {
                     <span className={classNames('min-w-[100px]', styles.label)}>
                       {tr('description')}:
                     </span>
-                    <span className="font-DINPro-Medium  text-black">
+                    <span className="font-HarmonyOS_Medium  text-black">
                       {tr(v.description)}
                     </span>
                   </div>
@@ -251,4 +253,4 @@ function Overview() {
     </div>
   )
 }
-export default Overview
+export default observer(Overview)

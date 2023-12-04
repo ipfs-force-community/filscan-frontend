@@ -3,7 +3,7 @@
 import { EvmContractSummary, apiUrl } from '@/contents/apiUrl'
 import { Translation } from '@/components/hooks/Translation'
 import { home_meta } from '@/contents/home'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './style.module.scss'
 import classNames from 'classnames'
 import useAxiosData from '@/store/useAxiosData'
@@ -105,7 +105,7 @@ function Meta() {
                 <Tooltip context={tipContent} icon={false}>
                   <div
                     className={classNames(
-                      'text_clip DINPro-Bold text-xl	 font-bold',
+                      'text_clip font-HarmonyOS_Bold text-xl	 font-bold',
                       styles['solid-text'],
                     )}
                   >
@@ -116,7 +116,7 @@ function Meta() {
 
                 <div
                   className={classNames(
-                    'text_des mt-1 flex items-center gap-x-1 font-PingFang text-xs',
+                    'text_des mt-1 flex items-center gap-x-1 font-HarmonyOS text-xs',
                     styles.title,
                   )}
                 >
@@ -130,7 +130,7 @@ function Meta() {
             <div className={styles['meta-item']} key={item.dataIndex}>
               <div
                 className={classNames(
-                  'text_clip DINPro-Bold text-xl	 font-bold',
+                  'text_clip font-HarmonyOS_Bold text-xl	 font-bold',
                   styles['solid-text'],
                 )}
               >
@@ -139,7 +139,7 @@ function Meta() {
               </div>
               <div
                 className={classNames(
-                  'text_des mt-1 flex items-center gap-x-1 font-PingFang text-xs',
+                  'text_des mt-1 flex items-center gap-x-1 font-HarmonyOS text-xs',
                   styles.title,
                 )}
               >

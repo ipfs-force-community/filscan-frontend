@@ -21,38 +21,28 @@ import ContractGas from '@/src/statistics/contractGas'
 import ContractAddr from '@/src/statistics/contractAddr'
 import ContractCon from '@/src/statistics/contractCon'
 import ContractBalance from '@/src/statistics/ContractBanlace'
+import { observer } from 'mobx-react'
+import filscanStore from '@/store/modules/filscan'
+import { useEffect } from 'react'
 
-export default () => {
+export default observer(() => {
   const { tr } = Translation({ ns: 'static' })
   const { hash } = useHash()
+  const { headerShow } = filscanStore
 
-  // const [show, setShow] = useState(true);
-  // const [lastScrollTop, setLastScrollTop] = useState(0);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     // const ele = document.getElementsByClassName('header-fade-in');
-  //     // console.log('---33', ele)
-  //     // if (ele && ele.length > 0) {
-  //     //   setShow(true)
-  //     // } else {
-  //     //   setShow(false)
-  //     // }
-  //     let st = window.pageYOffset || document.documentElement.scrollTop;
-  //     console.log('99999ee', st, document.documentElement.scrollHeight, document.documentElement.clientHeight)
-  //     let show = true;
-  //     if (st > lastScrollTop) {
-  //       show= false
-  //     }
-  //     setShow(show);
-  //     if (show) {
-  //       document.documentElement.scrollTop = st - 110;
-  //     }
-  //     setLastScrollTop(st <= 0 ? 0 : st);
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, [lastScrollTop]);
+  useEffect(() => {
+    const hashArr = [
+      'networks',
+      'fevm',
+      'fevm_trend',
+      'blockChain',
+      'blockChain_power',
+      'fil_overview',
+    ]
+    if (hashArr.includes(hash) && typeof window !== 'undefined') {
+      window?.scrollTo(0, 0)
+    }
+  }, [hash])
 
   const renderNavChildren = (itemChildren: Array<Menu_Info>) => {
     return (
@@ -62,8 +52,7 @@ export default () => {
             <Link
               key={child.key}
               href={`/statistics/charts#${child.key}`}
-              scroll={false}
-              className={`text_des text_color flex w-full items-center gap-x-2 rounded-[5px] p-2 pl-10 hover:!text-primary ${
+              className={`text_des text_color  flex w-full items-center gap-x-2 rounded-[5px] p-1.5 pl-10 text-sm hover:!text-primary ${
                 hash === child.key ? 'bg-bg_hover !text-primary' : ''
               }`}
             >
@@ -84,7 +73,7 @@ export default () => {
       <div className={classNames('flex gap-x-5', styles.content)}>
         <BrowserView>
           <div className={`${styles['static-menu']}`}>
-            <div className="mx-2.5 mb-2.5 flex h-10 flex-col justify-center gap-y-2.5 text-lg font-medium">
+            <div className="mx-2.5 mb-2 flex h-10 flex-col justify-center text-lg font-medium">
               <span>{tr('static_overview')}</span>
             </div>
             <ul className="card_shadow border_color flex h-fit cursor-pointer flex-col rounded-xl border py-4">
@@ -93,13 +82,12 @@ export default () => {
                 return (
                   <div
                     key={item.key}
-                    className="relative flex w-full flex-col items-center px-4 font-DINPro-Medium"
+                    className="relative flex w-full flex-col items-center px-4 font-HarmonyOS_Medium"
                   >
                     <Link
                       key={item.key}
                       href={`/statistics/charts#${item.key}`}
-                      scroll={false}
-                      className={`text_color flex h-10 w-full items-center gap-x-2 rounded-[5px] px-2.5 hover:bg-bg_hover ${
+                      className={`text_color flex h-8 w-full items-center gap-x-2 rounded-[5px] px-2.5  hover:text-primary ${
                         hash === item.key ? 'bg-bg_hover text-primary' : ''
                       }`}
                     >
@@ -113,7 +101,6 @@ export default () => {
             </ul>
           </div>
         </BrowserView>
-
         <MobileView>
           <div className={styles['nav-wrap']}>
             {chartsNav.map((value, index) => {
@@ -135,50 +122,68 @@ export default () => {
         </MobileView>
 
         <div
-          className={classNames(
-            'flex flex-1 flex-col gap-y-6',
-            styles['tab-content'],
-          )}
+          className={classNames('flex flex-1 flex-col', styles['tab-content'])}
         >
           {!hash && <Meta />}
           {hash === 'networks' && <Meta />}
-          {hash.includes('fevm') && (
-            <>
+          {hash === 'fevm' && (
+            <div>
+              <ContractTrend />
+              <ContractCon />
+              <ContractAddr />
+              <ContractGas />
+              <ContractBalance />
+            </div>
+          )}
+          {hash.startsWith('fevm') && (
+            <div>
               <div id="fevm_trend">
                 <ContractTrend />
               </div>
-              <div id="fevm_con">
+              <div id="fevm_con" className={styles['statistics-target']}>
                 <ContractCon />
               </div>
-              <div id="fevm_addr">
+              <div id="fevm_addr" className={styles['statistics-target']}>
                 <ContractAddr />
               </div>
-              <div id="fevm_gas">
+              <div id="fevm_gas" className={styles['statistics-target']}>
                 <ContractGas />
               </div>
-              <div id="fevm_balance">
+              <div id="fevm_balance" className={styles['statistics-target']}>
                 <ContractBalance />
               </div>
-            </>
+            </div>
           )}
-          {hash.includes('blockChain') && (
-            <>
+          {hash.startsWith('blockChain') && (
+            <div>
               <div id="blockChain_power">
                 <PowerTrend />
               </div>
-              <div id="blockChain_cc_dc_power">
+              <div
+                id="blockChain_cc_dc_power"
+                className={styles['statistics-target']}
+              >
                 <DCCTrend />
               </div>
-              <div id="blockChain_trend">
+              <div
+                id="blockChain_trend"
+                className={styles['statistics-target']}
+              >
                 <BlockRewardTrend />
               </div>
-              <div id="blockChain_reward_per">
+              <div
+                id="blockChain_reward_per"
+                className={styles['statistics-target']}
+              >
                 <BlockRewardPer />
               </div>
-              <div id="blockChain_nodes">
+              <div
+                id="blockChain_nodes"
+                className={styles['statistics-target']}
+              >
                 <ActiveNodeTrend />
               </div>
-            </>
+            </div>
           )}
           {hash === 'fil_overview' && (
             <>
@@ -190,4 +195,4 @@ export default () => {
       </div>
     </div>
   )
-}
+})

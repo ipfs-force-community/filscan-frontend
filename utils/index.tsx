@@ -379,16 +379,21 @@ export function validateCode(code: number | string) {
 //校验邮箱
 export function isEmail(email: string): boolean {
   // 判断字符串中是否包含@符号和至少一个.符号
-  if (email.includes('@') && email.includes('.')) {
-    // 判断@符号是否在.符号之前，并且.符号不在末尾
-    if (
-      email.indexOf('@') < email.indexOf('.') &&
-      email.indexOf('.') < email.length - 1
-    ) {
-      return true
-    }
-  }
-  return false
+  // if (email.includes('@') && email.includes('.')) {
+  //   // 判断@符号是否在.符号之前，并且.符号不在末尾
+  //   if (
+  //     email.indexOf('@') < email.indexOf('.') &&
+  //     email.indexOf('.') < email.length - 1
+  //   ) {
+  //     return true
+  //   }
+  // }
+  // return false
+  // 邮箱正则表达式
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  // 使用正则表达式进行匹配
+  return emailRegex.test(email)
 }
 //校验手机号
 export function isPhone(phoneNumber: string): boolean {

@@ -7,19 +7,35 @@ import Share from './Share'
 import { observer } from 'mobx-react-lite'
 import userStore from '@/store/modules/user'
 import Table from '@/packages/Table'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { Button } from 'antd'
+import Image from 'next/image'
+import filscanStore from '@/store/modules/filscan'
+
 export default observer(() => {
-  const { userInfo, recordList } = userStore
+  const { inviteCode, recordList } = userStore
+  const { lang } = filscanStore
   const { tr } = Translation({ ns: 'account' })
+  const [show, setShow] = useState(false)
+
   const columns = useMemo(() => {
     return active_member_list(tr).map((v) => {
       return { ...v, title: tr(v.title) }
     })
   }, [tr])
 
+  // const showSrc = useMemo(() => {
+  //   if (lang === 'zh') {
+  //     return active_zh
+  //   } else if (lang === 'kr') {
+  //     return active_kr
+  //   }
+  //   return active_en
+  // }, [lang])
+
   return (
     <div className={`${style.active}`}>
-      <div className={style.active_header}>ddd</div>
+      <div className={style.active_header}>dd</div>
       <div className={style.active_title}>
         {tr('active_rule')} <Detail />
       </div>
@@ -33,7 +49,7 @@ export default observer(() => {
                   !v.title ? style.active_content_otherItem : ''
                 }`}
               >
-                {v.icon}
+                <div className={style.active_content_item_image}>{v.icon}</div>
                 <div>{tr(v.title)}</div>
                 <div className={style.active_des}>{tr(v.des)}</div>
               </div>
@@ -44,12 +60,25 @@ export default observer(() => {
       <div className={style.active_share}>
         <div className={style.active_share_item}>
           <span className={style.active_des}>{tr('invite_code')}</span>
-
           <span className={style.active_value}>
-            {userInfo?.inviteCode} <Copy text={userInfo?.inviteCode} />
+            {inviteCode} <Copy text={inviteCode} />
           </span>
         </div>
-        <Share />
+        <div>
+          <div className={style.send}>
+            <Button className="active_btn" onClick={() => setShow(true)}>
+              {tr('active_share')}
+            </Button>
+            <span className={style.send_icon}>{tr('send_member')}</span>
+          </div>
+          <Share
+            inviteCode={inviteCode}
+            show={show}
+            onChange={(value: boolean) => {
+              setShow(value)
+            }}
+          />
+        </div>
       </div>
       <div className="card_shadow border_color  mt-4 rounded-xl	border p-5">
         <Table

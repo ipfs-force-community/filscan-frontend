@@ -8,15 +8,36 @@ import { Button, Form, Input } from 'antd'
 import { login_list } from '@/contents/user'
 import { isEmail, validatePassword } from '@/utils'
 import { observer } from 'mobx-react'
-import messageManager from '@/packages/message'
-import Image from 'next/image'
 import { BrowserView, MobileView } from '@/components/device-detect'
+import { useHash } from '@/components/hooks/useHash'
+import { useEffect } from 'react'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
   const { verifyCode } = userStore
+  const { hashParams = {} } = useHash()
+  const { inviteCode } = hashParams
   const [form] = Form.useForm()
 
+  useEffect(() => {
+    const handleClick = async (e: any) => {
+      if (e.keyCode === 13) {
+        //按下enter 回车键
+        try {
+          const values = await form.validateFields()
+          console.log('Success:', values)
+          onFinish()
+        } catch (errorInfo) {
+          console.log('Failed:', errorInfo)
+        }
+      }
+      e.stopPropagation()
+    }
+    window.addEventListener('keydown', handleClick)
+    return () => {
+      window.removeEventListener('keydown', handleClick)
+    }
+  }, [])
   const onFinish = async () => {
     const data = form.getFieldsValue()
     const payload = {
@@ -31,6 +52,9 @@ export default observer(() => {
   }
 
   const mail = Form.useWatch('email', form)
+  useEffect(() => {
+    form?.setFieldValue('invite', inviteCode)
+  }, [inviteCode])
 
   const renderChildren = (item: any) => {
     let content

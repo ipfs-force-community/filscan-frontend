@@ -9,14 +9,14 @@ import {
 } from '@/store/ApiUrl'
 import { makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
-import router from 'next/router'
+import Router from 'next/router'
+import { formatTime } from '@/utils'
 
 const defaultUser = {
   name: '',
   mail: '',
   last_login: 0,
-  superVip: true,
-  inviteCode: '',
+  superVip: false,
   membership_type: '',
   expired_time: '',
 }
@@ -26,6 +26,8 @@ class UserStore {
   verifyCode: string
   vipModal: boolean
   recordList: Array<any>
+  showMemberWarn: boolean
+  inviteCode: string
   constructor() {
     this.userInfo = {
       ...defaultUser,
@@ -34,12 +36,21 @@ class UserStore {
     this.verifyCode = ''
     this.vipModal = false
     this.recordList = []
+    this.showMemberWarn = false
+    this.inviteCode = ''
     makeObservable(this, {
       userInfo: observable,
       vipModal: observable,
       recordList: observable,
+      showMemberWarn: observable,
     })
     this.getUserInfo()
+  }
+
+  setMemberWarn(isShow: boolean) {
+    runInAction(() => {
+      this.showMemberWarn = isShow
+    })
   }
 
   setVipModal(isShow: boolean) {
@@ -66,7 +77,10 @@ class UserStore {
       return false
     }
     if (!userData.error) {
-      router.push('/admin.login')
+      if (typeof window !== 'undefined') {
+        // 使用 router 进行路由导航等操作
+        Router.push('/admin/login')
+      }
     }
   }
 
@@ -77,29 +91,46 @@ class UserStore {
       this.getUserCode()
       this.getInviteList()
     }
-
-    runInAction(() => {
-      this.userInfo = {
-        ...(userData?.data || {}),
-        superVip: userData?.data?.membership_type?.startsWith('Enterprise'),
-        last_login: userData?.data?.last_login_at || '',
-        loading: false,
-      }
-    })
+    if (!userData.error) {
+      runInAction(() => {
+        const superVip =
+          userData?.data?.membership_type?.startsWith('Enterprise')
+        if (
+          superVip &&
+          userData.data.expired_time &&
+          formatTime(userData.data.expired_time * 1000).days > -15 &&
+          formatTime(userData.data.expired_time * 1000).days < 0
+        ) {
+          //会员还有不超过15天到期
+          this.showMemberWarn = true
+        }
+        this.userInfo = {
+          ...(userData?.data || {}),
+          superVip:
+            superVip && formatTime(userData.data.expired_time * 1000).days < 0,
+          last_login: userData?.data?.last_login_at || '',
+          loading: false,
+        }
+      })
+    } else {
+      runInAction(() => {
+        this.userInfo = {
+          ...defaultUser,
+          loading: false,
+        }
+      })
+    }
   }
 
   //获取我的邀请码
   async getUserCode() {
     const userData: RequestResult = await axiosServer(inviteCode)
     runInAction(() => {
-      this.userInfo = {
-        ...(this.userInfo || {}),
-        inviteCode: userData.data.invite_code,
-      }
+      this.inviteCode = userData?.data?.invite_code || ''
     })
   }
-  //邀请记录
 
+  //邀请记录
   async getInviteList() {
     const list: RequestResult = await axiosServer(inviteList)
     runInAction(() => {
@@ -115,32 +146,32 @@ class UserStore {
       })
     }
     if (!userData.error && !userData?.data?.code) {
-      localStorage.setItem('token', userData.data?.token)
-      this.getUserInfo()
+      localStorage.setItem(`mail`, userData.data?.mail)
+      localStorage.setItem(`token-${userData.data.mail}`, userData.data?.token)
+      await this.getUserInfo()
+      if (typeof window !== 'undefined') {
+        // 使用 router 进行路由导航等操作
+        Router.push('/account#overview')
+      }
       messageManager.showMessage({
         type: 'success',
         content: 'login successful',
       })
-      router.push('/account#overview')
     }
   }
 
-  setUserInfo(user?: any) {
+  //退出登录
+  clearUserInfo() {
     runInAction(() => {
-      if (!user) {
-        this.userInfo = {
-          ...defaultUser,
-          loading: false,
-        }
-      } else {
-        this.userInfo = {
-          ...(user || {}),
-          superVip: true,
-          last_login: user?.last_login_at || '',
-          loading: false,
-        }
+      this.userInfo = {
+        ...defaultUser,
+        loading: false,
       }
     })
+    if (typeof window !== 'undefined') {
+      // 使用 router 进行路由导航等操作
+      Router.push('/admin/login')
+    }
   }
 }
 

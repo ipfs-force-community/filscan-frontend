@@ -24,6 +24,10 @@ import PhoneIcon from '@/assets/images/member/phone.svg'
 import PowerWarnIcon from '@/assets/images/member/power.svg'
 import BalanceWarnIcon from '@/assets/images/member/balance.svg'
 import SectorWarnIcon from '@/assets/images/member/sector.svg'
+import ActivePower from '@/assets/images/member/activePower.svg'
+import ActiveBalance from '@/assets/images/member/activeBalance.svg'
+import ActiveSector from '@/assets/images/member/activeSector.svg'
+import ActiveWarn from '@/assets/images/member/activeWarn.svg'
 import Companies from '@/assets/images/member/companies.svg'
 import CompaniesPro from '@/assets/images/member/companiesPro.svg'
 import CompaniesV from '@/assets/images/member/companiesV.png'
@@ -33,11 +37,13 @@ import active2 from '@/assets/images/member/active2.png'
 import active3 from '@/assets/images/member/active3.png'
 import step from '@/assets/images/step.png'
 import Image from 'next/image'
+import Vip from '@/assets/images/member/vip.svg'
+import FreeVip from '@/assets/images/freeVip.svg'
 
 export const account_manager: Array<MenuItem> = [
   {
     label: 'overview',
-    icon: getSvgIcon('account_overview'),
+    icon: getSvgIcon('account_panel'),
     href: 'overview',
     key: 'overview',
   },
@@ -77,7 +83,8 @@ export const account_manager: Array<MenuItem> = [
     icon: getSvgIcon('monitor'),
     href: 'monitorBalance',
     key: 'monitor',
-    vip: true,
+    sufIcon: <Vip />,
+    // vip: true,
     children: [
       {
         label: 'monitor_balance', //余额监控
@@ -100,16 +107,17 @@ export const account_manager: Array<MenuItem> = [
     href: 'miners',
   },
   {
+    label: 'active',
+    href: 'active',
+    sufIcon: <FreeVip className="ml-4 scale-[3]" />,
+    icon: getSvgIcon('member_active'),
+    key: 'active',
+  },
+  {
     label: 'personal',
     icon: getSvgIcon('account_personal'),
     key: 'personal',
     href: 'personal',
-  },
-  {
-    label: 'active',
-    href: 'share_active',
-    icon: getSvgIcon('member_active'),
-    key: 'active',
   },
   {
     label: 'logout',
@@ -174,7 +182,7 @@ export const overview = {
                   {changeText ? flag + unitConversion(changeText, 2) : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip flex items-baseline gap-x-1 font-HarmonyOS_Bold text-xl font-semibold">
                 {textValue}
                 <span className="text_color text-sm">{unit}</span>
               </span>
@@ -208,7 +216,7 @@ export const overview = {
                   {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'}
                 </span> */}
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip flex items-baseline gap-x-1 font-HarmonyOS_Bold text-xl font-semibold">
                 {/* {flag}
                 {changeText?formatFilNum(Math.abs(Number(changeText)), false, false, 2) : '--'} */}
                 {textValue}
@@ -246,7 +254,7 @@ export const overview = {
                     : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip flex items-baseline gap-x-1 font-HarmonyOS_Bold text-xl font-semibold">
                 {textValue}
                 <span className="text-sm">{unit}</span>
               </span>
@@ -282,7 +290,7 @@ export const overview = {
                     : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip flex items-baseline gap-x-1 font-HarmonyOS_Bold text-xl font-semibold">
                 {textValue}
                 <span className="text-sm">{unit}</span>
               </span>
@@ -316,7 +324,7 @@ export const overview = {
                     : '--'}
                 </span>
               </span>
-              <span className="text_clip flex items-baseline gap-x-1 font-DINPro-Bold text-xl font-semibold">
+              <span className="text_clip flex items-baseline gap-x-1 font-HarmonyOS_Bold text-xl font-semibold">
                 {textValue}
                 <span className="text-sm">{unit}</span>
               </span>
@@ -370,9 +378,7 @@ export const overview = {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
-            {showText}
-          </div>
+          <div className="w-fit rounded-[5px]  p-2 text-xs ">{showText}</div>
         )
       },
     },
@@ -649,7 +655,7 @@ export const account_balance = {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="text_color w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+          <div className="text_color w-fit p-2 font-normal text-mobile_font">
             {showText}
           </div>
         )
@@ -859,7 +865,7 @@ export const account_reward = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
+            <div className="text_color w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1006,7 +1012,7 @@ export const account_power = {
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
+            <div className="text_color w-fit p-2 font-normal text-mobile_font">
               {showText}
             </div>
           )
@@ -1707,7 +1713,7 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
       render: (text: string, record: any) => {
         const showText = record.is_default ? tr('default_group') : text
         return (
-          <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+          <div className="text_color w-fit p-2 font-normal text-mobile_font">
             {showText}
           </div>
         )
@@ -1720,8 +1726,8 @@ export const monitor_list = (tr: any, onChange: any, type?: string) => {
       width: '200',
       fixed: 'left',
       render: (text: string, record: any) => {
-        if (type === 'power') {
-          return 'ALL'
+        if (text === '') {
+          return 'All'
         }
         return (
           <div className="flex items-center gap-x-1">
@@ -1940,7 +1946,7 @@ export const member_list_2 = [
 export const member_main = [
   {
     title: 'companies',
-    icon: <Image src={CompaniesV} alt="" width={106} />,
+    icon: <Image src={CompaniesV} alt="" width={126} />,
     list: [
       { title: 'companies_1', icon: <Companies /> },
       { title: 'companies_2', icon: <Companies /> },
@@ -1960,7 +1966,7 @@ export const member_main = [
   },
   {
     title: 'companiesPro',
-    icon: <Image src={CompaniesVPro} alt="" width={106} />,
+    icon: <Image src={CompaniesVPro} alt="" width={126} />,
     list: [
       { title: 'companies_1', icon: <CompaniesPro /> },
       { title: 'companies_2', icon: <CompaniesPro /> },
@@ -1985,7 +1991,7 @@ export const member_main = [
 export const active_member = [
   {
     title: 'active_1',
-    icon: <Image src={active1} alt="" width={58} />,
+    icon: <Image src={active2} alt="" width={58} />,
     des: 'active_1_des',
   },
   {
@@ -1995,7 +2001,7 @@ export const active_member = [
   },
   {
     title: 'active_2',
-    icon: <Image src={active2} alt="" width={58} />,
+    icon: <Image src={active3} alt="" width={58} />,
     des: 'active_2_des',
   },
   {
@@ -2005,7 +2011,7 @@ export const active_member = [
   },
   {
     title: 'active_3',
-    icon: <Image src={active3} alt="" width={58} />,
+    icon: <Image src={active1} alt="" width={58} />,
     des: 'active_3_des',
   },
 ]
@@ -2026,20 +2032,20 @@ export const active_member_detail = [
 ]
 export const active_member_share = [
   {
-    icon: <PowerWarnIcon />,
+    icon: <ActivePower />,
     title: 'warn_power',
   },
   {
-    icon: <SectorWarnIcon />,
+    icon: <ActiveSector />,
     title: 'warn_sector',
   },
   {
-    icon: <BalanceWarnIcon />,
+    icon: <ActiveBalance />,
     title: 'warn_balance',
   },
   {
-    icon: getSvgIcon('monitor'),
-    title: 'companies_5',
+    icon: <ActiveWarn />,
+    title: 'active_member_warn',
   },
 ]
 

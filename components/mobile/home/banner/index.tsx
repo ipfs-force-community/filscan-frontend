@@ -2,15 +2,14 @@ import styles from './style.module.scss'
 import { observer } from 'mobx-react'
 import { Carousel, Image } from 'antd'
 import useAxiosData from '@/store/useAxiosData'
-import { useFilscanStore } from '@/store/FilscanStore'
 import { useEffect, useRef, useState } from 'react'
 import useWindow from '@/components/hooks/useWindown'
 import { apiUrl } from '@/contents/apiUrl'
+import filscanStore from '@/store/modules/filscan'
 
 const Banner = (props: any) => {
   const { axiosData } = useAxiosData()
-  const { theme, lang } = useFilscanStore()
-  const carousel = useRef<any>(null)
+  const { lang } = filscanStore
   const [data, setData] = useState([])
   const { isMobile } = useWindow()
   useEffect(() => {

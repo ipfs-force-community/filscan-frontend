@@ -223,6 +223,8 @@ const account = {
   power_rules_3: '3. 扇区正常到期',
   //会员
   //会员
+  member_miner_warn: '当前节点个数已达上限，升级会员畅享',
+  member_warn: '您的会员权益即将到期，请及时续费，以免影响正常使用',
   member_header: '如果你担心或碰到过以下问题',
   power_title: '算力掉落',
   power_text: '扇区大批出错，致使算力锐减却无法及时获知，导致出块奖励损失惨重',
@@ -238,7 +240,8 @@ const account = {
   warn_phone: '电话告警',
   data_text: '重点信息一站式监控',
   warn_text: '告警渠道多样，灵活配置',
-  member_content_title: '会员等级',
+  member_warn_title: '添加监控，告警快人一步',
+  member_content_title: '加入会员，即可开启',
   companies: '企业会员',
   companiesPro: '企业Pro版',
   companies_1: '30个节点上限',
@@ -252,8 +255,9 @@ const account = {
   year: '年度会员',
   quarter_discount: '低于8.8折',
   year_discount: '低于8.0折',
-  share_friend: '邀请朋友，赠送一个月黄金会员',
+  share_friend: '邀请朋友，赠送一个月企业版会员',
   share_turn: '即刻开启，最大化减少损失',
+  tg_title: '添加商务TG开通',
   //活动
   success_member: '已成功注册',
   error_member: '未绑定节点',
@@ -265,6 +269,7 @@ const account = {
   send_member: '送会员',
   invite_code: '邀请码',
   active_share: '去邀请',
+  active_member_warn: '短信 、电话告警',
   active: '邀请活动',
   active_rule: '活动规则',
   active_detail: '详情',
@@ -276,10 +281,22 @@ const account = {
   active_expired: '会员到期后，权益自动回收，您可通过续费继续享用相关服务。',
   active_1: '邀请好友',
   active_1_des: '发送邀请海报或邀请码给好友，扫码或登录官网填写邀请码注册',
-  active_2: '好友注册成功',
-  active_2_des: '好友注册成功，并成功添加有效节点，累计登录3天',
+  active_2: '注册添加',
+  active_2_des: '好友注册成功，并成功添加有效节点',
   active_3: '邀请2个有效好友',
   active_3_des: '邀请2个有效好友，成功领取奖励',
+  active_target_1: '节点信息 一网打尽',
+  active_target_2: '异常告警 快人一步',
+  scan_code: '立即扫码体验',
+  active_des: '活动解释权归FILSCAN所有',
+  active_gift: '新人赠送7天企业版体验权益',
+  active_save: '保存本地',
+  copy_tg: '复制ID',
+  recommend: '推荐',
+  //personal
+  personal_1: '升级/续费会员',
+  personal_2: '绑定邮箱',
+  personal_3: '修改密码',
 }
 
 export default account

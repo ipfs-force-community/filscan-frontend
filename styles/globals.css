@@ -88,6 +88,8 @@ body {
 /* #__next{
   width: 100%;
   height: 100vh;
+
+  PingFangSC-Regular 
 } */
 
 .container_body {
@@ -99,6 +101,7 @@ body {
   min-height: 800px;
   width: 100%;
   height: 100%;
+  font-family: HarmonyOS_Regular;
   background-color: var(--main-bg-color);
 }
 

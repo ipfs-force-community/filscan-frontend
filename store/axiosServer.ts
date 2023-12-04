@@ -9,7 +9,6 @@ export interface RequestResult {
   data: any
   error: string | null
 }
-
 export const axiosServer = async <T>(
   url: string,
   payload = {},
@@ -26,8 +25,12 @@ export const axiosServer = async <T>(
 
   const request = async (retry: number): Promise<RequestResult> => {
     try {
+      const mail =
+        typeof window !== 'undefined' ? localStorage.getItem(`mail`) : null
       const token =
-        typeof window !== 'undefined' ? localStorage.getItem('token') : null // 在客户端使用 localStorage
+        typeof window !== 'undefined'
+          ? localStorage.getItem(`token-${mail}`)
+          : null // 在客户端使用 localStorage
       const response: AxiosResponse<any> = await axios.request({
         url,
         method: 'POST',

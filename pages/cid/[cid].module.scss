@@ -1,18 +1,18 @@
-@media screen and (max-width: 1000px){
-    .cid{
-        padding: 12px;
-        :global{
-            .des{
-                color: var(--mobile-title-color);
-                word-break: break-all;
-                font-weight: 500;
-                font-size: 15px;
-                font-family: DINPro-Medium, DINPro;
-                line-height: 14px;
-            }
-            .ant-pagination{
-                justify-content: flex-end;
-            }
-        }
+@media screen and (max-width: 1000px) {
+  .cid {
+    padding: 12px;
+    :global {
+      .des {
+        color: var(--mobile-title-color);
+        word-break: break-all;
+        font-weight: 500;
+        font-size: 15px;
+        font-family: HarmonyOS_Medium, HarmonyOS_Regular;
+        line-height: 14px;
+      }
+      .ant-pagination {
+        justify-content: flex-end;
+      }
     }
+  }
 }

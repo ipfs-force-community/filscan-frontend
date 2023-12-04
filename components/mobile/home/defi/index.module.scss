@@ -9,7 +9,7 @@
     background: var(--mobile-title-color);
     color: var(--mobile-text-unimportant);
     font-size: 12px;
-    font-family: "DINPro-Medium";
+    font-family: 'HarmonyOS_Medium';
   }
 
   .protocol {
@@ -28,16 +28,13 @@
     .title {
       padding: 18px 0px 10px 0px;
       font-size: 16px;
-      font-family: "DINPro-Medium";
+      font-family: 'HarmonyOS_Medium';
     }
     .content {
       overflow: hidden;
       border: 1px solid #eeeff1;
       border-radius: 6px !important;
       background: white;
-
     }
   }
-
-
 }

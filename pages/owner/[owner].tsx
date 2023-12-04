@@ -46,7 +46,7 @@ export default () => {
     <div className={classNames('main_contain', styles.miner)}>
       <div
         className={
-          'DINPro-Medium mb-2.5 flex items-center gap-x-2 text-lg font-medium'
+          'HarmonyOS_Medium mb-2.5 flex items-center gap-x-2 text-lg font-medium'
         }
       >
         <BrowserView>
