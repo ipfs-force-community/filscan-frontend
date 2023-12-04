@@ -247,6 +247,7 @@ const account = {
   warn_phone: '전화 알림',
   data_text: '중요 정보 통합 모니터링',
   warn_text: '다양한 경고 채널과 유연한 구성',
+  member_warn_title: '모니터링 추가, 경고로 빠르게 대응하기',
   member_content_title: '멤버십 레벨',
   companies: '기업 멤버십',
   companiesPro: '기업 Pro 에디션',

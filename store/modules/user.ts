@@ -34,7 +34,7 @@ class UserStore {
       loading: true,
     }
     this.verifyCode = ''
-    this.vipModal = true
+    this.vipModal = false
     this.recordList = []
     this.showMemberWarn = false
     this.inviteCode = ''
@@ -147,11 +147,11 @@ class UserStore {
     }
     if (!userData.error && !userData?.data?.code) {
       localStorage.setItem('token', userData.data?.token)
+      await this.getUserInfo()
       if (typeof window !== 'undefined') {
         // 使用 router 进行路由导航等操作
         Router.push('/account#overview')
       }
-      this.getUserInfo()
       messageManager.showMessage({
         type: 'success',
         content: 'login successful',

@@ -1,7 +1,11 @@
 .active {
   &_header {
-    height: 353px;
-    background-color: plum;
+    img {
+      width: 100%;
+      object-fit: cover;
+      max-height: 353px;
+      border-radius: 12px;
+    }
   }
   &_title {
     display: flex;

@@ -249,6 +249,7 @@ const account = {
   warn_phone: 'Phone Call Alerts',
   data_text: 'Comprehensive Monitoring Of Critical Information',
   warn_text: 'Diverse Alert Channels With Flexible Configurations',
+  member_warn_title: 'Add Monitoring, Stay Ahead With Alerts',
   member_content_title: 'Membership Levels',
   companies: 'Enterprise Membership',
   companiesPro: 'Enterprise Pro',

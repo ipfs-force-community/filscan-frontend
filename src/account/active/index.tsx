@@ -9,8 +9,15 @@ import userStore from '@/store/modules/user'
 import Table from '@/packages/Table'
 import { useMemo, useState } from 'react'
 import { Button } from 'antd'
+import Image from 'next/image'
+import active_zh from '@/assets/images/member/active_zh.jpg'
+import active_kr from '@/assets/images/member/active_kr.jpg'
+import active_en from '@/assets/images/member/active_en.jpg'
+import filscanStore from '@/store/modules/filscan'
+
 export default observer(() => {
   const { inviteCode, recordList } = userStore
+  const { lang } = filscanStore
   const { tr } = Translation({ ns: 'account' })
   const [show, setShow] = useState(false)
 
@@ -20,9 +27,20 @@ export default observer(() => {
     })
   }, [tr])
 
+  const showSrc = useMemo(() => {
+    if (lang === 'zh') {
+      return active_zh
+    } else if (lang === 'kr') {
+      return active_kr
+    }
+    return active_en
+  }, [lang])
+
   return (
     <div className={`${style.active}`}>
-      <div className={style.active_header}>ddd</div>
+      <div className={style.active_header}>
+        <Image src={showSrc} alt="" />
+      </div>
       <div className={style.active_title}>
         {tr('active_rule')} <Detail />
       </div>

@@ -293,6 +293,10 @@ const account = {
   active_save: '保存本地',
   copy_tg: '复制ID',
   recommend: '推荐',
+  //personal
+  personal_1: '升级/续费会员',
+  personal_2: '绑定邮箱',
+  personal_3: '修改密码',
 }
 
 export default account
