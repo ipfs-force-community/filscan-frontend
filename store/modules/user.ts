@@ -146,7 +146,8 @@ class UserStore {
       })
     }
     if (!userData.error && !userData?.data?.code) {
-      localStorage.setItem('token', userData.data?.token)
+      localStorage.setItem(`mail`, userData.data?.mail)
+      localStorage.setItem(`token-${userData.data.mail}`, userData.data?.token)
       await this.getUserInfo()
       if (typeof window !== 'undefined') {
         // 使用 router 进行路由导航等操作

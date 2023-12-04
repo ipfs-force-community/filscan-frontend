@@ -45,7 +45,7 @@ const Account: React.FC = () => {
   }, [hash])
 
   useEffect(() => {
-    if (!userInfo.mail || !localStorage.getItem('token')) {
+    if (!userInfo.mail || !localStorage.getItem(`token-${userInfo.mail}`)) {
       router.push('/admin/login')
       return
     } else {

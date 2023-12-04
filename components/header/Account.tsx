@@ -47,7 +47,8 @@ export default observer(() => {
                 key={index}
                 onClick={() => {
                   //logout
-                  localStorage.removeItem('token')
+                  localStorage.removeItem(`mail`)
+                  localStorage.removeItem(`token-${mail}`)
                   userStore.clearUserInfo()
                   router.reload()
                 }}
