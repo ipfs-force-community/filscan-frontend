@@ -2,39 +2,31 @@
 
 import { Translation } from '@/components/hooks/Translation'
 import Logo from '@/assets/images/logo.svg'
-import UserIcon from '@/assets/images/user.svg'
 import userStore from '@/store/modules/user'
 import { formatDateTime } from '@/utils'
 import { Input } from 'antd'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { getSvgIcon } from '@/svgsIcon'
 import { observer } from 'mobx-react'
 import { personal_list } from '@/contents/user'
+import { userType } from '@/contents/account'
+import style from './index.module.scss'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' })
-  const { userInfo, showMemberWarn } = userStore
+  const { userInfo, memberWarn } = userStore
+  const { membership_type } = userInfo
   const [edit, setEdit] = useState(false)
   const [name, setName] = useState('')
 
   const handleSaveName = async () => {
     setEdit(false)
-    // const result = await axiosData(proApi.updateInfo, {
-    //   name,
-    // })
-    // if (result) {
-    //   messageManager.showMessage({
-    //     type: 'success',
-    //     content: 'Update successful',
-    //   })
-    // }
   }
-
   return (
     <>
       <p className="font-HarmonyOS text-lg font-semibold">
         {tr('personal')}
-        {showMemberWarn && (
+        {memberWarn && (
           <span
             className=" ml-4 cursor-pointer text-xs font-normal text-warnColor"
             onClick={() => {
@@ -74,11 +66,16 @@ export default observer(() => {
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span className="des_bg_color flex w-fit gap-x-2 rounded-[5px] px-[6px] py-1">
-              <UserIcon width={20} height={20} />
-              <span>{tr('default_user')}</span>
+            <span
+              className={`${style.membership_card} ${
+                style[`membership_card_${membership_type}`]
+              }`}
+            >
+              {userType[membership_type]?.icon}
+              <span>{tr(userType[membership_type]?.title)}</span>
             </span>
-            <span className="text_des mt-2 text-xs ">
+            {/* <span className="des_bg_color flex w-fit gap-x-2 rounded-[5px] px-[6px] py-1"></span> */}
+            <span className="text_des mt-2 text-xs">
               <span className="mr-2">{tr('last_login')}:</span>
               {formatDateTime(userInfo.last_login)}
             </span>

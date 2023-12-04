@@ -27,6 +27,7 @@ class UserStore {
   vipModal: boolean
   recordList: Array<any>
   showMemberWarn: boolean
+  memberWarn: boolean
   inviteCode: string
   constructor() {
     this.userInfo = {
@@ -37,6 +38,7 @@ class UserStore {
     this.vipModal = false
     this.recordList = []
     this.showMemberWarn = false
+    this.memberWarn = false
     this.inviteCode = ''
     makeObservable(this, {
       isLogin: computed,
@@ -44,6 +46,7 @@ class UserStore {
       vipModal: observable,
       recordList: observable,
       showMemberWarn: observable,
+      memberWarn: observable,
     })
     this.getUserInfo()
   }
@@ -111,6 +114,7 @@ class UserStore {
         ) {
           //会员还有不超过15天到期
           this.showMemberWarn = true
+          this.memberWarn = true
         }
         this.userInfo = {
           ...(userData?.data || {}),

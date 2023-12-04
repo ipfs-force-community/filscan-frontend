@@ -91,12 +91,11 @@ export default observer(() => {
           </div>
           <div className={`${style.member_content}`}>
             <div className={`${style.member_content_title}`}>
-              {/* <LeftIcon /> */}
               {tr('member_content_title')}
-              {/* <RightIcon /> */}
             </div>
             <div className={style.member_content_main}>
-              {member_main.map((item: any, index: number) => {
+              {Object.keys(member_main).map((key: string, index: number) => {
+                const item = member_main[key]
                 return (
                   <div
                     key={index}

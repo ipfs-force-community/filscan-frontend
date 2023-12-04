@@ -39,6 +39,24 @@ import step from '@/assets/images/step.png'
 import Image from 'next/image'
 import Vip from '@/assets/images/member/vip.svg'
 import FreeVip from '@/assets/images/freeVip.svg'
+import UserIcon from '@/assets/images/user.svg'
+export const userType: any = {
+  NormalVIP: {
+    title: 'default_user',
+    bgColor: '',
+    icon: <UserIcon width={20} height={20} />,
+  },
+  EnterpriseVIP: {
+    title: 'companies',
+    bgColor: 'rgba(214, 156, 98, 1)',
+    icon: <Image src={CompaniesV} width={32} alt="" />,
+  },
+  EnterpriseProVIP: {
+    title: 'companiesPro',
+    bgColor: 'rgba(15, 24, 51, 1)',
+    icon: <Image src={CompaniesV} width={32} alt="" />,
+  },
+}
 
 export const account_manager: Array<MenuItem> = [
   {
@@ -109,7 +127,7 @@ export const account_manager: Array<MenuItem> = [
   {
     label: 'active',
     href: 'active',
-    sufIcon: <FreeVip className="ml-4 scale-[3]" />,
+    sufIcon: <FreeVip className="ml-4 scale-[3]" style={{ fill: 'red' }} />,
     icon: getSvgIcon('member_active'),
     key: 'active',
   },
@@ -1894,8 +1912,8 @@ export const member_list_2 = [
   },
 ]
 
-export const member_main = [
-  {
+export const member_main: any = {
+  companies: {
     title: 'companies',
     icon: <Image src={CompaniesV} alt="" width={126} />,
     list: [
@@ -1915,7 +1933,7 @@ export const member_main = [
       { title: 'year', price: '1599U', discount: 'year_discount' },
     ],
   },
-  {
+  companiesPro: {
     title: 'companiesPro',
     icon: <Image src={CompaniesVPro} alt="" width={126} />,
     list: [
@@ -1936,7 +1954,7 @@ export const member_main = [
       { title: 'year', price: '1599U', discount: 'year_discount' },
     ],
   },
-]
+}
 
 //活动
 export const active_member = [

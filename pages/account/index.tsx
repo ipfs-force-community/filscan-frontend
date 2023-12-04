@@ -98,7 +98,7 @@ const Account: React.FC = () => {
         <Link href={`/account#${item.key}`} scroll={false}>
           <span className={style.submenu_title}>
             {tr(item.label)}
-            {item.sufIcon}
+            <span className={style.submenu_title_icon}>{item.sufIcon}</span>
           </span>
         </Link>
       </Menu.Item>

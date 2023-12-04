@@ -1,0 +1,16 @@
+.membership_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  &_EnterpriseVIP {
+    color: #6d3f1a;
+    background: linear-gradient(315deg, #f2c37d 0%, #fff2da 100%);
+  }
+  &_EnterpriseProVIP {
+    color: #faefff;
+    background: linear-gradient(310deg, #0f1833 0%, #5f6688 100%);
+  }
+}

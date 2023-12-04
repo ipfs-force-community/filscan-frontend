@@ -254,7 +254,7 @@ const account = {
   quarter: '季度会员',
   year: '年度会员',
   quarter_discount: '低于8.8折',
-  year_discount: '低于8.0折',
+  year_discount: '低于8折',
   share_friend: '邀请朋友，赠送一个月企业版会员',
   share_turn: '即刻开启，最大化减少损失',
   tg_title: '添加商务TG开通',
