@@ -15,7 +15,6 @@ export default (props: Props) => {
   const { show, onChange } = props
   const { userInfo, showMemberWarn } = userStore
   const { tr } = Translation({ ns: 'account' })
-  console.log('---3', show)
   const [form] = Form.useForm()
 
   const [loading, setLoading] = useState(false)
