@@ -14,6 +14,7 @@ import styles from './index.module.scss'
 import MTable from '@/packages/mobile/table'
 import useWindow from '@/components/hooks/useWindown'
 import { get } from 'lodash'
+import classNames from 'classnames'
 interface Props {
   selectedKey: string
 }
@@ -46,7 +47,7 @@ export default observer((props: Props) => {
   }
 
   return (
-    <>
+    <div className={styles.wrap}>
       <BrowserView>
         <div className="flex items-center justify-between">
           <div className="flex  flex-col">
@@ -99,7 +100,12 @@ export default observer((props: Props) => {
           </div>
         </div>
       </MobileView>
-      <div className="card_shadow border_color mt-5 rounded-xl border p-4">
+      <div
+        className={classNames(
+          'card_shadow border_color mt-5 rounded-xl border p-4',
+          styles['table-wrap'],
+        )}
+      >
         <BrowserView>
           <Table
             data={luckyData?.lucky_rate_list || []}
@@ -116,6 +122,6 @@ export default observer((props: Props) => {
           />
         </MobileView>
       </div>
-    </>
+    </div>
   )
 })
