@@ -276,6 +276,24 @@ const mobileNavMenu: Menu_Info[] = [
     ],
   },
   {
+    key: 'monitor',
+    type: 'account',
+    children: [
+      {
+        key: 'monitor_balance',
+        link: '#monitorBalance',
+      },
+      {
+        key: 'monitor_sector',
+        link: '#monitorSector',
+      },
+      {
+        key: 'monitor_power',
+        link: '#monitorPower',
+      },
+    ],
+  },
+  {
     key: 'login',
     link: '/admin/login',
     // children: [
