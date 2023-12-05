@@ -139,7 +139,15 @@ class ManageStore {
     })
     const result: RequestResult = await axiosServer(expiredData, { ...payload })
     runInAction(() => {
-      this.expiredData = result?.data || {}
+      const data = result?.data || {}
+      if (data.sector_detail_month) {
+        data.sector_detail_month = data.sector_detail_month.map(
+          (item: any, index: number) => {
+            return { ...item, id: index }
+          },
+        )
+      }
+      this.expiredData = data
       this.expiredLoading = false
     })
   }

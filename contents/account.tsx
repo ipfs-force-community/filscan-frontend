@@ -1560,39 +1560,47 @@ export const account_expired = {
   columns: (tr: any, type?: 'detail') => {
     let arr: Array<any> = [
       {
-        title: 'tag',
-        dataIndex: 'tag',
-        width: '15%',
-        ellipsis: {
-          showTitle: false,
-        },
-        render: (text: string, record: any) => {
-          return <TagInput isEdit={false} text={text} record={record} />
-        },
-      },
-      {
-        title: 'miner_id',
-        dataIndex: 'miner_id',
-        width: '10%',
-        render: (text: string) => (
-          <Link href={`/account#expired?miner=${text}`} className="link_text">
-            {text}
-          </Link>
-        ),
-      },
-      {
         title: 'group_name',
         dataIndex: 'group_name',
-        width: '15%',
+        width: 100,
+        fixed: 'left',
         ellipsis: {
           showTitle: false,
         },
         render: (text: string, record: any) => {
           const showText = record.is_default ? tr('default_group') : text
           return (
-            <div className="w-fit rounded-[5px] bg-bg_hover p-2 text-xs text-primary">
+            <div className="text_color w-fit rounded-[5px] p-2 font-normal">
               {showText}
             </div>
+          )
+        },
+      },
+      {
+        title: 'miner_id',
+        dataIndex: 'miner_id',
+        width: 100,
+        fixed: 'left',
+        render: (text: string, record: any) => {
+          return (
+            <>
+              <div className="flex items-center gap-x-[1px]">
+                <Link
+                  href={`/account#power?miner=${text}`}
+                  className="link_text"
+                >
+                  {text}
+                </Link>
+                {record?.tag && (
+                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
+                    <TextTooltip
+                      text={record?.tag}
+                      className="whitespace-nowrap"
+                    />
+                  </span>
+                )}
+              </div>
+            </>
           )
         },
       },
