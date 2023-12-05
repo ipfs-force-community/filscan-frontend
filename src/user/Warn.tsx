@@ -36,7 +36,6 @@ export default observer(() => {
           <div className={style.warn_content}>
             <div className={style.warn_main}>
               <div className={style.warn_main_left}>
-                <span>icon-logo &#xe675; </span>
                 <span>{tr('free_send')}</span>
                 <span>
                   7
