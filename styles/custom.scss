@@ -3,6 +3,11 @@
 }
 
 @font-face {
+  font-family: 'iconfont';
+  src: url('../assets/font/iconfont.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
   src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf');
   font-display: auto;
@@ -22,6 +27,13 @@
   font-display: auto;
 }
 
+.icon {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 // @font-face {
 //   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
 //   src: url('../assets/font/din/HarmonyOS_Regular-Regular.otf');
