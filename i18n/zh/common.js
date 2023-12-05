@@ -43,8 +43,7 @@ const common = {
   verification_code: '验证码登录',
   email_placeholder: '输入邮箱号',
   password_placeholder: '输入密码',
-  invite_placeholder: '输入邀请码',
-
+  invite_placeholder: '输入邀请码(选填)',
   code_placeholder: '输入验证码',
   remember_me: '记住并自动登录',
   forgot_password: '忘记密码',
