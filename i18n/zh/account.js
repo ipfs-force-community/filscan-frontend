@@ -304,7 +304,7 @@ const account = {
   mail_success: '已绑定',
 
   //第一次弹窗
-  free_send: '企业会员免费赠送',
+  free_send: '企业版会员免费赠送',
 }
 
 export default account

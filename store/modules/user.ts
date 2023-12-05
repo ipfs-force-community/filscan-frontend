@@ -42,7 +42,7 @@ class UserStore {
     this.recordList = []
     this.showMemberWarn = false
     this.memberWarn = false
-    this.firstWarn = false
+    this.firstWarn = true
     this.inviteCode = ''
     makeObservable(this, {
       isLogin: computed,

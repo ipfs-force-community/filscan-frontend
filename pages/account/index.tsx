@@ -122,7 +122,7 @@ const Account: React.FC = () => {
     active: <Active />,
   }
 
-  const noMiners = ['miner_add', 'person', 'miners', 'active']
+  const noMiners = ['miner_add', 'personal', 'miners', 'active']
   return (
     <>
       <BrowserView>

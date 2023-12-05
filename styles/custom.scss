@@ -213,6 +213,14 @@
         }
       }
       .ant-table-tbody {
+        .ant-table-cell {
+          font-family: HarmonyOS;
+          background-color: var(--bgColor);
+          border-bottom: 1px solid var(--border-color);
+          &::before {
+            display: none;
+          }
+        }
         .ant-table-cell-fix-left,
         .ant-table-cell-fix-right {
           background-color: var(--bgColor);

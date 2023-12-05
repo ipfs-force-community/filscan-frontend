@@ -7,8 +7,11 @@ import { Translation } from '@/components/hooks/Translation'
 import BgMore from '@/assets/images/member/bgMore.svg'
 
 import { observer } from 'mobx-react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 export default observer(() => {
   const { firstWarn } = userStore
+  const router = useRouter()
   const item = member_main.EnterpriseVIP
   const { tr } = Translation({ ns: 'account' })
   return (
@@ -60,7 +63,13 @@ export default observer(() => {
               )
             })}
           </ul>
-          <div className={style.warn_btn}>
+          <div
+            className={style.warn_btn}
+            onClick={() => {
+              userStore.setFirstWarn(false)
+              router.push('/account/#monitorBalance')
+            }}
+          >
             {tr('look_detail')}
             <span className={style.warn_btn_icon}>
               <BgMore />

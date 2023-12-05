@@ -41,7 +41,7 @@ export default observer(() => {
                 userStore.setVipModal(false)
               }}
             >
-              X
+              {getSvgIcon('closeIcon')}
             </span>
           </div>
           <div className={style.content}>
@@ -52,7 +52,9 @@ export default observer(() => {
                   <div className={style.content_card_title}>
                     {tr(item.title)}
                   </div>
-                  <div>{tr(item.value)}</div>
+                  <div className={style.content_card_value}>
+                    {tr(item.value)}
+                  </div>
                 </div>
               )
             })}
@@ -180,6 +182,7 @@ export default observer(() => {
               setShow(true)
             }}
           >
+            <span className={style.member_btnShare_icon}>Free VIP</span>
             <Vip />
             {tr('share_friend')}
           </div>

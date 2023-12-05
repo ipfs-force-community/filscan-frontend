@@ -236,7 +236,7 @@ const account = {
   power_title: 'Drop In Power',
   power_text:
     'Due to a large number of sector errors, power sharply decreases without timely notification, resulting in significant loss of block rewards',
-  balance_title: 'Insufficient Account Balance',
+  balance_title: 'Insufficient Balance',
   balance_text:
     'Insufficient account balance without timely information access leads to failed sector sealing or maintenance',
   sector_title: 'Sector Expiration',
@@ -276,7 +276,7 @@ const account = {
   error_active: 'Valid',
   invitees: 'Invitee',
   is_valid: 'Validity',
-  send_member: 'Free Vip',
+  send_member: 'Free VIP',
   invite_code: 'Code',
   active_share: 'Invite Now',
   active_member_warn: 'SMS And Phone Alerts',
