@@ -1,6 +1,7 @@
 const account = {
   date: '日期',
   day: '天',
+  copy: '复制',
   confirm: '确认',
   cancel: '取消',
   //login: '节点管家',

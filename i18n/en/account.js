@@ -1,5 +1,6 @@
 const account = {
   date: 'Date',
+  copy: 'Copy',
   day: 'Day',
   confirm: 'Confirm',
   cancel: 'Cancel',
@@ -267,6 +268,50 @@ const account = {
   share_friend: 'Invite And Free one-month Enterprise Edition Membership',
   share_turn: 'Start Now And Minimize Losses',
   tg_title: 'Add Business TG For Activation',
+  //活动
+  success_member: '已成功注册',
+  error_member: '未绑定节点',
+  success_miners: '已绑定节点',
+  success_active: '有效',
+  error_active: '无效',
+  invitees: 'Invitee',
+  is_valid: 'Validity',
+  send_member: '送会员',
+  invite_code: 'Code',
+  active_share: 'Invite Now',
+  active_member_warn: '短信 、电话告警',
+  active: 'Invitation',
+  active_rule: 'Event Rules',
+  active_detail: 'Details',
+  active_rule_detail: 'Details',
+  rule_content:
+    'Accumulate invitations for 2 node managers to register and have their invited accounts bind with valid node information, and receive a one-month Enterprise Edition membership worth 169U. The invitees can also enjoy 7 days of Enterprise Edition benefits',
+  active_member: 'Enterprise Edition Membership Benefits:',
+  active_member_1: 'Full monitoring capabilities.',
+  active_expired:
+    'After the membership expires, the benefits will be automatically revoked. You can continue to enjoy the related services by renewing the membership.',
+  active_1: '邀请好友',
+  active_1_des:
+    'Send invitation posters or invitation codes to friends, they can scan the code or register on the official website with the invitation code.',
+  active_2: '注册添加',
+  active_2_des:
+    'Your friend has successfully registered and added valid nodes.',
+  active_3: '邀请2个有效好友',
+  active_3_des: 'Invite 2 valid friends and successfully claim the reward',
+  active_target_1: '节点信息 一网打尽',
+  active_target_2: '异常告警 快人一步',
+  scan_code: '立即扫码体验',
+  active_des: '活动解释权归FILSCAN所有',
+  active_gift: '新人赠送7天企业版体验权益',
+  active_save: '保存本地',
+  copy_tg: '复制ID',
+  recommend: '推荐',
+  //personal
+  personal_1: '升级/续费会员',
+  personal_2: '绑定邮箱',
+  personal_3: '修改密码',
+  member_expired_time: '到期',
+  mail_success: '已绑定',
 }
 
 export default account

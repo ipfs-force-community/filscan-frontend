@@ -121,6 +121,7 @@ const Account: React.FC = () => {
     active: <Active />,
   }
 
+  const noMiners = ['miner_add', 'person', 'miners', 'active']
   return (
     <>
       <BrowserView>
@@ -166,8 +167,7 @@ const Account: React.FC = () => {
             >
               {!miners_count &&
               hashParams.type !== 'miner_add' &&
-              selectedKey !== 'personal' &&
-              selectedKey !== 'miners' ? (
+              !noMiners.includes(selectedKey) ? (
                 <NoMiner selectedKey={selectedKey} />
               ) : (
                 childrenData[selectedKey]

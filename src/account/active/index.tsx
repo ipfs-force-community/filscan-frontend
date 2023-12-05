@@ -2,15 +2,16 @@ import { Translation } from '@/components/hooks/Translation'
 import style from './index.module.scss'
 import Detail from './detail'
 import { active_member, active_member_list } from '@/contents/account'
-import Copy from '@/components/copy'
 import Share from './Share'
+import copy from 'copy-to-clipboard'
 import { observer } from 'mobx-react-lite'
 import userStore from '@/store/modules/user'
 import Table from '@/packages/Table'
 import { useMemo, useState } from 'react'
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import Image from 'next/image'
 import filscanStore from '@/store/modules/filscan'
+import memberZh from '@/assets/images/member/member_Zh.jpg'
 
 export default observer(() => {
   const { inviteCode, recordList } = userStore
@@ -24,6 +25,10 @@ export default observer(() => {
     })
   }, [tr])
 
+  const handleCopy = (value: string) => {
+    copy(value)
+    return message.success('Clipboard Successfully')
+  }
   // const showSrc = useMemo(() => {
   //   if (lang === 'zh') {
   //     return active_zh
@@ -35,7 +40,9 @@ export default observer(() => {
 
   return (
     <div className={`${style.active}`}>
-      <div className={style.active_header}>dd</div>
+      <div className={style.active_header}>
+        <Image src={memberZh} alt="" />
+      </div>
       <div className={style.active_title}>
         {tr('active_rule')} <Detail />
       </div>
@@ -50,7 +57,7 @@ export default observer(() => {
                 }`}
               >
                 <div className={style.active_content_item_image}>{v.icon}</div>
-                <div>{tr(v.title)}</div>
+                {/* <div>{tr(v.title)}</div> */}
                 <div className={style.active_des}>{tr(v.des)}</div>
               </div>
             </>
@@ -61,7 +68,20 @@ export default observer(() => {
         <div className={style.active_share_item}>
           <span className={style.active_des}>{tr('invite_code')}</span>
           <span className={style.active_value}>
-            {inviteCode} <Copy text={inviteCode} />
+            {inviteCode?.split('')?.map((v, index: number) => {
+              return (
+                <span className={style.active_value_code} key={index}>
+                  {v}
+                </span>
+              )
+            })}
+            <span
+              className={`${style.active_value_code} ${style.active_value_copy}`}
+              onClick={() => handleCopy(inviteCode)}
+            >
+              {tr('copy')}
+            </span>
+            {/* <Copy text={inviteCode} /> */}
           </span>
         </div>
         <div>

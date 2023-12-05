@@ -1,6 +1,7 @@
 const account = {
   date: '날짜',
   day: '일',
+  copy: 'Copy',
   confirm: 'Confirm',
   cancel: 'Cancel',
   go_home: '홈으로',
@@ -265,6 +266,49 @@ const account = {
   share_friend: '친구를 초대하여 한 달간의 기업 멤버십을 선물하세요',
   share_turn: '지금 시작하고 손실을 최소화하세요',
   tg_title: '비즈니스 TG 추가로 활성화',
+  //活动
+  success_member: '已成功注册',
+  error_member: '未绑定节点',
+  success_miners: '已绑定节点',
+  success_active: '有效',
+  error_active: '无效',
+  invitees: '초대 받은 사람',
+  is_valid: '유효 여부',
+  send_member: '送会员',
+  invite_code: '초대 코드',
+  active_share: '지금 초대하기',
+  active_member_warn: '短信 、电话告警',
+  active: '초대 이벤트',
+  active_rule: '이벤트 규칙',
+  active_detail: '자세한 내용',
+  active_rule_detail: '세부',
+  rule_content:
+    '노드 관리자 2명 이상을 초대하여 등록하고 초대된 계정이 유효한 노드 정보와 바인딩되면, 169U에 해당하는 1개월의 엔터프라이즈 에디션 회원 자격을 받게 됩니다. 초대 받은 사람들은 7일간 엔터프라이즈 에디션 혜택을 체험할 수도 있습니다.',
+  active_member: '엔터프라이즈 에디션 회원 자격 혜택:',
+  active_member_1: '완전한 모니터링 기능',
+  active_expired:
+    '회원 자격이 만료되면 혜택은 자동으로 회수됩니다. 회원 자격을 재신청하여 관련 서비스를 계속해서 이용할 수 있습니다.',
+  active_1: '邀请好友',
+  active_1_des:
+    '친구에게 초대 포스터나 초대 코드를 보내고, 코드를 스캔하거나 공식 웹사이트에서 초대 코드로 등록하세요.',
+  active_2: '注册添加',
+  active_2_des: '친구가 성공적으로 등록하고 유효한 노드를 추가했습니다.',
+  active_3: '邀请2个有效好友',
+  active_3_des: '성공적으로 유효한 친구 2명을 초대하고 보상을 받았습니다.',
+  active_target_1: '节点信息 一网打尽',
+  active_target_2: '异常告警 快人一步',
+  scan_code: '立即扫码体验',
+  active_des: '活动解释权归FILSCAN所有',
+  active_gift: '新人赠送7天企业版体验权益',
+  active_save: '保存本地',
+  copy_tg: '复制ID',
+  recommend: '推荐',
+  //personal
+  personal_1: '升级/续费会员',
+  personal_2: '绑定邮箱',
+  personal_3: '修改密码',
+  member_expired_time: '到期',
+  mail_success: '已绑定',
 }
 
 export default account
