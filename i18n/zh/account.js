@@ -37,6 +37,7 @@ const account = {
   edit_delete: '删除',
   created_at: '创建时间',
   look_more: '查看权益',
+  look_detail: '查看详情',
 
   //个人账户
   register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
@@ -243,7 +244,7 @@ const account = {
   data_text: '重点信息一站式监控',
   warn_text: '告警渠道多样，灵活配置',
   member_warn_title: '添加监控，告警快人一步',
-  member_content_title: '加入会员，即可开启',
+  member_content_title: '加入会员，即刻开启',
   companies: '企业会员',
   companiesPro: '企业Pro版',
   companies_1: '30个节点上限',
@@ -301,6 +302,9 @@ const account = {
   personal_3: '修改密码',
   member_expired_time: '到期',
   mail_success: '已绑定',
+
+  //第一次弹窗
+  free_send: '企业会员免费赠送',
 }
 
 export default account

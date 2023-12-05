@@ -29,6 +29,7 @@ class UserStore {
   recordList: Array<any>
   showMemberWarn: boolean
   memberWarn: boolean
+  firstWarn: boolean
   inviteCode: string
   constructor() {
     this.userInfo = {
@@ -40,14 +41,17 @@ class UserStore {
     this.recordList = []
     this.showMemberWarn = false
     this.memberWarn = false
+    this.firstWarn = true
     this.inviteCode = ''
     makeObservable(this, {
       isLogin: computed,
       userInfo: observable,
+      verifyCode: observable,
       vipModal: observable,
       recordList: observable,
       showMemberWarn: observable,
       memberWarn: observable,
+      firstWarn: observable,
     })
     this.getUserInfo()
   }
@@ -62,6 +66,12 @@ class UserStore {
   setMemberWarn(isShow: boolean) {
     runInAction(() => {
       this.showMemberWarn = isShow
+    })
+  }
+  // 关闭第一次弹窗
+  setFirstWarn(value: boolean) {
+    runInAction(() => {
+      this.firstWarn = value
     })
   }
 
@@ -179,6 +189,10 @@ class UserStore {
       localStorage.setItem(`mail`, userData.data?.mail)
       localStorage.setItem(`token-${userData.data.mail}`, userData.data?.token)
       await this.getUserInfo()
+      if (!userData.data.is_activity) {
+        this.setFirstWarn(true)
+      }
+
       if (typeof window !== 'undefined') {
         // 使用 router 进行路由导航等操作
         Router.push('/account#overview')

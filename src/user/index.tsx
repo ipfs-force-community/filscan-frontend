@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import loginIcon from '@/assets/images/loginIcon.png'
 import { Translation } from '@/components/hooks/Translation'
 import Image from 'next/image'
+import Warn from './Warn'
 
 interface Props {
   children: JSX.Element

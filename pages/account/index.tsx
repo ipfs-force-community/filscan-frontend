@@ -28,6 +28,7 @@ import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
 import Active from '@/src/account/active'
+import Warn from '@/src/user/Warn'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
@@ -175,6 +176,7 @@ const Account: React.FC = () => {
             </div>
           </div>
         </div>
+        <Warn />
       </BrowserView>
       <MobileView>
         <div>
