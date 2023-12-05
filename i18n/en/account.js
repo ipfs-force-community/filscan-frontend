@@ -270,8 +270,8 @@ const account = {
   tg_title: 'Add Business TG For Activation',
   //活动
   success_member: 'Registered successfully',
-  error_member: 'Unbound node',
-  success_miners: 'Bound node',
+  error_member: 'Unbound miners',
+  success_miners: 'Bound miners',
   success_active: 'Invalid',
   error_active: 'Valid',
   invitees: 'Invitee',

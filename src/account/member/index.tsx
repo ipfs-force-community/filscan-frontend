@@ -113,7 +113,9 @@ export default observer(() => {
                       <div className={style.member_itemMain_card}>
                         <div className={style.member_itemMain_card_header}>
                           <div className={`${style.member_item_card}`}>
-                            {tr(item.title)}
+                            <span className={`${style.member_item_card_title}`}>
+                              {tr(item.title)}
+                            </span>
                             <span className={style.member_itemMain_card_icon}>
                               {item.icon}
                             </span>

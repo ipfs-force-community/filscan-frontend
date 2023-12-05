@@ -70,6 +70,10 @@
       padding: 0px 20px;
       border-color: rgba(243, 215, 183, 1) rgba(221, 176, 127, 1)
         rgba(221, 176, 127, 1) rgba(243, 215, 183, 1);
+      &_title {
+        font-size: 16px;
+        font-weight: 500;
+      }
     }
     &_list {
       display: flex;
@@ -137,6 +141,10 @@
       background: linear-gradient(310deg, #0f1833 0%, #535d8c 100%);
       border-color: rgba(148, 250, 255, 0.8) rgba(255, 148, 174, 0.8)
         rgba(255, 148, 174, 0.8) rgba(148, 250, 255, 0.8);
+      &_title {
+        font-size: 16px;
+        font-weight: 500;
+      }
     }
     .member_item_priceItem {
       color: #3046b6;
@@ -184,7 +192,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 359px;
+    width: 389px;
     padding: 8px 10px;
     color: #6d3f1a;
     border-radius: 5px;
