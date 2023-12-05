@@ -420,10 +420,15 @@
       color: var(--font-color);
       cursor: pointer;
     }
+    .ant-select-selection-placeholder {
+      font-size: 12px !important;
+    }
   }
+
   .ant-select-selection-placeholder {
     display: flex;
     align-items: center;
+    font-size: 12px !important;
     color: var(--font_des) !important;
   }
 }

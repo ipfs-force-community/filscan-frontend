@@ -63,7 +63,9 @@ export default observer((props: Props) => {
       group?.miners_info?.forEach((v) => {
         allMiners.push({
           miner_tag: v.miner_tag,
-          label: String(v.miner_id),
+          label: showTagLabel
+            ? `${String(v.miner_id)}  ${v.miner_tag ? `(${v.miner_tag})` : ''}`
+            : String(v.miner_id),
           value: String(v.miner_id),
         })
         miners.push({
@@ -147,7 +149,7 @@ export default observer((props: Props) => {
     <div className={style.header}>
       <div className={style.header_left}>
         <Selects
-          style={{ width: '212px' }}
+          style={{ width: '200px' }}
           disabled={disableAll}
           value={selectGroup}
           className={classes?.group}
@@ -160,7 +162,7 @@ export default observer((props: Props) => {
         {props.hasOwnProperty('selectMiner') && (
           <Selects
             disabled={disableAll}
-            style={{ width: '212px' }}
+            style={{ width: '200px' }}
             value={selectMiner}
             className={classes?.miner}
             placeholder={tr('select_miner')}
@@ -172,7 +174,7 @@ export default observer((props: Props) => {
         )}
         {props.hasOwnProperty('selectTag') && (
           <Selects
-            style={{ width: '212px' }}
+            style={{ width: '200px' }}
             disabled={disableAll}
             value={selectTag}
             placeholder={tr('select_miner_tag')}
