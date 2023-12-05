@@ -125,7 +125,7 @@ export default observer((props: Props) => {
               </span>
             </span>
           </div>
-          <div className="flex gap-x-2.5">
+          <div className={classNames(styles.group)}>
             <Groups
               selectGroup={active}
               onChange={(value: string) => {

@@ -137,7 +137,7 @@ export default observer((props: Props) => {
               </span>
             </span>
           </div>
-          <div className={styles.filter}>
+          <div className={styles.group}>
             <Groups
               selectGroup={active}
               onChange={(value: string) => {
