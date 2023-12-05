@@ -300,7 +300,7 @@ const account = {
   personal_1: '升级/续费会员',
   personal_2: '绑定邮箱',
   personal_3: '修改密码',
-  member_expired_time: '到期',
+  member_expired_time: '{{value}} 到期',
   mail_success: '已绑定',
 
   //第一次弹窗

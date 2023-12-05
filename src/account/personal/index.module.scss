@@ -25,7 +25,7 @@
     width: 237px;
     height: 85px;
     cursor: pointer;
-    background: #ffffff
+    background: var(--bgColor)
       linear-gradient(
         283deg,
         rgba(28, 106, 253, 0.1) 0%,
@@ -38,7 +38,11 @@
     }
   }
   &_value {
-    background: #ffffff linear-gradient(283deg, #fafafa 0%, #fafafa 100%);
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    background: var(--bgDesColor);
+    // background: #ffffff linear-gradient(283deg, #fafafa 0%, #fafafa 100%);
     .personal_list_icon {
       color: #fafafa;
       svg {

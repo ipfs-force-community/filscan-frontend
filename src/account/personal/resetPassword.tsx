@@ -58,6 +58,7 @@ export default (props: Props) => {
             form={form}
             onFinish={handleSave}
             layout="vertical"
+            className="custom_form"
           >
             {personal_setting.map((item: any) => {
               const objShow: any = {}

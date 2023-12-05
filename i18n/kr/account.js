@@ -308,11 +308,13 @@ const account = {
   personal_1: '멤버십 업그레이드/갱신',
   personal_2: '绑定邮箱',
   personal_3: '비밀번호 변경',
-  member_expired_time: '到期',
+  member_expired_time: '{{value}}에 만료됨',
   mail_success: '경계',
-  look_more: '查看权益',
-  look_detail: '查看详情',
-  look_detail_member: '免费赠送',
+  look_more: '혜택 보기',
+  look_detail: '세부 내용 확인',
+  look_detail_member: '무료로',
+  //第一次弹窗
+  free_send: '기업 회원 자유로운 선물',
 }
 
 export default account

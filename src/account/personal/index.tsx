@@ -108,9 +108,9 @@ export default observer(() => {
             {tr('personal_1')}
           </span>
           <span className={style.personal_list_des}>
-            {`${formatDateTime(userInfo.expired_time, 'YYYY-MM-DD')} ${tr(
-              'member_expired_time',
-            )}`}
+            {`${tr('member_expired_time', {
+              value: formatDateTime(userInfo.expired_time, 'YYYY-MM-DD'),
+            })}`}
           </span>
         </div>
 

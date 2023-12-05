@@ -310,11 +310,13 @@ const account = {
   personal_1: 'Upgrade/Renew VIP',
   // personal_2: '绑定邮箱',
   personal_3: 'Change Password',
-  member_expired_time: '到期',
+  member_expired_time: 'Expires on {{value}}',
   mail_success: 'Bound',
-  look_more: '查看权益',
-  look_detail: '查看详情',
-  look_detail_member: '免费赠送',
+  look_more: 'Benefits',
+  look_detail: 'Check the Details',
+  look_detail_member: 'For Free',
+  //第一次弹窗
+  free_send: 'Enterprise Membership For Free',
 }
 
 export default account

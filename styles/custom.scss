@@ -76,35 +76,36 @@
 
 .custom_form {
   .ant-form-item {
-    margin-bottom: 10px;
-    &-label {
-      color: var(--font-color);
+    // margin-bottom: 10px;
+    .ant-form-item-label {
+      color: var(--font-color) !important;
+      .ant-form-item-required {
+        color: var(--font-color) !important;
+      }
       label {
-        color: var(--font-color);
+        color: var(--font-color) !important;
       }
     }
     .ant-form-item-explain {
       font-size: 12px;
-      line-height: 16px;
+      // line-height: 16px;
     }
   }
 
-  .ant-form-item-row {
-    height: 100%;
-    .ant-form-item-control {
-      height: 100%;
-      .ant-form-item-control-input {
-        height: 100%;
+  .ant-form-item-control {
+    .ant-form-item-control-input {
+      .ant-input-suffix {
+        .anticon {
+          color: var(--font-color) !important;
+        }
       }
-      .ant-form-item-control-input-content {
-        height: 100%;
-        .ant-input-affix-wrapper {
-          height: 100%;
-          background-color: transparent !important;
-          .ant-input {
-            &::value {
-              background-color: var(--bgColor) !important;
-            }
+    }
+    .ant-form-item-control-input-content {
+      .ant-input-affix-wrapper {
+        background-color: transparent !important;
+        .ant-input {
+          &::value {
+            background-color: var(--bgColor) !important;
           }
         }
       }
