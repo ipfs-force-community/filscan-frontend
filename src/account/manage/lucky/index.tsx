@@ -3,7 +3,7 @@
 import { Translation } from '@/components/hooks/Translation'
 import Table from '@/packages/Table'
 import { useEffect, useMemo, useState } from 'react'
-import { account_lucky, account_lucky_mobile } from '@/contents/account'
+import { account_lucky } from '@/contents/account'
 import ExportExcel from '@/packages/exportExcel'
 import { formatDateTime } from '@/utils'
 import manageStore from '@/store/modules/account/manage'
@@ -13,7 +13,7 @@ import { BrowserView, MobileView } from '@/components/device-detect'
 import styles from './index.module.scss'
 import MTable from '@/packages/mobile/table'
 import useWindow from '@/components/hooks/useWindown'
-import { get } from 'lodash'
+import classNames from 'classnames'
 interface Props {
   selectedKey: string
 }
@@ -26,11 +26,8 @@ export default observer((props: Props) => {
   const columns = useMemo(() => {
     return account_lucky.columns(tr).map((item) => {
       if (isMobile) {
-        const mItem = get(account_lucky_mobile.columns(tr), item['dataIndex'])
-        item = {
-          ...item,
-          ...mItem,
-        }
+        item.fixed = 'auto'
+        item.width = 'unset'
       }
       return { ...item, title: tr(item.title) }
     })
@@ -46,7 +43,7 @@ export default observer((props: Props) => {
   }
 
   return (
-    <>
+    <div className={styles.wrap}>
       <BrowserView>
         <div className="flex items-center justify-between">
           <div className="flex  flex-col">
@@ -88,7 +85,7 @@ export default observer((props: Props) => {
               </span>
             </span>
           </div>
-          <div className="flex gap-x-2.5">
+          <div className={styles.group}>
             <Groups
               selectGroup={active}
               onChange={(value: string) => {
@@ -99,7 +96,12 @@ export default observer((props: Props) => {
           </div>
         </div>
       </MobileView>
-      <div className="card_shadow border_color mt-5 rounded-xl border p-4">
+      <div
+        className={classNames(
+          'card_shadow border_color mt-5 rounded-xl border p-4',
+          styles['table-wrap'],
+        )}
+      >
         <BrowserView>
           <Table
             data={luckyData?.lucky_rate_list || []}
@@ -116,6 +118,6 @@ export default observer((props: Props) => {
           />
         </MobileView>
       </div>
-    </>
+    </div>
   )
 })

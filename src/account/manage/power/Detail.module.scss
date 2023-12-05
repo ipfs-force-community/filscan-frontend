@@ -1,7 +1,8 @@
 @media only screen and (max-width: 1000px) {
   .wrap {
-    padding-inline: 12px;
+    margin-top: 20px;
 
+    margin-inline: 12px;
     .title-wrap {
       display: flex;
       flex-direction: column;
@@ -22,28 +23,16 @@
         font-size: 12px;
         line-height: 12px;
       }
-
-      .group {
-        display: flex;
-        & > div {
-          width: 100%;
-          :global {
-            .ant-select {
-              width: inherit;
-            }
-          }
-        }
-      }
     }
-
     .table-wrap {
-      margin: unset;
-      margin: 10px 0px 15px 0px;
-      padding: unset;
-      border: unset;
-      border: 1px solid var(--mobile-divide-line);
-      border-radius: 6px;
-      box-shadow: unset;
+        margin: unset;
+        margin: 10px 0 15px 0px;
+        padding: unset;
+        border: unset;
+        border: 1px solid var(--mobile-divide-line);
+        border-radius: 6px;
+        box-shadow: unset;
+        
     }
   }
 }

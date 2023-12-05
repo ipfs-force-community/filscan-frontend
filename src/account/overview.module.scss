@@ -1,7 +1,6 @@
 @media only screen and (max-width: 1000px) {
   .wrap {
     padding-inline: 12px;
-
     .title-wrap {
       display: flex;
       flex-direction: column;
@@ -33,6 +32,37 @@
             }
           }
         }
+      }
+    }
+    .overviewWrap {
+      display: grid;
+      margin-top: 15px;
+
+      grid-gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "item-0 item-0"
+        "item-1 item-2"
+        "item-3 item-3"
+        "item-4 item-4";
+
+      .item {
+        padding: 12px 10px;
+      }
+      .item-0 {
+        grid-area: item-0;
+      }
+      .item-1 {
+        grid-area: item-1;
+      }
+      .item-2 {
+        grid-area: item-2;
+      }
+      .item-3 {
+        grid-area: item-3;
+      }
+      .item-4 {
+        grid-area: item-4;
       }
     }
 

@@ -22,6 +22,7 @@ const rootSubmenuKeys = ['1', '2', '3', '4', '5']
 const Header = (props: any) => {
   const { t } = useTranslation('nav')
   const { tr } = Translation({ ns: 'common' })
+  const { tr: trr } = Translation({ ns: 'account' })
   const [open, setOpen] = useState(false)
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectKeys, setSelectKeys] = useState<string[]>([])
@@ -90,19 +91,51 @@ const Header = (props: any) => {
 
   useEffect(() => {
     let _items: MenuItem[] = []
-    mobileNavMenu.forEach((value, index) => {
-      if (value.children) {
+    mobileNavMenu.forEach((value0, index0) => {
+      if (value0.children) {
+        let __items: MenuItem[] = []
+
+        value0.children.forEach((value1, index1) => {
+          if (value1.children) {
+            __items.push(
+              getItem(
+                `${
+                  value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                }`,
+                `[${index0}].children[${[index1]}]`,
+                value1.children.map((value2, index2) => {
+                  return getItem(
+                    `${
+                      value0.type === 'account'
+                        ? trr(value2.key)
+                        : t(value2.key)
+                    }`,
+                    `[${index0}].children[${[index1]}].children[${[index2]}]`,
+                  )
+                }),
+              ),
+            )
+          } else {
+            __items.push(
+              getItem(
+                `${
+                  value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                }`,
+                `[${index0}].children[${[index1]}]`,
+              ),
+            )
+          }
+        })
+
         _items.push(
           getItem(
-            `${t(value.key)}`,
-            index,
-            value.children.map((val, idx) => {
-              return getItem(`${t(val.key)}`, `[${index}].children[${[idx]}]`)
-            }),
+            `${value0.type === 'account' ? trr(value0.key) : t(value0.key)}`,
+            index0,
+            __items,
           ),
         )
       } else {
-        _items.push(getItem(`${t(value.key)}`, `[${index}]`))
+        _items.push(getItem(`${t(value0.key)}`, `[${index0}]`))
       }
     })
     setItems(_items)

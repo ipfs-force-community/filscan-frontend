@@ -20,6 +20,23 @@
       font-size: 12px;
       line-height: 12px;
     }
+
+    .group {
+      display: flex;
+      column-gap: 10px;
+      & > div {
+        flex: 1;
+        width: 100%;
+        :global {
+          .ant-select {
+            width: inherit;
+          }
+          .custom_picker {
+            width: inherit;
+          }
+        }
+      }
+    }
   }
 
   .table-wrap {
