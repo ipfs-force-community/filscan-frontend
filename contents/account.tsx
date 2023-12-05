@@ -555,63 +555,6 @@ export const account_lucky = {
   ],
 }
 
-export const account_lucky_mobile = {
-  columns: (tr: any, type?: string) => {
-    return {
-      group_name: {
-        width: 'unset',
-        fixed: false,
-        render: (text: string, record: any) => {
-          const showText = record.is_default ? tr('default_group') : text
-          return (
-            <div className="text_color w-fit p-2 font-normal text-mobile_font">
-              {showText}
-            </div>
-          )
-        },
-      },
-      miner_id: {
-        width: 'unset',
-        fixed: false,
-        render: (text: string, record: any) => {
-          return (
-            <>
-              <div className="flex items-center gap-x-[1px]">
-                <Link
-                  href={`/account#power?miner=${text}`}
-                  className="link_text"
-                >
-                  {text}
-                </Link>
-                {record?.tag && (
-                  <span className="w-fit max-w-[60px] rounded-[5px] bg-bg_hover px-2 py-1 text-xs  text-primary">
-                    <TextTooltip
-                      text={record?.tag}
-                      className="whitespace-nowrap"
-                    />
-                  </span>
-                )}
-              </div>
-            </>
-          )
-        },
-      },
-      '24h_lucky': {
-        width: 'unset',
-        fixed: false,
-      },
-      '7d_lucky': {
-        width: 'unset',
-        fixed: false,
-      },
-      '30d_lucky': {
-        width: 'unset',
-        fixed: false,
-      },
-    }
-  },
-}
-
 export const account_balance = {
   columns: (tr: any) => [
     // {

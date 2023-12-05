@@ -3,7 +3,7 @@
 import { Translation } from '@/components/hooks/Translation'
 import Table from '@/packages/Table'
 import { useEffect, useMemo, useState } from 'react'
-import { account_lucky, account_lucky_mobile } from '@/contents/account'
+import { account_lucky } from '@/contents/account'
 import ExportExcel from '@/packages/exportExcel'
 import { formatDateTime } from '@/utils'
 import manageStore from '@/store/modules/account/manage'
@@ -13,7 +13,6 @@ import { BrowserView, MobileView } from '@/components/device-detect'
 import styles from './index.module.scss'
 import MTable from '@/packages/mobile/table'
 import useWindow from '@/components/hooks/useWindown'
-import { get } from 'lodash'
 import classNames from 'classnames'
 interface Props {
   selectedKey: string
@@ -27,11 +26,8 @@ export default observer((props: Props) => {
   const columns = useMemo(() => {
     return account_lucky.columns(tr).map((item) => {
       if (isMobile) {
-        const mItem = get(account_lucky_mobile.columns(tr), item['dataIndex'])
-        item = {
-          ...item,
-          ...mItem,
-        }
+        item.fixed = 'auto'
+        item.width = 'unset'
       }
       return { ...item, title: tr(item.title) }
     })
