@@ -65,7 +65,7 @@
     .body {
       position: fixed;
       top: 44px;
-      overflow: hidden;
+      overflow: scroll;
       min-height: 0px;
       width: 100%;
       height: 0px;
@@ -74,10 +74,14 @@
       transition:
         min-height 0.3s,
         opacity 0.3s;
+
+        .menuWrap {
+          padding-bottom: 44px;
+          height: max-content;
+        }
     }
     .body.active {
       min-height: 100%;
-      height: auto;
       opacity: 1;
     }
 

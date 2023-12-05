@@ -233,6 +233,49 @@ const mobileNavMenu: Menu_Info[] = [
     ],
   },
   {
+    key: 'account_title',
+    type: 'account',
+    children: [
+      {
+        key: 'overview',
+        link: '#overview',
+      },
+      {
+        key: 'data_details',
+        children: [
+          {
+            key: 'overview_power',
+            link: '#power',
+          },
+          {
+            key: 'overview_gas',
+            link: '#gas',
+          },
+          {
+            key: 'overview_expired',
+            link: '#expired',
+          },
+          {
+            key: 'overview_reward',
+            link: '#expired',
+          },
+          {
+            key: 'overview_reward',
+            link: '#reward',
+          },
+          {
+            key: 'overview_lucky',
+            link: '#lucky',
+          },
+          {
+            key: 'overview_balance',
+            link: '#balance',
+          },
+        ],
+      },
+    ],
+  },
+  {
     key: 'login',
     link: '/admin/login',
     // children: [
