@@ -5,25 +5,32 @@ import Logo from '@/assets/images/logo.svg'
 import userStore from '@/store/modules/user'
 import { formatDateTime } from '@/utils'
 import { Input } from 'antd'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { getSvgIcon } from '@/svgsIcon'
 import { observer } from 'mobx-react'
-import { personal_list } from '@/contents/user'
 import { userType } from '@/contents/account'
+import passwordPng from '@/assets/images/member/password.png'
+import emailPng from '@/assets/images/member/email.png'
 import style from './index.module.scss'
+import Vip from '@/assets/images/member/vip.svg'
+import Detail from './detail'
+import Image from 'next/image'
+import ResetPassword from './ResetPassword'
+import { tree } from 'd3'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'account' })
   const { userInfo, memberWarn } = userStore
-  const { membership_type } = userInfo
+  const { membership_type, mail } = userInfo
   const [edit, setEdit] = useState(false)
   const [name, setName] = useState('')
+  const [show, setShow] = useState(false)
 
   const handleSaveName = async () => {
     setEdit(false)
   }
   return (
-    <>
+    <div className="mb-50">
       <p className="font-HarmonyOS text-lg font-semibold">
         {tr('personal')}
         {memberWarn && (
@@ -62,19 +69,21 @@ export default observer(() => {
                   {getSvgIcon('edit')}
                 </span>
               </div>
-              {/* <span className="text_des text-xs">{userInfo.mail}</span> */}
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span
-              className={`${style.membership_card} ${
-                style[`membership_card_${membership_type}`]
-              }`}
-            >
-              {userType[membership_type]?.icon}
-              <span>{tr(userType[membership_type]?.title)}</span>
+            <span className={style.membership_card}>
+              <span
+                className={`${style.membership_card} ${
+                  style[`membership_card_${membership_type}`]
+                }`}
+              >
+                {userType[membership_type]?.icon}
+                <span>{tr(userType[membership_type]?.title)}</span>
+              </span>
+              <Detail />
             </span>
-            {/* <span className="des_bg_color flex w-fit gap-x-2 rounded-[5px] px-[6px] py-1"></span> */}
+
             <span className="text_des mt-2 text-xs">
               <span className="mr-2">{tr('last_login')}:</span>
               {formatDateTime(userInfo.last_login)}
@@ -82,18 +91,71 @@ export default observer(() => {
           </div>
         </div>
       </div>
-      <div className="mt-5 flex gap-4">
-        {personal_list.map((v: any, index: number) => {
-          return (
-            <div
-              key={index}
-              className="card_shadow border_color w-fit flex-1 rounded-xl p-5"
-            >
-              <span>{tr(v.title)}</span>
-            </div>
-          )
-        })}
+      <div className={style.personal_list}>
+        <div
+          className={`${style.personal_list_item} ${
+            style[`personal_list_item_member`]
+          }`}
+          onClick={() => {
+            userStore.setVipModal(true)
+          }}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('memberBg')}
+          </span>
+          <span className={style.personal_list_title}>
+            <Vip width={20} height={25} />
+            {tr('personal_1')}
+          </span>
+          <span className={style.personal_list_des}>
+            {`${formatDateTime(userInfo.expired_time, 'YYYY-MM-DD')} ${tr(
+              'member_expired_time',
+            )}`}
+          </span>
+        </div>
+
+        <div
+          className={`${style.personal_list_item}`}
+          onClick={() => {
+            setShow(true)
+          }}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('member_icon_logo')}
+          </span>
+          <span className={style.personal_list_title}>
+            <Image src={passwordPng} alt="" width={20} height={25} />
+            {tr('personal_3')}
+          </span>
+        </div>
+
+        <div
+          className={`${style.personal_list_item} ${style.personal_list_value}`}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('member_icon_logo')}
+          </span>
+          <span className={style.personal_list_text}>{mail}</span>
+          <span className={style.personal_list_text}>
+            {getSvgIcon('successIcon')}
+            {tr('mail_success')}
+          </span>
+        </div>
+        <div
+          className={`${style.personal_list_item} ${style.personal_list_value}`}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('member_icon_logo')}
+          </span>
+          <span className={style.personal_list_title}>Coming soon</span>
+        </div>
       </div>
-    </>
+      <ResetPassword
+        show={show}
+        onChange={(value) => {
+          setShow(value)
+        }}
+      />
+    </div>
   )
 })

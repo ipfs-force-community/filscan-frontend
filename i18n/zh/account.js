@@ -35,6 +35,7 @@ const account = {
   edit_write: '修改',
   edit_delete: '删除',
   created_at: '创建时间',
+  look_more: '查看权益',
 
   //个人账户
   register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
@@ -297,6 +298,8 @@ const account = {
   personal_1: '升级/续费会员',
   personal_2: '绑定邮箱',
   personal_3: '修改密码',
+  member_expired_time: '到期',
+  mail_success: '已绑定',
 }
 
 export default account

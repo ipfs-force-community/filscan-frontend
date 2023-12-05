@@ -29,10 +29,11 @@
   --tips-bgColor: #ffffff;
   --cw-bgDesColor: #f5f5f5;
   --cw-bgColor: #d4d4d4;
-  /*
+  --font-warn-color: #6d3f1a;
+  --font-bgIcon-color: rgba(245, 198, 132, 1);
+  --font-pro-color: #3046b6 /*
   手机端
-  */
-  --mobile-bg-color: #ffffff;
+  */ --mobile-bg-color: #ffffff;
   --mobile-bg-color-unimportant: #f5f5f5;
   --mobile-bg-black: #000000;
   --mobile-bg-3: rgba(0, 0, 0, 0.03);
@@ -77,6 +78,9 @@
   --table-hover: #1b1b1b;
   --tips-bgColor: #1c1c1c;
   --cw-bgColor: #333333;
+  --font-warn-color: #f0bc91;
+  --font-pro-color: #d0d8ff;
+  --font-bgIcon-color: rgba(245, 198, 132, 0.8);
 }
 
 body {

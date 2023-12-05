@@ -274,6 +274,12 @@
   }
 }
 
+.noPadding_popover {
+  .ant-popover-inner {
+    padding: 0px !important;
+  }
+}
+
 //ant-pagination
 .ant-pagination {
   display: flex;

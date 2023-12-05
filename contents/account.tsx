@@ -1913,7 +1913,7 @@ export const member_list_2 = [
 ]
 
 export const member_main: any = {
-  companies: {
+  EnterpriseVIP: {
     title: 'companies',
     icon: <Image src={CompaniesV} alt="" width={126} />,
     list: [
@@ -1933,7 +1933,7 @@ export const member_main: any = {
       { title: 'year', price: '1599U', discount: 'year_discount' },
     ],
   },
-  companiesPro: {
+  EnterpriseProVIP: {
     title: 'companiesPro',
     icon: <Image src={CompaniesVPro} alt="" width={126} />,
     list: [

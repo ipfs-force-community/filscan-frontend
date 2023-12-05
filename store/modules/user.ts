@@ -4,6 +4,7 @@ import {
   inviteList,
   login,
   resetPassword,
+  updateInfo,
   userInfo,
   verifyCode,
 } from '@/store/ApiUrl'
@@ -93,6 +94,23 @@ class UserStore {
         Router.push('/admin/login')
       }
     }
+  }
+
+  //更新用户信息
+  async resetUser(payload: any) {
+    const userData: RequestResult = await axiosServer(updateInfo, {
+      ...payload,
+    })
+    if (userData.error) {
+      return false
+    } else {
+      this.clearUserInfo()
+      messageManager.showMessage({
+        type: 'success',
+        content: 'Update successful',
+      })
+    }
+    return true
   }
 
   //获取用户登录信息
