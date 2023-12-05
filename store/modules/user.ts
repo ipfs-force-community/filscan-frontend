@@ -1,5 +1,6 @@
 import { RequestResult, axiosServer } from '@/store/axiosServer'
 import {
+  ValidInvite,
   inviteCode,
   inviteList,
   login,
@@ -179,6 +180,19 @@ class UserStore {
     })
   }
   async loginUserInfo(payload: Record<string, any>) {
+    if (payload.invite_code) {
+      const inviteData = await axiosServer(ValidInvite, {
+        mail: payload.mail,
+        invite_code: payload.invite_code,
+      })
+
+      if (!inviteData?.data?.success) {
+        return messageManager.showMessage({
+          type: 'error',
+          content: inviteData?.data?.msg || 'error',
+        })
+      }
+    }
     const userData: any = await axiosServer(login, payload)
     if (userData?.data?.code) {
       return messageManager.showMessage({
@@ -204,7 +218,6 @@ class UserStore {
       })
     }
   }
-
   //退出登录
   clearUserInfo() {
     runInAction(() => {

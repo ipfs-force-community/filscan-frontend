@@ -59,7 +59,7 @@ export default observer((props: Props) => {
         closeIcon={false}
         wrapClassName="custom_modal noPaddingModal " //noTopModal
         open={show}
-        width={400}
+        width={416}
         footer={null}
         onCancel={() => {
           onChange(false)
@@ -67,7 +67,10 @@ export default observer((props: Props) => {
       >
         <div className={style.activeShare}>
           <div className={style.share} ref={shareRef}>
-            <div className={style.share_top}>
+            <div
+              className={style.share_top}
+              style={{ width: '416px', height: '580px' }}
+            >
               <div className={style.share_main}>
                 <div className={style.share_content}>
                   <span
@@ -107,19 +110,22 @@ export default observer((props: Props) => {
                 <div>{tr('active_target_2')}</div> */}
               </div>
               <div className={style.share_invite}>
-                <span>{tr('invite_code')}</span>
-                <div className={style.share_invite_content}>
+                <div>{tr('invite_code')}</div>
+                <ul className={style.share_invite_content}>
                   {inviteCode?.split('')?.map((v, index: number) => {
                     return (
-                      <div key={index} className={style.share_invite_item}>
+                      <li key={index} className={style.share_invite_item}>
                         {v}
-                      </div>
+                      </li>
                     )
                   })}
-                </div>
+                </ul>
               </div>
             </div>
-            <div className={style.share_bottom}>
+            <div
+              className={style.share_bottom}
+              style={{ width: '416px', height: '146px' }}
+            >
               <div className={style.share_bottom_code}>
                 <QRCodePage
                   link={`${window.location.host}/admin/register/?inviteCode=${inviteCode}`}

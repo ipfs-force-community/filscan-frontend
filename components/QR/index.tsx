@@ -35,7 +35,6 @@ export default function QRCodePage(props: Props) {
           setTimeout(() => {
             const dataUrl = canvas.toDataURL()
             imgRef.current.style.width = '120px'
-            imgRef.current.style.height = '120px'
             imgRef.current.src = dataUrl
             canvas.style.display = 'none'
           })

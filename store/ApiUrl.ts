@@ -12,6 +12,7 @@ export const verifyCode = proUrl + '/SendVerificationCode'
 export const resetPassword = proUrl + '/ResetPasswordByCode'
 export const inviteCode = proUrl + '/UserInviteCode'
 export const inviteList = proUrl + '/UserInviteRecord'
+export const ValidInvite = proUrl + '/ValidInvite'
 export const updateInfo = proUrl + '/UpdateUserInfo'
 
 //活动

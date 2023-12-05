@@ -122,6 +122,10 @@ body {
     cursor: none;
   }
 }
+img {
+  /* max-width: 100%; */
+  height: inherit;
+}
 
 a {
   color: #1c6afd;
