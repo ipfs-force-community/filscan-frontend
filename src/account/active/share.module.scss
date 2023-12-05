@@ -1,0 +1,185 @@
+.activeShare {
+  position: relative;
+  &_save {
+    position: absolute;
+    top: 50%;
+    right: -230px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    width: 186px;
+    height: 48px;
+    line-height: 48px;
+    // box-shadow: 0px 10px 20px #1c6afd;
+    // background-color: #1c6afd;
+    background: #d8d8d8
+      linear-gradient(90deg, #a0fbc0 0%, #23d1e1 29%, #1c6afd 100%);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+  }
+}
+
+.share {
+  height: fit-content;
+  width: max-content;
+  background-color: transparent;
+  &_top {
+    position: relative;
+    // width: 416px;
+    // height: 580px;
+    background-image: url('../../../assets/images/member/share_1.png');
+    background-size: contain;
+  }
+  &_bottom {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    padding: 0px 20px;
+    width: 416px;
+    color: #ffffff;
+    height: 146px;
+    background-image: url('../../../assets/images/member/share_2.png');
+    background-size: contain;
+    &_code {
+      width: 100px;
+      color: #ffffff;
+      img {
+        max-width: 100px;
+      }
+    }
+    &_title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #000000;
+      margin-bottom: 4px;
+    }
+    &_des {
+      font-size: 12px;
+      line-height: 14px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    &_gift {
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+      &_text {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 500;
+        color: #ff0e54;
+        margin-top: 4px;
+        // background: linear-gradient(276deg, #ff0e54 0%, #ff6d31 100%);
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+  &_main {
+    position: relative;
+    padding-top: 80px;
+    padding-left: 20px;
+  }
+
+  &_content {
+    position: relative;
+    width: fit-content;
+    padding: 20px 20px 24px 20px;
+    color: #ffffff;
+    background: linear-gradient(
+      180deg,
+      rgba(158, 195, 255, 0.3) 0%,
+      rgba(62, 146, 255, 0.5) 100%
+    );
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(7px);
+    &_icon {
+      position: absolute;
+      width: 20%;
+      height: 20%;
+    }
+    &_top {
+      top: -1px;
+      left: -1px;
+      border-radius: 20px 0px 20px 0px;
+      border-top: 1px solid #fff;
+      border-left: 1px solid #fff;
+    }
+    &_bottom {
+      bottom: -1px;
+      left: -1px;
+      color: #ffffff;
+      border-radius: 0px 0px 0px 20px;
+      border-left: 1px solid #fff;
+      border-bottom: 1px solid #fff;
+    }
+    &_right {
+      right: -0px;
+      left: inherit;
+      border-radius: 0px 20px 0px 0px;
+      border: 1px solid;
+      border-color: #fff #fff transparent transparent;
+    }
+    &_Bright {
+      right: -0px;
+      left: inherit;
+      border-radius: 0px 0px 20px 0px;
+      border: 1px solid;
+      border-color: transparent #fff #fff transparent;
+    }
+    &_title {
+      font-size: 22px;
+      color: #ffffff;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    &_item {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      font-size: 18px;
+      line-height: 32px;
+    }
+  }
+  &_target {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0px 25px 0px;
+    &_image {
+      width: 90%;
+      margin: auto;
+    }
+  }
+  &_invite {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding-left: 20px;
+    color: #ffffff;
+    &_content {
+      display: flex;
+      list-style: none;
+      margin-left: 10px;
+    }
+    &_item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 7px;
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      background-color: rgba(158, 195, 255, 0.6);
+      margin-right: 10px;
+    }
+  }
+}

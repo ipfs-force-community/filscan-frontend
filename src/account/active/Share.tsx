@@ -1,7 +1,7 @@
 import { Translation } from '@/components/hooks/Translation'
-import { Button, Modal } from 'antd'
-import { useMemo, useRef, useState } from 'react'
-import style from './index.module.scss'
+import { Modal } from 'antd'
+import { useMemo, useRef } from 'react'
+import style from './share.module.scss'
 import { active_member_share } from '@/contents/account'
 import QRCodePage from '@/components/QR'
 import html2canvas from 'html2canvas'
@@ -115,7 +115,7 @@ export default observer((props: Props) => {
                   {inviteCode?.split('')?.map((v, index: number) => {
                     return (
                       <li key={index} className={style.share_invite_item}>
-                        {v}
+                        {String(v)}
                       </li>
                     )
                   })}

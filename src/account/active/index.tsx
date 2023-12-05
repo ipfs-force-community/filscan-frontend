@@ -11,7 +11,9 @@ import { useMemo, useState } from 'react'
 import { Button, message } from 'antd'
 import Image from 'next/image'
 import filscanStore from '@/store/modules/filscan'
-import memberZh from '@/assets/images/member/member_Zh.jpg'
+import active_zh from '@/assets/images/member/member_Zh.jpg'
+import active_en from '@/assets/images/member/member_en.jpg'
+import active_kr from '@/assets/images/member/member_kr.jpg'
 
 export default observer(() => {
   const { inviteCode, recordList } = userStore
@@ -29,19 +31,19 @@ export default observer(() => {
     copy(value)
     return message.success('Clipboard Successfully')
   }
-  // const showSrc = useMemo(() => {
-  //   if (lang === 'zh') {
-  //     return active_zh
-  //   } else if (lang === 'kr') {
-  //     return active_kr
-  //   }
-  //   return active_en
-  // }, [lang])
+  const showSrc = useMemo(() => {
+    if (lang === 'zh') {
+      return active_zh
+    } else if (lang === 'kr') {
+      return active_kr
+    }
+    return active_en
+  }, [lang])
 
   return (
     <div className={`${style.active}`}>
       <div className={style.active_header}>
-        <Image src={memberZh} alt="" />
+        <Image src={showSrc} alt="" />
       </div>
       <div className={style.active_title}>
         {tr('active_rule')} <Detail />
@@ -67,12 +69,12 @@ export default observer(() => {
       <div className={style.active_share}>
         <div className={style.active_share_item}>
           <span className={style.active_des}>{tr('invite_code')}</span>
-          <span className={style.active_value}>
+          <ul className={style.active_value}>
             {inviteCode?.split('')?.map((v, index: number) => {
               return (
-                <span className={style.active_value_code} key={index}>
+                <li className={style.active_value_code} key={index}>
                   {v}
-                </span>
+                </li>
               )
             })}
             <span
@@ -82,7 +84,7 @@ export default observer(() => {
               {tr('copy')}
             </span>
             {/* <Copy text={inviteCode} /> */}
-          </span>
+          </ul>
         </div>
         <div>
           <div className={style.send}>

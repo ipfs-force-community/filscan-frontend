@@ -252,7 +252,7 @@ const account = {
   warn_text: 'Diverse Alert Channels With Flexible Configurations',
   member_warn_title: 'Add Monitoring, Stay Ahead With Alerts',
   member_content_title: 'Join Membership, Activate Instantly',
-  companies: 'Enterprise Membership',
+  companies: 'Enterprise',
   companiesPro: 'Enterprise Pro',
   companies_1: '30 Nodes Limit',
   companies_2: 'Power',
@@ -269,14 +269,14 @@ const account = {
   share_turn: 'Start Now And Minimize Losses',
   tg_title: 'Add Business TG For Activation',
   //活动
-  success_member: '已成功注册',
-  error_member: '未绑定节点',
-  success_miners: '已绑定节点',
-  success_active: '有效',
-  error_active: '无效',
+  success_member: 'Registered successfully',
+  error_member: 'Unbound node',
+  success_miners: 'Bound node',
+  success_active: 'Invalid',
+  error_active: 'Valid',
   invitees: 'Invitee',
   is_valid: 'Validity',
-  send_member: '送会员',
+  send_member: 'Free Vip',
   invite_code: 'Code',
   active_share: 'Invite Now',
   active_member_warn: 'SMS And Phone Alerts',
@@ -290,10 +290,10 @@ const account = {
   active_member_1: 'Full monitoring capabilities.',
   active_expired:
     'After the membership expires, the benefits will be automatically revoked. You can continue to enjoy the related services by renewing the membership.',
-  active_1: '邀请好友',
+  // active_1: '邀请好友',
   active_1_des:
     'Send invitation posters or invitation codes to friends, they can scan the code or register on the official website with the invitation code.',
-  active_2: '注册添加',
+  // active_2: '注册添加',
   active_2_des:
     'Your friend has successfully registered and added valid nodes.',
   active_3: '邀请2个有效好友',
@@ -307,11 +307,14 @@ const account = {
   copy_tg: 'Copy ID',
   recommend: '推荐',
   //personal
-  personal_1: '升级/续费会员',
-  personal_2: '绑定邮箱',
-  personal_3: '修改密码',
+  personal_1: 'Upgrade/Renew VIP',
+  // personal_2: '绑定邮箱',
+  personal_3: 'Change Password',
   member_expired_time: '到期',
-  mail_success: '已绑定',
+  mail_success: 'Bound',
+  look_more: '查看权益',
+  look_detail: '查看详情',
+  look_detail_member: '免费赠送',
 }
 
 export default account

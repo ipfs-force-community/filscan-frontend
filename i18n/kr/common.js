@@ -40,6 +40,7 @@ const common = {
   verification_code: '인증 코드 로그인 ',
   email_placeholder: '이메일 주소를 입력하세요',
   password_placeholder: '비밀번호를 입력하세요',
+  invite_placeholder: '초대코드 입력(선택)',
   code_placeholder: '인증 코드를 입력하세요',
   remember_me: '기억하기 및 자동 로그인',
   forgot_password: '비밀번호를 잊으셨나요',
@@ -50,6 +51,7 @@ const common = {
   go_register: '지금 회원 가입하기',
   new_password: '비밀번호 설정하기',
   confirm_password: '비밀번호 확인',
+
   agreement:
     '회원가입은 "약관"과 "개인정보 처리방침"에 동의하는 것을 의미합니다',
 

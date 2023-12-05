@@ -245,7 +245,7 @@ const account = {
   warn_text: '告警渠道多样，灵活配置',
   member_warn_title: '添加监控，告警快人一步',
   member_content_title: '加入会员，即刻开启',
-  companies: '企业会员',
+  companies: '企业版',
   companiesPro: '企业Pro版',
   companies_1: '30个节点上限',
   companies_2: '算力监控',
