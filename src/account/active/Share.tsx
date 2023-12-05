@@ -57,7 +57,7 @@ export default observer((props: Props) => {
       <Modal
         destroyOnClose={true}
         closeIcon={false}
-        wrapClassName="custom_modal noPaddingModal noTopModal"
+        wrapClassName="custom_modal noPaddingModal " //noTopModal
         open={show}
         width={400}
         footer={null}
@@ -120,7 +120,7 @@ export default observer((props: Props) => {
               </div>
             </div>
             <div className={style.share_bottom}>
-              <div>
+              <div className={style.share_bottom_code}>
                 <QRCodePage
                   link={`${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
                 />
@@ -132,10 +132,7 @@ export default observer((props: Props) => {
                 </div>
                 <div className={style.share_bottom_des}>{tr('active_des')}</div>
                 <div className={style.share_bottom_gift}>
-                  <span className={style.share_bottom_icon}>
-                    <Image src={gift} alt="" />
-                    {/* {getSvgIcon('member_active')} */}
-                  </span>
+                  <Image src={gift} alt="" width={20} />
                   <span className={style.share_bottom_gift_text}>
                     {tr('active_gift')}
                   </span>

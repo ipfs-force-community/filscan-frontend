@@ -15,7 +15,7 @@ import style from './index.module.scss'
 import Vip from '@/assets/images/member/vip.svg'
 import Detail from './detail'
 import Image from 'next/image'
-import ResetPassword from './ResetPassword'
+import ResetPassword from './resetPassword'
 import { tree } from 'd3'
 
 export default observer(() => {

@@ -4,8 +4,9 @@ import style from './warn.module.scss'
 import { getSvgIcon } from '@/svgsIcon'
 import { active_member_share, member_main } from '@/contents/account'
 import { Translation } from '@/components/hooks/Translation'
-import { observer } from 'mobx-react'
+import BgMore from '@/assets/images/member/bgMore.svg'
 
+import { observer } from 'mobx-react'
 export default observer(() => {
   const { firstWarn } = userStore
   const item = member_main.EnterpriseVIP
@@ -31,15 +32,16 @@ export default observer(() => {
               userStore.setFirstWarn(false)
             }}
           >
-            X
+            {getSvgIcon('closeIcon')}
           </div>
           <div className={style.warn_content}>
             <div className={style.warn_main}>
               <div className={style.warn_main_left}>
-                <span>
+                <span className={style.warn_main_left_icon}>
                   <i className="icon icon-logo" />
+                  <span>{tr('free_send')}</span>
                 </span>
-                <span>{tr('free_send')}</span>
+
                 <span>
                   7
                   <span className={style.warn_main_left_unit}>{tr('day')}</span>
@@ -58,7 +60,15 @@ export default observer(() => {
               )
             })}
           </ul>
-          <div className={style.warn_btn}>{tr('look_detail')}</div>
+          <div className={style.warn_btn}>
+            {tr('look_detail')}
+            <span className={style.warn_btn_icon}>
+              <BgMore />
+              <span className={style.warn_btn_icon_text}>
+                {tr('look_detail_member')}
+              </span>
+            </span>
+          </div>
         </div>
       </div>
     </Modal>

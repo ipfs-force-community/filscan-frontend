@@ -80,7 +80,7 @@
   --cw-bgColor: #333333;
   --font-warn-color: #f0bc91;
   --font-pro-color: #d0d8ff;
-  --font-bgIcon-color: rgba(245, 198, 132, 0.8);
+  --font-bgIcon-color: rgba(245, 198, 132, 0.5);
 }
 
 body {

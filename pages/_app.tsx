@@ -1,4 +1,5 @@
 /** @format */
+import '@/styles/iconfont.css'
 import '@/styles/globals.css'
 import '@/styles/common.scss'
 import '@/styles/custom.scss'

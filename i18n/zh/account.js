@@ -38,7 +38,7 @@ const account = {
   created_at: '创建时间',
   look_more: '查看权益',
   look_detail: '查看详情',
-
+  look_detail_member: '免费赠送',
   //个人账户
   register_success: '恭喜！您的账户已注册成功，快来开启您的专属服务!',
   register_btn: '开启服务',
