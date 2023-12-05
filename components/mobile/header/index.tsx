@@ -17,6 +17,7 @@ import { header_top } from '@/contents/common'
 import filscanStore from '@/store/modules/filscan'
 import { observer } from 'mobx-react'
 import userStore from '@/store/modules/user'
+import Link from 'next/link'
 
 const rootSubmenuKeys = ['1', '2', '3', '4', '5']
 
@@ -211,6 +212,31 @@ const Header = (props: any) => {
             onSelect={onSelect}
             items={items}
           />
+          {!userStore.isLogin && (
+            <Link
+              href={'/admin/login'}
+              onClick={() => {
+                setOpen(false)
+              }}
+              className={styles.login}
+            >
+              {t('login')}
+            </Link>
+          )}
+          {userStore.isLogin && (
+            <div
+              onClick={() => {
+                localStorage.removeItem(`mail`)
+                localStorage.removeItem(`token-${userStore.userInfo.mail}`)
+                userStore.clearUserInfo()
+                router.reload()
+                setOpen(false)
+              }}
+              className={styles['log-out']}
+            >
+              {t('logout')}
+            </div>
+          )}
         </div>
       </div>
     </div>
