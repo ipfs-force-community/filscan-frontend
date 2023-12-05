@@ -147,6 +147,7 @@ export default observer((props: Props) => {
     <div className={style.header}>
       <div className={style.header_left}>
         <Selects
+          style={{ width: '212px' }}
           disabled={disableAll}
           value={selectGroup}
           className={classes?.group}
@@ -159,6 +160,7 @@ export default observer((props: Props) => {
         {props.hasOwnProperty('selectMiner') && (
           <Selects
             disabled={disableAll}
+            style={{ width: '212px' }}
             value={selectMiner}
             className={classes?.miner}
             placeholder={tr('select_miner')}
@@ -170,6 +172,7 @@ export default observer((props: Props) => {
         )}
         {props.hasOwnProperty('selectTag') && (
           <Selects
+            style={{ width: '212px' }}
             disabled={disableAll}
             value={selectTag}
             placeholder={tr('select_miner_tag')}

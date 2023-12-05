@@ -48,7 +48,7 @@ class AccountStore {
   async getAccountGroup() {
     const result: RequestResult = await axiosServer(UserGroups)
     if (!result.error) {
-      this.getAccountMinersNumber()
+      await this.getAccountMinersNumber()
     }
     runInAction(() => {
       this.groupMiners = (result?.data?.group_info_list || []).map(

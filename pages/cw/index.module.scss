@@ -121,9 +121,12 @@
 }
 
 .top-wrap {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
   position: absolute;
   bottom: 60px;
-  right: 50px;
+  right: 80px;
   padding: 6px 15px;
   border-radius: 5px;
   cursor: pointer;
