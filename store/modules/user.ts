@@ -7,7 +7,7 @@ import {
   userInfo,
   verifyCode,
 } from '@/store/ApiUrl'
-import { makeObservable, observable, runInAction } from 'mobx'
+import { computed, makeObservable, observable, runInAction } from 'mobx'
 import messageManager from '@/packages/message'
 import Router from 'next/router'
 import { formatTime } from '@/utils'
@@ -39,12 +39,20 @@ class UserStore {
     this.showMemberWarn = false
     this.inviteCode = ''
     makeObservable(this, {
+      isLogin: computed,
       userInfo: observable,
       vipModal: observable,
       recordList: observable,
       showMemberWarn: observable,
     })
     this.getUserInfo()
+  }
+
+  get isLogin() {
+    return !(
+      !this.userInfo.mail ||
+      !localStorage.getItem(`token-${this.userInfo.mail}`)
+    )
   }
 
   setMemberWarn(isShow: boolean) {
