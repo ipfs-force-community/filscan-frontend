@@ -271,7 +271,8 @@ const account = {
   year: 'Annual',
   quarter_discount: 'Less than 12% off',
   year_discount: 'Less than 20% off',
-  share_friend: 'Invite And Free one-month Enterprise Edition Membership',
+  share_friend:
+    'Invite Others And Get One Month Enterprise Membership For Free',
   share_turn: 'Start Now And Minimize Losses',
   tg_title: 'Add Business TG For Activation',
   //活动

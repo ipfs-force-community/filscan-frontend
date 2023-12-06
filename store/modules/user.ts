@@ -178,6 +178,8 @@ class UserStore {
       this.recordList = list?.data?.items || []
     })
   }
+
+  //登录
   async loginUserInfo(payload: Record<string, any>) {
     if (payload.invite_code) {
       const inviteData = await axiosServer(ValidInvite, {
@@ -206,7 +208,6 @@ class UserStore {
       if (!userData.data.is_activity) {
         this.setFirstWarn(true)
       }
-
       if (typeof window !== 'undefined') {
         // 使用 router 进行路由导航等操作
         Router.push('/account#overview')

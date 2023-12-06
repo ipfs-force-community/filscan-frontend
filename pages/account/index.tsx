@@ -90,11 +90,11 @@ const Account: React.FC = () => {
           title={
             <span className={style.submenu_title}>
               {tr(item.label)}
-              {item.vip && (
+              {/* {item.vip && (
                 <span className={style.submenu_title_vip}>
                   <Vip />
                 </span>
-              )}
+              )} */}
               {item.sufIcon}
             </span>
           }

@@ -102,7 +102,7 @@ export const account_manager: Array<MenuItem> = [
     href: 'monitorBalance',
     key: 'monitor',
     sufIcon: <Vip />,
-    // vip: true,
+    vip: true,
     children: [
       {
         label: 'monitorBalance', //余额监控

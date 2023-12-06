@@ -4,7 +4,7 @@ const account = {
   copy: '复制',
   confirm: '确认',
   cancel: '取消',
-  //login: '节点管家',
+  login: '节点管家',
   go_home: '返回首页',
   go_login: '去登录',
   back: '返回',
