@@ -248,6 +248,7 @@ const account = {
   companies: '企业版',
   companiesPro: '企业Pro版',
   companies_1: '30个节点上限',
+  companies_1_pro: '节点无上限',
   companies_2: '算力监控',
   companies_3: '余额监控',
   companies_4: '扇区监控',

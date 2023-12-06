@@ -45,6 +45,10 @@ const Account: React.FC = () => {
     return 'overview'
   }, [hash])
 
+  useEffect(() => {
+    userStore.getUserInfo()
+  }, [])
+
   // useEffect(() => {
   //   if (!userInfo.mail || !localStorage.getItem(`mail`)) {
   //     router.push('/admin/login')

@@ -36,7 +36,12 @@ export default () => {
             <ul className={style.member_item_list}>
               {item?.list?.map((v: any) => {
                 return (
-                  <li key={v.title} className={style.member_item_li}>
+                  <li
+                    key={v.title}
+                    className={`${style.member_item_li} ${
+                      style[`member_item_li_${membership_type}`]
+                    }`}
+                  >
                     {v.icon}
                     {tr(v.title)}
                   </li>
@@ -54,7 +59,6 @@ export default () => {
       <Popover
         content={content}
         title={''}
-        open={true}
         placement="left"
         overlayClassName="noPadding_popover"
       >

@@ -54,7 +54,7 @@ export const userType: any = {
   EnterpriseProVIP: {
     title: 'companiesPro',
     bgColor: 'rgba(15, 24, 51, 1)',
-    icon: <Image src={CompaniesV} width={32} alt="" />,
+    icon: <Image src={CompaniesVPro} width={32} alt="" />,
   },
 }
 
@@ -1917,11 +1917,11 @@ export const member_main: any = {
     title: 'companies',
     icon: <Image src={CompaniesV} alt="" width={126} />,
     list: [
-      { title: 'companies_1', icon: <Companies /> },
-      { title: 'companies_2', icon: <Companies /> },
-      { title: 'companies_3', icon: <Companies /> },
-      { title: 'companies_4', icon: <Companies /> },
-      { title: 'companies_5', icon: <Companies /> },
+      { title: 'companies_1', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_2', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_3', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_4', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_5', icon: <i className="icon icon-quanyiicon" /> },
     ],
     priceList: [
       { title: 'monthly', price: '169U' },
@@ -1937,12 +1937,15 @@ export const member_main: any = {
     title: 'companiesPro',
     icon: <Image src={CompaniesVPro} alt="" width={126} />,
     list: [
-      { title: 'companies_1', icon: <CompaniesPro /> },
-      { title: 'companies_2', icon: <CompaniesPro /> },
-      { title: 'companies_3', icon: <CompaniesPro /> },
-      { title: 'companies_4', icon: <CompaniesPro /> },
-      { title: 'companies_6', icon: <CompaniesPro /> },
-      { title: 'companies_5', icon: <CompaniesPro /> },
+      {
+        title: 'companies_1_pro',
+        icon: <i className="icon icon-quanyiicon " />,
+      },
+      { title: 'companies_2', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_3', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_4', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_6', icon: <i className="icon icon-quanyiicon" /> },
+      { title: 'companies_5', icon: <i className="icon icon-quanyiicon" /> },
     ],
     priceList: [
       { title: 'monthly', price: '169U' },

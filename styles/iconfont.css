@@ -11,9 +11,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-quanyiicon:before {
+  content: '\e673';
+}
+
+.icon-vip:before {
+  content: '\e674';
+}
+
 .icon-logo:before {
   content: '\e675';
 }
-.icon-guanbianniu :before {
-  content: '&#xe676';
+
+.icon-guanbianniu:before {
+  content: '\e676';
 }

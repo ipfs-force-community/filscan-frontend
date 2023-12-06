@@ -33,9 +33,12 @@
   --warn-color: rgba(239, 127, 26, 1);
   --font-warn-color: #6d3f1a;
   --font-bgIcon-color: rgba(245, 198, 132, 1);
-  --font-pro-color: #3046b6 /*
+  --font-pro-color: #3046b6;
+
+  /*
   手机端
-  */ --mobile-bg-color: #ffffff;
+  */
+  --mobile-bg-color: #ffffff;
   --mobile-bg-color-unimportant: #f5f5f5;
   --mobile-bg-black: #000000;
   --mobile-bg-3: rgba(0, 0, 0, 0.03);
