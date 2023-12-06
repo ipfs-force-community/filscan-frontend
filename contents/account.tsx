@@ -71,27 +71,27 @@ export const account_manager: Array<MenuItem> = [
     key: 'data_details',
     children: [
       {
-        label: 'overview_power', //算力概览
+        label: 'power', //算力概览
         key: 'power',
       },
       {
-        label: 'overview_gas', //gas 消耗
+        label: 'gas', //gas 消耗
         key: 'gas',
       },
       {
-        label: 'overview_expired', //到期扇区
+        label: 'expired', //到期扇区
         key: 'expired',
       },
       {
-        label: 'overview_reward', //出块奖励
+        label: 'reward', //出块奖励
         key: 'reward',
       },
       {
-        label: 'overview_lucky', //幸运值
+        label: 'lucky', //幸运值
         key: 'lucky',
       },
       {
-        label: 'overview_balance', //地址余额
+        label: 'balance', //地址余额
         key: 'balance',
       },
     ],

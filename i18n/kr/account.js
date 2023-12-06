@@ -44,12 +44,12 @@ const account = {
   created_at: 'Create Time',
 
   //数据概览
-  overview_power: '해시파워 개요',
-  overview_gas: 'Gas 소비',
-  overview_expired: '만기 섹터',
-  overview_reward: '블록 보상',
-  overview_lucky: '행운값',
-  overview_balance: '잔액',
+  power: '해시파워 개요',
+  gas: 'Gas 소비',
+  expired: '만기 섹터',
+  reward: '블록 보상',
+  lucky: '행운값',
+  balance: '잔액',
   no_node_data: '노드가 아직 추가되지 않았습니다',
   miners_add: '노드 추가',
   group_add: '그룹 추가',

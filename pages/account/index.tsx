@@ -120,14 +120,14 @@ const Account: React.FC = () => {
   }
 
   const childrenData: Record<string, JSX.Element> = {
-    overview: <Overview selectedKey="overview" />,
+    overview: <Overview selectedKey={selectedKey} />,
     miners: <Miners />,
-    lucky: <Lucky selectedKey={'overview_lucky'} />,
-    power: <Power selectedKey={'overview_power'} />,
-    gas: <Gas selectedKey={'overview_gas'} />,
-    balance: <Balance selectedKey={'overview_balance'} />,
-    expired: <Expired selectedKey={'overview_expired'} />,
-    reward: <Reward selectedKey={'overview_reward'} />,
+    lucky: <Lucky selectedKey={'lucky'} />,
+    power: <Power selectedKey={'power'} />,
+    gas: <Gas selectedKey={'gas'} />,
+    balance: <Balance selectedKey={'balance'} />,
+    expired: <Expired selectedKey={'expired'} />,
+    reward: <Reward selectedKey={'reward'} />,
     monitorBalance: <MonitorBalance />,
     monitorSector: <MonitorSector />,
     monitorPower: <MonitorPower />,
