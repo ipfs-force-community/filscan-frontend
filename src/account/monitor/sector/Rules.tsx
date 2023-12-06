@@ -107,6 +107,7 @@ export default observer((props: Props) => {
         },
       ])
     }
+    setOtherRules({})
   }, [record])
 
   const handleChange = (type: string, value: any, index: number) => {
