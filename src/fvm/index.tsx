@@ -112,9 +112,9 @@ function Share({ data, title }: { data: any; title: string }) {
                                 <Image
                                   src={item.logo}
                                   alt=""
-                                  width="36"
-                                  height="36"
-                                  className="rounded-full"
+                                  width={36}
+                                  height={36}
+                                  className="h-9 w-9 rounded-full"
                                 />
                                 <div
                                   className={

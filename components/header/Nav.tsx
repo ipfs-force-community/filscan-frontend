@@ -80,7 +80,7 @@ export default () => {
                 {tr(nav.key)}
                 <span>{getSvgIcon('downIcon')}</span>
                 {nav.sufIcon && (
-                  <span className="absolute -right-[12px] top-[13px]">
+                  <span className="absolute -right-[12px] top-[10px]">
                     {getSvgIcon(nav.sufIcon)}
                   </span>
                 )}

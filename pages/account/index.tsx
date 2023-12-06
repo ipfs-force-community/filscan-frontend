@@ -46,8 +46,17 @@ const Account: React.FC = () => {
   }, [hash])
 
   useEffect(() => {
-    userStore.getUserInfo()
+    load()
   }, [])
+  const load = async () => {
+    const result = await userStore.getUserInfo()
+    if (result) {
+      router.push('/admin/login')
+    } else {
+      accountStore.getAccountMinersNumber()
+      accountStore.getAccountGroup()
+    }
+  }
 
   // useEffect(() => {
   //   if (!userInfo.mail || !localStorage.getItem(`mail`)) {

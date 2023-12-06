@@ -131,8 +131,6 @@ class UserStore {
     if (!userData.error) {
       await this.getUserCode()
       await this.getInviteList()
-    }
-    if (!userData.error) {
       runInAction(() => {
         const superVip =
           userData?.data?.membership_type?.startsWith('Enterprise')
@@ -161,6 +159,7 @@ class UserStore {
           loading: false,
         }
       })
+      return true
     }
   }
 
