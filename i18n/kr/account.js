@@ -41,7 +41,7 @@ const account = {
   miner_add: '添加',
   edit_write: '수정',
   edit_delete: '삭제',
-  created_at: 'Create Time',
+  created_at: '생성 시간',
 
   //数据概览
   power: '해시파워 개요',

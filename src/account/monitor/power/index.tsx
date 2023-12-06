@@ -109,7 +109,7 @@ export default observer(() => {
       <div
         className={classNames('flex flex-wrap gap-[10px]', styles.power_title)}
       >
-        {tr('monitor_power')}
+        {tr('monitorPower')}
         {isMobile && (
           <div className={styles.tip}>
             <ExclamationCircleOutlined className="mr-[2px]" />

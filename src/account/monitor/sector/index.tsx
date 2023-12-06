@@ -139,7 +139,7 @@ export default observer(() => {
       <div
         className={classNames('flex flex-wrap gap-[10px]', styles.sector_title)}
       >
-        {tr('monitor_sector')}
+        {tr('monitorSector')}
         {isMobile && (
           <div className={styles.tip}>
             <ExclamationCircleOutlined className="mr-[2px]" />

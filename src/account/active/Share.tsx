@@ -134,7 +134,7 @@ export default observer((props: Props) => {
             >
               <div className={style.share_bottom_code}>
                 <QRCodePage
-                  link={`${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
+                  link={`http://${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
                 />
               </div>
 

@@ -41,7 +41,7 @@ const account = {
   miner_add: 'Add',
   edit_write: 'Modify',
   edit_delete: 'Delete',
-  created_at: 'Create Time',
+  created_at: 'Created Time',
 
   //数据概览 Data Overview
   // power: '算力概览',
@@ -182,7 +182,7 @@ const account = {
   //监控
   add_rules: 'Add Rules',
   examination: 'Rules',
-  alarm: 'Alarm Modes',
+  alarm: 'Alert Methods',
   status: 'State',
   rules_more:
     'A single dialog box can have a maximum of 10 rule sets. If you need to add more, please save your changes and continue',
@@ -190,19 +190,19 @@ const account = {
   monitor_mobile_edit_tip:
     'Please go to the PC version for monitoring operations such as adding, deleting, and modifying',
   //告警方式
-  warn_title: 'Alarm Modes',
+  warn_title: 'Alert Methods',
   warn_title_des:
-    'You can choose one or a combination of alarm methods based on the actual situation',
-  email_warn: 'Email Notification',
+    'You can choose one or a combination of alert methods based on the actual situation',
+  email_warn: 'Email Alert',
   email_warn_placeholder: 'Please provide the alert email address  ',
   email_warn_warning: 'Please enter a valid email address',
   email_warn_des:
     'The registered email address for the current account will be automatically sent, so there is no need to submit it again',
-  message_warn: 'SMS Notification',
+  message_warn: 'SMS Alert',
   message_warn_placeholder: 'Please provide the receiving phone number ',
   message_warn_warning: 'Please enter a valid recipient number',
 
-  phone_warn: 'Phone Call Notification',
+  phone_warn: 'Phone Call Alert',
   phone_warn_placeholder: 'Please provide the receiving phone number ',
   phone_warn_warning: 'Please enter a valid recipient number',
 
