@@ -340,7 +340,8 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  padding: 20px 50px;
+  width: 100%;
+  padding: 20px 40px;
   height: max-content;
   text-align: center;
   &_main {
@@ -367,7 +368,7 @@
     }
   }
   &_title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #000000;
     margin-bottom: 20px;

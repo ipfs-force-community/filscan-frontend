@@ -73,7 +73,7 @@ const common = {
     'Filscan.io is a Filecoin blockchain explorer and data service platform.',
   footer_des2:
     'It offers a range of one-stop data services, including mining ranking, blockchain data query, visualization charts, and FVM ecosystem data analysis.',
-  active: 'Active',
+  active: 'Activity',
   active_time: 'Activity Period',
 }
 export default common

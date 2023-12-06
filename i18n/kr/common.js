@@ -70,7 +70,7 @@ const common = {
     'Filscan 브라우저는 Filecoin 블록체인 브라우저 및 데이터 서비스 플랫폼입니다.',
   footer_des2:
     'Filecoin 기반의 수익 랭킹, 블록체인 데이터 조회, 시각화 차트 등의 데이터 서비스를 제공합니다',
-  active: 'Active',
+  active: '활동',
   active_time: '활동기간',
 }
 
