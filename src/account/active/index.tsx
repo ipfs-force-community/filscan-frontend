@@ -7,19 +7,26 @@ import copy from 'copy-to-clipboard'
 import { observer } from 'mobx-react-lite'
 import userStore from '@/store/modules/user'
 import Table from '@/packages/Table'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Button, message } from 'antd'
 import Image from 'next/image'
 import filscanStore from '@/store/modules/filscan'
 import active_zh from '@/assets/images/member/member_Zh.jpg'
 import active_en from '@/assets/images/member/member_en.jpg'
 import active_kr from '@/assets/images/member/member_kr.jpg'
+import activeStore from '@/store/modules/active'
 
 export default observer(() => {
-  const { inviteCode, recordList } = userStore
+  const { inviteCode, recordList, userInfo } = userStore
   const { lang } = filscanStore
   const { tr } = Translation({ ns: 'account' })
   const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    if (userInfo.mail) {
+      activeStore.getActiveList()
+    }
+  }, [userInfo.mail])
 
   const columns = useMemo(() => {
     return active_member_list(tr).map((v) => {

@@ -17,12 +17,15 @@ import { useEffect, useState } from 'react'
 export default observer(() => {
   const { vipModal } = userStore
   const { tr } = Translation({ ns: 'account' })
-  const { inviteCode } = userStore
+  const { inviteCode, userInfo } = userStore
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    userStore.getInviteList()
-  }, [])
+    if (userInfo?.mail) {
+      userStore.getInviteList()
+    }
+  }, [userInfo?.mail])
+
   return (
     <Modal
       title={``}

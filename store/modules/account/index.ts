@@ -29,8 +29,6 @@ class AccountStore {
       groupMiners: observable,
       defaultGroup: observable,
     })
-    this.getAccountMinersNumber()
-    this.getAccountGroup()
   }
 
   //用户名下节点数
