@@ -214,27 +214,27 @@ const mobileNavMenu: Menu_Info[] = [
         key: 'data_details',
         children: [
           {
-            key: 'overview_power',
+            key: 'power',
             link: 'account/#power',
           },
           {
-            key: 'overview_gas',
+            key: 'gas',
             link: 'account/#gas',
           },
           {
-            key: 'overview_expired',
+            key: 'expired',
             link: 'account/#expired',
           },
           {
-            key: 'overview_reward',
+            key: 'reward',
             link: 'account/#reward',
           },
           {
-            key: 'overview_lucky',
+            key: 'lucky',
             link: 'account/#lucky',
           },
           {
-            key: 'overview_balance',
+            key: 'balance',
             link: 'account/#balance',
           },
         ],
@@ -243,15 +243,15 @@ const mobileNavMenu: Menu_Info[] = [
         key: 'monitor',
         children: [
           {
-            key: 'monitor_balance',
+            key: 'monitorBalance',
             link: 'account/#monitorBalance',
           },
           {
-            key: 'monitor_sector',
+            key: 'monitorSector',
             link: 'account/#monitorSector',
           },
           {
-            key: 'monitor_power',
+            key: 'monitorPower',
             link: 'account/#monitorPower',
           },
         ],

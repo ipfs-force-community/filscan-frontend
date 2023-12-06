@@ -149,7 +149,7 @@ const Header = (props: any) => {
       })
     setItems(_items)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang])
+  }, [lang, t, trr])
 
   const onClick = () => {
     router.push('/')
