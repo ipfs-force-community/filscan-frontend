@@ -227,10 +227,6 @@ const mobileNavMenu: Menu_Info[] = [
           },
           {
             key: 'overview_reward',
-            link: 'account/#expired',
-          },
-          {
-            key: 'overview_reward',
             link: 'account/#reward',
           },
           {
