@@ -301,6 +301,7 @@ export const account_detail = {
     {
       title: 'robust_address',
       dataIndex: 'robust_address',
+      type: ['account_basic'],
       elasticity: true,
       render: (text: string) => {
         return text ? (

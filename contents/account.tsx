@@ -368,6 +368,19 @@ export const overview = {
     //   },
     // },
     {
+      title: 'group_name',
+      dataIndex: 'group_name',
+      width: 100,
+      fixed: 'left',
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (text: string, record: any) => {
+        const showText = record.is_default ? tr('default_group') : text
+        return <div className="w-fit rounded-[5px]  p-2 ">{showText}</div>
+      },
+    },
+    {
       title: 'miner_id',
       dataIndex: 'miner_id',
       width: 150,
@@ -387,21 +400,7 @@ export const overview = {
         )
       },
     },
-    {
-      title: 'group_name',
-      dataIndex: 'group_name',
-      width: 100,
-      fixed: 'left',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: (text: string, record: any) => {
-        const showText = record.is_default ? tr('default_group') : text
-        return (
-          <div className="w-fit rounded-[5px]  p-2 text-xs ">{showText}</div>
-        )
-      },
-    },
+
     {
       title: 'quality_power',
       dataIndex: 'total_quality_adj_power',

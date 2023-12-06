@@ -198,7 +198,7 @@
       }
       .ant-table-tbody {
         .ant-table-cell {
-          font-family: HarmonyOS;
+          font-family: HarmonyOS_Regular;
           background-color: var(--bgColor);
           border-bottom: 1px solid var(--border-color);
           &::before {
@@ -425,6 +425,11 @@
   }
 }
 .ant-select-disabled {
+  &:hover {
+    .ant-select-selector {
+      border: 1px solid var(--border-color) !important;
+    }
+  }
   .ant-select-selector {
     .ant-select-selection-item {
       color: var(--font_des) !important;
@@ -569,6 +574,7 @@
 
 //date
 .custom_picker {
+  font-family: HarmonyOS_Regular;
   position: relative;
   border-radius: 5px;
   min-width: 120px;
@@ -582,8 +588,10 @@
     top: 50%;
     transform: translate(0px, -50%);
   }
+
   .custom_date_picker {
     .ant-picker-input {
+      font-family: HarmonyOS_Regular;
       padding-left: 20px;
       color: var(--font-color);
       input {
@@ -601,6 +609,9 @@
     font-family: HarmonyOS_Medium, HarmonyOS_Regular;
     font-weight: 500;
     color: #000000;
+    .ant-picker-suffix {
+      color: var(--font-color) !important;
+    }
   }
 }
 .custom_date_picker_wrap {

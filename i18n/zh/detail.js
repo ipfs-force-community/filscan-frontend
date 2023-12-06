@@ -159,7 +159,7 @@ const detail = {
   replaced: '消息被覆盖',
   base_cid: '被覆盖CID',
   replaced_detail: '消息 {{value}} 已被 {{newValue}} 覆盖',
-
+  robust_address: 'Robust Address',
   //内部交易
   amount: '价值',
   method: '方法',

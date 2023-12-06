@@ -99,7 +99,7 @@ export default ({
       }
       const data = await accountStore.saveGroups(payload)
       setLoading(false)
-      if (!data.error) {
+      if (!data?.error) {
         messageManager.showMessage({
           type: 'success',
           content: 'Add Miner successfully',
