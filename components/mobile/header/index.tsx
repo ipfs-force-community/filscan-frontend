@@ -16,6 +16,8 @@ import Image from 'next/image'
 import { header_top } from '@/contents/common'
 import filscanStore from '@/store/modules/filscan'
 import { observer } from 'mobx-react'
+import userStore from '@/store/modules/user'
+import Link from 'next/link'
 
 const rootSubmenuKeys = ['1', '2', '3', '4', '5']
 
@@ -91,53 +93,60 @@ const Header = (props: any) => {
 
   useEffect(() => {
     let _items: MenuItem[] = []
-    mobileNavMenu.forEach((value0, index0) => {
-      if (value0.children) {
-        let __items: MenuItem[] = []
+    mobileNavMenu
+      .filter((value, index) => {
+        if (userStore.isLogin) {
+          return true
+        }
+        return value.type !== 'account'
+      })
+      .forEach((value0, index0) => {
+        if (value0.children) {
+          let __items: MenuItem[] = []
 
-        value0.children.forEach((value1, index1) => {
-          if (value1.children) {
-            __items.push(
-              getItem(
-                `${
-                  value0.type === 'account' ? trr(value1.key) : t(value1.key)
-                }`,
-                `[${index0}].children[${[index1]}]`,
-                value1.children.map((value2, index2) => {
-                  return getItem(
-                    `${
-                      value0.type === 'account'
-                        ? trr(value2.key)
-                        : t(value2.key)
-                    }`,
-                    `[${index0}].children[${[index1]}].children[${[index2]}]`,
-                  )
-                }),
-              ),
-            )
-          } else {
-            __items.push(
-              getItem(
-                `${
-                  value0.type === 'account' ? trr(value1.key) : t(value1.key)
-                }`,
-                `[${index0}].children[${[index1]}]`,
-              ),
-            )
-          }
-        })
+          value0.children.forEach((value1, index1) => {
+            if (value1.children) {
+              __items.push(
+                getItem(
+                  `${
+                    value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                  }`,
+                  `[${index0}].children[${[index1]}]`,
+                  value1.children.map((value2, index2) => {
+                    return getItem(
+                      `${
+                        value0.type === 'account'
+                          ? trr(value2.key)
+                          : t(value2.key)
+                      }`,
+                      `[${index0}].children[${[index1]}].children[${[index2]}]`,
+                    )
+                  }),
+                ),
+              )
+            } else {
+              __items.push(
+                getItem(
+                  `${
+                    value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                  }`,
+                  `[${index0}].children[${[index1]}]`,
+                ),
+              )
+            }
+          })
 
-        _items.push(
-          getItem(
-            `${value0.type === 'account' ? trr(value0.key) : t(value0.key)}`,
-            index0,
-            __items,
-          ),
-        )
-      } else {
-        _items.push(getItem(`${t(value0.key)}`, `[${index0}]`))
-      }
-    })
+          _items.push(
+            getItem(
+              `${value0.type === 'account' ? trr(value0.key) : t(value0.key)}`,
+              index0,
+              __items,
+            ),
+          )
+        } else {
+          _items.push(getItem(`${t(value0.key)}`, `[${index0}]`))
+        }
+      })
     setItems(_items)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang])
@@ -203,6 +212,31 @@ const Header = (props: any) => {
             onSelect={onSelect}
             items={items}
           />
+          {!userStore.isLogin && (
+            <Link
+              href={'/admin/login'}
+              onClick={() => {
+                setOpen(false)
+              }}
+              className={styles.login}
+            >
+              {t('login')}
+            </Link>
+          )}
+          {userStore.isLogin && (
+            <div
+              onClick={() => {
+                localStorage.removeItem(`mail`)
+                localStorage.removeItem(`token-${userStore.userInfo.mail}`)
+                userStore.clearUserInfo()
+                router.reload()
+                setOpen(false)
+              }}
+              className={styles['log-out']}
+            >
+              {t('logout')}
+            </div>
+          )}
         </div>
       </div>
     </div>

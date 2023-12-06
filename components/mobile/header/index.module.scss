@@ -20,7 +20,7 @@
           align-items: center;
           margin-left: 12px;
           font-size: 12px;
-          font-family: 'HarmonyOS_Medium';
+          font-family: "HarmonyOS_Medium";
           column-gap: 4px;
           & > :first-child {
             width: fit-content;
@@ -71,14 +71,38 @@
       height: 0px;
       background: #00000099;
       opacity: 0;
-      transition:
-        min-height 0.3s,
-        opacity 0.3s;
+      transition: min-height 0.3s, opacity 0.3s;
 
-        .menuWrap {
-          padding-bottom: 44px;
-          height: max-content;
+      .menuWrap {
+        padding-bottom: 44px;
+        height: max-content;
+        background: white;
+        .login {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 30px;
+          height: 44px;
+          border-radius: 6px;
+          background: var(--mobile-link-color);
+          color: var(--mobile-bg-color);
+
+          margin-inline: 12px;
         }
+
+        .log-out {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 30px;
+          height: 44px;
+          border: 1px solid var(--mobile-link-color);
+          border-radius: 6px;
+          color: var(--mobile-link-color);
+
+          margin-inline: 12px;
+        }
+      }
     }
     .body.active {
       min-height: 100%;
