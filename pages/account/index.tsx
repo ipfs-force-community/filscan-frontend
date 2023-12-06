@@ -52,21 +52,15 @@ const Account: React.FC = () => {
     const result = await userStore.getUserInfo()
     if (result) {
       router.push('/admin/login')
-    } else {
-      accountStore.getAccountMinersNumber()
-      accountStore.getAccountGroup()
     }
   }
 
-  // useEffect(() => {
-  //   if (!userInfo.mail || !localStorage.getItem(`mail`)) {
-  //     router.push('/admin/login')
-  //     return
-  //   } else {
-  //     accountStore.getAccountMinersNumber()
-  //     accountStore.getAccountGroup()
-  //   }
-  // }, [userInfo.mail])
+  useEffect(() => {
+    if (userInfo?.mail) {
+      accountStore.getAccountMinersNumber()
+      accountStore.getAccountGroup()
+    }
+  }, [userInfo.mail])
 
   if (loading) {
     return <Loading />
