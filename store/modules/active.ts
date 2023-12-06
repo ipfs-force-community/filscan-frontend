@@ -9,7 +9,7 @@ class Active {
     makeObservable(this, {
       activeList: observable,
     })
-    this.getActiveList()
+    // this.getActiveList()
   }
 
   async getActiveList() {
@@ -20,5 +20,5 @@ class Active {
   }
 }
 
-const active = new Active()
-export default active
+const activeStore = new Active()
+export default activeStore

@@ -12,6 +12,8 @@ import CompaniesPro from '@/assets/images/member/companiesPro.svg'
 import CompaniesV from '@/assets/images/member/companiesV.png'
 import CompaniesVPro from '@/assets/images/member/companiesVPro.png'
 import Image from 'next/image'
+import UserIcon from '@/assets/images/user.svg'
+import Vip from '@/assets/images/member/vip.svg'
 
 export const logTabs = [
   {
@@ -132,18 +134,22 @@ export const login_list: Record<string, any> = {
     },
   ],
 }
-
 export const personal_list = [
   {
     title: 'personal_1',
+    key: 'member',
+    icon: <Vip />,
+
     // title_des: 'personal_1_des',
   },
   {
     title: 'personal_2',
+    key: 'mail',
     // title_des: 'personal_1_des',
   },
   {
     title: 'personal_3',
+    key: 'password',
     // title_des: 'personal_1_des',
   },
 ]

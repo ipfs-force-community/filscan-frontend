@@ -1,7 +1,7 @@
 import { Translation } from '@/components/hooks/Translation'
-import { Button, Modal } from 'antd'
-import { useMemo, useRef, useState } from 'react'
-import style from './index.module.scss'
+import { Modal } from 'antd'
+import { useMemo, useRef } from 'react'
+import style from './share.module.scss'
 import { active_member_share } from '@/contents/account'
 import QRCodePage from '@/components/QR'
 import html2canvas from 'html2canvas'
@@ -29,6 +29,8 @@ export default observer((props: Props) => {
     if (shareRef.current) {
       html2canvas(shareRef?.current, {
         useCORS: true,
+        scale: 2,
+        scrollY: 0,
         allowTaint: false, //允许跨域图片,
         backgroundColor: 'transparent',
       }).then((canvas) => {
@@ -57,9 +59,9 @@ export default observer((props: Props) => {
       <Modal
         destroyOnClose={true}
         closeIcon={false}
-        wrapClassName="custom_modal noPaddingModal noTopModal"
+        wrapClassName="custom_modal noPaddingModal " //noTopModal
         open={show}
-        width={400}
+        width={416}
         footer={null}
         onCancel={() => {
           onChange(false)
@@ -67,7 +69,10 @@ export default observer((props: Props) => {
       >
         <div className={style.activeShare}>
           <div className={style.share} ref={shareRef}>
-            <div className={style.share_top}>
+            <div
+              className={style.share_top}
+              style={{ width: '416px', height: '580px' }}
+            >
               <div className={style.share_main}>
                 <div className={style.share_content}>
                   <span
@@ -89,8 +94,10 @@ export default observer((props: Props) => {
                     {active_member_share.map((v: any, index: number) => {
                       return (
                         <li key={index} className={style.share_content_item}>
-                          {v.icon}
-                          {tr(v.title)}
+                          <span>{v.icon}</span>
+                          <div>
+                            <span>{tr(v.title)}</span>
+                          </div>
                         </li>
                       )
                     })}
@@ -107,22 +114,27 @@ export default observer((props: Props) => {
                 <div>{tr('active_target_2')}</div> */}
               </div>
               <div className={style.share_invite}>
-                <span>{tr('invite_code')}</span>
+                <div>{tr('invite_code')}</div>
                 <div className={style.share_invite_content}>
                   {inviteCode?.split('')?.map((v, index: number) => {
                     return (
                       <div key={index} className={style.share_invite_item}>
-                        {v}
+                        <div className={style.share_invite_item_value}>
+                          {String(v)}
+                        </div>
                       </div>
                     )
                   })}
                 </div>
               </div>
             </div>
-            <div className={style.share_bottom}>
-              <div>
+            <div
+              className={style.share_bottom}
+              style={{ width: '416px', height: '146px' }}
+            >
+              <div className={style.share_bottom_code}>
                 <QRCodePage
-                  link={`${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
+                  link={`http://${window.location.host}/admin/register/?inviteCode=${inviteCode}`}
                 />
               </div>
 
@@ -132,10 +144,7 @@ export default observer((props: Props) => {
                 </div>
                 <div className={style.share_bottom_des}>{tr('active_des')}</div>
                 <div className={style.share_bottom_gift}>
-                  <span className={style.share_bottom_icon}>
-                    <Image src={gift} alt="" />
-                    {/* {getSvgIcon('member_active')} */}
-                  </span>
+                  <Image src={gift} alt="" width={20} />
                   <span className={style.share_bottom_gift_text}>
                     {tr('active_gift')}
                   </span>

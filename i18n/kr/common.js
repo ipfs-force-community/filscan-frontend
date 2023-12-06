@@ -40,6 +40,7 @@ const common = {
   verification_code: '인증 코드 로그인 ',
   email_placeholder: '이메일 주소를 입력하세요',
   password_placeholder: '비밀번호를 입력하세요',
+  invite_placeholder: '초대코드 입력(선택)',
   code_placeholder: '인증 코드를 입력하세요',
   remember_me: '기억하기 및 자동 로그인',
   forgot_password: '비밀번호를 잊으셨나요',
@@ -50,6 +51,7 @@ const common = {
   go_register: '지금 회원 가입하기',
   new_password: '비밀번호 설정하기',
   confirm_password: '비밀번호 확인',
+
   agreement:
     '회원가입은 "약관"과 "개인정보 처리방침"에 동의하는 것을 의미합니다',
 
@@ -68,6 +70,8 @@ const common = {
     'Filscan 브라우저는 Filecoin 블록체인 브라우저 및 데이터 서비스 플랫폼입니다.',
   footer_des2:
     'Filecoin 기반의 수익 랭킹, 블록체인 데이터 조회, 시각화 차트 등의 데이터 서비스를 제공합니다',
+  active: '활동',
+  active_time: 'Period',
 }
 
 export default common

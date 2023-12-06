@@ -29,8 +29,6 @@ class AccountStore {
       groupMiners: observable,
       defaultGroup: observable,
     })
-    this.getAccountMinersNumber()
-    this.getAccountGroup()
   }
 
   //用户名下节点数
@@ -48,7 +46,7 @@ class AccountStore {
   async getAccountGroup() {
     const result: RequestResult = await axiosServer(UserGroups)
     if (!result.error) {
-      this.getAccountMinersNumber()
+      await this.getAccountMinersNumber()
     }
     runInAction(() => {
       this.groupMiners = (result?.data?.group_info_list || []).map(
@@ -72,7 +70,7 @@ class AccountStore {
   async saveMiners(groupItem: GroupInfoList[]) {
     const result: RequestResult = await axiosServer(saveMiner, groupItem)
     if (!result.error) {
-      this.getAccountGroup()
+      await this.getAccountGroup()
       return true
     }
   }
@@ -81,7 +79,7 @@ class AccountStore {
     const result: RequestResult = await axiosServer(saveGroup, payload)
     if (!result.error) {
       if (!result?.data?.code) {
-        this.getAccountGroup()
+        await this.getAccountGroup()
         return {
           error: null,
         }
@@ -102,14 +100,14 @@ class AccountStore {
   async delGroups(group_id: number) {
     const result: RequestResult = await axiosServer(delGroup, { group_id })
     if (!result.error) {
-      this.getAccountGroup()
+      await this.getAccountGroup()
     }
   }
   //删除某个分组内节点
   async delMiners(miner_id: string) {
     const result: RequestResult = await axiosServer(deleteMiners, { miner_id })
     if (!result.error) {
-      this.getAccountGroup()
+      await this.getAccountGroup()
       return messageManager.showMessage({
         type: 'success',
         content: 'delete miner successfully',

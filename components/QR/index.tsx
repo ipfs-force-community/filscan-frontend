@@ -35,7 +35,6 @@ export default function QRCodePage(props: Props) {
           setTimeout(() => {
             const dataUrl = canvas.toDataURL()
             imgRef.current.style.width = '120px'
-            imgRef.current.style.height = '120px'
             imgRef.current.src = dataUrl
             canvas.style.display = 'none'
           })
@@ -51,7 +50,7 @@ export default function QRCodePage(props: Props) {
   return (
     <>
       <img ref={imgRef} width={0} height={0} className="rounded-md" />
-      <canvas ref={canvasRef} width={120} height={120} className="rounded-md" />
+      <canvas ref={canvasRef} width={100} height={100} className="rounded-md" />
     </>
   )
 }

@@ -81,7 +81,7 @@ const navMenu: Array<Menu_Info | any> = [
 
   {
     key: 'fvm',
-    // sufIcon: "hot",
+    sufIcon: 'freeVip',
     color: '#F44C30',
     children: [
       {
@@ -91,6 +91,7 @@ const navMenu: Array<Menu_Info | any> = [
       {
         key: 'active',
         link: '/active',
+        sufIcon: 'freeVip',
       },
     ],
   },

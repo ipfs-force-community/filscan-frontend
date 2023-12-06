@@ -299,6 +299,32 @@ export const account_detail = {
       },
     },
     {
+      title: 'robust_address',
+      dataIndex: 'robust_address',
+      type: ['account_basic'],
+      elasticity: true,
+      render: (text: string) => {
+        return text ? (
+          <>
+            <BrowserView>
+              <span className="flex items-center gap-x-2">
+                {text?.length > 30 ? isIndent(text, 10, 10) : text}
+                <Copy text={text} />
+              </span>
+            </BrowserView>
+            <MobileView>
+              <span className="copy-row">
+                <span className="normal-text">{text}</span>
+                <Copy text={text} icon={<CopySvgMobile />} className="copy" />
+              </span>
+            </MobileView>
+          </>
+        ) : (
+          text
+        )
+      },
+    },
+    {
       title: 'worker_address',
       dataIndex: 'worker_address',
       render: (text: string) => {
@@ -744,7 +770,7 @@ export const message_detail = {
                         <AccountLink value={item.to} tagText={item.to_tag} />
                       </span>
                     </span>
-                    <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
+                    <span className="flex items-center gap-x-2 font-HarmonyOS_Medium ">
                       <span className="font_weight">For</span>
                       <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                       <span>{item?.token_name}</span>
@@ -823,7 +849,7 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
+                        <span className="flex items-center gap-x-2 font-HarmonyOS_Medium ">
                           <span className="font_weight">For</span>
                           <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                           <span>{item?.token_name}</span>
@@ -856,7 +882,7 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
+                        <span className="flex items-center gap-x-2 font-HarmonyOS_Medium ">
                           <span className="font_weight">For</span>
                           <span>{Number(item?.amount).toFixed(4) || '--'}</span>
                           <span>{item?.token_name}</span>
@@ -907,7 +933,7 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
+                        <span className="flex items-center gap-x-2 font-HarmonyOS_Medium ">
                           <span className="font_weight">For</span>
                           <span>
                             {formatFilNum(item.value, false, false, 4) || '--'}
@@ -938,7 +964,7 @@ export const message_detail = {
                             />
                           </span>
                         </span>
-                        <span className="font-HarmonyOS_Medium flex items-center gap-x-2 ">
+                        <span className="flex items-center gap-x-2 font-HarmonyOS_Medium ">
                           <span className="font_weight">For</span>
                           <span>
                             {formatFilNum(item.value, false, false, 4) || '--'}
@@ -1412,27 +1438,24 @@ const default_content = [
     elasticity: true,
     type: ['account_basic'],
     render: (text: string, record: any) => {
-      if (record.account_type === 'multisig') {
-        return text ? (
-          <>
-            <BrowserView>
-              <span className="flex items-center gap-x-2">
-                {text?.length > 30 ? isIndent(text, 10, 10) : text}
-                <Copy text={text} />
-              </span>
-            </BrowserView>
-            <MobileView>
-              <span className="copy-row">
-                <span className="normal-text">{text}</span>
-                <Copy text={text} icon={<CopySvgMobile />} className="copy" />
-              </span>
-            </MobileView>
-          </>
-        ) : (
-          text
-        )
-      }
-      return null
+      return text ? (
+        <>
+          <BrowserView>
+            <span className="flex items-center gap-x-2">
+              {text?.length > 30 ? isIndent(text, 10, 10) : text}
+              <Copy text={text} />
+            </span>
+          </BrowserView>
+          <MobileView>
+            <span className="copy-row">
+              <span className="normal-text">{text}</span>
+              <Copy text={text} icon={<CopySvgMobile />} className="copy" />
+            </span>
+          </MobileView>
+        </>
+      ) : (
+        text
+      )
     },
   },
   {

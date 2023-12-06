@@ -28,6 +28,7 @@ import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
 import Active from '@/src/account/active'
+import Warn from '@/src/user/Warn'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
@@ -45,10 +46,17 @@ const Account: React.FC = () => {
   }, [hash])
 
   useEffect(() => {
-    if (!userInfo.mail || !localStorage.getItem(`token-${userInfo.mail}`)) {
+    load()
+  }, [])
+  const load = async () => {
+    const result = await userStore.getUserInfo()
+    if (result) {
       router.push('/admin/login')
-      return
-    } else {
+    }
+  }
+
+  useEffect(() => {
+    if (userInfo?.mail) {
       accountStore.getAccountMinersNumber()
       accountStore.getAccountGroup()
     }
@@ -76,11 +84,11 @@ const Account: React.FC = () => {
           title={
             <span className={style.submenu_title}>
               {tr(item.label)}
-              {item.vip && (
+              {/* {item.vip && (
                 <span className={style.submenu_title_vip}>
                   <Vip />
                 </span>
-              )}
+              )} */}
               {item.sufIcon}
             </span>
           }
@@ -98,7 +106,7 @@ const Account: React.FC = () => {
         <Link href={`/account#${item.key}`} scroll={false}>
           <span className={style.submenu_title}>
             {tr(item.label)}
-            {item.sufIcon}
+            <span className={style.submenu_title_icon}>{item.sufIcon}</span>
           </span>
         </Link>
       </Menu.Item>
@@ -106,14 +114,14 @@ const Account: React.FC = () => {
   }
 
   const childrenData: Record<string, JSX.Element> = {
-    overview: <Overview selectedKey="overview" />,
+    overview: <Overview selectedKey={selectedKey} />,
     miners: <Miners />,
-    lucky: <Lucky selectedKey={'overview_lucky'} />,
-    power: <Power selectedKey={'overview_power'} />,
-    gas: <Gas selectedKey={'overview_gas'} />,
-    balance: <Balance selectedKey={'overview_balance'} />,
-    expired: <Expired selectedKey={'overview_expired'} />,
-    reward: <Reward selectedKey={'overview_reward'} />,
+    lucky: <Lucky selectedKey={'lucky'} />,
+    power: <Power selectedKey={'power'} />,
+    gas: <Gas selectedKey={'gas'} />,
+    balance: <Balance selectedKey={'balance'} />,
+    expired: <Expired selectedKey={'expired'} />,
+    reward: <Reward selectedKey={'reward'} />,
     monitorBalance: <MonitorBalance />,
     monitorSector: <MonitorSector />,
     monitorPower: <MonitorPower />,
@@ -121,6 +129,7 @@ const Account: React.FC = () => {
     active: <Active />,
   }
 
+  const noMiners = ['miner_add', 'personal', 'miners', 'active']
   return (
     <>
       <BrowserView>
@@ -166,8 +175,7 @@ const Account: React.FC = () => {
             >
               {!miners_count &&
               hashParams.type !== 'miner_add' &&
-              selectedKey !== 'personal' &&
-              selectedKey !== 'miners' ? (
+              !noMiners.includes(selectedKey) ? (
                 <NoMiner selectedKey={selectedKey} />
               ) : (
                 childrenData[selectedKey]
@@ -175,6 +183,7 @@ const Account: React.FC = () => {
             </div>
           </div>
         </div>
+        <Warn />
       </BrowserView>
       <MobileView>
         <div>

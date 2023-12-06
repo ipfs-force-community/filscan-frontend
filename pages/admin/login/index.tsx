@@ -31,7 +31,7 @@ export default observer(() => {
         try {
           const values = await form.validateFields()
           console.log('Success:', values)
-          onFinish()
+          //onFinish()
         } catch (errorInfo) {
           console.log('Failed:', errorInfo)
         }

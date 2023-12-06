@@ -4,6 +4,7 @@ import { Option_Item } from '@/contents/type'
 import { Select } from 'antd'
 import { useEffect, useState } from 'react'
 import type { SelectProps } from 'antd'
+import { getSvgIcon } from '@/svgsIcon'
 
 interface Props extends SelectProps {
   className?: string
@@ -46,6 +47,7 @@ export default (props: Props) => {
       size={'large'}
       className={`custom_select ${className}`}
       popupClassName={'custom_select_wrapper'}
+      suffixIcon={<span>{getSvgIcon('downIcon')}</span>}
       filterOption={(input, option: any) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }

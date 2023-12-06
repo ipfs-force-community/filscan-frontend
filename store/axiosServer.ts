@@ -49,7 +49,7 @@ export const axiosServer = async <T>(
     } catch (error) {
       if (axios.isCancel(error)) {
         return {
-          data: null,
+          data: error,
           error: 'Request cancelled',
         }
       }
@@ -59,7 +59,7 @@ export const axiosServer = async <T>(
       }
 
       return {
-        data: null,
+        data: error,
         error: 'Request failed',
       }
     }

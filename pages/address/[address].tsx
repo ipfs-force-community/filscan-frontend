@@ -255,7 +255,6 @@ export default () => {
   if (loading) {
     return <Loading />
   }
-
   return (
     <div className={classNames(styles.address, 'main_contain')}>
       <div

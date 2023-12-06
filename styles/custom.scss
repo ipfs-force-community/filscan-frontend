@@ -3,6 +3,11 @@
 }
 
 @font-face {
+  font-family: 'iconfont';
+  src: url('../assets/font/iconfont.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
   src: url('../assets/font/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf');
   font-display: auto;
@@ -22,22 +27,13 @@
   font-display: auto;
 }
 
-// @font-face {
-//   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
-//   src: url('../assets/font/din/HarmonyOS_Regular-Regular.otf');
-//   font-display: auto;
-// }
-// @font-face {
-//   font-family: 'HarmonyOS_Bold'; /* Project id 1544881 */
-//   src: url('../assets/font/din/HarmonyOS_Bold.otf');
-//   font-display: auto;
-// }
-
-// @font-face {
-//   font-family: 'HarmonyOS_Medium'; /* Project id 1544881 */
-//   src: url('../assets/font/din/HarmonyOS_Medium.otf');
-//   font-display: auto;
-// }
+.icon {
+  font-family: 'iconfont' !important;
+  font-size: 14px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 //layout
 .custom_header {
@@ -64,35 +60,36 @@
 
 .custom_form {
   .ant-form-item {
-    margin-bottom: 10px;
-    &-label {
-      color: var(--font-color);
+    // margin-bottom: 10px;
+    .ant-form-item-label {
+      color: var(--font-color) !important;
+      .ant-form-item-required {
+        color: var(--font-color) !important;
+      }
       label {
-        color: var(--font-color);
+        color: var(--font-color) !important;
       }
     }
     .ant-form-item-explain {
       font-size: 12px;
-      line-height: 16px;
+      // line-height: 16px;
     }
   }
 
-  .ant-form-item-row {
-    height: 100%;
-    .ant-form-item-control {
-      height: 100%;
-      .ant-form-item-control-input {
-        height: 100%;
+  .ant-form-item-control {
+    .ant-form-item-control-input {
+      .ant-input-suffix {
+        .anticon {
+          color: var(--font-color) !important;
+        }
       }
-      .ant-form-item-control-input-content {
-        height: 100%;
-        .ant-input-affix-wrapper {
-          height: 100%;
-          background-color: transparent !important;
-          .ant-input {
-            &::value {
-              background-color: var(--bgColor) !important;
-            }
+    }
+    .ant-form-item-control-input-content {
+      .ant-input-affix-wrapper {
+        background-color: transparent !important;
+        .ant-input {
+          &::value {
+            background-color: var(--bgColor) !important;
           }
         }
       }
@@ -200,6 +197,14 @@
         }
       }
       .ant-table-tbody {
+        .ant-table-cell {
+          font-family: HarmonyOS_Regular;
+          background-color: var(--bgColor);
+          border-bottom: 1px solid var(--border-color);
+          &::before {
+            display: none;
+          }
+        }
         .ant-table-cell-fix-left,
         .ant-table-cell-fix-right {
           background-color: var(--bgColor);
@@ -271,6 +276,20 @@
   .ant-tooltip-inner {
     background-color: var(--tips-bgColor) !important;
     color: var(--font-color) !important;
+  }
+}
+
+.noPadding_popover {
+  .ant-popover-content {
+    background-color: transparent;
+  }
+  .ant-popover-inner {
+    .ant-popover-inner-content {
+      background-color: transparent;
+    }
+    background-color: transparent;
+    border-radius: 12px;
+    padding: 0px !important;
   }
 }
 
@@ -393,14 +412,24 @@
       color: var(--font-color);
       cursor: pointer;
     }
+    .ant-select-selection-placeholder {
+      font-size: 12px !important;
+    }
   }
+
   .ant-select-selection-placeholder {
     display: flex;
     align-items: center;
+    font-size: 12px !important;
     color: var(--font_des) !important;
   }
 }
 .ant-select-disabled {
+  &:hover {
+    .ant-select-selector {
+      border: 1px solid var(--border-color) !important;
+    }
+  }
   .ant-select-selector {
     .ant-select-selection-item {
       color: var(--font_des) !important;
@@ -545,6 +574,7 @@
 
 //date
 .custom_picker {
+  font-family: HarmonyOS_Regular;
   position: relative;
   border-radius: 5px;
   min-width: 120px;
@@ -558,8 +588,10 @@
     top: 50%;
     transform: translate(0px, -50%);
   }
+
   .custom_date_picker {
     .ant-picker-input {
+      font-family: HarmonyOS_Regular;
       padding-left: 20px;
       color: var(--font-color);
       input {
@@ -577,6 +609,9 @@
     font-family: HarmonyOS_Medium, HarmonyOS_Regular;
     font-weight: 500;
     color: #000000;
+    .ant-picker-suffix {
+      color: var(--font-color) !important;
+    }
   }
 }
 .custom_date_picker_wrap {
@@ -716,7 +751,7 @@
   width: 100%;
 }
 .ant-modal-mask {
-  background-color: rgba(0, 0, 0, 0.45) !important;
+  background-color: rgba(0, 0, 0, 0.65) !important;
 }
 .custom_modal_wrapper {
   width: 100%;

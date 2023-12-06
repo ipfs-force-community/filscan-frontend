@@ -12,13 +12,20 @@ import iconBg from '@/assets/images/member/member_bg.png'
 import AddTG from './addTg'
 import Image from 'next/image'
 import Share from '../active/Share'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default observer(() => {
   const { vipModal } = userStore
   const { tr } = Translation({ ns: 'account' })
-  const { inviteCode } = userStore
+  const { inviteCode, userInfo } = userStore
   const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    if (userInfo?.mail) {
+      userStore.getInviteList()
+    }
+  }, [userInfo?.mail])
+
   return (
     <Modal
       title={``}
@@ -41,7 +48,7 @@ export default observer(() => {
                 userStore.setVipModal(false)
               }}
             >
-              X
+              {getSvgIcon('closeIcon')}
             </span>
           </div>
           <div className={style.content}>
@@ -52,7 +59,9 @@ export default observer(() => {
                   <div className={style.content_card_title}>
                     {tr(item.title)}
                   </div>
-                  <div>{tr(item.value)}</div>
+                  <div className={style.content_card_value}>
+                    {tr(item.value)}
+                  </div>
                 </div>
               )
             })}
@@ -91,12 +100,11 @@ export default observer(() => {
           </div>
           <div className={`${style.member_content}`}>
             <div className={`${style.member_content_title}`}>
-              {/* <LeftIcon /> */}
               {tr('member_content_title')}
-              {/* <RightIcon /> */}
             </div>
             <div className={style.member_content_main}>
-              {member_main.map((item: any, index: number) => {
+              {Object.keys(member_main).map((key: string, index: number) => {
+                const item = member_main[key]
                 return (
                   <div
                     key={index}
@@ -112,7 +120,9 @@ export default observer(() => {
                       <div className={style.member_itemMain_card}>
                         <div className={style.member_itemMain_card_header}>
                           <div className={`${style.member_item_card}`}>
-                            {tr(item.title)}
+                            <span className={`${style.member_item_card_title}`}>
+                              {tr(item.title)}
+                            </span>
                             <span className={style.member_itemMain_card_icon}>
                               {item.icon}
                             </span>
@@ -181,6 +191,7 @@ export default observer(() => {
               setShow(true)
             }}
           >
+            <span className={style.member_btnShare_icon}>Free VIP</span>
             <Vip />
             {tr('share_friend')}
           </div>

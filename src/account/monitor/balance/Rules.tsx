@@ -55,7 +55,8 @@ export default observer((props: Props) => {
       }
       const newRules = {
         group_id: record.group_id === -1 ? 'all' : String(record.group_id),
-        miner_id: record.miner_id_or_all,
+        miner_id:
+          record.miner_id_or_all === '' ? 'all' : record.miner_id_or_all,
         rule: record.rules.map((v: any) => {
           return {
             category: v.account_type,
@@ -121,6 +122,7 @@ export default observer((props: Props) => {
         },
       ])
     }
+    setOtherRules({})
   }, [record])
 
   const handleChange = (

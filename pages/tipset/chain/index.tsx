@@ -84,7 +84,7 @@ export default observer(() => {
               return (
                 <li
                   key={itemHeader.dataIndex}
-                  className="text_des font-medium"
+                  className="text_des "
                   style={{ width: itemHeader.width }}
                 >
                   {itemHeader.title}
@@ -168,7 +168,7 @@ export default observer(() => {
                           <li
                             style={{ width: itemHeader.width }}
                             key={dataIndex}
-                            className="font-HarmonyOS_Medium"
+                            className="font-HarmonyOS"
                           >
                             {renderValue}
                           </li>

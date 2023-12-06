@@ -1,3 +1,15 @@
+.replaced_detail {
+  display: flex;
+  align-items: center;
+  column-gap: 2px;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  width: fit-content;
+  background-color: var(--warn-bg-color);
+  color: var(--warn-color);
+  margin: 10px 10px;
+}
 @media screen and (max-width: 1000px) {
   .message {
     padding: 12px;

@@ -132,7 +132,7 @@ export default observer(() => {
           styles.balance_title,
         )}
       >
-        {tr('monitor_balance')}
+        {tr('monitorBalance')}
         {isMobile && (
           <div className={styles.tip}>
             <ExclamationCircleOutlined className="mr-[2px]" />

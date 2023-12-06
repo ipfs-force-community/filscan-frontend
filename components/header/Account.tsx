@@ -50,7 +50,7 @@ export default observer(() => {
                   localStorage.removeItem(`mail`)
                   localStorage.removeItem(`token-${mail}`)
                   userStore.clearUserInfo()
-                  router.reload()
+                  router.push('/admin/login')
                 }}
                 className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"
               >

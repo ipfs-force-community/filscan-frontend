@@ -43,8 +43,7 @@ const common = {
   verification_code: '验证码登录',
   email_placeholder: '输入邮箱号',
   password_placeholder: '输入密码',
-  invite_placeholder: '输入邀请码',
-
+  invite_placeholder: '输入邀请码(选填)',
   code_placeholder: '输入验证码',
   remember_me: '记住并自动登录',
   forgot_password: '忘记密码',
@@ -72,6 +71,6 @@ const common = {
     '提供基于 Filecoin 的各类数据查询、可视化图表以及FVM生态数据统计分析的一站式数据服务',
 
   active: '活动',
-  active_time: '活动期限',
+  active_time: 'Period',
 }
 export default common
