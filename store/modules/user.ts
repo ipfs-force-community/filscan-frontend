@@ -204,7 +204,7 @@ class UserStore {
     if (!userData.error && !userData?.data?.code) {
       localStorage.setItem(`mail`, userData.data?.mail)
       localStorage.setItem(`token-${userData.data.mail}`, userData.data?.token)
-      await this.getUserInfo()
+      //await this.getUserInfo()
       if (!userData.data.is_activity) {
         this.setFirstWarn(true)
       }
