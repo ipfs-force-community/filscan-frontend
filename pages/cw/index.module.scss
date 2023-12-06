@@ -7,14 +7,8 @@
 .cw_contain {
   position: relative;
   height: 100%;
-  //padding: 20px 70px 40px 60px;
-  //  min-width: 1024px;
-  //   max-width: 1440px;
 }
-/**
-     *  donut-spinner
-     *  source from https://30-seconds.github.io/30-seconds-of-css/#donut-spinner
-     */
+
 @keyframes donut-spin {
   0% {
     transform: rotate(0deg);
@@ -81,58 +75,40 @@
   right: 75px;
 }
 
+.block-header-chart {
+  user-select: none;
+  height: 80vh;
+  background: var(--board-bg-color);
+  margin: 50px 10px 10px 0px;
+  padding: 0px 10px;
+  min-width: 1200px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
 .block-header-chart-noData {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  .block-header-chart {
-    user-select: none;
-    height: 80vh;
-    background: var(--board-bg-color);
-    margin: 0 10px 10px 0px;
-    padding: 0px 10px;
-    min-width: 1200px;
-    cursor: pointer;
-  }
   .lc-tooltip {
     user-select: none;
   }
-
-  .top-wrap {
-    position: absolute;
-    bottom: 60px;
-    right: 80px;
-    display: flex;
-    align-items: center;
-    column-gap: 4px;
-    padding: 6px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid var(--border-color);
-    background: var(--select-shadow);
-    color: var(--font_des);
-    backdrop-filter: blur(2px);
-    &:hover {
-      color: var(--primary);
-    }
-  }
 }
-
 .top-wrap {
-  display: flex;
-  align-items: center;
-  column-gap: 4px;
   position: absolute;
   bottom: 60px;
   right: 80px;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
   padding: 6px 15px;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid var(--border-color);
-  background: var(--bgColor);
+  background: var(--select-shadow);
   color: var(--font_des);
+  backdrop-filter: blur(2px);
   &:hover {
     color: var(--primary);
   }

@@ -54,6 +54,7 @@ export default () => {
       <Popover
         content={content}
         title={''}
+        open={true}
         placement="left"
         overlayClassName="noPadding_popover"
       >

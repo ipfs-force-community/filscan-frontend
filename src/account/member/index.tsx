@@ -12,13 +12,17 @@ import iconBg from '@/assets/images/member/member_bg.png'
 import AddTG from './addTg'
 import Image from 'next/image'
 import Share from '../active/Share'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default observer(() => {
   const { vipModal } = userStore
   const { tr } = Translation({ ns: 'account' })
   const { inviteCode } = userStore
   const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    userStore.getInviteList()
+  }, [])
   return (
     <Modal
       title={``}

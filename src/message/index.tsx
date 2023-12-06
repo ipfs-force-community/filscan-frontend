@@ -18,6 +18,7 @@ import Trade from './Trade'
 import Event from './Event'
 import Loading from '@/components/loading'
 import AccountLink from '@/components/accountLink'
+import { getSvgIcon } from '@/svgsIcon'
 
 export default ({ cid }: { cid: string | string[] }) => {
   const { tr } = Translation({ ns: 'detail' })
@@ -178,6 +179,7 @@ export default ({ cid }: { cid: string | string[] }) => {
     }
   }
 
+  console.log('-----344', data, message_detail)
   return (
     <div className={classNames(styles.message, 'main_contain')}>
       <div
@@ -191,6 +193,7 @@ export default ({ cid }: { cid: string | string[] }) => {
         >
           {tr(message_detail?.title || '')}
         </span>
+
         <Segmented
           data={message_detail.tabs}
           defaultActive="detail"
@@ -199,6 +202,15 @@ export default ({ cid }: { cid: string | string[] }) => {
           isHash={true}
         />
       </div>
+      {data.replaced && (
+        <div className={styles.replaced_detail}>
+          {getSvgIcon('tip')}
+          {tr('replaced_detail', {
+            value: cid,
+            newValue: data?.message_basic?.cid,
+          })}
+        </div>
+      )}
       {renderItemChild()}
     </div>
   )

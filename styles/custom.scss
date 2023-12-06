@@ -34,22 +34,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-// @font-face {
-//   font-family: 'HarmonyOS_Regular'; /* Project id 1544881 */
-//   src: url('../assets/font/din/HarmonyOS_Regular-Regular.otf');
-//   font-display: auto;
-// }
-// @font-face {
-//   font-family: 'HarmonyOS_Bold'; /* Project id 1544881 */
-//   src: url('../assets/font/din/HarmonyOS_Bold.otf');
-//   font-display: auto;
-// }
-
-// @font-face {
-//   font-family: 'HarmonyOS_Medium'; /* Project id 1544881 */
-//   src: url('../assets/font/din/HarmonyOS_Medium.otf');
-//   font-display: auto;
-// }
 
 //layout
 .custom_header {
@@ -296,7 +280,15 @@
 }
 
 .noPadding_popover {
+  .ant-popover-content {
+    background-color: transparent;
+  }
   .ant-popover-inner {
+    .ant-popover-inner-content {
+      background-color: transparent;
+    }
+    background-color: transparent;
+    border-radius: 12px;
     padding: 0px !important;
   }
 }

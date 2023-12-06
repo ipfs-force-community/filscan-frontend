@@ -90,7 +90,7 @@ export default (props: Props) => {
             wrapperClassName: 'custom-table-loading',
             indicator: (
               <div className="custom-table-loading-div">
-                <Image src={loadingPng} width={160} height={160} alt="" />
+                <Image src={loadingPng} alt="" />
               </div>
             ),
           }}

@@ -129,8 +129,8 @@ class UserStore {
   async getUserInfo() {
     const userData: RequestResult = await axiosServer(userInfo)
     if (!userData.error) {
-      this.getUserCode()
-      this.getInviteList()
+      await this.getUserCode()
+      await this.getInviteList()
     }
     if (!userData.error) {
       runInAction(() => {
