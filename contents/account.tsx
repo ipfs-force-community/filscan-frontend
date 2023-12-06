@@ -58,6 +58,8 @@ export const userType: any = {
   },
 }
 
+export const vipList = ['EnterpriseVIP', 'EnterpriseProVIP']
+
 export const account_manager: Array<MenuItem> = [
   {
     label: 'overview',

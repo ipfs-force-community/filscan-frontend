@@ -8,7 +8,7 @@ import { Input } from 'antd'
 import { useState } from 'react'
 import { getSvgIcon } from '@/svgsIcon'
 import { observer } from 'mobx-react'
-import { userType } from '@/contents/account'
+import { userType, vipList } from '@/contents/account'
 import passwordPng from '@/assets/images/member/password.png'
 import emailPng from '@/assets/images/member/email.png'
 import style from './index.module.scss'
@@ -81,7 +81,7 @@ export default observer(() => {
                 {userType[membership_type]?.icon}
                 <span>{tr(userType[membership_type]?.title)}</span>
               </span>
-              <Detail />
+              {vipList.includes(membership_type) && <Detail />}
             </span>
 
             <span className="text_des mt-2 text-xs">
