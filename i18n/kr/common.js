@@ -71,7 +71,7 @@ const common = {
   footer_des2:
     'Filecoin 기반의 수익 랭킹, 블록체인 데이터 조회, 시각화 차트 등의 데이터 서비스를 제공합니다',
   active: '활동',
-  active_time: '활동기간',
+  active_time: 'Period',
 }
 
 export default common

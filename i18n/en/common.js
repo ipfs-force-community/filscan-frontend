@@ -74,6 +74,6 @@ const common = {
   footer_des2:
     'It offers a range of one-stop data services, including mining ranking, blockchain data query, visualization charts, and FVM ecosystem data analysis.',
   active: 'Activity',
-  active_time: 'Activity Period',
+  active_time: 'Period',
 }
 export default common

@@ -1,13 +1,18 @@
 import { Translation } from '@/components/hooks/Translation'
-import active from '@/store/modules/active'
 import { formatDateTime } from '@/utils'
 import { observer } from 'mobx-react'
 import Image from 'next/image'
 import style from './index.module.scss'
+import activeStore from '@/store/modules/active'
+import { useEffect } from 'react'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'common' })
-  const { activeList } = active
+  const { activeList } = activeStore
+
+  useEffect(() => {
+    activeStore.getActiveList()
+  }, [])
   return (
     <div className="main_contain">
       <div className={style.active_title}>{tr('active')}</div>
