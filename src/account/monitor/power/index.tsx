@@ -106,7 +106,9 @@ export default observer(() => {
 
   return (
     <div className={styles.power}>
-      <div className={classNames('flex gap-[10px] flex-wrap', styles.power_title)}>
+      <div
+        className={classNames('flex flex-wrap gap-[10px]', styles.power_title)}
+      >
         {tr('monitor_power')}
         {isMobile && (
           <div className={styles.tip}>

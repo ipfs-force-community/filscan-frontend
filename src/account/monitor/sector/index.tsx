@@ -136,7 +136,9 @@ export default observer(() => {
 
   return (
     <div className={styles.sector}>
-      <div className={classNames('flex gap-[10px] flex-wrap', styles.sector_title)}>
+      <div
+        className={classNames('flex flex-wrap gap-[10px]', styles.sector_title)}
+      >
         {tr('monitor_sector')}
         {isMobile && (
           <div className={styles.tip}>
