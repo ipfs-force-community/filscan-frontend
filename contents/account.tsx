@@ -105,15 +105,15 @@ export const account_manager: Array<MenuItem> = [
     // vip: true,
     children: [
       {
-        label: 'monitor_balance', //余额监控
+        label: 'monitorBalance', //余额监控
         key: 'monitorBalance',
       },
       {
-        label: 'monitor_sector', //gas 消耗
+        label: 'monitorSector', //gas 消耗
         key: 'monitorSector',
       },
       {
-        label: 'monitor_power', //gas 消耗
+        label: 'monitorPower', //gas 消耗
         key: 'monitorPower',
       },
     ],
