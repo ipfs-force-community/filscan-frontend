@@ -171,37 +171,6 @@ const mobileNavMenu: Menu_Info[] = [
     key: 'language',
     children: [
       {
-        key: 'token',
-        link: '/contract/token/',
-      },
-      {
-        key: 'nft',
-        link: '/contract/nft/',
-      },
-      {
-        key: 'defi_dashboard',
-        link: '/fevm/defi/',
-      },
-      {
-        key: 'contract_rank',
-        link: '/contract/rank/',
-      },
-      {
-        key: 'contract_list',
-        link: '/contract/list/',
-      },
-    ],
-  },
-  {
-    key: 'fvm',
-    sufIcon: 'hotIcon',
-    color: '#F44C30',
-    link: '/fvm',
-  },
-  {
-    key: 'language',
-    children: [
-      {
         key: '中文',
         value: 'zh',
         type: 'lang',
@@ -239,61 +208,61 @@ const mobileNavMenu: Menu_Info[] = [
     children: [
       {
         key: 'overview',
-        link: '#overview',
+        link: 'account/#overview',
       },
       {
         key: 'data_details',
         children: [
           {
             key: 'overview_power',
-            link: '#power',
+            link: 'account/#power',
           },
           {
             key: 'overview_gas',
-            link: '#gas',
+            link: 'account/#gas',
           },
           {
             key: 'overview_expired',
-            link: '#expired',
+            link: 'account/#expired',
           },
           {
             key: 'overview_reward',
-            link: '#expired',
+            link: 'account/#expired',
           },
           {
             key: 'overview_reward',
-            link: '#reward',
+            link: 'account/#reward',
           },
           {
             key: 'overview_lucky',
-            link: '#lucky',
+            link: 'account/#lucky',
           },
           {
             key: 'overview_balance',
-            link: '#balance',
+            link: 'account/#balance',
+          },
+        ],
+      },
+      {
+        key: 'monitor',
+        children: [
+          {
+            key: 'monitor_balance',
+            link: 'account/#monitorBalance',
+          },
+          {
+            key: 'monitor_sector',
+            link: 'account/#monitorSector',
+          },
+          {
+            key: 'monitor_power',
+            link: 'account/#monitorPower',
           },
         ],
       },
     ],
   },
-  {
-    key: 'monitor',
-    type: 'account',
-    children: [
-      {
-        key: 'monitor_balance',
-        link: '#monitorBalance',
-      },
-      {
-        key: 'monitor_sector',
-        link: '#monitorSector',
-      },
-      {
-        key: 'monitor_power',
-        link: '#monitorPower',
-      },
-    ],
-  },
+
   // {
   //   key: 'login',
   //   link: '/admin/login',
