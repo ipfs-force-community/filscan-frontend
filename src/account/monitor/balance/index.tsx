@@ -126,11 +126,19 @@ export default observer(() => {
 
   return (
     <div className={styles.balance}>
-       <div className={classNames('flex gap-[10px] flex-wrap', styles.balance_title)}>
-          {tr('monitor_balance')}
-          {
-            isMobile && (<div className={styles.tip}><ExclamationCircleOutlined className='mr-[2px]' />{tr('monitor_mobile_edit_tip')}</div>)
-          }
+      <div
+        className={classNames(
+          'flex flex-wrap gap-[10px]',
+          styles.balance_title,
+        )}
+      >
+        {tr('monitor_balance')}
+        {isMobile && (
+          <div className={styles.tip}>
+            <ExclamationCircleOutlined className="mr-[2px]" />
+            {tr('monitor_mobile_edit_tip')}
+          </div>
+        )}
       </div>
       <Header
         onChange={handleChange}
