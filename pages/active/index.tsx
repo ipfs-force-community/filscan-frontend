@@ -18,8 +18,8 @@ export default observer(() => {
               <Image
                 className={style.active_item_image}
                 width={373}
-                src={''}
-                //src={v.image_url}
+                height={270}
+                src={v?.image_url || ''}
                 alt=""
                 onClick={() => {
                   if (v.jump_url) {

@@ -19,7 +19,7 @@ export default observer(() => {
   const { inviteCode, recordList } = userStore
   const { lang } = filscanStore
   const { tr } = Translation({ ns: 'account' })
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
 
   const columns = useMemo(() => {
     return active_member_list(tr).map((v) => {

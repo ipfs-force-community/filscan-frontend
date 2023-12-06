@@ -1,7 +1,7 @@
 import { Translation } from '@/components/hooks/Translation'
 import { Modal } from 'antd'
 import { useMemo, useRef } from 'react'
-import style from './share.module.scss'
+import style from './shareT.module.scss'
 import { active_member_share } from '@/contents/account'
 import QRCodePage from '@/components/QR'
 import html2canvas from 'html2canvas'
@@ -29,8 +29,6 @@ export default observer((props: Props) => {
     if (shareRef.current) {
       html2canvas(shareRef?.current, {
         useCORS: true,
-        scale: 2,
-        scrollY: 0,
         allowTaint: false, //允许跨域图片,
         backgroundColor: 'transparent',
       }).then((canvas) => {
@@ -75,7 +73,7 @@ export default observer((props: Props) => {
             >
               <div className={style.share_main}>
                 <div className={style.share_content}>
-                  <span
+                  {/* <span
                     className={`${style.share_content_icon} ${style.share_content_top}`}
                   />
                   <span
@@ -86,7 +84,7 @@ export default observer((props: Props) => {
                   />
                   <span
                     className={`${style.share_content_icon} ${style.share_content_bottom} ${style.share_content_Bright}`}
-                  />
+                  /> */}
                   <div className={style.share_content_title}>
                     {tr('account_title')}
                   </div>
@@ -94,37 +92,14 @@ export default observer((props: Props) => {
                     {active_member_share.map((v: any, index: number) => {
                       return (
                         <li key={index} className={style.share_content_item}>
-                          <span>{v.icon}</span>
-                          <div>
-                            <span>{tr(v.title)}</span>
-                          </div>
+                          {v.icon}
+                          <span className={style.share_content_item_value}>
+                            {tr(v.title)}
+                          </span>
                         </li>
                       )
                     })}
                   </ul>
-                </div>
-              </div>
-              <div className={style.share_target}>
-                <Image
-                  src={imgSrc}
-                  alt=""
-                  className={style.share_target_image}
-                />
-                {/* <div>{tr('active_target_1')}</div>
-                <div>{tr('active_target_2')}</div> */}
-              </div>
-              <div className={style.share_invite}>
-                <div>{tr('invite_code')}</div>
-                <div className={style.share_invite_content}>
-                  {inviteCode?.split('')?.map((v, index: number) => {
-                    return (
-                      <div key={index} className={style.share_invite_item}>
-                        <div className={style.share_invite_item_value}>
-                          {String(v)}
-                        </div>
-                      </div>
-                    )
-                  })}
                 </div>
               </div>
             </div>
