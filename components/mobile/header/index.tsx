@@ -170,7 +170,7 @@ const Header = (props: any) => {
       })
     setItems(_items)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang, t, trr])
+  }, [lang, t, trr, userStore.isLogin])
 
   const onClick = () => {
     router.push('/')
@@ -217,8 +217,8 @@ const Header = (props: any) => {
       <div
         id="mask"
         onClick={onMaskClick}
-        // className={classNames(styles.body, open ? styles.active : '')}
-        className={classNames(styles.body, styles.active)}
+        className={classNames(styles.body, open ? styles.active : '')}
+        // className={classNames(styles.body, styles.active)}
       >
         <div
           onClick={(e) => {
