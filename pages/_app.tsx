@@ -26,6 +26,7 @@ import { Provider, observer } from 'mobx-react'
 import * as mobxStores from '@/store'
 import Member from '@/src/account/member'
 import filscanStore from '@/store/modules/filscan'
+import Warn from '@/src/user/Warn'
 const antdTheme = theme
 
 App.getInitialProps = async (context: any) => {
@@ -165,6 +166,7 @@ function App({ Component, pageProps, isMobile }: any) {
                   )}
                 >
                   <Component {...pageProps} />
+                  <Warn />
                   <Member />
                 </div>
                 <Footer />
