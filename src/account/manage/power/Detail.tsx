@@ -154,7 +154,7 @@ export default observer(
                 </span>
               </span>
             </div>
-            <div className="flex gap-x-2.5">
+            <div className={styles['date-time']}>
               <DateTime
                 showEnd={true}
                 defaultValue={[date.startTime, date.endTime]}

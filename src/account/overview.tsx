@@ -156,7 +156,6 @@ export default observer((props: Props) => {
                   )}
                 >
                   {showValue}
-                  {icon && <span>{getSvgIcon(icon)}</span>}
                 </li>
               )
             })}

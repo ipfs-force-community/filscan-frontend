@@ -23,6 +23,13 @@
         font-size: 12px;
         line-height: 12px;
       }
+
+      .date-time {
+
+        &>div {
+          justify-content: space-between;
+        }
+      }
     }
     .table-wrap {
         margin: unset;

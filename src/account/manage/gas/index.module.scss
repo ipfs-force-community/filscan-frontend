@@ -23,7 +23,19 @@
 
     .group {
       display: flex;
-      justify-content: space-between;
+      column-gap: 10px;
+      & > div {
+        flex: 1;
+        width: 100%;
+        :global {
+          .ant-select {
+            width: inherit;
+          }
+          .custom_picker {
+            width: inherit;
+          }
+        }
+      }
     }
   }
 
