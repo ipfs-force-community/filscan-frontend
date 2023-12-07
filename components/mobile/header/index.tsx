@@ -106,11 +106,25 @@ const Header = (props: any) => {
 
           value0.children.forEach((value1, index1) => {
             if (value1.children) {
+              let label = <></>
+              if (value1.key === 'overview') {
+                console.log('+======value1=========', value1.key)
+
+                label = (
+                  <p>{`${
+                    value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                  }`}</p>
+                )
+              } else {
+                label = (
+                  <>{`${
+                    value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                  }`}</>
+                )
+              }
               __items.push(
                 getItem(
-                  `${
-                    value0.type === 'account' ? trr(value1.key) : t(value1.key)
-                  }`,
+                  label,
                   `[${index0}].children[${[index1]}]`,
                   value1.children.map((value2, index2) => {
                     return getItem(
@@ -125,14 +139,21 @@ const Header = (props: any) => {
                 ),
               )
             } else {
-              __items.push(
-                getItem(
-                  `${
+              let label = <></>
+              if (value1.key === 'overview') {
+                label = (
+                  <p>{`${
                     value0.type === 'account' ? trr(value1.key) : t(value1.key)
-                  }`,
-                  `[${index0}].children[${[index1]}]`,
-                ),
-              )
+                  }`}</p>
+                )
+              } else {
+                label = (
+                  <>{`${
+                    value0.type === 'account' ? trr(value1.key) : t(value1.key)
+                  }`}</>
+                )
+              }
+              __items.push(getItem(label, `[${index0}].children[${[index1]}]`))
             }
           })
 
@@ -196,7 +217,8 @@ const Header = (props: any) => {
       <div
         id="mask"
         onClick={onMaskClick}
-        className={classNames(styles.body, open ? styles.active : '')}
+        // className={classNames(styles.body, open ? styles.active : '')}
+        className={classNames(styles.body, styles.active)}
       >
         <div
           onClick={(e) => {
