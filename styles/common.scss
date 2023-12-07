@@ -250,6 +250,12 @@
     color: #1c6afd;
   }
 }
+.noWarp_table {
+  cursor: pointer;
+  max-width: 92px;
+  white-space: nowrap;
+  width: 100%;
+}
 
 .w_account {
   width: calc(100% - 210px);

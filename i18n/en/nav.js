@@ -28,7 +28,7 @@ const en = {
   provider: 'Storage Provider',
   fvm: 'Filecoin Ecosystem',
   fvm_all: 'Project Overview',
-  active: 'Active',
+  active: 'Activity',
   account: 'Miner Metrics',
   network_overview: 'Network Overview',
   develop: 'Developer',

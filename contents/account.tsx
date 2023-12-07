@@ -129,7 +129,7 @@ export const account_manager: Array<MenuItem> = [
   {
     label: 'active',
     href: 'active',
-    sufIcon: <FreeVip className="ml-4 scale-[3]" style={{ fill: 'red' }} />,
+    sufIcon: <FreeVip className="ml-4 scale-[3]" />,
     icon: getSvgIcon('member_active'),
     key: 'active',
   },

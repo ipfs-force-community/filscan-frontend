@@ -211,11 +211,11 @@ export const defi_list = {
 }
 
 export const homeDefiColumns: any = {
-  rank: '10%',
-  protocol: '25%',
-  tvl: '20%',
-  tvl_change_rate_in_24h: '30%',
-  users: '',
+  rank: 60,
+  protocol: 100,
+  tvl: 120,
+  tvl_change_rate_in_24h: 150,
+  users: 60,
 }
 
 export const mobileHomeDefiColumns: string[] = [

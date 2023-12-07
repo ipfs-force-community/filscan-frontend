@@ -260,11 +260,11 @@ export const contract_rank = {
 }
 
 export const homeContractRank: any = {
-  rank: '10%',
-  contract_address: '15%',
-  contract_name: '20%',
-  transfer_count: '15%',
-  user_count: '15%',
+  rank: 50,
+  contract_address: 100,
+  contract_name: 120,
+  transfer_count: 100,
+  user_count: 50,
 }
 
 export const mobileHomeContractRank: string[] = [

@@ -315,7 +315,7 @@ export default observer((props: Props) => {
           </div>
         </div>
         {origin === 'home' && (
-          <Link href={`/statistics/charts#BlockChain`}>
+          <Link href={`/statistics/charts#blockChain`}>
             <MobileView>
               <GoMobileIcon width={28} height={28} />
             </MobileView>

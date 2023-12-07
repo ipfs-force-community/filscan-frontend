@@ -149,7 +149,7 @@ export default () => {
           data={data?.account_indicator || {}}
           loading={loadingBalance}
         />
-        <Power data={data?.account_indicator || {}} />
+        <Power data={data?.account_indicator || {}} loading={loadingBalance} />
       </div>
       <OverView overView={miner_overview} accountId={miner} />
       <div className={classNames(styles.column, 'mt-6 flex gap-x-5')}>
