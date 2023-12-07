@@ -35,15 +35,20 @@
         }
       }
     }
-
-    .table-wrap {
-      margin: unset;
-      margin: 10px 0px 15px 0px;
-      padding: unset;
-      border: unset;
-      border: 1px solid var(--mobile-divide-line);
-      border-radius: 6px;
-      box-shadow: unset;
+  }
+  .table-wrap {
+    margin: unset;
+    margin: 10px 0px 15px 0px;
+    padding: unset;
+    border: unset;
+    border: 1px solid var(--mobile-divide-line);
+    border-radius: 6px;
+    box-shadow: unset;
+    tr {
+      &:first-child {
+        height: 0px !important;
+      }
+      height: 68px !important;
     }
   }
 }

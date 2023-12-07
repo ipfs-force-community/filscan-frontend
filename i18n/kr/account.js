@@ -16,7 +16,7 @@ const account = {
   monitorSector: '만료 모니터링',
   monitorBalance: '잔액 모니터링',
   monitorPower: '전력 모니터링',
-  personal: 'Personal',
+  personal: '계좌 정보',
   logout: 'Logout',
   default_group: '기본 그룹',
   welcome: 'Welcome to Filscan!',

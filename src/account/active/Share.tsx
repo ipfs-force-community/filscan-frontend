@@ -29,7 +29,6 @@ export default observer((props: Props) => {
     if (shareRef.current) {
       html2canvas(shareRef?.current, {
         useCORS: true,
-        scale: 2,
         scrollY: 0,
         allowTaint: false, //允许跨域图片,
         backgroundColor: 'transparent',

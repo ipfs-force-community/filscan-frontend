@@ -27,7 +27,7 @@ export default observer((props: Props) => {
     if (miner && typeof miner === 'string') {
       return [
         {
-          title: tr('overview_gas'),
+          title: tr('gas'),
           path: '/account#gas',
         },
         {
@@ -37,7 +37,7 @@ export default observer((props: Props) => {
       ]
     }
     return []
-  }, [miner])
+  }, [miner, tr])
 
   const [date, setDate] = useState({
     startTime: formatDateTime(getCalcTime(6), 'YYYY-MM-DDTHH:mm:ssZ'),

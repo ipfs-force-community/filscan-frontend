@@ -28,13 +28,9 @@ export default function QRCodePage(props: Props) {
         qrCodeImage.src = qrCodeData
         qrCodeImage.onload = () => {
           context.drawImage(qrCodeImage, 0, 0, canvas.width, canvas.height)
-          // const logoSize = 20
-          // const logoX = canvas.width / 2 - logoSize / 2
-          // const logoY = canvas.height / 2 - logoSize / 2
-          // context.drawImage(logoImage, logoX, logoY, logoSize, logoSize)
           setTimeout(() => {
             const dataUrl = canvas.toDataURL()
-            imgRef.current.style.width = '120px'
+            imgRef.current.style.width = '110px'
             imgRef.current.src = dataUrl
             canvas.style.display = 'none'
           })

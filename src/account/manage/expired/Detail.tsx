@@ -7,7 +7,6 @@ import { formatDateTime } from '@/utils'
 import ExportExcel from '@/packages/exportExcel'
 import Table from '@/packages/Table'
 import { account_expired } from '@/contents/account'
-import useAxiosData from '@/store/useAxiosData'
 import manageStore from '@/store/modules/account/manage'
 import { observer } from 'mobx-react'
 
@@ -23,12 +22,11 @@ export default observer((props: Props) => {
   const { tr } = Translation({ ns: 'account' })
   const { expiredDetailData, expiredDetailLoading } = manageStore
 
-  const { axiosData } = useAxiosData()
   const routerItems = useMemo(() => {
     if (miner && typeof miner === 'string') {
       return [
         {
-          title: tr('overview_expired'),
+          title: tr('expired'),
           path: '/account#expired',
         },
         {
@@ -38,7 +36,7 @@ export default observer((props: Props) => {
       ]
     }
     return []
-  }, [miner])
+  }, [miner, tr])
 
   const columns = useMemo(() => {
     return account_expired.columns(tr, 'detail').map((item) => {

@@ -525,7 +525,7 @@ export const account_lucky = {
         return (
           <>
             <div className="flex items-center gap-x-[1px]">
-              <Link href={`/account#power?miner=${text}`} className="link_text">
+              <Link href={`/miner/${text}`} className="link_text">
                 {text}
               </Link>
               {record?.tag && (
@@ -843,7 +843,7 @@ export const account_reward = {
             <>
               <div className="flex items-center gap-x-[1px]">
                 <Link
-                  href={`/account#power?miner=${text}`}
+                  href={`/account#reward?miner=${text}`}
                   className="link_text"
                 >
                   {text}
@@ -885,8 +885,13 @@ export const account_reward = {
         title: 'date',
         dataIndex: 'date',
         fixed: 'left',
-        width: '10%',
-        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD'),
+        width: '15%',
+        render: (text: string) => {
+          if (text === 'All') {
+            return text
+          }
+          return formatDateTime(text, 'YYYY-MM-DD')
+        },
       })
       arr[1].width = '15%'
       arr[2].width = '10%'
@@ -923,7 +928,7 @@ export const account_reward_mobile = {
             <>
               <div className="flex items-center gap-x-[1px]">
                 <Link
-                  href={`/account#power?miner=${text}`}
+                  href={`/account#reward?miner=${text}`}
                   className="link_text"
                 >
                   {text}
@@ -1268,10 +1273,7 @@ export const account_gas = {
           return (
             <>
               <div className="flex items-center gap-x-[1px]">
-                <Link
-                  href={`/account#power?miner=${text}`}
-                  className="link_text"
-                >
+                <Link href={`/account#gas?miner=${text}`} className="link_text">
                   {text}
                 </Link>
                 {record?.tag && (
@@ -1385,7 +1387,12 @@ export const account_gas = {
         dataIndex: 'date',
         fixed: 'left',
         // width: 200,
-        render: (text: string) => formatDateTime(text, 'YYYY-MM-DD'),
+        render: (text: string) => {
+          if (text === 'All') {
+            return text
+          }
+          return formatDateTime(text, 'YYYY-MM-DD')
+        },
       })
       arr[2].render = (text: string) => (
         <Link href={`/miner/${text}`} className="link_text">
@@ -1548,7 +1555,7 @@ export const account_expired = {
             <>
               <div className="flex items-center gap-x-[1px]">
                 <Link
-                  href={`/account#power?miner=${text}`}
+                  href={`/account#expired?miner=${text}`}
                   className="link_text"
                 >
                   {text}

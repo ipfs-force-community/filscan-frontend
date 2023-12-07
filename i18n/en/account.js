@@ -11,7 +11,7 @@ const account = {
   account_title: 'Miner Metrics',
   overview: 'Overview',
   miners: 'Miners',
-  personal: 'Personal',
+  personal: 'Account',
   data_details: 'Details',
   monitor: 'Monitoring',
   monitorBalance: 'Balance',
