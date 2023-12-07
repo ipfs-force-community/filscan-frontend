@@ -19,6 +19,7 @@ import { MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons'
 import ArrowDown from '@/assets/images/account/arrow_down.svg'
 import Image from 'next/image'
 import { cloneDeep } from 'lodash'
+import useWindow from '@/components/hooks/useWindown'
 interface Props {
   selectedKey: string
 }
@@ -28,7 +29,7 @@ export default observer((props: Props) => {
   const { expiredData, expiredLoading } = manageStore
   const [active, setActive] = useState<string>('-1')
   const { hashParams } = useHash()
-
+  const { isMobile } = useWindow()
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([])
 
   const handleRowClick = (record: any, index: number) => {
@@ -46,9 +47,19 @@ export default observer((props: Props) => {
 
   const columns = useMemo(() => {
     return account_expired.columns(tr).map((item) => {
+      if (isMobile && item.dataIndex === 'group_name') {
+        item.render = (text: string, record: any) => {
+          const showText = record.is_default ? tr('default_group') : text
+          return (
+            <div className="text_color w-fit rounded-[5px] font-normal">
+              {showText}
+            </div>
+          )
+        }
+      }
       return { ...item, title: tr(item.title) }
     })
-  }, [tr])
+  }, [tr, isMobile])
 
   const columnsTable = useMemo(() => {
     return cloneDeep(account_expired.headerList).map((item) => {
@@ -170,6 +181,7 @@ export default observer((props: Props) => {
               expandedRowRender: (record, index, indent, expanded) => {
                 return (
                   <MTable
+                    className={styles['expanded-table']}
                     scroll={{ x: 'max-content' }}
                     dataSource={
                       expiredData?.sector_detail_month[index]
