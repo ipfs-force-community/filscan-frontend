@@ -29,8 +29,9 @@
         .ant-table-tbody {
           td {
             padding: 0px;
-            min-height: 40px;
+
             padding-inline: 10px;
+            padding-block: 10px;
           }
 
           .ant-table-cell {
