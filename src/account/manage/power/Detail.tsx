@@ -35,7 +35,7 @@ export default observer(
       if (miner && typeof miner === 'string') {
         return [
           {
-            title: tr('overview_power'),
+            title: tr('power'),
             path: '/account#power',
           },
           {
@@ -45,7 +45,7 @@ export default observer(
         ]
       }
       return []
-    }, [miner])
+    }, [miner, tr])
 
     const [date, setDate] = useState({
       startTime: formatDateTime(getCalcTime(6), 'YYYY-MM-DDTHH:mm:ssZ'),

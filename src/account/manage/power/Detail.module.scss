@@ -1,3 +1,10 @@
+.title-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 25px;
+}
 @media only screen and (max-width: 1000px) {
   .wrap {
     margin-top: 20px;
@@ -25,21 +32,19 @@
       }
 
       .date-time {
-
-        &>div {
+        & > div {
           justify-content: space-between;
         }
       }
     }
     .table-wrap {
-        margin: unset;
-        margin: 10px 0 15px 0px;
-        padding: unset;
-        border: unset;
-        border: 1px solid var(--mobile-divide-line);
-        border-radius: 6px;
-        box-shadow: unset;
-        
+      margin: unset;
+      margin: 10px 0 15px 0px;
+      padding: unset;
+      border: unset;
+      border: 1px solid var(--mobile-divide-line);
+      border-radius: 6px;
+      box-shadow: unset;
     }
   }
 }

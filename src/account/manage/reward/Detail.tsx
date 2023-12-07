@@ -25,7 +25,7 @@ export default observer((props: Props) => {
     if (miner && typeof miner === 'string') {
       return [
         {
-          title: tr('overview_reward'),
+          title: tr('reward'),
           path: '/account#reward',
         },
         {
@@ -35,7 +35,7 @@ export default observer((props: Props) => {
       ]
     }
     return []
-  }, [miner])
+  }, [miner, tr])
 
   const [date, setDate] = useState({
     startTime: formatDateTime(getCalcTime(6), 'YYYY-MM-DDTHH:mm:ssZ'),
