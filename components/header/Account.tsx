@@ -75,9 +75,10 @@ export default observer(() => {
                 }}
                 className="text_color  flex h-10 cursor-pointer items-center rounded-[5px] font-normal  hover:bg-bg_hover hover:text-primary"
               >
-                <span className="flex items-center gap-x-2 px-4">
+                <span className="flex items-center gap-x-1 px-4">
                   {item.icon}
                   {tr(item.label)}
+                  {item.sufIcon}
                 </span>
               </li>
             )

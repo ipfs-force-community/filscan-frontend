@@ -38,8 +38,9 @@ import active3 from '@/assets/images/member/active3.png'
 import step from '@/assets/images/step.png'
 import Image from 'next/image'
 import Vip from '@/assets/images/member/vip.svg'
-import FreeVip from '@/assets/images/freeVip.svg'
+import FreeVip from '@/assets/images/freeVip.png'
 import UserIcon from '@/assets/images/user.svg'
+
 export const userType: any = {
   NormalVIP: {
     title: 'default_user',
@@ -103,7 +104,7 @@ export const account_manager: Array<MenuItem> = [
     icon: getSvgIcon('monitor'),
     href: 'monitorBalance',
     key: 'monitor',
-    sufIcon: <Vip />,
+    sufIcon: <Vip width={16} />,
     vip: true,
     children: [
       {
@@ -129,7 +130,7 @@ export const account_manager: Array<MenuItem> = [
   {
     label: 'active',
     href: 'active',
-    sufIcon: <FreeVip className="ml-4 scale-[3]" />,
+    sufIcon: <Image src={FreeVip} alt="" height={13} />,
     icon: getSvgIcon('member_active'),
     key: 'active',
   },
