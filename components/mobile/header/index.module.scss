@@ -189,6 +189,11 @@
             color: var(--mobile-text-minor);
             font-weight: 400;
             font-size: 14px;
+            p {
+              color: var(--mobile-title-color);
+              font-weight: 500;
+              font-size: 15px;
+            }
           }
         }
       }
