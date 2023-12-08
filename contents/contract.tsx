@@ -260,9 +260,9 @@ export const contract_rank = {
 }
 
 export const homeContractRank: any = {
-  rank: 50,
+  rank: 60,
   contract_address: 100,
-  contract_name: 120,
+  contract_name: 115,
   transfer_count: 100,
   user_count: 50,
 }

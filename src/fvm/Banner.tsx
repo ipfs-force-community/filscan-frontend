@@ -28,7 +28,7 @@ function Banner() {
   }
 
   return (
-    <div className="group relative mt-5 h-full w-full overflow-hidden">
+    <div className="group relative mt-8 h-full w-full overflow-hidden px-2.5">
       <Carousel
         autoplay={true}
         autoplaySpeed={5000}

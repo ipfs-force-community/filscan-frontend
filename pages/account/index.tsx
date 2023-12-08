@@ -24,10 +24,10 @@ import accountStore from '@/store/modules/account'
 import userStore from '@/store/modules/user'
 import { Menu } from 'antd'
 import { observer } from 'mobx-react'
-import Vip from '@/assets/images/member/vip.svg'
 import { BrowserView, MobileView } from '@/components/device-detect'
 import style from './index.module.scss'
 import Active from '@/src/account/active'
+import Banner from '@/src/fvm/Banner'
 
 const Account: React.FC = () => {
   const { tr } = Translation({ ns: 'account' })
@@ -167,6 +167,7 @@ const Account: React.FC = () => {
               >
                 {account_manager.map(renderMenuItem)}
               </Menu>
+              <Banner />
             </div>
             <div
               className="w_account flex min-h-full flex-grow flex-col px-5 py-10"

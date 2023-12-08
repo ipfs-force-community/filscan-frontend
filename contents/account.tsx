@@ -1957,13 +1957,13 @@ export const member_main: any = {
       { title: 'companies_5', icon: <i className="icon icon-quanyiicon" /> },
     ],
     priceList: [
-      { title: 'monthly', price: '169U' },
+      { title: 'monthly', price: '269U' },
       {
         title: 'quarter',
-        price: '439U',
+        price: '699U',
         discount: 'quarter_discount',
       },
-      { title: 'year', price: '1599U', discount: 'year_discount' },
+      { title: 'year', price: '2499U', discount: 'year_discount' },
     ],
   },
 }

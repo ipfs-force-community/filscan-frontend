@@ -14,6 +14,7 @@ interface Props {
   selectTag?: string
   addRule?: boolean
   isAllMiner?: boolean
+  isAllGroup?: boolean
   disableAll?: boolean
   reset?: boolean
   classes?: Record<string, any>
@@ -27,6 +28,7 @@ export default observer((props: Props) => {
     disableAll = false,
     isAllMiner = true,
     selectGroup,
+    isAllGroup = true,
     selectMiner,
     selectTag,
     showTagLabel,
@@ -85,14 +87,17 @@ export default observer((props: Props) => {
       }
       newMinerGroups.push({ ...group, miners: miners, tags: tags })
     })
-    const newGroups: Array<any> = [
-      {
+
+    const newGroups: Array<any> = []
+    if (isAllGroup) {
+      newGroups.push({
         label: tr('all_groups'),
         group_name: 'all_groups',
         value: 'all',
         miners: [...allMiners],
-      },
-    ]
+      })
+    }
+
     return [newGroups.concat(newMinerGroups), allMiners, allTags]
   }, [tr, groupMiners, isAllMiner, showTagLabel])
 
