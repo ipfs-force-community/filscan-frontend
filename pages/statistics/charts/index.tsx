@@ -22,13 +22,11 @@ import ContractAddr from '@/src/statistics/contractAddr'
 import ContractCon from '@/src/statistics/contractCon'
 import ContractBalance from '@/src/statistics/ContractBanlace'
 import { observer } from 'mobx-react'
-import filscanStore from '@/store/modules/filscan'
 import { useEffect } from 'react'
 
 export default observer(() => {
   const { tr } = Translation({ ns: 'static' })
   const { hash } = useHash()
-  const { headerShow } = filscanStore
 
   useEffect(() => {
     const hashArr = [
@@ -126,15 +124,6 @@ export default observer(() => {
         >
           {!hash && <Meta />}
           {hash === 'networks' && <Meta />}
-          {hash === 'fevm' && (
-            <div>
-              <ContractTrend />
-              <ContractCon />
-              <ContractAddr />
-              <ContractGas />
-              <ContractBalance />
-            </div>
-          )}
           {hash.startsWith('fevm') && (
             <div>
               <div id="fevm_trend">

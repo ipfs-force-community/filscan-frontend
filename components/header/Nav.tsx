@@ -16,7 +16,7 @@ export default () => {
     return (
       <ul
         key={num}
-        className="select_shadow main_bg_color border_color absolute inset-y-full z-50 -ml-8 hidden  h-fit w-max list-none rounded-[5px] border  px-4  group-hover:block"
+        className="select_shadow main_bg_color border_color absolute inset-y-full z-50 -ml-8 hidden h-fit  w-max list-none rounded-[5px] border px-4  font-HarmonyOS  group-hover:block"
       >
         {children.map((item, index) => {
           return (
@@ -75,7 +75,7 @@ export default () => {
             return (
               <div
                 key={index}
-                className="group relative flex  h-full cursor-pointer items-center gap-x-1 hover:text-primary"
+                className="group relative flex  h-full cursor-pointer items-center gap-x-1  font-HarmonyOS_Medium hover:text-primary "
               >
                 {tr(nav.key)}
                 <span>{getSvgIcon('downIcon')}</span>

@@ -186,6 +186,11 @@
             display: none;
           }
         }
+        tr {
+          th {
+            font-weight: 500;
+          }
+        }
         .ant-table-column-sorters {
           justify-content: flex-start !important;
           .ant-table-column-title {

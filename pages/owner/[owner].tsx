@@ -73,7 +73,7 @@ export default () => {
             data={data?.account_indicator || {}}
             loading={loading}
           />
-          <Power data={data?.account_indicator || {}} />
+          <Power data={data?.account_indicator || {}} loading={loading} />
         </div>
 
         <ul

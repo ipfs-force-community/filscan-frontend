@@ -69,6 +69,35 @@ export default ({ origin }: { origin?: string }) => {
     defi_list.columns(progress, origin).forEach((col) => {
       if (origin === 'home') {
         if (homeDefiColumns.hasOwnProperty(col.dataIndex)) {
+          if (col.dataIndex === 'protocol') {
+            col.render = (text: string, record: any) => {
+              return (
+                <span
+                  className="flex items-center gap-x-1"
+                  onClick={() => {
+                    if (record.main_site) {
+                      window.open(record.main_site)
+                    }
+                  }}
+                >
+                  <Image
+                    src={record.icon_url || ''}
+                    width={22}
+                    height={22}
+                    className="rounded"
+                    alt="logo"
+                  />
+                  <div
+                    className={
+                      origin === 'home' && !isMobile ? 'noWarp_table' : ''
+                    }
+                  >
+                    <TextTip text={text} />
+                  </div>
+                </span>
+              )
+            }
+          }
           newArr.push({
             ...col,
             title: tr(col.title),
@@ -136,7 +165,7 @@ export default ({ origin }: { origin?: string }) => {
     <div
       className={classNames(
         `card_shadow border_color mt-4 rounded-xl	border p-5 ${
-          origin === 'home' ? 'h-[650px]' : 'h-full'
+          origin === 'home' ? 'h-[580px]' : 'h-full'
         }`,
         styles.wrap,
         styles.reset,

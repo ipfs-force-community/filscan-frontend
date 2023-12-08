@@ -26,6 +26,7 @@ import CopySvgMobile from '@/assets/images/icon-copy.svg'
 import { cloneDeep } from 'lodash'
 import filscanStore from '@/store/modules/filscan'
 import { observer } from 'mobx-react'
+import TextTooltip from '@/packages/textTooltip'
 const default_sort = {
   field: 'transfer_count',
   order: 'descend',
@@ -118,17 +119,32 @@ export default observer(({ origin }: { origin?: string }) => {
           item.render = (text: string, record: any) => {
             if (text) {
               return (
-                <span className="flex flex-wrap items-center gap-x-2">
+                <div className="flex w-fit items-center gap-x-1">
                   <Link href={`/address/${record.contract_address}`}>
-                    {text}
+                    <div
+                      className={
+                        origin === 'home' && !isMobile ? 'noWarp_table' : ''
+                      }
+                    >
+                      <TextTooltip text={text} />
+                    </div>
                   </Link>
                   <VerifySvg width={13} height={14} />
-                </span>
+                </div>
               )
             }
             return (
-              <Link href="/contract/verify" className="text_color">
-                {tr('ver_address')}
+              <Link
+                href="/contract/verify"
+                className="text_color h-[32px] w-fit"
+              >
+                <div
+                  className={
+                    origin === 'home' && !isMobile ? 'noWarp_table' : ''
+                  }
+                >
+                  <TextTooltip text={tr('ver_address')} />
+                </div>
               </Link>
             )
           }
@@ -213,7 +229,7 @@ export default observer(({ origin }: { origin?: string }) => {
       <div
         className={classNames(
           `card_shadow border_color  mt-4 rounded-xl	border p-5 ${
-            origin === 'home' ? 'h-[650px] ' : 'h-full'
+            origin === 'home' ? 'h-[580px] ' : 'h-full'
           }`,
           styles.reset,
           styles.table,

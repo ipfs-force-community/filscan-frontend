@@ -38,8 +38,9 @@ import active3 from '@/assets/images/member/active3.png'
 import step from '@/assets/images/step.png'
 import Image from 'next/image'
 import Vip from '@/assets/images/member/vip.svg'
-import FreeVip from '@/assets/images/freeVip.svg'
+import FreeVip from '@/assets/images/freeVip.png'
 import UserIcon from '@/assets/images/user.svg'
+
 export const userType: any = {
   NormalVIP: {
     title: 'default_user',
@@ -103,7 +104,7 @@ export const account_manager: Array<MenuItem> = [
     icon: getSvgIcon('monitor'),
     href: 'monitorBalance',
     key: 'monitor',
-    sufIcon: <Vip />,
+    sufIcon: <Vip width={16} />,
     vip: true,
     children: [
       {
@@ -129,7 +130,7 @@ export const account_manager: Array<MenuItem> = [
   {
     label: 'active',
     href: 'active',
-    sufIcon: <FreeVip className="ml-4 scale-[3]" style={{ fill: 'red' }} />,
+    sufIcon: <Image src={FreeVip} alt="" height={13} />,
     icon: getSvgIcon('member_active'),
     key: 'active',
   },
@@ -1956,13 +1957,13 @@ export const member_main: any = {
       { title: 'companies_5', icon: <i className="icon icon-quanyiicon" /> },
     ],
     priceList: [
-      { title: 'monthly', price: '169U' },
+      { title: 'monthly', price: '269U' },
       {
         title: 'quarter',
-        price: '439U',
+        price: '699U',
         discount: 'quarter_discount',
       },
-      { title: 'year', price: '1599U', discount: 'year_discount' },
+      { title: 'year', price: '2499U', discount: 'year_discount' },
     ],
   },
 }

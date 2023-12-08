@@ -23,7 +23,7 @@ export default observer(() => {
   const removeQueryParam = useRemoveQueryParam()
   const { axiosData, loading } = useAxiosData()
   const { name, p } = useRouter().query
-  // const [loading, setLoading] = useState(false);
+  // const [loadingData, setLoadingData] = useState(true)
   const [headerOptions, setHeaderOptions] = useState<Array<any>>([])
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -66,7 +66,7 @@ export default observer(() => {
   }, [method, current])
 
   const load = async (cur?: number, method?: string) => {
-    //  setLoading(true);
+    // setLoadingData(true)
     const showIndex = cur || current
     const method_name = method === 'all' ? '' : method
     const result: any = await axiosData(apiUrl.tipset_pool, {
@@ -76,7 +76,7 @@ export default observer(() => {
         method_name,
       },
     })
-    // setLoading(false);
+    // setLoadingData(false)
     setDataSource({
       data: (result?.messages_pool_list || [])?.map((item: any) => {
         return {
