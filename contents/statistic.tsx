@@ -1,26 +1,26 @@
 /** @format */
 
-import { formatFilNum, formatNumber } from '@/utils';
-import { Menu_Info } from './type';
+import { formatFilNum, formatNumber } from '@/utils'
+import { Menu_Info } from './type'
 
 export const timeList = [
   {
-    label:'24h',
+    label: '24h',
     title: '24h',
     value: '24h',
-    dataIndex:'24h',
+    dataIndex: '24h',
   },
   {
-    label:'7d',
+    label: '7d',
     title: '7d',
     value: '7d',
-    dataIndex:'7d',
+    dataIndex: '7d',
   },
   {
     label: '30d',
     title: '30d',
     value: '1m',
-    dataIndex:'1m',
+    dataIndex: '1m',
   },
   // {
   //   label:'1year',
@@ -28,7 +28,7 @@ export const timeList = [
   //   value: '1year',
   //   dataIndex:'1year',
   // },
-];
+]
 
 export const gas = {
   title: 'trend_24', //基础手续费
@@ -50,7 +50,7 @@ export const gas = {
       value: '1year',
     },
   ],
-};
+}
 
 export const gas_24 = {
   title: {
@@ -80,9 +80,9 @@ export const gas_24 = {
       title: 'avg_gas_fee',
       render: (v: string) => {
         if (Number(v) === 0) {
-          return 0;
+          return 0
         }
-        return formatFilNum(v, false, false);
+        return formatFilNum(v, false, false)
       },
     }, //平均手续费
     {
@@ -90,12 +90,12 @@ export const gas_24 = {
       title: 'sum_gas_fee/ratio',
       render: (text: string, record: any) => {
         if (Number(text) === 0) {
-          return 0;
+          return 0
         }
 
         return `${formatFilNum(text, false, false)}/${Number(
-          record.gas_fee_ratio * 100
-        ).toFixed(2)}%`;
+          record.gas_fee_ratio * 100,
+        ).toFixed(2)}%`
       },
     }, //合计手续费/占比
     {
@@ -104,11 +104,11 @@ export const gas_24 = {
       render: (text: string, record: any) => {
         return `${formatNumber(text)}/${(
           record.message_count_ratio * 100
-        ).toFixed(2)}%`;
+        ).toFixed(2)}%`
       },
     }, //消息数/占比
   ],
-};
+}
 
 //算力走势图
 export const power_trend = {
@@ -142,9 +142,8 @@ export const power_trend = {
       color: '#B0CBFE',
       type: 'bar',
     }, //算力损失
-
   ],
-};
+}
 
 //合约交易走势图
 export const contract_trend = {
@@ -156,7 +155,7 @@ export const contract_trend = {
       color: '#1C6AFD',
     },
   ],
-};
+}
 //合约地址走势
 export const contract_addr = {
   list: [
@@ -167,7 +166,7 @@ export const contract_addr = {
       color: '#1C6AFD',
     },
   ],
-};
+}
 
 //合约部署走势
 export const contract_con = {
@@ -179,7 +178,7 @@ export const contract_con = {
       color: '#1C6AFD',
     },
   ],
-};
+}
 
 //合约gas 走势
 export const contract_gas = {
@@ -191,7 +190,19 @@ export const contract_gas = {
       color: '#1C6AFD',
     },
   ],
-};
+}
+
+//合约余额走势
+export const contract_balance = {
+  list: [
+    {
+      title: 'contract_total_balance',
+      dataIndex: 'contract_total_balance',
+      type: 'line',
+      color: '#1C6AFD',
+    },
+  ],
+}
 
 // 区块奖励走势
 export const block_rewards = {
@@ -202,7 +213,7 @@ export const block_rewards = {
       type: 'line',
       color: '#1C6AFD',
     },
-  ]
+  ],
 }
 //产出效率
 export const block_rewards_per = {
@@ -213,7 +224,7 @@ export const block_rewards_per = {
       type: 'line',
       color: '#1C6AFD',
     },
-  ]
+  ],
 }
 
 export const active_node = {
@@ -224,7 +235,7 @@ export const active_node = {
       type: 'line',
       color: '#1C6AFD',
     },
-  ]
+  ],
 }
 
 export const active_miner_count = {
@@ -235,10 +246,10 @@ export const active_miner_count = {
       type: 'line',
       color: '#1C6AFD',
     },
-  ]
+  ],
 }
 //DC CC 走势
-export const cc_dc_trend= {
+export const cc_dc_trend = {
   list: [
     {
       title: 'dc_trend',
@@ -252,7 +263,7 @@ export const cc_dc_trend= {
       type: 'line',
       color: '#F8CD4D',
     },
-  ]
+  ],
 }
 
 export const fil_overviewList = [
@@ -261,200 +272,218 @@ export const fil_overviewList = [
     list: [
       {
         key: 'mined',
-        color: '#F8CD4D'
+        color: '#F8CD4D',
       },
       {
         key: 'remaining_mined',
-        color: '#1C6AFD'
+        color: '#1C6AFD',
       },
       {
         key: 'vested',
-        color: '#4988FD'
+        color: '#4988FD',
       },
       {
         key: 'remaining_vested',
-        color: '#4ACAB4'
+        color: '#4ACAB4',
       },
       {
         key: 'reserve_disbursed',
-        color: '#B0CBFE'
+        color: '#B0CBFE',
       },
       {
         key: 'remaining_reserved',
-        color: '#6E69CF'
-      }
-    ]
+        color: '#6E69CF',
+      },
+    ],
   },
   {
     title: 'pie_title_b',
-    title_tip:'pie_title_a_tip',
+    title_tip: 'pie_title_a_tip',
     list: [
       {
         key: 'locked',
-        color: '#4ACAB4'
+        color: '#4ACAB4',
       },
       {
         key: 'burnt',
-        color: '#1C6AFD'
+        color: '#1C6AFD',
       },
       {
         key: 'circulating',
-        color: '#F8CD4D'
+        color: '#F8CD4D',
       },
     ],
-  }
+  },
 ]
 
 export const fil_charts = {
   title: {
-    label:'TokenRules'
+    label: 'TokenRules',
   },
-  chart:  [
+  chart: [
     {
       key: 'FilecoinFoundation',
       name: 'Filecoin基金会',
       value: '5',
-      color: '#4988FD'
+      color: '#4988FD',
     },
     {
       key: 'Contributors',
       name: '协议实验室团队及贡献者',
       value: '4.5',
-      color: '#1C6AFD'
+      color: '#1C6AFD',
     },
     {
       key: 'protocolLab',
       name: '协议实验室',
       value: '10.5',
-      color: '#E77E8E'
+      color: '#E77E8E',
     },
     {
       key: 'FundraisingRemainder',
       name: '募资 – 剩余通证',
       value: '2.5',
-      color: '#6E69CF'
+      color: '#6E69CF',
     },
     {
       key: 'FundraisingSAFT',
       name: '募资 – 未来通证简单协议',
       value: '7.5',
-      color: '#F9D02C'
+      color: '#F9D02C',
     },
     {
       key: 'MiningReserve',
       name: '为存储服务提供者预留通证',
       value: '15',
-      color: '#F6A823'
+      color: '#F6A823',
     },
     {
       key: 'TokenAllocation',
       name: '存储提供者通证分配',
       value: '55',
-      color: '#4ACAB4'
-    }
+      color: '#4ACAB4',
+    },
   ],
   content: [
     {
       label: 'Allocation',
       value: 'value',
       Released: 'Released',
-      description: 'description'
+      description: 'description',
     },
     {
       label: 'filBase',
       value: '2,000,000,000',
       Released: '2,000,000',
-      description: 'filBase_des'
+      description: 'filBase_des',
     },
     {
       label: 'ReservedTokens',
       value: '300,000,000 ',
       Released: '300,000 ',
-      description:
-            'ReservedTokens_des'
+      description: 'ReservedTokens_des',
     },
     {
       label: 'TokenAllocation',
       value: '1,100,000,000',
       Released: '1,100',
-      description: 'TokenAllocation_des'
+      description: 'TokenAllocation_des',
     },
     {
       label: 'Fundraising',
       value: '150,000,000 ',
       Released: '50,000 ',
-      description: 'Fundraising_des'
+      description: 'Fundraising_des',
     },
     {
       label: 'Funds',
       value: '50,000,000',
       Released: '50,000 ',
-      description: 'Funds_des'
+      description: 'Funds_des',
     },
     {
       label: 'FilecoinFoundation',
       value: '100,000,000',
-      description: 'FilecoinFoundation_des'
+      description: 'FilecoinFoundation_des',
     },
     {
       label: 'protocolLab',
       value: '210,000,000',
       Released: '20,000',
-      description: 'protocolLab_des'
+      description: 'protocolLab_des',
     },
     {
       label: 'Contributors',
       value: '90,000,000',
       Released: '9,000 ',
-      description: 'Contributors_des'
-    }
-  ]
+      description: 'Contributors_des',
+    },
+  ],
 }
 //charts
 export const chartsNav: Array<Menu_Info> = [
   {
     key: 'networks',
     preIcon: 'meta',
-    title:'networks_overview',
-
+    title: 'networks_overview',
   },
-  // {
-  //   key: 'fevm',
-  //   preIcon: 'meta',
-  //   title:'FEVM',
-  // },
   {
-    key: 'BlockChain',
+    key: 'fevm',
+    preIcon: 'fevm',
+    title: 'FEVM',
+    children: [
+      {
+        key: 'fevm_trend',
+        title: 'contract_trend',
+      },
+      {
+        key: 'fevm_con',
+        title: 'contract_con',
+      },
+      {
+        key: 'fevm_addr',
+        title: 'contract_addr',
+      },
+      {
+        key: 'fevm_gas',
+        title: 'contract_gas',
+      },
+      {
+        key: 'fevm_balance',
+        title: 'contract_balance',
+      },
+    ],
+  },
+  {
+    key: 'blockChain',
     preIcon: 'block_chain',
-    title:'BlockChain',
-    // children: [
-    //   {
-    //     key: 'power',
-    //     title: 'power',
-    //   },
-    //   {
-    //     key: 'cc_dc_power',
-    //     title:'cc_dc_power',
-    //   },
-    //   {
-    //     key: 'block_trend',
-    //     title:'block_trend',
-    //   },
-    //   {
-    //     key: 'block_reward_per',
-    //     title:'block_reward_per_TiB',
-    //   },
-    //   {
-    //     key: 'active_nodes',
-    //     title:'active_nodes',
-    //   }
-    // ]
+    title: 'BlockChain',
+    children: [
+      {
+        key: 'blockChain_power',
+        title: 'power',
+      },
+      {
+        key: 'blockChain_cc_dc_power',
+        title: 'cc_dc_power',
+      },
+      {
+        key: 'blockChain_trend',
+        title: 'block_trend',
+      },
+      {
+        key: 'blockChain_reward_per',
+        title: 'block_reward_per_TiB',
+      },
+      {
+        key: 'blockChain_nodes',
+        title: 'active_nodes',
+      },
+    ],
   },
   {
     key: 'fil_overview',
     preIcon: 'fil_overview',
-    title:'fil_overview',
-
+    title: 'fil_overview',
   },
-
 ]

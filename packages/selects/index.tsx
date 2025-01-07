@@ -1,53 +1,58 @@
 /** @format */
 
-import { Option_Item } from '@/contents/type';
-import { Select } from 'antd';
-import { useEffect, useState } from 'react';
+import { Option_Item } from '@/contents/type'
+import { Select } from 'antd'
+import { useEffect, useState } from 'react'
+import type { SelectProps } from 'antd'
+import { getSvgIcon } from '@/svgsIcon'
 
-export default ({
-  options,
-  onChange,
-  value,
-  className = '',
-  popupClassName='',
-  border,
-  placeholder
-}: {
-  value?: string;
-  className?: string;
-  popupClassName?: string;
-  border?: boolean;
-  suffix?: JSX.Element;
-    options: Array<Option_Item>;
-    placeholder?: string;
-  onChange: (value: string) => void;
-}) => {
-  const [new_options, setOptions] = useState<Array<Option_Item>>([]);
+interface Props extends SelectProps {
+  className?: string
+  border?: boolean
+  popupClassName?: string
+  options?: Array<Option_Item>
+  onChange?: (value: string, item?: any) => void
+}
+
+export default (props: Props) => {
+  const {
+    className = '',
+    popupClassName = '',
+    options,
+    onChange,
+    value,
+    border,
+    placeholder,
+    disabled,
+    style,
+  } = props
+  const [new_options, setOptions] = useState<Array<Option_Item>>([])
 
   useEffect(() => {
-    setOptions(options || []);
-  }, [options]);
+    setOptions(options || [])
+  }, [options])
 
-  const handleChange = (value: string) => {
-    onChange(value);
-  };
-  /*
-  ${
-        border ? 'border_select' : 'no_border_select'
-        }
-  */
+  const handleChange = (value: string, item?: any) => {
+    if (onChange) onChange(value, item)
+  }
+
   return (
     <Select
       showSearch
-      placeholder={ placeholder || 'Select a person'}
-      optionFilterProp='children'
+      placeholder={placeholder || 'Select a person'}
+      optionFilterProp="children"
       value={value}
+      disabled={disabled}
+      style={style}
+      size={'large'}
       className={`custom_select ${className}`}
       popupClassName={'custom_select_wrapper'}
+      suffixIcon={<span>{getSvgIcon('downIcon')}</span>}
       filterOption={(input, option: any) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }
       options={[...new_options]}
-      onChange={handleChange}></Select>
-  );
-};
+      onChange={handleChange}
+    ></Select>
+  )
+}

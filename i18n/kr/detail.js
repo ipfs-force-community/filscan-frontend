@@ -1,33 +1,33 @@
-
 // pool-detail
 const detail = {
-  "24h": '24시간',
-  '7d':'7일',
-  "30d": '30일',
-  "1year": '1년',
-  look_all:'전체 데이터 보기',
+  '24h': '24시간',
+  '7d': '7일',
+  '30d': '30일',
+  '1year': '1년',
+  look_all: '전체 데이터 보기',
+  all_token: 'All Tokens',
   //owner
-  'owner_title': '스토리지 풀 정보',
-  'owner_title_tip': '스토리지 풀 정보: 노드 데이터를 모아 총합한 데이터 정보',
-  all:'모든 메소드',
+  owner_title: '스토리지 풀 정보',
+  owner_title_tip: '스토리지 풀 정보: 노드 데이터를 모아 총합한 데이터 정보',
+  all: '모든 메소드',
   account: '계정',
-  account_title:'계정',
+  account_title: '계정',
   owner_address: 'Owner 주소',
   owned_miners: '소유한 노드',
-  owned_active_miners: "액티브한 노드",
+  owned_active_miners: '액티브한 노드',
   miner: 'Miner',
   evm: 'EVM',
   ethaddress: 'ETH 주소',
-  ethaccount:'ETH 계정',
-  transfer_records:'이체 기록',
+  ethaccount: 'ETH 계정',
+  transfer_records: '이체 기록',
   //account_type
   account_name: '계정',
   latest_transfer_time: '최신 거래 시간',
   multisig: '멀티 사인 계정',
   account_detail: '스토리지 풀 정보',
   from_ath: '발송자',
-  to_ath:'수신자',
-  account_id:'계정 주소',
+  to_ath: '수신자',
+  account_id: '계정 주소',
   //Overview
   owner_overview_title: '스토리지 풀 개요',
   balance: '계정 잔액',
@@ -35,23 +35,27 @@ const detail = {
   init_pledge: '섹터 저당',
   pre_deposits: '선입금',
   locked_balance: '잠긴 보상',
-  balance_tip:'계정 잔액=사용 가능한 잔액+섹터 저당+선입금+잠긴 보상',
-  available_balance_tip:'초기 예치금 및 잠긴 보상을 제외한 계정 내 사용 가능한 지출 가능 금액',
-  init_pledge_tip: '복제 검증의 두 번째 단계를 성공적으로 완료한 후 실제로 예치된 금액',
-  pre_deposits_tip: '예치금액은 두 번째 단계에서 지정된 시간 내에 성공적으로 증명을 제출한 후 각 섹터별로 실제로 예치된 금액에 따라 조정됩니다. 그렇지 않을 경우, 주어진 시간 내에 증명을 제출하지 않을 경우 벌금이 부과됩니다',
-  locked_balance_tip:'출출 보상의 미발행 부분은 시간에 따라 선형적으로 해제됩니다',
+  balance_tip: '계정 잔액=사용 가능한 잔액+섹터 저당+선입금+잠긴 보상',
+  available_balance_tip:
+    '초기 예치금 및 잠긴 보상을 제외한 계정 내 사용 가능한 지출 가능 금액',
+  init_pledge_tip:
+    '복제 검증의 두 번째 단계를 성공적으로 완료한 후 실제로 예치된 금액',
+  pre_deposits_tip:
+    '예치금액은 두 번째 단계에서 지정된 시간 내에 성공적으로 증명을 제출한 후 각 섹터별로 실제로 예치된 금액에 따라 조정됩니다. 그렇지 않을 경우, 주어진 시간 내에 증명을 제출하지 않을 경우 벌금이 부과됩니다',
+  locked_balance_tip:
+    '출출 보상의 미발행 부분은 시간에 따라 선형적으로 해제됩니다',
   sector_count: '전체',
-  live_sector_count:'유효',
+  live_sector_count: '유효',
   fault_sector_count: '오류',
   recover_sector_count: '복구',
   eth_address: 'ETH 주소',
   stable_address: '안정 주소',
   tokenList: '보유한 토큰',
-  showContract:'계약: {{value}}',
-  showAddress:'주소: {{value}}',
+  showContract: '계약: {{value}}',
+  showAddress: '주소: {{value}}',
 
   //统计指标
-  indicators:'통계 지표',
+  indicators: '통계 지표',
   power_increase_indicators: '채굴파워 증가량',
   power_ratio: '전력 성장률',
   sector_increase: '섹터 증가량',
@@ -61,16 +65,20 @@ const detail = {
   block_count: '블록 수량',
   block_count_tip: '블록 수 = 블록 (block) 수량 총합',
   mining_efficiency: '효율성',
-  mining_efficiency_tip:'선택한 주기 동안, 노드가 채굴한 총 블록 보상과 유효한 채굴 능력 비율',
+  mining_efficiency_tip:
+    '선택한 주기 동안, 노드가 채굴한 총 블록 보상과 유효한 채굴 능력 비율',
   lucky: '행운값',
-  lucky_tip:'행운 값: 실제 블록 보상 수와 예상 블록 보상 수의 비율입니다. QualityAdjPower가 1 PiB 미만인 경우, 이 값은 상당한 무작위성을 가지며 참고 용도로만 사용되어야 합니다',
+  lucky_tip:
+    '행운 값: 실제 블록 보상 수와 예상 블록 보상 수의 비율입니다. QualityAdjPower가 1 PiB 미만인 경우, 이 값은 상당한 무작위성을 가지며 참고 용도로만 사용되어야 합니다',
   sector_ratio: '섹터 증가 속도',
   sector_ratio_tip: '',
-  windowPost_gas:'컴퓨팅 전력 소비 유지',
+  windowPost_gas: '컴퓨팅 전력 소비 유지',
   win_count: '우승자 보상',
-  win_count_tip:'Filecoin 경제 모델에서 한 높이 (tipset)하에는 여러 블록 (block)이 있을 수 있으며, 각 블록 (block)은 여러 보상 (win count)을 받을 수 있습니다. 누적 블록 수 =모든 보상 수의 총합',
-  net_profit_per_tb:'Gas 소비/T',
-  net_profit_per_tb_tip:'선택된 기간 내에 크기가 T인 단일 섹터를 봉인하는 데 필요한 가스 소비',
+  win_count_tip:
+    'Filecoin 경제 모델에서 한 높이 (tipset)하에는 여러 블록 (block)이 있을 수 있으며, 각 블록 (block)은 여러 보상 (win count)을 받을 수 있습니다. 누적 블록 수 =모든 보상 수의 총합',
+  net_profit_per_tb: 'Gas 소비/T',
+  net_profit_per_tb_tip:
+    '선택된 기간 내에 크기가 T인 단일 섹터를 봉인하는 데 필요한 가스 소비',
   //账户变化
   account_change: '계정 변동',
   power: '파워',
@@ -83,7 +91,7 @@ const detail = {
   total_block_count_tip: '최근 30일간 해당 노드에서 채굴한 블록 수의 총합',
   total_reward: '30일 보상',
   total_reward_tip: '최근 30일간 해당 노드에서 채굴한 블록의 총 보상',
-  total_balance_tip:'계정 잔액=사용 가능한 잔액+섹터 저당+선입금+잠긴 보상',
+  total_balance_tip: '계정 잔액=사용 가능한 잔액+섹터 저당+선입금+잠긴 보상',
   total_win_count: '30일 우승 횟수',
   total_win_count_tip: '최근 30일간 해당 노드에서 채굴한 블록의 총 우승 횟수',
   sector_size: '섹터 크기',
@@ -106,7 +114,7 @@ const detail = {
   contract_name: '계약 명칭',
   peer_detail: '노드 세부정보',
   miner_owner: '노드 세이버',
-  no_area:'Unknown',
+  no_area: 'Unknown',
 
   //miner
   //pool_overview_title:'账户',
@@ -150,7 +158,8 @@ const detail = {
   exit_code: '상태',
   err_message: '에러 메시지',
   replaced: 'CID를 덮어썼습니다',
-  base_cid:'재정의된 CID',
+  replaced_detail: 'CID {{value}} 을(를) {{newValue}} 로 덮어썼습니다.',
+  base_cid: '재정의된 CID',
 
   //内部交易
   amount: '액수',
@@ -206,7 +215,7 @@ const detail = {
   erc20_transfer: '토큰 거래',
   erc20_transfer_total: '총 {{value}}개 송금',
 
-  power_change: 'Power Change',
+  power_change: '전원 변경',
 
   //height
   blcok_time: '블록 시간',
@@ -215,22 +224,26 @@ const detail = {
   messages_count: '메시지',
   reward: '보상',
   //cid detail
-  block_list:'Block List',
+  block_list: 'Block List',
   blocks_cid: 'Cid',
   blocks_miner: 'Miner',
   blocks_messages: ' 메시지',
   blocks_reward: '보상',
-  win_count:'윈 카운트',
+  win_count: '윈 카운트',
   //cid_details
-  message_list_total:'Total of {{value}} Messages',
-  chain_cid_detail: '区块详情',
+  message_list_total: 'Total of {{value}} Messages',
+  chain_cid_detail: '블록 세부정보',
   cid_height: '높이',
   parent_weight: 'Parent Block 무게',
-  parents_cid:'Parent CID',
-  parent_base_fee:'Parent Block 기본 수수료',
+  parents_cid: 'Parent CID',
+  parent_base_fee: 'Parent Block 기본 수수료',
   ticket_value: '티켓 값',
   state_root: '스테이트 루트',
-  message_count:'메시지 개수',
+  message_count: '메시지 개수',
+  blk_cids_message: '메시지 차단',
 
+  //pendingMsg
+  pending_title: '대기 중인 메시지',
+  pending_total: 'Total of {{value}} messages to be processed',
 }
 export default detail

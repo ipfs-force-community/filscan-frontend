@@ -1,0 +1,15 @@
+.submenu_title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  &_icon {
+    margin-top: 2px;
+    // .monitor_svg {
+    //   svg {
+    //     width: 14px;
+    //     height: 12px;
+    //   }
+    // }
+  }
+}

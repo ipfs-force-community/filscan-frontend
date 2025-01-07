@@ -1,18 +1,19 @@
-import { Translation } from "@/components/hooks/Translation";
-import { apiUrl } from "@/contents/apiUrl";
-import { message_detail } from "@/contents/detail"
-import Table from "@/packages/Table"
-import { useFilscanStore } from "@/store/FilscanStore";
-import useAxiosData from "@/store/useAxiosData";
-import classNames from "classnames";
-import { useEffect, useMemo, useState } from "react"
+import { Translation } from '@/components/hooks/Translation'
+import { apiUrl } from '@/contents/apiUrl'
+import { message_detail } from '@/contents/detail'
+import Table from '@/packages/Table'
+import useAxiosData from '@/store/useAxiosData'
+import classNames from 'classnames'
+import { useEffect, useMemo, useState } from 'react'
 import styles from './Trade.module.scss'
-export default ({ cid }: {cid?:string | string[]}) => {
-  const { tr } = Translation({ ns: 'detail' });
-  const { theme, lang } = useFilscanStore();
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
+export default observer(({ cid }: { cid?: string | string[] }) => {
+  const { tr } = Translation({ ns: 'detail' })
+  const { theme, lang } = filscanStore
   const { axiosData } = useAxiosData()
-  const [loading, setLoading] = useState(false);
-  const [data,setData]= useState([])
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState([])
 
   useEffect(() => {
     load()
@@ -25,16 +26,19 @@ export default ({ cid }: {cid?:string | string[]}) => {
   }
 
   const columns = useMemo(() => {
-    return message_detail.trade.map(item => {
-      return {...item, title: tr(item.title)}
+    return message_detail.trade.map((item) => {
+      return { ...item, title: tr(item.title) }
     })
   }, [lang])
 
-  return <div className={classNames("card_shadow border border_color rounded-xl p-5 min-h-[500px]",styles.wrap)}>
-    <Table
-      data={data}
-      columns={columns}
-      loading={loading}
-    />
-  </div>
-}
+  return (
+    <div
+      className={classNames(
+        'card_shadow border_color min-h-[500px] rounded-xl border p-5',
+        styles.wrap,
+      )}
+    >
+      <Table data={data} columns={columns} loading={loading} />
+    </div>
+  )
+})

@@ -16,7 +16,7 @@
 .main_contain {
   overflow: hidden;
   margin: auto;
-  min-height: 100%;
+  min-height: calc(100vh - 220px);
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -119,6 +119,9 @@
 .custom-icon {
   color: #ffffff !important;
 }
+.custom_noHeader {
+  margin-top: 100px;
+}
 
 /*主题文字渐变text*/
 .clip_text {
@@ -141,7 +144,7 @@
   //   var(--font-color) 100%
   // );
   // -webkit-background-clip: text;
-  // //font-family: DINPro-Bold, DINPro;
+  // //font-family: HarmonyOS_Bold, HarmonyOS_Regular;
   // -webkit-text-fill-color: transparent;
 }
 /*子元素不渐变*/
@@ -225,12 +228,12 @@
   color: var(--bgColor);
   font-weight: bold;
   font-size: px-to-rem(11px);
-  font-family: DINPro-Bold;
+  font-family: HarmonyOS_Bold;
 
   &::before {
     display: block;
     padding-top: 100%;
-    content: "";
+    content: '';
   }
 }
 
@@ -241,26 +244,34 @@
 
 .link_text {
   color: #1c6afd;
-  font-weight: 500;
-  font-family: DINPro-Medium, DINPro;
+  font-family: HarmonyOS_Regular;
   cursor: pointer;
   &:hover {
     color: #1c6afd;
   }
+}
+.noWarp_table {
+  cursor: pointer;
+  max-width: 92px;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .w_account {
   width: calc(100% - 210px);
 }
 
+.custom_remix-icon {
+  color: var(--font_des);
+}
 .cancel_btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 6px 15px;
   min-width: 80px;
+  min-height: 32px;
   width: fit-content;
-  height: fit-content;
   outline: none !important;
   border-color: var(--border-color) !important;
   background-color: var(--bgColor) !important;
@@ -277,8 +288,8 @@
   justify-content: center;
   padding: 6px 15px;
   min-width: 80px;
+  min-height: 32px;
   width: fit-content;
-  height: fit-content;
   outline: none !important;
   border-color: transparent !important;
   background: var(--font-color) !important;
@@ -294,9 +305,23 @@
   justify-content: center;
   padding: 6px 15px;
   min-width: 80px;
+  min-height: 32px;
   width: fit-content;
   border-radius: 5px;
   background: linear-gradient(315deg, #1764ff 0%, #4093ed 100%) !important;
+  color: #fff !important;
+}
+
+.active_btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  padding: 6px 15px;
+  min-width: 80px;
+  min-height: 32px;
+  width: fit-content;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #a0fbc0 0%, #23d1e1 29%, #1c6afd 100%);
   color: #fff !important;
 }
 .primary_default {

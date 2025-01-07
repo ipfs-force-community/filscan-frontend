@@ -1,35 +1,30 @@
 /** @format */
 
-import { Translation } from '@/components/hooks/Translation';
-import { proApi } from '@/contents/apiUrl';
-import useAxiosData from '@/store/useAxiosData';
-import { Modal, Input, Button } from 'antd';
-import { useState } from 'react';
-import { useGroupsStore } from '../content';
+import { Translation } from '@/components/hooks/Translation'
+import accountStore from '@/store/modules/account'
+import { Modal, Input, Button } from 'antd'
+import { useState } from 'react'
 
 export default ({
   show,
   onChange,
 }: {
-  show: boolean;
-  onChange: (value: boolean) => void;
+  show: boolean
+  onChange: (value: boolean) => void
 }) => {
-  const { tr } = Translation({ ns: 'account' });
-  const [value, setValue] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { axiosData } = useAxiosData();
-  const { setGroups } = useGroupsStore();
+  const { tr } = Translation({ ns: 'account' })
+  const [value, setValue] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleClick = async () => {
     //添加分组
-    // onChange(value);
-    setLoading(true);
-    const data = await axiosData(proApi.saveGroup, { group_name: value });
-    const newGroups = await axiosData(proApi.getGroups);
-    setGroups(newGroups?.group_info_list || []);
-    setLoading(false);
-    onChange(false);
-  };
+    if (value.length > 0) {
+      setLoading(true)
+      await accountStore.saveGroups({ group_name: value })
+      setLoading(false)
+      onChange(false)
+    }
+  }
 
   return (
     <Modal
@@ -39,31 +34,34 @@ export default ({
       destroyOnClose={true}
       closeIcon={false}
       footer={
-        <span className='flex justify-center gap-x-4 mt-5'>
+        <span className="mt-5 flex justify-center gap-x-4">
           <Button
-            className='cancel_btn'
+            className="cancel_btn"
             onClick={() => {
-              onChange(false);
-            }}>
+              onChange(false)
+            }}
+          >
             {tr('cancel')}
           </Button>
           <Button
-            className='confirm_btn'
+            className="confirm_btn"
             loading={loading}
-            onClick={handleClick}>
+            onClick={handleClick}
+          >
             {tr('confirm')}
           </Button>
         </span>
-      }>
+      }
+    >
       <Input
-        className='mt-5 custom_input h-12'
+        className="custom_input mt-5 h-12"
         showCount
         placeholder={tr('create_group_holder')}
         maxLength={10}
         onChange={(e: any) => {
-          setValue(e.target.value);
+          setValue(e.target.value)
         }}
       />
     </Modal>
-  );
-};
+  )
+}

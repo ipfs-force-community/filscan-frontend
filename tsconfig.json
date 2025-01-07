@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     "store/FilscanStore.js"
-  ],
+, "src/cw/leecharts/utils.js", "src/cw/leecharts/utils.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,9 +1,9 @@
 /** @format */
 
-import Link from 'next/link';
-import { Item, Option_Item } from './type';
-import { formatFilNum, unitConversion } from '@/utils';
-import Progress from '@/packages/progress';
+import Link from 'next/link'
+import { Item, Option_Item } from './type'
+import { formatFilNum, unitConversion } from '@/utils'
+import Progress from '@/packages/progress'
 
 //    pool: '存储池排行',
 //     provider: '节点排行',
@@ -11,51 +11,51 @@ import Progress from '@/packages/progress';
 //     rewards: '节点收益',
 
 interface showHeader extends Item {
-  options?: Array<string>;
+  options?: Array<string>
 }
 
 const sectorOptions: Array<Option_Item> = [
   { label: 'select_rank_all', value: 'all' },
   { label: 'select_rank_32', value: '32 GiB' },
   { label: 'select_rank_64', value: '64 GiB' },
-];
+]
 const timeList: Array<Option_Item> = [
   { label: '24h', value: '24h' },
   { label: 'week_days', value: '7d' },
   { label: 'month', value: '1m' },
-];
+]
 
 export const rank_header:
   | {
-      tabList: Array<showHeader>;
-      growth: Record<string, Array<Option_Item>>;
-      rewards: Record<string, Array<Option_Item>>;
+      tabList: Array<showHeader>
+      growth: Record<string, Array<Option_Item>>
+      rewards: Record<string, Array<Option_Item>>
     }
   | any = {
-    tabList: [
-      {
-        title: 'growth',
-        dataIndex: 'growth',
-        options: ['sectorOptions', 'timeList'],
-      },
-      {
-        title: 'provider',
-        dataIndex: 'provider',
-      },
-      {
-        title: 'pool',
-        dataIndex: 'pool',
-      },
+  tabList: [
+    {
+      title: 'growth',
+      dataIndex: 'growth',
+      options: ['sectorOptions', 'timeList'],
+    },
+    {
+      title: 'provider',
+      dataIndex: 'provider',
+    },
+    {
+      title: 'pool',
+      dataIndex: 'pool',
+    },
 
-      {
-        title: 'rewards',
-        dataIndex: 'rewards',
-        options: ['sectorOptions', 'timeList'],
-      },
-    ],
-    growth: { sector_size: sectorOptions, interval: timeList },
-    rewards: { sector_size: sectorOptions, interval: timeList },
-  };
+    {
+      title: 'rewards',
+      dataIndex: 'rewards',
+      options: ['sectorOptions', 'timeList'],
+    },
+  ],
+  growth: { sector_size: sectorOptions, interval: timeList },
+  rewards: { sector_size: sectorOptions, interval: timeList },
+}
 
 export const providerList = (progress: any): Array<any> => {
   return [
@@ -63,7 +63,7 @@ export const providerList = (progress: any): Array<any> => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '6%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       title: 'provider_miner', //节点号
@@ -71,10 +71,15 @@ export const providerList = (progress: any): Array<any> => {
       with: '9%',
       render: (text: string) => {
         return (
-          <Link href={`/miner/${text}`} scroll={true} prefetch className='link_text'>
+          <Link
+            href={`/miner/${text}`}
+            scroll={true}
+            prefetch
+            className="link_text"
+          >
             {text}
           </Link>
-        );
+        )
       },
     },
     {
@@ -84,17 +89,17 @@ export const providerList = (progress: any): Array<any> => {
       sorter: true,
       defaultSortOrder: 'descend',
       render: (text: string | number, record: any) => {
-        const text1 = record.quality_power_ratio;
-        const left = 100 - (Number(text) / Number(progress)) * 100;
-        const showLeft = left > 100 ? 100 : left;
+        const text1 = record.quality_power_ratio
+        const left = 100 - (Number(text) / Number(progress)) * 100
+        const showLeft = left > 100 ? 100 : left
         return (
-          <span className='flex items-center gap-x-2'>
+          <span className="flex items-center gap-x-2">
             <Progress left={showLeft + '%'} />
             <span>{`${unitConversion(text, 2)} / ${(
               Number(text1) * 100
             ).toFixed(2)}%`}</span>
           </span>
-        );
+        )
       },
     },
     {
@@ -111,8 +116,8 @@ export const providerList = (progress: any): Array<any> => {
       width: '15%',
       sorter: true,
       render: (text: string, record: any) => {
-        const text1 = record.block_ratio;
-        return `${text} / ${(Number(text1) * 100).toFixed(2)}%`;
+        const text1 = record.block_ratio
+        return `${text} / ${(Number(text1) * 100).toFixed(2)}%`
       },
     },
     {
@@ -122,8 +127,8 @@ export const providerList = (progress: any): Array<any> => {
       width: '15%',
       sorter: true,
       render: (text: string, record: any) => {
-        const text1 = formatFilNum(text, false, false, 2);
-        return `${text1} / ${(Number(record.rewards_ratio) * 100).toFixed(2)}%`;
+        const text1 = formatFilNum(text, false, false, 2)
+        return `${text1} / ${(Number(record.rewards_ratio) * 100).toFixed(2)}%`
       },
     },
     {
@@ -133,8 +138,8 @@ export const providerList = (progress: any): Array<any> => {
       width: '15%',
       render: (text: string) => formatFilNum(text, false, false, 2),
     },
-  ];
-};
+  ]
+}
 
 export const poolList = (progress: number | string) => {
   return [
@@ -142,7 +147,7 @@ export const poolList = (progress: number | string) => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '6%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       title: 'pool_owner', //存储池号
@@ -150,10 +155,15 @@ export const poolList = (progress: number | string) => {
       with: '24%',
       render: (text: string) => {
         return (
-          <Link href={`/owner/${text}`} scroll={true} prefetch className='link_text'>
+          <Link
+            href={`/owner/${text}`}
+            scroll={true}
+            prefetch
+            className="link_text"
+          >
             {text}
           </Link>
-        );
+        )
       },
     },
     {
@@ -163,14 +173,14 @@ export const poolList = (progress: number | string) => {
       sorter: true,
       defaultSortOrder: 'descend',
       render: (text: string | number, record: any) => {
-        const left = 100 - (Number(text) / Number(progress)) * 100;
-        const showLeft = left > 100 ? 100 : left;
+        const left = 100 - (Number(text) / Number(progress)) * 100
+        const showLeft = left > 100 ? 100 : left
         return (
-          <span className='flex items-center gap-x-2'>
+          <span className="flex items-center gap-x-2">
             <Progress left={showLeft + '%'} />
             <span>{unitConversion(record.quality_adj_power, 2)}</span>
           </span>
-        );
+        )
       },
     },
     {
@@ -193,8 +203,8 @@ export const poolList = (progress: number | string) => {
       sorter: true,
       with: '6%',
     },
-  ];
-};
+  ]
+}
 
 const growthList = (progress: number | string) => {
   return [
@@ -202,7 +212,7 @@ const growthList = (progress: number | string) => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '6%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       title: 'miner', //节点号
@@ -210,10 +220,10 @@ const growthList = (progress: number | string) => {
       width: '12%',
       render: (text: string) => {
         return (
-          <Link href={`/miner/${text}`} scroll={true} className='link_text'>
+          <Link href={`/miner/${text}`} scroll={true} className="link_text">
             {text}
           </Link>
-        );
+        )
       },
     },
     {
@@ -224,14 +234,14 @@ const growthList = (progress: number | string) => {
       width: '18%',
       defaultSortOrder: 'descend',
       render: (text: string | number, record: any) => {
-        const left = 100 - (Number(text) / Number(progress)) * 100;
-        const showLeft = left > 100 ? 100 : left;
+        const left = 100 - (Number(text) / Number(progress)) * 100
+        const showLeft = left > 100 ? 100 : left
         return (
-          <span className='flex items-center gap-x-2'>
-            <Progress left={showLeft+ '%'} />
+          <span className="flex items-center gap-x-2">
+            <Progress left={showLeft + '%'} />
             <span>{unitConversion(text, 2) + '/D'}</span>
           </span>
-        );
+        )
       },
     },
     {
@@ -262,14 +272,10 @@ const growthList = (progress: number | string) => {
       width: '13%',
       dataIndex: 'sector_size',
     },
-  ];
-};
+  ]
+}
 
-export const mobileRankList = [
-  'rank',
-  'miner_id',
-  'power_ratio'
-]
+export const mobileRankList = ['rank', 'miner_id', 'power_ratio']
 
 const rewardsList = () => {
   return [
@@ -277,7 +283,7 @@ const rewardsList = () => {
       title: 'ranking', //排名
       dataIndex: 'rank',
       width: '10%',
-      render: (text: string) => <span className='rank_icon'>{text}</span>,
+      render: (text: string) => <span className="rank_icon">{text}</span>,
     },
     {
       title: 'miner', //节点号
@@ -285,10 +291,10 @@ const rewardsList = () => {
       width: '15%',
       render: (text: string) => {
         return (
-          <Link href={`/miner/${text}`} scroll={true} className='table_link'>
+          <Link href={`/miner/${text}`} scroll={true} className="table_link">
             {text}
           </Link>
-        );
+        )
       },
     },
     {
@@ -299,9 +305,9 @@ const rewardsList = () => {
       sorter: true,
       defaultSortOrder: 'descend',
       render: (text: string, record: any) => {
-        const showNum = formatFilNum(text, false, false, 2);
-        const ratio = Number(record.rewards_ratio * 100).toFixed(2) + '%';
-        return `${showNum}/${ratio}`;
+        const showNum = formatFilNum(text, false, false, 2)
+        const ratio = Number(record.rewards_ratio * 100).toFixed(2) + '%'
+        return `${showNum}/${ratio}`
       },
     },
     {
@@ -330,36 +336,36 @@ const rewardsList = () => {
       width: '15%',
       dataIndex: 'sector_size',
     },
-  ];
-};
+  ]
+}
 
 export const getColumn = (type: string, progress: number | string) => {
   switch (type) {
-  case 'provider':
-    return providerList(progress);
-  case 'pool':
-    return poolList(progress);
-  case 'growth':
-    return growthList(progress);
-  case 'rewards':
-    return rewardsList();
-  default:
-    return providerList(progress);
+    case 'provider':
+      return providerList(progress)
+    case 'pool':
+      return poolList(progress)
+    case 'growth':
+      return growthList(progress)
+    case 'rewards':
+      return rewardsList()
+    default:
+      return providerList(progress)
   }
-};
+}
 
-export const getMobileColumn = (type:string)=>{
+export const getMobileColumn = (type: string) => {
   switch (type) {
-  case 'provider':
-    return ['rank','miner_id','quality_adj_power']
-  case 'pool':
-    return ['rank','owner_id','quality_adj_power']
-  case 'growth':
-    return ['rank','miner_id','power_ratio']
-  case 'rewards':
-    return ['rank','miner_id','rewards']
-  default:
-    break;
+    case 'provider':
+      return ['rank', 'miner_id', 'quality_adj_power']
+    case 'pool':
+      return ['rank', 'owner_id', 'quality_adj_power']
+    case 'growth':
+      return ['rank', 'miner_id', 'power_ratio']
+    case 'rewards':
+      return ['rank', 'miner_id', 'rewards']
+    default:
+      break
   }
 }
 
@@ -368,4 +374,4 @@ export const getDefaultSort: any = {
   pool: 'quality_adj_power',
   growth: 'power_ratio',
   rewards: 'rewards',
-};
+}

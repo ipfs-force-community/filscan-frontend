@@ -1,7 +1,17 @@
+.selectTab{
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
 @media only screen and (max-width: 1000px) {
   .owner {
     display: flex;
     align-items: center;
     word-break: break-word;
+  }
+  .selectMobileTab{
+    width: 100%;
+    margin-top: 10px;
   }
 }

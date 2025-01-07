@@ -1,3 +1,4 @@
+
 @media screen and (max-width: 1000px) {
   .list {
     .list-header {
@@ -11,8 +12,8 @@
         width: 100%;
       }
     }
-
-    .reset {
+  }
+  .reset {
       overflow: unset;
       margin-top: unset;
       padding: unset;
@@ -30,5 +31,7 @@
         }
       }
     }
-  }
+    .padding-table{
+      padding-bottom: 0px;
+    }
 }

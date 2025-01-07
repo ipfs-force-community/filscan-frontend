@@ -1,199 +1,161 @@
 /** @format */
 
-import { Translation } from '@/components/hooks/Translation';
-import { UserInfo } from '@/store/UserStore';
-import Logo from '@/assets/images/logo.svg';
-import UserIcon from '@/assets/images/user.svg';
-import { formatDateTime, max_name_length, validatePassword } from '@/utils';
-import { personal_setting } from '@/contents/account';
-import { Button, Form, Input } from 'antd';
-import useAxiosData from '@/store/useAxiosData';
-import { proApi } from '@/contents/apiUrl';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import messageManager from '@/packages/message';
-import { getSvgIcon } from '@/svgsIcon';
+import { Translation } from '@/components/hooks/Translation'
+import Logo from '@/assets/images/logo.svg'
+import userStore from '@/store/modules/user'
+import { formatDateTime } from '@/utils'
+import { Input } from 'antd'
+import { useState } from 'react'
+import { getSvgIcon } from '@/svgsIcon'
+import { observer } from 'mobx-react'
+import { userType, vipList } from '@/contents/account'
+import passwordPng from '@/assets/images/member/password.png'
+import emailPng from '@/assets/images/member/email.png'
+import style from './index.module.scss'
+import Vip from '@/assets/images/member/vip.svg'
+import Detail from './detail'
+import Image from 'next/image'
+import ResetPassword from './resetPassword'
+import { tree } from 'd3'
 
-export default () => {
-  const { tr } = Translation({ ns: 'account' });
-  const [loading, setLoading] = useState(false);
-  const { axiosData } = useAxiosData();
-  const router = useRouter();
-  const userInfo = UserInfo();
-  const [form] = Form.useForm();
-  const [edit, setEdit] = useState(false);
-  const [name,setName]= useState('')
+export default observer(() => {
+  const { tr } = Translation({ ns: 'account' })
+  const { userInfo, memberWarn } = userStore
+  const { membership_type, mail } = userInfo
+  const [edit, setEdit] = useState(false)
+  const [name, setName] = useState('')
+  const [show, setShow] = useState(false)
 
   const handleSaveName = async () => {
     setEdit(false)
-    const result = await axiosData(proApi.updateInfo, {
-      name,
-    });
-    if (result) {
-      messageManager.showMessage({
-        type: 'success',
-        content: 'Update successful',
-      });
-    }
-
   }
-
-  const handleSave = async () => {
-    setLoading(true);
-    const payload = form.getFieldsValue();
-    const result = await axiosData(proApi.updateInfo, {
-      ...payload,
-    });
-    if (result) {
-      const newInfo:any = await axiosData(proApi.userInfo);
-      messageManager.showMessage({
-        type: 'success',
-        content: 'Update successful',
-      });
-      localStorage.removeItem('token');
-      userInfo.setUserInfo({ })
-      router.push('/account/login')
-    }
-    setLoading(false);
-  };
-
   return (
-    <>
-      <p className='font-semibold text-lg	 font-PingFang'>{tr('personal')}</p>
-      <div className='card_shadow mt-8 p-5 border border_color rounded-xl'>
-        <div className='flex justify-between'>
-          <div className='flex gap-x-2 items-center'>
+    <div className="mb-50">
+      <p className="font-HarmonyOS text-lg font-semibold">
+        {tr('personal')}
+        {memberWarn && (
+          <span
+            className=" ml-4 cursor-pointer text-xs font-normal text-warnColor"
+            onClick={() => {
+              userStore.setVipModal(true)
+            }}
+          >
+            <i className="ri-error-warning-line mr-1"></i>
+            {tr('member_warn')}
+          </span>
+        )}
+      </p>
+      <div className="card_shadow border_color mt-8 rounded-xl border p-5">
+        <div className="flex justify-between">
+          <div className="flex items-center gap-x-2">
             <Logo width={60} height={60} />
-            <div className='flex flex-col justify-start '>
-              <div className='flex items-center gap-x-2'>
-                {edit ? <Input defaultValue={userInfo.name}
-                  showCount={true}
-                  maxLength={10}
-                  onChange={(e:any)=>setName(e.target.value)}
-                  onPressEnter={handleSaveName}
-                  onBlur={handleSaveName} /> :
-                  <span className='font-PingFang font-semibold text-xl '>
-                    {name||userInfo.name}
+            <div className="flex flex-col justify-start ">
+              <div className="flex items-center gap-x-2">
+                {edit ? (
+                  <Input
+                    defaultValue={userInfo.name}
+                    showCount={true}
+                    maxLength={10}
+                    onChange={(e: any) => setName(e.target.value)}
+                    onPressEnter={handleSaveName}
+                    onBlur={handleSaveName}
+                  />
+                ) : (
+                  <span className="font-HarmonyOS text-xl font-semibold ">
+                    {name || userInfo.name}
                   </span>
-                }
-                <span className='cursor-pointer' onClick={ ()=>setEdit(true)}>{getSvgIcon('edit')}</span>
+                )}
+                <span className="cursor-pointer" onClick={() => setEdit(true)}>
+                  {getSvgIcon('edit')}
+                </span>
               </div>
-              <span className='text_des text-xs'>{userInfo.mail}</span>
             </div>
           </div>
-          <div className='flex flex-col items-end'>
-            <span className='des_bg_color flex gap-x-2 px-[6px] w-fit py-1 rounded-[5px]'>
-              <UserIcon width={20} height={20} />
-              <span>{tr('default_user')}</span>
+          <div className="flex flex-col items-end">
+            <span className={style.membership_card}>
+              <span
+                className={`${style.membership_card} ${
+                  style[`membership_card_${membership_type}`]
+                }`}
+              >
+                {userType[membership_type]?.icon}
+                <span>{tr(userType[membership_type]?.title)}</span>
+              </span>
+              {vipList.includes(membership_type) && <Detail />}
             </span>
-            <span className='mt-2 text_des text-xs '>
-              <span className='mr-2'>{tr('last_login')}:</span>
+
+            <span className="text_des mt-2 text-xs">
+              <span className="mr-2">{tr('last_login')}:</span>
               {formatDateTime(userInfo.last_login)}
             </span>
           </div>
         </div>
       </div>
-      <div className='mt-5 card_shadow p-5 border border_color rounded-xl'>
-        <p className='font-semibold text-lg	 font-PingFang'>
-          {tr('personal_setting')}
-        </p>
+      <div className={style.personal_list}>
+        <div
+          className={`${style.personal_list_item} ${
+            style[`personal_list_item_member`]
+          }`}
+          onClick={() => {
+            userStore.setVipModal(true)
+          }}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('memberBg')}
+          </span>
+          <span className={style.personal_list_title}>
+            <Vip width={20} height={25} />
+            {tr('personal_1')}
+          </span>
+          <span className={style.personal_list_des}>
+            {`${tr('member_expired_time', {
+              value: formatDateTime(userInfo.expired_time, 'YYYY-MM-DD'),
+            })}`}
+          </span>
+        </div>
 
-        <>
-          <Form
-            initialValues={{
-              old_password: '',
-              name: userInfo?.name||'' }}
-            form={form}
-            onFinish={handleSave}
-            layout='vertical'
-            className='w-3/5 min-w-[300px] mt-5'
-          >
-            {personal_setting.map((item: any) => {
-              const objShow: any = {};
-              if (item.dataIndex === 'name') {
-                objShow.showCount = true;
-                objShow.maxLength = max_name_length;
-              }
-              const newRules: any = [];
-              item?.rules?.forEach((v: any) => {
-                newRules.push({ ...v, message: tr(v.message) });
-                if (item.name === 'name') {
-                  newRules.push(() => ({
-                    validator(_: any, value: any) {
-                      if (
-                        !value|| value.length < max_name_length
-                      ) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error(tr('name_length')));
-                    },
-                  }));
-                }
-                if (item.name === 'new_password') {
-                  newRules.push(() => ({
-                    validator(_: any, value: any) {
-                      if (
-                        !value ||
-                          validatePassword(
-                            value,
-                            form.getFieldValue('old_password')
-                          )
-                      ) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error(tr('password_rules')));
-                    },
-                  }));
-                } else if (item.name === 'confirm_password') {
-                  newRules.push(
-                    ({ getFieldValue }: { getFieldValue: Function }) => ({
-                      validator(_: any, value: any) {
-                        if (
-                          !value ||
-                            getFieldValue('new_password') === value
-                        ) {
-                          return Promise.resolve();
-                        }
-                        return Promise.reject(
-                          new Error(tr('confirm_password_rules'))
-                        );
-                      },
-                    })
-                  );
-                }
-              });
-              return (
-                <Form.Item
-                  rules={item.rules}
-                  name={item.dataIndex}
-                  label={tr(item.title)}
-                  key={item.dataIndex}>
-                  {item?.dataIndex?.includes('password') ? (
-                    <Input.Password className='h-12 custom_input' {...objShow} defaultValue={''} placeholder={ tr(item.placeholder)} />
-                  ) : (
-                    <Input className='h-12 custom_input' defaultValue={''} {...objShow} placeholder={ tr(item.placeholder)}/>
-                  )}
-                </Form.Item>
-              );
-            })}
-            <Form.Item className='mt-5 !w-full flex-1 flex'>
-              {/* <Button className='cancel_btn border border_color' onClick={() => {
-                form.resetFields(['old_password','name','new_password','old_password'])
-              }}
-              >{tr('cancel')}</Button> */}
-              <Button
-                htmlType='submit'
-                className='confirm_btn'
-                loading={loading}
-              >
-                {tr('confirm')}
-              </Button>
-            </Form.Item>
-          </Form>
+        <div
+          className={`${style.personal_list_item}`}
+          onClick={() => {
+            setShow(true)
+          }}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('member_icon_logo')}
+          </span>
+          <span className={style.personal_list_title}>
+            <Image src={passwordPng} alt="" width={20} height={25} />
+            {tr('personal_3')}
+          </span>
+        </div>
 
-        </>
-
+        <div
+          className={`${style.personal_list_item} ${style.personal_list_value}`}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('member_icon_logo')}
+          </span>
+          <span className={style.personal_list_text}>{mail}</span>
+          <span className={style.personal_list_text}>
+            {getSvgIcon('successIcon')}
+            {tr('mail_success')}
+          </span>
+        </div>
+        <div
+          className={`${style.personal_list_item} ${style.personal_list_value}`}
+        >
+          <span className={`${style.personal_list_icon}`}>
+            {getSvgIcon('member_icon_logo')}
+          </span>
+          <span className={style.personal_list_title}>Coming soon</span>
+        </div>
       </div>
-    </>
-  );
-};
+      <ResetPassword
+        show={show}
+        onChange={(value) => {
+          setShow(value)
+        }}
+      />
+    </div>
+  )
+})

@@ -1,69 +1,88 @@
-import { LeftOutlined, RightOutlined } from "@ant-design/icons"
-import { Carousel } from "antd"
-import { useEffect, useRef, useState } from "react"
-import { Image } from 'antd'
-import useAxiosData from "@/store/useAxiosData"
-import { apiUrl } from "@/contents/apiUrl"
-import { useFilscanStore } from "@/store/FilscanStore"
+import { Carousel, Image } from 'antd'
+import { useEffect, useRef, useState } from 'react'
+import useAxiosData from '@/store/useAxiosData'
+import { apiUrl } from '@/contents/apiUrl'
+import style from './style.module.scss'
+import filscanStore from '@/store/modules/filscan'
+import { observer } from 'mobx-react'
 
 function Banner() {
-
   const { axiosData } = useAxiosData()
-  const { theme, lang } = useFilscanStore();
+  const { theme, lang } = filscanStore
   const carousel = useRef<any>(null)
   const [data, setData] = useState([])
+  const [autoplay, setAutoplay] = useState(true)
+  const [current, setCurrent] = useState<Number>(0)
 
   useEffect(() => {
     loadBanner()
   }, [lang])
 
-  const loadBanner = async() => {
-    const result:any =await axiosData(apiUrl.home_banner, {
+  const loadBanner = async () => {
+    const result: any = await axiosData(apiUrl.home_banner, {
       category: 'new_home',
-      language:lang ||'zh'
+      language: lang || 'zh',
     })
-    setData(result?.items||[])
+    setData(result?.items || [])
   }
 
   if (data.length === 0) {
     return null
   }
 
-  return <div className="group relative overflow-hidden w-full h-full">
-    {/* <span
-      className="hidden group-hover:flex absolute z-10 top-1/2 cursor-pointer w-5 h-5  items-center justify-center rounded-full bg-tipColor"
-      onClick={() => {
-        if (carousel.current) {
-          carousel?.current?.prev()
-        }
+  const handleSlideChange = (currentSlide: number, next: number) => {
+    setCurrent(next)
+  }
 
-      }}>
-      <LeftOutlined rev={undefined} className="text-white text-xs" />
-    </span> */}
-
-    <Carousel autoplay={false} autoplaySpeed={5000} ref={carousel} infinite={true }>
-      {[...data]?.map((item: any,index) => {
-        return <div key={ index} onClick={() => {
-          if (item.link) {
-            window.open(item.link)
-          }
-        }}>
-          <Image preview={false} src={item.url} alt='' width='100%' className="rounded-2xl cursor-pointer object-cover carousel-image"/>
-        </div>
-      })}
-    </Carousel>
-    {/* <span
-      className="hidden group-hover:flex absolute z-10 top-1/2 right-0  w-5 h-5 items-center justify-center rounded-full bg-tipColor cursor-pointer"
-      onClick={() => {
-        if (carousel.current) {
-          carousel?.current?.next()
-        }
-      }}>
-      <RightOutlined rev={undefined} className="text-white text-xs"/>
-    </span> */}
-
-  </div>
+  return (
+    <div className="group relative h-full w-full overflow-hidden">
+      <Carousel
+        autoplay={autoplay}
+        ref={carousel}
+        autoplaySpeed={5000}
+        infinite={true}
+        beforeChange={handleSlideChange}
+        dots={false}
+      >
+        {[...data]?.map((item: any, index) => {
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                if (item.link) {
+                  window.open(item.link)
+                }
+              }}
+            >
+              <Image
+                preview={false}
+                src={item.url}
+                alt=""
+                width="100%"
+                className="carousel-image cursor-pointer rounded-2xl object-cover"
+              />
+            </div>
+          )
+        })}
+      </Carousel>
+      <ul className={style.dots}>
+        {[...data]?.map((v, index: number) => {
+          return (
+            <li
+              key={index}
+              className={`${style.dots_li} ${
+                Number(current) === index ? style.dots_active : ''
+              }`}
+              onClick={() => {
+                carousel?.current?.goTo(index)
+                setAutoplay(false)
+              }}
+            ></li>
+          )
+        })}
+      </ul>
+    </div>
+  )
 }
 
-export default Banner
-
+export default observer(Banner)

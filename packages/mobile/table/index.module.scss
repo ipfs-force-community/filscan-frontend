@@ -1,36 +1,46 @@
 @media only screen and (max-width: 1000px) {
   .wrap {
     :global {
-        td {
-          padding: 0;
-        }
-        .ant-table {
-          padding: 0px 12px !important;
-          border-radius: unset;
-          // border: 1px solid #eeeff1;
-          .ant-table-thead {
-            th {
-              padding: 0px;
-              height: 38px;
-            }
-            .ant-table-cell {
-              border: none;
-              background: transparent;
-              color: var(--mobile-des-color);
-              font-weight: 400;
-              font-size: 12px;
-            }
-            .ant-table-cell::before {
-              display: none;
-            }
+      td {
+        padding: 0;
+      }
+      .ant-table {
+        padding: 0px 12px !important;
+        border-radius: unset;
+        // border: 1px solid #eeeff1;
+        .ant-table-thead {
+          th {
+            padding: 0px;
+            height: 38px;
+
+            padding-inline: 10px;
           }
-          .ant-table-tbody {
-            td {
-              padding: 0px;
-              height: 40px;
-            }
+          .ant-table-cell {
+            border: none;
+            background: transparent;
+            color: var(--mobile-des-color);
+            font-weight: 400;
+            font-size: 12px;
+          }
+          .ant-table-cell::before {
+            display: none;
+          }
+        }
+        .ant-table-tbody {
+          td {
+            padding: 0px;
+
+            padding-inline: 10px;
+            padding-block: 10px;
+          }
+
+          .ant-table-cell {
+            color: var(--mobile-title-color);
+            font-weight: 500;
+            font-size: 14px;
           }
         }
       }
-}
+    }
+  }
 }

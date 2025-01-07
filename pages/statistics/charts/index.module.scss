@@ -1,7 +1,19 @@
+.static-menu {
+  width: 209px;
+  position: fixed;
+}
+.tab-content {
+  width: calc(100% - 209px);
+  padding-left: 220px;
+}
+.statistics-target {
+  margin-top: 20px;
+  scroll-margin-top: 125px;
+}
+
 @media screen and (max-width: 1000px) {
   .statistics-charts {
     padding: 0px 12px 20px;
-
     .content {
       display: flex;
       flex-direction: column;
@@ -15,28 +27,28 @@
         margin-inline: -12px;
 
         a {
-            height: 44px;
-            color: var(--mobile-title-color);
-            font-size: 16px;
-            line-height: 44px;
+          height: 44px;
+          color: var(--mobile-title-color);
+          font-size: 16px;
+          line-height: 44px;
         }
 
         a.active {
-            position: relative;
-            color: var(--mobile-link-color);
-            font-weight: 500;
+          position: relative;
+          color: var(--mobile-link-color);
+          font-weight: 500;
         }
 
         a.active::after {
-            position: absolute;
-            bottom: 0px;
-            left: 50%;
-            width: 25px;
-            height: 2px;
-            border-radius: 2px;
-            background: var(--mobile-link-color);
-            content: '';
-            transform: translateX(-50%);
+          position: absolute;
+          bottom: 0px;
+          left: 50%;
+          width: 25px;
+          height: 2px;
+          border-radius: 2px;
+          background: var(--mobile-link-color);
+          content: '';
+          transform: translateX(-50%);
         }
       }
     }
@@ -60,7 +72,7 @@
         color: var(--mobile-des-color);
         font-weight: 500;
         font-size: 12px;
-        font-family: "DINPro-Medium";
+        font-family: 'HarmonyOS_Medium';
       }
     }
   }

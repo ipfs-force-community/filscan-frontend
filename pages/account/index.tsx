@@ -1,182 +1,203 @@
 /** @format */
 
-import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { Translation } from '@/components/hooks/Translation';
-import { account_manager } from '@/contents/account';
-import { useHash } from '@/components/hooks/useHash';
-import Overview from '@/src/account/overview';
-import Miners from '@/src/account/miners';
-import Personal from '@/src/account/personal';
-import Lucky from '@/src/account/lucky';
-import Balance from '@/src/account/balance';
-import Reward from '@/src/account/reward';
-import { proApi } from '@/contents/apiUrl';
-import NoMiner from '@/src/account/NoMiner';
-import useAxiosData from '@/store/useAxiosData';
-import Power from '@/src/account/power';
-import Gas from '@/src/account/gas';
-import Expired from '@/src/account/expired';
-import { Skeleton } from 'antd';
-import { UserInfo } from '@/store/UserStore';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { MinerStoreContext } from '@/src/account/content';
-import Loading from '@/components/loading';
+import React, { useEffect, useMemo } from 'react'
+import { Translation } from '@/components/hooks/Translation'
+import { account_manager } from '@/contents/account'
+import { useHash } from '@/components/hooks/useHash'
+import Overview from '@/src/account/overview'
+import Miners from '@/src/account/miners'
+import Personal from '@/src/account/personal'
+import Lucky from '@/src/account/manage/lucky'
+import Balance from '@/src/account/manage/balance'
+import Reward from '@/src/account/manage/reward'
+import NoMiner from '@/src/account/NoMiner'
+import Power from '@/src/account/manage/power'
+import Gas from '@/src/account/manage/gas'
+import Expired from '@/src/account/manage/expired'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import Loading from '@/components/loading'
 import MonitorBalance from '@/src/account/monitor/balance'
+import MonitorSector from '@/src/account/monitor/sector'
+import MonitorPower from '@/src/account/monitor/power'
+import accountStore from '@/store/modules/account'
+import userStore from '@/store/modules/user'
+import { Menu } from 'antd'
+import { observer } from 'mobx-react'
+import { BrowserView, MobileView } from '@/components/device-detect'
+import style from './index.module.scss'
+import Active from '@/src/account/active'
+import Banner from '@/src/fvm/Banner'
 
 const Account: React.FC = () => {
-  const { tr } = Translation({ ns: 'account' });
-  const { hash, hashParams } = useHash();
-  const rootSubmenuKeys: Array<string> = [];
-  const userInfo = UserInfo();
+  const { tr } = Translation({ ns: 'account' })
+  const { userInfo, showMemberWarn } = userStore
+  const { superVip } = userInfo
+  const { countMiners } = accountStore
+  const { miners_count, loading } = countMiners
+  const { hash, hashParams } = useHash()
   const router = useRouter()
-  const { axiosData} = useAxiosData()
-  const [minersNum, setMinersNum] = useState<any>({})
-  const [minerLoading,setMinerLoading] = useState(true)
   const selectedKey = useMemo(() => {
     if (hash) {
-      return hash;
+      return hash
     }
-    return 'overview';
-  }, [hash]);
+    return 'overview'
+  }, [hash])
 
   useEffect(() => {
-    loadMinersNum()
-  },[])
-
-  const loadMinersNum = async () => {
-    setMinerLoading(true)
-    const result = await axiosData(proApi.account_miners, {}, { isCancel: false });
-    setMinerLoading(false)
-    setMinersNum(result)
+    load()
+  }, [])
+  const load = async () => {
+    const result = await userStore.getUserInfo()
+    if (result) {
+      router.push('/admin/login')
+    }
   }
-  // const { data: minersNum, loading: minerLoading } =
-  //   useAxiosData(proApi.account_miners) || {};
-
-  function getChildren(arr: Array<any>) {
-    return arr.map((v) => {
-      return { ...v, label: tr(v.label) };
-    });
-  }
-  const menuData = useMemo(() => {
-    let itemsArr: any = [];
-    account_manager.forEach((item) => {
-      if (item.key !== 'logout') {
-        rootSubmenuKeys.push(item.key);
-        let others = [];
-        const obj = { ...item, label: item.label };
-        delete obj.children;
-        if (item?.children) {
-          others = getChildren(item?.children || []);
-          itemsArr.push({ ...obj });
-          itemsArr.push(...others);
-        } else {
-          itemsArr.push({ ...obj });
-        }
-      }
-    });
-    return itemsArr;
-  }, [tr]);
 
   useEffect(() => {
-    if (!userInfo.mail || !localStorage.getItem('token')) {
-      router.push('/account/login');
+    if (userInfo?.mail) {
+      accountStore.getAccountMinersNumber()
+      accountStore.getAccountGroup()
     }
-  }, [userInfo.mail]);
+  }, [userInfo.mail])
 
-  if (minerLoading) {
+  if (loading) {
     return <Loading />
   }
 
+  const handleChange = (openKeys: any, item: any) => {
+    if (item.vip && !superVip) {
+      userStore.setVipModal(true)
+    }
+  }
+
+  const renderMenuItem = (item: any) => {
+    if (item.label === 'logout') {
+      return null
+    }
+    if (item.children) {
+      return (
+        <Menu.SubMenu
+          key={item.key}
+          icon={item.icon}
+          title={
+            <span className={style.submenu_title}>
+              {tr(item.label)}
+              {/* {item.vip && (
+                <span className={style.submenu_title_vip}>
+                  <Vip />
+                </span>
+              )} */}
+              {item.sufIcon}
+            </span>
+          }
+          onTitleClick={({ key }) => {
+            handleChange(key, item)
+          }}
+        >
+          {item.vip && !superVip ? <></> : item.children.map(renderMenuItem)}
+        </Menu.SubMenu>
+      )
+    }
+
+    return (
+      <Menu.Item key={item.key} icon={item.icon}>
+        <Link href={`/account#${item.key}`} scroll={false}>
+          <span className={style.submenu_title}>
+            {tr(item.label)}
+            <span className={style.submenu_title_icon}>{item.sufIcon}</span>
+          </span>
+        </Link>
+      </Menu.Item>
+    )
+  }
+
+  const childrenData: Record<string, JSX.Element> = {
+    overview: <Overview selectedKey={selectedKey} />,
+    miners: <Miners />,
+    lucky: <Lucky selectedKey={'lucky'} />,
+    power: <Power selectedKey={'power'} />,
+    gas: <Gas selectedKey={'gas'} />,
+    balance: <Balance selectedKey={'balance'} />,
+    expired: <Expired selectedKey={'expired'} />,
+    reward: <Reward selectedKey={'reward'} />,
+    monitorBalance: <MonitorBalance />,
+    monitorSector: <MonitorSector />,
+    monitorPower: <MonitorPower />,
+    personal: <Personal />,
+    active: <Active />,
+  }
+
+  const noMiners = ['miner_add', 'personal', 'miners', 'active']
   return (
-    <div className='main_contain !py-6 '>
-      <div className='w-full h-full flex rounded-xl border card_shadow border_color '>
-        <div className='w-[210px] border-r border_color  py-10'>
-          <div className='w-full px-5 mb-10 text-lg font-semibold font-PingFang	'>
-            {tr('account_title')}
+    <>
+      <BrowserView>
+        <div className="main_contain !py-6 ">
+          {showMemberWarn && (
+            <div className="mb-5 flex w-full items-center justify-center text-warnColor">
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  userStore.setVipModal(true)
+                }}
+              >
+                <i className="ri-error-warning-line mr-1"></i>
+                {tr('member_warn')}
+              </span>
+
+              <span
+                className="ml-4 cursor-pointer"
+                onClick={() => {
+                  userStore.setMemberWarn(false)
+                }}
+              >
+                <i className="ri-close-line"></i>
+              </span>
+            </div>
+          )}
+          <div className="card_shadow border_color flex h-full w-full rounded-xl border ">
+            <div className="border_color w-[210px] border-r  py-10">
+              <div className="mb-10 w-full px-5 font-HarmonyOS text-lg font-semibold	">
+                {tr('account_title')}
+              </div>
+              <Menu
+                mode="inline"
+                className="custom_menu"
+                selectedKeys={[selectedKey]}
+              >
+                {account_manager.map(renderMenuItem)}
+              </Menu>
+              <Banner />
+            </div>
+            <div
+              className="w_account flex min-h-full flex-grow flex-col px-5 py-10"
+              style={{ height: 'inherit' }}
+            >
+              {!miners_count &&
+              hashParams.type !== 'miner_add' &&
+              !noMiners.includes(selectedKey) ? (
+                <NoMiner selectedKey={selectedKey} />
+              ) : (
+                childrenData[selectedKey]
+              )}
+            </div>
           </div>
-          <ul className='list-none px-4'>
-            {menuData.map((parent: any) => {
-              return (
-                <Link
-                  key={parent.label}
-                  href={ `/account#${parent.key}`}
-                  scroll={ false}
-                  className={`cursor-pointer  flex gap-x-2 items-center p-2.5 text_color rounded-[5px] hover:text-primary ${
-                    parent?.icon ? 'font-medium' : 'ml-5 font-normal'
-                  } ${
-                    selectedKey === parent.key
-                      ? '!text-primary bg-bg_hover'
-                      : ''
-                  }`}>
-                  <span className='flex items-center gap-x-2 px-4'>
-                    {parent.icon}
-                    {tr(parent.label)}
-                  </span>
-                </Link>
-              );
-            })}
-          </ul>
         </div>
-        <div
-          className='flex-grow flex flex-col px-5 py-10 w_account min-h-full'
-          style={{ height: 'inherit' }}>
-          {!minersNum?.miners_count&&
+      </BrowserView>
+      <MobileView>
+        <div>
+          {!miners_count &&
           hashParams.type !== 'miner_add' &&
-          selectedKey !== 'personal' && selectedKey !== 'miners' ? (
-              <NoMiner selectedKey={selectedKey === 'overview'? 'overview':'overview_' + selectedKey} />
-            ) : (
-              <MinerStoreContext.Provider value={{
-                setAllNum: (value) => {
-                  setMinersNum(value)
-                } }}>
-                {selectedKey === 'overview' && (
-                  <Overview selectedKey='overview' />
-                )}
-                {selectedKey === 'miners' && <Miners minersNum={minersNum} />}
-                {selectedKey === 'lucky' && (
-                  <Lucky
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'power' && (
-                  <Power
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'gas' && (
-                  <Gas selectedKey={'overview_' + selectedKey} />
-                )}
-                {selectedKey === 'balance' && (
-                  <Balance
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'expired' && (
-                  <Expired
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'reward' && (
-                  <Reward
-                    selectedKey={'overview_' + selectedKey}
-
-                  />
-                )}
-                {selectedKey === 'monitorBalance' && (
-                  <MonitorBalance />
-                )}
-                {selectedKey === 'personal' && <Personal />}
-              </MinerStoreContext.Provider>
-            )}
+          selectedKey !== 'personal' &&
+          selectedKey !== 'miners' ? (
+            <NoMiner selectedKey={selectedKey} />
+          ) : (
+            childrenData[selectedKey]
+          )}
         </div>
-      </div>
-    </div>
-  );
-};
+      </MobileView>
+    </>
+  )
+}
 
-export default Account; //已登录/注册
+export default observer(Account) //已登录/注册

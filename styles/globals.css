@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root,
-:root[theme="light"] {
+:root[theme='light'] {
   --border-color: #e6e8eb;
   /*
   PC端
@@ -12,10 +12,10 @@
   --activeColor: #ffffff;
   --bgColor: #ffffff;
   --main-bg-color: #f9f9f9;
-  --reverse-color: "#000000";
+  --reverse-color: '#000000';
   --font-color: #000000;
-  --font-text-color:#131D2F;
-  --select-shadow: rgba(223, 227, 234, 0.6);
+  --font-text-color: #131d2f;
+  --select-shadow: rgba(255, 255, 255, 0.6);
   --select-bgColor: #ffffff;
   --card-shadow: rgba(223, 227, 234, 0.6);
   --tab-shadow: rgba(0, 0, 0, 0.1);
@@ -26,9 +26,15 @@
   --text_clip: #131254;
   --bgDesColor: #f6f6f6;
   --table-hover: #f8f8f8;
-  --tips-bgColor:#ffffff;
-  --cw-bgDesColor: #F5F5F5;
-  --cw-bgColor: #D4D4D4;
+  --tips-bgColor: #ffffff;
+  --cw-bgDesColor: #f5f5f5;
+  --cw-bgColor: #d4d4d4;
+  --warn-bg-color: rgba(239, 127, 26, 0.05);
+  --warn-color: rgba(239, 127, 26, 1);
+  --font-warn-color: #6d3f1a;
+  --font-bgIcon-color: rgba(245, 198, 132, 1);
+  --font-pro-color: #3046b6;
+
   /*
   手机端
   */
@@ -47,24 +53,22 @@
   --mobile-divide-line: #eeeff1;
   --mobile-footer-bg: #222121;
   --mobile-text-60: rgba(255, 255, 255, 0.6);
-  --mobile-text-placeholder:#CCCCCC;
-  --mobile-bg-5: rgba(29,107,252,0.05);
-  --mobile-2473FA-0:rgba(36, 115, 250, 0.05);
-  --mobile-2473FA-5:rgba(36, 115, 250, 0.05);
-  --mobile-F9F9F9:#F9F9F9;
-  --mobile-F2F2F2:#F2F2F2;;
-  
+  --mobile-text-placeholder: #cccccc;
+  --mobile-bg-5: rgba(29, 107, 252, 0.05);
+  --mobile-2473FA-0: rgba(36, 115, 250, 0.05);
+  --mobile-2473FA-5: rgba(36, 115, 250, 0.05);
+  --mobile-F9F9F9: #f9f9f9;
+  --mobile-F2F2F2: #f2f2f2;
 }
 
 :root,
-:root[theme="dark"] {
+:root[theme='dark'] {
   --border-color: #222222;
-  --font-text-color:#ffffff;
-
+  --font-text-color: #ffffff;
   --activeColor: #ffffff;
   --bgColor: #121212;
   --main-bg-color: #090a0a;
-  --reverse-color: "#FFFFFF";
+  --reverse-color: '#FFFFFF';
   --font-color: #ffffff;
   --text_clip: #ffffff;
   --select-shadow: rgba(0, 0, 0, 0.6);
@@ -77,10 +81,14 @@
   --card-shadow: rgba(0, 0, 0, 0.4);
   --tab-shadow: rgba(0, 0, 0, 0.1);
   --table-hover: #1b1b1b;
-  --tips-bgColor:#1c1c1c;
-
+  --tips-bgColor: #1c1c1c;
+  --cw-bgColor: #333333;
+  --warn-bg-color: rgba(239, 127, 26, 0.05);
+  --warn-color: rgba(239, 127, 26, 1);
+  --font-warn-color: #f0bc91;
+  --font-pro-color: #d0d8ff;
+  --font-bgIcon-color: rgba(245, 198, 132, 0.5);
 }
-
 
 body {
   overflow-x: hidden;
@@ -91,9 +99,11 @@ body {
 /* #__next{
   width: 100%;
   height: 100vh;
+
+  PingFangSC-Regular 
 } */
 
-.container_body{
+.container_body {
   display: flex;
   overflow-x: hidden;
   overflow-y: auto;
@@ -102,28 +112,28 @@ body {
   min-height: 800px;
   width: 100%;
   height: 100%;
+  font-family: HarmonyOS_Regular;
   background-color: var(--main-bg-color);
-
 }
 
+@media screen and (max-width: 1000px) {
+  .container_body {
+    padding-top: 0px;
+  }
 
-@media screen and (max-width: 1000px){
-    .container_body{
-      padding-top: 0px;
-    }
-
-    html,body {
-      cursor: none !important;
-    }
-    .cursor-pointer {
-      cursor: none;
-    }
+  html,
+  body {
+    cursor: none !important;
+  }
+  .cursor-pointer {
+    cursor: none;
+  }
+}
+img {
+  /* max-width: 100%; */
+  height: inherit;
 }
 
-
-
-
-
-a{
-  color: #1C6AFD;
+a {
+  color: #1c6afd;
 }
